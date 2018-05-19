@@ -26,6 +26,16 @@ Learning
 - Finish Math for ML
 - Start DL
 
+
+###  end of June
+
+Simple game
+
+### July Extension
+
+Extension
+### Half august 
+Evaluation
 ### Mid-July to Mid-August
 - Finish Writing the report
 
