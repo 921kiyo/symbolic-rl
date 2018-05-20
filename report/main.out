@@ -1,9 +1,12 @@
 \BOOKMARK [0][]{chapter.3}{1 Introduction}{}% 1
 \BOOKMARK [0][]{chapter.4}{2 Background}{}% 2
-\BOOKMARK [1][]{section.5}{2.1 Reinforcement Learning}{chapter.4}% 3
-\BOOKMARK [1][]{section.6}{2.2 Answer Set Programming}{chapter.4}% 4
-\BOOKMARK [1][]{section.7}{2.3 Existing research}{chapter.4}% 5
-\BOOKMARK [1][]{section.8}{2.4 Legal and Ethical Issues}{chapter.4}% 6
-\BOOKMARK [0][]{chapter.9}{3 Contribution}{}% 7
-\BOOKMARK [0][]{chapter.10}{4 Experimental Results}{}% 8
-\BOOKMARK [0][]{chapter.11}{5 Conclusion}{}% 9
+\BOOKMARK [0][]{chapter.5}{3 Motivation}{}% 3
+\BOOKMARK [1][]{section.6}{3.1 Objectives}{chapter.5}% 4
+\BOOKMARK [1][]{section.7}{3.2 Project outline}{chapter.5}% 5
+\BOOKMARK [1][]{section.8}{3.3 Contribution}{chapter.5}% 6
+\BOOKMARK [0][]{chapter.9}{4 Background}{}% 7
+\BOOKMARK [1][]{section.10}{4.1 Reinforcement Learning}{chapter.9}% 8
+\BOOKMARK [1][]{section.11}{4.2 Symbolic reinforcement Learning}{chapter.9}% 9
+\BOOKMARK [1][]{section.12}{4.3 GVGAI framework}{chapter.9}% 10
+\BOOKMARK [1][]{section.13}{4.4 Legal and Ethical Issues}{chapter.9}% 11
+\BOOKMARK [0][]{chapter.14}{5 Contribution}{}% 12

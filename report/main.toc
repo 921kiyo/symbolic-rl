@@ -1,10 +1,13 @@
 \select@language {english}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.3}
 \contentsline {chapter}{\numberline {2}Background}{2}{chapter.4}
-\contentsline {section}{\numberline {2.1}Reinforcement Learning}{2}{section.5}
-\contentsline {section}{\numberline {2.2}Answer Set Programming}{2}{section.6}
-\contentsline {section}{\numberline {2.3}Existing research}{2}{section.7}
-\contentsline {section}{\numberline {2.4}Legal and Ethical Issues}{2}{section.8}
-\contentsline {chapter}{\numberline {3}Contribution}{3}{chapter.9}
-\contentsline {chapter}{\numberline {4}Experimental Results}{4}{chapter.10}
-\contentsline {chapter}{\numberline {5}Conclusion}{5}{chapter.11}
+\contentsline {chapter}{\numberline {3}Motivation}{3}{chapter.5}
+\contentsline {section}{\numberline {3.1}Objectives}{3}{section.6}
+\contentsline {section}{\numberline {3.2}Project outline}{3}{section.7}
+\contentsline {section}{\numberline {3.3}Contribution}{3}{section.8}
+\contentsline {chapter}{\numberline {4}Background}{4}{chapter.9}
+\contentsline {section}{\numberline {4.1}Reinforcement Learning}{4}{section.10}
+\contentsline {section}{\numberline {4.2}Symbolic reinforcement Learning}{4}{section.11}
+\contentsline {section}{\numberline {4.3}GVGAI framework}{4}{section.12}
+\contentsline {section}{\numberline {4.4}Legal and Ethical Issues}{4}{section.13}
+\contentsline {chapter}{\numberline {5}Contribution}{5}{chapter.14}
