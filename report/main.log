@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  24 MAY 2018 16:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  25 MAY 2018 13:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -545,7 +545,7 @@ LaTeX Info: Redefining \nameref on input line 24.
 \openout3 = `main.out'.
 
  (./titlepage.tex
-<./figures/imperial.pdf, id=52, 362.35374pt x 95.35625pt>
+<./figures/imperial.pdf, id=48, 362.35374pt x 95.35625pt>
 File: ./figures/imperial.pdf Graphic file (type pdf)
 
 <use ./figures/imperial.pdf>
@@ -598,10 +598,10 @@ Chapter 2.
 ]
 Chapter 3.
 Runaway argument?
-./main.tex:134: Paragraph ended before \OT1\" was complete.
+./main.tex:150: Paragraph ended before \OT1\" was complete.
 <to be read again> 
                    \par 
-l.134 
+l.150 
       
 I suspect you've forgotten a `}', causing me to apply this
 control sequence to too much text. How can we recover?
@@ -609,41 +609,38 @@ My plan is to forget the whole thing and hope for the best.
 
 [3
 
-]
+] [4]
 Chapter 4.
-[4
-
-]
-Chapter 5.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 191.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 206.
 [5
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 191.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 206.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 191.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 191.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 206.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 206.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 0D0FFDA9E6ECB6B558E2823E4D64C3FC;700.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 191.
+(rerunfilecheck)             Checksum: 0379232284EF26EBA9110F0C38327BC6;650.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 206.
  ) 
 Here is how much of TeX's memory you used:
- 8815 strings out of 494353
- 130985 string characters out of 6170044
- 226792 words of memory out of 5000000
- 11928 multiletter control sequences out of 15000+600000
- 26813 words of font info for 52 fonts, out of 8000000 for 9000
+ 8814 strings out of 494353
+ 130970 string characters out of 6170044
+ 225792 words of memory out of 5000000
+ 11927 multiletter control sequences out of 15000+600000
+ 27991 words of font info for 53 fonts, out of 8000000 for 9000
  452 hyphenation exceptions out of 8191
  44i,11n,43p,358b,415s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/bitstrea/charter/bchri8a.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmssbx10.pfb>
-Output written on main.pdf (12 pages, 59937 bytes).
+ts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/bitstrea/charter/bchri8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmssbx10.pfb>
+Output written on main.pdf (12 pages, 71830 bytes).
 PDF statistics:
- 148 PDF objects out of 1000 (max. 8388607)
- 127 compressed objects within 2 object streams
- 27 named destinations out of 1000 (max. 500000)
- 102 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 147 PDF objects out of 1000 (max. 8388607)
+ 125 compressed objects within 2 object streams
+ 26 named destinations out of 1000 (max. 500000)
+ 94 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1527176473 "main.tex" "main.pdf" "main" 1527176473
+["pdflatex"] 1527250204 "main.tex" "main.pdf" "main" 1527250204
   "/etc/texmf/web2c/texmf.cnf" 1477904399 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
@@ -11,6 +11,7 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchri7t.tfm" 1136768653 2568 58165f44b773491d02ba0f602dd480cb ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchri8r.tfm" 1136768653 4976 cfc4dd38b8fb809ad0d6138823dff41a ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchro7t.tfm" 1136768653 2564 c0af5590dbe95d999446375de177ecfb ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchro8r.tfm" 1136768653 4808 f8233db62d0ad46442d31435fc0cac0d ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm" 1136768653 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
@@ -36,6 +37,7 @@
   "/usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchr7t.vf" 1136768653 1372 955cf021d0094e95829436b7bdab6458 ""
   "/usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchrc7t.vf" 1136768653 1948 35abb510befa010fcb6eda2b3e0faf72 ""
   "/usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchri7t.vf" 1136768653 1376 a6caf4b9594dae1aa6039195e9d4e333 ""
+  "/usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchro7t.vf" 1136768653 1372 d8fa1b1dd9b8afa411952b34e510fbaa ""
   "/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf" 1367878877 6963 2e0cb3d93aa64508bdb0db58ae900d97 ""
   "/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def" 1456440043 50112 f44490c2cb959606ae206a8f9f3f70e2 ""
@@ -110,15 +112,15 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1506607516 1736994 7b22fc77a2876e8c879e4f3e0c27d048 ""
   "figures/imperial.pdf" 1439884276 14992 7f9429838e925fcd04acfa4d283703b5 ""
   "includes.tex" 1439984244 2982 94e3c51e3874ecbcf3cf3ddf0a89e382 ""
-  "main.aux" 1526842236 2293 75d0eb5afc6dec3681a2fbfb3846c837 ""
-  "main.out" 1526842236 700 0d0ffda9e6ecb6b558e2823e4d64c3fc ""
-  "main.tex" 1527176473 3932 34ce2d55648aa8c38457eeca7dd73f35 ""
-  "main.toc" 1526842236 889 e9a02934973bea06415cefe17c33c5ff ""
+  "main.aux" 1527250127 2131 96416f8a31a5cecce922dca2e1e4f2c0 ""
+  "main.out" 1527250127 650 0379232284ef26eba9110f0c38327bc6 ""
+  "main.tex" 1527250204 4401 56995f9b3428417f2a69e1c11d0606f0 ""
+  "main.toc" 1527250127 821 fd3e2fe8ea9bd20a2750e5fb91f994e2 ""
   "notation.tex" 1439984354 362 dde8d17bdd645c497ea48e05d51963bd ""
   "titlepage.tex" 1440156428 1995 b33c89e3a284110d3cc1b5b405785394 ""
   (generated)
+  "main.log"
   "main.pdf"
   "main.toc"
   "main.out"
-  "main.log"
   "main.aux"
