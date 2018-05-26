@@ -1,11 +1,20 @@
-\BOOKMARK [0][]{chapter.3}{1 Introduction}{}% 1
-\BOOKMARK [0][]{chapter.4}{2 Background}{}% 2
-\BOOKMARK [0][]{chapter.5}{3 Motivation}{}% 3
-\BOOKMARK [1][]{section.6}{3.1 Objectives}{chapter.5}% 4
-\BOOKMARK [1][]{section.7}{3.2 Project outline}{chapter.5}% 5
-\BOOKMARK [1][]{section.8}{3.3 Contribution}{chapter.5}% 6
-\BOOKMARK [0][]{chapter.9}{4 Background}{}% 7
-\BOOKMARK [1][]{section.10}{4.1 Reinforcement Learning}{chapter.9}% 8
-\BOOKMARK [1][]{section.11}{4.2 Symbolic reinforcement Learning}{chapter.9}% 9
-\BOOKMARK [1][]{section.12}{4.3 GVGAI framework}{chapter.9}% 10
-\BOOKMARK [1][]{section.13}{4.4 Legal and Ethical Issues}{chapter.9}% 11
+\BOOKMARK [0][]{chapter.1}{1 Introduction}{}% 1
+\BOOKMARK [0][]{chapter.2}{2 Background}{}% 2
+\BOOKMARK [1][]{section.2.1}{2.1 Data Efficient Learning}{chapter.2}% 3
+\BOOKMARK [1][]{section.2.2}{2.2 ASP in Reinforcement Learning}{chapter.2}% 4
+\BOOKMARK [0][]{chapter.3}{3 Background}{}% 5
+\BOOKMARK [1][]{section.3.1}{3.1 Inductive Logic Programming}{chapter.3}% 6
+\BOOKMARK [2][]{subsection.3.1.1}{3.1.1 Stable Model Semantics}{section.3.1}% 7
+\BOOKMARK [2][]{subsection.3.1.2}{3.1.2 Anwer Set Programming}{section.3.1}% 8
+\BOOKMARK [2][]{subsection.3.1.3}{3.1.3 Learning from Anwer Sets \(LAS\)}{section.3.1}% 9
+\BOOKMARK [2][]{subsection.3.1.4}{3.1.4 Inductive Learning of Answer Set Programs \(ILASP\)}{section.3.1}% 10
+\BOOKMARK [1][]{section.3.2}{3.2 Reinforcement Learning}{chapter.3}% 11
+\BOOKMARK [1][]{section.3.3}{3.3 Symbolic Reinforcement Learning}{chapter.3}% 12
+\BOOKMARK [1][]{section.3.4}{3.4 GVGAI Framework}{chapter.3}% 13
+\BOOKMARK [0][]{chapter.4}{4 Project Overview}{}% 14
+\BOOKMARK [1][]{section.4.1}{4.1 Motivation}{chapter.4}% 15
+\BOOKMARK [1][]{section.4.2}{4.2 Objectives}{chapter.4}% 16
+\BOOKMARK [1][]{section.4.3}{4.3 Project outline}{chapter.4}% 17
+\BOOKMARK [1][]{section.4.4}{4.4 Contribution}{chapter.4}% 18
+\BOOKMARK [1][]{section.4.5}{4.5 Legal and Ethical Issues}{chapter.4}% 19
+\BOOKMARK [1][]{section.4.6}{4.6 References}{chapter.4}% 20

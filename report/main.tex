@@ -1,5 +1,6 @@
 \documentclass[12pt,twoside]{report}
-
+\usepackage{fixltx2e}
+\usepackage{hyperref}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Definitions for the title page
@@ -19,7 +20,7 @@
 % load some macros
 \input{notation}
 
-\date{September 2015}
+\date{June 2018}
 
 \begin{document}
 
@@ -34,16 +35,16 @@
 \pagestyle{fancy}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{abstract}
-Your abstract.
-\end{abstract}
-
-\cleardoublepage
+% \begin{abstract}
+% Your abstract.
+% \end{abstract}
+%
+% \cleardoublepage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Acknowledgments}
-Comment this out if not needed.
-
-\clearpage{\pagestyle{empty}\cleardoublepage}
+% \section*{Acknowledgments}
+% Comment this out if not needed.
+%
+% \clearpage{\pagestyle{empty}\cleardoublepag e}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %--- table of contents
@@ -59,6 +60,8 @@ Comment this out if not needed.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Introduction}
+
+% IMPERIAL LOGO
 % \begin{figure}[tb]
 % \centering
 % \includegraphics[width = 0.4\hsize]{./figures/imperial}
@@ -67,18 +70,41 @@ Comment this out if not needed.
 % \end{figure}
 % Figure~\ref{fig:logo} is an example of a figure.
 
-Problem setting
+
+There has been successful applications of deep reinforcement learning (DRL) a number of domains, such as games and robotics.
+DRL is considered to be a step towards artificial general intelligence.
+However there are still a number of issues to overcome in this method. As pointed by XXX, there are 3 major problems.
+First, it requires a large amount of data for training the model, which requires a long time of learning process.
+Second, it is considered to be a black-box, meaning the decision making process is unknown to human and therefore not explanable.
+Third there is no thoughts process to the decision making, which, as XX points out, is a fundamental to the artificial general intelligence.
+To overcome these problems, there are 3 main streams of research on this field.
+First main research is focused on applying Baysian statistics XXX, the second main research is XXX.
+Recently, the XXX attempted to incorporate symbolic representations into the system to achive more data-efficient learning, which shows a promissing results of this approach.
+The paper was the application of symbolic representatiojns into a very simple game to demonstrate this proof of concept would actually work.
+
+
+By contract, there is active reserach in symbolic machine learning, which focuses on logic=based learning rather than statistical machine learning.
+For example, XX shows the agent can learn XXX from a noisy examples, with only a very few training examples.
+
+
+In this paper, I explore incorporation of symbolic machine learning into XXX to achieve data-efficient learning using Inductive Learning of Answer Set Programs (ILASP), which is the state-of-art symbolic learning method that can be applied to imcomplete and more complex environment.
+
+
+This research is based on XX, but in this paper I explore symbolic represetations process and include more learning aspect.
+
+
+Problem setting \cite{garnelo2016towards}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Background}
+
+\section{Data Efficient Learning}
 
 Two most studied approach for using previous learning exprience is meta-learning and transfer learning
 
 Artificial General Intelligence
 
 Definision of AGI
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Background}
 
 The history of data-efficient learning
 What other people have done in this.
@@ -89,7 +115,8 @@ AlphaGo, and AlphaGo Zero
 
 Also business success.
 
-History of Relational Reinforcement Learning
+Study of symbolic machine learning roots from
+% Relational Reinforcement Learning
 
 Baysian Optimisation
 
@@ -99,10 +126,135 @@ Symbolic Deep reinforcement learning
 
 Some implementation: German paper
 
-\chapter{Motivation}
+\section{ASP in Reinforcement Learning}
+
+\chapter{Background}
+\section{Inductive Logic Programming}
+Inductive Logic Programming (ILP) is a subfield of research area aimed at the intersection of machine learning and logic programming (MUGGLETON 1991). The purpose of ILP is to derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and any of negative examples.
+
+Herbrand Model
+
+Least Herbrand Model
+
+Definite Logic Program is a set of definite rule where
+
+\begin{theorem}
+a definite rule is of the form h \leftarrow a\textsubscript{1}, ..., a\textsubscript{n}, where h , a\textsubscript{1}, ..., a\textsubscript{n} are all atoms.
+\end{theorem}
+
+whereas
+
+Normal Logic Program is a set of normal rule where
+
+\begin{theorem}
+a normal rule is of the form h \leftarrow a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n} where h is the head of the rule,
+ and a\textsubscript{1}, ..., a\textsubscript{n}, b\textsubscript{1}, ..., b\textsubscript{n} are the body of the rule (both the head and body are all atoms).
+\end{theorem}
+
+\subsection{Stable Model Semantics}
+
+Stable Model of a normal logic program
+
+\subsection{Anwer Set Programming}
+
+Literals
+
+Negation as a failure
+
+constrains is of the form
+\begin{theorem}
+\leftarrow a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
+\end{theorem}
+
+Constraints are to filtering any irrelevant answer sets.
+
+Syntax Examples
+
+There are two types of constraints: soft and hard constraints. Soft constraint is XXX
+
+Hard constraint is XXX
+
+optimisation statement is of the form.
+
+Which is useful to order the answer sets in terms of preference.
+
+Syntax examples.
+
+Aggregate
+
+choice rules
+
+An ASP program P is normal logic program with addition of choice rules, constraints and optimisation statement.
+
+Answer set of P is
+
+
+\subsubsection{Cautious Induction}
+Cautious inductiion is based on the cautious semantics of answer set programs.
+
+Sakama 2008
+
+no concept of negative examples.
+
+
+\subsubsection{Brave Induction}
+
+Brave Induction is
+
+
+Brave indction cannot learn constrains
+
+
+Sakama 2009
+
+\subsection{Learning from Anwer Sets (LAS)}
+
+Learning from Answer Sets was developed in XX to overcome limitations of cautious induction and brave induction.
+
+
+Partial Interpretations of the form
+
+
+
+\subsection{Inductive Learning of Answer Set Programs (ILASP)}
+
+ILASP is an algorithm that is capable of solving LAS tasks
+
+It is based on two fundamental concepts: positive solutions and violating solutions.
+A hypothesis H is a positive solution if and only if
+1. H \subseteq S\textsubscript{M} \\
+2. \forall e\textsuperscript{+} \in \exists A \in AS(B \cup H) subject to A extends e\textsuperscript{+}\\
+
+A hypothesis H is a violating solution if and only if
+1. H \subseteq S\textsubscript{M} \\
+2. \forall e\textsuperscript{+} \in E\textsuperscript{+} \exists A \in AS(B \cup H) subject to A extends e\textsuperscript{+}\\
+3. \exists e\textsuperscript{-} \in E\textsuperscript{-} \exists A \in AS(B \cup H) subject to A extends e\textsuperscript{-}\\
+
+
+ILP\textsubscript{LAS} is positive solutions that are not violating solutions. 
+
+ILASP task containing a contex-dependent example
+
+TODO Explain how symbolic learning works
+
+TODO What would you learn in my context? Relashinship of the objects?
+Objects, types, locations and interactions.
+
+\section{Reinforcement Learning}
+
+
+
+\section{Symbolic Reinforcement Learning}
+
+
+Explain the paper
+\section{GVGAI Framework}
+
+
+\chapter{Project Overview}
+\section{Motivation}
 
 Why symbolic reinforcement learning is good attempt
-
 
 Reason 1: Complehensive by humans -> Explanable rather than black-box
 Reason 2: Similar to the human, it uses reasoning
@@ -151,37 +303,6 @@ Implement based on \"Towards Deep Symbolic Reinforcement Learning \"
 \section{Contribution}
 
 
-\chapter{Background}
-
-ASP
-
-What is ILP?
-
-ILASP
-
-
-ILASP task containing a contex-dependent example
-
-
-
-TODO Explain how symbolic learning works
-
-TODO What would you learn in my context? Relashinship of the objects?
-Objects, types, locations and interactions.
-
-
-\section{Reinforcement Learning}
-
-
-\section{Symbolic reinforcement Learning}
-
-
-Explain the paper
-
-
-\section{GVGAI framework}
-
-
 \section{Legal and Ethical Issues}
 
 ???
@@ -198,9 +319,9 @@ Explain the paper
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \chapter{Conclusion}
 
-
+\section{References}
 %% bibliography
 \bibliographystyle{apa}
-
+\bibliography{references}
 
 \end{document}
