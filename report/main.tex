@@ -1,6 +1,8 @@
 \documentclass[12pt,twoside]{report}
 \usepackage{fixltx2e}
 \usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsmath}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Definitions for the title page
@@ -132,24 +134,24 @@ Some implementation: German paper
 \section{Inductive Logic Programming}
 Inductive Logic Programming (ILP) is a subfield of research area aimed at the intersection of machine learning and logic programming (MUGGLETON 1991). The purpose of ILP is to derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and any of negative examples.
 
-Herbrand Model
+\begin{equation}
+B \cap H \models E
+\end{equation}
 
-Least Herbrand Model
+TODO Herbrand Model
 
-Definite Logic Program is a set of definite rule where
+TODO Least Herbrand Model
 
-\begin{theorem}
-a definite rule is of the form h \leftarrow a\textsubscript{1}, ..., a\textsubscript{n}, where h , a\textsubscript{1}, ..., a\textsubscript{n} are all atoms.
-\end{theorem}
+Definite Logic Program is a set of definite rule where: \newline
+
+a definite rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, where h , a\textsubscript{1}, ..., a\textsubscript{n} are all atoms.
 
 whereas
 
 Normal Logic Program is a set of normal rule where
 
-\begin{theorem}
-a normal rule is of the form h \leftarrow a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n} where h is the head of the rule,
+a normal rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, \textit{not} b\textsubscript{1}, ..., \textit{not}  b\textsubscript{n} where h is the head of the rule,
  and a\textsubscript{1}, ..., a\textsubscript{n}, b\textsubscript{1}, ..., b\textsubscript{n} are the body of the rule (both the head and body are all atoms).
-\end{theorem}
 
 \subsection{Stable Model Semantics}
 
@@ -190,29 +192,53 @@ Answer set of P is
 
 
 \subsubsection{Cautious Induction}
-Cautious inductiion is based on the cautious semantics of answer set programs.
 
 Sakama 2008
 
-no concept of negative examples.
+no concept of negative examples in this paper.
+
+Cautious Induction task is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ where: \\
+B is the background knowledge \\
+E\textsuperscript{+} is a set of positive examples \\
+E\textsuperscript{-} is a set of negative examples \\
+
+ H \in ILP\textsubscript{cautious} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if  \\
+
+ there is at least one answer set A of B $\cup$ H such that: \\
+ for every anser set A of B $\cup$ H:
+\forall e \in E\textsuperscript{+} : e \in A \\
+\forall e \in E\textsuperscript{-} : e \notin A \\
+
+One of the limitation of cautious indction is that XX
+
+Sakama 2009
 
 
 \subsubsection{Brave Induction}
 
-Brave Induction is
+Similarly, Brave Induction task is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ where: \\
+B is the background knowledge \\
+E\textsuperscript{+} is a set of positive examples \\
+E\textsuperscript{-} is a set of negative examples \\
 
+ H \in ILP\textsubscript{brave} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if there is at least one answer set A of B $\cup$ H such that: \\
+\forall e \in E\textsuperscript{+} : e \in A \\
+\forall e \in E\textsuperscript{-} : e \notin A \\
 
-Brave indction cannot learn constrains
-
+One of the limitation of brave indction is that it cannot learn constrains as shown in the example
 
 Sakama 2009
 
 \subsection{Learning from Anwer Sets (LAS)}
 
-Learning from Answer Sets was developed in XX to overcome limitations of cautious induction and brave induction.
+Learning from Answer Sets was developed in [Law et al 2014] to overcome limitations of cautious induction and brave induction.
 
 
-Partial Interpretations of the form
+Examples used in LAS is converted from $\langle$ E\textsuperscript{+}, E\textsuperscript{-}$\rangle$ into
+
+Partial Interpretations are of the form $\langle$ E\textsuperscript{inc}, E\textsuperscript{exc}$\rangle$
+
+A Herbrand Interpretations extends a partial interpretation if it include all of the inclusions and none of the exclusions.
 
 
 
@@ -243,18 +269,83 @@ Objects, types, locations and interactions.
 \section{Reinforcement Learning}
 An RL agent may include either Policy, Value function or Model,
 
-where
+where policy
+
+On-Policy
+Off-policy
+
+Bellman Equation
 
 \subsection{Markov Decision Process(MDP)}
 
-\subsection{Temporal-Difference Learning}
+MDPs formaly represent a fully observable environment of an agent for reinforcement learning.
 
-\subsection{Optimal Control Threads}
+A state S\textsubscript{t} is Markov if and only if \\
+P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\vert$ S\textsubscript{1}, ..., S\textsubscript{t}] therefore the probability of reaching S\textsubscript{t+1} depends solely on S\textsubscript{t}, which captures all the relevant information from earilier history.
 
+A MDP is of the form \langle S, A, T, R, \gamma \rangle where: \\
+
+\begin{itemize}
+\item S is the set of finite states that is observable in the environment
+\item A is the set of finite actions executable by the agent
+\item T is a state transition in the form of probability matrix XXXXX
+\item R is a reward function
+\item $\gamma$ is a discount factor $\gamma$ $\ooalign$ [0,1]
+\end{itemize}
+
+
+\subsection{Temporal-Difference (TD) Learning}
+
+TD learns directly from episodes of experiences, which can be imcomplete.
+TD does not require knowledge of MDP transitions and rewards (model-free)
+Sutton 1988
+
+Update value
+\begin{equation}
+V(S\textsubscript{t} \leftarrow V(S\textsubscript{t} + \alpha (R\textsubscript{t+1} + \gamma V(S\textsubscript{t+1}) - V(S\textsubscript{t}))
+\end{equation}
+
+where R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) is the estimated return (a.k.a TD target)
+
+R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) - V(S\textsubscript{t}) is TD error.
+
+
+TD updates the estimate by using the estimates of XXX (bootstrap).
+
+The advantages of TD methods
+- does not require any model of an environment.
+- online learning
 \subsection{Q-Learning}
+Q-learning is off-policy TD learning defined in [Watkin 1989], which is of the form:
+
+\begin{equation}
+Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\textsubscript{t}) + \alpha(R\textsubscript{t+1} + \gamma max (a+t) Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))
+
+\end{equation}
+\\
+where $\alpha$ is the learning rate, $\gamma$ is a discount rate between 0 and 1.
+
+this equation is used to upate action-value function
+
+Model free learning: derectly derive an optimal policy by interacting with the environment without the model
+
+Model free can be done using Monte Carlo Policy evaluation
+
+One way to solve the Bellman Optimality equation is Q-leraning
+
+U(s) = max a Q(s,a)
 
 
-Bellman Equation
+a function Q(S,A) which predicts the best action A in state S to maximise the total cumulative rewards.
+
+The function is estimated by Q-learning, which repeately updates Q(s,a) using
+the Bellman Equation.
+
+
+Q table
+
+
+Epsilon greedy
 
 \section{Symbolic Reinforcement Learning}
 
