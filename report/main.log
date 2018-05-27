@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  27 MAY 2018 16:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  27 MAY 2018 21:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -535,7 +535,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hypcap package is loaded.
 Package caption Info: End \AtBeginDocument code.
 Package backref Info: ** backref set up for natbib ** on input line 27.
-(./titlepage.tex <./figures/imperial.pdf, id=96, 362.35374pt x 95.35625pt>
+(./titlepage.tex <./figures/imperial.pdf, id=104, 362.35374pt x 95.35625pt>
 File: ./figures/imperial.pdf Graphic file (type pdf)
 
 <use ./figures/imperial.pdf>
@@ -571,10 +571,6 @@ LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <12> not available
 
 ]
 Chapter 1.
-
-Package natbib Warning: Citation `garnelo2016towards' on page 1 undefined on in
-put line 98.
-
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
@@ -598,43 +594,43 @@ Underfull \hbox (badness 10000) in paragraph at lines 145--146
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <14.4> not available
 (Font)              Font shape `OT1/bch/b/n' tried instead on input line 156.
 
-./main.tex:167: LaTeX Error: Environment theorem undefined.
+./main.tex:170: LaTeX Error: Environment theorem undefined.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.167 \begin{theorem}
+l.170 \begin{theorem}
                      
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-./main.tex:168: Missing $ inserted.
+./main.tex:171: Missing $ inserted.
 <inserted text> 
                 $
-l.168 \leftarrow
+l.171 \leftarrow
                  a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubs...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-./main.tex:169: LaTeX Error: \begin{document} ended by \end{theorem}.
+./main.tex:172: LaTeX Error: \begin{document} ended by \end{theorem}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.169 \end{theorem}
+l.172 \end{theorem}
                    
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-./main.tex:169: Missing $ inserted.
+./main.tex:172: Missing $ inserted.
 <inserted text> 
                 $
-l.169 \end{theorem}
+l.172 \end{theorem}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -645,214 +641,214 @@ my insertion and my current dilemma will both disappear.
 [3
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 200--204
+Underfull \hbox (badness 10000) in paragraph at lines 203--207
 
  []
 
-./main.tex:205: Missing $ inserted.
+./main.tex:208: Missing $ inserted.
 <inserted text> 
                 $
-l.205  H \in
+l.208  H \in
              ILP\textsubscript{cautious} $\langle$ B, E\textsuperscript{+}, ...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./main.tex:205: Missing $ inserted.
+./main.tex:208: Missing $ inserted.
 <inserted text> 
                 $
-l.205  H \in ILP\textsubscript{cautious} $\langle
+l.208  H \in ILP\textsubscript{cautious} $\langle
                                                  $ B, E\textsuperscript{+}, ...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 205--206
+Underfull \hbox (badness 10000) in paragraph at lines 208--209
 
  []
 
-./main.tex:209: Missing $ inserted.
+./main.tex:212: Missing $ inserted.
 <inserted text> 
                 $
-l.209 \forall
+l.212 \forall
               e \in E\textsuperscript{+} : e \in A \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./main.tex:211: Missing $ inserted.
+./main.tex:214: Missing $ inserted.
 <inserted text> 
                 $
-l.211 
+l.214 
       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--211
+Underfull \hbox (badness 10000) in paragraph at lines 210--214
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 219--223
+Underfull \hbox (badness 10000) in paragraph at lines 222--226
 
  []
 
-./main.tex:224: Missing $ inserted.
+./main.tex:227: Missing $ inserted.
 <inserted text> 
                 $
-l.224  H \in
+l.227  H \in
              ILP\textsubscript{brave} $\langle$ B, E\textsuperscript{+}, E\t...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./main.tex:224: Missing $ inserted.
-<inserted text> 
-                $
-l.224  H \in ILP\textsubscript{brave} $\langle
-                                              $ B, E\textsuperscript{+}, E\t...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./main.tex:225: Missing $ inserted.
-<inserted text> 
-                $
-l.225 \forall
-              e \in E\textsuperscript{+} : e \in A \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ./main.tex:227: Missing $ inserted.
 <inserted text> 
                 $
-l.227 
+l.227  H \in ILP\textsubscript{brave} $\langle
+                                              $ B, E\textsuperscript{+}, E\t...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./main.tex:228: Missing $ inserted.
+<inserted text> 
+                $
+l.228 \forall
+              e \in E\textsuperscript{+} : e \in A \\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./main.tex:230: Missing $ inserted.
+<inserted text> 
+                $
+l.230 
       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 224--227
+Underfull \hbox (badness 10000) in paragraph at lines 227--230
 
  []
 
 [4]
-./main.tex:251: Missing $ inserted.
+./main.tex:252: Missing $ inserted.
 <inserted text> 
                 $
-l.251 1. H \subseteq
+l.252 1. H \subseteq
                      S\textsubscript{M} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./main.tex:253: Missing $ inserted.
+./main.tex:254: Missing $ inserted.
 <inserted text> 
                 $
-l.253 
+l.254 
       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 249--253
+Underfull \hbox (badness 10000) in paragraph at lines 250--254
 
  []
 
-./main.tex:255: Missing $ inserted.
+./main.tex:256: Missing $ inserted.
 <inserted text> 
                 $
-l.255 1. H \subseteq
+l.256 1. H \subseteq
                      S\textsubscript{M} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./main.tex:258: Missing $ inserted.
+./main.tex:259: Missing $ inserted.
 <inserted text> 
                 $
-l.258 
+l.259 
       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 254--258
+Underfull \hbox (badness 10000) in paragraph at lines 255--259
 
  []
-
-./main.tex:286: Missing $ inserted.
-<inserted text> 
-                $
-l.286 A MDP is of the form \langle
-                                   S, A, T, R, \gamma \rangle where: \\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
 
 ./main.tex:287: Missing $ inserted.
 <inserted text> 
                 $
-l.287 
+l.287 A MDP is of the form \langle
+                                   S, A, T, R, \gamma \rangle where: \\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./main.tex:288: Missing $ inserted.
+<inserted text> 
+                $
+l.288 
       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 286--287
+Underfull \hbox (badness 10000) in paragraph at lines 287--288
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+bch on input line 289.
+LaTeX Font Info:    Try loading font information for OMS+bch on input line 290.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsbch.fd
 File: omsbch.fd 
 )
 LaTeX Font Info:    Font shape `OMS/bch/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 289.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 290.
  [5]
-./main.tex:293: Missing $ inserted.
+./main.tex:294: Missing $ inserted.
 <inserted text> 
                 $
-l.293 ... is a discount factor $\gamma$ $\ooalign$
+l.294 ... is a discount factor $\gamma$ $\ooalign$
                                                    [0,1]
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-./main.tex:294: LaTeX Error: Command \end{itemize} invalid in math mode.
+./main.tex:295: LaTeX Error: Command \end{itemize} invalid in math mode.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.294 \end{itemize}
+l.295 \end{itemize}
                    
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-./main.tex:294: LaTeX Error: Something's wrong--perhaps a missing \item.
+./main.tex:295: LaTeX Error: Something's wrong--perhaps a missing \item.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.294 \end{itemize}
+l.295 \end{itemize}
                    
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-./main.tex:294: LaTeX Error: Something's wrong--perhaps a missing \item.
+./main.tex:295: LaTeX Error: Something's wrong--perhaps a missing \item.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.294 \end{itemize}
+l.295 \end{itemize}
                    
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-./main.tex:294: Missing $ inserted.
+./main.tex:295: Missing $ inserted.
 <inserted text> 
                 $
-l.294 \end{itemize}
+l.295 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -860,49 +856,49 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-./main.tex:323: Missing $ inserted.
+./main.tex:324: Missing $ inserted.
 <inserted text> 
                 $
-l.323 
+l.324 
       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./main.tex:323: Display math should end with $$.
+./main.tex:324: Display math should end with $$.
 <to be read again> 
                    \par 
-l.323 
+l.324 
       
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
 
 
-./main.tex:324: LaTeX Error: Bad math environment delimiter.
+./main.tex:325: LaTeX Error: Bad math environment delimiter.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.324 \end{equation}
+l.325 \end{equation}
                     
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-./main.tex:324: You can't use `\eqno' in vertical mode.
+./main.tex:325: You can't use `\eqno' in vertical mode.
 \endmathdisplay@a ...\df@tag \@empty \else \veqno 
                                                   \alt@tag \df@tag \fi \ifx ...
-l.324 \end{equation}
+l.325 \end{equation}
                     
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
 If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
-./main.tex:324: Missing $ inserted.
+./main.tex:325: Missing $ inserted.
 <inserted text> 
                 $
-l.324 \end{equation}
+l.325 \end{equation}
                     
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -910,47 +906,53 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-./main.tex:324: Display math should end with $$.
+./main.tex:325: Display math should end with $$.
 <to be read again> 
                    \endgroup 
-l.324 \end{equation}
+l.325 \end{equation}
                     
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
 
 [6] [7]
 Chapter 4.
+[8
+
+]
 Runaway argument?
-./main.tex:406: Paragraph ended before \OT1\" was complete.
+./main.tex:405: Paragraph ended before \OT1\" was complete.
 <to be read again> 
                    \par 
-l.406 
+l.405 
       
 I suspect you've forgotten a `}', causing me to apply this
 control sequence to too much text. How can we recover?
 My plan is to forget the whole thing and hope for the best.
 
-[8
+(./main.bbl (./main.brf)
+\tf@brf=\write5
+\openout5 = `main.brf'.
 
-] (./main.bbl)
+ [9])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 435.
+ [10
 
-Package natbib Warning: There were undefined citations.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 431.
-[9]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 431.
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 435.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 431.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 431.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 435.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 435.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 5153A2F4BFB7C68810A86E62BAFBFF2C;1629.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 431.
+(rerunfilecheck)             Checksum: CF0CB025F7D50626778C7711234597E6;1771.
+Package rerunfilecheck Info: File `main.brf' has not changed.
+(rerunfilecheck)             Checksum: E30D8051DC9FEE566404816D5ED9778C;50.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 435.
  ) 
 Here is how much of TeX's memory you used:
- 8843 strings out of 494353
- 130375 string characters out of 6170044
- 231463 words of memory out of 5000000
- 11965 multiletter control sequences out of 15000+600000
+ 8859 strings out of 494353
+ 130617 string characters out of 6170044
+ 231450 words of memory out of 5000000
+ 11973 multiletter control sequences out of 15000+600000
  33491 words of font info for 59 fonts, out of 8000000 for 9000
  452 hyphenation exceptions out of 8191
  38i,12n,43p,317b,419s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -963,10 +965,10 @@ ts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
 nts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 10.pfb>
-Output written on main.pdf (12 pages, 119738 bytes).
+Output written on main.pdf (13 pages, 121642 bytes).
 PDF statistics:
- 227 PDF objects out of 1000 (max. 8388607)
- 201 compressed objects within 3 object streams
- 41 named destinations out of 1000 (max. 500000)
- 190 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 247 PDF objects out of 1000 (max. 8388607)
+ 220 compressed objects within 3 object streams
+ 46 named destinations out of 1000 (max. 500000)
+ 206 words of extra memory for PDF output out of 10000 (max. 10000000)
 

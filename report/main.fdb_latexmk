@@ -1,13 +1,12 @@
 # Fdb version 3
-["bibtex main"] 0 "main.aux" "main.bbl" "main" 1527434438
+["bibtex main"] 0 "main.aux" "main.bbl" "main" 0
   "/usr/share/texlive/texmf-dist/bibtex/bst/beebe/apa.bst" 1136766823 23582 e3c8338eb1efb7432441aa8861285f53 ""
-  "main.aux" 1527434438 3647 77f1bf585863e2f5376e6388709e0bf7 ""
+  "main.aux" 1527452094 3970 a577591befdd5ea9d948f7297ce73293 ""
   "main.bcf" 0 -1 0 ""
   "references.bib" 1527342280 215 abd07bbf0effc55d9c1a5ec87ad731ab ""
   (generated)
   "main.bbl"
-  "main.blg"
-["pdflatex"] 1527434437 "main.tex" "main.pdf" "main" 1527434438
+["pdflatex"] 1527452094 "main.tex" "main.pdf" "main" 1527452094
   "/etc/texmf/web2c/texmf.cnf" 1477904399 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
@@ -113,17 +112,18 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1506607516 1736994 7b22fc77a2876e8c879e4f3e0c27d048 ""
   "figures/imperial.pdf" 1439884276 14992 7f9429838e925fcd04acfa4d283703b5 ""
   "includes.tex" 1439984244 2982 94e3c51e3874ecbcf3cf3ddf0a89e382 ""
-  "main.aux" 1527434438 3647 77f1bf585863e2f5376e6388709e0bf7 ""
-  "main.bbl" 1527434369 0 d41d8cd98f00b204e9800998ecf8427e "bibtex main"
-  "main.out" 1527434438 1629 5153a2f4bfb7c68810a86e62bafbff2c ""
-  "main.tex" 1527434438 13973 93dbf9bdf21cc064f1b16be4294f9cee ""
-  "main.toc" 1527434438 2034 c08c774aba3395c9ddcbd79520e08dc3 ""
+  "main.aux" 1527452094 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "main.bbl" 1527447864 282 2c8a558815b938b28afe3764edd1ca55 "bibtex main"
+  "main.brf" 0 -1 0 ""
+  "main.out" 0 -1 0 ""
+  "main.tex" 1527452094 14488 a9e63ea09505245f6332651d14e57b31 ""
+  "main.toc" 0 -1 0 ""
   "notation.tex" 1439984354 362 dde8d17bdd645c497ea48e05d51963bd ""
   "titlepage.tex" 1440156428 1995 b33c89e3a284110d3cc1b5b405785394 ""
   (generated)
   "main.log"
-  "main.pdf"
-  "main.aux"
-  "main.out"
   "main.brf"
+  "main.pdf"
+  "main.out"
+  "main.aux"
   "main.toc"

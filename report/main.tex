@@ -157,7 +157,10 @@ a normal rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubsc
 
 Stable Model of a normal logic program
 
-\subsection{Anwer Set Programming}
+\subsection{Anwer Set Programming (ASP)}
+
+Answer Set Programming (ASP) is a declarative programming
+
 
 Literals
 
@@ -239,8 +242,6 @@ Examples used in LAS is converted from $\langle$ E\textsuperscript{+}, E\textsup
 Partial Interpretations are of the form $\langle$ E\textsuperscript{inc}, E\textsuperscript{exc}$\rangle$
 
 A Herbrand Interpretations extends a partial interpretation if it include all of the inclusions and none of the exclusions.
-
-
 
 \subsection{Inductive Learning of Answer Set Programs (ILASP)}
 
@@ -341,11 +342,13 @@ a function Q(S,A) which predicts the best action A in state S to maximise the to
 The function is estimated by Q-learning, which repeately updates Q(s,a) using
 the Bellman Equation.
 
-
-Q table
+TODO INSERT Q-learning ALGORITHM HERE
 
 
 Epsilon greedy
+
+\section{Deep
+Reinforcement Learning}
 
 \section{Symbolic Reinforcement Learning}
 
@@ -365,16 +368,11 @@ Reason 2: Similar to the human, it uses reasoning
 
 Use of previous experience (background knowledge)
 
-Not much explored yet.
-
-However there is a room for exploration on this field.
-
-TODO Explain how reinforcement learning works
+Not much explored yet.However there is a room for exploration on this field.
 
 Reason 3: Recent advance of ILASP is promissing
 
 Because of the recent advancement of logic-based learning and deep reinforcement learning, combination of both approach would be a next explonation toward artificial general intelligence.
-
 
 \section{Objectives}
 
@@ -384,8 +382,11 @@ combining the two novel approaches to overcome the problems of the QND
 
 The probject outline
 
-Implement baseline performance (DQN)
+Implement baseline performance (DQN, Q-learning, ASPRL)
 
+Due to the complex environment of the chosen game, I will not implemnet the original DSRL, since the feature extractions from the pixel would only work in a very simple pixel environment,
+
+would not be realistic in this case.
 
 Pipeline
 Implement the CNN side that is able to extract features of the game and convert into ASP syntax.
@@ -395,8 +396,6 @@ Apply ILASP to the ASP, which involves development of the pipeline of ILASP in P
 
 Finally use Q-learning that allow
 
-
-
 which measurement would you use? (grid word, something else? GVGAL games)
 Summarise different types of knowledge representations (Objects ?? relationship?)
 
@@ -404,8 +403,13 @@ Common sense
 
 Implement based on \"Towards Deep Symbolic Reinforcement Learning \"
 
+Transfer learning
+
 \section{Contribution}
 
+To my knowledge, this is the first time that both symbolic learning method is incorporated into a reinforcement learning to facilitate learning process
+
+\section{Methods}
 
 \section{Legal and Ethical Issues}
 
