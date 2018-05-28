@@ -1,28 +1,34 @@
 \select@language {english}
-\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
-\contentsline {chapter}{\numberline {2}Background}{2}{chapter.2}
-\contentsline {section}{\numberline {2.1}Data Efficient Learning}{2}{section.2.1}
-\contentsline {section}{\numberline {2.2}ASP in Reinforcement Learning}{2}{section.2.2}
-\contentsline {chapter}{\numberline {3}Background}{3}{chapter.3}
-\contentsline {section}{\numberline {3.1}Inductive Logic Programming}{3}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Stable Model Semantics}{3}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Anwer Set Programming (ASP)}{3}{subsection.3.1.2}
-\contentsline {subsubsection}{Cautious Induction}{4}{section*.2}
-\contentsline {subsubsection}{Brave Induction}{4}{section*.3}
-\contentsline {subsection}{\numberline {3.1.3}Learning from Anwer Sets (LAS)}{5}{subsection.3.1.3}
-\contentsline {subsection}{\numberline {3.1.4}Inductive Learning of Answer Set Programs (ILASP)}{5}{subsection.3.1.4}
-\contentsline {section}{\numberline {3.2}Reinforcement Learning}{5}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Markov Decision Process(MDP)}{5}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Temporal-Difference (TD) Learning}{6}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Q-Learning}{6}{subsection.3.2.3}
-\contentsline {section}{\numberline {3.3}Deep Reinforcement Learning}{7}{section.3.3}
-\contentsline {section}{\numberline {3.4}Symbolic Reinforcement Learning}{7}{section.3.4}
-\contentsline {section}{\numberline {3.5}GVGAI Framework}{7}{section.3.5}
-\contentsline {chapter}{\numberline {4}Project Overview}{8}{chapter.4}
-\contentsline {section}{\numberline {4.1}Motivation}{8}{section.4.1}
-\contentsline {section}{\numberline {4.2}Objectives}{8}{section.4.2}
-\contentsline {section}{\numberline {4.3}Project outline}{8}{section.4.3}
-\contentsline {section}{\numberline {4.4}Contribution}{9}{section.4.4}
-\contentsline {section}{\numberline {4.5}Methods}{9}{section.4.5}
-\contentsline {section}{\numberline {4.6}Legal and Ethical Issues}{9}{section.4.6}
-\contentsline {section}{\numberline {4.7}References}{9}{section.4.7}
+\contentsline {chapter}{\numberline {1}Introduction}{2}{chapter.1}
+\contentsline {chapter}{\numberline {2}Related Work}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Deep Reinforcement Learning and its issues}{3}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Data efficient learning}{3}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Transfer learning}{3}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Planning}{3}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}Transparency}{3}{subsection.2.1.4}
+\contentsline {section}{\numberline {2.2}Symbolic Reinforcement Learning}{4}{section.2.2}
+\contentsline {chapter}{\numberline {3}Background}{5}{chapter.3}
+\contentsline {section}{\numberline {3.1}Inductive Logic Programming}{5}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Stable Model Semantics}{5}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Anwer Set Programming (ASP)}{5}{subsection.3.1.2}
+\contentsline {subsubsection}{Cautious Induction}{6}{section*.2}
+\contentsline {subsubsection}{Brave Induction}{6}{section*.3}
+\contentsline {subsection}{\numberline {3.1.3}Learning from Anwer Sets (LAS)}{7}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Inductive Learning of Answer Set Programs (ILASP)}{7}{subsection.3.1.4}
+\contentsline {section}{\numberline {3.2}Reinforcement Learning}{7}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Markov Decision Process(MDP)}{7}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Temporal-Difference (TD) Learning}{8}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Q-Learning}{8}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.3}Deep Reinforcement Learning}{9}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Convolutional Neural Networks (CNN)}{9}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Deep Q-Networks (DQNs)}{9}{subsection.3.3.2}
+\contentsline {section}{\numberline {3.4}Symbolic Reinforcement Learning}{9}{section.3.4}
+\contentsline {section}{\numberline {3.5}GVGAI Framework}{9}{section.3.5}
+\contentsline {chapter}{\numberline {4}Project Overview}{10}{chapter.4}
+\contentsline {section}{\numberline {4.1}Motivation}{10}{section.4.1}
+\contentsline {section}{\numberline {4.2}Objectives}{10}{section.4.2}
+\contentsline {section}{\numberline {4.3}Project outline}{10}{section.4.3}
+\contentsline {section}{\numberline {4.4}Contribution}{11}{section.4.4}
+\contentsline {section}{\numberline {4.5}Methods}{11}{section.4.5}
+\contentsline {section}{\numberline {4.6}Legal and Ethical Issues}{11}{section.4.6}
+\contentsline {section}{\numberline {4.7}References}{11}{section.4.7}

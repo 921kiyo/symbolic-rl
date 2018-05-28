@@ -9,7 +9,7 @@
 % Edit these to provide the correct information
 % e.g. \newcommand{\reportauthor}{Timothy Kimber}
 
-\newcommand{\reporttitle}{Data Efficient Deep Reinforcement Learning using Inductive Logic Programming}
+\newcommand{\reporttitle}{Symbolic Reinforcement Learning using Inductive Logic Programming}
 \newcommand{\reportauthor}{Kiyohito Kunii}
 \newcommand{\supervisor}{Professor Alessandra Russo}
 \newcommand{\degreetype}{MSc in Computing Science}
@@ -28,7 +28,6 @@
 
 % load title page
 \input{titlepage}
-
 
 % page numbering etc.
 \pagenumbering{roman}
@@ -53,8 +52,8 @@
 \fancyhead[RE,LO]{\sffamily {Table of Contents}}
 \tableofcontents
 
-
-\clearpage{\pagestyle{empty}\cleardoublepage}
+% ADD BLANK PAGE
+% \clearpage{\pagestyle{empty}\cleardoublepage}
 \pagenumbering{arabic}
 \setcounter{page}{1}
 \fancyhead[LE,RO]{\slshape \rightmark}
@@ -73,34 +72,37 @@
 % Figure~\ref{fig:logo} is an example of a figure.
 
 
-There has been successful applications of deep reinforcement learning (DRL) a number of domains, such as games and robotics.
+There has been successful applications of deep reinforcement learning (DRL) a number of domains, such as games and robotics (TODO INSERT REFERENCES).
 DRL is considered to be a step towards artificial general intelligence.
-However there are still a number of issues to overcome in this method. As pointed by XXX, there are 3 major problems.
+As pointed by XXX, however, there are still a number of issues to overcome in this method.
 First, it requires a large amount of data for training the model, which requires a long time of learning process.
-Second, it is considered to be a black-box, meaning the decision making process is unknown to human and therefore not explanable.
+Second, it is considered to be a black-box, meaning the decision making process is unknown to human user and therefore lacks explanation ability.
 Third there is no thoughts process to the decision making, which, as XX points out, is a fundamental to the artificial general intelligence.
-To overcome these problems, there are 3 main streams of research on this field.
+To tackle these problems, there are 3 main streams of research on this field.
 First main research is focused on applying Baysian statistics XXX, the second main research is XXX.
 Recently, the XXX attempted to incorporate symbolic representations into the system to achive more data-efficient learning, which shows a promissing results of this approach.
-The paper was the application of symbolic representatiojns into a very simple game to demonstrate this proof of concept would actually work.
 
-
-By contract, there is active reserach in symbolic machine learning, which focuses on logic=based learning rather than statistical machine learning.
-For example, XX shows the agent can learn XXX from a noisy examples, with only a very few training examples.
-
-
-In this paper, I explore incorporation of symbolic machine learning into XXX to achieve data-efficient learning using Inductive Learning of Answer Set Programs (ILASP), which is the state-of-art symbolic learning method that can be applied to imcomplete and more complex environment.
-
-
-This research is based on XX, but in this paper I explore symbolic represetations process and include more learning aspect.
-
-
-Problem setting \cite{garnelo2016towards}
+In this paper, I further explore incorporation of symbolic machine learning into reinforcement learning to achieve data-efficient learning using Inductive Learning of Answer Set Programs (ILASP), which is the state-of-art symbolic learning method that can be applied to imcomplete and more complex environment.
+This research is inspired by \cite{garnelo2016towards}, but in this paper I explore symbolic represetations process and include more learning aspect.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Background}
+\chapter{Related Work}
 
-\section{Data Efficient Learning}
+\section{Deep Reinforcement Learning and its issues}
+
+\subsection{Data efficient learning}
+
+\subsection{Transfer learning}
+
+\subsection{Planning}
+
+\subsection{Transparency}
+
+Transparency and interpretable capability of the model is another important aspect for machine learning applications.
+
+
+XXX[Programmati...] developed a programmatically interpretable reinforcement learning which finds a policy that can be represented in a human-readable programming language.
+
 
 Two most studied approach for using previous learning exprience is meta-learning and transfer learning
 
@@ -115,8 +117,6 @@ The advance of statistical machine learning methods, especially deeep reinforcem
 
 AlphaGo, and AlphaGo Zero
 
-Also business success.
-
 Study of symbolic machine learning roots from
 % Relational Reinforcement Learning
 
@@ -128,7 +128,21 @@ Symbolic Deep reinforcement learning
 
 Some implementation: German paper
 
-\section{ASP in Reinforcement Learning}
+The paper was the application of symbolic representatiojns into a very simple game to demonstrate this proof of concept would actually work.
+By contract, there is active reserach in symbolic machine learning, which focuses on logic=based learning rather than statistical machine learning.
+For example, XX shows the agent can learn XXX from a noisy examples, with only a very few training examples.
+
+
+\section{Symbolic Reinforcement Learning}
+Incorporation of logic into reinforcement learning dates back to the study of relational reinforcement learning,
+
+
+More recently there has been a number of attempts to incorporate ASP into reinforcement learning.
+
+There are a number of reseached conducted in applying DNN to symbolic reasoning.
+For example,
+
+[From GamePlay to Symbolic Reasoning]
 
 \chapter{Background}
 \section{Inductive Logic Programming}
@@ -167,6 +181,9 @@ Literals
 Negation as a failure
 
 constrains is of the form
+
+Clingo
+
 \begin{theorem}
 \leftarrow a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
 \end{theorem}
@@ -317,6 +334,8 @@ The advantages of TD methods
 - does not require any model of an environment.
 - online learning
 \subsection{Q-Learning}
+what is Q function
+
 Q-learning is off-policy TD learning defined in [Watkin 1989], which is of the form:
 
 \begin{equation}
@@ -350,12 +369,24 @@ Epsilon greedy
 \section{Deep
 Reinforcement Learning}
 
+\subsection{Convolutional Neural Networks (CNN)}
+
+\subsection{Deep Q-Networks (DQNs)}
+
 \section{Symbolic Reinforcement Learning}
 
 
 Explain the paper
 \section{GVGAI Framework}
 
+The Video Game Definition Language (VGDL)
+
+SpriteSet defines all the sprites available in the game.
+LevelMapping defines relationships among characters, and the sprites available.
+InteractionSet defines what events occur when two sprites collide
+TerminationSet defines the end conditions of the game, and decides whether the player wins or not.
+
+% Timeout and SpriteCounter
 
 \chapter{Project Overview}
 \section{Motivation}
@@ -363,12 +394,14 @@ Explain the paper
 Why symbolic reinforcement learning is good attempt
 
 
-Reason 1: Complehensive by humans -> Explanable rather than black-box
+Reason 1: Complehensive by humans $\rightarrow$ Explanable rather than black-box
+
 Reason 2: Similar to the human, it uses reasoning
 
 Use of previous experience (background knowledge)
+As discussed in XX, there are many research that attempted to incorporate symbolic reasoning into DRL, but there is not much research on incorporating symbolc learning with reinforcement learning
 
-Not much explored yet.However there is a room for exploration on this field.
+However there is a room for exploration on this field.
 
 Reason 3: Recent advance of ILASP is promissing
 
@@ -386,11 +419,9 @@ Implement baseline performance (DQN, Q-learning, ASPRL)
 
 Due to the complex environment of the chosen game, I will not implemnet the original DSRL, since the feature extractions from the pixel would only work in a very simple pixel environment,
 
-would not be realistic in this case.
-
 Pipeline
-Implement the CNN side that is able to extract features of the game and convert into ASP syntax.
 
+The basic architecture follows the similar method in XXX, but I also add symbolic learning to these extracted symbolic features using ILASP.
 
 Apply ILASP to the ASP, which involves development of the pipeline of ILASP in Python
 
@@ -403,7 +434,7 @@ Common sense
 
 Implement based on \"Towards Deep Symbolic Reinforcement Learning \"
 
-Transfer learning
+Lastly, I will also test the capability of transfer learning for this new method. 
 
 \section{Contribution}
 
