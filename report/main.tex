@@ -3,6 +3,9 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{amsmath, amssymb}
+\usepackage[table]{xcolor}
+\usepackage{amssymb}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Definitions for the title page
@@ -238,20 +241,21 @@ Objects, types, locations and interactions.
 \section{Reinforcement Learning}
 \label{rl}
 
-% \begin{figure}[!htb]
-% \centering
-% \includegraphics[width=5cm, height=5cm]{./figures/agent_env}
-% \caption{Agent and Environment}
-% \label{agent_env}
-% \end{figure}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=5cm, height=5cm]{./figures/agent_env}
+\caption{Agent and Environment}
+\label{agent_env}
+\end{figure}
 
 % An RL agent may include either Policy, Value function or Model,
 
-On-Policy
+On-Policy learn policy \pi from its past experience
 Off-policy
 
 \subsection{Markov Decision Process(MDP)}
 
+There is an agent who interacts with an envirnment (Figure \ref{agent_env}). At each time step, an action taken by the agent affect the environment state and the reward (or penality) it receives from the action outcome. (TODO Observations)
 When an agnet must make a sequence of decision, the sequential decision problem can be formalised using Markov decision process (MDP). MDPs formaly represent a fully observable environment of an agent for reinforcement learning.
 
 A MDP is of the form $\langle$ S, A, T\textsubscript{a}, R\textsubscript{a}, $\gamma$ $\rangle$ where: \\
@@ -260,11 +264,10 @@ A MDP is of the form $\langle$ S, A, T\textsubscript{a}, R\textsubscript{a}, $\g
 \item S is the set of finite states that is observable in the environment
 \item A is the set of finite actions taken by the agent
 \item T\textsubscript{a}(s, s$^\prime$) is a state transition in the form of probability matrix Pr(S\textsubscript{t+1} = s$^\prime$ $\vert$ s\textsubscript{t} = s, a\textsubscript{t} = a), which is the probablity that action a in state s at time t will result in state s$^\prime$ at time t+1.
-\item R is a reward function R\textsubscript{a}(s, s$^\prime$) = $\displaystyle \E[R\textsubscript{t+1} $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a], the expected immediate reward that action a in state s at time t will return
+\item R is a reward function R\textsubscript{a}(s, s$^\prime$) = $\displaystyle \E[R\textsubscript{t+1} $ $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a], the expected immediate reward that action a in state s at time t will return
 \item $\gamma$ is a discount factor $\gamma$ $\in$ [0,1], which represents the preference of the agent for present rewards over future rewards
 
 \end{itemize}
-
 
 In MDPs, there is an element of delayed reward tradeoff between immediate rewards and its delayed reward
 
@@ -273,17 +276,21 @@ P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\ve
 
 A solution to the sequential decision problem is called a policy $\pi$, which is a distributin over actions given states.
 
-An optimal policy $\pi^*$ maximises R.
+An optimal policy $\pi^*$ is the one that maximise the total rewards in the environment.
+
+The total reward with a discount factor is
 
 
-Q\textsubscript{\pi} = $\displaystyle \E[R\textsubscript{\pi}$ []
+The existence of the discount factor can be justified as follows:
+
+TODO
+$\displaystyle \E[R\textsubscript{t+1} $ $\vert$ S\textsubscript{t} = s]
+
 
 Reinforcement learning is a method to get approximated optimal solution.
 
 
 \subsection{Temporal-Difference (TD) Learning}
-
-
 
 TD learns directly from episodes of experiences, which can be imcomplete.
 TD does not require knowledge of MDP transitions and rewards (model-free)
@@ -304,7 +311,16 @@ The advantages of TD methods
 - does not require any model of an environment.
 - online learning
 \subsection{Q-Learning}
-what is Q function
+
+model-free leaning, where the agent will not rely on the models of the environment.
+
+Q-learning approximate the Q(a,s) from the samples of
+
+the agent only knows about the possible states and actions but the transition state and reward probability functions are unknown.
+
+Q function is the state-action pair
+
+the optimal Q-function Q\textsuperscript{*}(s,a) represents XXX for the agent to selection action a given that it is in state s.
 
 Q-learning is off-policy TD learning defined in [Watkin 1989], which is of the form:
 
@@ -474,10 +490,140 @@ Lastly, I will also test the capability of transfer learning for this new method
 To my knowledge, this is the first time that both symbolic learning method is incorporated into a reinforcement learning to facilitate learning process
 
 \section{Methods}
+fjdaj;j
 
-\section{Legal and Ethical Issues}
-
-???
+% \chapter{Ethics Checklist}
+% {
+% \renewcommand*{\arraystretch}{1.3}
+% \begin{longtable}{ |p{13.2cm}|p{0.6cm}|p{0.6cm}| }
+% \hline
+%  & \bf Yes & \bf No \\
+% \hline
+%
+% \multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 1: HUMAN EMBRYOS/FOETUSES} \\
+% \hline
+%
+% Does your project involve Human Embryonic Stem Cells? & & \\
+% \hline
+%
+% Does your project involve the use of human embryos? & & \\
+% \hline
+%
+% Does your project involve the use of human foetal tissues / cells? & & \\
+% \hline
+%
+% \multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 2: HUMANS} \\
+% \hline
+%
+% Does your project involve human participants? & & \\
+% \hline
+%
+% \multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 3: HUMAN CELLS / TISSUES} \\
+% \hline
+%
+% Does your project involve human cells or tissues? (Other than from “Human Embryos/Foetuses” i.e. Section 1)? & & \\
+% \hline
+%
+% \multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 4: PROTECTION OF PERSONAL DATA} \\
+% \hline
+%
+% Does your project involve personal data collection and/or processing? & & \\
+% \hline
+%
+% Does it involve the collection and/or processing of sensitive personal data (e.g. health, sexual lifestyle, ethnicity, political opinion, religious or philosophical conviction)? & & \\
+% \hline
+%
+% Does it involve processing of genetic information? & & \\
+% \hline
+%
+% Does it involve tracking or observation of participants? It should be noted that this issue is not limited to surveillance or localization data. It also applies to Wan data such as IP address, MACs, cookies etc. & & \\
+% \hline
+%
+% Does your project involve further processing of previously collected personal data (secondary use)? For example Does your project involve merging existing data sets? & & \\
+% \hline
+%
+% \multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 5: ANIMALS} \\
+% \hline
+%
+% Does your project involve animals? & & \\
+% \hline
+%
+%
+% \multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 6: DEVELOPING COUNTRIES} \\
+% \hline
+%
+% Does your project involve developing countries? & & \\
+% \hline
+%
+% If your project involves low and/or lower-middle income countries, are any benefit-sharing actions planned? & & \\
+% \hline
+%
+% Could the situation in the country put the individuals taking part in the project at risk? & & \\
+% \hline
+%
+% \multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 7: ENVIRONMENTAL PROTECTION AND SAFETY} \\
+% \hline
+%
+% Does your project involve the use of elements that may cause harm to the environment, animals or plants? & & \\
+% \hline
+%
+% Does your project deal with endangered fauna and/or flora /protected areas? & & \\
+% \hline
+%
+% Does your project involve the use of elements that may cause harm to humans, including project staff? & & \\
+% \hline
+%
+% Does your project involve other harmful materials or equipment, e.g. high-powered laser systems? & & \\
+% \hline
+%
+%
+% \multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 8: DUAL USE} \\
+% \hline
+%
+% Does your project have the potential for military applications? & & \\
+% \hline
+%
+% Does your project have an exclusive civilian application focus? & & \\
+% \hline
+%
+% Will your project use or produce goods or information that will require export licenses in accordance with legislation on dual use items? & & \\
+% \hline
+%
+% Does your project affect current standards in military ethics – e.g., global ban on weapons of mass destruction, issues of proportionality, discrimination of combatants and accountability in drone and autonomous robotics developments, incendiary or laser weapons? & & \\
+% \hline
+%
+% \multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 9: MISUSE} \\
+% \hline
+%
+% Does your project have the potential for malevolent/criminal/terrorist abuse? & & \\
+% \hline
+%
+% Does your project involve information on/or the use of biological-, chemical-, nuclear/radiological-security sensitive materials and explosives, and means of their delivery? & & \\
+% \hline
+%
+% Does your project involve the development of technologies or the creation of information that could have severe negative impacts on human rights standards (e.g. privacy, stigmatization, discrimination), if misapplied? & & \\
+% \hline
+%
+% Does your project have the potential for terrorist or criminal abuse e.g. infrastructural vulnerability studies, cybersecurity related project? & & \\
+% \hline
+%
+% \multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 10: LEGAL ISSUES} \\
+% \hline
+%
+% Will your project use or produce software for which there are copyright licensing implications? & & \\
+% \hline
+%
+% Will your project use or produce goods or information for which there are data protection, or other legal implications? & & \\
+% \hline
+%
+% \multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 11: OTHER ETHICS ISSUES} \\
+% \hline
+%
+% Are there any other ethics issues that should be taken into consideration? & & \\
+% \hline
+%
+% \end{longtable}
+% }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
