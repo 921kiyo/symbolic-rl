@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex main"] 0 "main.aux" "main.bbl" "main" 1527539983
-  "/usr/share/texlive/texmf-dist/bibtex/bst/beebe/apa.bst" 1136766823 23582 e3c8338eb1efb7432441aa8861285f53 ""
-  "main.aux" 1527539982 4640 292d5bb0fcb10f715e173083209341e1 ""
+["bibtex main"] 0 "main.aux" "main.bbl" "main" 1527690504
+  "/usr/share/texlive/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
+  "main.aux" 1527690495 4513 5c1d33748f23b6b99fefede1893dff39 ""
   "main.bcf" 0 -1 0 ""
-  "references.bib" 1527342280 215 abd07bbf0effc55d9c1a5ec87ad731ab ""
+  "references.bib" 1527689440 56631 cb5cbed5e30f8a650cc500d8367b8cd7 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1527539982 "main.tex" "main.pdf" "main" 1527539983
+["pdflatex"] 1527690494 "main.tex" "main.pdf" "main" 1527690504
   "/etc/texmf/web2c/texmf.cnf" 1477904399 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
@@ -113,18 +113,18 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1506607516 1736994 7b22fc77a2876e8c879e4f3e0c27d048 ""
   "figures/imperial.pdf" 1439884276 14992 7f9429838e925fcd04acfa4d283703b5 ""
   "includes.tex" 1439984244 2982 94e3c51e3874ecbcf3cf3ddf0a89e382 ""
-  "main.aux" 1527539982 4640 292d5bb0fcb10f715e173083209341e1 ""
-  "main.bbl" 1527539706 282 2c8a558815b938b28afe3764edd1ca55 "bibtex main"
-  "main.brf" 1527539982 50 5bf3be39430a881f106b7dac86844fb4 ""
-  "main.out" 1527539982 2269 bd915799013bde786b1c42f6751ed590 ""
-  "main.tex" 1527539983 16020 93a73dc1f03dccb8256d564058b5c2fd ""
-  "main.toc" 1527539982 2754 9a5edacdc66ac2baf1af009ac0704e01 ""
+  "main.aux" 1527690495 4513 5c1d33748f23b6b99fefede1893dff39 ""
+  "main.bbl" 1527690489 49 0eba253fc001332e731e8aba3f23127b "bibtex main"
+  "main.brf" 1527690495 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "main.out" 1527690495 2269 2b205a6c66852c071ee7f8f5e649490e ""
+  "main.tex" 1527690504 16215 132f391705376baee3d9eba0798628cb ""
+  "main.toc" 1527690495 2754 d35e78891260c7fa65cfad5e483904b4 ""
   "notation.tex" 1439984354 362 dde8d17bdd645c497ea48e05d51963bd ""
   "titlepage.tex" 1440156428 1995 b33c89e3a284110d3cc1b5b405785394 ""
   (generated)
+  "main.brf"
   "main.pdf"
   "main.out"
   "main.toc"
-  "main.brf"
   "main.log"
   "main.aux"

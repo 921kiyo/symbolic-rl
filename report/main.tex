@@ -85,68 +85,13 @@ Recently, the XXX attempted to incorporate symbolic representations into the sys
 In this paper, I further explore incorporation of symbolic machine learning into reinforcement learning to achieve data-efficient learning using Inductive Learning of Answer Set Programs (ILASP), which is the state-of-art symbolic learning method that can be applied to imcomplete and more complex environment.
 This research is inspired by \cite{garnelo2016towards}, but in this paper I explore symbolic represetations process and include more learning aspect.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Related Work}
-
-\section{Deep Reinforcement Learning and its issues}
-
-\subsection{Data efficient learning}
-
-\subsection{Transfer learning}
-
-\subsection{Planning}
-
-\subsection{Transparency}
-
-Transparency and interpretable capability of the model is another important aspect for machine learning applications.
-
-
-XXX[Programmati...] developed a programmatically interpretable reinforcement learning which finds a policy that can be represented in a human-readable programming language.
-
-
-Two most studied approach for using previous learning exprience is meta-learning and transfer learning
-
-Artificial General Intelligence
-
-Definision of AGI
-
-The history of data-efficient learning
-What other people have done in this.
-
-The advance of statistical machine learning methods, especially deeep reinforcement learning
-
-AlphaGo, and AlphaGo Zero
-
-Study of symbolic machine learning roots from
-% Relational Reinforcement Learning
-
-Baysian Optimisation
-
-RNN approach
-
-Symbolic Deep reinforcement learning
-
-Some implementation: German paper
-
-The paper was the application of symbolic representatiojns into a very simple game to demonstrate this proof of concept would actually work.
-By contract, there is active reserach in symbolic machine learning, which focuses on logic=based learning rather than statistical machine learning.
-For example, XX shows the agent can learn XXX from a noisy examples, with only a very few training examples.
-
-
-\section{Symbolic Reinforcement Learning}
-Incorporation of logic into reinforcement learning dates back to the study of relational reinforcement learning,
-
-
-More recently there has been a number of attempts to incorporate ASP into reinforcement learning.
-
-There are a number of reseached conducted in applying DNN to symbolic reasoning.
-For example,
-
-[From GamePlay to Symbolic Reasoning]
+This background report is organised as follows:
 
 \chapter{Background}
 \section{Inductive Logic Programming}
 Inductive Logic Programming (ILP) is a subfield of research area aimed at the intersection of machine learning and logic programming (MUGGLETON 1991). The purpose of ILP is to derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and any of negative examples.
+
+Limitations of Inductive Logic Programming:
 
 \begin{equation}
 B \cap H \models E
@@ -388,6 +333,69 @@ TerminationSet defines the end conditions of the game, and decides whether the p
 
 % Timeout and SpriteCounter
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Related Work}
+
+\section{Deep Reinforcement Learning and its issues}
+
+\subsection{Data efficient learning}
+
+\subsection{Transfer learning}
+
+\subsection{Planning}
+
+\subsection{Transparency}
+
+Transparency and interpretable capability of the model is another important aspect for machine learning applications.
+
+
+XXX[Programmati...] developed a programmatically interpretable reinforcement learning which finds a policy that can be represented in a human-readable programming language.
+
+
+Two most studied approach for using previous learning exprience is meta-learning and transfer learning
+
+Artificial General Intelligence
+
+Definision of AGI
+
+The history of data-efficient learning
+What other people have done in this.
+
+The advance of statistical machine learning methods, especially deeep reinforcement learning
+
+AlphaGo, and AlphaGo Zero
+
+Study of symbolic machine learning roots from
+% Relational Reinforcement Learning
+
+Baysian Optimisation
+
+RNN approach
+
+Symbolic Deep reinforcement learning
+
+Some implementation: German paper
+
+The paper was the application of symbolic representatiojns into a very simple game to demonstrate this proof of concept would actually work.
+By contract, there is active reserach in symbolic machine learning, which focuses on logic=based learning rather than statistical machine learning.
+For example, XX shows the agent can learn XXX from a noisy examples, with only a very few training examples.
+
+
+\section{Symbolic Reinforcement Learning}
+Incorporation of logic into reinforcement learning dates back to the study of relational reinforcement learning,
+
+
+More recently there has been a number of attempts to incorporate ASP into reinforcement learning.
+
+There are a number of reseached conducted in applying DNN to symbolic reasoning.
+For example,
+
+[From GamePlay to Symbolic Reasoning]
+
+
+However, as XX points out, 1 pixel of the game could influence the decision making of the agent.
+
+
 \chapter{Project Overview}
 \section{Motivation}
 
@@ -434,7 +442,7 @@ Common sense
 
 Implement based on \"Towards Deep Symbolic Reinforcement Learning \"
 
-Lastly, I will also test the capability of transfer learning for this new method. 
+Lastly, I will also test the capability of transfer learning for this new method.
 
 \section{Contribution}
 
@@ -460,7 +468,7 @@ To my knowledge, this is the first time that both symbolic learning method is in
 
 \section{References}
 %% bibliography
-\bibliographystyle{apa}
+\bibliographystyle{plain}
 \bibliography{references}
 
 \end{document}
