@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  30 MAY 2018 20:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  30 MAY 2018 20:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -25,15 +25,7 @@ File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(/usr/share/texlive/texmf-dist/tex/latex/base/fixltx2e.sty
-Package: fixltx2e 2015/06/22 v2.0b fixes to LaTeX (obsolete)
-
-
-Package fixltx2e Warning: fixltx2e is not required with releases after 2015
-(fixltx2e)                All fixes are now in the LaTeX kernel.
-(fixltx2e)                See the latexrelease package for details.
-
-) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
@@ -241,99 +233,124 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-(./includes.tex (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2012/02/13 v1.0a Color table columns (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen118
+\extrarowheight=\dimen119
+\NC@list=\toks20
+\extratabsurround=\skip47
+\backup@length=\skip48
+)
+\everycr=\toks21
+\minrowclearance=\skip49
+)
+\rownum=\count111
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+) (./includes.tex
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
-\Gm@cnth=\count111
-\Gm@cntv=\count112
-\c@Gm@tempcnt=\count113
-\Gm@bindingoffset=\dimen118
-\Gm@wd@mp=\dimen119
-\Gm@odd@mp=\dimen120
-\Gm@even@mp=\dimen121
-\Gm@layoutwidth=\dimen122
-\Gm@layoutheight=\dimen123
-\Gm@layouthoffset=\dimen124
-\Gm@layoutvoffset=\dimen125
-\Gm@dimlist=\toks20
-) (/usr/share/texlive/texmf-dist/tex/latex/textpos/textpos.sty
+\Gm@cnth=\count112
+\Gm@cntv=\count113
+\c@Gm@tempcnt=\count114
+\Gm@bindingoffset=\dimen120
+\Gm@wd@mp=\dimen121
+\Gm@odd@mp=\dimen122
+\Gm@even@mp=\dimen123
+\Gm@layoutwidth=\dimen124
+\Gm@layoutheight=\dimen125
+\Gm@layouthoffset=\dimen126
+\Gm@layoutvoffset=\dimen127
+\Gm@dimlist=\toks22
+)
+(/usr/share/texlive/texmf-dist/tex/latex/textpos/textpos.sty
 Package: textpos 2014/01/03 v1.7j
 
 Package: textpos 2014/01/03 1.7j, absolute positioning of text on the page
 \TP@textbox=\box28
-\TPHorizModule=\dimen126
-\TPVertModule=\dimen127
-\TP@margin=\dimen128
-\TP@absmargin=\dimen129
+\TPHorizModule=\dimen128
+\TPVertModule=\dimen129
+\TP@margin=\dimen130
+\TP@absmargin=\dimen131
 Grid set 16 x 16 = 37.34424pt x 52.81541pt
-\TPboxrulesize=\dimen130
-\TP@tbargs=\toks21
-\TP@prevdepth=\dimen131
+\TPboxrulesize=\dimen132
+\TP@tbargs=\toks23
+\TP@prevdepth=\dimen133
 ) (/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip47
-\bibsep=\skip48
+\bibhang=\skip50
+\bibsep=\skip51
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count114
+\c@NAT@ctr=\count115
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
 Package: tabularx 2014/10/28 v2.10 `tabularx' package (DPC)
-
-(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
-Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
-\col@sep=\dimen132
-\extrarowheight=\dimen133
-\NC@list=\toks22
-\extratabsurround=\skip49
-\backup@length=\skip50
-)
 \TX@col@width=\dimen134
 \TX@old@table=\dimen135
 \TX@old@col=\dimen136
 \TX@target=\dimen137
 \TX@delta=\dimen138
-\TX@cols=\count115
-\TX@ftn=\toks23
+\TX@cols=\count116
+\TX@ftn=\toks24
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
-\LTleft=\skip51
-\LTright=\skip52
-\LTpre=\skip53
-\LTpost=\skip54
-\LTchunksize=\count116
+\LTleft=\skip52
+\LTright=\skip53
+\LTpre=\skip54
+\LTpost=\skip55
+\LTchunksize=\count117
 \LTcapwidth=\dimen139
 \LT@head=\box29
 \LT@firsthead=\box30
 \LT@foot=\box31
 \LT@lastfoot=\box32
-\LT@cols=\count117
-\LT@rows=\count118
-\c@LT@tables=\count119
-\c@LT@chunks=\count120
-\LT@p@ftn=\toks24
+\LT@cols=\count118
+\LT@rows=\count119
+\c@LT@tables=\count120
+\c@LT@chunks=\count121
+\LT@p@ftn=\toks25
 )
 (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
 \bigstrutjot=\dimen140
 )
 (/usr/share/texlive/texmf-dist/tex/latex/subfigure/subfigure.sty
 Package: subfigure 2002/03/15 v2.1.5 subfigure package
-\subfigtopskip=\skip55
-\subfigcapskip=\skip56
+\subfigtopskip=\skip56
+\subfigcapskip=\skip57
 \subfigcaptopadj=\dimen141
-\subfigbottomskip=\skip57
+\subfigbottomskip=\skip58
 \subfigcapmargin=\dimen142
-\subfiglabelskip=\skip58
-\c@subfigure=\count121
-\c@lofdepth=\count122
-\c@subtable=\count123
-\c@lotdepth=\count124
+\subfiglabelskip=\skip59
+\c@subfigure=\count122
+\c@lofdepth=\count123
+\c@subtable=\count124
+\c@lotdepth=\count125
 
 ****************************************
 * Local config file subfigure.cfg used *
 ****************************************
 (/usr/share/texlive/texmf-dist/tex/latex/subfigure/subfigure.cfg)
-\subfig@top=\skip59
-\subfig@bottom=\skip60
+\subfig@top=\skip60
+\subfig@bottom=\skip61
 )
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
@@ -349,7 +366,7 @@ Package caption3 Info: TeX engine: e-TeX on input line 67.
 \caption@parindent=\dimen148
 \caption@hangindent=\dimen149
 )
-\c@ContinuedFloat=\count125
+\c@ContinuedFloat=\count126
 Package caption Info: hyperref package is loaded.
 Package caption Info: longtable package is loaded.
 
@@ -364,15 +381,15 @@ LaTeX Warning: Command \refstepcounter  has changed.
                Check if current package is valid.
 
 ) (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-\fancy@headwidth=\skip61
-\f@ncyO@elh=\skip62
-\f@ncyO@erh=\skip63
-\f@ncyO@olh=\skip64
-\f@ncyO@orh=\skip65
-\f@ncyO@elf=\skip66
-\f@ncyO@erf=\skip67
-\f@ncyO@olf=\skip68
-\f@ncyO@orf=\skip69
+\fancy@headwidth=\skip62
+\f@ncyO@elh=\skip63
+\f@ncyO@erh=\skip64
+\f@ncyO@olh=\skip65
+\f@ncyO@orh=\skip66
+\f@ncyO@elf=\skip67
+\f@ncyO@erf=\skip68
+\f@ncyO@olf=\skip69
+\f@ncyO@orf=\skip70
 )
 (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2016/02/24 3.9q The Babel package
@@ -382,7 +399,7 @@ Language: english 2012/08/20 v3.3p English support from the babel system
 
 (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2016/02/24 3.9q Babel common definitions
-\babel@savecnt=\count126
+\babel@savecnt=\count127
 \U@D=\dimen150
 )
 \l@canadian = a dialect from \language\l@american 
@@ -445,35 +462,26 @@ Package: hypcap 2011/02/16 v1.11 Adjusting the anchors of captions (HO)
 )) (./notation.tex) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Try loading font information for OT1+bch on input line 28.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Try loading font information for OT1+bch on input line 31.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1bch.fd
 File: ot1bch.fd 2004/10/18 font definitions for OT1/bch.
 )
 \AtBeginShipoutBox=\box33
-
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
-Package: color 2016/01/03 v1.1b Standard LaTeX Color (DPC)
-
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
-File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
-)
-Package color Info: Driver file: pdftex.def on input line 143.
-)
-Package hyperref Info: Link coloring ON on input line 28.
+Package hyperref Info: Link coloring ON on input line 31.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -481,11 +489,11 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count127
+\c@section@level=\count128
 )
-LaTeX Info: Redefining \ref on input line 28.
-LaTeX Info: Redefining \pageref on input line 28.
-LaTeX Info: Redefining \nameref on input line 28.
+LaTeX Info: Redefining \ref on input line 31.
+LaTeX Info: Redefining \pageref on input line 31.
+LaTeX Info: Redefining \nameref on input line 31.
 
 (./main.out) (./main.out)
 \@outlinefile=\write3
@@ -494,17 +502,17 @@ LaTeX Info: Redefining \nameref on input line 28.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count128
+\scratchcounter=\count129
 \scratchdimen=\dimen151
 \scratchbox=\box34
-\nofMPsegments=\count129
-\nofMParguments=\count130
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count131
+\nofMPsegments=\count130
+\nofMParguments=\count131
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count132
 \MPscratchDim=\dimen152
-\MPnumerator=\count132
-\makeMPintoPDFobject=\count133
-\everyMPtoPDFconversion=\toks26
+\MPnumerator=\count133
+\makeMPintoPDFobject=\count134
+\everyMPtoPDFconversion=\toks27
 )
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -543,7 +551,7 @@ LaTeX Info: Redefining \nameref on input line 28.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hypcap package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package backref Info: ** backref set up for natbib ** on input line 28.
+Package backref Info: ** backref set up for natbib ** on input line 31.
 (./titlepage.tex <./figures/imperial.pdf, id=124, 362.35374pt x 95.35625pt>
 File: ./figures/imperial.pdf Graphic file (type pdf)
 
@@ -584,71 +592,67 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.64 \chapter
+l.67 \chapter
              {Introduction} [1
 
 
 
 ]
 Chapter 1.
-
-Package natbib Warning: Citation `garnelo2016towards' on page 2 undefined on in
-put line 87.
-
 [2
 
 ]
 Chapter 2.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 96.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 99.
 
-Underfull \hbox (badness 10000) in paragraph at lines 110--111
+Underfull \hbox (badness 10000) in paragraph at lines 113--114
 
  []
 
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 121.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 124.
 [3
 
 ]
 
-./main.tex:138: LaTeX Error: Environment theorem undefined.
+./main.tex:141: LaTeX Error: Environment theorem undefined.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.138 \begin{theorem}
+l.141 \begin{theorem}
                      
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-./main.tex:139: Missing $ inserted.
+./main.tex:142: Missing $ inserted.
 <inserted text> 
                 $
-l.139 \leftarrow
+l.142 \leftarrow
                  a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubs...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-./main.tex:140: LaTeX Error: \begin{document} ended by \end{theorem}.
+./main.tex:143: LaTeX Error: \begin{document} ended by \end{theorem}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.140 \end{theorem}
+l.143 \end{theorem}
                    
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-./main.tex:140: Missing $ inserted.
+./main.tex:143: Missing $ inserted.
 <inserted text> 
                 $
-l.140 \end{theorem}
+l.143 \end{theorem}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -657,219 +661,219 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--175
+Underfull \hbox (badness 10000) in paragraph at lines 174--178
 
  []
 
-./main.tex:176: Missing $ inserted.
+./main.tex:179: Missing $ inserted.
 <inserted text> 
                 $
-l.176  H \in
+l.179  H \in
              ILP\textsubscript{cautious} $\langle$ B, E\textsuperscript{+}, ...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./main.tex:176: Missing $ inserted.
+./main.tex:179: Missing $ inserted.
 <inserted text> 
                 $
-l.176  H \in ILP\textsubscript{cautious} $\langle
+l.179  H \in ILP\textsubscript{cautious} $\langle
                                                  $ B, E\textsuperscript{+}, ...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 176--177
+Underfull \hbox (badness 10000) in paragraph at lines 179--180
 
  []
 
-./main.tex:180: Missing $ inserted.
+./main.tex:183: Missing $ inserted.
 <inserted text> 
                 $
-l.180 \forall
+l.183 \forall
               e \in E\textsuperscript{+} : e \in A \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./main.tex:182: Missing $ inserted.
+./main.tex:185: Missing $ inserted.
 <inserted text> 
                 $
-l.182 
+l.185 
       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 178--182
+Underfull \hbox (badness 10000) in paragraph at lines 181--185
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 190--194
+Underfull \hbox (badness 10000) in paragraph at lines 193--197
 
  []
 
-./main.tex:195: Missing $ inserted.
+./main.tex:198: Missing $ inserted.
 <inserted text> 
                 $
-l.195  H \in
+l.198  H \in
              ILP\textsubscript{brave} $\langle$ B, E\textsuperscript{+}, E\t...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./main.tex:195: Missing $ inserted.
-<inserted text> 
-                $
-l.195  H \in ILP\textsubscript{brave} $\langle
-                                              $ B, E\textsuperscript{+}, E\t...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./main.tex:196: Missing $ inserted.
-<inserted text> 
-                $
-l.196 \forall
-              e \in E\textsuperscript{+} : e \in A \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ./main.tex:198: Missing $ inserted.
 <inserted text> 
                 $
-l.198 
+l.198  H \in ILP\textsubscript{brave} $\langle
+                                              $ B, E\textsuperscript{+}, E\t...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./main.tex:199: Missing $ inserted.
+<inserted text> 
+                $
+l.199 \forall
+              e \in E\textsuperscript{+} : e \in A \\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./main.tex:201: Missing $ inserted.
+<inserted text> 
+                $
+l.201 
       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 195--198
+Underfull \hbox (badness 10000) in paragraph at lines 198--201
 
  []
 
 [4]
-./main.tex:220: Missing $ inserted.
+./main.tex:223: Missing $ inserted.
 <inserted text> 
                 $
-l.220 1. H \subseteq
+l.223 1. H \subseteq
                      S\textsubscript{M} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./main.tex:222: Missing $ inserted.
+./main.tex:225: Missing $ inserted.
 <inserted text> 
                 $
-l.222 
+l.225 
       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 218--222
+Underfull \hbox (badness 10000) in paragraph at lines 221--225
 
  []
-
-./main.tex:224: Missing $ inserted.
-<inserted text> 
-                $
-l.224 1. H \subseteq
-                     S\textsubscript{M} \\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
 
 ./main.tex:227: Missing $ inserted.
 <inserted text> 
                 $
-l.227 
+l.227 1. H \subseteq
+                     S\textsubscript{M} \\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./main.tex:230: Missing $ inserted.
+<inserted text> 
+                $
+l.230 
       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 223--227
+Underfull \hbox (badness 10000) in paragraph at lines 226--230
 
  []
 
-<./figures/agent_env.png, id=195, 248.93pt x 228.855pt>
+<./figures/agent_env.png, id=197, 248.93pt x 228.855pt>
 File: ./figures/agent_env.png Graphic file (type png)
 
 <use ./figures/agent_env.png>
-Package pdftex.def Info: ./figures/agent_env.png used on input line 243.
+Package pdftex.def Info: ./figures/agent_env.png used on input line 246.
 (pdftex.def)             Requested size: 142.26761pt x 142.26926pt.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 244.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 247.
 
-./main.tex:250: Missing $ inserted.
+./main.tex:253: Missing $ inserted.
 <inserted text> 
                 $
-l.250 On-Policy learn policy \pi
+l.253 On-Policy learn policy \pi
                                  from its past experience
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./main.tex:252: Missing $ inserted.
+./main.tex:255: Missing $ inserted.
 <inserted text> 
                 $
-l.252 
+l.255 
       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 258--259
+Underfull \hbox (badness 10000) in paragraph at lines 261--262
 
  []
 
 [5]
-LaTeX Font Info:    Try loading font information for OMS+bch on input line 261.
+LaTeX Font Info:    Try loading font information for OMS+bch on input line 264.
 
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsbch.fd
 File: omsbch.fd 
 )
 LaTeX Font Info:    Font shape `OMS/bch/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 261.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 264.
  [6 <./figures/agent_env.png>]
-./main.tex:326: Missing $ inserted.
+./main.tex:329: Missing $ inserted.
 <inserted text> 
                 $
-l.326 
+l.329 
       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./main.tex:326: Display math should end with $$.
+./main.tex:329: Display math should end with $$.
 <to be read again> 
                    \par 
-l.326 
+l.329 
       
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
 
 
-./main.tex:327: LaTeX Error: Bad math environment delimiter.
+./main.tex:330: LaTeX Error: Bad math environment delimiter.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.327 \end{equation}
+l.330 \end{equation}
                     
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-./main.tex:327: You can't use `\eqno' in vertical mode.
+./main.tex:330: You can't use `\eqno' in vertical mode.
 \endmathdisplay@a ...\df@tag \@empty \else \veqno 
                                                   \alt@tag \df@tag \fi \ifx ...
-l.327 \end{equation}
+l.330 \end{equation}
                     
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
 If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
-./main.tex:327: Missing $ inserted.
+./main.tex:330: Missing $ inserted.
 <inserted text> 
                 $
-l.327 \end{equation}
+l.330 \end{equation}
                     
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -877,10 +881,10 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-./main.tex:327: Display math should end with $$.
+./main.tex:330: Display math should end with $$.
 <to be read again> 
                    \endgroup 
-l.327 \end{equation}
+l.330 \end{equation}
                     
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
@@ -899,10 +903,10 @@ Chapter 4.
 
 ]
 Runaway argument?
-./main.tex:482: Paragraph ended before \OT1\" was complete.
+./main.tex:485: Paragraph ended before \OT1\" was complete.
 <to be read again> 
                    \par 
-l.482 
+l.485 
       
 I suspect you've forgotten a `}', causing me to apply this
 control sequence to too much text. How can we recover?
@@ -910,42 +914,67 @@ My plan is to forget the whole thing and hope for the best.
 
 [12]
 Chapter 5.
+Missing character: There is no ‚ in font bchr7t!
+Missing character: There is no Ä in font bchr7t!
+Missing character: There is no ú in font bchr7t!
+Missing character: There is no ‚ in font bchr7t!
+Missing character: There is no Ä in font bchr7t!
+Missing character: There is no ù in font bchr7t!
+
+Overfull \hbox (9.14763pt too wide) in alignment at lines 498--559
+ [] [] [] 
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 559
+ []
+
+Missing character: There is no ‚ in font bchr7t!
+Missing character: There is no Ä in font bchr7t!
+Missing character: There is no ì in font bchr7t!
+
+Overfull \hbox (9.14763pt too wide) in alignment at lines 559--620
+ [] [] [] 
+ []
+
+
+Overfull \hbox (9.14763pt too wide) in alignment at lines 620--625
+ [] [] [] 
+ []
+
+[13
+
+] [14] [15]
+Chapter 6.
 (./main.bbl (./main.brf)
 \tf@brf=\write5
 \openout5 = `main.brf'.
 
- [13
+ [16
+
+])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 645.
+ [17
 
 ]
-
-Package natbib Warning: Empty `thebibliography' environment on input line 3.
-
-)
-
-Package natbib Warning: There were undefined citations.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 512.
-[14
-
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 512.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 645.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 512.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 512.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 645.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 645.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 68EAFEA6A7ECDD0541E210E0B8EB8870;2175.
+(rerunfilecheck)             Checksum: 1083BB90AC22B0F0A01E076E0FF200BE;2154.
 Package rerunfilecheck Info: File `main.brf' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 512.
+(rerunfilecheck)             Checksum: 0E27576C41F6890685F4852E676FBAAB;43.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 645.
  ) 
 Here is how much of TeX's memory you used:
- 9169 strings out of 494353
- 134085 string characters out of 6170044
- 233385 words of memory out of 5000000
- 12256 multiletter control sequences out of 15000+600000
+ 9615 strings out of 494353
+ 138962 string characters out of 6170044
+ 261094 words of memory out of 5000000
+ 12695 multiletter control sequences out of 15000+600000
  38388 words of font info for 69 fonts, out of 8000000 for 9000
  452 hyphenation exceptions out of 8191
- 38i,12n,43p,336b,419s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,12n,43p,336b,474s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fon
@@ -955,11 +984,12 @@ ts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
 nts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (15 pages, 142928 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (18 pages, 156604 bytes).
 PDF statistics:
- 296 PDF objects out of 1000 (max. 8388607)
- 263 compressed objects within 3 object streams
- 53 named destinations out of 1000 (max. 500000)
+ 316 PDF objects out of 1000 (max. 8388607)
+ 279 compressed objects within 3 object streams
+ 58 named destinations out of 1000 (max. 500000)
  251 words of extra memory for PDF output out of 10000 (max. 10000000)
 

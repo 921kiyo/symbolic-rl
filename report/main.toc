@@ -29,5 +29,5 @@
 \contentsline {section}{\numberline {4.3}Project outline}{11}{section.4.3}
 \contentsline {section}{\numberline {4.4}Contribution}{12}{section.4.4}
 \contentsline {section}{\numberline {4.5}Methods}{12}{section.4.5}
-\contentsline {section}{\numberline {4.6}Legal and Ethical Issues}{12}{section.4.6}
-\contentsline {chapter}{\numberline {5}References}{13}{chapter.5}
+\contentsline {chapter}{\numberline {5}Ethics Checklist}{13}{chapter.5}
+\contentsline {chapter}{\numberline {6}References}{16}{chapter.6}
