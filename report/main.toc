@@ -15,8 +15,7 @@
 \contentsline {section}{\numberline {2.3}Deep Reinforcement Learning}{7}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}Convolutional Neural Networks (CNN)}{7}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}Deep Q-Networks (DQNs)}{7}{subsection.2.3.2}
-\contentsline {section}{\numberline {2.4}Symbolic Reinforcement Learning}{7}{section.2.4}
-\contentsline {section}{\numberline {2.5}GVGAI Framework}{7}{section.2.5}
+\contentsline {section}{\numberline {2.4}GVGAI Framework}{7}{section.2.4}
 \contentsline {chapter}{\numberline {3}Related Work}{8}{chapter.3}
 \contentsline {section}{\numberline {3.1}Deep Reinforcement Learning and its issues}{8}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Data efficient learning}{8}{subsection.3.1.1}
@@ -31,4 +30,4 @@
 \contentsline {section}{\numberline {4.4}Contribution}{11}{section.4.4}
 \contentsline {section}{\numberline {4.5}Methods}{11}{section.4.5}
 \contentsline {section}{\numberline {4.6}Legal and Ethical Issues}{11}{section.4.6}
-\contentsline {section}{\numberline {4.7}References}{11}{section.4.7}
+\contentsline {chapter}{\numberline {5}References}{12}{chapter.5}

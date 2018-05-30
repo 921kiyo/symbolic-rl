@@ -2,12 +2,13 @@
 \usepackage{fixltx2e}
 \usepackage{hyperref}
 \usepackage{graphicx}
-\usepackage{amsmath}
+\usepackage{amsmath, amssymb}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Definitions for the title page
 % Edit these to provide the correct information
 % e.g. \newcommand{\reportauthor}{Timothy Kimber}
+\DeclareMathOperator{\E}{\mathbb{E}}
 
 \newcommand{\reporttitle}{Symbolic Reinforcement Learning using Inductive Logic Programming}
 \newcommand{\reportauthor}{Kiyohito Kunii}
@@ -85,10 +86,15 @@ Recently, the XXX attempted to incorporate symbolic representations into the sys
 In this paper, I further explore incorporation of symbolic machine learning into reinforcement learning to achieve data-efficient learning using Inductive Learning of Answer Set Programs (ILASP), which is the state-of-art symbolic learning method that can be applied to imcomplete and more complex environment.
 This research is inspired by \cite{garnelo2016towards}, but in this paper I explore symbolic represetations process and include more learning aspect.
 
-This background report is organised as follows:
+This background report is organised as follows: Chapter \ref{background} introduces
 
 \chapter{Background}
+\label{background}
+
+This section introduces introduces Inductive Logic Programming (Section \ref{ilp}), Reinforcement Learning (Section \ref{rl}), Deep Reinforcement Learning (Section \ref{drl}) and GVGAI Framework, an open-source game platform for AI methods (Section \ref{gvgai}), which provide the foundations of this work.
+
 \section{Inductive Logic Programming}
+\label{ilp}
 Inductive Logic Programming (ILP) is a subfield of research area aimed at the intersection of machine learning and logic programming (MUGGLETON 1991). The purpose of ILP is to derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and any of negative examples.
 
 Limitations of Inductive Logic Programming:
@@ -230,34 +236,54 @@ TODO What would you learn in my context? Relashinship of the objects?
 Objects, types, locations and interactions.
 
 \section{Reinforcement Learning}
-An RL agent may include either Policy, Value function or Model,
+\label{rl}
 
-where policy
+% \begin{figure}[!htb]
+% \centering
+% \includegraphics[width=5cm, height=5cm]{./figures/agent_env}
+% \caption{Agent and Environment}
+% \label{agent_env}
+% \end{figure}
+
+% An RL agent may include either Policy, Value function or Model,
 
 On-Policy
 Off-policy
 
-Bellman Equation
-
 \subsection{Markov Decision Process(MDP)}
 
-MDPs formaly represent a fully observable environment of an agent for reinforcement learning.
+When an agnet must make a sequence of decision, the sequential decision problem can be formalised using Markov decision process (MDP). MDPs formaly represent a fully observable environment of an agent for reinforcement learning.
 
-A state S\textsubscript{t} is Markov if and only if \\
-P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\vert$ S\textsubscript{1}, ..., S\textsubscript{t}] therefore the probability of reaching S\textsubscript{t+1} depends solely on S\textsubscript{t}, which captures all the relevant information from earilier history.
-
-A MDP is of the form \langle S, A, T, R, \gamma \rangle where: \\
+A MDP is of the form $\langle$ S, A, T\textsubscript{a}, R\textsubscript{a}, $\gamma$ $\rangle$ where: \\
 
 \begin{itemize}
 \item S is the set of finite states that is observable in the environment
-\item A is the set of finite actions executable by the agent
-\item T is a state transition in the form of probability matrix XXXXX
-\item R is a reward function
-\item $\gamma$ is a discount factor $\gamma$ $\ooalign$ [0,1]
+\item A is the set of finite actions taken by the agent
+\item T\textsubscript{a}(s, s$^\prime$) is a state transition in the form of probability matrix Pr(S\textsubscript{t+1} = s$^\prime$ $\vert$ s\textsubscript{t} = s, a\textsubscript{t} = a), which is the probablity that action a in state s at time t will result in state s$^\prime$ at time t+1.
+\item R is a reward function R\textsubscript{a}(s, s$^\prime$) = $\displaystyle \E[R\textsubscript{t+1} $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a], the expected immediate reward that action a in state s at time t will return
+\item $\gamma$ is a discount factor $\gamma$ $\in$ [0,1], which represents the preference of the agent for present rewards over future rewards
+
 \end{itemize}
 
 
+In MDPs, there is an element of delayed reward tradeoff between immediate rewards and its delayed reward
+
+A state S\textsubscript{t} is Markov if and only if
+P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\vert$ S\textsubscript{1}, ..., S\textsubscript{t}] therefore the probability of reaching S\textsubscript{t+1} depends solely on S\textsubscript{t}, which captures all the relevant information from earilier history.
+
+A solution to the sequential decision problem is called a policy $\pi$, which is a distributin over actions given states.
+
+An optimal policy $\pi^*$ maximises R.
+
+
+Q\textsubscript{\pi} = $\displaystyle \E[R\textsubscript{\pi}$ []
+
+Reinforcement learning is a method to get approximated optimal solution.
+
+
 \subsection{Temporal-Difference (TD) Learning}
+
+
 
 TD learns directly from episodes of experiences, which can be imcomplete.
 TD does not require knowledge of MDP transitions and rewards (model-free)
@@ -271,7 +297,6 @@ V(S\textsubscript{t} \leftarrow V(S\textsubscript{t} + \alpha (R\textsubscript{t
 where R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) is the estimated return (a.k.a TD target)
 
 R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) - V(S\textsubscript{t}) is TD error.
-
 
 TD updates the estimate by using the estimates of XXX (bootstrap).
 
@@ -311,18 +336,18 @@ TODO INSERT Q-learning ALGORITHM HERE
 
 Epsilon greedy
 
-\section{Deep
-Reinforcement Learning}
+\section{Deep Reinforcement Learning}
+\label{drl}
 
 \subsection{Convolutional Neural Networks (CNN)}
+\label{cnn}
 
 \subsection{Deep Q-Networks (DQNs)}
-
-\section{Symbolic Reinforcement Learning}
-
+\label{dqn}
 
 Explain the paper
 \section{GVGAI Framework}
+\label{gvgai}
 
 The Video Game Definition Language (VGDL)
 
@@ -466,7 +491,7 @@ To my knowledge, this is the first time that both symbolic learning method is in
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \chapter{Conclusion}
 
-\section{References}
+\chapter{References}
 %% bibliography
 \bibliographystyle{plain}
 \bibliography{references}
