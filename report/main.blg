@@ -5,45 +5,45 @@ The style file: plain.bst
 Database file #1: references.bib
 Warning--empty journal in Garnelo2016
 Warning--there's a number but no volume in Gelfond1988
-You've used 3 entries,
+You've used 5 entries,
             2118 wiz_defined-function locations,
-            518 strings with 4415 characters,
-and the built_in function-call counts, 942 in all, are:
-= -- 93
-> -- 38
+            534 strings with 4764 characters,
+and the built_in function-call counts, 1612 in all, are:
+= -- 162
+> -- 69
 < -- 0
-+ -- 15
-- -- 12
-* -- 72
-:= -- 165
-add.period$ -- 9
-call.type$ -- 3
-change.case$ -- 15
++ -- 27
+- -- 22
+* -- 126
+:= -- 278
+add.period$ -- 15
+call.type$ -- 5
+change.case$ -- 26
 chr.to.int$ -- 0
-cite$ -- 5
-duplicate$ -- 32
-empty$ -- 74
-format.name$ -- 12
-if$ -- 186
+cite$ -- 7
+duplicate$ -- 54
+empty$ -- 125
+format.name$ -- 22
+if$ -- 321
 int.to.chr$ -- 0
-int.to.str$ -- 3
-missing$ -- 3
-newline$ -- 18
-num.names$ -- 6
-pop$ -- 14
+int.to.str$ -- 5
+missing$ -- 5
+newline$ -- 28
+num.names$ -- 10
+pop$ -- 21
 preamble$ -- 1
-purify$ -- 12
+purify$ -- 21
 quote$ -- 0
-skip$ -- 20
+skip$ -- 35
 stack$ -- 0
-substring$ -- 71
-swap$ -- 2
+substring$ -- 122
+swap$ -- 4
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 12
+type$ -- 20
 warning$ -- 2
-while$ -- 10
-width$ -- 4
-write$ -- 33
+while$ -- 18
+width$ -- 6
+write$ -- 55
 (There were 2 warnings)

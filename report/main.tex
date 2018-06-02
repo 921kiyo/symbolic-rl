@@ -29,10 +29,10 @@
 \input{notation}
 
 \date{June 2018}
-
-\begin{document}
 \theoremstyle{definition}
 \newtheorem{examp}{Example}[section]
+
+\begin{document}
 
 
 % load title page
@@ -127,20 +127,9 @@ This background report is organised as follows: Chapter \ref{background} introdu
 
 This section introduces introduces Inductive Logic Programming (Section \ref{ilp}), Reinforcement Learning (Section \ref{rl}) and GVGAI Framework, an open-source game platform for AI methods (Section \ref{gvgai}), which provide the foundations of this work.
 
-\section{Inductive Logic Programming}
+\section{Logic Basics}
 
-\label{ilp}
-Inductive Logic Programming (ILP) is a subfield of research area aimed at the intersection between machine learning and logic programming \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and any of negative examples.
-
-ENTAILMENT
-
-Satisfiable
-
-\begin{equation}
-B \cap H \models E
-\end{equation}
-
-where E consists of positive examples (E\textsuperscript{+}) and negative examples (E\textsuperscript{-})
+TODO ENTAILMENT
 
 To compute this inference task, the syntax of the predicate logic program needs to be converted into Conjunctive Normal Form (CNF), or clausal theory, which consists of a conjunction of clauses, where a clause is disjunction of literals, and a literal can include positive literals and negative literals.
 
@@ -241,10 +230,9 @@ does not contain negation and a unique minimal Herbrand model.
 \end{examp}
 
 
-
 \subsection{Anwer Set Programming (ASP)}
 
-Answer set of normal logic program P is a stable model, and Answer Set Programming (ASP) is a normal logic with extensions: constrains, choice rules and aggregates. ASP program consists of a set of rules, where each rule consists of an atom and literals.
+Answer set of normal logic program P is a stable model, and Answer Set Programming (ASP) is a normal logic program with extensions: constrains, choice rules and optimisation. ASP program consists of a set of rules, where each rule consists of an atom and literals.
 A literal is either an atom \textit{p} or its \textit{default negation} not p (Negation as a failure).
 
 
@@ -267,44 +255,44 @@ Choice rule can express possible outcomes given an action choice, which is of th
 l{h\textsubscript{1},...,h\textsubscript{m}}u \leftarrow a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
 \end{theorem}
 
-
+where the head is called \textit{aggregates}.
 
 An answer set of ASP program is interpretations that make all the ruls true.
 
 Non-monotonicity.
 
-Clingo
-
 ASP has true, false and unknown
-
-
 
 for non-deterministic to describe transition possibilities.
 
-
-Syntax Examples
-
-
+% DO I NEED OPTIMISATION??
 optimisation statement is of the form.
 
 Which is useful to order the answer sets in terms of preference.
 
-Syntax examples.
+\textit{Clingo} is one of the programs to execute the ASP program and returns answer sets of the programs.
 
-Aggregate
+\section{Inductive Logic Programming (ILP)}
 
-choice rules
+\label{ilp}
+Inductive Logic Programming (ILP) is a subfield of research area aimed at the intersection between machine learning and logic programming \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and any of negative examples.
 
-An ASP program P is normal logic program with addition of choice rules, constraints and optimisation statement.
+ENTAILMENT
 
-Answer set of P is
+Satisfiable
+
+\begin{equation}
+B \cap H \models E
+\end{equation}
+
+where E consists of positive examples (E\textsuperscript{+}) and negative examples (E\textsuperscript{-})
 
 
-\subsubsection{Cautious Induction}
+\subsubsection{ILP in Anser set semantics}
 
-Sakama 2008
+Cautious and brave entailments can be defined in terms of induction in ILP \cite{Sakama2009}.
 
-no concept of negative examples in this paper.
+% Sakama 2008 has no concept of negative examples in this paper.
 
 Cautious Induction task is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ where: \\
 B is the background knowledge \\
@@ -318,12 +306,17 @@ E\textsuperscript{-} is a set of negative examples \\
 \forall e \in E\textsuperscript{+} : e \in A \\
 \forall e \in E\textsuperscript{-} : e \notin A \\
 
-One of the limitation of cautious indction is that XX
+\begin{examp} (Limitation of cautious induction)
 
-Sakama 2009
+1\{situation(P, awake), situation(P, sleep)\}1 :- person(P).
 
+person(john).
+\end{examp}
+\label{limitation_cautious}
 
-\subsubsection{Brave Induction}
+In the example \ref{limitation_cautious}, neither of situation(john, awake) or situation(john, sleep) is false in all answer sets. In this example, it only return person(john).
+
+Cautious entailment may be too restrict.
 
 Similarly, Brave Induction task is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ where: \\
 B is the background knowledge \\
@@ -334,14 +327,19 @@ E\textsuperscript{-} is a set of negative examples \\
 \forall e \in E\textsuperscript{+} : e \in A \\
 \forall e \in E\textsuperscript{-} : e \notin A \\
 
-One of the limitation of brave indction is that it cannot learn constrains as shown in the example
 
-Sakama 2009
+By contrast, Brave indction is that it cannot learn constrains as shown in the example \ref{limitation_brave}.
+
+\begin{examp} (Limitation of brave induction)
+
+XXX
+\end{examp}
+\label{limitation_brave}
 
 \subsection{Learning from Anwer Sets (LAS)}
 
-Learning from Answer Sets was developed in [Law et al 2014] to overcome limitations of cautious induction and brave induction.
-
+Cautious induction In order to overcome the limitations of cautious and brave induction,
+Learning from Answer Sets (LAS) was developed in \cite{Law2014} to faciliate more complex learning task.
 
 Examples used in LAS is converted from $\langle$ E\textsuperscript{+}, E\textsuperscript{-}$\rangle$ into
 
@@ -505,6 +503,8 @@ SpriteSet defines all the sprites available in the game.
 LevelMapping defines relationships among characters, and the sprites available.
 InteractionSet defines what events occur when two sprites collide
 TerminationSet defines the end conditions of the game, and decides whether the player wins or not.
+
+TODO Add game images
 
 % Timeout and SpriteCounter
 
