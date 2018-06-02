@@ -6,6 +6,7 @@
 \usepackage{amssymb}
 \usepackage{csquotes}
 
+\newtheorem{theorem}{Theorem}
 % Ctrl + Alt + B
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,12 +30,10 @@
 \input{notation}
 
 \date{June 2018}
-\theoremstyle{definition}
-\newtheorem{examp}{Example}[section]
 
 \begin{document}
-
-
+% \theoremstyle{definition}
+\newtheorem{examp}{Example}[section]
 % load title page
 \input{titlepage}
 
@@ -70,7 +69,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Introduction}
-
 % IMPERIAL LOGO
 % \begin{figure}[tb]
 % \centering
@@ -241,7 +239,7 @@ Head and body
 A Constraint is of the form
 
 \begin{theorem}
-\leftarrow a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
+$\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
 \end{theorem}
 
 which is to filtering any irrelevant answer sets.
@@ -252,7 +250,7 @@ Hard constraint is XXX
 Choice rule can express possible outcomes given an action choice, which is of the form
 
 \begin{theorem}
-l{h\textsubscript{1},...,h\textsubscript{m}}u \leftarrow a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
+l{h\textsubscript{1},...,h\textsubscript{m}}u $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
 \end{theorem}
 
 where the head is called \textit{aggregates}.
@@ -299,12 +297,12 @@ B is the background knowledge \\
 E\textsuperscript{+} is a set of positive examples \\
 E\textsuperscript{-} is a set of negative examples \\
 
- H \in ILP\textsubscript{cautious} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if  \\
+ H $\in$ ILP\textsubscript{cautious} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if  \\
 
  there is at least one answer set A of B $\cup$ H such that: \\
  for every anser set A of B $\cup$ H:
-\forall e \in E\textsuperscript{+} : e \in A \\
-\forall e \in E\textsuperscript{-} : e \notin A \\
+$\forall$ e $\in$ E\textsuperscript{+} : e $\in$ A \\
+$\forall$ e $\in$ E\textsuperscript{-} : e $\notin$ A \\
 
 \begin{examp} (Limitation of cautious induction)
 
@@ -323,9 +321,9 @@ B is the background knowledge \\
 E\textsuperscript{+} is a set of positive examples \\
 E\textsuperscript{-} is a set of negative examples \\
 
- H \in ILP\textsubscript{brave} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if there is at least one answer set A of B $\cup$ H such that: \\
-\forall e \in E\textsuperscript{+} : e \in A \\
-\forall e \in E\textsuperscript{-} : e \notin A \\
+ H $\in$ ILP\textsubscript{brave} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if there is at least one answer set A of B $\cup$ H such that: \\
+$\forall$ e $\in$ E\textsuperscript{+} : e $\in$ A \\
+$\forall$ e $\in$ E\textsuperscript{-} : e $\notin$ A \\
 
 
 By contrast, Brave indction is that it cannot learn constrains as shown in the example \ref{limitation_brave}.
@@ -353,13 +351,13 @@ ILASP is an algorithm that is capable of solving LAS tasks
 
 It is based on two fundamental concepts: positive solutions and violating solutions.
 A hypothesis H is a positive solution if and only if
-1. H \subseteq S\textsubscript{M} \\
-2. \forall e\textsuperscript{+} \in \exists A \in AS(B \cup H) subject to A extends e\textsuperscript{+}\\
+1. H $\subseteq$ S\textsubscript{M} \\
+2. $\forall$ e\textsuperscript{+} $\in$ $\exists$ A $\in$ AS(B $\cup$ H) subject to A extends e\textsuperscript{+}\\
 
 A hypothesis H is a violating solution if and only if
-1. H \subseteq S\textsubscript{M} \\
-2. \forall e\textsuperscript{+} \in E\textsuperscript{+} \exists A \in AS(B \cup H) subject to A extends e\textsuperscript{+}\\
-3. \exists e\textsuperscript{-} \in E\textsuperscript{-} \exists A \in AS(B \cup H) subject to A extends e\textsuperscript{-}\\
+1. H $\subseteq$ S\textsubscript{M} \\
+2. $\forall$ e\textsuperscript{+} $\in$ E\textsuperscript{+} $\exists$ A $\in$ AS(B $\cup$ H) subject to A extends e\textsuperscript{+}\\
+3. $\exists$ e\textsuperscript{-} $\in$ E\textsuperscript{-} $\exists$ A $\in$ AS(B $\cup$ H) subject to A extends e\textsuperscript{-}\\
 
 
 ILP\textsubscript{LAS} is positive solutions that are not violating solutions.
@@ -383,7 +381,7 @@ Objects, types, locations and interactions.
 
 % An RL agent may include either Policy, Value function or Model,
 
-On-Policy learn policy \pi from its past experience
+On-Policy learn policy $\pi$ from its past experience
 Off-policy
 
 Model-based vs model-free learning
@@ -425,7 +423,7 @@ The total reward with a discount factor is
 The existence of the discount factor can be justified as follows:
 
 TODO
-$\displaystyle \E[R\textsubscript{t+1} $ $\vert$ S\textsubscript{t} = s]
+$\displaystyle \E[R\textsubscript{t+1} \vert$ S\textsubscript{t} = s]
 
 
 Reinforcement learning is a method to get approximated optimal solution.
@@ -466,12 +464,12 @@ Q function is the state-action pair
 the optimal Q-function Q\textsuperscript{*}(s,a) represents XXX for the agent to selection action a given that it is in state s.
 
 Q-learning is off-policy TD learning defined in [Watkin 1989], which is of the form:
+%
+% \begin{equation}
+% Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\textsubscript{t}) + \alpha(R\textsubscript{t+1} + \gamma max (a+t) Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))
+%
+% \end{equation}
 
-\begin{equation}
-Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\textsubscript{t}) + \alpha(R\textsubscript{t+1} + \gamma max (a+t) Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))
-
-\end{equation}
-\\
 where $\alpha$ is the learning rate, $\gamma$ is a discount rate between 0 and 1.
 
 this equation is used to upate action-value function
@@ -587,8 +585,6 @@ which measurement would you use? (grid word, something else? GVGAL games)
 Summarise different types of knowledge representations (Objects ?? relationship?)
 
 Common sense
-
-Implement based on \"Towards Deep Symbolic Reinforcement Learning \"
 
 Lastly, I will also test the capability of transfer learning for this new method.
 

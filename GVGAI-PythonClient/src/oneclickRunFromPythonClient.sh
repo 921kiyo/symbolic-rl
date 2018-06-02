@@ -2,7 +2,8 @@
 
 game_id=0
 server_dir=../../..
-agent_name=sampleRandom.Agent
+# agent_name=sampleRandom.Agent
+agent_name=ercumentihan.Agent
 sh_dir=utils
 
 

@@ -1,0 +1,4 @@
+[GAME] Game idx:0 game name aliens
+[PHASE] Starting First Phase of Training in 3 levels.
+[TRAINING] Result (1->win; 0->lose): level:0, Player0:0, Player0-Score:19.0, timesteps:242
+[TRAINING] Result (1->win; 0->lose): level:1, Player0:0, Player0-Score:18.0, timesteps:170
