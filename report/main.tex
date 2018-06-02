@@ -86,6 +86,32 @@ To tackle these problems, there are 3 main streams of research on this field.
 First main research is focused on applying Baysian statistics XXX, the second main research is XXX.
 Recently, the XXX attempted to incorporate symbolic representations into the system to achive more data-efficient learning, which shows a promissing results of this approach.
 
+MOTIVATION
+
+Why symbolic reinforcement learning is good attempt
+
+
+Reason 1: Complehensive by humans $\rightarrow$ Explanable rather than black-box
+
+Reason 2: Similar to the human, it uses reasoning
+
+Use of previous experience (background knowledge)
+As discussed in XX, there are many research that attempted to incorporate symbolic reasoning into DRL, but there is not much research on incorporating symbolc learning with reinforcement learning
+
+However there is a room for exploration on this field.
+
+Reason 3: Recent advance of ILASP is promissing
+
+Because of the recent advancement of logic-based learning and deep reinforcement learning, combination of both approach would be a next explonation toward artificial general intelligence.
+
+
+OBJECTIVES
+combining the two novel approaches to overcome the problems of the QND
+
+
+
+
+
 In this paper, I further explore incorporation of symbolic machine learning into reinforcement learning to achieve data-efficient learning using Inductive Learning of Answer Set Programs (ILASP), which is the state-of-art symbolic learning method that can be applied to imcomplete and more complex environment.
 This research is inspired by \cite{Garnelo2016}, but in this paper I explore symbolic represetations process and include more learning aspect.
 
@@ -98,9 +124,7 @@ This section introduces introduces Inductive Logic Programming (Section \ref{ilp
 
 \section{Inductive Logic Programming}
 \label{ilp}
-Inductive Logic Programming (ILP) is a subfield of research area aimed at the intersection of machine learning and logic programming (MUGGLETON 1991). The purpose of ILP is to derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and any of negative examples.
-
-Limitations of Inductive Logic Programming:
+Inductive Logic Programming (ILP) is a subfield of research area aimed at the intersection between machine learning and logic programming (MUGGLETON 1991). The purpose of ILP is to derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and any of negative examples.
 
 \begin{equation}
 B \cap H \models E
@@ -121,22 +145,50 @@ Normal Logic Program is a set of normal rule where
 a normal rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, \textit{not} b\textsubscript{1}, ..., \textit{not}  b\textsubscript{n} where h is the head of the rule,
  and a\textsubscript{1}, ..., a\textsubscript{n}, b\textsubscript{1}, ..., b\textsubscript{n} are the body of the rule (both the head and body are all atoms).
 
+ Limitations of Inductive Logic Programming:
+
+
 \subsection{Stable Model Semantics}
+
+
 
 Stable Model of a normal logic program
 
+[Gelfond 1988]
+
+Reduct
+
+does not contain negation and a unique minimal Herbrand model.
+
+Examples of this
+
 \subsection{Anwer Set Programming (ASP)}
+
+ASP prgorma consists of a set of rules, where each rule consists of an atom and literals.
+
+Literals are
+
+
+Head and body
 
 Answer Set Programming (ASP) is a declarative programming
 
-
-Literals
 
 Negation as a failure
 
 constrains is of the form
 
+An answer set of ASP program is interpretations that make all the ruls true.
+
+Non-monotonicity.
+
 Clingo
+
+ASP has true, false and unknown
+
+Choice rule can express possible outcomes given an action choice. For example,
+
+for non-deterministic to describe transition possibilities.
 
 \begin{theorem}
 \leftarrow a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
@@ -255,6 +307,8 @@ Off-policy
 
 \subsection{Markov Decision Process(MDP)}
 
+
+(Puterman, 1994)
 There is an agent who interacts with an envirnment (Figure \ref{agent_env}). At each time step, an action taken by the agent affect the environment state and the reward (or penality) it receives from the action outcome. (TODO Observations)
 When an agnet must make a sequence of decision, the sequential decision problem can be formalised using Markov decision process (MDP). MDPs formaly represent a fully observable environment of an agent for reinforcement learning.
 
@@ -274,11 +328,15 @@ In MDPs, there is an element of delayed reward tradeoff between immediate reward
 A state S\textsubscript{t} is Markov if and only if
 P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\vert$ S\textsubscript{1}, ..., S\textsubscript{t}] therefore the probability of reaching S\textsubscript{t+1} depends solely on S\textsubscript{t}, which captures all the relevant information from earilier history.
 
-A solution to the sequential decision problem is called a policy $\pi$, which is a distributin over actions given states.
+A solution to the sequential decision problem is called a policy $\pi$, a sequence of actions that leads to a solution
+% which is a distributin over actions given states.
+
+The transition and reward functions are not necessary to be known to compute $\pi$.
 
 An optimal policy $\pi^*$ is the one that maximise the total rewards in the environment.
 
 The total reward with a discount factor is
+
 
 
 The existence of the discount factor can be justified as follows:
@@ -291,6 +349,8 @@ Reinforcement learning is a method to get approximated optimal solution.
 
 
 \subsection{Temporal-Difference (TD) Learning}
+
+To solve MDP, one of the approaches is called Temporal-Difference (TD) Learning.
 
 TD learns directly from episodes of experiences, which can be imcomplete.
 TD does not require knowledge of MDP transitions and rewards (model-free)
@@ -349,19 +409,8 @@ the Bellman Equation.
 
 TODO INSERT Q-learning ALGORITHM HERE
 
-
 Epsilon greedy
 
-\section{Deep Reinforcement Learning}
-\label{drl}
-
-\subsection{Convolutional Neural Networks (CNN)}
-\label{cnn}
-
-\subsection{Deep Q-Networks (DQNs)}
-\label{dqn}
-
-Explain the paper
 \section{GVGAI Framework}
 \label{gvgai}
 
@@ -377,15 +426,7 @@ TerminationSet defines the end conditions of the game, and decides whether the p
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Related Work}
 
-\section{Deep Reinforcement Learning and its issues}
-
-\subsection{Data efficient learning}
-
-\subsection{Transfer learning}
-
-\subsection{Planning}
-
-\subsection{Transparency}
+% \section{Deep Reinforcement Learning and its issues}
 
 Transparency and interpretable capability of the model is another important aspect for machine learning applications.
 
@@ -438,27 +479,8 @@ However, as XX points out, 1 pixel of the game could influence the decision maki
 
 
 \chapter{Project Overview}
-\section{Motivation}
 
-Why symbolic reinforcement learning is good attempt
-
-
-Reason 1: Complehensive by humans $\rightarrow$ Explanable rather than black-box
-
-Reason 2: Similar to the human, it uses reasoning
-
-Use of previous experience (background knowledge)
-As discussed in XX, there are many research that attempted to incorporate symbolic reasoning into DRL, but there is not much research on incorporating symbolc learning with reinforcement learning
-
-However there is a room for exploration on this field.
-
-Reason 3: Recent advance of ILASP is promissing
-
-Because of the recent advancement of logic-based learning and deep reinforcement learning, combination of both approach would be a next explonation toward artificial general intelligence.
-
-\section{Objectives}
-
-combining the two novel approaches to overcome the problems of the QND
+\section{Proposed Architecture}
 
 \section{Project outline}
 
@@ -485,11 +507,11 @@ Implement based on \"Towards Deep Symbolic Reinforcement Learning \"
 
 Lastly, I will also test the capability of transfer learning for this new method.
 
-\section{Contribution}
-
-To my knowledge, this is the first time that both symbolic learning method is incorporated into a reinforcement learning to facilitate learning process
-
-\section{Methods}
+% \section{Contribution}
+%
+% To my knowledge, this is the first time that both symbolic learning method is incorporated into a reinforcement learning to facilitate learning process
+%
+% \section{Methods}
 
 
 \chapter{Ethics Checklist}
@@ -637,7 +659,7 @@ Are there any other ethics issues that should be taken into consideration? & \ch
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \chapter{Conclusion}
 
-\chapter{References}
+
 %% bibliography
 \bibliographystyle{plain}
 \bibliography{references}

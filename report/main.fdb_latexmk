@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex main"] 0 "main.aux" "main.bbl" "main" 1527709634
+["bibtex main"] 1527936025 "main.aux" "main.bbl" "main" 1527936026
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "main.aux" 1527709626 5532 ee5f4a91765e541cc5d0d27136b95020 ""
+  "main.aux" 1527936026 3884 ae237de6c22ee2439f9cfa6164bfe553 ""
   "main.bcf" 0 -1 0 ""
   "references.bib" 1527709124 65560 f5ff55e563365e1984d76f427d48d8b1 ""
   (generated)
-  "main.blg"
   "main.bbl"
-["pdflatex"] 1527709626 "main.tex" "main.pdf" "main" 1527709634
+  "main.blg"
+["pdflatex"] 1527936025 "main.tex" "main.pdf" "main" 1527936026
   "/etc/texmf/web2c/texmf.cnf" 1477904399 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
@@ -125,18 +125,17 @@
   "figures/agent_env.png" 1527694151 8876 70d56925069c74e7a7bf25077cd34dbe ""
   "figures/imperial.pdf" 1439884276 14992 7f9429838e925fcd04acfa4d283703b5 ""
   "includes.tex" 1439984244 2982 94e3c51e3874ecbcf3cf3ddf0a89e382 ""
-  "main.aux" 1527709626 5532 ee5f4a91765e541cc5d0d27136b95020 ""
-  "main.bbl" 1527709282 204 fc034819e5d0316d2bb8c64a5b028dc7 "bibtex main"
-  "main.brf" 1527709626 43 0e27576c41f6890685f4852e676fbaab ""
-  "main.out" 1527709626 2154 1083bb90ac22b0f0a01e076e0ff200be ""
-  "main.tex" 1527709634 23707 223724f62d1f54752864ea0444892c42 ""
-  "main.toc" 1527709626 2649 a0d5a462ad5410242ab1faa4664b1f6b ""
+  "main.aux" 1527936026 3884 ae237de6c22ee2439f9cfa6164bfe553 ""
+  "main.bbl" 1527936025 0 d41d8cd98f00b204e9800998ecf8427e "bibtex main"
+  "main.out" 1527936026 1295 53671e38eb93ab072543c521c5bda76b ""
+  "main.tex" 1527936026 24146 b7243e4663f4c2209cf3e5ca4e8d5265 ""
+  "main.toc" 1527936026 1668 db60200445a662e98f46eadba63738bc ""
   "notation.tex" 1439984354 362 dde8d17bdd645c497ea48e05d51963bd ""
   "titlepage.tex" 1440156428 1995 b33c89e3a284110d3cc1b5b405785394 ""
   (generated)
-  "main.pdf"
-  "main.aux"
-  "main.log"
-  "main.toc"
   "main.brf"
+  "main.aux"
   "main.out"
+  "main.toc"
+  "main.log"
+  "main.pdf"
