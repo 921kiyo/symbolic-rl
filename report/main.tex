@@ -1,10 +1,12 @@
 \documentclass[12pt,twoside]{report}
-% \usepackage{fixltx2e}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{amsmath, amssymb}
 \usepackage[table]{xcolor}
 \usepackage{amssymb}
+\usepackage{csquotes}
+
+% Ctrl + Alt + B
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -29,6 +31,9 @@
 \date{June 2018}
 
 \begin{document}
+\theoremstyle{definition}
+\newtheorem{examp}{Example}[section]
+
 
 % load title page
 \input{titlepage}
@@ -120,19 +125,67 @@ This background report is organised as follows: Chapter \ref{background} introdu
 \chapter{Background}
 \label{background}
 
-This section introduces introduces Inductive Logic Programming (Section \ref{ilp}), Reinforcement Learning (Section \ref{rl}), Deep Reinforcement Learning (Section \ref{drl}) and GVGAI Framework, an open-source game platform for AI methods (Section \ref{gvgai}), which provide the foundations of this work.
+This section introduces introduces Inductive Logic Programming (Section \ref{ilp}), Reinforcement Learning (Section \ref{rl}) and GVGAI Framework, an open-source game platform for AI methods (Section \ref{gvgai}), which provide the foundations of this work.
 
 \section{Inductive Logic Programming}
+
 \label{ilp}
-Inductive Logic Programming (ILP) is a subfield of research area aimed at the intersection between machine learning and logic programming (MUGGLETON 1991). The purpose of ILP is to derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and any of negative examples.
+Inductive Logic Programming (ILP) is a subfield of research area aimed at the intersection between machine learning and logic programming \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and any of negative examples.
+
+ENTAILMENT
+
+Satisfiable
 
 \begin{equation}
 B \cap H \models E
 \end{equation}
 
-TODO Herbrand Model
+where E consists of positive examples (E\textsuperscript{+}) and negative examples (E\textsuperscript{-})
 
-TODO Least Herbrand Model
+To compute this inference task, the syntax of the predicate logic program needs to be converted into Conjunctive Normal Form (CNF), or clausal theory, which consists of a conjunction of clauses, where a clause is disjunction of literals, and a literal can include positive literals and negative literals.
+
+A literal is either an atom p or negation by failure, which is used to derive not p.
+
+\begin{examp} (Conjunctive Normal Form)
+
+\end{examp}
+
+
+The \textit{Herbrand domain} (a.k.a \textit{Herbrand universe}) of clause sets \textit{Th} is the set of all ground terms that are constants and function symbols appeared in \textit{Th}.
+
+\begin{examp} (Herbrand Domain)
+
+\end{examp}
+
+The \textit{Herbrand base} of \textit{Th} is the set of all ground predicates that are formed by predicate symbols in \textit{Th} and terms in the \textit{Herbrand domain}.
+
+\begin{examp} (Herbrand Base)
+
+\end{examp}
+
+The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the \textit{Herbrand Domain}.
+
+\begin{examp} (Grounding)
+
+\end{examp}
+
+
+TODO Explain grounding in ASP context.
+
+
+A \textit{Horn clause} is a subset of CNF, which is a clause wtith at most one positive literal, where a \textit{definite clause} (also called a \textit{rule} or a \textit{fact}) contains exactly one positive literal, and a \textit{denial} (or a \textit{constraint}) is a clause with no positive literals.
+
+\begin{examp} (Horn clause)
+
+\end{examp}
+
+
+
+Limitations of Inductive Logic Programming:
+
+\subsection{Stable Model Semantics}
+
+TODO Relationship from the previous Section
 
 Definite Logic Program is a set of definite rule where: \newline
 
@@ -145,38 +198,76 @@ Normal Logic Program is a set of normal rule where
 a normal rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, \textit{not} b\textsubscript{1}, ..., \textit{not}  b\textsubscript{n} where h is the head of the rule,
  and a\textsubscript{1}, ..., a\textsubscript{n}, b\textsubscript{1}, ..., b\textsubscript{n} are the body of the rule (both the head and body are all atoms).
 
- Limitations of Inductive Logic Programming:
+
+The grounding of a normal logic program P can be obtained by replacing each rule in P with a ground instance of the rule, such that for each atom A in body\textsuperscript{+} (R) (TODO EXPLAIN WHAT THIS IS), already occurs in the head of another ground rule.
 
 
-\subsection{Stable Model Semantics}
+RELATIONSHIP WITH PROLOG
+
+The entire program needs to be grounded in order for ASP solver to work, and, unlike Prolog,  each rule must be \enquote{safe}. A rule R is safe if every variable that occurs in the head of the rule occurs at least once in body\textsuperscript{+}(R) (TODO check if this is correct).
+
+An \textit{Herbrand interpretation} of a set of definite clauses \textit{Th} is a subset of the Herbrand base of \textit{Th}, which is a set of ground atoms that are true in terms of interpretation.
 
 
 
-Stable Model of a normal logic program
+Interpretation evaluate it to true
+Interpretation evaluate it to false
 
-[Gelfond 1988]
+A \textit{Herbrand Model} is a Herbrand interpretation if and only if a set Th of clauses is satisfiable.
 
-Reduct
+
+Algorithm for computing Herbrand model is shown in
+
+XXXX
+
+A set of clauses Th is unsatisfiable if the algorithm terminates and does not return Herbrand model.
+
+The \textit{Least Herbrand Model} is an unique minimum Herbrand model if and only if none of its subsets is an Herbrand model (TODO MATHMATICALLY SAY THIS)
+
+For a normal program, there is usually no least Herbrand model.
+TODO Explain MORE
+
+Stable Model of a normal logic program is XX
+\cite{Gelfond1988}
+
+Any stable model is a minimal Herbrand model, and stable sets is stable models. The stable models can be found by constructing the result of the program with respect to sets of atoms X (P\textsuperscript{x} in the following 2 steps
+
+
 
 does not contain negation and a unique minimal Herbrand model.
 
-Examples of this
+\begin{examp} (Horn clause)
+
+\end{examp}
+
+
 
 \subsection{Anwer Set Programming (ASP)}
 
-ASP prgorma consists of a set of rules, where each rule consists of an atom and literals.
-
-Literals are
+Answer set of normal logic program P is a stable model, and Answer Set Programming (ASP) is a normal logic with extensions: constrains, choice rules and aggregates. ASP program consists of a set of rules, where each rule consists of an atom and literals.
+A literal is either an atom \textit{p} or its \textit{default negation} not p (Negation as a failure).
 
 
 Head and body
 
-Answer Set Programming (ASP) is a declarative programming
+A Constraint is of the form
+
+\begin{theorem}
+\leftarrow a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
+\end{theorem}
+
+which is to filtering any irrelevant answer sets.
+There are two types of constraints: soft and hard constraints. Soft constraint is XXX
+
+Hard constraint is XXX
+
+Choice rule can express possible outcomes given an action choice, which is of the form
+
+\begin{theorem}
+l{h\textsubscript{1},...,h\textsubscript{m}}u \leftarrow a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
+\end{theorem}
 
 
-Negation as a failure
-
-constrains is of the form
 
 An answer set of ASP program is interpretations that make all the ruls true.
 
@@ -186,21 +277,13 @@ Clingo
 
 ASP has true, false and unknown
 
-Choice rule can express possible outcomes given an action choice. For example,
+
 
 for non-deterministic to describe transition possibilities.
 
-\begin{theorem}
-\leftarrow a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
-\end{theorem}
-
-Constraints are to filtering any irrelevant answer sets.
 
 Syntax Examples
 
-There are two types of constraints: soft and hard constraints. Soft constraint is XXX
-
-Hard constraint is XXX
 
 optimisation statement is of the form.
 
@@ -304,6 +387,8 @@ Objects, types, locations and interactions.
 
 On-Policy learn policy \pi from its past experience
 Off-policy
+
+Model-based vs model-free learning
 
 \subsection{Markov Decision Process(MDP)}
 

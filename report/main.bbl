@@ -1,0 +1,19 @@
+\begin{thebibliography}{1}
+
+\bibitem{Garnelo2016}
+Marta Garnelo, Kai Arulkumaran, and Murray Shanahan.
+\newblock {Towards Deep Symbolic Reinforcement Learning}.
+\newblock sep 2016.
+
+\bibitem{Gelfond1988}
+Michael Gelfond and Vladimir Lifschitz.
+\newblock {The stable model semantics for logic programming}.
+\newblock {\em 5th International Conf. of Symp. on Logic Programming},
+  (December 2014):1070--1080, 1988.
+
+\bibitem{Muggleton1991}
+S~Muggleton.
+\newblock {Inductive logic programming}.
+\newblock {\em New Generation Computing}, 8(4):295--318, 1991.
+
+\end{thebibliography}
