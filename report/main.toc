@@ -5,17 +5,18 @@
 \contentsline {subsection}{\numberline {2.1.1}Stable Model Semantics}{5}{subsection.2.1.1}
 \contentsline {subsection}{\numberline {2.1.2}Anwer Set Programming (ASP)}{5}{subsection.2.1.2}
 \contentsline {section}{\numberline {2.2}Inductive Logic Programming (ILP)}{6}{section.2.2}
-\contentsline {subsubsection}{ILP in Anser set semantics}{6}{section*.2}
+\contentsline {subsubsection}{ILP in Answer set semantics}{6}{section*.2}
 \contentsline {subsection}{\numberline {2.2.1}Learning from Anwer Sets (LAS)}{7}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Inductive Learning of Answer Set Programs (ILASP)}{7}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.2}Inductive Learning of Answer Set Programs (ILASP)}{8}{subsection.2.2.2}
+\contentsline {subsubsection}{Learning from Ordered Answer Sets}{8}{section*.3}
+\contentsline {subsubsection}{A Context-dependent Learning from Ordered Answer Sets}{8}{section*.4}
 \contentsline {section}{\numberline {2.3}Reinforcement Learning}{8}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Markov Decision Process(MDP)}{8}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.1}Markov Decision Process(MDP)}{9}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}Temporal-Difference (TD) Learning}{9}{subsection.2.3.2}
-\contentsline {subsection}{\numberline {2.3.3}Q-Learning}{9}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.3}Q-Learning}{10}{subsection.2.3.3}
 \contentsline {section}{\numberline {2.4}GVGAI Framework}{10}{section.2.4}
 \contentsline {chapter}{\numberline {3}Related Work}{11}{chapter.3}
-\contentsline {section}{\numberline {3.1}Symbolic Reinforcement Learning}{11}{section.3.1}
-\contentsline {chapter}{\numberline {4}Project Overview}{13}{chapter.4}
-\contentsline {section}{\numberline {4.1}Proposed Architecture}{13}{section.4.1}
+\contentsline {chapter}{\numberline {4}Project Overview}{12}{chapter.4}
+\contentsline {section}{\numberline {4.1}Proposed Architecture}{12}{section.4.1}
 \contentsline {section}{\numberline {4.2}Project outline}{13}{section.4.2}
 \contentsline {chapter}{\numberline {5}Ethics Checklist}{14}{chapter.5}

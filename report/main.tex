@@ -286,7 +286,11 @@ B \cap H \models E
 where E consists of positive examples (E\textsuperscript{+}) and negative examples (E\textsuperscript{-})
 
 
-\subsubsection{ILP in Anser set semantics}
+One of the advantage of ILP over statistical machine learning is that the hypothesis the agent learnt can be easily understood by a human, making the decision more transparent rather than black box.
+
+\subsubsection{ILP in Answer set semantics}
+
+There are several ILP frameworks under the Answer set semantics.
 
 Cautious and brave entailments can be defined in terms of induction in ILP \cite{Sakama2009}.
 
@@ -364,10 +368,22 @@ ILP\textsubscript{LAS} is positive solutions that are not violating solutions.
 
 ILASP task containing a contex-dependent example
 
-TODO Explain how symbolic learning works
+\subsubsection{Learning from Ordered Answer Sets}
 
-TODO What would you learn in my context? Relashinship of the objects?
-Objects, types, locations and interactions.
+Weak constraints: useful for modelling the agent's preference
+
+
+
+\subsubsection{A Context-dependent Learning from Ordered Answer Sets}
+
+
+context-dependent partial interpretation (CDPI)
+
+
+Context-dependent ordering example (CDOE)
+
+Two advantages of adding contex-dependent are it increases the efficiency of learning tasks, and more expressive structure of the background knowlege to particular examples.
+
 
 \section{Reinforcement Learning}
 \label{rl}
@@ -516,7 +532,6 @@ Transparency and interpretable capability of the model is another important aspe
 
 XXX[Programmati...] developed a programmatically interpretable reinforcement learning which finds a policy that can be represented in a human-readable programming language.
 
-
 Two most studied approach for using previous learning exprience is meta-learning and transfer learning
 
 Artificial General Intelligence
@@ -535,8 +550,6 @@ Study of symbolic machine learning roots from
 
 Baysian Optimisation
 
-RNN approach
-
 Symbolic Deep reinforcement learning
 
 Some implementation: German paper
@@ -546,7 +559,7 @@ By contract, there is active reserach in symbolic machine learning, which focuse
 For example, XX shows the agent can learn XXX from a noisy examples, with only a very few training examples.
 
 
-\section{Symbolic Reinforcement Learning}
+% \section{Symbolic Reinforcement Learning}
 Incorporation of logic into reinforcement learning dates back to the study of relational reinforcement learning,
 
 
@@ -561,9 +574,70 @@ For example,
 However, as XX points out, 1 pixel of the game could influence the decision making of the agent.
 
 
+TODO Explain how symbolic learning works
+
+
 \chapter{Project Overview}
 
 \section{Proposed Architecture}
+
+The proposed architecture is shown in Figure \ref{proposed_architecture}. The basic
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=15cm, height=9cm]{./figures/ILASRL}
+\caption{Proposed Architecture}
+\label{proposed_architecture}
+\end{figure}
+
+
+% TODO What would you learn in my context? Relashinship of the objects?
+% Objects, types, locations and interactions.
+
+
+\begin{examp} (Examples for ILASPRL (input))
+
+agent\_before(S1, T1).
+
+agent\_after(S1, T1).
+reward(R).
+action(A).
+
+\end{examp}
+\label{examples\_input}
+
+
+\begin{examp} (Example of learning task (output))
+
+% valid\_move(C1, T):- \\
+%   adjacent(C1, C2), \\
+%   agent\_at(C2, T), \\
+%   not obstacle(C1, C2), \\
+%   not enemy(C1, C2). \\
+% \\
+% valid\_move(C1, T):- \\
+%   link(C2, C1), \\
+%   agent\_at(C2, T). \\
+valid\_move(C0, C1):- previous(C0, C1).
+\\
+previous(C2, C1):-
+
+agent\_at(C0, C1),
+adjacent(C0, C2),
+not obstacle(C0, C2),
+not enemy(C0, C2).
+\\
+state\_transition(S1, S2, T2):-
+  agent\_before(S1, T1),
+  agent\_after(S2, T2).
+
+\end{examp}
+\label{limitation_brave}
+
+
+Example: model refinement in a simple Grid world
+
+
 
 \section{Project outline}
 
@@ -740,6 +814,8 @@ Are there any other ethics issues that should be taken into consideration? & \ch
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \chapter{Conclusion}
 
+% Further research
+% probabilistic inductive logic programming instead of ASP.
 
 %% bibliography
 \bibliographystyle{plain}
