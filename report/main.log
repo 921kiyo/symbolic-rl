@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  3 JUN 2018 19:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  3 JUN 2018 22:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -489,46 +489,7 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
-(./main.aux
-./main.aux:71: Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.71 ...12}{Proposed Architecture}{examp.4.1.1}{}}
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-
-./main.aux:71: LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.71 ...12}{Proposed Architecture}{examp.4.1.1}{}}
-                                                  
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-./main.aux:71: Extra \endcsname.
-\@ifundefined ...dafter \ifx \csname #1\endcsname 
-                                                  \relax \expandafter \@firs...
-l.71 ...12}{Proposed Architecture}{examp.4.1.1}{}}
-                                                  
-I'm ignoring this, since I wasn't doing a \csname.
-
-./main.aux:71: Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.71 ...12}{Proposed Architecture}{examp.4.1.1}{}}
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-
-LaTeX Warning: Label `limitation_brave' multiply defined.
-
-)
+(./main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
@@ -622,10 +583,7 @@ Package caption Info: hypcap package is loaded.
 Package caption Info: End \AtBeginDocument code.
 Package backref Info: ** backref set up for natbib ** on input line 34.
 \c@examp=\count143
-(./titlepage.tex [1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<./figures/imperial.pdf, id=83, 362.35374pt x 95.35625pt>
+(./titlepage.tex <./figures/imperial.pdf, id=84, 362.35374pt x 95.35625pt>
 File: ./figures/imperial.pdf Graphic file (type pdf)
 
 <use ./figures/imperial.pdf>
@@ -651,12 +609,10 @@ LaTeX Font Info:    Try loading font information for U+lasy on input line 39.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
-)pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
- been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.61 \end{titlepage}
-                     [1 <./figures/imperial.pdf>]) (./main.toc
+) [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./figures/imperial.pdf>]) 
+(./main.toc
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <12> not available
 (Font)              Font shape `OT1/bch/b/n' tried instead on input line 2.
 )
@@ -674,93 +630,147 @@ l.71 \chapter
 
 ]
 Chapter 1.
+
+Package natbib Warning: Citation `Garnelo2016' on page 2 undefined on input lin
+e 88.
+
+
+Package natbib Warning: Citation `Garnelo2016' on page 2 undefined on input lin
+e 101.
+
 [2
 
 ] [3]
 Chapter 2.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 128.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 110.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 173.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 152.
 [4
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 177--178
+Underfull \hbox (badness 10000) in paragraph at lines 156--157
 
  []
+
+
+Package natbib Warning: Citation `Gelfond1988' on page 5 undefined on input lin
+e 197.
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 299--303
+
+Package natbib Warning: Citation `Muggleton1991' on page 6 undefined on input l
+ine 255.
+
+
+Package natbib Warning: Citation `Sakama2009' on page 6 undefined on input line
+ 274.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 278--282
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 304--305
+Underfull \hbox (badness 10000) in paragraph at lines 283--284
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 306--310
+Underfull \hbox (badness 10000) in paragraph at lines 285--289
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+bch on input line 313.
+LaTeX Font Info:    Try loading font information for OMS+bch on input line 292.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsbch.fd
 File: omsbch.fd 
 )
 LaTeX Font Info:    Font shape `OMS/bch/m/it' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 313.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 292.
 
-Underfull \hbox (badness 10000) in paragraph at lines 323--327
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 328--331
+Underfull \hbox (badness 10000) in paragraph at lines 302--306
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 356--360
+Underfull \hbox (badness 10000) in paragraph at lines 307--310
+
+ []
+
+
+Package natbib Warning: Citation `Law2014' on page 7 undefined on input line 32
+3.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 335--339
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 361--365
+Underfull \hbox (badness 10000) in paragraph at lines 340--344
 
  []
 
-<./figures/agent_env.png, id=172, 248.93pt x 228.855pt>
+<./figures/agent_env.png, id=170, 248.93pt x 228.855pt>
 File: ./figures/agent_env.png Graphic file (type png)
 
 <use ./figures/agent_env.png>
-Package pdftex.def Info: ./figures/agent_env.png used on input line 393.
+Package pdftex.def Info: ./figures/agent_env.png used on input line 372.
 (pdftex.def)             Requested size: 142.26761pt x 142.26926pt.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 394.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 373.
  [8 <./figures/agent_env.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 412--413
+Underfull \hbox (badness 10000) in paragraph at lines 386--387
 
  []
 
 LaTeX Font Info:    Font shape `OMS/bch/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 415.
-[9] [10]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 389.
+[9]
+
+Package natbib Warning: Citation `Sutton1990' on page 10 undefined on input lin
+e 494.
+
+<./figures/dyna.png, id=189, 243.91125pt x 175.65625pt>
+File: ./figures/dyna.png Graphic file (type png)
+
+<use ./figures/dyna.png>
+Package pdftex.def Info: ./figures/dyna.png used on input line 498.
+(pdftex.def)             Requested size: 227.62413pt x 170.72942pt.
+
+
+LaTeX Warning: Reference `Montague1999' on page 10 undefined on input line 499.
+
+
+
+LaTeX Warning: Reference `Montague1999' on page 10 undefined on input line 499.
+
+
+[10] [11 <./figures/dyna.png>]
 Chapter 3.
-[11
+[12
 
 ]
 Chapter 4.
-<./figures/ILASRL.png, id=200, 543.02875pt x 333.245pt>
+
+Package natbib Warning: Citation `Sutton1990' on page 13 undefined on input lin
+e 570.
+
+<./figures/ILASRL.png, id=205, 543.02875pt x 333.245pt>
 File: ./figures/ILASRL.png Graphic file (type png)
 
 <use ./figures/ILASRL.png>
-Package pdftex.def Info: ./figures/ILASRL.png used on input line 588.
+Package pdftex.def Info: ./figures/ILASRL.png used on input line 574.
 (pdftex.def)             Requested size: 426.80879pt x 256.09094pt.
- [12
+ [13
 
- <./figures/ILASRL.png>] [13]
+ <./figures/ILASRL.png>] [14]
+
+Package natbib Warning: Citation `Schaul2013' on page 15 undefined on input lin
+e 667.
+
+[15]
 Chapter 5.
 Missing character: There is no ‚ in font bchr7t!
 Missing character: There is no Ä in font bchr7t!
@@ -769,74 +779,53 @@ Missing character: There is no ‚ in font bchr7t!
 Missing character: There is no Ä in font bchr7t!
 Missing character: There is no ù in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 675--736
+Overfull \hbox (9.14763pt too wide) in alignment at lines 692--753
  [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 736
+Underfull \vbox (badness 10000) detected at line 753
  []
 
 Missing character: There is no ‚ in font bchr7t!
 Missing character: There is no Ä in font bchr7t!
 Missing character: There is no ì in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 736--797
+Overfull \hbox (9.14763pt too wide) in alignment at lines 753--814
  [] [] [] 
  []
 
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 797--802
+Overfull \hbox (9.14763pt too wide) in alignment at lines 814--819
  [] [] [] 
  []
 
-[14
+[16
 
-] [15] (./main.bbl (./main.brf)
-\tf@brf=\write5
-\openout5 = `main.brf'.
+] [17] (./main.bbl)
 
- [16])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 824.
- [17
+Package natbib Warning: There were undefined citations.
 
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 824.
- (./main.aux
-./main.aux:71: Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.71 ...12}{Proposed Architecture}{examp.4.1.1}{}}
-                                                  
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
-
-./main.aux:71: Extra \endcsname.
-\@newl@bel ... \bbl@tempa \csname #1@#2\endcsname 
-                                                  \def \bbl@tempb {#3}\@safe...
-l.71 ...12}{Proposed Architecture}{examp.4.1.1}{}}
-                                                  
-I'm ignoring this, since I wasn't doing a \csname.
-
-)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 824.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 824.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 840.
+[18]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 840.
+ (./main.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 840.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 840.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: EC63C5FF9DCEB52E54139B46A82C494C;1284.
-Package rerunfilecheck Info: File `main.brf' has not changed.
-(rerunfilecheck)             Checksum: 48A789DCA8816DA6B41A19906F646EE7;241.
+(rerunfilecheck)             Checksum: F8FAEFE315366E54A091619B95A49C17;1504.
 
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 824.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 840.
  ) 
 Here is how much of TeX's memory you used:
- 10473 strings out of 494353
- 151394 string characters out of 6170044
- 285258 words of memory out of 5000000
- 13534 multiletter control sequences out of 15000+600000
- 40226 words of font info for 71 fonts, out of 8000000 for 9000
+ 10477 strings out of 494353
+ 151388 string characters out of 6170044
+ 285578 words of memory out of 5000000
+ 13535 multiletter control sequences out of 15000+600000
+ 45705 words of font info for 86 fonts, out of 8000000 for 9000
  452 hyphenation exceptions out of 8191
  41i,12n,43p,909b,522s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
@@ -850,10 +839,10 @@ cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (19 pages, 179978 bytes).
+Output written on main.pdf (19 pages, 186750 bytes).
 PDF statistics:
- 286 PDF objects out of 1000 (max. 8388607)
- 246 compressed objects within 3 object streams
- 63 named destinations out of 1000 (max. 500000)
- 160 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 294 PDF objects out of 1000 (max. 8388607)
+ 253 compressed objects within 3 object streams
+ 62 named destinations out of 1000 (max. 500000)
+ 181 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -10,9 +10,11 @@
 \BOOKMARK [2][]{subsection.2.3.1}{2.3.1 Markov Decision Process\(MDP\)}{section.2.3}% 10
 \BOOKMARK [2][]{subsection.2.3.2}{2.3.2 Temporal-Difference \(TD\) Learning}{section.2.3}% 11
 \BOOKMARK [2][]{subsection.2.3.3}{2.3.3 Q-Learning}{section.2.3}% 12
-\BOOKMARK [1][]{section.2.4}{2.4 GVGAI Framework}{chapter.2}% 13
+\BOOKMARK [2][]{subsection.2.3.4}{2.3.4 Model-based vs model-free learning}{section.2.3}% 13
 \BOOKMARK [0][]{chapter.3}{3 Related Work}{}% 14
 \BOOKMARK [0][]{chapter.4}{4 Project Overview}{}% 15
 \BOOKMARK [1][]{section.4.1}{4.1 Proposed Architecture}{chapter.4}% 16
-\BOOKMARK [1][]{section.4.2}{4.2 Project outline}{chapter.4}% 17
-\BOOKMARK [0][]{chapter.5}{5 Ethics Checklist}{}% 18
+\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 ASP representation generation}{section.4.1}% 17
+\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Model generation and update using ILASP\(RL\)}{section.4.1}% 18
+\BOOKMARK [1][]{section.4.2}{4.2 Project outline}{chapter.4}% 19
+\BOOKMARK [0][]{chapter.5}{5 Ethics Checklist}{}% 20

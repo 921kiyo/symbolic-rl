@@ -21,10 +21,10 @@
 \@writefile{lof}{\select@language{english}}
 \@writefile{lot}{\select@language{english}}
 \citation{Garnelo2016}
+\citation{Garnelo2016}
 \@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{2}{chapter.1}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{brf}{\backcite{Garnelo2016}{{2}{1}{chapter.1}}}
 \@writefile{toc}{\contentsline {chapter}{\numberline {2}Background}{4}{chapter.2}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -32,20 +32,16 @@
 \@writefile{toc}{\contentsline {section}{\numberline {2.1}Logic Basics}{4}{section.2.1}}
 \citation{Gelfond1988}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Stable Model Semantics}{5}{subsection.2.1.1}}
-\@writefile{brf}{\backcite{Gelfond1988}{{5}{2.1.1}{subsection.2.1.1}}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Anwer Set Programming (ASP)}{5}{subsection.2.1.2}}
 \citation{Muggleton1991}
 \citation{Sakama2009}
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}Inductive Logic Programming (ILP)}{6}{section.2.2}}
 \newlabel{ilp}{{2.2}{6}{Inductive Logic Programming (ILP)}{section.2.2}{}}
-\@writefile{brf}{\backcite{Muggleton1991}{{6}{2.2}{section.2.2}}}
 \@writefile{toc}{\contentsline {subsubsection}{ILP in Answer set semantics}{6}{section*.2}}
-\@writefile{brf}{\backcite{Sakama2009}{{6}{2.2}{section*.2}}}
 \citation{Law2014}
 \newlabel{limitation_cautious}{{2.2}{7}{ILP in Answer set semantics}{examp.2.2.1}{}}
 \newlabel{limitation_brave}{{2.2}{7}{ILP in Answer set semantics}{examp.2.2.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Learning from Anwer Sets (LAS)}{7}{subsection.2.2.1}}
-\@writefile{brf}{\backcite{Law2014}{{7}{2.2.1}{subsection.2.2.1}}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Inductive Learning of Answer Set Programs (ILASP)}{8}{subsection.2.2.2}}
 \@writefile{toc}{\contentsline {subsubsection}{Learning from Ordered Answer Sets}{8}{section*.3}}
 \@writefile{toc}{\contentsline {subsubsection}{A Context-dependent Learning from Ordered Answer Sets}{8}{section*.4}}
@@ -56,33 +52,37 @@
 \newlabel{agent_env}{{2.1}{8}{Agent and Environment\relax }{figure.caption.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Markov Decision Process(MDP)}{9}{subsection.2.3.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Temporal-Difference (TD) Learning}{9}{subsection.2.3.2}}
+\citation{Sutton1990}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}Q-Learning}{10}{subsection.2.3.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.4}GVGAI Framework}{10}{section.2.4}}
-\newlabel{gvgai}{{2.4}{10}{GVGAI Framework}{section.2.4}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Related Work}{11}{chapter.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.4}Model-based vs model-free learning}{10}{subsection.2.3.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Relationships among learning, planning and acting \ref  {Montague1999}\relax }}{11}{figure.caption.6}}
+\newlabel{dyna}{{2.2}{11}{Relationships among learning, planning and acting \ref {Montague1999}\relax }{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Related Work}{12}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Project Overview}{12}{chapter.4}}
+\newlabel{related_work}{{3}{12}{Related Work}{chapter.3}{}}
+\citation{Sutton1990}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Project Overview}{13}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Proposed Architecture}{12}{section.4.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Proposed Architecture\relax }}{12}{figure.caption.6}}
-\newlabel{proposed_architecture}{{4.1}{12}{Proposed Architecture\relax }{figure.caption.6}{}}
-\newlabel{examples\_input}{{4.1}{12}{Proposed Architecture}{examp.4.1.1}{}}
-\newlabel{limitation_brave}{{4.1}{13}{Proposed Architecture}{examp.4.1.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Project outline}{13}{section.4.2}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Ethics Checklist}{14}{chapter.5}}
+\newlabel{project_overview}{{4}{13}{Project Overview}{chapter.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Proposed Architecture}{13}{section.4.1}}
+\newlabel{proposed_architecture_section}{{4.1}{13}{Proposed Architecture}{section.4.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Proposed reinforcement learning architecture. ILASPRL learns to generate a model and updates based on the interaction with the environment, which is used to facilite the policy evaluation. \relax }}{13}{figure.caption.7}}
+\newlabel{proposed_architecture}{{4.1}{13}{Proposed reinforcement learning architecture. ILASPRL learns to generate a model and updates based on the interaction with the environment, which is used to facilite the policy evaluation. \relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}ASP representation generation}{13}{subsection.4.1.1}}
+\newlabel{ilasprl_input}{{4.1.1}{14}{ASP representation generation}{examp.4.1.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Model generation and update using ILASP(RL)}{14}{subsection.4.1.2}}
+\newlabel{learning_task}{{4.1.2}{14}{Model generation and update using ILASP(RL)}{examp.4.1.2}{}}
+\citation{Schaul2013}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Project outline}{15}{section.4.2}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Ethics Checklist}{16}{chapter.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ethics_checklist}{{5}{16}{Ethics Checklist}{chapter.5}{}}
 \gdef \LT@i {\LT@entry 
     {1}{388.37627pt}\LT@entry 
     {1}{29.47182pt}\LT@entry 
     {1}{29.47182pt}}
 \bibstyle{plain}
 \bibdata{references}
-\bibcite{Garnelo2016}{{1}{}{{}}{{}}}
-\bibcite{Gelfond1988}{{2}{}{{}}{{}}}
-\bibcite{Law2014}{{3}{}{{}}{{}}}
-\bibcite{Muggleton1991}{{4}{}{{}}{{}}}
-\bibcite{Sakama2009}{{5}{}{{}}{{}}}
-\providecommand\NAT@force@numbers{}\NAT@force@numbers

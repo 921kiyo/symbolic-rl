@@ -80,50 +80,32 @@
 
 
 There has been successful applications of deep reinforcement learning (DRL) a number of domains, such as games and robotics (TODO INSERT REFERENCES).
-DRL is considered to be a step towards artificial general intelligence.
-As pointed by XXX, however, there are still a number of issues to overcome in this method.
+DRL is considered to be a step towards artificial general intelligence, there are still a number of issues to overcome in this method.
 First, it requires a large amount of data for training the model, which requires a long time of learning process.
 Second, it is considered to be a black-box, meaning the decision making process is unknown to human user and therefore lacks explanation ability.
 Third there is no thoughts process to the decision making, which, as XX points out, is a fundamental to the artificial general intelligence.
-To tackle these problems, there are 3 main streams of research on this field.
-First main research is focused on applying Baysian statistics XXX, the second main research is XXX.
-Recently, the XXX attempted to incorporate symbolic representations into the system to achive more data-efficient learning, which shows a promissing results of this approach.
+To tackle these problems, there are a number of different approaches the researchers have been experimenting.
+One of the methods is to incorporate symbolic representations into the system to achive more data-efficient learning, which shows a promissing results of this approach (\cite{Garnelo2016}).
+In this paper, we explore the potential of inductive logic problemming into reinforcement learning and attempt to solve the problems above.
+The advantages of symbolic reinforcement learning are, first of all, the decision making mechanism is understandable by humans rather than being black-box.
+Second, it resembles how human reason. There is some aspects of try-and-error in human learning, but they explore reasonings to efficiently learn the surrounding or situations.
+Also they effectily use previous experience (background knowledge) when encountered a similar situation.
+Finally, the recent advance of ILP research is remarkable and there are a number of new algorithsm that effectively work in non-monotonic senarios based on Answer Set Programmings (ASPs).
 
-MOTIVATION
-
-Why symbolic reinforcement learning is good attempt
-
-
-Reason 1: Complehensive by humans $\rightarrow$ Explanable rather than black-box
-
-Reason 2: Similar to the human, it uses reasoning
-
-Use of previous experience (background knowledge)
-As discussed in XX, there are many research that attempted to incorporate symbolic reasoning into DRL, but there is not much research on incorporating symbolc learning with reinforcement learning
-
-However there is a room for exploration on this field.
-
-Reason 3: Recent advance of ILASP is promissing
-
+Recently there are a number of research that attempted to incorporate symbolic reasoning into DRL, but the combining inductive logic programming and reinforcement learning has not been explored.
 Because of the recent advancement of logic-based learning and deep reinforcement learning, combination of both approach would be a next explonation toward artificial general intelligence.
 
-
-OBJECTIVES
-combining the two novel approaches to overcome the problems of the QND
-
-
-
-
+In this paper, our objectives is to explore this new reseach field and see how this combination of the two different learning methods could enhance the learning capability.
 
 In this paper, I further explore incorporation of symbolic machine learning into reinforcement learning to achieve data-efficient learning using Inductive Learning of Answer Set Programs (ILASP), which is the state-of-art symbolic learning method that can be applied to imcomplete and more complex environment.
 This research is inspired by \cite{Garnelo2016}, but in this paper I explore symbolic represetations process and include more learning aspect.
 
-This background report is organised as follows: Chapter \ref{background} introduces
+This background report is organised as follows: In Chapter \ref{background}, necessary background of logic, inductive logic programming and reinforcement learning are described for this paper. Chapter \ref{related_work} discusses previous research in this particular approach and see the drawbacks of each approach. Chapter \ref{project_overview} shows the tentative architecture of our new approach, using Inductive Learning of Answer Set Programs (ILASP) to generate model of the environment. We also describe the outline of the project. Finally the ethics checklist is provided in Chapter \ref{ethics_checklist}.
 
 \chapter{Background}
 \label{background}
 
-This section introduces introduces Inductive Logic Programming (Section \ref{ilp}), Reinforcement Learning (Section \ref{rl}) and GVGAI Framework, an open-source game platform for AI methods (Section \ref{gvgai}), which provide the foundations of this work.
+This section introduces Logic Basics, Inductive Logic Programming (Section \ref{ilp}) and Reinforcement Learning (Section \ref{rl}), which provide the foundations of this work.
 
 \section{Logic Basics}
 
@@ -136,7 +118,6 @@ A literal is either an atom p or negation by failure, which is used to derive no
 \begin{examp} (Conjunctive Normal Form)
 
 \end{examp}
-
 
 The \textit{Herbrand domain} (a.k.a \textit{Herbrand universe}) of clause sets \textit{Th} is the set of all ground terms that are constants and function symbols appeared in \textit{Th}.
 
@@ -165,8 +146,6 @@ A \textit{Horn clause} is a subset of CNF, which is a clause wtith at most one p
 \begin{examp} (Horn clause)
 
 \end{examp}
-
-
 
 Limitations of Inductive Logic Programming:
 
@@ -397,11 +376,6 @@ Two advantages of adding contex-dependent are it increases the efficiency of lea
 
 % An RL agent may include either Policy, Value function or Model,
 
-On-Policy learn policy $\pi$ from its past experience
-Off-policy
-
-Model-based vs model-free learning
-
 \subsection{Markov Decision Process(MDP)}
 
 
@@ -467,6 +441,7 @@ TD updates the estimate by using the estimates of XXX (bootstrap).
 The advantages of TD methods
 - does not require any model of an environment.
 - online learning
+
 \subsection{Q-Learning}
 
 model-free leaning, where the agent will not rely on the models of the environment.
@@ -508,23 +483,32 @@ TODO INSERT Q-learning ALGORITHM HERE
 
 Epsilon greedy
 
-\section{GVGAI Framework}
-\label{gvgai}
+\subsection{Model-based vs model-free learning}
 
-The Video Game Definition Language (VGDL)
+A model M is a representation of an MDP where the state space and action space are assumed to be known. The model represents state transitions and rewards. In this case, the problem to be solved becomes a planning problem. A planning is for a series of actions to achive the agent's goal.
+Most of the reinforcement learning problems are model-free learning, where M is not unknown and the agnet learns to achieve the goal by the interactions with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
 
-SpriteSet defines all the sprites available in the game.
-LevelMapping defines relationships among characters, and the sprites available.
-InteractionSet defines what events occur when two sprites collide
-TerminationSet defines the end conditions of the game, and decides whether the player wins or not.
+the performance of model-based RL is limited to optimal policy given the model M. Thus when the model is not a representation of the true MDP, the planning algorithms will not lead to the optimal policy, but suboptimal policy. The solution to this problem is either to use model-free approach when the model is inaccurate or incorporate undertainty of the model using XXX.
 
-TODO Add game images
 
-% Timeout and SpriteCounter
+One algorithm which combine both aspects of model learning is called Dyna (\cite{Sutton1990}), which is shown in Figure \ref{dyna}.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=8cm, height=6cm]{./figures/dyna}
+\caption{Relationships among learning, planning and acting \ref{Montague1999}}
+\label{dyna}
+\end{figure}
+
+Dyna learns a model from real experience and use the model to generate simulated experience to update the evaluation functions.
+
+This approach is more effective because the simulated experience is relatively easy to generate compared to having to have real experience, thus less iterations.
+
+TODO ADD MATH
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Related Work}
-
+\label{related_work}
 % \section{Deep Reinforcement Learning and its issues}
 
 Transparency and interpretable capability of the model is another important aspect for machine learning applications.
@@ -578,22 +562,27 @@ TODO Explain how symbolic learning works
 
 
 \chapter{Project Overview}
+\label{project_overview}
 
 \section{Proposed Architecture}
+\label{proposed_architecture_section}
 
-The proposed architecture is shown in Figure \ref{proposed_architecture}. The basic
+The proposed tentative architecture is shown in Figure \ref{proposed_architecture}. The overall architecture resembles Sutton's Dyna architecture (\cite{Sutton1990}), which combined both model-free learning and model-based learning.
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=15cm, height=9cm]{./figures/ILASRL}
-\caption{Proposed Architecture}
+\caption{Proposed reinforcement learning architecture. ILASPRL learns to generate a model and updates based on the interaction with the environment, which is used to facilite the policy evaluation. }
 \label{proposed_architecture}
 \end{figure}
-
 
 % TODO What would you learn in my context? Relashinship of the objects?
 % Objects, types, locations and interactions.
 
+\subsection{ASP representation generation}
+
+The inputs from the experience needs to be converted in ASP form, which can be used to proceed the inductive learning in ILASP(RL).
+Observations from the interaction with the environment are state transition, reward and action of the agent, which can be directly converted using XXX. Example \ref{ilasprl_input} is ASP input form that is feeded into ILASP(RL) phase.
 
 \begin{examp} (Examples for ILASPRL (input))
 
@@ -604,8 +593,11 @@ reward(R).
 action(A).
 
 \end{examp}
-\label{examples\_input}
+\label{ilasprl_input}
 
+\subsection{Model generation and update using ILASP(RL)}
+
+Once the input is converted, the agent must learn the following definition of the model of the environment.
 
 \begin{examp} (Example of learning task (output))
 
@@ -632,16 +624,21 @@ state\_transition(S1, S2, T2):-
   agent\_after(S2, T2).
 
 \end{examp}
-\label{limitation_brave}
+\label{learning_task}
+
+The background knowldge is empty, and each example contain different transition of the agent.
+
+The model is updated as the agent explore more environment.
+
+
+In addition, when the environment has been changed during the exploration, the agent creates a new model for this new environment.
+
+
+In two different but similar scenarios, the model is generalised based on the two models, and the agent's model is more general which covers both games. Thus in theory, the agent should still be able to exploit the efficient learning from the model-based learning, facilitating the transfer learning.
 
 
 Example: model refinement in a simple Grid world
 
-
-
-\section{Project outline}
-
-The probject outline
 
 Implement baseline performance (DQN, Q-learning, ASPRL)
 
@@ -662,6 +659,24 @@ Common sense
 
 Lastly, I will also test the capability of transfer learning for this new method.
 
+\section{Project outline}
+
+The next phase of the individual project is implementation and experiments. I will implement the proposed architecture using Python and ILASP (Clingo), and compare the performance
+
+The platform I am planning to use to measure the performance of my approach will be GVG-AI Framework, which was created for the General Video Game AI Competition \footnote{http://www.gvgai.net/}, which provides game environments for an agent that should be able to play a wide variety of games without knowing which games are to be played.
+The underline language is the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
+
+Especially, I will measure the following aspects of the new Algorithms
+
+Learning efficiency
+
+Transfer Learning capability
+
+XXX
+
+
+The proposed architecture is not finalised and will be reviewed regularly as I proceed the development of the architecture.
+
 % \section{Contribution}
 %
 % To my knowledge, this is the first time that both symbolic learning method is incorporated into a reinforcement learning to facilitate learning process
@@ -670,6 +685,8 @@ Lastly, I will also test the capability of transfer learning for this new method
 
 
 \chapter{Ethics Checklist}
+\label{ethics_checklist}
+
 {
 \renewcommand*{\arraystretch}{1.3}
 \begin{longtable}{ |p{13.2cm}|p{0.6cm}|p{0.6cm}| }
@@ -796,12 +813,11 @@ Will your project use or produce goods or information for which there are data p
 \multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 11: OTHER ETHICS ISSUES} \\
 \hline
 
-Are there any other ethics issues that should be taken into consideration? & \checkmark& \\
+Are there any other ethics issues that should be taken into consideration? & & \checkmark \\
 \hline
 
 \end{longtable}
 }
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \chapter{Contribution}
