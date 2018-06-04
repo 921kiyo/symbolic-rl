@@ -16,9 +16,9 @@
 \contentsline {subsection}{\numberline {2.3.3}Q-Learning}{10}{subsection.2.3.3}
 \contentsline {subsection}{\numberline {2.3.4}Model-based vs model-free learning}{10}{subsection.2.3.4}
 \contentsline {chapter}{\numberline {3}Related Work}{12}{chapter.3}
-\contentsline {chapter}{\numberline {4}Project Overview}{13}{chapter.4}
-\contentsline {section}{\numberline {4.1}Proposed Architecture}{13}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}ASP representation generation}{13}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Model generation and update using ILASP(RL)}{14}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Project outline}{15}{section.4.2}
-\contentsline {chapter}{\numberline {5}Ethics Checklist}{16}{chapter.5}
+\contentsline {chapter}{\numberline {4}Project Overview}{14}{chapter.4}
+\contentsline {section}{\numberline {4.1}Proposed Architecture}{14}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}ASP representation generation}{14}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Model generation and update using ILASP(RL)}{15}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Project outline}{16}{section.4.2}
+\contentsline {chapter}{\numberline {5}Ethics Checklist}{17}{chapter.5}

@@ -444,40 +444,20 @@ The advantages of TD methods
 
 \subsection{Q-Learning}
 
-model-free leaning, where the agent will not rely on the models of the environment.
+Q-learning is off-policy TD learning defined in [Watkin 1989], where the agent will not rely on the models of the environment (model-free leaning) and only knows about the possible states and actionns. The transition states and reward probability functions are unknown to the agent.
+It is of the form:
 
-Q-learning approximate the Q(a,s) from the samples of
+\begin{equation}
+Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\textsubscript{t}) + \alpha(R\textsubscript{t+1} + \gamma max (a+t) Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))
 
-the agent only knows about the possible states and actions but the transition state and reward probability functions are unknown.
+\end{equation}
+where $\alpha$ is the learning rate, $\gamma$ is a discount rate between 0 and 1. The equation is used to update the state-action value function called Q function. The function Q(S,A) predicts the best action A in state S to maximise the total cumulative rewards.
+The optimal Q-function Q\textsuperscript{*}(s,a) represents XXX for the agent to selection action a given that it is in state s.
 
-Q function is the state-action pair
-
-the optimal Q-function Q\textsuperscript{*}(s,a) represents XXX for the agent to selection action a given that it is in state s.
-
-Q-learning is off-policy TD learning defined in [Watkin 1989], which is of the form:
-%
-% \begin{equation}
-% Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\textsubscript{t}) + \alpha(R\textsubscript{t+1} + \gamma max (a+t) Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))
-%
-% \end{equation}
-
-where $\alpha$ is the learning rate, $\gamma$ is a discount rate between 0 and 1.
-
-this equation is used to upate action-value function
-
-Model free learning: derectly derive an optimal policy by interacting with the environment without the model
-
-Model free can be done using Monte Carlo Policy evaluation
-
-One way to solve the Bellman Optimality equation is Q-leraning
-
-U(s) = max a Q(s,a)
-
-
-a function Q(S,A) which predicts the best action A in state S to maximise the total cumulative rewards.
-
-The function is estimated by Q-learning, which repeately updates Q(s,a) using
-the Bellman Equation.
+% Model free can be done using Monte Carlo Policy evaluation
+% One way to solve the Bellman Optimality equation is Q-leraning
+% U(s) = max a Q(s,a)
+% The function is estimated by Q-learning, which repeately updates Q(s,a) using the Bellman Equation.
 
 TODO INSERT Q-learning ALGORITHM HERE
 
@@ -489,7 +469,6 @@ A model M is a representation of an MDP where the state space and action space a
 Most of the reinforcement learning problems are model-free learning, where M is not unknown and the agnet learns to achieve the goal by the interactions with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
 
 the performance of model-based RL is limited to optimal policy given the model M. Thus when the model is not a representation of the true MDP, the planning algorithms will not lead to the optimal policy, but suboptimal policy. The solution to this problem is either to use model-free approach when the model is inaccurate or incorporate undertainty of the model using XXX.
-
 
 One algorithm which combine both aspects of model learning is called Dyna (\cite{Sutton1990}), which is shown in Figure \ref{dyna}.
 
@@ -511,8 +490,20 @@ TODO ADD MATH
 \label{related_work}
 % \section{Deep Reinforcement Learning and its issues}
 
-Transparency and interpretable capability of the model is another important aspect for machine learning applications.
+The use of symbolic representations to achieve data-efficient learning was traditionally discussed in relational reinforcement learnign (RLL).
 
+More recently, \ref{Garnelo2016} introduced the proof of concept for incorporating symbolic front end as a means of converting low-dimensional symbolic representation into spatio-temporal representations, which will be the state transitions input of reinforcement learning.
+
+just a symbolic representations and not learning
+segmentation was done manually.
+As demonstrated in XXX, a single pixel can dramatically influence the policy (Maybe not so important here??).
+
+
+This symbolic approach was followed by \ref{Garcez2018}, which improved simbolic representations in two ways. First,
+
+
+
+Transparency and interpretable capability of the model is another important aspect for machine learning applications.
 
 XXX[Programmati...] developed a programmatically interpretable reinforcement learning which finds a policy that can be represented in a human-readable programming language.
 
@@ -553,9 +544,6 @@ There are a number of reseached conducted in applying DNN to symbolic reasoning.
 For example,
 
 [From GamePlay to Symbolic Reasoning]
-
-
-However, as XX points out, 1 pixel of the game could influence the decision making of the agent.
 
 
 TODO Explain how symbolic learning works

@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  3 JUN 2018 22:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.28)  4 JUN 2018 00:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**main.tex
+**main
 (./main.tex
 LaTeX2e <2016/02/01>
-Babel <3.9q> and hyphenation patterns for 17 language(s) loaded.
+Babel <3.9q> and hyphenation patterns for 3 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
@@ -427,6 +427,8 @@ File: babel.def 2016/02/24 3.9q Babel common definitions
 \babel@savecnt=\count135
 \U@D=\dimen150
 )
+\l@british = a dialect from \language\l@english 
+\l@UKenglish = a dialect from \language\l@english 
 \l@canadian = a dialect from \language\l@american 
 \l@australian = a dialect from \language\l@british 
 \l@newzealand = a dialect from \language\l@british 
@@ -728,49 +730,113 @@ Underfull \hbox (badness 10000) in paragraph at lines 386--387
 LaTeX Font Info:    Font shape `OMS/bch/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 389.
 [9]
+./main.tex:452: Missing $ inserted.
+<inserted text> 
+                $
+l.452 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./main.tex:452: Display math should end with $$.
+<to be read again> 
+                   \par 
+l.452 
+      
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+
+./main.tex:453: LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.453 \end{equation}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+./main.tex:453: You can't use `\eqno' in vertical mode.
+\endmathdisplay@a ...\df@tag \@empty \else \veqno 
+                                                  \alt@tag \df@tag \fi \ifx ...
+l.453 \end{equation}
+                    
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+./main.tex:453: Missing $ inserted.
+<inserted text> 
+                $
+l.453 \end{equation}
+                    
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+./main.tex:453: Display math should end with $$.
+<to be read again> 
+                   \endgroup 
+l.453 \end{equation}
+                    
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
 
 Package natbib Warning: Citation `Sutton1990' on page 10 undefined on input lin
-e 494.
+e 473.
 
 <./figures/dyna.png, id=189, 243.91125pt x 175.65625pt>
 File: ./figures/dyna.png Graphic file (type png)
 
 <use ./figures/dyna.png>
-Package pdftex.def Info: ./figures/dyna.png used on input line 498.
+Package pdftex.def Info: ./figures/dyna.png used on input line 477.
 (pdftex.def)             Requested size: 227.62413pt x 170.72942pt.
 
 
-LaTeX Warning: Reference `Montague1999' on page 10 undefined on input line 499.
+LaTeX Warning: Reference `Montague1999' on page 10 undefined on input line 478.
 
 
 
-LaTeX Warning: Reference `Montague1999' on page 10 undefined on input line 499.
+LaTeX Warning: Reference `Montague1999' on page 10 undefined on input line 478.
 
 
 [10] [11 <./figures/dyna.png>]
 Chapter 3.
+
+LaTeX Warning: Reference `Garnelo2016' on page 12 undefined on input line 495.
+
+
+LaTeX Warning: Reference `Garcez2018' on page 12 undefined on input line 502.
+
 [12
 
-]
+] [13]
 Chapter 4.
 
-Package natbib Warning: Citation `Sutton1990' on page 13 undefined on input lin
-e 570.
+Package natbib Warning: Citation `Sutton1990' on page 14 undefined on input lin
+e 558.
 
-<./figures/ILASRL.png, id=205, 543.02875pt x 333.245pt>
+<./figures/ILASRL.png, id=210, 543.02875pt x 333.245pt>
 File: ./figures/ILASRL.png Graphic file (type png)
 
 <use ./figures/ILASRL.png>
-Package pdftex.def Info: ./figures/ILASRL.png used on input line 574.
+Package pdftex.def Info: ./figures/ILASRL.png used on input line 562.
 (pdftex.def)             Requested size: 426.80879pt x 256.09094pt.
- [13
+ [14
 
- <./figures/ILASRL.png>] [14]
+ <./figures/ILASRL.png>] [15]
 
-Package natbib Warning: Citation `Schaul2013' on page 15 undefined on input lin
-e 667.
+Package natbib Warning: Citation `Schaul2013' on page 16 undefined on input lin
+e 655.
 
-[15]
+[16]
 Chapter 5.
 Missing character: There is no ‚ in font bchr7t!
 Missing character: There is no Ä in font bchr7t!
@@ -779,55 +845,55 @@ Missing character: There is no ‚ in font bchr7t!
 Missing character: There is no Ä in font bchr7t!
 Missing character: There is no ù in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 692--753
+Overfull \hbox (9.14763pt too wide) in alignment at lines 680--741
  [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 753
+Underfull \vbox (badness 10000) detected at line 741
  []
 
 Missing character: There is no ‚ in font bchr7t!
 Missing character: There is no Ä in font bchr7t!
 Missing character: There is no ì in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 753--814
+Overfull \hbox (9.14763pt too wide) in alignment at lines 741--802
  [] [] [] 
  []
 
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 814--819
+Overfull \hbox (9.14763pt too wide) in alignment at lines 802--807
  [] [] [] 
  []
 
-[16
+[17
 
-] [17] (./main.bbl)
+] [18] (./main.bbl)
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 840.
-[18]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 840.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 828.
+[19]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 828.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 840.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 840.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 828.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 828.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: F8FAEFE315366E54A091619B95A49C17;1504.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 840.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 828.
  ) 
 Here is how much of TeX's memory you used:
- 10477 strings out of 494353
- 151388 string characters out of 6170044
- 285578 words of memory out of 5000000
- 13535 multiletter control sequences out of 15000+600000
+ 10484 strings out of 494953
+ 151465 string characters out of 6180976
+ 284317 words of memory out of 5000000
+ 13508 multiletter control sequences out of 15000+600000
  45705 words of font info for 86 fonts, out of 8000000 for 9000
- 452 hyphenation exceptions out of 8191
- 41i,12n,43p,909b,522s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 14 hyphenation exceptions out of 8191
+ 41i,12n,43p,905b,522s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fon
@@ -839,10 +905,10 @@ cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (19 pages, 186750 bytes).
+Output written on main.pdf (20 pages, 189785 bytes).
 PDF statistics:
- 294 PDF objects out of 1000 (max. 8388607)
- 253 compressed objects within 3 object streams
- 62 named destinations out of 1000 (max. 500000)
+ 299 PDF objects out of 1000 (max. 8388607)
+ 257 compressed objects within 3 object streams
+ 64 named destinations out of 1000 (max. 500000)
  181 words of extra memory for PDF output out of 10000 (max. 10000000)
 
