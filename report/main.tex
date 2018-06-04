@@ -170,33 +170,44 @@ A \textit{Herbrand Model} is a Herbrand interpretation if and only if a set \tex
 
 The \textit{Herbrand Model} is a minimum Herbrand model if and only if none of its subsets is an Herbrand model. 
 For definite logic programs, there is a unique minimal Herbrand model (the \textit{Least Herbrand Model} \textit{M(P)} ).
-For normal logic programs, thre is no least Herbrand Model.
+For normal logic programs, there may not be a least Herbrand Model.
 
 \textit{Definite Logic Program} is a set of definite rule, and  a definite rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, where h , a\textsubscript{1}, ..., a\textsubscript{n} are all atoms. h is the \textit{head} of the rule and a\textsubscript{1}, ..., a\textsubscript{n} are the body of the rule. 
 
 \textit{Normal Logic Program} is a set of normal rule, and a normal rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, \textit{not} b\textsubscript{1}, ..., \textit{not}  b\textsubscript{n} where h is the head of the rule,
  and a\textsubscript{1}, ..., a\textsubscript{n}, b\textsubscript{1}, ..., b\textsubscript{n} are the body of the rule (both the head and body are all atoms).
 
-The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the \textit{Herbrand Domain}.
+To solve a normal logic program \textit{Th}, the program needs to be grounded. The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the \textit{Herbrand Domain}.
 
 \begin{examp} \normalfont (Grounding)
 
+P = $\begin{cases}
+	p  \leftarrow not q. \\
+	q  \leftarrow p.
+      \end{cases}$
 \end{examp} 
+\label{grounding}
 
-TODO Explain grounding in ASP context.
+ground(P) in Example \ref{grounding} is p:- not q. and q:- p. The algorithm of grounding start with the empty program Q = \{  \} and the relevant grounding is constructed by adding to each rule R to Q given that R is a ground instance of a rule in P and their positive body literals already occurs in the in the of rules in Q. The algorithm terminates when no more rules can be added to Q. 
+%TODO Explain grounding in ASP context.
+%The grounding of a normal logic program P can be obtained by replacing each rule in P with a ground instance of the rule, such that for each atom A in body\textsuperscript{+} (R) (TODO EXPLAIN WHAT THIS IS), already occurs in the head of another ground rule.
+Not only the entire program needs to be grounded in order for ASP solver to work, and, unlike Prolog,  but also each rule must be \textit{safe}. A rule \textit{R} is safe if every variable that occurs in the head of the rule occurs at least once in body\textsuperscript{+}(R) .
 
-The grounding of a normal logic program P can be obtained by replacing each rule in P with a ground instance of the rule, such that for each atom A in body\textsuperscript{+} (R) (TODO EXPLAIN WHAT THIS IS), already occurs in the head of another ground rule.
+Since there is no unique least Herbrand Model for a normal logic program, \cite{Gelfond1988} defined Stable Model of a normal logic program. In order to obtain the Stable model of P, P needs to be converted using \textit{Reduct} with respect to an interpretation X. First, if the body of any rule in P contains an atom which is not in X, those rules need to be removed. Second, all default negation atoms in the remaining rules in P need to be removed. 
 
-The entire program needs to be grounded in order for ASP solver to work, and, unlike Prolog,  each rule must be \textit{safe}. A rule \textit{R} is safe if every variable that occurs in the head of the rule occurs at least once in body\textsuperscript{+}(R) (TODO check if this is correct).
+\begin{examp} \normalfont (Reduct)
 
-TODO Reduct
+P = $\begin{cases}
+	p  \leftarrow not q. \\
+	q  \leftarrow p.
+      \end{cases}$
+\end{examp} 
+\label{grounding}
 
-Stable Model of a normal logic program is XX
-\cite{Gelfond1988}
 
-Any stable model is a minimal Herbrand model, and stable sets is stable models. The stable models can be found by constructing the result of the program with respect to sets of atoms X (P\textsuperscript{x} in the following 2 steps
+%Any stable model is a minimal Herbrand model, and stable sets is stable models. The stable models can be found by constructing the result of the program with respect to sets of atoms X (P\textsuperscript{x} in the following 2 steps
 
-does not contain negation and a unique minimal Herbrand model.
+After the Grounding and Reduct, 
 
 \subsection{Anwer Set Programming (ASP) Syntax}
 
@@ -312,8 +323,6 @@ ILASP task containing a contex-dependent example
 
 Weak constraints: useful for modelling the agent's preference
 
-
-
 \subsubsection{A Context-dependent Learning from Ordered Answer Sets}
 
 
@@ -339,7 +348,8 @@ Two advantages of adding contex-dependent are it increases the efficiency of lea
 
 \subsection{Markov Decision Process(MDP)}
 
-
+A state S\textsubscript{t} is Markov if and only if
+P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\vert$ S\textsubscript{1}, ..., S\textsubscript{t}] therefore the probability of reaching S\textsubscript{t+1} depends solely on S\textsubscript{t}, which captures all the relevant information from earilier history.
 (Puterman, 1994)
 There is an agent who interacts with an envirnment (Figure \ref{agent_env}). At each time step, an action taken by the agent affect the environment state and the reward (or penality) it receives from the action outcome. (TODO Observations)
 When an agnet must make a sequence of decision, the sequential decision problem can be formalised using Markov decision process (MDP). MDPs formaly represent a fully observable environment of an agent for reinforcement learning.
@@ -357,9 +367,6 @@ A MDP is of the form $\langle$ S, A, T\textsubscript{a}, R\textsubscript{a}, $\g
 
 In MDPs, there is an element of delayed reward tradeoff between immediate rewards and its delayed reward
 
-A state S\textsubscript{t} is Markov if and only if
-P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\vert$ S\textsubscript{1}, ..., S\textsubscript{t}] therefore the probability of reaching S\textsubscript{t+1} depends solely on S\textsubscript{t}, which captures all the relevant information from earilier history.
-
 A solution to the sequential decision problem is called a policy $\pi$, a sequence of actions that leads to a solution
 % which is a distributin over actions given states.
 
@@ -369,18 +376,14 @@ An optimal policy $\pi^*$ is the one that maximise the total rewards in the envi
 
 The total reward with a discount factor is
 
-
-
 The existence of the discount factor can be justified as follows:
 
 TODO
 $\displaystyle \E[R\textsubscript{t+1} \vert$ S\textsubscript{t} = s]
 
-
 Reinforcement learning is a method to get approximated optimal solution.
 
-
-\subsection{Policy}
+\subsection{Policy and Value Function}
 
 An agnet follows a policy
 
