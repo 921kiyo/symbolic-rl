@@ -78,20 +78,19 @@
 % \end{figure}
 % Figure~\ref{fig:logo} is an example of a figure.
 
-
-There has been successful applications of deep reinforcement learning (DRL) a number of domains, such as games and robotics (TODO INSERT REFERENCES).
-DRL is considered to be a step towards artificial general intelligence, there are still a number of issues to overcome in this method.
+There has been successful applications of deep reinforcement learning (DRL) a number of domains, such as video games (\cite{Mnih2015}), game of Go (\cite{Silver2016}) and robotics (\cite{Levine2015}). However, there are still a number of issues to overcome in this method. 
 First, it requires a large amount of data for training the model, which requires a long time of learning process.
 Second, it is considered to be a black-box, meaning the decision making process is unknown to human user and therefore lacks explanation ability.
 Third there is no thoughts process to the decision making, which, as XX points out, is a fundamental to the artificial general intelligence.
 To tackle these problems, there are a number of different approaches the researchers have been experimenting.
+
 One of the methods is to incorporate symbolic representations into the system to achive more data-efficient learning, which shows a promissing results of this approach (\cite{Garnelo2016}).
 In this paper, we explore the potential of inductive logic problemming into reinforcement learning and attempt to solve the problems above.
 The advantages of symbolic reinforcement learning are, first of all, the decision making mechanism is understandable by humans rather than being black-box.
 Second, it resembles how human reason. There is some aspects of try-and-error in human learning, but they explore reasonings to efficiently learn the surrounding or situations.
 Also they effectily use previous experience (background knowledge) when encountered a similar situation.
 Finally, the recent advance of ILP research is remarkable and there are a number of new algorithsm that effectively work in non-monotonic senarios based on Answer Set Programmings (ASPs).
-
+--------------------------------------------
 Recently there are a number of research that attempted to incorporate symbolic reasoning into DRL, but the combining inductive logic programming and reinforcement learning has not been explored.
 Because of the recent advancement of logic-based learning and deep reinforcement learning, combination of both approach would be a next explonation toward artificial general intelligence.
 
@@ -100,16 +99,31 @@ In this paper, our objectives is to explore this new reseach field and see how t
 In this paper, I further explore incorporation of symbolic machine learning into reinforcement learning to achieve data-efficient learning using Inductive Learning of Answer Set Programs (ILASP), which is the state-of-art symbolic learning method that can be applied to imcomplete and more complex environment.
 This research is inspired by \cite{Garnelo2016}, but in this paper I explore symbolic represetations process and include more learning aspect.
 
-This background report is organised as follows: In Chapter \ref{background}, necessary background of logic, inductive logic programming and reinforcement learning are described for this paper. Chapter \ref{related_work} discusses previous research in this particular approach and see the drawbacks of each approach. Chapter \ref{project_overview} shows the tentative architecture of our new approach, using Inductive Learning of Answer Set Programs (ILASP) to generate model of the environment. We also describe the outline of the project. Finally the ethics checklist is provided in Chapter \ref{ethics_checklist}.
+This background report will be the part of the final report and is organised as follows: In Chapter \ref{background}, necessary background of logic, inductive logic programming and reinforcement learning are described for this paper. Chapter \ref{related_work} discusses previous research in this particular approach and see the drawbacks of each approach. Chapter \ref{project_overview} shows the tentative architecture of our new approach, using Inductive Learning of Answer Set Programs (ILASP) to generate model of the environment. We also describe the outline of the project. Finally the ethics checklist is provided in Chapter \ref{ethics_checklist}.
 
 \chapter{Background}
 \label{background}
 
-This section introduces Logic Basics, Inductive Logic Programming (Section \ref{ilp}) and Reinforcement Learning (Section \ref{rl}), which provide the foundations of this work.
+This section introduces necessary background of Inductive Logic Programming (Section \ref{ilp}) and Reinforcement Learning (Section \ref{rl}), which provide the foundations of this work.
 
-\section{Logic Basics}
+\section{Inductive Logic Programming (ILP)}
+\label{ilp}
 
-TODO ENTAILMENT
+
+Inductive Logic Programming (ILP) is a subfield of research area aimed at the intersection between machine learning and logic programming \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and any of negative examples, given a hypothesis language for search space and cover relation (\cite{DeRaedt1997}). The possible explanation of covers relation is described by the entailment, as shown in Equation \ref{ilp_equation}
+
+\begin{equation}
+B \cap H \models E
+\end{equation}
+\label{ilp_equation}
+
+where E consists of positive examples (E\textsuperscript{+}) and negative examples (E\textsuperscript{-}). 
+
+One of the advantage of ILP over statistical machine learning is that the hypothesis the agent learnt can be easily understood by a human, making the decision more transparent rather than black box.
+
+\subsection{Logic Basics}
+
+Satisfiable
 
 To compute this inference task, the syntax of the predicate logic program needs to be converted into Conjunctive Normal Form (CNF), or clausal theory, which consists of a conjunction of clauses, where a clause is disjunction of literals, and a literal can include positive literals and negative literals.
 
@@ -249,25 +263,8 @@ Which is useful to order the answer sets in terms of preference.
 
 \textit{Clingo} is one of the programs to execute the ASP program and returns answer sets of the programs.
 
-\section{Inductive Logic Programming (ILP)}
 
-\label{ilp}
-Inductive Logic Programming (ILP) is a subfield of research area aimed at the intersection between machine learning and logic programming \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and any of negative examples.
-
-ENTAILMENT
-
-Satisfiable
-
-\begin{equation}
-B \cap H \models E
-\end{equation}
-
-where E consists of positive examples (E\textsuperscript{+}) and negative examples (E\textsuperscript{-})
-
-
-One of the advantage of ILP over statistical machine learning is that the hypothesis the agent learnt can be easily understood by a human, making the decision more transparent rather than black box.
-
-\subsubsection{ILP in Answer set semantics}
+\subsection{ILP in Answer set semantics}
 
 There are several ILP frameworks under the Answer set semantics.
 
@@ -419,18 +416,37 @@ $\displaystyle \E[R\textsubscript{t+1} \vert$ S\textsubscript{t} = s]
 Reinforcement learning is a method to get approximated optimal solution.
 
 
+\subsection{Policy}
+
+An agnet follows a policy
+
+A\textsubscript{t} = $\pi$(S\textsubscript{t})
+
+One of the common possibilibies is that the agent chooses an action in order to maximise the discounted sum of future rewards. 
+
+A\textsubscript{t} to maximise R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ...
+
+
+An action-value function evaluate a particular state by taking an action according the policy 
+
+q\textsubscript{$\pi$} = $\displaystyle \E[R\textsubscript{t+1} $[R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ... $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a, A\textsubscript{t+1 } = a,]
+
+
+
+
 \subsection{Temporal-Difference (TD) Learning}
 
 To solve MDP, one of the approaches is called Temporal-Difference (TD) Learning.
 
 TD learns directly from episodes of experiences, which can be imcomplete.
 TD does not require knowledge of MDP transitions and rewards (model-free)
-Sutton 1988
+%Sutton 1988
 
 Update value
-\begin{equation}
-V(S\textsubscript{t} \leftarrow V(S\textsubscript{t} + \alpha (R\textsubscript{t+1} + \gamma V(S\textsubscript{t+1}) - V(S\textsubscript{t}))
-\end{equation}
+
+%\begin{equation}
+%\textbf{	V(S\textsubscript{t} \leftarrow V(S\textsubscript{t} + \alpha (R\textsubscript{t+1} + \gamma V(S\textsubscript{t+1}) - V(S\textsubscript{t}))
+%}\end{equation}
 
 where R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) is the estimated return (a.k.a TD target)
 
@@ -447,10 +463,10 @@ The advantages of TD methods
 Q-learning is off-policy TD learning defined in [Watkin 1989], where the agent will not rely on the models of the environment (model-free leaning) and only knows about the possible states and actionns. The transition states and reward probability functions are unknown to the agent.
 It is of the form:
 
-\begin{equation}
-Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\textsubscript{t}) + \alpha(R\textsubscript{t+1} + \gamma max (a+t) Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))
-
-\end{equation}
+%\begin{equation}
+%Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\textsubscript{t}) + \alpha(R\textsubscript{t+1} + \gamma max (a+t) Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))
+%
+%\end{equation}
 where $\alpha$ is the learning rate, $\gamma$ is a discount rate between 0 and 1. The equation is used to update the state-action value function called Q function. The function Q(S,A) predicts the best action A in state S to maximise the total cumulative rewards.
 The optimal Q-function Q\textsuperscript{*}(s,a) represents XXX for the agent to selection action a given that it is in state s.
 
@@ -463,7 +479,7 @@ TODO INSERT Q-learning ALGORITHM HERE
 
 Epsilon greedy
 
-\subsection{Model-based vs model-free learning}
+\subsection{Model-based vs Model-free Learning}
 
 A model M is a representation of an MDP where the state space and action space are assumed to be known. The model represents state transitions and rewards. In this case, the problem to be solved becomes a planning problem. A planning is for a series of actions to achive the agent's goal.
 Most of the reinforcement learning problems are model-free learning, where M is not unknown and the agnet learns to achieve the goal by the interactions with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
@@ -567,7 +583,7 @@ The proposed tentative architecture is shown in Figure \ref{proposed_architectur
 % TODO What would you learn in my context? Relashinship of the objects?
 % Objects, types, locations and interactions.
 
-\subsection{ASP representation generation}
+\subsection{ASP Representation Generation}
 
 The inputs from the experience needs to be converted in ASP form, which can be used to proceed the inductive learning in ILASP(RL).
 Observations from the interaction with the environment are state transition, reward and action of the agent, which can be directly converted using XXX. Example \ref{ilasprl_input} is ASP input form that is feeded into ILASP(RL) phase.
@@ -583,7 +599,7 @@ action(A).
 \end{examp}
 \label{ilasprl_input}
 
-\subsection{Model generation and update using ILASP(RL)}
+\subsection{Model Generation and Update using ILASP(RL)}
 
 Once the input is converted, the agent must learn the following definition of the model of the environment.
 
@@ -647,7 +663,7 @@ Common sense
 
 Lastly, I will also test the capability of transfer learning for this new method.
 
-\section{Project outline}
+\section{Project Outline}
 
 The next phase of the individual project is implementation and experiments. I will implement the proposed architecture using Python and ILASP (Clingo), and compare the performance
 

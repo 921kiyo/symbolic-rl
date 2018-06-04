@@ -1,0 +1,70 @@
+\begin{thebibliography}{10}
+
+\bibitem{DeRaedt1997}
+Luc {De Raedt}.
+\newblock {Logical settings for concept-learning}.
+\newblock {\em Artificial Intelligence}, 95(1):187--201, 1997.
+
+\bibitem{Garnelo2016}
+Marta Garnelo, Kai Arulkumaran, and Murray Shanahan.
+\newblock {Towards Deep Symbolic Reinforcement Learning}.
+\newblock sep 2016.
+
+\bibitem{Gelfond1988}
+Michael Gelfond and Vladimir Lifschitz.
+\newblock {The stable model semantics for logic programming}.
+\newblock {\em 5th International Conf. of Symp. on Logic Programming},
+  (December 2014):1070--1080, 1988.
+
+\bibitem{Law2014}
+Mark Law, Alessandra Russo, and Krysia Broda.
+\newblock {Inductive Learning of Answer Set Programs}.
+\newblock {\em European Conference on Logics in Artificial Intelligence
+  (JELIA)}, 2(Ray 2009):311--325, 2014.
+
+\bibitem{Levine2015}
+Sergey Levine, Chelsea Finn, Trevor Darrell, and Pieter Abbeel.
+\newblock {End-to-End Training of Deep Visuomotor Policies}.
+\newblock apr 2015.
+
+\bibitem{Mnih2015}
+Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei~A. Rusu, Joel Veness,
+  Marc~G. Bellemare, Alex Graves, Martin Riedmiller, Andreas~K. Fidjeland,
+  Georg Ostrovski, Stig Petersen, Charles Beattie, Amir Sadik, Ioannis
+  Antonoglou, Helen King, Dharshan Kumaran, Daan Wierstra, Shane Legg, and
+  Demis Hassabis.
+\newblock {Human-level control through deep reinforcement learning}.
+\newblock {\em Nature}, 2015.
+
+\bibitem{Muggleton1991}
+S~Muggleton.
+\newblock {Inductive logic programming}.
+\newblock {\em New Generation Computing}, 8(4):295--318, 1991.
+
+\bibitem{Sakama2009}
+Chiaki Sakama and Katsumi Inoue.
+\newblock {Brave induction: A logical framework for learning from incomplete
+  information}.
+\newblock {\em Machine Learning}, 76(1):3--35, 2009.
+
+\bibitem{Schaul2013}
+Tom Schaul.
+\newblock {A video game description language for model-based or interactive
+  learning}, 2013.
+
+\bibitem{Silver2016}
+David Silver, Aja Huang, Chris~J. Maddison, Arthur Guez, Laurent Sifre, George
+  {Van Den Driessche}, Julian Schrittwieser, Ioannis Antonoglou, Veda
+  Panneershelvam, Marc Lanctot, Sander Dieleman, Dominik Grewe, John Nham, Nal
+  Kalchbrenner, Ilya Sutskever, Timothy Lillicrap, Madeleine Leach, Koray
+  Kavukcuoglu, Thore Graepel, and Demis Hassabis.
+\newblock {Mastering the game of Go with deep neural networks and tree search}.
+\newblock {\em Nature}, 529(7587):484--489, 2016.
+
+\bibitem{Sutton1990}
+Richard~S. Sutton.
+\newblock {Integrated Architectures for Learning, Planning, and Reacting Based
+  on Approximating Dynamic Programming}.
+\newblock {\em Machine Learning Proceedings 1990}, 02254(1987):216--224, 1990.
+
+\end{thebibliography}
