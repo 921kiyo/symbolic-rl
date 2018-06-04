@@ -5,7 +5,7 @@
 \usepackage[table]{xcolor}
 \usepackage{amssymb}
 \usepackage{csquotes}
-
+\usepackage{amsthm}
 \newtheorem{theorem}{Theorem}
 % Ctrl + Alt + B
 
@@ -31,11 +31,18 @@
 
 \date{June 2018}
 
+
+% \newtheoremstyle{definition}[section]
+\newtheorem{examp}{example}[section]
+
+
 \begin{document}
-% \theoremstyle{definition}
-\newtheorem{examp}{Example}[section]
+
+
 % load title page
 \input{titlepage}
+
+
 
 % page numbering etc.
 \pagenumbering{roman}
@@ -109,142 +116,99 @@ This section introduces necessary background of Inductive Logic Programming (Sec
 \section{Inductive Logic Programming (ILP)}
 \label{ilp}
 
-
-Inductive Logic Programming (ILP) is a subfield of research area aimed at the intersection between machine learning and logic programming \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and any of negative examples, given a hypothesis language for search space and cover relation (\cite{DeRaedt1997}). The possible explanation of covers relation is described by the entailment, as shown in Equation \ref{ilp_equation}
+Inductive Logic Programming (ILP) is a subfield of machine learning research area aimed at the intersection between machine learning and logic-based knowledge representation \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and any of negative examples, given a hypothesis language for search space and cover relation (\cite{DeRaedt1997}). The possible explanation of covers relation is described by the entailment, as shown in Equation \ref{ilp_equation}. 
 
 \begin{equation}
 B \cap H \models E
 \end{equation}
 \label{ilp_equation}
 
-where E consists of positive examples (E\textsuperscript{+}) and negative examples (E\textsuperscript{-}). 
+where E consists of positive examples (E\textsuperscript{+}) and none of the negative examples (E\textsuperscript{-}). 
 
 One of the advantage of ILP over statistical machine learning is that the hypothesis the agent learnt can be easily understood by a human, making the decision more transparent rather than black box.
 
+% TODO Predicate invention
+
+TODO Limitations of Inductive Logic Programming:
+
+In this section, we briefly introduce basic logic nortions, Anser set programming (ASP)
+
 \subsection{Logic Basics}
 
-Satisfiable
+TODO Satisfiable
 
-To compute this inference task, the syntax of the predicate logic program needs to be converted into Conjunctive Normal Form (CNF), or clausal theory, which consists of a conjunction of clauses, where a clause is disjunction of literals, and a literal can include positive literals and negative literals.
+To compute an inference task, the syntax of the predicate logic program needs to be converted into Conjunctive Normal Form (CNF), or clausal theory, which consists of a conjunction of clauses, where a clause is disjunction of literals, and a literal can include positive literals and negative literals. A literal is either an atom \textit{p} or \textit{not p} (negation by failure).
 
-A literal is either an atom p or negation by failure, which is used to derive not p.
-
-\begin{examp} (Conjunctive Normal Form)
-
+\begin{examp} \normalfont Conjunctive Normal Form (Clausal Theory)
+\begin{center}
+ \textit{(~rain $\vee$ umbrella $\vee$ rain\_shoes) $\wedge$ (~sunny $\vee$ roofer)}
+\end{center}
 \end{examp}
 
-The \textit{Herbrand domain} (a.k.a \textit{Herbrand universe}) of clause sets \textit{Th} is the set of all ground terms that are constants and function symbols appeared in \textit{Th}.
-
-\begin{examp} (Herbrand Domain)
-
-\end{examp}
-
-The \textit{Herbrand base} of \textit{Th} is the set of all ground predicates that are formed by predicate symbols in \textit{Th} and terms in the \textit{Herbrand domain}.
-
-\begin{examp} (Herbrand Base)
-
-\end{examp}
-
-The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the \textit{Herbrand Domain}.
-
-\begin{examp} (Grounding)
-
-\end{examp}
-
-
-TODO Explain grounding in ASP context.
-
-
-A \textit{Horn clause} is a subset of CNF, which is a clause wtith at most one positive literal, where a \textit{definite clause} (also called a \textit{rule} or a \textit{fact}) contains exactly one positive literal, and a \textit{denial} (or a \textit{constraint}) is a clause with no positive literals.
-
-\begin{examp} (Horn clause)
-
-\end{examp}
-
-Limitations of Inductive Logic Programming:
+A \textit{Horn clause} is a subset of CNF, which is a clause with at most one positive literal, where a \textit{definite clause} (also called a \textit{rule} or a \textit{fact}) contains exactly one positive literal, and a \textit{denial} (or a \textit{constraint}) is a clause with no positive literals.
+A \textit{normal clause} extends Horn clause with negation as failure. 
+\\
 
 \subsection{Stable Model Semantics}
 
-TODO Relationship from the previous Section
+Having defined the syntax of clausal logic, we now introduce its semantics under the context of stable model. The semantics of the logic is based on the notion of \textit{interpretation}, which is defined under a \textit{domain}. A \textit{domain} contains all the objects that exist.  For the convenient reasons, we focus on a special interpretations called \textit{Herbrand interpretations} rather than generation interpretations. 
 
-Definite Logic Program is a set of definite rule where: \newline
+The \textit{Herbrand domain} (a.k.a \textit{Herbrand universe}) of clause sets \textit{Th} is the set of all ground terms that are constants and function symbols appeared in \textit{Th}.
 
-a definite rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, where h , a\textsubscript{1}, ..., a\textsubscript{n} are all atoms.
+%\begin{examp} \normalfont (Herbrand Domain)
+%\end{examp}
+The \textit{Herbrand base} of \textit{Th} is the set of all ground predicates that are formed by predicate symbols in \textit{Th} and terms in the \textit{Herbrand domain}.
 
-whereas
-
-Normal Logic Program is a set of normal rule where
-
-a normal rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, \textit{not} b\textsubscript{1}, ..., \textit{not}  b\textsubscript{n} where h is the head of the rule,
- and a\textsubscript{1}, ..., a\textsubscript{n}, b\textsubscript{1}, ..., b\textsubscript{n} are the body of the rule (both the head and body are all atoms).
-
-
-The grounding of a normal logic program P can be obtained by replacing each rule in P with a ground instance of the rule, such that for each atom A in body\textsuperscript{+} (R) (TODO EXPLAIN WHAT THIS IS), already occurs in the head of another ground rule.
-
-
-RELATIONSHIP WITH PROLOG
-
-The entire program needs to be grounded in order for ASP solver to work, and, unlike Prolog,  each rule must be \enquote{safe}. A rule R is safe if every variable that occurs in the head of the rule occurs at least once in body\textsuperscript{+}(R) (TODO check if this is correct).
-
-An \textit{Herbrand interpretation} of a set of definite clauses \textit{Th} is a subset of the Herbrand base of \textit{Th}, which is a set of ground atoms that are true in terms of interpretation.
-
-
+%\begin{examp} \normalfont (Herbrand Base)
+%\end{examp}
+The \textit{Herbrand interpretation} of a set of definite clauses \textit{Th} is a subset of the Herbrand base of \textit{Th}, which is a set of ground atoms that are true in terms of interpretation.
 
 Interpretation evaluate it to true
 Interpretation evaluate it to false
 
-A \textit{Herbrand Model} is a Herbrand interpretation if and only if a set Th of clauses is satisfiable.
+A \textit{Herbrand Model} is a Herbrand interpretation if and only if a set \textit{Th} of clauses is satisfiable. In other words, a set of clauses \textit{Th} is unsatisfiable if no Herbrand model was found.
 
+The \textit{Herbrand Model} is a minimum Herbrand model if and only if none of its subsets is an Herbrand model. 
+For definite logic programs, there is a unique minimal Herbrand model (the \textit{Least Herbrand Model} \textit{M(P)} ).
+For normal logic programs, thre is no least Herbrand Model.
 
-Algorithm for computing Herbrand model is shown in
+\textit{Definite Logic Program} is a set of definite rule, and  a definite rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, where h , a\textsubscript{1}, ..., a\textsubscript{n} are all atoms. h is the \textit{head} of the rule and a\textsubscript{1}, ..., a\textsubscript{n} are the body of the rule. 
 
-XXXX
+\textit{Normal Logic Program} is a set of normal rule, and a normal rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, \textit{not} b\textsubscript{1}, ..., \textit{not}  b\textsubscript{n} where h is the head of the rule,
+ and a\textsubscript{1}, ..., a\textsubscript{n}, b\textsubscript{1}, ..., b\textsubscript{n} are the body of the rule (both the head and body are all atoms).
 
-A set of clauses Th is unsatisfiable if the algorithm terminates and does not return Herbrand model.
+The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the \textit{Herbrand Domain}.
 
-The \textit{Least Herbrand Model} is an unique minimum Herbrand model if and only if none of its subsets is an Herbrand model (TODO MATHMATICALLY SAY THIS)
+\begin{examp} \normalfont (Grounding)
 
-For a normal program, there is usually no least Herbrand model.
-TODO Explain MORE
+\end{examp} 
+
+TODO Explain grounding in ASP context.
+
+The grounding of a normal logic program P can be obtained by replacing each rule in P with a ground instance of the rule, such that for each atom A in body\textsuperscript{+} (R) (TODO EXPLAIN WHAT THIS IS), already occurs in the head of another ground rule.
+
+The entire program needs to be grounded in order for ASP solver to work, and, unlike Prolog,  each rule must be \textit{safe}. A rule \textit{R} is safe if every variable that occurs in the head of the rule occurs at least once in body\textsuperscript{+}(R) (TODO check if this is correct).
+
+TODO Reduct
 
 Stable Model of a normal logic program is XX
 \cite{Gelfond1988}
 
 Any stable model is a minimal Herbrand model, and stable sets is stable models. The stable models can be found by constructing the result of the program with respect to sets of atoms X (P\textsuperscript{x} in the following 2 steps
 
-
-
 does not contain negation and a unique minimal Herbrand model.
 
-\begin{examp} (Horn clause)
-
-\end{examp}
-
-
-\subsection{Anwer Set Programming (ASP)}
+\subsection{Anwer Set Programming (ASP) Syntax}
 
 Answer set of normal logic program P is a stable model, and Answer Set Programming (ASP) is a normal logic program with extensions: constrains, choice rules and optimisation. ASP program consists of a set of rules, where each rule consists of an atom and literals.
 A literal is either an atom \textit{p} or its \textit{default negation} not p (Negation as a failure).
-
-
-Head and body
-
-A Constraint is of the form
-
-\begin{theorem}
-$\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
-\end{theorem}
+A Constraint is of the form $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
 
 which is to filtering any irrelevant answer sets.
-There are two types of constraints: soft and hard constraints. Soft constraint is XXX
-
-Hard constraint is XXX
+There are two types of constraints: \textit{hard constraints} and \textit{hard constraints}. Hard constraints are strictly satisfied, whereas soft constraints are must not be satisfied but the sum of the violations should be minimised by assigning XXX. 
 
 Choice rule can express possible outcomes given an action choice, which is of the form
-
-\begin{theorem}
 l{h\textsubscript{1},...,h\textsubscript{m}}u $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
-\end{theorem}
 
 where the head is called \textit{aggregates}.
 

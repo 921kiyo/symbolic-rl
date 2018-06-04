@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  4 JUN 2018 15:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  4 JUN 2018 20:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -289,9 +289,21 @@ Package csquotes Info: ... configuration file loaded successfully.
 (/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.cfg
 File: csquotes.cfg 
 ))
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2015/03/04 v2.20.2
+\thm@style=\toks23
+\thm@bodyfont=\toks24
+\thm@headfont=\toks25
+\thm@notefont=\toks26
+\thm@headpunct=\toks27
+\thm@preskip=\skip50
+\thm@postskip=\skip51
+\thm@headsep=\skip52
+\dth@everypar=\toks28
+)
 \c@theorem=\count119
-
-(./includes.tex (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+ (./includes.tex
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 \Gm@cnth=\count120
 \Gm@cntv=\count121
@@ -304,8 +316,9 @@ Package: geometry 2010/09/12 v5.6 Page Geometry
 \Gm@layoutheight=\dimen125
 \Gm@layouthoffset=\dimen126
 \Gm@layoutvoffset=\dimen127
-\Gm@dimlist=\toks23
-) (/usr/share/texlive/texmf-dist/tex/latex/textpos/textpos.sty
+\Gm@dimlist=\toks29
+)
+(/usr/share/texlive/texmf-dist/tex/latex/textpos/textpos.sty
 Package: textpos 2014/01/03 v1.7j
 
 Package: textpos 2014/01/03 1.7j, absolute positioning of text on the page
@@ -316,12 +329,12 @@ Package: textpos 2014/01/03 1.7j, absolute positioning of text on the page
 \TP@absmargin=\dimen131
 Grid set 16 x 16 = 37.34424pt x 52.81541pt
 \TPboxrulesize=\dimen132
-\TP@tbargs=\toks24
+\TP@tbargs=\toks30
 \TP@prevdepth=\dimen133
 ) (/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip50
-\bibsep=\skip51
+\bibhang=\skip53
+\bibsep=\skip54
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count123
 )
@@ -333,14 +346,14 @@ Package: tabularx 2014/10/28 v2.10 `tabularx' package (DPC)
 \TX@target=\dimen137
 \TX@delta=\dimen138
 \TX@cols=\count124
-\TX@ftn=\toks25
+\TX@ftn=\toks31
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
-\LTleft=\skip52
-\LTright=\skip53
-\LTpre=\skip54
-\LTpost=\skip55
+\LTleft=\skip55
+\LTright=\skip56
+\LTpre=\skip57
+\LTpost=\skip58
 \LTchunksize=\count125
 \LTcapwidth=\dimen139
 \LT@head=\box29
@@ -351,19 +364,19 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \LT@rows=\count127
 \c@LT@tables=\count128
 \c@LT@chunks=\count129
-\LT@p@ftn=\toks26
+\LT@p@ftn=\toks32
 )
 (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
 \bigstrutjot=\dimen140
 )
 (/usr/share/texlive/texmf-dist/tex/latex/subfigure/subfigure.sty
 Package: subfigure 2002/03/15 v2.1.5 subfigure package
-\subfigtopskip=\skip56
-\subfigcapskip=\skip57
+\subfigtopskip=\skip59
+\subfigcapskip=\skip60
 \subfigcaptopadj=\dimen141
-\subfigbottomskip=\skip58
+\subfigbottomskip=\skip61
 \subfigcapmargin=\dimen142
-\subfiglabelskip=\skip59
+\subfiglabelskip=\skip62
 \c@subfigure=\count130
 \c@lofdepth=\count131
 \c@subtable=\count132
@@ -373,8 +386,8 @@ Package: subfigure 2002/03/15 v2.1.5 subfigure package
 * Local config file subfigure.cfg used *
 ****************************************
 (/usr/share/texlive/texmf-dist/tex/latex/subfigure/subfigure.cfg)
-\subfig@top=\skip60
-\subfig@bottom=\skip61
+\subfig@top=\skip63
+\subfig@bottom=\skip64
 )
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
@@ -405,15 +418,15 @@ LaTeX Warning: Command \refstepcounter  has changed.
                Check if current package is valid.
 
 ) (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-\fancy@headwidth=\skip62
-\f@ncyO@elh=\skip63
-\f@ncyO@erh=\skip64
-\f@ncyO@olh=\skip65
-\f@ncyO@orh=\skip66
-\f@ncyO@elf=\skip67
-\f@ncyO@erf=\skip68
-\f@ncyO@olf=\skip69
-\f@ncyO@orf=\skip70
+\fancy@headwidth=\skip65
+\f@ncyO@elh=\skip66
+\f@ncyO@erh=\skip67
+\f@ncyO@olh=\skip68
+\f@ncyO@orh=\skip69
+\f@ncyO@elf=\skip70
+\f@ncyO@erf=\skip71
+\f@ncyO@olf=\skip72
+\f@ncyO@orf=\skip73
 )
 (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2016/02/24 3.9q The Babel package
@@ -467,6 +480,7 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 48.
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/hypcap.sty
 Package: hypcap 2011/02/16 v1.11 Adjusting the anchors of captions (HO)
 )) (./notation.tex)
+\c@examp=\count136
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
@@ -474,26 +488,26 @@ Package csquotes Info: Redefining alias 'default' -> 'english'.
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Try loading font information for OT1+bch on input line 34.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Try loading font information for OT1+bch on input line 39.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1bch.fd
 File: ot1bch.fd 2004/10/18 font definitions for OT1/bch.
 )
 \AtBeginShipoutBox=\box33
-Package hyperref Info: Link coloring ON on input line 34.
+Package hyperref Info: Link coloring ON on input line 39.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -501,11 +515,11 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count136
+\c@section@level=\count137
 )
-LaTeX Info: Redefining \ref on input line 34.
-LaTeX Info: Redefining \pageref on input line 34.
-LaTeX Info: Redefining \nameref on input line 34.
+LaTeX Info: Redefining \ref on input line 39.
+LaTeX Info: Redefining \pageref on input line 39.
+LaTeX Info: Redefining \nameref on input line 39.
 
 (./main.out) (./main.out)
 \@outlinefile=\write3
@@ -514,17 +528,17 @@ LaTeX Info: Redefining \nameref on input line 34.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count137
+\scratchcounter=\count138
 \scratchdimen=\dimen151
 \scratchbox=\box34
-\nofMPsegments=\count138
-\nofMParguments=\count139
-\everyMPshowfont=\toks27
-\MPscratchCnt=\count140
+\nofMPsegments=\count139
+\nofMParguments=\count140
+\everyMPshowfont=\toks33
+\MPscratchCnt=\count141
 \MPscratchDim=\dimen152
-\MPnumerator=\count141
-\makeMPintoPDFobject=\count142
-\everyMPtoPDFconversion=\toks28
+\MPnumerator=\count142
+\makeMPintoPDFobject=\count143
+\everyMPtoPDFconversion=\toks34
 )
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -563,8 +577,7 @@ LaTeX Info: Redefining \nameref on input line 34.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hypcap package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package backref Info: ** backref set up for natbib ** on input line 34.
-\c@examp=\count143
+Package backref Info: ** backref set up for natbib ** on input line 39.
 (./titlepage.tex <./figures/imperial.pdf, id=92, 362.35374pt x 95.35625pt>
 File: ./figures/imperial.pdf Graphic file (type pdf)
 
@@ -605,7 +618,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.71 \chapter
+l.78 \chapter
              {Introduction} [1
 
 
@@ -617,105 +630,107 @@ Chapter 1.
 ] [3]
 Chapter 2.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 109.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 116.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 124.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 136.
 [4
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 170--171
+Underfull \hbox (badness 10000) in paragraph at lines 148--151
 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 275--279
+Underfull \hbox (badness 10000) in paragraph at lines 239--243
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 244--245
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 246--250
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 280--281
+LaTeX Font Info:    Try loading font information for OMS+bch on input line 253.
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 282--286
-
- []
-
-LaTeX Font Info:    Try loading font information for OMS+bch on input line 289.
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsbch.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsbch.fd
 File: omsbch.fd 
 )
 LaTeX Font Info:    Font shape `OMS/bch/m/it' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 289.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 253.
 
-Underfull \hbox (badness 10000) in paragraph at lines 299--303
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 304--307
-
- []
-
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 332--336
+Underfull \hbox (badness 10000) in paragraph at lines 263--267
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 337--341
+Underfull \hbox (badness 10000) in paragraph at lines 268--271
 
  []
 
-<./figures/agent_env.png, id=199, 248.93pt x 228.855pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 296--300
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 301--305
+
+ []
+
+[7] <./figures/agent_env.png, id=193, 248.93pt x 228.855pt>
 File: ./figures/agent_env.png Graphic file (type png)
 
 <use ./figures/agent_env.png>
-Package pdftex.def Info: ./figures/agent_env.png used on input line 369.
+Package pdftex.def Info: ./figures/agent_env.png used on input line 333.
 (pdftex.def)             Requested size: 142.26761pt x 142.26926pt.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 370.
- [8 <./figures/agent_env.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 383--384
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 334.
+
+Underfull \hbox (badness 10000) in paragraph at lines 347--348
 
  []
 
 LaTeX Font Info:    Font shape `OMS/bch/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 386.
-[9] <./figures/dyna.png, id=220, 243.91125pt x 175.65625pt>
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 350.
+[8 <./figures/agent_env.png>] [9]
+<./figures/dyna.png, id=214, 243.91125pt x 175.65625pt>
 File: ./figures/dyna.png Graphic file (type png)
 
 <use ./figures/dyna.png>
-Package pdftex.def Info: ./figures/dyna.png used on input line 493.
+Package pdftex.def Info: ./figures/dyna.png used on input line 457.
 (pdftex.def)             Requested size: 227.62413pt x 170.72942pt.
 
 
-LaTeX Warning: Reference `Montague1999' on page 10 undefined on input line 494.
+LaTeX Warning: Reference `Montague1999' on page 10 undefined on input line 458.
 
 
 
-LaTeX Warning: Reference `Montague1999' on page 10 undefined on input line 494.
+LaTeX Warning: Reference `Montague1999' on page 10 undefined on input line 458.
 
 
 [10] [11 <./figures/dyna.png>]
 Chapter 3.
 
-LaTeX Warning: Reference `Garnelo2016' on page 12 undefined on input line 511.
+LaTeX Warning: Reference `Garnelo2016' on page 12 undefined on input line 475.
 
 
-LaTeX Warning: Reference `Garcez2018' on page 12 undefined on input line 518.
+LaTeX Warning: Reference `Garcez2018' on page 12 undefined on input line 482.
 
 [12
 
 ] [13]
 Chapter 4.
-<./figures/ILASRL.png, id=242, 543.02875pt x 333.245pt>
+<./figures/ILASRL.png, id=236, 543.02875pt x 333.245pt>
 File: ./figures/ILASRL.png Graphic file (type png)
 
 <use ./figures/ILASRL.png>
-Package pdftex.def Info: ./figures/ILASRL.png used on input line 578.
+Package pdftex.def Info: ./figures/ILASRL.png used on input line 542.
 (pdftex.def)             Requested size: 426.80879pt x 256.09094pt.
  [14
 
@@ -728,24 +743,24 @@ Missing character: There is no ‚ in font bchr7t!
 Missing character: There is no Ä in font bchr7t!
 Missing character: There is no ù in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 696--757
+Overfull \hbox (9.14763pt too wide) in alignment at lines 660--721
  [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 757
+Underfull \vbox (badness 10000) detected at line 721
  []
 
 Missing character: There is no ‚ in font bchr7t!
 Missing character: There is no Ä in font bchr7t!
 Missing character: There is no ì in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 757--818
+Overfull \hbox (9.14763pt too wide) in alignment at lines 721--782
  [] [] [] 
  []
 
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 818--823
+Overfull \hbox (9.14763pt too wide) in alignment at lines 782--787
  [] [] [] 
  []
 
@@ -758,30 +773,30 @@ Overfull \hbox (9.14763pt too wide) in alignment at lines 818--823
  [19] [20
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 844.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 808.
  [21]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 844.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 808.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 844.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 844.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 808.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 808.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 736AEC315E2C17AE739A82206AEC98E0;1664.
+(rerunfilecheck)             Checksum: 0954497C81AA0E59A85DA7D220D8651A;1671.
 Package rerunfilecheck Info: File `main.brf' has not changed.
-(rerunfilecheck)             Checksum: 824438E739ED3A961F5AB2AEF28A2BF0;611.
+(rerunfilecheck)             Checksum: 7A5A5880A9F28FC3C4C0DBD5E75AA33F;606.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 844.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 808.
  ) 
 Here is how much of TeX's memory you used:
- 10560 strings out of 494353
- 152684 string characters out of 6170044
- 285763 words of memory out of 5000000
- 13600 multiletter control sequences out of 15000+600000
- 45705 words of font info for 86 fonts, out of 8000000 for 9000
+ 10608 strings out of 494353
+ 153293 string characters out of 6170044
+ 287033 words of memory out of 5000000
+ 13651 multiletter control sequences out of 15000+600000
+ 43867 words of font info for 84 fonts, out of 8000000 for 9000
  452 hyphenation exceptions out of 8191
- 41i,12n,43p,909b,525s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,12n,43p,928b,525s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fon
@@ -795,10 +810,10 @@ usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (22 pages, 205612 bytes).
+Output written on main.pdf (22 pages, 205415 bytes).
 PDF statistics:
- 352 PDF objects out of 1000 (max. 8388607)
- 305 compressed objects within 4 object streams
- 77 named destinations out of 1000 (max. 500000)
+ 343 PDF objects out of 1000 (max. 8388607)
+ 297 compressed objects within 3 object streams
+ 71 named destinations out of 1000 (max. 500000)
  197 words of extra memory for PDF output out of 10000 (max. 10000000)
 

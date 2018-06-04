@@ -4,16 +4,16 @@
 \contentsline {section}{\numberline {2.1}Inductive Logic Programming (ILP)}{4}{section.2.1}
 \contentsline {subsection}{\numberline {2.1.1}Logic Basics}{4}{subsection.2.1.1}
 \contentsline {subsection}{\numberline {2.1.2}Stable Model Semantics}{5}{subsection.2.1.2}
-\contentsline {subsection}{\numberline {2.1.3}Anwer Set Programming (ASP)}{6}{subsection.2.1.3}
-\contentsline {subsection}{\numberline {2.1.4}ILP in Answer set semantics}{7}{subsection.2.1.4}
+\contentsline {subsection}{\numberline {2.1.3}Anwer Set Programming (ASP) Syntax}{6}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}ILP in Answer set semantics}{6}{subsection.2.1.4}
 \contentsline {subsection}{\numberline {2.1.5}Learning from Anwer Sets (LAS)}{7}{subsection.2.1.5}
-\contentsline {subsection}{\numberline {2.1.6}Inductive Learning of Answer Set Programs (ILASP)}{8}{subsection.2.1.6}
+\contentsline {subsection}{\numberline {2.1.6}Inductive Learning of Answer Set Programs (ILASP)}{7}{subsection.2.1.6}
 \contentsline {subsubsection}{Learning from Ordered Answer Sets}{8}{section*.2}
 \contentsline {subsubsection}{A Context-dependent Learning from Ordered Answer Sets}{8}{section*.3}
 \contentsline {section}{\numberline {2.2}Reinforcement Learning}{8}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Markov Decision Process(MDP)}{9}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.1}Markov Decision Process(MDP)}{8}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Policy}{9}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Temporal-Difference (TD) Learning}{10}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.3}Temporal-Difference (TD) Learning}{9}{subsection.2.2.3}
 \contentsline {subsection}{\numberline {2.2.4}Q-Learning}{10}{subsection.2.2.4}
 \contentsline {subsection}{\numberline {2.2.5}Model-based vs Model-free Learning}{10}{subsection.2.2.5}
 \contentsline {chapter}{\numberline {3}Related Work}{12}{chapter.3}
