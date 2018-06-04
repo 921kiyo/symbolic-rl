@@ -85,7 +85,7 @@
 % \end{figure}
 % Figure~\ref{fig:logo} is an example of a figure.
 
-There has been successful applications of deep reinforcement learning (DRL) a number of domains, such as video games (\cite{Mnih2015}), game of Go (\cite{Silver2016}) and robotics (\cite{Levine2015}). However, there are still a number of issues to overcome in this method. 
+There has been successful applications of deep reinforcement learning (DRL) a number of domains, such as video games (\cite{Mnih2015}), game of Go (\cite{Silver2016}) and robotics (\cite{Levine2015}). However, there are still a number of issues to overcome in this method.
 First, it requires a large amount of data for training the model, which requires a long time of learning process.
 Second, it is considered to be a black-box, meaning the decision making process is unknown to human user and therefore lacks explanation ability.
 Third there is no thoughts process to the decision making, which, as XX points out, is a fundamental to the artificial general intelligence.
@@ -116,14 +116,14 @@ This section introduces necessary background of Inductive Logic Programming (Sec
 \section{Inductive Logic Programming (ILP)}
 \label{ilp}
 
-Inductive Logic Programming (ILP) is a subfield of machine learning research area aimed at the intersection between machine learning and logic-based knowledge representation \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and any of negative examples, given a hypothesis language for search space and cover relation (\cite{DeRaedt1997}). The possible explanation of covers relation is described by the entailment, as shown in Equation \ref{ilp_equation}. 
+Inductive Logic Programming (ILP) is a subfield of machine learning research area aimed at the intersection between machine learning and logic-based knowledge representation \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and any of negative examples, given a hypothesis language for search space and cover relation (\cite{DeRaedt1997}). The possible explanation of covers relation is described by the entailment, as shown in Equation \ref{ilp_equation}.
 
 \begin{equation}
 B \cap H \models E
 \end{equation}
 \label{ilp_equation}
 
-where E consists of positive examples (E\textsuperscript{+}) and none of the negative examples (E\textsuperscript{-}). 
+where E consists of positive examples (E\textsuperscript{+}) and none of the negative examples (E\textsuperscript{-}).
 
 One of the advantage of ILP over statistical machine learning is that the hypothesis the agent learnt can be easily understood by a human, making the decision more transparent rather than black box.
 
@@ -146,12 +146,12 @@ To compute an inference task, the syntax of the predicate logic program needs to
 \end{examp}
 
 A \textit{Horn clause} is a subset of CNF, which is a clause with at most one positive literal, where a \textit{definite clause} (also called a \textit{rule} or a \textit{fact}) contains exactly one positive literal, and a \textit{denial} (or a \textit{constraint}) is a clause with no positive literals.
-A \textit{normal clause} extends Horn clause with negation as failure. 
+A \textit{normal clause} extends Horn clause with negation as failure.
 \\
 
 \subsection{Stable Model Semantics}
 
-Having defined the syntax of clausal logic, we now introduce its semantics under the context of stable model. The semantics of the logic is based on the notion of \textit{interpretation}, which is defined under a \textit{domain}. A \textit{domain} contains all the objects that exist.  For the convenient reasons, we focus on a special interpretations called \textit{Herbrand interpretations} rather than generation interpretations. 
+Having defined the syntax of clausal logic, we now introduce its semantics under the context of stable model. The semantics of the logic is based on the notion of \textit{interpretation}, which is defined under a \textit{domain}. A \textit{domain} contains all the objects that exist.  For the convenient reasons, we focus on a special interpretations called \textit{Herbrand interpretations} rather than generation interpretations.
 
 The \textit{Herbrand domain} (a.k.a \textit{Herbrand universe}) of clause sets \textit{Th} is the set of all ground terms that are constants and function symbols appeared in \textit{Th}.
 
@@ -168,11 +168,11 @@ Interpretation evaluate it to false
 
 A \textit{Herbrand Model} is a Herbrand interpretation if and only if a set \textit{Th} of clauses is satisfiable. In other words, a set of clauses \textit{Th} is unsatisfiable if no Herbrand model was found.
 
-The \textit{Herbrand Model} is a minimum Herbrand model if and only if none of its subsets is an Herbrand model. 
+The \textit{Herbrand Model} is a minimum Herbrand model if and only if none of its subsets is an Herbrand model.
 For definite logic programs, there is a unique minimal Herbrand model (the \textit{Least Herbrand Model} \textit{M(P)} ).
 For normal logic programs, there may not be a least Herbrand Model.
 
-\textit{Definite Logic Program} is a set of definite rule, and  a definite rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, where h , a\textsubscript{1}, ..., a\textsubscript{n} are all atoms. h is the \textit{head} of the rule and a\textsubscript{1}, ..., a\textsubscript{n} are the body of the rule. 
+\textit{Definite Logic Program} is a set of definite rule, and  a definite rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, where h , a\textsubscript{1}, ..., a\textsubscript{n} are all atoms. h is the \textit{head} of the rule and a\textsubscript{1}, ..., a\textsubscript{n} are the body of the rule.
 
 \textit{Normal Logic Program} is a set of normal rule, and a normal rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, \textit{not} b\textsubscript{1}, ..., \textit{not}  b\textsubscript{n} where h is the head of the rule,
  and a\textsubscript{1}, ..., a\textsubscript{n}, b\textsubscript{1}, ..., b\textsubscript{n} are the body of the rule (both the head and body are all atoms).
@@ -185,15 +185,15 @@ P = $\begin{cases}
 	p  \leftarrow not q. \\
 	q  \leftarrow p.
       \end{cases}$
-\end{examp} 
+\end{examp}
 \label{grounding}
 
-ground(P) in Example \ref{grounding} is p:- not q. and q:- p. The algorithm of grounding start with the empty program Q = \{  \} and the relevant grounding is constructed by adding to each rule R to Q given that R is a ground instance of a rule in P and their positive body literals already occurs in the in the of rules in Q. The algorithm terminates when no more rules can be added to Q. 
+ground(P) in Example \ref{grounding} is p:- not q. and q:- p. The algorithm of grounding start with the empty program Q = \{  \} and the relevant grounding is constructed by adding to each rule R to Q given that R is a ground instance of a rule in P and their positive body literals already occurs in the in the of rules in Q. The algorithm terminates when no more rules can be added to Q.
 %TODO Explain grounding in ASP context.
 %The grounding of a normal logic program P can be obtained by replacing each rule in P with a ground instance of the rule, such that for each atom A in body\textsuperscript{+} (R) (TODO EXPLAIN WHAT THIS IS), already occurs in the head of another ground rule.
 Not only the entire program needs to be grounded in order for ASP solver to work, and, unlike Prolog,  but also each rule must be \textit{safe}. A rule \textit{R} is safe if every variable that occurs in the head of the rule occurs at least once in body\textsuperscript{+}(R) .
 
-Since there is no unique least Herbrand Model for a normal logic program, \cite{Gelfond1988} defined Stable Model of a normal logic program. In order to obtain the Stable model of P, P needs to be converted using \textit{Reduct} with respect to an interpretation X. First, if the body of any rule in P contains an atom which is not in X, those rules need to be removed. Second, all default negation atoms in the remaining rules in P need to be removed. 
+Since there is no unique least Herbrand Model for a normal logic program, \cite{Gelfond1988} defined Stable Model of a normal logic program. In order to obtain the Stable model of P, P needs to be converted using \textit{Reduct} with respect to an interpretation X. First, if the body of any rule in P contains an atom which is not in X, those rules need to be removed. Second, all default negation atoms in the remaining rules in P need to be removed.
 
 \begin{examp} \normalfont (Reduct)
 
@@ -201,13 +201,13 @@ P = $\begin{cases}
 	p  \leftarrow not q. \\
 	q  \leftarrow p.
       \end{cases}$
-\end{examp} 
+\end{examp}
 \label{grounding}
 
 
 %Any stable model is a minimal Herbrand model, and stable sets is stable models. The stable models can be found by constructing the result of the program with respect to sets of atoms X (P\textsuperscript{x} in the following 2 steps
 
-After the Grounding and Reduct, 
+After the Grounding and Reduct,
 
 \subsection{Anwer Set Programming (ASP) Syntax}
 
@@ -216,7 +216,7 @@ A literal is either an atom \textit{p} or its \textit{default negation} not p (N
 A Constraint is of the form $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
 
 which is to filtering any irrelevant answer sets.
-There are two types of constraints: \textit{hard constraints} and \textit{hard constraints}. Hard constraints are strictly satisfied, whereas soft constraints are must not be satisfied but the sum of the violations should be minimised by assigning XXX. 
+There are two types of constraints: \textit{hard constraints} and \textit{hard constraints}. Hard constraints are strictly satisfied, whereas soft constraints are must not be satisfied but the sum of the violations should be minimised by assigning XXX.
 
 Choice rule can express possible outcomes given an action choice, which is of the form
 l{h\textsubscript{1},...,h\textsubscript{m}}u $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
@@ -389,12 +389,12 @@ An agnet follows a policy
 
 A\textsubscript{t} = $\pi$(S\textsubscript{t})
 
-One of the common possibilibies is that the agent chooses an action in order to maximise the discounted sum of future rewards. 
+One of the common possibilibies is that the agent chooses an action in order to maximise the discounted sum of future rewards.
 
 A\textsubscript{t} to maximise R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ...
 
 
-An action-value function evaluate a particular state by taking an action according the policy 
+An action-value function evaluate a particular state by taking an action according the policy
 
 q\textsubscript{$\pi$} = $\displaystyle \E[R\textsubscript{t+1} $[R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ... $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a, A\textsubscript{t+1 } = a,]
 
@@ -417,7 +417,7 @@ Update value
 
 where R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) is the estimated return (a.k.a TD target)
 
-R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) - V(S\textsubscript{t}) is TD error.
+R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) - V(S\textsubscript{t}) is TD error.sudo add-apt-repository ppa:texworks/stable
 
 TD updates the estimate by using the estimates of XXX (bootstrap).
 
