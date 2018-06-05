@@ -276,54 +276,42 @@ $\forall$ e $\in$ E\textsuperscript{-} : e $\notin$ A \\
 
 B = $\begin{cases}
 	exercises  \leftarrow not \ eat\_out. \\
-	eat\_out \leftarrow exercises. \\
+	tennis \leftarrow holiday \\
       \end{cases}$ \\
 E\textsubscript{+} = tennis \\
 E\textsubscript{-} = eat\_out \\
-One possible  H $\in$ ILP\textsubscript{cautious} is \{tennis$ \leftarrow$ exercises, $\leftarrow$ not tennis \}.
+One possible  H $\in$ ILP\textsubscript{brave} is \{tennis\}, which returns \{tennis, holidy, exercises\} as Answer Sets. 
 \end{examp}
 \label{brave_induction_example}
 
+The limitation of Brave indction that cannot learn constraints as shown in the example \ref{limitation_brave}. 
 
-Brave indction cannot learn constraints as shown in the example \ref{limitation_brave}.
-
-The limitation of Cautious Induction is that positive examples must be true for all Answer Sets and negative examples must not be included in any of the Answer Sets. These conditions may be too strict in some cases, and Cautious Induction is not able to accept the case where positive examples are true in some of the Answer Sets but not all Answer Sets of the program. 
+TODO MORE EXPLANATION
 
 \begin{examp} \normalfont Limitation of Brave Induction (Example)
 
-1\{situation(P, awake), situation(P, sleep)\}1 :- person(P).
+B = $\begin{cases}
+	1\{situation(P, awake), situation(P, sleep)\}1 \leftarrow person(P). \\
+	person(C) \leftarrow super\_person(C). \\
+	super\_person(john).
+	\end{cases}$
 
-person(john).
-
+In order to learn the  constraint hypothesis H = \{ $\leftarrow$ not situation(P, awake), super\_person(P)\}, it is not possible to find an optimal solution. 
 \end{examp}
 \label{limitation_brave}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{Learning from Answer Sets (LAS)}
-\label{section_las}
-
-Cautious induction In order to overcome the limitations of cautious and brave induction,
-Learning from Answer Sets (LAS) was developed in \cite{Law2014} to faciliate more complex learning task.
-
-Examples used in LAS is converted from $\langle$ E\textsuperscript{+}, E\textsuperscript{-}$\rangle$ into
-
-Partial Interpretations are of the form $\langle$ E\textsuperscript{inc}, E\textsuperscript{exc}$\rangle$
-
-A Herbrand Interpretations extends a partial interpretation if it include all of the inclusions and none of the exclusions.
-
 \subsection{Inductive Learning of Answer Set Programs (ILASP)}
+\label{section_lasp}
+
+\subsubsection{Learning from Answer Sets (LAS)}
+\textit{Learning from Answer Sets (LAS)} was developed in \cite{Law2014} to faciliate more complex learning task that neither Cautious Induction nor Brave Induction could learn.
+Examples used in LAS are \textit{Partial Interpretations}, which are of the form $\langle$ e\textsuperscript{inc}, e\textsuperscript{exc}$\rangle$. (called \textit{inclusions} and \textit{exclusions} of e respectively).  A Herbrand Interpretations extends a partial interpretation if it include all of e\textsuperscript{inc} and none of e\textsuperscript{exc}.
+
+LAS is of the form $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is background knowledge, S\textsubscript{M} is hypothesis space which consists of a set of normal rules, choice rules and constraints. S\textsubscript{M} is specified by \textit{language bias} of the learning task using \textit{mode declaration} . Mode declaration , and specifies what can occur in an hypothesis by specifying the predicate, and has two parts: \textit{modeh} and \textit{modeb}.  modeh and modeb are the predicates that can occur in the head of the rule and body of the rule respectively. Language bias is the specification of the language in the hypothesis in order to reduce search space for the hypothesis. 
+
+%S\textsubscript{M} consists of all rules given the language bias.
+
+\subsubsection{Inductive Learning of Answer Set Programs (ILASP)}
 
 ILASP is an algorithm that is capable of solving LAS tasks
 
