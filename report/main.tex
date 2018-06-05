@@ -182,7 +182,7 @@ To solve a normal logic program \textit{Th}, the program needs to be grounded. T
 \begin{examp} \normalfont (Grounding)
 
 P = $\begin{cases}
-	p  \leftarrow not q. \\
+	p  \leftarrow not \ q. \\
 	q  \leftarrow p.
       \end{cases}$
 \end{examp}
@@ -197,17 +197,19 @@ Since there is no unique least Herbrand Model for a normal logic program, \cite{
 
 \begin{examp} \normalfont (Reduct)
 
+X = {p}
+
 P = $\begin{cases}
 	p  \leftarrow not q. \\
-	q  \leftarrow p.
+  q  \leftarrow not p. \\
+  r  \leftarrow p.
       \end{cases}$
 \end{examp}
-\label{grounding}
+\label{reduct}
 
-
+In the Example \ref{reduct}, P\textsuperscript{x} is {p, r $\leftarrow$ p.}.
 %Any stable model is a minimal Herbrand model, and stable sets is stable models. The stable models can be found by constructing the result of the program with respect to sets of atoms X (P\textsuperscript{x} in the following 2 steps
-
-After the Grounding and Reduct,
+A stable model of P is an interpretaiton X if and only if X is the unique least Herbrand Model of ground(P)\textsuperscript{x} in the logic programs.
 
 \subsection{Anwer Set Programming (ASP) Syntax}
 
@@ -385,7 +387,12 @@ Reinforcement learning is a method to get approximated optimal solution.
 
 \subsection{Policy and Value Function}
 
-An agnet follows a policy
+An agent follows a policy
+
+
+A policy $\pi$ is optimal if it maximises the action-value function
+
+TODO on-policy and off-policy learning.
 
 A\textsubscript{t} = $\pi$(S\textsubscript{t})
 
