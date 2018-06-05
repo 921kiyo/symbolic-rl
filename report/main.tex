@@ -200,8 +200,8 @@ Since there is no unique least Herbrand Model for a normal logic program, \cite{
 X = {p}
 
 P = $\begin{cases}
-	p  \leftarrow not q. \\
-  q  \leftarrow not p. \\
+	p  \leftarrow not\ q. \\
+  q  \leftarrow not\ p. \\
   r  \leftarrow p.
       \end{cases}$
 \end{examp}
@@ -213,32 +213,23 @@ A stable model of P is an interpretaiton X if and only if X is the unique least 
 
 \subsection{Anwer Set Programming (ASP) Syntax}
 
-Answer set of normal logic program P is a stable model, and Answer Set Programming (ASP) is a normal logic program with extensions: constrains, choice rules and optimisation. ASP program consists of a set of rules, where each rule consists of an atom and literals.
-A literal is either an atom \textit{p} or its \textit{default negation} not p (Negation as a failure).
-A Constraint is of the form $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
+Answer set of normal logic program P is a stable model, and Answer Set Programming (ASP) is a normal logic program with extensions: constrains, choice rules and optimisation. ASP program consists of a set of rules, where each rule consists of an atom and literals.A literal is either an atom \textit{p} or its default negation (negation as a failure) \textit{not p} .
 
-which is to filtering any irrelevant answer sets.
-There are two types of constraints: \textit{hard constraints} and \textit{hard constraints}. Hard constraints are strictly satisfied, whereas soft constraints are must not be satisfied but the sum of the violations should be minimised by assigning XXX.
+A Constraint of the program P is of the form $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}, where the rule has an empty head. The constraint filters any irrelevant answer sets. When computing ground(P)\textsubscript{x}, the empty head becomes $\perp$, which cannot be in the Answer Set. 
+There are two types of constraints: \textit{hard constraints} and \textit{hard constraints}. Hard constraints are strictly satisfied, whereas soft constraints are must not be satisfied but the sum of the violations should be minimised when solving ASP.
 
 Choice rule can express possible outcomes given an action choice, which is of the form
-l{h\textsubscript{1},...,h\textsubscript{m}}u $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}
+l\{h\textsubscript{1},...,h\textsubscript{m}\}u $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n} where  l and u are integers and h\textsubscript{i} for 1 $\leq$ i $\leq$ m are atoms. The head is called \textit{aggregates}.
 
-where the head is called \textit{aggregates}.
+optimisation statement is useful to order the answer sets in terms of preference, which is of the form
+\#minimize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}] or \#maximize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}] where w\textsubscript{1},..., w\textsubscript{n} is an integer weight and a\textsubscript{1},...,a\textsubscript{n} is an ground atom.  ASP solvers compute the scores of the weighted sum of the sets of ground atoms based on the true answer sets, and find optimal Answer Sets which either maximise or minimise the score. 
 
-An answer set of ASP program is interpretations that make all the ruls true.
+\textit{Clingo} is one of ASP solvers that executes the ASP program and returns answer sets of the programs, and we will use \textit{Clingo} for the implementation of this research. 
 
-Non-monotonicity.
-
-ASP has true, false and unknown
-
-for non-deterministic to describe transition possibilities.
-
-% DO I NEED OPTIMISATION??
-optimisation statement is of the form.
-
-Which is useful to order the answer sets in terms of preference.
-
-\textit{Clingo} is one of the programs to execute the ASP program and returns answer sets of the programs.
+%An answer set of ASP program is interpretations that make all the ruls true.
+%Non-monotonicity.
+TODO ASP has true, false and unknown
+%for non-deterministic to describe transition possibilities.
 
 
 \subsection{ILP in Answer set semantics}
