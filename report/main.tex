@@ -97,7 +97,7 @@ The advantages of symbolic reinforcement learning are, first of all, the decisio
 Second, it resembles how human reason. There is some aspects of try-and-error in human learning, but they explore reasonings to efficiently learn the surrounding or situations.
 Also they effectily use previous experience (background knowledge) when encountered a similar situation.
 Finally, the recent advance of ILP research is remarkable and there are a number of new algorithsm that effectively work in non-monotonic senarios based on Answer Set Programmings (ASPs).
---------------------------------------------
+
 Recently there are a number of research that attempted to incorporate symbolic reasoning into DRL, but the combining inductive logic programming and reinforcement learning has not been explored.
 Because of the recent advancement of logic-based learning and deep reinforcement learning, combination of both approach would be a next explonation toward artificial general intelligence.
 
@@ -131,7 +131,7 @@ One of the advantage of ILP over statistical machine learning is that the hypoth
 
 TODO Limitations of Inductive Logic Programming:
 
-In this section, we briefly introduce basic logic nortions, Anser set programming (ASP)
+In this section, we briefly introduce basic logic notions, Anser set programming (ASP)
 
 \subsection{Logic Basics}
 
@@ -222,67 +222,97 @@ Choice rule can express possible outcomes given an action choice, which is of th
 l\{h\textsubscript{1},...,h\textsubscript{m}\}u $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n} where  l and u are integers and h\textsubscript{i} for 1 $\leq$ i $\leq$ m are atoms. The head is called \textit{aggregates}.
 
 optimisation statement is useful to order the answer sets in terms of preference, which is of the form
-\#minimize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}] or \#maximize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}] where w\textsubscript{1},..., w\textsubscript{n} is an integer weight and a\textsubscript{1},...,a\textsubscript{n} is an ground atom.  ASP solvers compute the scores of the weighted sum of the sets of ground atoms based on the true answer sets, and find optimal Answer Sets which either maximise or minimise the score. 
+\#minimize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}] or \#maximize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}] where w\textsubscript{1},..., w\textsubscript{n} is an integer weight and a\textsubscript{1},...,a\textsubscript{n} is an ground atom.  ASP solvers compute the scores of the weighted sum of the sets of ground atoms based on the true answer sets, and find optimal Answer Sets which either maximise or minimise the score.
 
 \textit{Clingo} is one of ASP solvers that executes the ASP program and returns answer sets of the programs, and we will use \textit{Clingo} for the implementation of this research. 
 
 %An answer set of ASP program is interpretations that make all the ruls true.
 %Non-monotonicity.
 TODO ASP has true, false and unknown
-%for non-deterministic to describe transition possibilities.
 
+\subsection{ILP Under Answer Set Semantics}
 
-\subsection{ILP in Answer set semantics}
-
-There are several ILP frameworks under the Answer set semantics.
-
-Cautious and brave entailments can be defined in terms of induction in ILP \cite{Sakama2009}.
-
+There are several ILP non-monotoic learning frameworks under the Answer set semantics . We introduce two of them: \textit{Cautious Induction} and \textit{Brave Induction} (\cite{Sakama2009}), which are foundations of \textit{Learning from Answer Sets} discussed in Section \ref{section_las}.  (for other ILP frameworks, see \cite{Otero2001}, \cite{Inoue2014}, \cite{Corapi2012} and \cite{DeRaedt1997}). 
+\subsubsection{Cautious Induction}
 % Sakama 2008 has no concept of negative examples in this paper.
+Cautious Induction task is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples.
 
-Cautious Induction task is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ where: \\
-B is the background knowledge \\
-E\textsuperscript{+} is a set of positive examples \\
-E\textsuperscript{-} is a set of negative examples \\
-
- H $\in$ ILP\textsubscript{cautious} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if  \\
-
- there is at least one answer set A of B $\cup$ H such that: \\
- for every anser set A of B $\cup$ H:
+ H $\in$ ILP\textsubscript{cautious} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if  there is at least one answer set A of B $\cup$ H (B $\cup$ H is satisfiable) such that for every anser set A of B $\cup$ H: \\
 $\forall$ e $\in$ E\textsuperscript{+} : e $\in$ A \\
 $\forall$ e $\in$ E\textsuperscript{-} : e $\notin$ A \\
 
-\begin{examp} (Limitation of cautious induction)
+\begin{examp} \normalfont Cautious Induction (Example)
+
+B = $\begin{cases}
+	exercises  \leftarrow not \ eat\_out. \\
+	eat\_out \leftarrow exercises. \\
+      \end{cases}$ \\
+E\textsubscript{+} = tennis \\
+E\textsubscript{-} = eat\_out \\
+One possible  H $\in$ ILP\textsubscript{cautious} is \{tennis$ \leftarrow$ exercises, $\leftarrow$ not tennis \}.
+\end{examp}
+\label{cautious_induction_example}
+
+The limitation of Cautious Induction is that positive examples must be true for all Answer Sets and negative examples must not be included in any of the Answer Sets. These conditions may be too strict in some cases, and Cautious Induction is not able to accept the case where positive examples are true in some of the Answer Sets but not all Answer Sets of the program. 
+
+\begin{examp} \normalfont Limitation of Cautious Induction (Example)
 
 1\{situation(P, awake), situation(P, sleep)\}1 :- person(P).
 
 person(john).
+
 \end{examp}
 \label{limitation_cautious}
 
-In the example \ref{limitation_cautious}, neither of situation(john, awake) or situation(john, sleep) is false in all answer sets. In this example, it only return person(john).
+In the example \ref{limitation_cautious}, neither of situation(john, awake) or situation(john, sleep) is false in all answer sets. In this example, it only return person(john). Thus no examples could be given to learn the choice rule. 
 
-Cautious entailment may be too restrict.
-
-Similarly, Brave Induction task is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ where: \\
-B is the background knowledge \\
-E\textsuperscript{+} is a set of positive examples \\
-E\textsuperscript{-} is a set of negative examples \\
-
+\subsubsection{Brave Induction}
+Brave Induction task is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ where, B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples. 
  H $\in$ ILP\textsubscript{brave} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if there is at least one answer set A of B $\cup$ H such that: \\
 $\forall$ e $\in$ E\textsuperscript{+} : e $\in$ A \\
 $\forall$ e $\in$ E\textsuperscript{-} : e $\notin$ A \\
 
+\begin{examp} \normalfont Brave Induction (Example)
 
-By contrast, Brave indction is that it cannot learn constrains as shown in the example \ref{limitation_brave}.
+B = $\begin{cases}
+	exercises  \leftarrow not \ eat\_out. \\
+	eat\_out \leftarrow exercises. \\
+      \end{cases}$ \\
+E\textsubscript{+} = tennis \\
+E\textsubscript{-} = eat\_out \\
+One possible  H $\in$ ILP\textsubscript{cautious} is \{tennis$ \leftarrow$ exercises, $\leftarrow$ not tennis \}.
+\end{examp}
+\label{brave_induction_example}
 
-\begin{examp} (Limitation of brave induction)
 
-XXX
+Brave indction cannot learn constraints as shown in the example \ref{limitation_brave}.
+
+The limitation of Cautious Induction is that positive examples must be true for all Answer Sets and negative examples must not be included in any of the Answer Sets. These conditions may be too strict in some cases, and Cautious Induction is not able to accept the case where positive examples are true in some of the Answer Sets but not all Answer Sets of the program. 
+
+\begin{examp} \normalfont Limitation of Brave Induction (Example)
+
+1\{situation(P, awake), situation(P, sleep)\}1 :- person(P).
+
+person(john).
+
 \end{examp}
 \label{limitation_brave}
 
-\subsection{Learning from Anwer Sets (LAS)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Learning from Answer Sets (LAS)}
+\label{section_las}
 
 Cautious induction In order to overcome the limitations of cautious and brave induction,
 Learning from Answer Sets (LAS) was developed in \cite{Law2014} to faciliate more complex learning task.

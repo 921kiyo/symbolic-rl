@@ -4,8 +4,8 @@
 \BOOKMARK [2][]{subsection.2.1.1}{2.1.1 Logic Basics}{section.2.1}% 4
 \BOOKMARK [2][]{subsection.2.1.2}{2.1.2 Stable Model Semantics}{section.2.1}% 5
 \BOOKMARK [2][]{subsection.2.1.3}{2.1.3 Anwer Set Programming \(ASP\) Syntax}{section.2.1}% 6
-\BOOKMARK [2][]{subsection.2.1.4}{2.1.4 ILP in Answer set semantics}{section.2.1}% 7
-\BOOKMARK [2][]{subsection.2.1.5}{2.1.5 Learning from Anwer Sets \(LAS\)}{section.2.1}% 8
+\BOOKMARK [2][]{subsection.2.1.4}{2.1.4 ILP Under Answer Set Semantics}{section.2.1}% 7
+\BOOKMARK [2][]{subsection.2.1.5}{2.1.5 Learning from Answer Sets \(LAS\)}{section.2.1}% 8
 \BOOKMARK [2][]{subsection.2.1.6}{2.1.6 Inductive Learning of Answer Set Programs \(ILASP\)}{section.2.1}% 9
 \BOOKMARK [1][]{section.2.2}{2.2 Reinforcement Learning}{chapter.2}% 10
 \BOOKMARK [2][]{subsection.2.2.1}{2.2.1 Markov Decision Process\(MDP\)}{section.2.2}% 11

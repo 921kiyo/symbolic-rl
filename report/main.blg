@@ -1,48 +1,54 @@
 This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
-I found no \citation commands---while reading file main.aux
-I found no \bibdata command---while reading file main.aux
-I found no \bibstyle command---while reading file main.aux
-You've used 0 entries,
-            0 wiz_defined-function locations,
-            83 strings with 482 characters,
-and the built_in function-call counts, 0 in all, are:
-= -- 0
-> -- 0
-< -- 0
-+ -- 0
-- -- 0
-* -- 0
-:= -- 0
-add.period$ -- 0
-call.type$ -- 0
-change.case$ -- 0
+The style file: plain.bst
+Database file #1: references.bib
+Repeated entry---line 381 of file references.bib
+ : @article{DeRaedt1997
+ :                     ,
+I'm skipping whatever remains of this entry
+Warning--empty journal in Garnelo2016
+Warning--there's a number but no volume in Gelfond1988
+Warning--empty journal in Levine2015
+You've used 14 entries,
+            2118 wiz_defined-function locations,
+            595 strings with 6731 characters,
+and the built_in function-call counts, 5517 in all, are:
+= -- 520
+> -- 357
+< -- 2
++ -- 142
+- -- 128
+* -- 453
+:= -- 954
+add.period$ -- 41
+call.type$ -- 14
+change.case$ -- 106
 chr.to.int$ -- 0
-cite$ -- 0
-duplicate$ -- 0
-empty$ -- 0
-format.name$ -- 0
-if$ -- 0
+cite$ -- 17
+duplicate$ -- 163
+empty$ -- 348
+format.name$ -- 128
+if$ -- 1085
 int.to.chr$ -- 0
-int.to.str$ -- 0
-missing$ -- 0
-newline$ -- 0
-num.names$ -- 0
-pop$ -- 0
-preamble$ -- 0
-purify$ -- 0
+int.to.str$ -- 14
+missing$ -- 13
+newline$ -- 72
+num.names$ -- 28
+pop$ -- 100
+preamble$ -- 1
+purify$ -- 92
 quote$ -- 0
-skip$ -- 0
+skip$ -- 119
 stack$ -- 0
-substring$ -- 0
-swap$ -- 0
-text.length$ -- 0
+substring$ -- 317
+swap$ -- 28
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 0
-warning$ -- 0
-while$ -- 0
-width$ -- 0
-write$ -- 0
-(There were 3 error messages)
+type$ -- 56
+warning$ -- 3
+while$ -- 50
+width$ -- 16
+write$ -- 148
+(There was 1 error message)
