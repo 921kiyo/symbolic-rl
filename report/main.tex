@@ -224,7 +224,7 @@ l\{h\textsubscript{1},...,h\textsubscript{m}\}u $\leftarrow$ a\textsubscript{1},
 optimisation statement is useful to order the answer sets in terms of preference, which is of the form
 \#minimize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}] or \#maximize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}] where w\textsubscript{1},..., w\textsubscript{n} is an integer weight and a\textsubscript{1},...,a\textsubscript{n} is an ground atom.  ASP solvers compute the scores of the weighted sum of the sets of ground atoms based on the true answer sets, and find optimal Answer Sets which either maximise or minimise the score.
 
-\textit{Clingo} is one of ASP solvers that executes the ASP program and returns answer sets of the programs, and we will use \textit{Clingo} for the implementation of this research. 
+\textit{Clingo} is one of ASP modern solvers that executes the ASP program and returns answer sets of the programs (\cite{Gebser2011}), and we will use \textit{Clingo} for the implementation of this research. 
 
 %An answer set of ASP program is interpretations that make all the ruls true.
 %Non-monotonicity.
@@ -284,7 +284,7 @@ One possible  H $\in$ ILP\textsubscript{brave} is \{tennis\}, which returns \{te
 \end{examp}
 \label{brave_induction_example}
 
-The limitation of Brave indction that cannot learn constraints as shown in the example \ref{limitation_brave}. 
+The limitation of Brave indction that it cannot learn constraints as shown in the example \ref{limitation_brave}.
 
 TODO MORE EXPLANATION
 
@@ -307,38 +307,78 @@ In order to learn the  constraint hypothesis H = \{ $\leftarrow$ not situation(P
 \textit{Learning from Answer Sets (LAS)} was developed in \cite{Law2014} to faciliate more complex learning task that neither Cautious Induction nor Brave Induction could learn.
 Examples used in LAS are \textit{Partial Interpretations}, which are of the form $\langle$ e\textsuperscript{inc}, e\textsuperscript{exc}$\rangle$. (called \textit{inclusions} and \textit{exclusions} of e respectively).  A Herbrand Interpretations extends a partial interpretation if it include all of e\textsuperscript{inc} and none of e\textsuperscript{exc}.
 
-LAS is of the form $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is background knowledge, S\textsubscript{M} is hypothesis space which consists of a set of normal rules, choice rules and constraints. S\textsubscript{M} is specified by \textit{language bias} of the learning task using \textit{mode declaration} . Mode declaration , and specifies what can occur in an hypothesis by specifying the predicate, and has two parts: \textit{modeh} and \textit{modeb}.  modeh and modeb are the predicates that can occur in the head of the rule and body of the rule respectively. Language bias is the specification of the language in the hypothesis in order to reduce search space for the hypothesis. 
+LAS is of the form $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is background knowledge, S\textsubscript{M} is hypothesis space, and E\textsuperscript{+} and E\textsuperscript{-} are examples of positive and negative partial interpretations. S\textsubscript{M} consists of a set of normal rules, choice rules and constraints. S\textsubscript{M} is specified by \textit{language bias} of the learning task using \textit{mode declaration}. Mode declaration, and specifies what can occur in an hypothesis by specifying the predicate, and has two parts: \textit{modeh} and \textit{modeb}.  modeh and modeb are the predicates that can occur in the head of the rule and body of the rule respectively. Language bias is the specification of the language in the hypothesis in order to reduce search space for the hypothesis.
+
+Given a learning task T, the set of all possible inductive solutions of T is denoted as ILP\textsubscript{LAS}(T), and a hypothesis H is an inductive solution of ILP\textsubscript{LAS}(T) $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ such that 
+\begin{enumerate}
+\item H $\subseteq$ S\textsubscript{M}
+\item $\forall$ e $\in$ E\textsuperscript{+} : $\exists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e
+\item $\forall$ e $\in$ E\textsuperscript{-} : $\nexists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e
+\end{enumerate}
 
 %S\textsubscript{M} consists of all rules given the language bias.
 
+\begin{examp} \normalfont LAS (Example)
+
+TODO
+%B = $\begin{cases}
+%	exercises  \leftarrow not \ eat\_out. \\
+%	tennis \leftarrow holiday \\
+%      \end{cases}$ \\
+%E\textsubscript{+} = tennis \\
+%E\textsubscript{-} = eat\_out \\
+%One possible  H $\in$ ILP\textsubscript{brave} is \{tennis\}, which returns \{tennis, holidy, exercises\} as Answer Sets. 
+
+\end{examp}
+\label{las_example}
+
+% Limitation of LAS??
+
 \subsubsection{Inductive Learning of Answer Set Programs (ILASP)}
 
-ILASP is an algorithm that is capable of solving LAS tasks
+ILASP is an algorithm that is capable of solving LAS tasks, and is based on two fundamental concepts: positive solutions and violating solutions.
 
-It is based on two fundamental concepts: positive solutions and violating solutions.
 A hypothesis H is a positive solution if and only if
-1. H $\subseteq$ S\textsubscript{M} \\
-2. $\forall$ e\textsuperscript{+} $\in$ $\exists$ A $\in$ AS(B $\cup$ H) subject to A extends e\textsuperscript{+}\\
-
+\begin{enumerate}
+\item H $\subseteq$ S\textsubscript{M}
+\item $\forall$ e\textsuperscript{+} $\in$ $\exists$ A $\in$ AS(B $\cup$ H) such that A extends e\textsuperscript{+}
+\end{enumerate}
 A hypothesis H is a violating solution if and only if
-1. H $\subseteq$ S\textsubscript{M} \\
-2. $\forall$ e\textsuperscript{+} $\in$ E\textsuperscript{+} $\exists$ A $\in$ AS(B $\cup$ H) subject to A extends e\textsuperscript{+}\\
-3. $\exists$ e\textsuperscript{-} $\in$ E\textsuperscript{-} $\exists$ A $\in$ AS(B $\cup$ H) subject to A extends e\textsuperscript{-}\\
+\begin{enumerate}
+\item H $\subseteq$ S\textsubscript{M}
+\item $\forall$ e\textsuperscript{+} $\in$ E\textsuperscript{+} $\exists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e\textsuperscript{+}
+\item $\exists$ e\textsuperscript{-} $\in$ E\textsuperscript{-} $\exists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e\textsuperscript{-}\\
+\end{enumerate}
 
+Given both definitions of positive and violating solutions, ILP\textsubscript{LAS} is positive solutions that are not violating solutions.
 
-ILP\textsubscript{LAS} is positive solutions that are not violating solutions.
+\subsubsection{Learning from Ordered Answer Sets (LOAS)}
 
-ILASP task containing a contex-dependent example
+LOAS is an extension of ILASP by incorporating learning capability of weak constraints, is useful for modelling the agent's preferences (\cite{Law2015}). 
+Examples used for learning are ordered pairs of partial answer sets, which are of the form o = $\langle$ e\textsubscript{1},e\textsubscript{2} $\rangle$.  An ASP Program P \textit{bravely respects o } if and only if
+\begin{enumerate}
+\item $\exists$ A\textsubscript{1}, A\textsubscript{2} $\in$ Answer Sets(P) such that A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2}, and A\textsubscript{1} $\succ$\textsubscript{P} A\textsubscript{1}
+\end{enumerate}
 
-\subsubsection{Learning from Ordered Answer Sets}
+P \textit{cautiously respects o } if and only if
+\begin{enumerate}
+\item $\forall$ A\textsubscript{1}, A\textsubscript{2} $\in$ Answer Sets(P) such that A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2}, and A\textsubscript{1} $\succ$\textsubscript{P} A\textsubscript{1}
+\end{enumerate}
 
-Weak constraints: useful for modelling the agent's preference
+LOAS task is of the form T = $\langle$ B, S\textsubscript{M}, E\textsubscript{+}, E\textsubscript{-}, O\textsuperscript{b},O\textsuperscript{c}$\rangle$ where O\textsuperscript{b} and O\textsuperscript{c} are brave and cautious orderings respectively, which are sets of ordering examples over set of positive partial interpretations E\textsuperscript{+}. 
+A hypothesis H is an inductive solution of T if and only if 
+\begin{enumerate}
+\item H $\subseteq$ S\textsubscript{M} in ILP\textsubscript{LOAS}(T)
+\item H' $\in$ ILP\textsubscript{LAS}($\langle$ B, S\textsubscript{LAS}(M\textsubscript{h}, M\textsubscript{b}), E\textsuperscript{+}, E\textsuperscript{-}$\rangle$) where H' is the subset of H without weak constraints
+\item $\forall$o $\in$ O\textsuperscript{b} B $\cup$ H bravely respects o
+\item $\forall$o $\in$ O\textsuperscript{c} B $\cup$ H cautiously respects o
+\end{enumerate}
 
 \subsubsection{A Context-dependent Learning from Ordered Answer Sets}
 
+ILASP task containing a contex-dependent example
 
 context-dependent partial interpretation (CDPI)
-
 
 Context-dependent ordering example (CDOE)
 
