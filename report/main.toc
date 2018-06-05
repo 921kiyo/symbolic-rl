@@ -12,11 +12,11 @@
 \contentsline {subsubsection}{Learning from Answer Sets (LAS)}{8}{section*.4}
 \contentsline {subsubsection}{Inductive Learning of Answer Set Programs (ILASP)}{9}{section*.5}
 \contentsline {subsubsection}{Learning from Ordered Answer Sets (LOAS)}{9}{section*.6}
-\contentsline {subsubsection}{A Context-dependent Learning from Ordered Answer Sets}{10}{section*.7}
+\contentsline {subsubsection}{A Context-dependent Learning from Ordered Answer Sets }{10}{section*.7}
 \contentsline {section}{\numberline {2.2}Reinforcement Learning}{10}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Markov Decision Process(MDP)}{10}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Policy and Value Function}{11}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Temporal-Difference (TD) Learning}{11}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.3}Temporal-Difference (TD) Learning}{12}{subsection.2.2.3}
 \contentsline {subsection}{\numberline {2.2.4}Q-Learning}{12}{subsection.2.2.4}
 \contentsline {subsection}{\numberline {2.2.5}Model-based vs Model-free Learning}{12}{subsection.2.2.5}
 \contentsline {chapter}{\numberline {3}Related Work}{14}{chapter.3}

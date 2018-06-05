@@ -15,6 +15,12 @@ Marta Garnelo, Kai Arulkumaran, and Murray Shanahan.
 \newblock {Towards Deep Symbolic Reinforcement Learning}.
 \newblock sep 2016.
 
+\bibitem{Gebser2011}
+Martin Gebser, Benjamin Kaufmann, Roland Kaminski, Max Ostrowski, Torsten
+  Schaub, and Marius Schneider.
+\newblock {Potassco: The Potsdam answer set solving collection}.
+\newblock {\em AI Communications}, 24(2):107--124, 2011.
+
 \bibitem{Gelfond1988}
 Michael Gelfond and Vladimir Lifschitz.
 \newblock {The stable model semantics for logic programming}.
@@ -31,6 +37,11 @@ Mark Law, Alessandra Russo, and Krysia Broda.
 \newblock {Inductive Learning of Answer Set Programs}.
 \newblock {\em European Conference on Logics in Artificial Intelligence
   (JELIA)}, 2(Ray 2009):311--325, 2014.
+
+\bibitem{Law2015}
+Mark Law, Alessandra Russo, and Krysia Broda.
+\newblock {Learning Weak Constraints in Answer Set Programming}.
+\newblock jul 2015.
 
 \bibitem{Levine2015}
 Sergey Levine, Chelsea Finn, Trevor Darrell, and Pieter Abbeel.

@@ -3,52 +3,53 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
 The style file: plain.bst
 Database file #1: references.bib
-Repeated entry---line 381 of file references.bib
+Repeated entry---line 397 of file references.bib
  : @article{DeRaedt1997
  :                     ,
 I'm skipping whatever remains of this entry
 Warning--empty journal in Garnelo2016
 Warning--there's a number but no volume in Gelfond1988
+Warning--empty journal in Law2015
 Warning--empty journal in Levine2015
-You've used 14 entries,
+You've used 16 entries,
             2118 wiz_defined-function locations,
-            595 strings with 6731 characters,
-and the built_in function-call counts, 5517 in all, are:
-= -- 520
-> -- 357
+            606 strings with 7021 characters,
+and the built_in function-call counts, 6246 in all, are:
+= -- 587
+> -- 408
 < -- 2
-+ -- 142
-- -- 128
-* -- 453
-:= -- 954
-add.period$ -- 41
-call.type$ -- 14
-change.case$ -- 106
++ -- 162
+- -- 146
+* -- 515
+:= -- 1083
+add.period$ -- 47
+call.type$ -- 16
+change.case$ -- 121
 chr.to.int$ -- 0
-cite$ -- 17
-duplicate$ -- 163
-empty$ -- 348
-format.name$ -- 128
-if$ -- 1085
+cite$ -- 20
+duplicate$ -- 184
+empty$ -- 392
+format.name$ -- 146
+if$ -- 1225
 int.to.chr$ -- 0
-int.to.str$ -- 14
-missing$ -- 13
-newline$ -- 72
-num.names$ -- 28
-pop$ -- 100
+int.to.str$ -- 16
+missing$ -- 15
+newline$ -- 82
+num.names$ -- 32
+pop$ -- 115
 preamble$ -- 1
-purify$ -- 92
+purify$ -- 105
 quote$ -- 0
-skip$ -- 119
+skip$ -- 133
 stack$ -- 0
-substring$ -- 317
-swap$ -- 28
+substring$ -- 352
+swap$ -- 29
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 56
-warning$ -- 3
-while$ -- 50
-width$ -- 16
-write$ -- 148
+type$ -- 64
+warning$ -- 4
+while$ -- 56
+width$ -- 18
+write$ -- 168
 (There was 1 error message)

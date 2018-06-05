@@ -215,7 +215,7 @@ A stable model of P is an interpretaiton X if and only if X is the unique least 
 
 Answer set of normal logic program P is a stable model, and Answer Set Programming (ASP) is a normal logic program with extensions: constrains, choice rules and optimisation. ASP program consists of a set of rules, where each rule consists of an atom and literals.A literal is either an atom \textit{p} or its default negation (negation as a failure) \textit{not p} .
 
-A Constraint of the program P is of the form $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}, where the rule has an empty head. The constraint filters any irrelevant answer sets. When computing ground(P)\textsubscript{x}, the empty head becomes $\perp$, which cannot be in the Answer Set. 
+A Constraint of the program P is of the form $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}, where the rule has an empty head. The constraint filters any irrelevant answer sets. When computing ground(P)\textsubscript{x}, the empty head becomes $\perp$, which cannot be in the Answer Set.
 There are two types of constraints: \textit{hard constraints} and \textit{hard constraints}. Hard constraints are strictly satisfied, whereas soft constraints are must not be satisfied but the sum of the violations should be minimised when solving ASP.
 
 Choice rule can express possible outcomes given an action choice, which is of the form
@@ -224,7 +224,7 @@ l\{h\textsubscript{1},...,h\textsubscript{m}\}u $\leftarrow$ a\textsubscript{1},
 optimisation statement is useful to order the answer sets in terms of preference, which is of the form
 \#minimize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}] or \#maximize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}] where w\textsubscript{1},..., w\textsubscript{n} is an integer weight and a\textsubscript{1},...,a\textsubscript{n} is an ground atom.  ASP solvers compute the scores of the weighted sum of the sets of ground atoms based on the true answer sets, and find optimal Answer Sets which either maximise or minimise the score.
 
-\textit{Clingo} is one of ASP modern solvers that executes the ASP program and returns answer sets of the programs (\cite{Gebser2011}), and we will use \textit{Clingo} for the implementation of this research. 
+\textit{Clingo} is one of ASP modern solvers that executes the ASP program and returns answer sets of the programs (\cite{Gebser2011}), and we will use \textit{Clingo} for the implementation of this research.
 
 %An answer set of ASP program is interpretations that make all the ruls true.
 %Non-monotonicity.
@@ -232,7 +232,7 @@ TODO ASP has true, false and unknown
 
 \subsection{ILP Under Answer Set Semantics}
 
-There are several ILP non-monotoic learning frameworks under the Answer set semantics . We introduce two of them: \textit{Cautious Induction} and \textit{Brave Induction} (\cite{Sakama2009}), which are foundations of \textit{Learning from Answer Sets} discussed in Section \ref{section_las}.  (for other ILP frameworks, see \cite{Otero2001}, \cite{Inoue2014}, \cite{Corapi2012} and \cite{DeRaedt1997}). 
+There are several ILP non-monotoic learning frameworks under the Answer set semantics . We introduce two of them: \textit{Cautious Induction} and \textit{Brave Induction} (\cite{Sakama2009}), which are foundations of \textit{Learning from Answer Sets} discussed in Section \ref{section_las}.  (for other ILP frameworks, see \cite{Otero2001}, \cite{Inoue2014}, \cite{Corapi2012} and \cite{DeRaedt1997}).
 \subsubsection{Cautious Induction}
 % Sakama 2008 has no concept of negative examples in this paper.
 Cautious Induction task is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples.
@@ -253,7 +253,7 @@ One possible  H $\in$ ILP\textsubscript{cautious} is \{tennis$ \leftarrow$ exerc
 \end{examp}
 \label{cautious_induction_example}
 
-The limitation of Cautious Induction is that positive examples must be true for all Answer Sets and negative examples must not be included in any of the Answer Sets. These conditions may be too strict in some cases, and Cautious Induction is not able to accept the case where positive examples are true in some of the Answer Sets but not all Answer Sets of the program. 
+The limitation of Cautious Induction is that positive examples must be true for all Answer Sets and negative examples must not be included in any of the Answer Sets. These conditions may be too strict in some cases, and Cautious Induction is not able to accept the case where positive examples are true in some of the Answer Sets but not all Answer Sets of the program.
 
 \begin{examp} \normalfont Limitation of Cautious Induction (Example)
 
@@ -264,10 +264,10 @@ person(john).
 \end{examp}
 \label{limitation_cautious}
 
-In the example \ref{limitation_cautious}, neither of situation(john, awake) or situation(john, sleep) is false in all answer sets. In this example, it only return person(john). Thus no examples could be given to learn the choice rule. 
+In the example \ref{limitation_cautious}, neither of situation(john, awake) or situation(john, sleep) is false in all answer sets. In this example, it only return person(john). Thus no examples could be given to learn the choice rule.
 
 \subsubsection{Brave Induction}
-Brave Induction task is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ where, B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples. 
+Brave Induction task is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ where, B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples.
  H $\in$ ILP\textsubscript{brave} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if there is at least one answer set A of B $\cup$ H such that: \\
 $\forall$ e $\in$ E\textsuperscript{+} : e $\in$ A \\
 $\forall$ e $\in$ E\textsuperscript{-} : e $\notin$ A \\
@@ -280,7 +280,7 @@ B = $\begin{cases}
       \end{cases}$ \\
 E\textsubscript{+} = tennis \\
 E\textsubscript{-} = eat\_out \\
-One possible  H $\in$ ILP\textsubscript{brave} is \{tennis\}, which returns \{tennis, holidy, exercises\} as Answer Sets. 
+One possible  H $\in$ ILP\textsubscript{brave} is \{tennis\}, which returns \{tennis, holidy, exercises\} as Answer Sets.
 \end{examp}
 \label{brave_induction_example}
 
@@ -296,7 +296,7 @@ B = $\begin{cases}
 	super\_person(john).
 	\end{cases}$
 
-In order to learn the  constraint hypothesis H = \{ $\leftarrow$ not situation(P, awake), super\_person(P)\}, it is not possible to find an optimal solution. 
+In order to learn the  constraint hypothesis H = \{ $\leftarrow$ not situation(P, awake), super\_person(P)\}, it is not possible to find an optimal solution.
 \end{examp}
 \label{limitation_brave}
 
@@ -309,7 +309,7 @@ Examples used in LAS are \textit{Partial Interpretations}, which are of the form
 
 LAS is of the form $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is background knowledge, S\textsubscript{M} is hypothesis space, and E\textsuperscript{+} and E\textsuperscript{-} are examples of positive and negative partial interpretations. S\textsubscript{M} consists of a set of normal rules, choice rules and constraints. S\textsubscript{M} is specified by \textit{language bias} of the learning task using \textit{mode declaration}. Mode declaration, and specifies what can occur in an hypothesis by specifying the predicate, and has two parts: \textit{modeh} and \textit{modeb}.  modeh and modeb are the predicates that can occur in the head of the rule and body of the rule respectively. Language bias is the specification of the language in the hypothesis in order to reduce search space for the hypothesis.
 
-Given a learning task T, the set of all possible inductive solutions of T is denoted as ILP\textsubscript{LAS}(T), and a hypothesis H is an inductive solution of ILP\textsubscript{LAS}(T) $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ such that 
+Given a learning task T, the set of all possible inductive solutions of T is denoted as ILP\textsubscript{LAS}(T), and a hypothesis H is an inductive solution of ILP\textsubscript{LAS}(T) $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ such that
 \begin{enumerate}
 \item H $\subseteq$ S\textsubscript{M}
 \item $\forall$ e $\in$ E\textsuperscript{+} : $\exists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e
@@ -327,7 +327,7 @@ TODO
 %      \end{cases}$ \\
 %E\textsubscript{+} = tennis \\
 %E\textsubscript{-} = eat\_out \\
-%One possible  H $\in$ ILP\textsubscript{brave} is \{tennis\}, which returns \{tennis, holidy, exercises\} as Answer Sets. 
+%One possible  H $\in$ ILP\textsubscript{brave} is \{tennis\}, which returns \{tennis, holidy, exercises\} as Answer Sets.
 
 \end{examp}
 \label{las_example}
@@ -354,7 +354,7 @@ Given both definitions of positive and violating solutions, ILP\textsubscript{LA
 
 \subsubsection{Learning from Ordered Answer Sets (LOAS)}
 
-LOAS is an extension of ILASP by incorporating learning capability of weak constraints, is useful for modelling the agent's preferences (\cite{Law2015}). 
+LOAS is an extension of ILASP by incorporating learning capability of weak constraints, is useful for modelling the agent's preferences (\cite{Law2015}).
 Examples used for learning are ordered pairs of partial answer sets, which are of the form o = $\langle$ e\textsubscript{1},e\textsubscript{2} $\rangle$.  An ASP Program P \textit{bravely respects o } if and only if
 \begin{enumerate}
 \item $\exists$ A\textsubscript{1}, A\textsubscript{2} $\in$ Answer Sets(P) such that A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2}, and A\textsubscript{1} $\succ$\textsubscript{P} A\textsubscript{1}
@@ -365,7 +365,7 @@ P \textit{cautiously respects o } if and only if
 \item $\forall$ A\textsubscript{1}, A\textsubscript{2} $\in$ Answer Sets(P) such that A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2}, and A\textsubscript{1} $\succ$\textsubscript{P} A\textsubscript{1}
 \end{enumerate}
 
-LOAS task is of the form T = $\langle$ B, S\textsubscript{M}, E\textsubscript{+}, E\textsubscript{-}, O\textsuperscript{b},O\textsuperscript{c}$\rangle$ where O\textsuperscript{b} and O\textsuperscript{c} are brave and cautious orderings respectively, which are sets of ordering examples over set of positive partial interpretations E\textsuperscript{+}. 
+LOAS task is of the form T = $\langle$ B, S\textsubscript{M}, E\textsubscript{+}, E\textsubscript{-}, O\textsuperscript{b},O\textsuperscript{c}$\rangle$ where O\textsuperscript{b} and O\textsuperscript{c} are brave and cautious orderings respectively, which are sets of ordering examples over set of positive partial interpretations E\textsuperscript{+}.
 A hypothesis H is an inductive solution of T if and only if 
 \begin{enumerate}
 \item H $\subseteq$ S\textsubscript{M} in ILP\textsubscript{LOAS}(T)
@@ -374,10 +374,11 @@ A hypothesis H is an inductive solution of T if and only if
 \item $\forall$o $\in$ O\textsuperscript{c} B $\cup$ H cautiously respects o
 \end{enumerate}
 
-\subsubsection{A Context-dependent Learning from Ordered Answer Sets}
-
-ILASP task containing a contex-dependent example
-
+\subsubsection{A Context-dependent Learning from Ordered Answer Sets }
+\textit{Context-dependent learning from ordered answer sets (ILP\textsubscript{LOAS}\textsuperscript{context})} is a further generalisation of ILP\textsubscript{LOAS} with \textit{context-dependent examples}. 
+Context-dependent examples are examples to which each unique background knowledge (context) only applies. This way the background knowledge is more structured rather than one fixed background knowledge that are applied to all examples. 
+Formally, partial interpretation is of the form $\langle$ e, C $\rangle$ (called \textit{context-dependent partial interpretation (CDPI)}), where \textit{e} is a partial interpretation and C is a \textit{context}, an ASP program without weak constraints.
+A \textit{context-dependent ordering example (CDOE)} is of the form $\langle$ $\langle$e\textsubscript{1}, C\textsubscript{1} $\rangle$, $\langle$ e\textsubscript{2}, C\textsubscript{2} $\rangle$$\rangle$
 context-dependent partial interpretation (CDPI)
 
 Context-dependent ordering example (CDOE)
