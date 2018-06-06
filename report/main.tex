@@ -88,18 +88,15 @@
 
 There has been successful applications of deep reinforcement learning (DRL) a number of domains, such as video games (\cite{Mnih2015}), game of Go (\cite{Silver2016}) and robotics (\cite{Levine2015}). However, there are still a number of issues to overcome in this method.
 First, it requires a large amount of data for training the model, which requires a long time of learning process.
-Second, it is considered to be a black-box, meaning the decision making process is unknown to human user and therefore lacks explanation ability.
-Third there is no thoughts process to the decision making, which, as XX points out, is a fundamental to the artificial general intelligence.
+Second, it is considered to be a black-box, meaning the decision making process is unknown to human user and therefore lacks explanation ability. Third there is no thoughts process to the decision making, such as understanding relational representations or planning. 
 To tackle these problems, there are a number of different approaches the researchers have been experimenting.
-
-One of the methods is to incorporate symbolic representations into the system to achive more data-efficient learning, which shows a promissing results of this approach (\cite{Garnelo2016}).
-In this paper, we explore the potential of inductive logic problemming into reinforcement learning and attempt to solve the problems above.
+One of the methods is to incorporate symbolic representations into the system to achive more data-efficient learning, which shows a promissing potential of this approach (\cite{Garnelo2016}).
+In this paper, we explore a potential of incorporating inductive logic problemming into reinforcement learning and attempt to solve the problems above.
 The advantages of symbolic reinforcement learning are, first of all, the decision making mechanism is understandable by humans rather than being black-box.
-Second, it resembles how human reason. There is some aspects of try-and-error in human learning, but they explore reasonings to efficiently learn the surrounding or situations.
-Also they effectily use previous experience (background knowledge) when encountered a similar situation.
-Finally, the recent advance of ILP research is remarkable and there are a number of new algorithsm that effectively work in non-monotonic senarios based on Answer Set Programmings (ASPs).
+Second, it resembles how human reason. There is some aspects of try-and-error in human learning, but humans exploit reasonings to efficiently learn the surrounding or situations. Also they effectively use previous experience (background knowledge) when encountered a similar situation.
+Finally, the recent advance of ILP research enabled us to apply ILP in more complex situations and there are a number of new algorithms that effectively work in non-monotonic senarios based on Answer Set Programmings (ASPs).
 
-Recently there are a number of research that attempted to incorporate symbolic reasoning into DRL, but the combining inductive logic programming and reinforcement learning has not been explored.
+After \cite{Garnelo2016},  there are several researches that further explored incorporation of symbolic reasoning into DRL, but the combining inductive logic programming and reinforcement learning has not been explored.
 Because of the recent advancement of logic-based learning and deep reinforcement learning, combination of both approach would be a next explonation toward artificial general intelligence.
 
 In this paper, our objectives is to explore this new reseach field and see how this combination of the two different learning methods could enhance the learning capability.
@@ -422,7 +419,7 @@ P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\ve
 (Puterman, 1994)
 When an agent must make a sequence of decision, the sequential decision problem can be formalised using Markov decision process (MDP). MDPs formaly represent a fully observable environment of an agent for reinforcement learning.
 
-A MDP is of the form $\langle$ S, A, T\textsubscript{a}, R\textsubscript{a}, $\gamma$ $\rangle$ where: \\
+A MDP is of the form $\langle$ S, A, T\textsubscript{a}, R\textsubscript{a}, $\gamma$ $\rangle$ where:
 
 \begin{itemize}
 \item S is the set of finite states that is observable in the environment
