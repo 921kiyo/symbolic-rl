@@ -402,8 +402,9 @@ A hypothesis H is an inductive solution of T if and only if
 
 Two advantages of adding contex-dependent are it increases the efficiency of learning tasks, and more expressive structure of the background knowlege to particular examples.
 
-\section{Reinforcement Learning}
+\section{Reinforcement Learning (RL)}
 \label{rl}
+Reinforcement learning (RL) is another subfield of mathine learning regarding an agent's behaviour in an environment in order to maximise defined total reward. The agent interacts with an envirnment (Figure \ref{agent_env}), and at each time step, an agent takes an action and receive observation, which affects the environment state and the reward (or penality) it receives from the action outcome. In this section, we briefly introduce necessary background in RL for our research. 
 
 \begin{figure}[!htb]
 \centering
@@ -419,8 +420,7 @@ Two advantages of adding contex-dependent are it increases the efficiency of lea
 A state S\textsubscript{t} is Markov if and only if
 P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\vert$ S\textsubscript{1}, ..., S\textsubscript{t}] therefore the probability of reaching S\textsubscript{t+1} depends solely on S\textsubscript{t}, which captures all the relevant information from earilier history.
 (Puterman, 1994)
-There is an agent who interacts with an envirnment (Figure \ref{agent_env}). At each time step, an action taken by the agent affect the environment state and the reward (or penality) it receives from the action outcome. (TODO Observations)
-When an agnet must make a sequence of decision, the sequential decision problem can be formalised using Markov decision process (MDP). MDPs formaly represent a fully observable environment of an agent for reinforcement learning.
+When an agent must make a sequence of decision, the sequential decision problem can be formalised using Markov decision process (MDP). MDPs formaly represent a fully observable environment of an agent for reinforcement learning.
 
 A MDP is of the form $\langle$ S, A, T\textsubscript{a}, R\textsubscript{a}, $\gamma$ $\rangle$ where: \\
 
@@ -471,8 +471,27 @@ An action-value function evaluate a particular state by taking an action accordi
 
 q\textsubscript{$\pi$} = $\displaystyle \E[R\textsubscript{t+1} $[R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ... $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a, A\textsubscript{t+1 } = a,]
 
+\subsection{Model-based vs Model-free Learning}
 
+A model M is a representation of an MDP where the state space and action space are assumed to be known. The model represents state transitions and rewards. In this case, the problem to be solved becomes a planning problem. A planning is for a series of actions to achive the agent's goal.
+Most of the reinforcement learning problems are model-free learning, where M is not unknown and the agnet learns to achieve the goal by the interactions with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
 
+the performance of model-based RL is limited to optimal policy given the model M. Thus when the model is not a representation of the true MDP, the planning algorithms will not lead to the optimal policy, but suboptimal policy. The solution to this problem is either to use model-free approach when the model is inaccurate or incorporate undertainty of the model using XXX.
+
+One algorithm which combine both aspects of model learning is called Dyna (\cite{Sutton1990}), which is shown in Figure \ref{dyna}.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=8cm, height=6cm]{./figures/dyna}
+\caption{Relationships among learning, planning and acting \ref{Montague1999}}
+\label{dyna}
+\end{figure}
+
+Dyna learns a model from real experience and use the model to generate simulated experience to update the evaluation functions.
+
+This approach is more effective because the simulated experience is relatively easy to generate compared to having to have real experience, thus less iterations.
+
+TODO ADD MATH
 
 \subsection{Temporal-Difference (TD) Learning}
 
@@ -515,73 +534,40 @@ The optimal Q-function Q\textsuperscript{*}(s,a) represents XXX for the agent to
 % U(s) = max a Q(s,a)
 % The function is estimated by Q-learning, which repeately updates Q(s,a) using the Bellman Equation.
 
-TODO INSERT Q-learning ALGORITHM HERE
-
 Epsilon greedy
 
-\subsection{Model-based vs Model-free Learning}
-
-A model M is a representation of an MDP where the state space and action space are assumed to be known. The model represents state transitions and rewards. In this case, the problem to be solved becomes a planning problem. A planning is for a series of actions to achive the agent's goal.
-Most of the reinforcement learning problems are model-free learning, where M is not unknown and the agnet learns to achieve the goal by the interactions with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
-
-the performance of model-based RL is limited to optimal policy given the model M. Thus when the model is not a representation of the true MDP, the planning algorithms will not lead to the optimal policy, but suboptimal policy. The solution to this problem is either to use model-free approach when the model is inaccurate or incorporate undertainty of the model using XXX.
-
-One algorithm which combine both aspects of model learning is called Dyna (\cite{Sutton1990}), which is shown in Figure \ref{dyna}.
-
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=8cm, height=6cm]{./figures/dyna}
-\caption{Relationships among learning, planning and acting \ref{Montague1999}}
-\label{dyna}
-\end{figure}
-
-Dyna learns a model from real experience and use the model to generate simulated experience to update the evaluation functions.
-
-This approach is more effective because the simulated experience is relatively easy to generate compared to having to have real experience, thus less iterations.
-
-TODO ADD MATH
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Related Work}
 \label{related_work}
-% \section{Deep Reinforcement Learning and its issues}
 
-The use of symbolic representations to achieve data-efficient learning was traditionally discussed in relational reinforcement learnign (RLL).
+ \ref{Garnelo2016} introduced Deep Symbolic Reinforcement Learning (DSRL), a proof of concept for incorporating symbolic front end as a means of converting low-dimensional symbolic representation into spatio-temporal representations, which will be the state transitions input of reinforcement learning.
+EXPLAIN MORE
 
-More recently, \ref{Garnelo2016} introduced the proof of concept for incorporating symbolic front end as a means of converting low-dimensional symbolic representation into spatio-temporal representations, which will be the state transitions input of reinforcement learning.
+WEAKNESS
 
 just a symbolic representations and not learning
+
 segmentation was done manually.
-As demonstrated in XXX, a single pixel can dramatically influence the policy (Maybe not so important here??).
 
+Also using deep neural network front-end might also cause a problem [TODO Refer to "One pixel attack for fooling deep neural networks"]. As demonstrated in XXX, a single pixel can dramatically influence the policy (Maybe not so important here??).
 
-This symbolic approach was followed by \ref{Garcez2018}, which improved simbolic representations in two ways. First,
+There are a number of further research to their DSRL. \ref{Garcez2018} further improved the symbolic abstraction phase by incorporating relative position of each object with respect to every other object rather than absolute object position. They also assign priority to each Q-value function based on the relative distance of objects from an agent. 
 
+%The use of symbolic representations to achieve data-efficient learning was traditionally discussed in relational reinforcement learnign (RLL).
 
+TODO "Relational Recurrent Neural Networks"
 
-Transparency and interpretable capability of the model is another important aspect for machine learning applications.
+TODO "Relational Deep Reinforcement Learning"
 
-XXX[Programmati...] developed a programmatically interpretable reinforcement learning which finds a policy that can be represented in a human-readable programming language.
+%Transparency and interpretable capability of the model is another important aspect for machine learning applications.
 
-Two most studied approach for using previous learning exprience is meta-learning and transfer learning
+%XXX[Programmati...] developed a programmatically interpretable reinforcement learning which finds a policy that can be represented in a human-readable programming language.
+%
+%Two most studied approach for using previous learning exprience is meta-learning and transfer learning
 
-Artificial General Intelligence
+%The history of data-efficient learning
 
-Definision of AGI
+%Study of symbolic machine learning roots from Relational Reinforcement Learning
 
-The history of data-efficient learning
-What other people have done in this.
-
-The advance of statistical machine learning methods, especially deeep reinforcement learning
-
-AlphaGo, and AlphaGo Zero
-
-Study of symbolic machine learning roots from
-% Relational Reinforcement Learning
-
-Baysian Optimisation
-
-Symbolic Deep reinforcement learning
 
 Some implementation: German paper
 
@@ -589,8 +575,6 @@ The paper was the application of symbolic representatiojns into a very simple ga
 By contract, there is active reserach in symbolic machine learning, which focuses on logic=based learning rather than statistical machine learning.
 For example, XX shows the agent can learn XXX from a noisy examples, with only a very few training examples.
 
-
-% \section{Symbolic Reinforcement Learning}
 Incorporation of logic into reinforcement learning dates back to the study of relational reinforcement learning,
 
 
@@ -628,12 +612,14 @@ The proposed tentative architecture is shown in Figure \ref{proposed_architectur
 The inputs from the experience needs to be converted in ASP form, which can be used to proceed the inductive learning in ILASP(RL).
 Observations from the interaction with the environment are state transition, reward and action of the agent, which can be directly converted using XXX. Example \ref{ilasprl_input} is ASP input form that is feeded into ILASP(RL) phase.
 
-\begin{examp} (Examples for ILASPRL (input))
+\begin{examp} \normalfont (Examples for ILASPRL (input))
 
 agent\_before(S1, T1).
 
 agent\_after(S1, T1).
+
 reward(R).
+
 action(A).
 
 \end{examp}
@@ -643,7 +629,12 @@ action(A).
 
 Once the input is converted, the agent must learn the following definition of the model of the environment.
 
-\begin{examp} (Example of learning task (output))
+%\begin{examp} \normalfont LAS (Example)
+%
+%\end{examp}
+%\label{las_example}
+
+\begin{examp} \normalfont(Example of learning task (output))
 
 % valid\_move(C1, T):- \\
 %   adjacent(C1, C2), \\
@@ -674,7 +665,6 @@ The background knowldge is empty, and each example contain different transition 
 
 The model is updated as the agent explore more environment.
 
-
 In addition, when the environment has been changed during the exploration, the agent creates a new model for this new environment.
 
 
@@ -694,6 +684,10 @@ The basic architecture follows the similar method in XXX, but I also add symboli
 
 Apply ILASP to the ASP, which involves development of the pipeline of ILASP in Python
 
+
+\subsection{Generation of Simulated Experience using the Model}
+
+
 Finally use Q-learning that allow
 
 which measurement would you use? (grid word, something else? GVGAL games)
@@ -703,21 +697,22 @@ Common sense
 
 Lastly, I will also test the capability of transfer learning for this new method.
 
+
+
 \section{Project Outline}
 
-The next phase of the individual project is implementation and experiments. I will implement the proposed architecture using Python and ILASP (Clingo), and compare the performance
+The next phase of the individual project is implementation and experiments. We will implement the proposed architecture using Python and ILASPv3.1.0 (Clingo) (TODO INSERT REF), and compare the performance.
 
-The platform I am planning to use to measure the performance of my approach will be GVG-AI Framework, which was created for the General Video Game AI Competition \footnote{http://www.gvgai.net/}, which provides game environments for an agent that should be able to play a wide variety of games without knowing which games are to be played.
+The platform we are planning to use to measure the performance of my approach will be GVG-AI Framework, which was created for the General Video Game AI Competition \footnote{http://www.gvgai.net/}, which provides game environments for an agent that should be able to play a wide variety of games without knowing which games are to be played.
 The underline language is the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
 
-Especially, I will measure the following aspects of the new Algorithms
+Especially, we will measure the following aspects of the new Algorithms
 
 Learning efficiency
 
 Transfer Learning capability
 
 XXX
-
 
 The proposed architecture is not finalised and will be reviewed regularly as I proceed the development of the architecture.
 
