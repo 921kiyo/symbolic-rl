@@ -68,6 +68,12 @@ Ramon~P Otero.
 \newblock {\em Conference on Inductive Logic Programming (ILP)}, pages
   193--205, 2001.
 
+\bibitem{Puterman1994}
+{Puterman M.L.}
+\newblock {\em {Markov Decision Processes—Discrete Stochastic Dynamic
+  Programming}}.
+\newblock John Wiley {\&} Sons, Inc., New York, NY, 1994.
+
 \bibitem{Sakama2009}
 Chiaki Sakama and Katsumi Inoue.
 \newblock {Brave induction: A logical framework for learning from incomplete
@@ -93,5 +99,9 @@ Richard~S. Sutton.
 \newblock {Integrated Architectures for Learning, Planning, and Reacting Based
   on Approximating Dynamic Programming}.
 \newblock {\em Machine Learning Proceedings 1990}, 02254(1987):216--224, 1990.
+
+\bibitem{Watkins}
+Watkins.
+\newblock {Learning from Delayed Reward}.
 
 \end{thebibliography}

@@ -396,16 +396,15 @@ A hypothesis H is an inductive solution of T if and only if
 \item $\forall$o $\in$ O\textsuperscript{c} B $\cup$ H cautiously respects o
 \end{enumerate}
 
-
 Two advantages of adding contex-dependent are it increases the efficiency of learning tasks, and more expressive structure of the background knowlege to particular examples.
 
 \section{Reinforcement Learning (RL)}
 \label{rl}
-Reinforcement learning (RL) is another subfield of mathine learning regarding an agent's behaviour in an environment in order to maximise defined total reward. The agent interacts with an envirnment (Figure \ref{agent_env}), and at each time step, an agent takes an action and receive observation, which affects the environment state and the reward (or penality) it receives from the action outcome. In this section, we briefly introduce necessary background in RL for our research. 
+Reinforcement learning (RL) is another subfield of mathine learning regarding an agent's behaviour in an environment in order to maximise the total reward. As shown in Figure \ref{agent_env}, the agent interacts with an envirnment, and at each time step, an agent takes an action and receive observation, which affects the environment state and the reward (or penality) it receives by the action outcome. In this section, we briefly introduce necessary background in RL for our research. 
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=5cm, height=5cm]{./figures/agent_env}
+\includegraphics[width=6cm, height=6cm]{./figures/agent_env}
 \caption{Agent and Environment}
 \label{agent_env}
 \end{figure}
@@ -413,10 +412,9 @@ Reinforcement learning (RL) is another subfield of mathine learning regarding an
 % An RL agent may include either Policy, Value function or Model,
 
 \subsection{Markov Decision Process(MDP)}
+An agent interacts with an environment at a sequence of discrete time step, which is a part of the sequential history of observations, actions and rewards, which is of the form H\textsubscript{t} = O\textsubscript{1}, R\textsubscript{1}, A\textsubscript{1}, ..., A\textsubscript{t-1}, O\textsubscript{t}, R\textsubscript{t}.  A \textit{state} is a function of the history S\textsubscript{t} = f(H\textsubscript{t}), which determines the next environment.  A state S\textsubscript{t} is said to have Markov property if and only if
+P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\vert$ S\textsubscript{1}, ..., S\textsubscript{t}]. In other words, the probability of reaching S\textsubscript{t+1} depends only on S\textsubscript{t}, which captures all the relevant information from earilier history (\cite{Puterman1994}).
 
-A state S\textsubscript{t} is Markov if and only if
-P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\vert$ S\textsubscript{1}, ..., S\textsubscript{t}] therefore the probability of reaching S\textsubscript{t+1} depends solely on S\textsubscript{t}, which captures all the relevant information from earilier history.
-(Puterman, 1994)
 When an agent must make a sequence of decision, the sequential decision problem can be formalised using Markov decision process (MDP). MDPs formaly represent a fully observable environment of an agent for reinforcement learning.
 
 A MDP is of the form $\langle$ S, A, T\textsubscript{a}, R\textsubscript{a}, $\gamma$ $\rangle$ where:
@@ -516,7 +514,7 @@ The advantages of TD methods
 
 \subsection{Q-Learning}
 
-Q-learning is off-policy TD learning defined in [Watkin 1989], where the agent will not rely on the models of the environment (model-free leaning) and only knows about the possible states and actionns. The transition states and reward probability functions are unknown to the agent.
+Q-learning is off-policy TD learning defined in \cite{Watkins}, where the agent will not rely on the models of the environment (model-free leaning) and only knows about the possible states and actionns. The transition states and reward probability functions are unknown to the agent.
 It is of the form:
 
 %\begin{equation}

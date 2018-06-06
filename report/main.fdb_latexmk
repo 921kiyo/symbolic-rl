@@ -1,9 +1,9 @@
 # Fdb version 3
-["bibtex main"] 1528195317 "main.aux" "main.bbl" "main" 1528195317
+["bibtex main"] 1528312168 "main.aux" "main.bbl" "main" 1528312168
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "main.aux" 1528195317 7129 920791e0260db9392eddf29e3d8c097f ""
+  "main.aux" 1528312165 9256 7dec46ae20daa980a81811ffef8b9bee ""
   "main.bcf" 0 -1 0 ""
-  "references.bib" 1528195315 78221 0a8dd4a67fecd0b8391d01eaae864915 ""
+  "references.bib" 1528312096 79334 b9f052a6f393981bee412f69690e1eca ""
   (generated)
   "main.bbl"
   "main.blg"
@@ -148,9 +148,9 @@
   "notation.tex" 1528103832 362 dde8d17bdd645c497ea48e05d51963bd ""
   "titlepage.tex" 1528103832 1995 b33c89e3a284110d3cc1b5b405785394 ""
   (generated)
-  "main.toc"
   "main.out"
-  "main.brf"
-  "main.log"
   "main.pdf"
+  "main.log"
   "main.aux"
+  "main.brf"
+  "main.toc"
