@@ -8,7 +8,7 @@
 \BOOKMARK [2][]{subsection.2.1.5}{2.1.5 Inductive Learning of Answer Set Programs \(ILASP\)}{section.2.1}% 8
 \BOOKMARK [1][]{section.2.2}{2.2 Reinforcement Learning \(RL\)}{chapter.2}% 9
 \BOOKMARK [2][]{subsection.2.2.1}{2.2.1 Markov Decision Process\(MDP\)}{section.2.2}% 10
-\BOOKMARK [2][]{subsection.2.2.2}{2.2.2 Policy and Value Function}{section.2.2}% 11
+\BOOKMARK [2][]{subsection.2.2.2}{2.2.2 Policies and Value Functions}{section.2.2}% 11
 \BOOKMARK [2][]{subsection.2.2.3}{2.2.3 Model-based vs Model-free Learning}{section.2.2}% 12
 \BOOKMARK [2][]{subsection.2.2.4}{2.2.4 Temporal-Difference \(TD\) Learning}{section.2.2}% 13
 \BOOKMARK [2][]{subsection.2.2.5}{2.2.5 Q-Learning}{section.2.2}% 14

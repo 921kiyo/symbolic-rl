@@ -425,39 +425,31 @@ A MDP is of the form $\langle$ S, A, T\textsubscript{a}, R\textsubscript{a}, $\g
 \item T\textsubscript{a}(s, s$^\prime$) is a state transition in the form of probability matrix Pr(S\textsubscript{t+1} = s$^\prime$ $\vert$ s\textsubscript{t} = s, a\textsubscript{t} = a), which is the probablity that action a in state s at time t will result in state s$^\prime$ at time t+1.
 \item R is a reward function R\textsubscript{a}(s, s$^\prime$) = $\displaystyle \E[R\textsubscript{t+1} $ $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a], the expected immediate reward that action a in state s at time t will return
 \item $\gamma$ is a discount factor $\gamma$ $\in$ [0,1], which represents the preference of the agent for present rewards over future rewards
-
 \end{itemize}
 
-In MDPs, there is an element of delayed reward tradeoff between immediate rewards and its delayed reward
+%$\displaystyle \E[R\textsubscript{t+1} \vert$ S\textsubscript{t} = s]
+\subsection{Policies and Value Functions}
+\textit{value functions} estimate the expected return, or expected future rewarded,  for a given action in a given state. The expected reward for an agent is dependent on the agent's action. 
 
-A solution to the sequential decision problem is called a policy $\pi$, a sequence of actions that leads to a solution
+A solution to the sequential decision problem is called a \textit{policy $\pi$}, a sequence of actions that leads to a solution.
 % which is a distributin over actions given states.
 
+The state value function v\textsubscript{$\pi$}(s) under a policy $\pi$ , which is of the form: 
+
+v\textsubscript{$\pi$}(s) 
+
+A policy $\pi$ is optimal if it maximises the action-value function
 The transition and reward functions are not necessary to be known to compute $\pi$.
 
 An optimal policy $\pi^*$ is the one that maximise the total rewards in the environment.
 
-The total reward with a discount factor is
-
-The existence of the discount factor can be justified as follows:
-
-TODO
-$\displaystyle \E[R\textsubscript{t+1} \vert$ S\textsubscript{t} = s]
-
 Reinforcement learning is a method to get approximated optimal solution.
-
-\subsection{Policy and Value Function}
-
-An agent follows a policy
-
-
-A policy $\pi$ is optimal if it maximises the action-value function
 
 TODO on-policy and off-policy learning.
 
 A\textsubscript{t} = $\pi$(S\textsubscript{t})
 
-One of the common possibilibies is that the agent chooses an action in order to maximise the discounted sum of future rewards.
+One of the common possibilities is that the agent chooses an action in order to maximise the discounted sum of future rewards.
 
 A\textsubscript{t} to maximise R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ...
 

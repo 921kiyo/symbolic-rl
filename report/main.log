@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  6 JUN 2018 20:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  6 JUN 2018 21:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -676,41 +676,31 @@ Package pdftex.def Info: ./figures/agent_env.png used on input line 407.
 (pdftex.def)             Requested size: 170.72113pt x 170.72241pt.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/bch/b/n' tried instead on input line 408.
-
-
-Package natbib Warning: Citation `Puterman1994' on page 11 undefined on input l
-ine 416.
-
-[11 <./figures/agent_env.png>]
-<./figures/dyna.png, id=265, 243.91125pt x 175.65625pt>
+ [11 <./figures/agent_env.png>]
+<./figures/dyna.png, id=267, 243.91125pt x 175.65625pt>
 File: ./figures/dyna.png Graphic file (type png)
 
 <use ./figures/dyna.png>
-Package pdftex.def Info: ./figures/dyna.png used on input line 480.
+Package pdftex.def Info: ./figures/dyna.png used on input line 472.
 (pdftex.def)             Requested size: 227.62413pt x 170.72942pt.
 
 
-LaTeX Warning: Reference `Montague1999' on page 12 undefined on input line 481.
+LaTeX Warning: Reference `Montague1999' on page 12 undefined on input line 473.
 
 
 
-LaTeX Warning: Reference `Montague1999' on page 12 undefined on input line 481.
+LaTeX Warning: Reference `Montague1999' on page 12 undefined on input line 473.
 
 
-[12]
-
-Package natbib Warning: Citation `Watkins' on page 13 undefined on input line 5
-17.
-
-[13 <./figures/dyna.png>] [14]
+[12] [13 <./figures/dyna.png>]
 Chapter 3.
 
-LaTeX Warning: Reference `Garnelo2016' on page 15 undefined on input line 537.
+LaTeX Warning: Reference `Garnelo2016' on page 14 undefined on input line 529.
 
 
-LaTeX Warning: Reference `Garcez2018' on page 15 undefined on input line 548.
+LaTeX Warning: Reference `Garcez2018' on page 14 undefined on input line 540.
 
-[15
+[14
 
 ]
 Chapter 4.
@@ -718,11 +708,11 @@ Chapter 4.
 File: ./figures/ILASRL.png Graphic file (type png)
 
 <use ./figures/ILASRL.png>
-Package pdftex.def Info: ./figures/ILASRL.png used on input line 597.
+Package pdftex.def Info: ./figures/ILASRL.png used on input line 589.
 (pdftex.def)             Requested size: 426.80879pt x 256.09094pt.
- [16
+ [15
 
- <./figures/ILASRL.png>] [17] [18]
+ <./figures/ILASRL.png>] [16] [17]
 Chapter 5.
 Missing character: There is no â in font bchr7t!
 Missing character: There is no € in font bchr7t!
@@ -731,60 +721,61 @@ Missing character: There is no â in font bchr7t!
 Missing character: There is no € in font bchr7t!
 Missing character: There is no  in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 726--787
+Overfull \hbox (9.14763pt too wide) in alignment at lines 718--779
  [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 787
+Underfull \vbox (badness 10000) detected at line 779
  []
 
 Missing character: There is no â in font bchr7t!
 Missing character: There is no € in font bchr7t!
 Missing character: There is no “ in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 787--848
+Overfull \hbox (9.14763pt too wide) in alignment at lines 779--840
  [] [] [] 
  []
 
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 848--853
+Overfull \hbox (9.14763pt too wide) in alignment at lines 840--845
  [] [] [] 
  []
 
-[19
+[18
 
-] [20] (./main.bbl (./main.brf)
+] [19] (./main.bbl (./main.brf)
 \tf@brf=\write5
 \openout5 = `main.brf'.
 
- [21] [22
+ [20] [21
 
-])
-
-Package natbib Warning: There were undefined citations.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 874.
-[23]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 874.
+]
+Missing character: There is no â in font bchri7t!
+Missing character: There is no € in font bchri7t!
+Missing character: There is no ” in font bchri7t!
+)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 866.
+ [22]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 866.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 874.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 874.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 866.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 866.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 21156499DBC4D2546ACF0EE0010E2590;1718.
+(rerunfilecheck)             Checksum: 7554F53AD34F0FF16F6A4ABD7DEBB870;1721.
 Package rerunfilecheck Info: File `main.brf' has not changed.
-(rerunfilecheck)             Checksum: 7F11BCFD89A755E21A1D641061F76376;951.
+(rerunfilecheck)             Checksum: 1A6042B00E5C0DD79C6813F819338B4B;1058.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 874.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 866.
  ) 
 Here is how much of TeX's memory you used:
- 10709 strings out of 494353
- 154637 string characters out of 6170044
- 287827 words of memory out of 5000000
- 13712 multiletter control sequences out of 15000+600000
+ 10720 strings out of 494353
+ 154822 string characters out of 6170044
+ 287859 words of memory out of 5000000
+ 13722 multiletter control sequences out of 15000+600000
  44461 words of font info for 85 fonts, out of 8000000 for 9000
  452 hyphenation exceptions out of 8191
  41i,12n,43p,928b,531s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -802,10 +793,10 @@ are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (24 pages, 233192 bytes).
+Output written on main.pdf (23 pages, 233543 bytes).
 PDF statistics:
  406 PDF objects out of 1000 (max. 8388607)
- 356 compressed objects within 4 object streams
- 107 named destinations out of 1000 (max. 500000)
+ 357 compressed objects within 4 object streams
+ 108 named destinations out of 1000 (max. 500000)
  197 words of extra memory for PDF output out of 10000 (max. 10000000)
 
