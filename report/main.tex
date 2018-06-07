@@ -561,91 +561,65 @@ ASP BC\textsuperscript{+} translation was done manually.
 %There are a number of reseached conducted in applying DNN to symbolic reasoning.
 %[From GamePlay to Symbolic Reasoning]
 
-
 \chapter{Project Overview}
 \label{project_overview}
 
 \section{Proposed Architecture}
 \label{proposed_architecture_section}
 
-The proposed tentative architecture is shown in Figure \ref{proposed_architecture}. The overall architecture resembles Sutton's Dyna architecture (\cite{Sutton1990}), which combined both model-free learning and model-based learning.
+The proposed tentative architecture is shown in Figure \ref{proposed_architecture}. The overall architecture is based on Sutton's Dyna architecture (\cite{Sutton1990}), which combined both model-free learning and model-based learning. What is different from Dyna is the way we generate the model of the environment, which is explained in the following subsections. 
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=15cm, height=9cm]{./figures/ILASRL}
-\caption{Proposed reinforcement learning architecture. ILASPRL learns to generate a model and updates based on the interaction with the environment, which is used to facilite the policy evaluation. }
+\caption{Proposed reinforcement learning architecture. ILASP learns to generate a model and updates based on the interaction with the environment, which is used to facilite the policy evaluation. }
 \label{proposed_architecture}
 \end{figure}
 
 % TODO What would you learn in my context? Relashinship of the objects?
 % Objects, types, locations and interactions.
 
-TODO ADD GAME SCENARIOS
-
 \subsection{ASP Representation Generation}
 
-The inputs from the experience needs to be converted in ASP form, which can be used to proceed the inductive learning in ILASP(RL).
-Observations from the interaction with the environment are state transition, reward and action of the agent, which can be directly converted using XXX. Example \ref{ilasprl_input} is ASP input form that is feeded into ILASP(RL) phase.
+At the first stage,  the input of real experience needs to be converted in ASP form, which can be used to proceed the inductive learning in ILASP. The input used in ILASP is state transition, reward and action of the agent, which can be directly converted using a simple mapping table or an action language (such as BC\textsuperscript{+} as used in \cite{Ferreira2017}). The following ASP input is what is fed into ILASP. \\
 
-\begin{examp} \normalfont (Examples for ILASPRL (input))
 
-agent\_before(S1, T1).
+agent\_at\_before(cell(X,Y), T).
 
-agent\_after(S1, T1).
+agent\_at\_after(cell(X,Y), T).
 
 reward(R).
 
 action(A).
 
-\end{examp}
-\label{ilasprl_input}
+\subsection{Model Generation and Update using ILASP}
 
-\subsection{Model Generation and Update using ILASP(RL)}
+TODO ADD GAME SCENARIOS
 
-Once the input is converted, the agent must learn the following definition of the model of the environment.
+Once the input of the real experience is converted in ASP syntax, the agent should learn the rule the following definition of the model of the environment using ILASP. \\
 
-%\begin{examp} \normalfont LAS (Example)
-%
-%\end{examp}
-%\label{las_example}
-
-\begin{examp} \normalfont(Example of learning task (output))
-
-% valid\_move(C1, T):- \\
-%   adjacent(C1, C2), \\
-%   agent\_at(C2, T), \\
-%   not obstacle(C1, C2), \\
-%   not enemy(C1, C2). \\
-% \\
-% valid\_move(C1, T):- \\
-%   link(C2, C1), \\
-%   agent\_at(C2, T). \\
-valid\_move(C0, C1):- previous(C0, C1).
+valid\_move(C, T):- link(C, T).
 \\
-previous(C2, C1):-
+link(C2, T):- agent\_at(C1, T), adjacent(C0, C2), not obstacle(C0, C2).\\
+%state\_transition(C1, C2, T2):-
+%  agent\_at\_before(C1, T1),
+%  agent\_at\_after(C2, T2).\\
+agent\_at(C, T):- agent\_at\_after(C, T) \\
 
-agent\_at(C0, C1),
-adjacent(C0, C2),
-not obstacle(C0, C2),
-not enemy(C0, C2).
-\\
-state\_transition(S1, S2, T2):-
-  agent\_before(S1, T1),
-  agent\_after(S2, T2).
+The background knowldge is empty, and there are only positive examples in this task. Each example contains different transition history of the agent. Inclusions are valid moves and exclusions are invalid moves. Learning valid\_move is the same as learning the rule of the games (the model of the environment), and it is updated as the agent explores more in the environment.
 
-\end{examp}
-\label{learning_task}
+In addition to the rule of the game, learning the following concepts will be crucial for transfer capability, as this concept will be applicable to any types of game environments.  \\
 
-The background knowldge is empty, and each example contain different transition of the agent.
+adjacent(C1, C2):- cell(C1), cell(C2). \\
+obstacle(C1, C2):- enemy(C1, C2). \\
+obstacle(C1, C2):- wall(C1, C2). \\
+wall(C1, C2):- agent\_at\_before(C1, T1), agent\_at\_after(C1, T2) \\
+enermy(C1, C2):- agent\_at\_before(C1, T1), agent\_at\_after(C2, T2), reward(R), R $<$ -100 \\
 
-The model is updated as the agent explore more environment.
-
-In addition, when the environment has been changed during the exploration, the agent creates a new model for this new environment.
-
-In two different but similar scenarios, the model is generalised based on the two models, and the agent's model is more general which covers both games. Thus in theory, the agent should still be able to exploit the efficient learning from the model-based learning, facilitating the transfer learning.
+where it is assumed that the reward of -100 means losing the game or losing the agent's life. Once the agent has learned the concept of the game, it knows how to avoid the an obstable in the adjacent cell in a new environment. Example XX illustrates this transfer cabability. 
 
 
-Example: model refinement in a simple Grid world
+In addition, when the environment has been changed during the exploration, the agent creates a new model for this new environment. In two different but similar scenarios, the model is generalised based on the two models, and the agent's model is more general which covers both games. Thus in theory, the agent should still be able to exploit the efficient learning from the model-based learning, facilitating the transfer learning.
 
 
 Implement baseline performance (DQN, Q-learning, ASPRL)
@@ -670,20 +644,35 @@ Common sense
 
 Lastly, I will also test the capability of transfer learning for this new method.
 
-\section{Project Outline}
+\section{Further Research and Brief Implementation Plan}
 
-The next phase of the research is further research on the proposed architecture and implementation and experiments. We will implement the proposed architecture using Python and ILASPv3.1.0 (Clingo) \cite{Law2017}, and compare the performance.
+The next phase of the research is further research on the proposed architecture and implementation and experiments. 
 
-Investigations of whether ILASP can learn Adjacent is crucial for our proposed architecture. 
-Other alternative is possibility of learning \textit{Predictive Representations of State} or \textit{Affordance} [\cite{Sridharan2017}] for the agent. 
+\subsection{Further Research}
+The proposed architecture is not finalised and will be reviewed regularly as I proceed the development of the architecture.
+More research needs to be devoded in finalising the overall architecture, and the following issues needs to be considered. 
+\begin{itemize}
 
-The platform we are planning to use to measure the performance of my approach will be GVG-AI Framework, which was created for the General Video Game AI Competition \footnote{http://www.gvgai.net/}, game environments for an agent that should be able to play a wide variety of games without knowing which games are to be played.
-The underline language is the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
+\item Further investigation of whether ILASP can learn the concept of adjacent, which is useful concept to know in any environment. 
+\item How to generalise the agent's model when the environment changes. The new environment could be very similar to the previous one, or could be a completely different environment thus the agent should create a new internal model rather than generalising the existing model.
+\item The current proposed architecture is based on Dyna with simulated experiences. However, this might not be the best overall architecture, and the feasibility of using simulated experience with the learnt model with ILASP needs to be further investigated. 
+
+\item Possibility of using other representational concepts such as \textit{Predictive Representations of State} or \textit{Affordance} [\cite{Sridharan2017}] for the agent. 
+
+\item Preparation for a backup plan in case ILASP approach does not work.
+ 
+\end{itemize}
+
+\subsection{Experiment Implementation}
+
+Once the architecture is decided, we will implement it using Python and ILASPv3.1.0 (Clingo) \cite{Law2017}, and compare the performance with other learning methods using a game platform called GVG-AI Framework. 
 
 The two main measurements for the performance of our new architecture are learning efficiency and transfer Learning capability. 
 
+Other learning methods will be Q-Learning and Deep Q-Learning since these methods are widely used as benchmark. 
 
-The proposed architecture is not finalised and will be reviewed regularly as I proceed the development of the architecture.
+GVG-AI Framework was created for the General Video Game AI Competition \footnote{http://www.gvgai.net/}, game environments for an agent that should be able to play a wide variety of games without knowing which games are to be played.
+The underline language is the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
 
 % \section{Contribution}
 %

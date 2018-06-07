@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  7 JUN 2018 16:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  7 JUN 2018 21:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -580,7 +580,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hypcap package is loaded.
 Package caption Info: End \AtBeginDocument code.
 Package backref Info: ** backref set up for natbib ** on input line 40.
-(./titlepage.tex <./figures/imperial.pdf, id=92, 362.35374pt x 95.35625pt>
+(./titlepage.tex <./figures/imperial.pdf, id=100, 362.35374pt x 95.35625pt>
 File: ./figures/imperial.pdf Graphic file (type pdf)
 
 <use ./figures/imperial.pdf>
@@ -668,7 +668,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 348--349
 
  []
 
-[9] [10] <./figures/agent_env.png, id=254, 248.93pt x 228.855pt>
+[9] [10] <./figures/agent_env.png, id=264, 248.93pt x 228.855pt>
 File: ./figures/agent_env.png Graphic file (type png)
 
 <use ./figures/agent_env.png>
@@ -677,7 +677,7 @@ Package pdftex.def Info: ./figures/agent_env.png used on input line 407.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/bch/b/n' tried instead on input line 408.
  [11 <./figures/agent_env.png>] [12]
-<./figures/dyna.png, id=273, 243.91125pt x 175.65625pt>
+<./figures/dyna.png, id=283, 243.91125pt x 175.65625pt>
 File: ./figures/dyna.png Graphic file (type png)
 
 <use ./figures/dyna.png>
@@ -740,27 +740,58 @@ line 555.
 
 [16]
 Chapter 4.
-<./figures/ILASRL.png, id=299, 543.02875pt x 333.245pt>
+<./figures/ILASRL.png, id=309, 543.02875pt x 333.245pt>
 File: ./figures/ILASRL.png Graphic file (type png)
 
 <use ./figures/ILASRL.png>
-Package pdftex.def Info: ./figures/ILASRL.png used on input line 575.
+Package pdftex.def Info: ./figures/ILASRL.png used on input line 574.
 (pdftex.def)             Requested size: 426.80879pt x 256.09094pt.
 
-Underfull \vbox (badness 6910) has occurred while \output is active []
+
+Package natbib Warning: Citation `Ferreira2017' on page 17 undefined on input l
+ine 584.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 584--585
+
+ []
+
+
+Underfull \vbox (badness 7558) has occurred while \output is active []
 
  [17
 
- <./figures/ILASRL.png>] [18]
+ <./figures/ILASRL.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 599--600
 
-Package natbib Warning: Citation `Law2017' on page 19 undefined on input line 6
-75.
+ []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 601--608
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 611--612
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 613--618
+
+ []
+
+[18]
 
 Package natbib Warning: Citation `Sridharan2017' on page 19 undefined on input 
-line 678.
+line 660.
 
 [19]
+
+Package natbib Warning: Citation `Law2017' on page 20 undefined on input line 6
+68.
+
+[20]
 Chapter 5.
 Missing character: There is no â in font bchr7t!
 Missing character: There is no € in font bchr7t!
@@ -769,34 +800,34 @@ Missing character: There is no â in font bchr7t!
 Missing character: There is no € in font bchr7t!
 Missing character: There is no  in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 700--761
+Overfull \hbox (9.14763pt too wide) in alignment at lines 689--750
  [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 761
+Underfull \vbox (badness 10000) detected at line 750
  []
 
 Missing character: There is no â in font bchr7t!
 Missing character: There is no € in font bchr7t!
 Missing character: There is no “ in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 761--822
+Overfull \hbox (9.14763pt too wide) in alignment at lines 750--811
  [] [] [] 
  []
 
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 822--827
+Overfull \hbox (9.14763pt too wide) in alignment at lines 811--816
  [] [] [] 
  []
 
-[20
+[21
 
-] [21] (./main.bbl (./main.brf)
+] [22] (./main.bbl (./main.brf)
 \tf@brf=\write5
 \openout5 = `main.brf'.
 
- [22] [23
+ [23] [24
 
 ]
 Missing character: There is no â in font bchri7t!
@@ -806,26 +837,26 @@ Missing character: There is no ” in font bchri7t!
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 848.
-[24]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 848.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 837.
+[25]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 837.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 848.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 848.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 837.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 837.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 7A504798B1ABA1EDBF4A132E6A8C6A3A;1722.
+(rerunfilecheck)             Checksum: B302E3630A1D171AB0BB9D015CB9F5C5;1906.
 Package rerunfilecheck Info: File `main.brf' has not changed.
-(rerunfilecheck)             Checksum: 849605551EB149C8D39F42D6FCFB2EAD;1058.
+(rerunfilecheck)             Checksum: 973AEFBCC0634A69A896974F4E07AB17;1065.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 848.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 837.
  ) 
 Here is how much of TeX's memory you used:
- 10734 strings out of 494353
- 154992 string characters out of 6170044
- 287867 words of memory out of 5000000
+ 10735 strings out of 494353
+ 155015 string characters out of 6170044
+ 287736 words of memory out of 5000000
  13732 multiletter control sequences out of 15000+600000
  44461 words of font info for 85 fonts, out of 8000000 for 9000
  452 hyphenation exceptions out of 8191
@@ -844,10 +875,10 @@ are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (25 pages, 240648 bytes).
+Output written on main.pdf (26 pages, 243032 bytes).
 PDF statistics:
- 419 PDF objects out of 1000 (max. 8388607)
- 368 compressed objects within 4 object streams
- 112 named destinations out of 1000 (max. 500000)
- 197 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 430 PDF objects out of 1000 (max. 8388607)
+ 378 compressed objects within 4 object streams
+ 113 named destinations out of 1000 (max. 500000)
+ 213 words of extra memory for PDF output out of 10000 (max. 10000000)
 
