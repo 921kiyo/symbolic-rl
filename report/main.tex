@@ -533,44 +533,33 @@ However, there a number of drawbacks on this approach. First, the extraction of 
 Third, the proposed method successfully used symbolic representations to achieve more data-efficient learning. However, there is still potential to apply symbolic learning to those symbolic representations to further improve the learning efficiency, which is what we attemp to do in this paper. 
 \ref{Garcez2018} further explored thissymbolic abstraction approach by incorporating relative position of each object with respect to every other object rather than absolute object position. They also assign priority to each Q-value function based on the relative distance of objects from an agent.
 
+\cite{Zambaldi2018} added relational reinforcement learning, classical subfield of research aiming to combining reinforcement learning with relational learning or Inductive Logic Programming,  on top of the symbolic deep learning approach and achieved by incorporating more abstract planning, and applied to much more complicate game environment than what was used in  \ref{Garnelo2016}. 
+
+
+They incorporated a deep RL with architectural inductive biases
+structured representations of the game, and relatioal reasoning. 
 
 %The use of symbolic representations to achieve data-efficient learning was traditionally discussed in relational reinforcement learnign (RLL).
 
-%TODO "Relational Recurrent Neural Networks" \cite{Santoro2018}
-
-\cite{Zambaldi2018} added relational reinforcement learning on top of the symbolic deep learning approach and achieved by incorporating more abstract planning. 
-
-This idea of adding planning capabiity is aligned to our approach. In this paper, we explore how to effectively learn the model of the environment and effectively use it to facilitate data-efficient learning and transfer learning capability. 
+This idea of adding planning capability is aligned to our approach of using ILP to improve a RL agent. In this paper, we explore how to effectively learn the model of the environment and effectively use it to facilitate data-efficient learning and transfer learning capability. 
 
 %Transparency and interpretable capability of the model is another important aspect for machine learning applications.
 
 %XXX[Programmati...] developed a programmatically interpretable reinforcement learning which finds a policy that can be represented in a human-readable programming language.
-%
-%Two most studied approach for using previous learning exprience is meta-learning and transfer learning
 
 %The history of data-efficient learning
 
-%Study of symbolic machine learning roots from Relational Reinforcement Learning
+Another approach for using symbolic reinforcement learning is storing heuristics expressed by konwledge bases [\cite{Apeldoorn2017}].  An agent lerans the concept of \textit{Hierarchical Knowledge Bases (HKBs)} [which is defined in more details in \cite{Apeldoorn2016} and \cite{Apeldoorn}] at every iteration of training, which contains multiple rules (state-action pairs).  The agent then is able to decide itself when it should exploit the heuristic rather than the state-action pairs of the RL using  \textit{Strategic Depth}. This approach effectively used the heuristic knowledge bases, which acts as a sym-symbolic model of the game. 
 
+Another related field to our research is combining ASP and RL. The original concept of ASP + RL was in \cite{Ferreira2017}, where they develop an algorithm that iteratively 
+In \cite{Ferreira2017a}, they developed an algorithm efficiently find the optimal solution of an MDP of non-stationary domains by using ASP to find the possible trajectories of an MDP. This approach focused more on efficient update on Q function. In order to find stationary sets, the extension of ASP called BC\textsuperscript{+}, an action language,  was used which can be directly translated the agent's actions into ASP form, and provide sequences of actions in Answer Sets. 
 
-Another approach for using representation is using heuristics in \cite{Apeldoorn2017}. 
+ASP BC\textsuperscript{+} translation was done manually. 
 
-There are several studies attempting to combine ASP and RL. \cite{Ferreira2017a} (this is implementation)
+%Incorporation of logic into reinforcement learning dates back to the study of relational reinforcement learning,
 
-The original idea of ASP + RL was in \cite{Ferreira2017a}. 
-
-By contract, there is active reserach in symbolic machine learning, which focuses on logic-based learning rather than statistical machine learning.
-For example, XX shows the agent can learn XXX from a noisy examples, with only a very few training examples.
-
-Incorporation of logic into reinforcement learning dates back to the study of relational reinforcement learning,
-
-
-More recently there has been a number of attempts to incorporate ASP into reinforcement learning.
-
-There are a number of reseached conducted in applying DNN to symbolic reasoning.
-For example,
-
-[From GamePlay to Symbolic Reasoning]
+%There are a number of reseached conducted in applying DNN to symbolic reasoning.
+%[From GamePlay to Symbolic Reasoning]
 
 
 \chapter{Project Overview}
@@ -686,7 +675,7 @@ Lastly, I will also test the capability of transfer learning for this new method
 The next phase of the research is further research on the proposed architecture and implementation and experiments. We will implement the proposed architecture using Python and ILASPv3.1.0 (Clingo) \cite{Law2017}, and compare the performance.
 
 Investigations of whether ILASP can learn Adjacent is crucial for our proposed architecture. 
-Other alternative is \textit{Predictive Representations of State}. 
+Other alternative is possibility of learning \textit{Predictive Representations of State} or \textit{Affordance} [\cite{Sridharan2017}] for the agent. 
 
 The platform we are planning to use to measure the performance of my approach will be GVG-AI Framework, which was created for the General Video Game AI Competition \footnote{http://www.gvgai.net/}, game environments for an agent that should be able to play a wide variety of games without knowing which games are to be played.
 The underline language is the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
