@@ -441,9 +441,15 @@ where G\textsubscript{t} = R\textsubscript{t+1} + $\gamma$R\textsubscript{t+2} +
 A policy $\pi$ is optimal if it maximises the action-value function
 The transition and reward functions are not necessary to be known to compute $\pi$.
 
-An optimal policy $\pi^*$ is the one that maximise the total rewards in the environment.
+Among all possible value functions, an \textit{optimal policy $\pi^*$} is the one that maximise the total rewards in the environment.
 
-Reinforcement learning is a method to get approximated optimal solution.
+v\textsuperscript{*}(s) = $\underset{\pi}{\max}$ v\textsubscript{$\pi$}(s) 
+
+The optimal policy $\pi$\textsuperscript{*} corresponds to v\textsuperscript{*}(s)
+
+$\pi$\textsuperscript{*} = arg max v\textsubscript{$\pi$}(s)
+
+%Reinforcement learning is a method to get approximated optimal solution.
 
 TODO on-policy and off-policy learning.
 
@@ -501,22 +507,23 @@ However, because bootstraping is update an estimate for an estimate, some bias i
 
 \subsection{Q-Learning}
 
-Q-learning is off-policy TD learning defined in \cite{Watkins}, where the agent will not rely on the models of the environment (model-free leaning) and only knows about the possible states and actionns. The transition states and reward probability functions are unknown to the agent.
+Q-learning is off-policy TD learning defined in \cite{Watkins}, where the agent only knows about the possible states and actionns. The transition states and reward probability functions are unknown to the agent.
 It is of the form:
 
+\begin{equation}
+Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\textsubscript{t}) +  \alpha(R\textsubscript{t+1} + \gamma  max (a+t) Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))
+\end{equation}
 %\begin{equation}
-Q(s\textsubscript{t},a\textsubscript{t}) $\leftarrow$ Q(s\textsubscript{t},a\textsubscript{t})
-%Q(s\textsubscript{t},a\textsubscript{t}) $\leftarrow$ Q(s\textsubscript{t},a\textsubscript{t}) + \alpha(R\textsubscript{t+1} + $\gamma$ max (a+t) Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))
-%\end{equation}
+
 where $\alpha$ is the learning rate, $\gamma$ is a discount rate between 0 and 1. The equation is used to update the state-action value function called Q function. The function Q(S,A) predicts the best action A in state S to maximise the total cumulative rewards.
-The optimal Q-function Q\textsuperscript{*}(s,a) represents XXX for the agent to selection action a given that it is in state s.
+The optimal Q-function Q\textsuperscript{*}(s,a) is directly approximated by the learned action-value function Q. 
 
 % Model free can be done using Monte Carlo Policy evaluation
 % One way to solve the Bellman Optimality equation is Q-leraning
 % U(s) = max a Q(s,a)
 % The function is estimated by Q-learning, which repeately updates Q(s,a) using the Bellman Equation.
 
-Epsilon greedy
+Epsilon greedy $\epsilon$ is the probability of choosing an action randomly instea of the greedy action. 
 
 \chapter{Related Work}
 \label{related_work}

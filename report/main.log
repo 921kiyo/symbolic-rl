@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  7 JUN 2018 10:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  7 JUN 2018 11:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -676,63 +676,63 @@ Package pdftex.def Info: ./figures/agent_env.png used on input line 407.
 (pdftex.def)             Requested size: 170.72113pt x 170.72241pt.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/bch/b/n' tried instead on input line 408.
- [11 <./figures/agent_env.png>]
-<./figures/dyna.png, id=267, 243.91125pt x 175.65625pt>
+ [11 <./figures/agent_env.png>] [12]
+<./figures/dyna.png, id=273, 243.91125pt x 175.65625pt>
 File: ./figures/dyna.png Graphic file (type png)
 
 <use ./figures/dyna.png>
-Package pdftex.def Info: ./figures/dyna.png used on input line 472.
+Package pdftex.def Info: ./figures/dyna.png used on input line 478.
 (pdftex.def)             Requested size: 227.62413pt x 170.72942pt.
 
 
-LaTeX Warning: Reference `Montague1999' on page 12 undefined on input line 473.
+LaTeX Warning: Reference `Montague1999' on page 13 undefined on input line 479.
 
 
 
-LaTeX Warning: Reference `Montague1999' on page 12 undefined on input line 473.
+LaTeX Warning: Reference `Montague1999' on page 13 undefined on input line 479.
 
 
-[12] [13 <./figures/dyna.png>] [14]
+[13 <./figures/dyna.png>] [14]
 Chapter 3.
 
-LaTeX Warning: Reference `Garnelo2016' on page 15 undefined on input line 524.
+LaTeX Warning: Reference `Garnelo2016' on page 15 undefined on input line 531.
 
 
-Package natbib Warning: Citation `Su2017' on page 15 undefined on input line 53
-3.
+Package natbib Warning: Citation `Su2017' on page 15 undefined on input line 54
+0.
 
 
-LaTeX Warning: Reference `Garcez2018' on page 15 undefined on input line 536.
+LaTeX Warning: Reference `Garcez2018' on page 15 undefined on input line 543.
 
 
 Package natbib Warning: Citation `Santoro2018' on page 15 undefined on input li
-ne 540.
+ne 547.
 
 
 Package natbib Warning: Citation `Zambaldi2018' on page 15 undefined on input l
-ine 542.
+ine 549.
 
 
 Package natbib Warning: Citation `Apeldoorn2017' on page 15 undefined on input 
-line 555.
+line 562.
 
 
 Package natbib Warning: Citation `Ferreira2017a' on page 15 undefined on input 
-line 557.
+line 564.
 
 
 Package natbib Warning: Citation `Ferreira2017a' on page 15 undefined on input 
-line 559.
+line 566.
 
 [15
 
 ]
 Chapter 4.
-<./figures/ILASRL.png, id=294, 543.02875pt x 333.245pt>
+<./figures/ILASRL.png, id=295, 543.02875pt x 333.245pt>
 File: ./figures/ILASRL.png Graphic file (type png)
 
 <use ./figures/ILASRL.png>
-Package pdftex.def Info: ./figures/ILASRL.png used on input line 585.
+Package pdftex.def Info: ./figures/ILASRL.png used on input line 592.
 (pdftex.def)             Requested size: 426.80879pt x 256.09094pt.
 
 Underfull \vbox (badness 6910) has occurred while \output is active []
@@ -742,7 +742,7 @@ Underfull \vbox (badness 6910) has occurred while \output is active []
  <./figures/ILASRL.png>] [17]
 
 Package natbib Warning: Citation `Law2017' on page 18 undefined on input line 6
-87.
+94.
 
 [18]
 Chapter 5.
@@ -753,24 +753,24 @@ Missing character: There is no â in font bchr7t!
 Missing character: There is no € in font bchr7t!
 Missing character: There is no  in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 712--773
+Overfull \hbox (9.14763pt too wide) in alignment at lines 719--780
  [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 773
+Underfull \vbox (badness 10000) detected at line 780
  []
 
 Missing character: There is no â in font bchr7t!
 Missing character: There is no € in font bchr7t!
 Missing character: There is no “ in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 773--834
+Overfull \hbox (9.14763pt too wide) in alignment at lines 780--841
  [] [] [] 
  []
 
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 834--839
+Overfull \hbox (9.14763pt too wide) in alignment at lines 841--846
  [] [] [] 
  []
 
@@ -790,33 +790,25 @@ Missing character: There is no ” in font bchri7t!
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 860.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 867.
 [23]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 860.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 867.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 860.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 860.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 867.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 867.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 7A504798B1ABA1EDBF4A132E6A8C6A3A;1722.
+Package rerunfilecheck Info: File `main.brf' has not changed.
+(rerunfilecheck)             Checksum: A4024666C0A3C32DBE9D9FA2AB3CFBE0;1058.
 
-
-Package rerunfilecheck Warning: File `main.brf' has changed.
-(rerunfilecheck)                Rerun to get bibliographical references right.
-
-Package rerunfilecheck Info: Checksums for `main.brf':
-(rerunfilecheck)             Before: 1A6042B00E5C0DD79C6813F819338B4B;1058
-(rerunfilecheck)             After:  46607FFCDDC7CD7BBF1BE7D7BE456523;1058.
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 860.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 867.
  ) 
 Here is how much of TeX's memory you used:
- 10728 strings out of 494353
- 154917 string characters out of 6170044
+ 10729 strings out of 494353
+ 154931 string characters out of 6170044
  287859 words of memory out of 5000000
  13728 multiletter control sequences out of 15000+600000
  44461 words of font info for 85 fonts, out of 8000000 for 9000
@@ -836,10 +828,10 @@ are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (24 pages, 236114 bytes).
+Output written on main.pdf (24 pages, 238164 bytes).
 PDF statistics:
- 413 PDF objects out of 1000 (max. 8388607)
- 363 compressed objects within 4 object streams
- 110 named destinations out of 1000 (max. 500000)
+ 414 PDF objects out of 1000 (max. 8388607)
+ 364 compressed objects within 4 object streams
+ 111 named destinations out of 1000 (max. 500000)
  197 words of extra memory for PDF output out of 10000 (max. 10000000)
 
