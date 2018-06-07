@@ -411,11 +411,11 @@ Reinforcement learning (RL) is another subfield of mathine learning regarding an
 
 % An RL agent may include either Policy, Value function or Model,
 
-\subsection{Markov Decision Process(MDP)}
-An agent interacts with an environment at a sequence of discrete time step, which is a part of the sequential history of observations, actions and rewards, which is of the form H\textsubscript{t} = O\textsubscript{1}, R\textsubscript{1}, A\textsubscript{1}, ..., A\textsubscript{t-1}, O\textsubscript{t}, R\textsubscript{t}.  A \textit{state} is a function of the history S\textsubscript{t} = f(H\textsubscript{t}), which determines the next environment.  A state S\textsubscript{t} is said to have Markov property if and only if
+\subsection{Markov Decision Process (MDP)}
+An agent interacts with an environment at a sequence of discrete time step, which is a part of the sequential history of observations, actions and rewards. The sequential history is formalised as H\textsubscript{t} = O\textsubscript{1}, R\textsubscript{1}, A\textsubscript{1}, ..., A\textsubscript{t-1}, O\textsubscript{t}, R\textsubscript{t}.  A \textit{state} is a function of the history S\textsubscript{t} = f(H\textsubscript{t}), which determines the next environment.  A state S\textsubscript{t} is said to have Markov property if and only if
 P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\vert$ S\textsubscript{1}, ..., S\textsubscript{t}]. In other words, the probability of reaching S\textsubscript{t+1} depends only on S\textsubscript{t}, which captures all the relevant information from earilier history (\cite{Puterman1994}).
 
-When an agent must make a sequence of decision, the sequential decision problem can be formalised using Markov decision process (MDP). MDPs formaly represent a fully observable environment of an agent for reinforcement learning.
+When an agent must make a sequence of decision, the sequential decision problem can be formalised using Markov decision process (MDP). MDPs formaly represent a fully observable environment of an agent for RL.
 
 A MDP is of the form $\langle$ S, A, T\textsubscript{a}, R\textsubscript{a}, $\gamma$ $\rangle$ where:
 
@@ -429,14 +429,14 @@ A MDP is of the form $\langle$ S, A, T\textsubscript{a}, R\textsubscript{a}, $\g
 
 %$\displaystyle \E[R\textsubscript{t+1} \vert$ S\textsubscript{t} = s]
 \subsection{Policies and Value Functions}
-\textit{value functions} estimate the expected return, or expected future rewarded,  for a given action in a given state. The expected reward for an agent is dependent on the agent's action. 
-
-A solution to the sequential decision problem is called a \textit{policy $\pi$}, a sequence of actions that leads to a solution.
+\textit{value functions} estimate the expected return, or expected future rewarded,  for a given action in a given state. The expected reward for an agent is dependent on the agent's action. A solution to the sequential decision problem is called a \textit{policy $\pi$}, a sequence of actions that leads to a solution.
 % which is a distributin over actions given states.
 
-The state value function v\textsubscript{$\pi$}(s) under a policy $\pi$ , which is of the form: 
+The state value function v\textsubscript{$\pi$}(s) of an MDP under a policy $\pi$ is th the expected return starting from state , which is of the form: 
 
-v\textsubscript{$\pi$}(s) 
+v\textsubscript{$\pi$}(s) = $\displaystyle \E$[G\textsubscript{t} $\vert$ S\textsubscript{t} = s]
+
+where G\textsubscript{t} = R\textsubscript{t+1} + $\gamma$R\textsubscript{t+2} + ... (the total discounted reward from t). 
 
 A policy $\pi$ is optimal if it maximises the action-value function
 The transition and reward functions are not necessary to be known to compute $\pi$.
@@ -453,7 +453,6 @@ One of the common possibilities is that the agent chooses an action in order to 
 
 A\textsubscript{t} to maximise R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ...
 
-
 An action-value function evaluate a particular state by taking an action according the policy
 
 q\textsubscript{$\pi$} = $\displaystyle \E[R\textsubscript{t+1} $[R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ... $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a, A\textsubscript{t+1 } = a,]
@@ -461,11 +460,11 @@ q\textsubscript{$\pi$} = $\displaystyle \E[R\textsubscript{t+1} $[R\textsubscrip
 \subsection{Model-based vs Model-free Learning}
 
 A model M is a representation of an MDP where the state space and action space are assumed to be known. The model represents state transitions and rewards. In this case, the problem to be solved becomes a planning problem. A planning is for a series of actions to achive the agent's goal.
-Most of the reinforcement learning problems are model-free learning, where M is not unknown and the agnet learns to achieve the goal by the interactions with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
+Most of the reinforcement learning problems are model-free learning, where M is not unknown and the agnet learns to achieve the goal by sorely interacticting with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
 
-the performance of model-based RL is limited to optimal policy given the model M. Thus when the model is not a representation of the true MDP, the planning algorithms will not lead to the optimal policy, but suboptimal policy. The solution to this problem is either to use model-free approach when the model is inaccurate or incorporate undertainty of the model using XXX.
+The performance of model-based RL is limited to optimal policy given the model M. Thus when the model is not a representation of the true MDP, the planning algorithms will not lead to the optimal policy, but suboptimal policy. The solution to this problem is either to use model-free approach when the model is inaccurate or incorporate undertainty of the model using XXX.
 
-One algorithm which combine both aspects of model learning is called Dyna (\cite{Sutton1990}), which is shown in Figure \ref{dyna}.
+One algorithm which combine both aspects of model learning to solve the issue of sub-optimality is called Dyna (\cite{Sutton1990}), which is shown in Figure \ref{dyna}.
 
 \begin{figure}[!htb]
 \centering
@@ -496,7 +495,7 @@ Update value
 
 where R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) is the estimated return (a.k.a TD target)
 
-R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) - V(S\textsubscript{t}) is TD error.sudo add-apt-repository ppa:texworks/stable
+R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) - V(S\textsubscript{t}) is TD
 
 TD updates the estimate by using the estimates of XXX (bootstrap).
 
@@ -510,8 +509,8 @@ Q-learning is off-policy TD learning defined in \cite{Watkins}, where the agent 
 It is of the form:
 
 %\begin{equation}
-%Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\textsubscript{t}) + \alpha(R\textsubscript{t+1} + \gamma max (a+t) Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))
-%
+Q(s\textsubscript{t},a\textsubscript{t}) $\leftarrow$ Q(s\textsubscript{t},a\textsubscript{t})
+%Q(s\textsubscript{t},a\textsubscript{t}) $\leftarrow$ Q(s\textsubscript{t},a\textsubscript{t}) + \alpha(R\textsubscript{t+1} + $\gamma$ max (a+t) Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))
 %\end{equation}
 where $\alpha$ is the learning rate, $\gamma$ is a discount rate between 0 and 1. The equation is used to update the state-action value function called Q function. The function Q(S,A) predicts the best action A in state S to maximise the total cumulative rewards.
 The optimal Q-function Q\textsuperscript{*}(s,a) represents XXX for the agent to selection action a given that it is in state s.
@@ -535,15 +534,16 @@ just a symbolic representations and not learning
 
 segmentation was done manually.
 
-Also using deep neural network front-end might also cause a problem [TODO Refer to "One pixel attack for fooling deep neural networks"]. As demonstrated in XXX, a single pixel can dramatically influence the policy (Maybe not so important here??).
+Also using deep neural network front-end might also cause a problem \cite{Su2017}. As demonstrated in XXX, a single pixel can dramatically influence the policy (Maybe not so important here??).
+
 
 There are a number of further research to their DSRL. \ref{Garcez2018} further improved the symbolic abstraction phase by incorporating relative position of each object with respect to every other object rather than absolute object position. They also assign priority to each Q-value function based on the relative distance of objects from an agent. 
 
 %The use of symbolic representations to achieve data-efficient learning was traditionally discussed in relational reinforcement learnign (RLL).
 
-TODO "Relational Recurrent Neural Networks"
+TODO "Relational Recurrent Neural Networks" \cite{Santoro2018}
 
-TODO "Relational Deep Reinforcement Learning"
+TODO "Relational Deep Reinforcement Learning" \cite{Zambaldi2018}
 
 %Transparency and interpretable capability of the model is another important aspect for machine learning applications.
 
@@ -556,10 +556,13 @@ TODO "Relational Deep Reinforcement Learning"
 %Study of symbolic machine learning roots from Relational Reinforcement Learning
 
 
-Some implementation: German paper
+Another approach for using representation is using heuristics in \cite{Apeldoorn2017}. 
 
-The paper was the application of symbolic representatiojns into a very simple game to demonstrate this proof of concept would actually work.
-By contract, there is active reserach in symbolic machine learning, which focuses on logic=based learning rather than statistical machine learning.
+There are several studies attempting to combine ASP and RL. \cite{Ferreira2017a} (this is implementation)
+
+The original idea of ASP + RL was in \cite{Ferreira2017a}. 
+
+By contract, there is active reserach in symbolic machine learning, which focuses on logic-based learning rather than statistical machine learning.
 For example, XX shows the agent can learn XXX from a noisy examples, with only a very few training examples.
 
 Incorporation of logic into reinforcement learning dates back to the study of relational reinforcement learning,
@@ -571,9 +574,6 @@ There are a number of reseached conducted in applying DNN to symbolic reasoning.
 For example,
 
 [From GamePlay to Symbolic Reasoning]
-
-
-TODO Explain how symbolic learning works
 
 
 \chapter{Project Overview}
@@ -593,6 +593,8 @@ The proposed tentative architecture is shown in Figure \ref{proposed_architectur
 
 % TODO What would you learn in my context? Relashinship of the objects?
 % Objects, types, locations and interactions.
+
+TODO ADD GAME SCENARIOS
 
 \subsection{ASP Representation Generation}
 
@@ -684,22 +686,18 @@ Common sense
 
 Lastly, I will also test the capability of transfer learning for this new method.
 
-
-
 \section{Project Outline}
 
-The next phase of the individual project is implementation and experiments. We will implement the proposed architecture using Python and ILASPv3.1.0 (Clingo) (TODO INSERT REF), and compare the performance.
+The next phase of the research is further research on the proposed architecture and implementation and experiments. We will implement the proposed architecture using Python and ILASPv3.1.0 (Clingo) \cite{Law2017}, and compare the performance.
 
-The platform we are planning to use to measure the performance of my approach will be GVG-AI Framework, which was created for the General Video Game AI Competition \footnote{http://www.gvgai.net/}, which provides game environments for an agent that should be able to play a wide variety of games without knowing which games are to be played.
+Investigations of whether ILASP can learn Adjacent is crucial for our proposed architecture. 
+Other alternative is \textit{Predictive Representations of State}. 
+
+The platform we are planning to use to measure the performance of my approach will be GVG-AI Framework, which was created for the General Video Game AI Competition \footnote{http://www.gvgai.net/}, game environments for an agent that should be able to play a wide variety of games without knowing which games are to be played.
 The underline language is the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
 
-Especially, we will measure the following aspects of the new Algorithms
+The two main measurements for the performance of our new architecture are learning efficiency and transfer Learning capability. 
 
-Learning efficiency
-
-Transfer Learning capability
-
-XXX
 
 The proposed architecture is not finalised and will be reviewed regularly as I proceed the development of the architecture.
 
