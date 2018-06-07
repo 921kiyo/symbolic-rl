@@ -20,10 +20,10 @@
 \contentsline {subsection}{\numberline {2.2.4}Temporal-Difference (TD) Learning}{13}{subsection.2.2.4}
 \contentsline {subsection}{\numberline {2.2.5}Q-Learning}{13}{subsection.2.2.5}
 \contentsline {chapter}{\numberline {3}Related Work}{15}{chapter.3}
-\contentsline {chapter}{\numberline {4}Project Overview}{16}{chapter.4}
-\contentsline {section}{\numberline {4.1}Proposed Architecture}{16}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}ASP Representation Generation}{17}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Model Generation and Update using ILASP(RL)}{17}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Generation of Simulated Experience using the Model}{18}{subsection.4.1.3}
-\contentsline {section}{\numberline {4.2}Project Outline}{18}{section.4.2}
-\contentsline {chapter}{\numberline {5}Ethics Checklist}{19}{chapter.5}
+\contentsline {chapter}{\numberline {4}Project Overview}{17}{chapter.4}
+\contentsline {section}{\numberline {4.1}Proposed Architecture}{17}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}ASP Representation Generation}{18}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Model Generation and Update using ILASP(RL)}{18}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Generation of Simulated Experience using the Model}{19}{subsection.4.1.3}
+\contentsline {section}{\numberline {4.2}Project Outline}{19}{section.4.2}
+\contentsline {chapter}{\numberline {5}Ethics Checklist}{20}{chapter.5}

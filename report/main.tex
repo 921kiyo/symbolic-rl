@@ -17,7 +17,7 @@
 % e.g. \newcommand{\reportauthor}{Timothy Kimber}
 \DeclareMathOperator{\E}{\mathbb{E}}
 
-\newcommand{\reporttitle}{Symbolic Reinforcement Learning using Inductive Logic Programming}
+\newcommand{\reporttitle}{Symbolic Reinforcement Learning using Inductive Logic Programming (DRAFT)}
 \newcommand{\reportauthor}{Kiyohito Kunii}
 \newcommand{\supervisor}{Professor Alessandra Russo}
 \newcommand{\degreetype}{MSc in Computing Science}
@@ -522,31 +522,25 @@ The optimal Q-function Q\textsuperscript{*}(s,a) is directly approximated by the
 % One way to solve the Bellman Optimality equation is Q-leraning
 % U(s) = max a Q(s,a)
 % The function is estimated by Q-learning, which repeately updates Q(s,a) using the Bellman Equation.
-
-Epsilon greedy $\epsilon$ is the probability of choosing an action randomly instea of the greedy action. 
+Q-learning learns the value of its deterministic greedy policy from the experience and gradually converge to the optimal Q-function. It also explored following \textit{$\epsilon$-greedy policy}, which is a stochastic greedy policy, but with the probability of $\epsilon$, the agent chooses an action randomly instea of the greedy action. 
 
 \chapter{Related Work}
 \label{related_work}
+In this section, I summarise recent studies related to symbolic (deep) reinforcement learning. 
 
- \ref{Garnelo2016} introduced Deep Symbolic Reinforcement Learning (DSRL), a proof of concept for incorporating symbolic front end as a means of converting low-dimensional symbolic representation into spatio-temporal representations, which will be the state transitions input of reinforcement learning.
-EXPLAIN MORE
+ \ref{Garnelo2016} introduced Deep Symbolic Reinforcement Learning (DSRL), a proof of concept for incorporating symbolic front end as a means of converting low-dimensional symbolic representation into spatio-temporal representations, which will be the state transitions input of reinforcement learning. DSRL extracts features using consolutional neural newtorks \cite{LeCunL1998} and auto-encoder, which are transformed into symbolic representations for relevant object types and posititions of the objects, which represents abstract state-space. These abstract representations are the input for Q-learning algorithm to learn a policy on this particular state-space. DSRL was shown to outperform DRL on a stochastic variant environments. 
+However, there a number of drawbacks on this approach. First, the extraction of the individual objects was done by manually defined threhold of feature activation values, given that the games were geometrically simple. This approach would not scale in a slightly complex game scenarios. Second, using deep neural network front-end might also cause a problem. As demonstrated in \cite{Su2017}, a single irrelevant pixel could dramatically influence state through the change in CNN.
+Third, the proposed method successfully used symbolic representations to achieve more data-efficient learning. However, there is still potential to apply symbolic learning to those symbolic representations to further improve the learning efficiency, which is what we attemp to do in this paper. 
+\ref{Garcez2018} further explored thissymbolic abstraction approach by incorporating relative position of each object with respect to every other object rather than absolute object position. They also assign priority to each Q-value function based on the relative distance of objects from an agent.
 
-WEAKNESS
-
-just a symbolic representations and not learning
-
-segmentation was done manually.
-
-Also using deep neural network front-end might also cause a problem \cite{Su2017}. As demonstrated in XXX, a single pixel can dramatically influence the policy (Maybe not so important here??).
-
-
-There are a number of further research to their DSRL. \ref{Garcez2018} further improved the symbolic abstraction phase by incorporating relative position of each object with respect to every other object rather than absolute object position. They also assign priority to each Q-value function based on the relative distance of objects from an agent. 
 
 %The use of symbolic representations to achieve data-efficient learning was traditionally discussed in relational reinforcement learnign (RLL).
 
-TODO "Relational Recurrent Neural Networks" \cite{Santoro2018}
+%TODO "Relational Recurrent Neural Networks" \cite{Santoro2018}
 
-TODO "Relational Deep Reinforcement Learning" \cite{Zambaldi2018}
+\cite{Zambaldi2018} added relational reinforcement learning on top of the symbolic deep learning approach and achieved by incorporating more abstract planning. 
+
+This idea of adding planning capabiity is aligned to our approach. In this paper, we explore how to effectively learn the model of the environment and effectively use it to facilitate data-efficient learning and transfer learning capability. 
 
 %Transparency and interpretable capability of the model is another important aspect for machine learning applications.
 
@@ -659,7 +653,6 @@ The model is updated as the agent explore more environment.
 
 In addition, when the environment has been changed during the exploration, the agent creates a new model for this new environment.
 
-
 In two different but similar scenarios, the model is generalised based on the two models, and the agent's model is more general which covers both games. Thus in theory, the agent should still be able to exploit the efficient learning from the model-based learning, facilitating the transfer learning.
 
 
@@ -678,7 +671,6 @@ Apply ILASP to the ASP, which involves development of the pipeline of ILASP in P
 
 
 \subsection{Generation of Simulated Experience using the Model}
-
 
 Finally use Q-learning that allow
 
