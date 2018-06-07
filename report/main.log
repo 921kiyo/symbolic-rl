@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.28)  7 JUN 2018 00:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  7 JUN 2018 10:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **main.tex
 (./main.tex
 LaTeX2e <2016/02/01>
-Babel <3.9q> and hyphenation patterns for 3 language(s) loaded.
+Babel <3.9q> and hyphenation patterns for 17 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
@@ -441,8 +441,6 @@ File: babel.def 2016/02/24 3.9q Babel common definitions
 \babel@savecnt=\count135
 \U@D=\dimen150
 )
-\l@british = a dialect from \language\l@english 
-\l@UKenglish = a dialect from \language\l@english 
 \l@canadian = a dialect from \language\l@american 
 \l@australian = a dialect from \language\l@british 
 \l@newzealand = a dialect from \language\l@british 
@@ -683,70 +681,70 @@ LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10.95> not available
 File: ./figures/dyna.png Graphic file (type png)
 
 <use ./figures/dyna.png>
-Package pdftex.def Info: ./figures/dyna.png used on input line 471.
+Package pdftex.def Info: ./figures/dyna.png used on input line 472.
 (pdftex.def)             Requested size: 227.62413pt x 170.72942pt.
 
 
-LaTeX Warning: Reference `Montague1999' on page 12 undefined on input line 472.
+LaTeX Warning: Reference `Montague1999' on page 12 undefined on input line 473.
 
 
 
-LaTeX Warning: Reference `Montague1999' on page 12 undefined on input line 472.
+LaTeX Warning: Reference `Montague1999' on page 12 undefined on input line 473.
 
 
-[12] [13 <./figures/dyna.png>]
+[12] [13 <./figures/dyna.png>] [14]
 Chapter 3.
 
-LaTeX Warning: Reference `Garnelo2016' on page 14 undefined on input line 528.
+LaTeX Warning: Reference `Garnelo2016' on page 15 undefined on input line 524.
 
 
-Package natbib Warning: Citation `Su2017' on page 14 undefined on input line 53
-7.
+Package natbib Warning: Citation `Su2017' on page 15 undefined on input line 53
+3.
 
 
-LaTeX Warning: Reference `Garcez2018' on page 14 undefined on input line 540.
+LaTeX Warning: Reference `Garcez2018' on page 15 undefined on input line 536.
 
 
-Package natbib Warning: Citation `Santoro2018' on page 14 undefined on input li
-ne 544.
+Package natbib Warning: Citation `Santoro2018' on page 15 undefined on input li
+ne 540.
 
 
-Package natbib Warning: Citation `Zambaldi2018' on page 14 undefined on input l
-ine 546.
+Package natbib Warning: Citation `Zambaldi2018' on page 15 undefined on input l
+ine 542.
 
 
-Package natbib Warning: Citation `Apeldoorn2017' on page 14 undefined on input 
+Package natbib Warning: Citation `Apeldoorn2017' on page 15 undefined on input 
+line 555.
+
+
+Package natbib Warning: Citation `Ferreira2017a' on page 15 undefined on input 
+line 557.
+
+
+Package natbib Warning: Citation `Ferreira2017a' on page 15 undefined on input 
 line 559.
 
-
-Package natbib Warning: Citation `Ferreira2017a' on page 14 undefined on input 
-line 561.
-
-
-Package natbib Warning: Citation `Ferreira2017a' on page 14 undefined on input 
-line 563.
-
-[14
+[15
 
 ]
 Chapter 4.
-<./figures/ILASRL.png, id=289, 543.02875pt x 333.245pt>
+<./figures/ILASRL.png, id=294, 543.02875pt x 333.245pt>
 File: ./figures/ILASRL.png Graphic file (type png)
 
 <use ./figures/ILASRL.png>
-Package pdftex.def Info: ./figures/ILASRL.png used on input line 589.
+Package pdftex.def Info: ./figures/ILASRL.png used on input line 585.
 (pdftex.def)             Requested size: 426.80879pt x 256.09094pt.
 
 Underfull \vbox (badness 6910) has occurred while \output is active []
 
- [15
+ [16
 
- <./figures/ILASRL.png>] [16]
+ <./figures/ILASRL.png>] [17]
 
-Package natbib Warning: Citation `Law2017' on page 17 undefined on input line 6
-91.
+Package natbib Warning: Citation `Law2017' on page 18 undefined on input line 6
+87.
 
-[17]
+[18]
 Chapter 5.
 Missing character: There is no ‚ in font bchr7t!
 Missing character: There is no Ä in font bchr7t!
@@ -755,34 +753,34 @@ Missing character: There is no ‚ in font bchr7t!
 Missing character: There is no Ä in font bchr7t!
 Missing character: There is no ù in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 716--777
+Overfull \hbox (9.14763pt too wide) in alignment at lines 712--773
  [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 777
+Underfull \vbox (badness 10000) detected at line 773
  []
 
 Missing character: There is no ‚ in font bchr7t!
 Missing character: There is no Ä in font bchr7t!
 Missing character: There is no ì in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 777--838
+Overfull \hbox (9.14763pt too wide) in alignment at lines 773--834
  [] [] [] 
  []
 
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 838--843
+Overfull \hbox (9.14763pt too wide) in alignment at lines 834--839
  [] [] [] 
  []
 
-[18
+[19
 
-] [19] (./main.bbl (./main.brf)
+] [20] (./main.bbl (./main.brf)
 \tf@brf=\write5
 \openout5 = `main.brf'.
 
- [20] [21
+ [21] [22
 
 ]
 Missing character: There is no ‚ in font bchri7t!
@@ -792,29 +790,37 @@ Missing character: There is no î in font bchri7t!
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 864.
-[22]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 864.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 860.
+[23]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 860.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 864.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 864.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 860.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 860.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 7A504798B1ABA1EDBF4A132E6A8C6A3A;1722.
-Package rerunfilecheck Info: File `main.brf' has not changed.
-(rerunfilecheck)             Checksum: 1A6042B00E5C0DD79C6813F819338B4B;1058.
 
+
+Package rerunfilecheck Warning: File `main.brf' has changed.
+(rerunfilecheck)                Rerun to get bibliographical references right.
+
+Package rerunfilecheck Info: Checksums for `main.brf':
+(rerunfilecheck)             Before: 1A6042B00E5C0DD79C6813F819338B4B;1058
+(rerunfilecheck)             After:  46607FFCDDC7CD7BBF1BE7D7BE456523;1058.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 864.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 860.
  ) 
 Here is how much of TeX's memory you used:
- 10729 strings out of 494953
- 154927 string characters out of 6180976
- 286598 words of memory out of 5000000
- 13699 multiletter control sequences out of 15000+600000
+ 10728 strings out of 494353
+ 154917 string characters out of 6170044
+ 287859 words of memory out of 5000000
+ 13728 multiletter control sequences out of 15000+600000
  44461 words of font info for 85 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
+ 452 hyphenation exceptions out of 8191
  41i,12n,43p,928b,531s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/share/texlive/texmf-
@@ -830,10 +836,10 @@ are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (23 pages, 234007 bytes).
+Output written on main.pdf (24 pages, 236114 bytes).
 PDF statistics:
- 406 PDF objects out of 1000 (max. 8388607)
- 357 compressed objects within 4 object streams
- 108 named destinations out of 1000 (max. 500000)
+ 413 PDF objects out of 1000 (max. 8388607)
+ 363 compressed objects within 4 object streams
+ 110 named destinations out of 1000 (max. 500000)
  197 words of extra memory for PDF output out of 10000 (max. 10000000)
 

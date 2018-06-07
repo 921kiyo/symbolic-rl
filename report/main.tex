@@ -459,12 +459,13 @@ q\textsubscript{$\pi$} = $\displaystyle \E[R\textsubscript{t+1} $[R\textsubscrip
 
 \subsection{Model-based vs Model-free Learning}
 
-A model M is a representation of an MDP where the state space and action space are assumed to be known. The model represents state transitions and rewards. In this case, the problem to be solved becomes a planning problem. A planning is for a series of actions to achive the agent's goal.
-Most of the reinforcement learning problems are model-free learning, where M is not unknown and the agnet learns to achieve the goal by sorely interacticting with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
+A model M is a representation of an MDP where the state space and action space are assumed to be known. The model represents state transitions and rewards. In this case, the problem to be solved becomes a planning problem for a series of actions to achive the agent's goal.
+Most of the reinforcement learning problems are model-free learning, where M is not unknown and the agent learns to achieve the goal by sorely interacticting with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
 
-The performance of model-based RL is limited to optimal policy given the model M. Thus when the model is not a representation of the true MDP, the planning algorithms will not lead to the optimal policy, but suboptimal policy. The solution to this problem is either to use model-free approach when the model is inaccurate or incorporate undertainty of the model using XXX.
+The performance of model-based RL is limited to optimal policy given the model M. In other words, when the model is not a representation of the true MDP, the planning algorithms will not lead to the optimal policy, but suboptimal policy. 
+%The solution to this problem is either to use model-free approach when the model is inaccurate or incorporate undertainty of the model using XXX.
 
-One algorithm which combine both aspects of model learning to solve the issue of sub-optimality is called Dyna (\cite{Sutton1990}), which is shown in Figure \ref{dyna}.
+One algorithm which combine both aspects of model-based and model-free learning to solve the issue of sub-optimality is called Dyna (\cite{Sutton1990}), which is shown in Figure \ref{dyna}.
 
 \begin{figure}[!htb]
 \centering
@@ -477,31 +478,26 @@ Dyna learns a model from real experience and use the model to generate simulated
 
 This approach is more effective because the simulated experience is relatively easy to generate compared to having to have real experience, thus less iterations.
 
-TODO ADD MATH
-
 \subsection{Temporal-Difference (TD) Learning}
 
-To solve MDP, one of the approaches is called Temporal-Difference (TD) Learning.
+To solve a MDP, one of the approaches is called Temporal-Difference (TD) Learning.
+TD is an online model-free learning and learns directly from episodes of imcomplete experiences without a model of the environment.
+TD updates the estimate by using the estimates of value function by bootstrap, which is formalised as 
 
-TD learns directly from episodes of experiences, which can be imcomplete.
-TD does not require knowledge of MDP transitions and rewards (model-free)
-%Sutton 1988
+\begin{equation}
+\centering
+V(S\textsubscript{t}) \leftarrow V(S\textsubscript{t}) + \alpha[R\textsubscript{t+1} + \gamma V(S\textsubscript{t+1}) - V(S\textsubscript{t})]
+\end{equation}
 
-Update value
+where R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) is the target for TD update, which is biased estimated of v\textsubscript{$\pi$} (S\textsubscript{t}), and $\delta$ = R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) - V(S\textsubscript{t}) is called TD error, which is the error in V(S\textsubscript{t}) available at time t+1. 
 
+Since TD methods only needs to know the estimate of one step ahead and does not need the final outcome of the episodes, it can learn online after every time step. TD also works without the terminal state, which is the goal for an agent.
+
+TD(0) is proved to converge to v\textsubscript{$\pi$} in the table-based case (non-function approximation). 
+However, because bootstraping is update an estimate for an estimate, some bias is inevitable. And TD method is sensitive to initial value, (but low variance). 
 %\begin{equation}
 %\textbf{	V(S\textsubscript{t} \leftarrow V(S\textsubscript{t} + \alpha (R\textsubscript{t+1} + \gamma V(S\textsubscript{t+1}) - V(S\textsubscript{t}))
 %}\end{equation}
-
-where R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) is the estimated return (a.k.a TD target)
-
-R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) - V(S\textsubscript{t}) is TD
-
-TD updates the estimate by using the estimates of XXX (bootstrap).
-
-The advantages of TD methods
-- does not require any model of an environment.
-- online learning
 
 \subsection{Q-Learning}
 
