@@ -168,6 +168,7 @@ HB = \{ q(a), p(a) \} (Herbrand Base)
 Given above,  there are four Herbrand Interpretations = $\langle$ \{q(a)\}, \{p(a)\}, \{q(a), p(a)\}, \{\} $\rangle$, and one Herbrand Model (as well as M(P)) = \{q(a), p(a)\}
 
 \end{examp}
+% TODO: Use the same or similar examples for all of them. 
 
 \textit{Definite Logic Program} is a set of definite rule, and  a \textit{definite rule} is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, where h , a\textsubscript{1}, ..., a\textsubscript{n} are all atoms. h is the \textit{head} of the rule and a\textsubscript{1}, ..., a\textsubscript{n} are the \textit{body} of the rule.
 \textit{Normal Logic Program} is a set of normal rule, and a normal rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, \textit{not} b\textsubscript{1}, ..., \textit{not}  b\textsubscript{n} where h is the head of the rule,
@@ -319,18 +320,18 @@ Given a learning task T, the set of all possible inductive solutions of T is den
 
 %S\textsubscript{M} consists of all rules given the language bias.
 
-\begin{examp} \normalfont LAS
-
-TODO
-%B = $\begin{cases}
-%	exercises  \leftarrow not \ eat\_out. \\
-%	tennis \leftarrow holiday \\
-%      \end{cases}$ \\
-%E\textsubscript{+} = tennis \\
-%E\textsubscript{-} = eat\_out \\
-
-\end{examp}
-\label{las_example}
+%\begin{examp} \normalfont LAS
+%
+%TODO
+%%B = $\begin{cases}
+%%	exercises  \leftarrow not \ eat\_out. \\
+%%	tennis \leftarrow holiday \\
+%%      \end{cases}$ \\
+%%E\textsubscript{+} = tennis \\
+%%E\textsubscript{-} = eat\_out \\
+%
+%\end{examp}
+%\label{las_example}
 
 % Limitation of LAS??
 
@@ -430,39 +431,49 @@ A MDP is of the form $\langle$ S, A, T\textsubscript{a}, R\textsubscript{a}, $\g
 \subsection{Policies and Value Functions}
 \label{policy_value_functions_subsection}
 
-\textit{Value functions} estimate the expected return, or expected future rewarded,  for a given action in a given state. The expected reward for an agent is dependent on the agent's action. A solution to the sequential decision problem is called a \textit{policy $\pi$}, a sequence of actions that leads to a solution.
-% which is a distributin over actions given states.
+\textit{Value functions} estimate the expected return, or expected future rewarded,  for a given action in a given state. The expected reward for an agent is dependent on the agent's action.  The state value function v\textsubscript{$\pi$}(s) of an MDP under a policy $\pi$ is the expected return starting from state \textit{s}, which is of the form:
 
-The state value function v\textsubscript{$\pi$}(s) of an MDP under a policy $\pi$ is th the expected return starting from state , which is of the form:
+\begin{equation}
+v\textsubscript{$\pi$}(s) = \displaystyle \E [G\textsubscript{t} \vert S\textsubscript{t} = s]
+\end{equation}
 
-v\textsubscript{$\pi$}(s) = $\displaystyle \E$[G\textsubscript{t} $\vert$ S\textsubscript{t} = s]
+where G\textsubscript{t} = R\textsubscript{t+1} + $\gamma$R\textsubscript{t+2} + ... $\gamma$\textsuperscript{T-1}R\textsubscript{T} , or the total discounted reward from \textit{t}.
 
-where G\textsubscript{t} = R\textsubscript{t+1} + $\gamma$R\textsubscript{t+2} + ... (the total discounted reward from t).
+The optimal state-value function v\textsuperscript{*}(s) maximises the value function over all policies in the MDP, which is of the form:
 
-A policy $\pi$ is optimal if it maximises the action-value function
-The transition and reward functions are not necessary to be known to compute $\pi$.
+\begin{equation}
+v\textsuperscript{*}(s) = \underset{\pi}{\max} \ v\textsubscript{$\pi$}(s)
+\end{equation}
 
-Among all possible value functions, an \textit{optimal policy $\pi^*$} is the one that maximise the total rewards in the environment.
+The optimal action-value function q\textsuperscript{*}(s) maximises the action-value function over all policies in the MDP, which is of the form: 
 
-v\textsuperscript{*}(s) = $\underset{\pi}{\max}$ v\textsubscript{$\pi$}(s)
+\begin{equation}
+q\textsuperscript{*}(s, a) = \underset{\pi}{\max} \ q\textsubscript{$\pi$}(s, a)
+\end{equation}
 
-The optimal policy $\pi$\textsuperscript{*} corresponds to v\textsuperscript{*}(s)
+A solution to the sequential decision problem is called a \textit{policy $\pi$}, a sequence of actions that leads to a solution. An optimal policy achieves the optimal value function (or action-value function), and it can be computed by maximising over the optimal action-value function.  
+%A policy $\pi$ is optimal if it maximises the action-value function q()
+%The transition and reward functions are not necessary to be known to compute $\pi$.
+%Among all possible value functions, an \textit{optimal policy $\pi^*$} is the one that maximise the total rewards in the environment.
+%The optimal policy $\pi$\textsuperscript{*} corresponds to v\textsuperscript{*}(s)
 
-$\pi$\textsuperscript{*} = arg max v\textsubscript{$\pi$}(s)
+%\begin{equation}
+%\pi \textsuperscript{*} = 
+%%\pi \textsuperscript{*} = arg max v\textsubscript{\pi}(s)
+%\end{equation}
 
 %Reinforcement learning is a method to get approximated optimal solution.
-
 %TODO on-policy and off-policy learning.
 
-A\textsubscript{t} = $\pi$(S\textsubscript{t})
-
-One of the common possibilities is that the agent chooses an action in order to maximise the discounted sum of future rewards.
-
-A\textsubscript{t} to maximise R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ...
-
-An action-value function evaluate a particular state by taking an action according the policy
-
-q\textsubscript{$\pi$} = $\displaystyle \E[R\textsubscript{t+1} $[R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ... $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a, A\textsubscript{t+1 } = a,]
+%A\textsubscript{t} = $\pi$(S\textsubscript{t})
+%
+%One of the common possibilities is that the agent chooses an action in order to maximise the discounted sum of future rewards.
+%
+%A\textsubscript{t} to maximise R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ...
+%
+%An action-value function evaluate a particular state by taking an action according the policy
+%
+%q\textsubscript{$\pi$} = $\displaystyle \E[R\textsubscript{t+1} $[R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ... $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a, A\textsubscript{t+1 } = a,]
 
 \subsection{Model-based and Model-free Learning}
 \label{model_base_model_free_subsection}
@@ -476,12 +487,12 @@ One algorithm which combine both aspects of model-based and model-free learning 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=8cm, height=6cm]{./figures/dyna}
-\caption{Relationships among learning, planning and acting \ref{Montague1999}}
+%\caption{Relationships among learning, planning and acting \cite{Montague1999}}
+\caption{Relationships among learning, planning and acting}
 \label{dyna}
 \end{figure}
 
 Dyna learns a model from real experience and use the model to generate simulated experience to update the evaluation functions.
-
 This approach is more effective because the simulated experience is relatively easy to generate compared building up real experience, thus less iterations are required.
 
 \subsection{Temporal-Difference (TD) Learning}
@@ -499,7 +510,9 @@ V(S\textsubscript{t}) \leftarrow V(S\textsubscript{t}) + \alpha[R\textsubscript{
 where R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) is the target for TD update, which is biased estimated of v\textsubscript{$\pi$} (S\textsubscript{t}), and $\delta$ = R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) - V(S\textsubscript{t}) is called TD error, which is the error in V(S\textsubscript{t}) available at time t+1.
 Since TD methods only needs to know the estimate of one step ahead and does not need the final outcome of the episodes, it can learn online after every time step. TD also works without the terminal state, which is the goal for an agent.
 TD(0) is proved to converge to v\textsubscript{$\pi$} in the table-based case (non-function approximation).
-However, because bootstraping is update an estimate for an estimate, some bias is inevitable. And TD method is sensitive to initial value, (but low variance).
+However, because bootstraping updates an estimate for an estimate, some bias are inevitable. 
+%In addition, TD method is sensitive to initial value, (but low variance).
+
 %\begin{equation}
 %\textbf{	V(S\textsubscript{t} \leftarrow V(S\textsubscript{t} + \alpha (R\textsubscript{t+1} + \gamma V(S\textsubscript{t+1}) - V(S\textsubscript{t}))
 %}\end{equation}
