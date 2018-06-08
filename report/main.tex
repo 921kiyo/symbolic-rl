@@ -17,7 +17,7 @@
 % e.g. \newcommand{\reportauthor}{Timothy Kimber}
 \DeclareMathOperator{\E}{\mathbb{E}}
 
-\newcommand{\reporttitle}{Symbolic Reinforcement Learning using Inductive Logic Programming (DRAFT)}
+\newcommand{\reporttitle}{Symbolic Reinforcement Learning using Inductive Logic Programming (Background Report)}
 \newcommand{\reportauthor}{Kiyohito Kunii}
 \newcommand{\supervisor}{Professor Alessandra Russo}
 \newcommand{\degreetype}{MSc in Computing Science}
@@ -86,11 +86,11 @@
 % Figure~\ref{fig:logo} is an example of a figure.
 
 There have been successful applications of deep reinforcement learning (DRL) in a number of domains, such as video games \cite{Mnih2015}, the game of Go \cite{Silver2016} and robotics \cite{Levine2015}. However, there are still a number of issues to overcome with this method.
-First, it requires a large amount of data for training the model, and the leraning process takes a long time.
-Second, it is considered to be a black-box, meaning that the decision making process is unknown to the human user and therefore lacks explanation of the decision making. Third there is no thought process to the decision making, such as understanding relational representations or planning.
-To tackle these problems, researchers have explored several different approaches.
-One of the methods is to incorporate symbolic representations into the system to achieve more data-efficient learning \cite{Garnelo2016}. This approach is promising and shows a potential.
-In this paper, we extend this approach and explore the potential of incorporating inductive logic programming into reinforcement learning to solve the above issues.
+First, it requires large dataset for training the model, and the learning is very slow and requires significant amount of computation.
+Second, it is considered to be a black-box, meaning that the decision making process is unknown to the human user and therefore lacks explanation of the decision making. Third, there is no thought process to the decision making, such as understanding relational representations or planning. To tackle these problems, researchers have explored several different approaches.
+One of the methods is to incorporate symbolic representations into the system \cite{Garnelo2016}. This approach is promising and shows a potential.
+
+In this paper, we extend this symbolic representation approach and explore the potential of incorporating inductive logic programming into reinforcement learning to solve the above issues.
 There are several advantages of symbolic reinforcement learning. First of all, the decision making mechanism is understandable by humans rather than being black-box.
 Second, it resembles how humans reason. Like reinforcement learning, there are some aspects of trial-and-error in human learning, but humans exploit reasonings to efficiently learn about their surrounding or situations. They also effectively use previous experience (background knowledge) when encountering similar situations.
 Finally, the recent advance of ILP research has enabled us to apply ILP in more complex situations and there are a number of new algorithms that work well in non-monotonic scenarios based on Answer Set Programmings (ASPs).
@@ -178,16 +178,16 @@ To solve a normal logic program \textit{Th}, the program needs to be grounded. T
 
 \begin{examp} \normalfont Grounding \\
 
-X = \{p\}, P = $\begin{cases}
-	p  \leftarrow not \ q. \\
-	q  \leftarrow p.
-      \end{cases}$
+P = $\begin{cases}
+%	p(X)  \leftarrow not \ q(X). \\
+	q(X)  \leftarrow p(X). \\
+	p(a).
+      \end{cases}$ \\
 
-ground(P) in this case  is p:- not q. and q:- p. 
+ground(P) in this case  is \{p(a), q(a)\}. 
 
 \end{examp}
 \label{grounding}
-
 
 %TODO Explain grounding in ASP context.
 %The grounding of a normal logic program P can be obtained by replacing each rule in P with a ground instance of the rule, such that for each atom A in body\textsuperscript{+} (R) (TODO EXPLAIN WHAT THIS IS), already occurs in the head of another ground rule.
@@ -201,9 +201,9 @@ X = \{p\},   P = $\begin{cases}
 	p  \leftarrow not\ q. \\
   q  \leftarrow not\ p. \\
   r  \leftarrow p.
-      \end{cases}$
+      \end{cases}$ \\
 
-The first step removes q  $\leftarrow$ not p, and the second step will remove not q. Thus reduct P\textsuperscript{x} is \{p, r $\leftarrow$ p.\}
+Where X is a set of atoms. The first step removes q  $\leftarrow$ not p, and the second step will remove not q. Thus reduct P\textsuperscript{x} is \{p, r $\leftarrow$ p.\}
 \end{examp}
 \label{reduct}
 
@@ -498,7 +498,7 @@ This approach is more effective because the simulated experience is relatively e
 \subsection{Temporal-Difference (TD) Learning}
 \label{td_learning_section}
 
-To solve a MDP, one of the approaches is called Temporal-Difference (TD) Learning.
+To solve a MDP, one of the approaches is called \textit{Temporal-Difference (TD) Learning}.
 TD is an online model-free learning and learns directly from episodes of imcomplete experiences without a model of the environment.
 TD updates the estimate by using the estimates of value function by bootstrap, which is formalised as
 
@@ -520,7 +520,7 @@ However, because bootstraping updates an estimate for an estimate, some bias are
 \subsection{Q-Learning}
 \label{q_learning_section}
 
-Q-learning is off-policy TD learning defined in \cite{Watkins}, where the agent only knows about the possible states and actionns. The transition states and reward probability functions are unknown to the agent.
+\textit{Q-learning} is off-policy TD learning defined in \cite{Watkins}, where the agent only knows about the possible states and actionns. The transition states and reward probability functions are unknown to the agent.
 It is of the form:
 
 \begin{equation}
@@ -565,7 +565,7 @@ Another approach for using symbolic reinforcement learning is storing heuristics
 
 Another field related to our research is the combining of ASP and RL. The original concept of combining ASP and RL was in \cite{Ferreira2017}, where they developed an algorithm that efficiently finds the optimal solution of an MDP of non-stationary domains by using ASP to find the possible trajectories of an MDP. This approach focused more on efficient update of the Q function rather than inductive learning. In order to find stationary sets, an extension of ASP called BC\textsuperscript{+}, an action language,  was used. BC\textsuperscript{+} can directly translate the agent's actions into ASP form, and provide sequences of actions in Answer Sets.
 
-ASP BC\textsuperscript{+} translation was done manually.
+%ASP BC\textsuperscript{+} translation was done manually.
 
 %Incorporation of logic into reinforcement learning dates back to the study of relational reinforcement learning,
 
