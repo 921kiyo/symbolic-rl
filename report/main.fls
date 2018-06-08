@@ -78,6 +78,8 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/subdepth/subdepth.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/subdepth/subdepth.sty
 INPUT includes.tex
 INPUT includes.tex
 INPUT /usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
@@ -227,6 +229,7 @@ INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchri7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchri8r.tfm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omsbch.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omsbch.fd
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchr7t.tfm
 INPUT ./figures/agent_env.png
 INPUT ./figures/agent_env.png
 INPUT ./figures/agent_env.png
@@ -246,6 +249,9 @@ INPUT ./figures/dyna.png
 INPUT ./figures/ILASRL.png
 INPUT ./figures/ILASRL.png
 INPUT ./figures/ILASRL.png
+INPUT ./figures/grid_world.png
+INPUT ./figures/grid_world.png
+INPUT ./figures/grid_world.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchr7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm

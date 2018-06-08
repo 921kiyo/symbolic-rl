@@ -1,68 +1,63 @@
 This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
-The style file: plain.bst
+The style file: ieeetr.bst
 Database file #1: references.bib
 Repeated entry---line 497 of file references.bib
  : @article{DeRaedt1997
  :                     ,
 I'm skipping whatever remains of this entry
+Warning--empty journal in Levine2015
+Warning--empty journal in Garnelo2016
+Warning--empty journal in Law2015
 Name 1 in "{Y.LeCun, L.Bottou, Y.Bengio}, and P.Haffner" has a comma at the end for entry LeCunL1998
-while executing---line 1049 of file plain.bst
+while executing---line 969 of file ieeetr.bst
+Warning--empty journal in Su2017
+Warning--empty journal in Zambaldi2018
+Warning--empty journal in Apeldoorn2016
 Warning--empty journal in Apeldoorn
 Warning--empty year in Apeldoorn
-Warning--empty journal in Apeldoorn2016
-Warning--empty journal in Ferreira2017a
 Warning--empty journal in Ferreira2017
-Warning--empty journal in Garnelo2016
-Warning--there's a number but no volume in Gelfond1988
-Warning--empty journal in Law2015
 Warning--empty journal in Law2017
-Warning--empty journal in Levine2015
-Warning--there's a number but no volume in Sridharan2017
-Warning--empty journal in Su2017
-Name 1 in "{Y.LeCun, L.Bottou, Y.Bengio}, and P.Haffner" has a comma at the end for entry LeCunL1998
-while executing---line 1090 of file plain.bst
-Warning--empty journal in Zambaldi2018
 You've used 28 entries,
-            2118 wiz_defined-function locations,
-            666 strings with 9058 characters,
-and the built_in function-call counts, 10292 in all, are:
-= -- 963
-> -- 657
-< -- 4
-+ -- 260
-- -- 232
-* -- 806
-:= -- 1779
-add.period$ -- 82
+            1876 wiz_defined-function locations,
+            650 strings with 8529 characters,
+and the built_in function-call counts, 7687 in all, are:
+= -- 717
+> -- 387
+< -- 0
++ -- 141
+- -- 113
+* -- 589
+:= -- 1137
+add.period$ -- 28
 call.type$ -- 28
-change.case$ -- 199
+change.case$ -- 27
 chr.to.int$ -- 0
-cite$ -- 41
-duplicate$ -- 322
-empty$ -- 660
-format.name$ -- 232
-if$ -- 2031
+cite$ -- 38
+duplicate$ -- 360
+empty$ -- 674
+format.name$ -- 113
+if$ -- 1807
 int.to.chr$ -- 0
 int.to.str$ -- 28
 missing$ -- 27
-newline$ -- 141
-num.names$ -- 56
-pop$ -- 212
+newline$ -- 88
+num.names$ -- 28
+pop$ -- 93
 preamble$ -- 1
-purify$ -- 172
+purify$ -- 0
 quote$ -- 0
-skip$ -- 238
+skip$ -- 252
 stack$ -- 0
-substring$ -- 541
-swap$ -- 48
-text.length$ -- 4
+substring$ -- 499
+swap$ -- 141
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 110
-warning$ -- 13
-while$ -- 92
+type$ -- 0
+warning$ -- 10
+while$ -- 79
 width$ -- 30
-write$ -- 283
-(There were 3 error messages)
+write$ -- 252
+(There were 2 error messages)
