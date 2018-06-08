@@ -8,7 +8,7 @@
 \usepackage{amsthm}
 \usepackage{subdepth}
 \newtheorem{theorem}{Theorem}
-% Ctrl + Alt + B
+% Ctrl + Alt + B to compile in Atom
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -43,8 +43,6 @@
 % load title page
 \input{titlepage}
 
-
-
 % page numbering etc.
 \pagenumbering{roman}
 \clearpage{\pagestyle{empty}\cleardoublepage}
@@ -77,6 +75,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Introduction}
+\label{introduction}
 % IMPERIAL LOGO
 % \begin{figure}[tb]
 % \centering
@@ -86,24 +85,24 @@
 % \end{figure}
 % Figure~\ref{fig:logo} is an example of a figure.
 
-There has been successful applications of deep reinforcement learning (DRL) in a number of domains, such as video games \cite{Mnih2015}, game of Go \cite{Silver2016} and robotics \cite{Levine2015}. However, there are still a number of issues to overcome in this method.
-First, it requires a large amount of data for training the model, which requires a long time of learning process.
-Second, it is considered to be a black-box, meaning that the decision making process is unknown to human user and therefore lacks explanation ability. Third there is no thoughts process to the decision making, such as understanding relational representations or planning.
-To tackle these problems, several different approaches the researchers have been explored.
-One of the methods is to incorporate symbolic representations into the system to achive more data-efficient learning \cite{Garnelo2016}, which shows a promissing potential of this approach.
-In this paper, we extend this approach and explore a potential of incorporating inductive logic programming into reinforcement learning to to solve the above issues.
-The advantages of symbolic reinforcement learning are, first of all, the decision making mechanism is understandable by humans rather than being black-box.
-Second, it resembles how human reasons. Like reinforcement learning, there is some aspects of try-and-error in human learning, but humans exploit reasonings to efficiently learn the surrounding or situations. They also effectively use previous experience (background knowledge) when encountered a similar situation.
-Finally, the recent advance of ILP research enabled us to apply ILP in more complex situations and there are a number of new algorithms that work well in non-monotonic senarios based on Answer Set Programmings (ASPs).
+There have been successful applications of deep reinforcement learning (DRL) in a number of domains, such as video games \cite{Mnih2015}, the game of Go \cite{Silver2016} and robotics \cite{Levine2015}. However, there are still a number of issues to overcome with this method.
+First, it requires a large amount of data for training the model, and the leraning process takes a long time.
+Second, it is considered to be a black-box, meaning that the decision making process is unknown to the human user and therefore lacks explanation of the decision making. Third there is no thought process to the decision making, such as understanding relational representations or planning.
+To tackle these problems, researchers have explored several different approaches.
+One of the methods is to incorporate symbolic representations into the system to achieve more data-efficient learning \cite{Garnelo2016}. This approach is promising and shows a potential.
+In this paper, we extend this approach and explore the potential of incorporating inductive logic programming into reinforcement learning to solve the above issues.
+There are several advantages of symbolic reinforcement learning. First of all, the decision making mechanism is understandable by humans rather than being black-box.
+Second, it resembles how humans reason. Like reinforcement learning, there are some aspects of trial-and-error in human learning, but humans exploit reasonings to efficiently learn about their surrounding or situations. They also effectively use previous experience (background knowledge) when encountering similar situations.
+Finally, the recent advance of ILP research has enabled us to apply ILP in more complex situations and there are a number of new algorithms that work well in non-monotonic scenarios based on Answer Set Programmings (ASPs).
 
-After \cite{Garnelo2016},  especially, there are several researches that further explored incorporation of symbolic reasoning into DRL, but the combining inductive logic programming and reinforcement learning has not been explored.
-Because of the recent advancement of symbolic machine learning and deep reinforcement learning, combination of both approach would be a next exploration.
+Particularly since \cite{Garnelo2016}, there have been several researches that further explored the incorporation of symbolic reasoning into DRL, but the combining of inductive logic programming and reinforcement learning has not been explored.
+Because of the recent advancement of symbolic machine learning and deep reinforcement learning, a combination of both approaches would be the next fielf to explore.
 
-In this work, our objective is to explore this new reseach field and see how this combination of the two different learning methods could enhance the learning capability.
+In this work, our objective is to explore this new researchield and see how combination of the two different learning methods could enhance the learning capability.
 
-In this paper, I further explore incorporation of symbolic machine learning into reinforcement learning to achieve data-efficient learning using Inductive Learning of Answer Set Programs (ILASP), which is the state-of-art symbolic learning method that can be applied to imcomplete and more complex environment.
+In this paper, we further explore the incorporation of symbolic machine learning into reinforcement learning to achieve data-efficient learning using Inductive Learning of Answer Set Programs (ILASP), which is a state-of-art symbolic learning method that can be applied to incomplete and more complex environments.
 
-This background report will be the part of the final report and is organised as follows: In Chapter \ref{background}, necessary background of logic, inductive logic programming and reinforcement learning are described for this paper. Chapter \ref{related_work} discusses previous research in this particular approach and see the drawbacks of each approach. Chapter \ref{project_overview} shows the tentative architecture of our new approach, using Inductive Learning of Answer Set Programs (ILASP) to generate a model of the environment. We also discuss some of the issues we currently face and plan for the implementation. Finally the ethics checklist is provided in Chapter \ref{ethics_checklist}.
+This background report will be part of the final report and is organised as follows: In Chapter \ref{background}, the background of logic, inductive logic programming and reinforcement learning necessary for this paper are described. Chapter \ref{related_work} discusses previous research on this particular approach. Chapter \ref{project_overview} shows the tentative architecture of our new approach, using Inductive Learning of Answer Set Programs (ILASP) to generate a model of the environment. We also discuss some of the issues we currently face with the architecture and plan the implementation. Finally the ethics checklist is provided in Chapter \ref{ethics_checklist}.
 
 \chapter{Background}
 \label{background}
@@ -113,7 +112,7 @@ This chapter introduces necessary background of Inductive Logic Programming (Sec
 \section{Inductive Logic Programming (ILP)}
 \label{ilp}
 
-Inductive Logic Programming (ILP) is a subfield of machine learning research area aimed at the intersection between machine learning and logic programming \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and none of negative examples, given a hypothesis language for search space and cover relation (\cite{DeRaedt1997}). ILP is based on leraning from entailment, as shown in Equation \ref{ilp_equation}.
+Inductive Logic Programming (ILP) is a subfield of machine learning research area aimed at the intersection between machine learning and logic programming \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and none of negative examples, given a hypothesis language for search space and cover relation \cite{DeRaedt1997}. ILP is based on learning from entailment, as shown in Equation \ref{ilp_equation}.
 
 \begin{equation}
 B \wedge H \models E
@@ -126,13 +125,13 @@ One of the advantage of ILP over statistical machine learning is that the hypoth
 
 One of the limitations of ILP is learning efficiency. There are usually thousands or more examples in many real-world examples. Scaling ILP task to cope with large examples is a challenging task \cite{Muggleton1993}.
 
-In this section, we briefly introduce basic logic notions, Anser set programming (ASP)
+In this section, we briefly introduce basic logic notions, Anser set programming (ASP) and some of inductive leraning frameworks.
 
 \subsection{Logic Basics}
 
-TODO Satisfiable
+%TODO Satisfiable
 
-To compute an inference task, the syntax of the predicate logic program needs to be converted into Conjunctive Normal Form (CNF), or clausal theory, which consists of a conjunction of clauses, where a clause is disjunction of literals, and a literal can include positive literals and negative literals. A literal is either an atom \textit{p} or \textit{not p} (negation by failure).
+To compute an inference task, the syntax of the predicate logic program needs to be converted into Conjunctive Normal Form (CNF), or clausal theory, which consists of a conjunction of clauses, where a clause is disjunction of literals, and a literal can include positive literals and negative literals. A literal is either an atom \textit{p} or \textit{not p} (negation as failure).
 
 \begin{examp} \normalfont Conjunctive Normal Form (Clausal Theory)
 \begin{center}
@@ -140,19 +139,18 @@ To compute an inference task, the syntax of the predicate logic program needs to
 \end{center}
 \end{examp}
 
-A \textit{Horn clause} is a subset of CNF, which is a clause with at most one positive literal, where a \textit{definite clause} (also called a \textit{rule} or a \textit{fact}) contains exactly one positive literal, and a \textit{denial} (or a \textit{constraint}) is a clause with no positive literals.
+A \textit{Horn clause} is a subset of CNF, which is a clause with at most one positive literal, where a \textit{definite clause} (also called a \textit{rule}) contains exactly one positive literal ($\neg$ body\textsubscript{1} $\vee$ $\neg$ body\textsubscript{2} $\vee$, ..., $\vee$ $\neg$ body\textsubscript{n} $\vee$ head), and a \textit{denial} (or a \textit{constraint}) is a clause without any positive literals ($\neg$ body\textsubscript{1} $\vee$ $\neg$ body\textsubscript{2} $\vee$, ..., $\vee$ $\neg$ body\textsubscript{n}).
 A \textit{normal clause} extends Horn clause with negation as failure.
-\\
 
 \subsection{Stable Model Semantics}
 
-Having defined the syntax of clausal logic, we now introduce its semantics under the context of stable model. The semantics of the logic is based on the notion of \textit{interpretation}, which is defined under a \textit{domain}. A \textit{domain} contains all the objects that exist.  For the convenient reasons, we focus on a special interpretations called \textit{Herbrand interpretations} rather than generation interpretations.
+Having defined the syntax of clausal logic, we now introduce its semantics under the context of stable model. The semantics of the logic is based on the notion of interpretation, which is defined under a \textit{domain}. A domain contains all the objects that exist. It is convention to use a special interpretations called \textit{Herbrand interpretations} rather than generation interpretations.
 
 The \textit{Herbrand domain} (a.k.a \textit{Herbrand universe}) of clause sets \textit{Th} is the set of all ground terms that are constants and function symbols appeared in \textit{Th}.
 
 %\begin{examp} \normalfont (Herbrand Domain)
 %\end{examp}
-The \textit{Herbrand base} of \textit{Th} is the set of all ground predicates that are formed by predicate symbols in \textit{Th} and terms in the \textit{Herbrand domain}.
+The \textit{Herbrand base} of \textit{Th} is the set of all ground predicates that are formed by predicate symbols in \textit{Th} and terms in the Herbrand domain.
 
 %\begin{examp} \normalfont (Herbrand Base)
 %\end{examp}
@@ -161,11 +159,7 @@ The \textit{Herbrand interpretation} of a set of definite clauses \textit{Th} is
 Interpretation evaluate it to true
 Interpretation evaluate it to false
 
-A \textit{Herbrand Model} is a Herbrand interpretation if and only if a set \textit{Th} of clauses is satisfiable. In other words, a set of clauses \textit{Th} is unsatisfiable if no Herbrand model was found.
-
-The \textit{Herbrand Model} is a minimum Herbrand model if and only if none of its subsets is an Herbrand model.
-For definite logic programs, there is a unique minimal Herbrand model (the \textit{Least Herbrand Model} \textit{M(P)} ).
-For normal logic programs, there may not be a least Herbrand Model.
+A \textit{Herbrand Model} is a Herbrand interpretation if and only if a set \textit{Th} of clauses is satisfiable. In other words, a set of clauses \textit{Th} is unsatisfiable if no Herbrand model was found. The Herbrand Model is a minimum Herbrand model if and only if none of its subsets is an Herbrand model. For definite logic programs, there is a unique minimal Herbrand model (the \textit{Least Herbrand Model} \textit{M(P)} ). For normal logic programs, there may not be a least Herbrand Model.
 
 \textit{Definite Logic Program} is a set of definite rule, and  a definite rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, where h , a\textsubscript{1}, ..., a\textsubscript{n} are all atoms. h is the \textit{head} of the rule and a\textsubscript{1}, ..., a\textsubscript{n} are the body of the rule.
 
@@ -397,7 +391,7 @@ Two advantages of adding contex-dependent are it increases the efficiency of lea
 
 \section{Reinforcement Learning (RL)}
 \label{rl}
-Reinforcement learning (RL) is another subfield of machine learning regarding an agent's behaviour in an environment in order to maximise the total reward. As shown in Figure \ref{agent_env}, the agent interacts with an environment, and at each time step, an agent takes an action and receive observation, which affects the environment state and the reward (or penalty) it receives by the action outcome. In this section, we briefly introduce necessary background in RL for our research.
+Reinforcement learning (RL) is a subfield of machine learning regarding how an agent behaves in an environment in order to maximise the total reward. As shown in Figure \ref{agent_env}, the agent interacts with an environment, and at each time step the agent takes an action and receives observation, which affects the environment state and the reward (or penalty) it receives as the action outcome. In this section, we briefly introduce the background in RL necessary for our research.
 
 \begin{figure}[!htb]
 \centering
@@ -405,8 +399,6 @@ Reinforcement learning (RL) is another subfield of machine learning regarding an
 \caption{Agent and Environment}
 \label{agent_env}
 \end{figure}
-
-% An RL agent may include either Policy, Value function or Model,
 
 \subsection{Markov Decision Process (MDP)}
 An agent interacts with an environment at a sequence of discrete time step, which is a part of the sequential history of observations, actions and rewards. The sequential history is formalised as H\textsubscript{t} = O\textsubscript{1}, R\textsubscript{1}, A\textsubscript{1}, ..., A\textsubscript{t-1}, O\textsubscript{t}, R\textsubscript{t}.  A \textit{state} is a function of the history S\textsubscript{t} = f(H\textsubscript{t}), which determines the next environment.  A state S\textsubscript{t} is said to have Markov property if and only if
@@ -462,10 +454,10 @@ q\textsubscript{$\pi$} = $\displaystyle \E[R\textsubscript{t+1} $[R\textsubscrip
 
 \subsection{Model-based vs Model-free Learning}
 
-A model M is a representation of an MDP where the state space and action space are assumed to be known. The model represents state transitions and rewards. In this case, the problem to be solved becomes a planning problem for a series of actions to archive the agent's goal.
-Most of the reinforcement learning problems are model-free learning, where M is not unknown and the agent learns to achieve the goal by sorely interacting with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
+A model M is a representation of an MDP where the state space and action space are assumed to be known. The model represents state transitions and rewards. In this case, the problem to be solved becomes a planning problem for a series of actions to achieve the agent's goal.
+Most of the reinforcement learning problems are model-free learning, where M is not unknown and the agent learns to achieve the goal by solely interacting with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
 
-The performance of model-based RL is limited to optimal policy given the model M. In other words, when the model is not a representation of the true MDP, the planning algorithms will not lead to the optimal policy, but suboptimal policy.
+The performance of model-based RL is limited to optimal policy given the model M. In other words, when the model is not a representation of the true MDP, the planning algorithms will not lead to the optimal policy, but a suboptimal policy.
 
 One algorithm which combine both aspects of model-based and model-free learning to solve the issue of sub-optimality is called Dyna (\cite{Sutton1990}), which is shown in Figure \ref{dyna}.
 
@@ -478,7 +470,7 @@ One algorithm which combine both aspects of model-based and model-free learning 
 
 Dyna learns a model from real experience and use the model to generate simulated experience to update the evaluation functions.
 
-This approach is more effective because the simulated experience is relatively easy to generate compared to having to have real experience, thus less iterations.
+This approach is more effective because the simulated experience is relatively easy to generate compared building up real experience, thus less iterations are required.
 
 \subsection{Temporal-Difference (TD) Learning}
 
@@ -524,19 +516,19 @@ Q-learning learns the value of its deterministic greedy policy from the experien
 \label{related_work}
 In this section, I summarise recent studies related to symbolic (deep) reinforcement learning.
 
- \ref{Garnelo2016} introduced Deep Symbolic Reinforcement Learning (DSRL), a proof of concept for incorporating symbolic front end as a means of converting low-dimensional symbolic representation into spatio-temporal representations, which will be the state transitions input of reinforcement learning. DSRL extracts features using convolutional neural newtworks (CNNs) \cite{LeCunL1998} and autoencoder, which are transformed into symbolic representations for relevant object types and positions of the objects, which represents abstract state-space. These abstract representations are the input for Q-learning algorithm to learn a policy on this particular state-space. DSRL was shown to outperform DRL on a stochastic variant environments.
-However, there a number of drawbacks on this approach. First, the extraction of the individual objects was done by manually defined threhold of feature activation values, given that the games were geometrically simple. Thus this approach would not scale in a slightly complex game scenarios. Second, using deep neural network front-end might also cause a problem. As demonstrated in \cite{Su2017}, a single irrelevant pixel could dramatically influence state through the change in CNNs.
-Third, the proposed method successfully used symbolic representations to achieve more data-efficient learning. However, there is still potential to apply symbolic learning to those symbolic representations to further improve the learning efficiency, which is what we attemp to do in this paper.
-\ref{Garcez2018} further explored this symbolic abstraction approach by incorporating relative position of each object with respect to every other object rather than absolute object position. They also assign priority to each Q-value function based on the relative distance of objects from an agent.
+ \cite{Garnelo2016} introduced Deep Symbolic Reinforcement Learning (DSRL), a proof of concept for incorporating symbolic front end as a means of converting low-dimensional symbolic representation into spatio-temporal representations, which will be the state transitions input of reinforcement learning. DSRL extracts features using convolutional neural newtworks (CNNs) \cite{LeCunL1998} and an autoencoder, which are transformed into symbolic representations for relevant object types and positions of the objects. These symbolic representations represent abstract state-space. These abstract representations are the input for the Q-learning algorithm to learn a policy on this particular state-space. DSRL was shown to outperform DRL in stochastic variant environments.
+However, there are a number of drawbacks to this approach. First, the extraction of the individual objects was done by manually defined threhold of feature activation values, given that the games were geometrically simple. Thus this approach would not scale in a slightly complex game scenarios. Second, using deep neural network front-end might also cause a problem. As demonstrated in \cite{Su2017}, a single irrelevant pixel could dramatically influence the state through the change in CNNs.
+While proposed method successfully used symbolic representations to achieve more data-efficient learning, there is still the potential to apply symbolic learning to those symbolic representations to further improve the learning efficiency, which is what we attemp to do in this paper.
+\cite{Garcez2018} further explored this symbolic abstraction approach by incorporating the relative position of each object with respect to every other object rather than absolute object position. They also assign priority to each Q-value function based on the relative distance of objects from an agent.
 
-\cite{Zambaldi2018} added relational reinforcement learning, classical subfield of research aiming to combining reinforcement learning with relational learning or Inductive Logic Programming,  on top of DSRL approach added  more abstract planning, and applied to much more complicate game environment than what was used in  \ref{Garnelo2016}.
+\cite{Zambaldi2018} added relational reinforcement learning, a classical subfield of research aiming to combining reinforcement learning with relational learning or Inductive Logic Programming,  which added more abstract planning on top of DSRL approach. The new mode was then applied to much more complicate game environment than that used by \cite{Garnelo2016}.
 
 %They incorporated a deep RL with architectural inductive biases
 %structured representations of the game, and relatioal reasoning.
 
 %The use of symbolic representations to achieve data-efficient learning was traditionally discussed in relational reinforcement learnign (RLL).
 
-This idea of adding planning capability is aligned to our approach of using ILP to improve a RL agent. In this paper, we explore how to effectively learn the model of the environment and effectively use it to facilitate data-efficient learning and transfer learning capability.
+This idea of adding planning capability align with our approach of using ILP to improve a RL agent. In this paper, we explore how to effectively learn the model of the environment and effectively use it to facilitate data-efficient learning and transfer learning capability.
 
 %Transparency and interpretable capability of the model is another important aspect for machine learning applications.
 
@@ -544,15 +536,15 @@ This idea of adding planning capability is aligned to our approach of using ILP 
 
 %The history of data-efficient learning
 
-Another approach for using symbolic reinforcement learning is storing heuristics expressed by konwledge bases [\cite{Apeldoorn2017}].  An agent lerans the concept of \textit{Hierarchical Knowledge Bases (HKBs)} [which is defined in more details in \cite{Apeldoorn2016} and \cite{Apeldoorn}] at every iteration of training, which contains multiple rules (state-action pairs).  The agent then is able to decide itself when it should exploit the heuristic rather than the state-action pairs of the RL using  \textit{Strategic Depth}. This approach effectively used the heuristic knowledge bases, which acts as a sym-symbolic model of the game.
+Another approach for using symbolic reinforcement learning is storing heuristics expressed by konwledge bases [\cite{Apeldoorn2017}].  An agent lerans the concept of \textit{Hierarchical Knowledge Bases (HKBs)} [which is defined in more details in \cite{Apeldoorn2016} and \cite{Apeldoorn}] at every iteration of training, which contains multiple rules (state-action pairs).  The agent then is able to decide itself when it should exploit the heuristic rather than the state-action pairs of the RL using  \textit{Strategic Depth}. This approach effectively uses the heuristic knowledge bases, which acts as a sym-symbolic model of the game.
 
-Another related field to our research is combining ASP and RL. The original concept of combining ASP and RL was in \cite{Ferreira2017}, where they developed an algorithm that efficiently finds the optimal solution of an MDP of non-stationary domains by using ASP to find the possible trajectories of an MDP. This approach focused more on efficient update on Q function rather than inductive learning. In order to find stationary sets, the extension of ASP called BC\textsuperscript{+}, an action language,  was used which can be directly translated the agent's actions into ASP form, and provide sequences of actions in Answer Sets.
+Another field related to our research is the combining of ASP and RL. The original concept of combining ASP and RL was in \cite{Ferreira2017}, where they developed an algorithm that efficiently finds the optimal solution of an MDP of non-stationary domains by using ASP to find the possible trajectories of an MDP. This approach focused more on efficient update of the Q function rather than inductive learning. In order to find stationary sets, an extension of ASP called BC\textsuperscript{+}, an action language,  was used. BC\textsuperscript{+} can directly translate the agent's actions into ASP form, and provide sequences of actions in Answer Sets.
 
 ASP BC\textsuperscript{+} translation was done manually.
 
 %Incorporation of logic into reinforcement learning dates back to the study of relational reinforcement learning,
 
-%There are a number of reseached conducted in applying DNN to symbolic reasoning.
+%There are a number of research conducted in applying DNN to symbolic reasoning.
 %[From GamePlay to Symbolic Reasoning]
 
 \chapter{Project Overview}
@@ -572,7 +564,7 @@ The proposed tentative architecture is shown in Figure \ref{proposed_architectur
 
 \subsection{ASP Representation Generation}
 
-At the first stage,  the input of real experience needs to be converted in ASP form, which can be used to proceed the inductive learning in ILASP. The input used in ILASP is state transition, reward and action of the agent, which can be directly converted using a simple mapping table or an action language (such as BC\textsuperscript{+} as used in \cite{Ferreira2017}). The following ASP input is what is sent to ILASP. \\
+At the first stage,  the input of real experience needs to be converted in ASP form, which can be used to execute the inductive learning in ILASP. The input used in ILASP is state transition, reward and action of the agent, which can be directly converted using a simple mapping table or an action language (such as BC\textsuperscript{+} as used in \cite{Ferreira2017}). The following ASP input is what is sent to ILASP. \\
 
 
 agent\_at\_before(cell(X,Y), T).
@@ -585,7 +577,7 @@ action(A, T).
 
 \subsection{Model Generation and Update using ILASP}
 
-Once the input of the real experience is converted in ASP syntax, the agent should learn the following definition of the model of the environment using ILASP. \\
+Once the input of the real experience is converted into ASP syntax, the agent should learn the following definition of the model of the environment using ILASP. \\
 
 valid\_move(C, T):- link(C, T).
 \\
@@ -595,9 +587,9 @@ link(C2, T):- agent\_at(C1, T), adjacent(C0, C2), not obstacle(C0, C2).\\
 %  agent\_at\_after(C2, T2).\\
 agent\_at(C, T):- agent\_at\_after(C, T) \\
 
-The background knowledge is empty, and there are only positive examples in learning this task. Each example contains different transition history of the agent. Inclusions are valid moves and exclusions are invalid moves. Learning valid\_move is the same as learning the rule of the games (the model of the environment), and it is updated as the agent explores in the environment.
+The background knowledge is empty, and there are only positive examples in learning this task. Each example contains a different transition history of the agent. Inclusions are valid moves and exclusions are invalid moves. Learning valid\_move is the same as learning the rule of the games (the model of the environment), and it is updated as the agent explores in the environment.
 
-In addition to the rule of the game, learning the following concepts will be crucial for transfer learning, as these concept will be applicable to any types of game environments.  \\
+In addition to the rules of the game, learning the following concepts will be crucial for transfer learning, as these concepts will be applicable to any types of game environment.  \\
 
 adjacent(C1, C2):- cell(C1), cell(C2). \\
 %obstacle(C1, C2):- enemy(C1, C2). \\
@@ -605,7 +597,7 @@ obstacle(C1, C2):- wall(C1, C2). \\
 wall(C1, C2):- agent\_at\_before(C1, T1), agent\_at\_after(C1, T2) \\
 enemy(C1, C2):- agent\_at\_before(C1, T1), agent\_at\_after(C2, T2), reward(R), R $<$ -100 \\
 
-where it is assumed that the reward of -100 means losing the game or losing the agent's life. Once the agent has learned the concept of the game, it knows how to avoid the an obstacle in the adjacent cell in a new environment. Figure \ref{grid_world} illustrates this transfer capability.
+where it is assumed that the reward of -100 means losing the game or losing the agent's life. Once the agent has learned the concept of the game, it knows how to avoid an obstacle in an adjacent cell in a new environment. Figure \ref{grid_world} illustrates this transfer capability.
 
 \begin{figure}[!htb]
 \centering
@@ -614,22 +606,22 @@ where it is assumed that the reward of -100 means losing the game or losing the 
 \label{grid_world}
 \end{figure}
 
-If the agent A learnt the concept \textit{adjacent} in Environment 1, the agent could reason (have a policy), for example, "if the adjacent cell is a wall, moving into that cell is an invalid move", "if the adjacent cell is an enemy, moving into that cell will incur negative reward". These learnt policies could immediately used in a new environment (e.g Environment 2), even though the agent's coordinates position is different from that in previous environment (e.g Environment 1).
+If the agent A learnt the concept \textit{adjacent} in Environment 1, the agent could reason (have a policy), for example, "if the adjacent cell is a wall, moving into that cell is an invalid move", "if the adjacent cell is an enemy, moving into that cell will incur a negative reward". These learnt policies could immediately be used in a new environment (e.g Environment 2), even though the agent's coordinates position is different from that in previous environment (e.g Environment 1).
 \subsection{Generation of Simulated Experience}
-Assuming the model is  true representation of the partial environment, we can generate simulated experience to update Q function. The simulated experience is cheaper than real experience, which should contribute to efficient learning. However Dyna architecture is known to lead to sub-optimal policy when the model is not accurate, and the solution to this problem needs to be further considered.
+Assuming the model is  a true representation of the partial environment, we can generate simulated experience to update the Q function. The simulated experience is cheaper than real experience, which should contribute to efficient learning. However Dyna architecture is known to lead to sub-optimal policy when the model is not accurate, and the solution to this problem needs to be considered further.
 
-Alternative to using simulated experience is to directly update state representations. Once the concept "adjacent"  was learnt from a real experience, it could be incorporated in a state.
+An alternative to using simulated experience is to directly update state representations. Once the concept "adjacent"  was learnt from a real experience, it could be incorporated in a state.
 
-In addition, when the environment changes during the exploration, the agent should generalise its internal model to cope with the new environment in two different but similar environments,  the agent's model is more general which covers both games. Thus in theory, the agent should still be able to achieve more efficient learning from the model-based learning, facilitating the transfer learning.
+In addition, when the environment changes during the exploration, the agent should generalise its internal model to cope with the new environment in two different but similar environments.  As a result the agent's model becomes more general which covers both games. Thus in theory, the agent should still be able to achieve more efficient learning from the model-based learning, facilitating the transfer learning.
 Implementation of exactly how the model is generalised will be further investigated.
 
 \section{Further Research and Plan}
 \label{research_plan}
-The next phase of the research is further research on the proposed architecture and implementation and experiments.
+The next phase of the research is further research on the proposed architecture, implementation and experiments.
 
 \subsection{Further Research}
-The proposed architecture is not finalised and will be reviewed regularly as the research is proceeded.
-More research needs to be devoted in finalising the overall architecture, and especially the following issues needs to be considered.
+The proposed architecture is not finalised and will be reviewed regularly as we do more research.
+More research needs to be devoted to finalising the overall architecture, and the following issues in particular need to be considered.
 \begin{itemize}
 
 \item Further investigation of whether ILASP can learn the concept of adjacent, which is crucial concept to know in any environment.
@@ -638,7 +630,7 @@ More research needs to be devoted in finalising the overall architecture, and es
 
 \item Possibility of using other representational concepts such as \textit{Predictive Representations of State} or \textit{Affordance} \cite{Sridharan2017} for the agent's learning task. These concept have not been considered at the moment, but could help better transfer learning.
 
-\item Preparation for a backup plan in case ILASP approach does not work, so that the reseach is feasible within 3 months of the reseach period.
+\item Preparation for a backup plan in case ILASP approach does not work, so that the researchs feasible within 3 months of the researcheriod.
 
 \end{itemize}
 
@@ -646,10 +638,10 @@ More research needs to be devoted in finalising the overall architecture, and es
 
 Once the architecture is decided, we will implement it using Python and ILASPv3.1.0 (Clingo) \cite{Law2017}, and compare the performance with other learning methods using a game platform called GVG-AI Framework.
 
-Other learning methods to be compared as benchmark will be Q-Learning and Deep Q-Learning since these methods are widely used in other related works. Other symbolic-based approachs could also be compared as an extension. The two main measurements for the performance of our new architecture are learning efficiency and transfer Learning capability as we stated our motivation in the Introduction.
+Other learning methods to be compared as benchmarks will be Q-Learning and Deep Q-Learning since these methods are widely used in other related works. Other symbolic-based approaches could also be compared as an extension. The two main measurements for the performance of our new architecture are learning efficiency and transfer learning capability as stated in the Introduction.
 
 GVG-AI Framework was created for the General Video Gamea AI Competition \footnote{http://www.gvgai.net/}, a game environment for an agent that should be able to play a wide variety of games without knowing which games are to be played.
-The underline language is the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
+The underlying language is the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
 
 % \section{Contribution}
 %

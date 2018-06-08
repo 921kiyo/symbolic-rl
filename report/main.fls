@@ -225,10 +225,10 @@ INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchr7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchb7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchb8r.tfm
+INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omsbch.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omsbch.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchri7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchri8r.tfm
-INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omsbch.fd
-INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omsbch.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchr7t.tfm
 INPUT ./figures/agent_env.png
 INPUT ./figures/agent_env.png
