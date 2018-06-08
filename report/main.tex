@@ -497,9 +497,7 @@ V(S\textsubscript{t}) \leftarrow V(S\textsubscript{t}) + \alpha[R\textsubscript{
 \end{equation}
 
 where R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) is the target for TD update, which is biased estimated of v\textsubscript{$\pi$} (S\textsubscript{t}), and $\delta$ = R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) - V(S\textsubscript{t}) is called TD error, which is the error in V(S\textsubscript{t}) available at time t+1.
-
 Since TD methods only needs to know the estimate of one step ahead and does not need the final outcome of the episodes, it can learn online after every time step. TD also works without the terminal state, which is the goal for an agent.
-
 TD(0) is proved to converge to v\textsubscript{$\pi$} in the table-based case (non-function approximation).
 However, because bootstraping is update an estimate for an estimate, some bias is inevitable. And TD method is sensitive to initial value, (but low variance).
 %\begin{equation}

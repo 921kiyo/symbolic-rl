@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  8 JUN 2018 20:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  8 JUN 2018 20:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -753,7 +753,7 @@ LaTeX Warning: Reference `Montague1999' on page 13 undefined on input line 479.
 Chapter 3.
 
 Package natbib Warning: Citation `Garcez2018' on page 15 undefined on input lin
-e 536.
+e 534.
 
 [15
 
@@ -763,10 +763,10 @@ Chapter 4.
 File: ./figures/ILASRL.png Graphic file (type png)
 
 <use ./figures/ILASRL.png>
-Package pdftex.def Info: ./figures/ILASRL.png used on input line 574.
+Package pdftex.def Info: ./figures/ILASRL.png used on input line 572.
 (pdftex.def)             Requested size: 426.80879pt x 256.09094pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 582--583
+Underfull \hbox (badness 10000) in paragraph at lines 580--581
 
  []
 
@@ -776,22 +776,22 @@ Underfull \vbox (badness 7558) has occurred while \output is active []
  [17
 
  <./figures/ILASRL.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 595--596
+Underfull \hbox (badness 10000) in paragraph at lines 593--594
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 597--604
+Underfull \hbox (badness 10000) in paragraph at lines 595--602
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 607--608
+Underfull \hbox (badness 10000) in paragraph at lines 605--606
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 609--614
+Underfull \hbox (badness 10000) in paragraph at lines 607--612
 
  []
 
@@ -799,7 +799,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 609--614
 File: ./figures/grid_world.png Graphic file (type png)
 
 <use ./figures/grid_world.png>
-Package pdftex.def Info: ./figures/grid_world.png used on input line 619.
+Package pdftex.def Info: ./figures/grid_world.png used on input line 617.
 (pdftex.def)             Requested size: 284.52843pt x 142.26758pt.
  [18] [19 <./figures/grid_world.png>] [20]
 Chapter 5.
@@ -810,24 +810,24 @@ Missing character: There is no â in font bchr7t!
 Missing character: There is no € in font bchr7t!
 Missing character: There is no  in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 673--734
+Overfull \hbox (9.14763pt too wide) in alignment at lines 671--732
  [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 734
+Underfull \vbox (badness 10000) detected at line 732
  []
 
 Missing character: There is no â in font bchr7t!
 Missing character: There is no € in font bchr7t!
 Missing character: There is no “ in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 734--795
+Overfull \hbox (9.14763pt too wide) in alignment at lines 732--793
  [] [] [] 
  []
 
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 795--800
+Overfull \hbox (9.14763pt too wide) in alignment at lines 793--798
  [] [] [] 
  []
 
@@ -847,12 +847,12 @@ Missing character: There is no ” in font bchri7t!
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 821.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 819.
 [26]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 821.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 819.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 821.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 821.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 819.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 819.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 8D7E275791B85A98D70C01CC71E9FDB9;1870.
 Package rerunfilecheck Info: File `main.brf' has not changed.
@@ -861,7 +861,7 @@ Package rerunfilecheck Info: File `main.brf' has not changed.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 821.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 819.
  ) 
 Here is how much of TeX's memory you used:
  10816 strings out of 494353
@@ -885,7 +885,7 @@ are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (27 pages, 256545 bytes).
+Output written on main.pdf (27 pages, 256568 bytes).
 PDF statistics:
  469 PDF objects out of 1000 (max. 8388607)
  414 compressed objects within 5 object streams
