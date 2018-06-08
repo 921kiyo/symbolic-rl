@@ -120,9 +120,7 @@ B \wedge H \models E
 \label{ilp_equation}
 
 where E contains all of the positive examples (E\textsuperscript{+}) and none of the negative examples (E\textsuperscript{-}).
-
 One of the advantage of ILP over statistical machine learning is that the hypothesis the agent learnt can be easily understood by a human, as it is expressed in first-order logic, making the learning process more transparent rather than black-box.
-
 One of the limitations of ILP is learning efficiency. There are usually thousands or more examples in many real-world examples. Scaling ILP task to cope with large examples is a challenging task \cite{Muggleton1993}.
 
 In this section, we briefly introduce basic logic notions, Anser set programming (ASP) and some of inductive leraning frameworks.
@@ -131,7 +129,7 @@ In this section, we briefly introduce basic logic notions, Anser set programming
 
 %TODO Satisfiable
 
-To compute an inference task, the syntax of the predicate logic program needs to be converted into Conjunctive Normal Form (CNF), or clausal theory, which consists of a conjunction of clauses, where a clause is disjunction of literals, and a literal can include positive literals and negative literals. A literal is either an atom \textit{p} or \textit{not p} (negation as failure).
+To compute an inference task, the syntax of the predicate logic program needs to be converted into \textit{Conjunctive Normal Form (CNF)}, or \textit{clausal theory}, which consists of a conjunction of clauses, where a clause is disjunction of literals, and a literal can include positive literals and negative literals. A literal is either an atom \textit{p} or \textit{not p} (\textit{negation as failure}).
 
 \begin{examp} \normalfont Conjunctive Normal Form (Clausal Theory)
 \begin{center}
@@ -145,28 +143,25 @@ A \textit{normal clause} extends Horn clause with negation as failure.
 \subsection{Stable Model Semantics}
 
 Having defined the syntax of clausal logic, we now introduce its semantics under the context of stable model. The semantics of the logic is based on the notion of interpretation, which is defined under a \textit{domain}. A domain contains all the objects that exist. It is convention to use a special interpretations called \textit{Herbrand interpretations} rather than generation interpretations.
+\begin{itemize}
+\item \textit{Herbrand Domain} (a.k.a \textit{Herbrand Universe}) of clause sets \textit{Th} is the set of all ground terms that are constants and function symbols appeared in \textit{Th}.
+\item \textit{Herbrand Base} of \textit{Th} is the set of all ground predicates that are formed by predicate symbols in \textit{Th} and terms in the Herbrand domain.
+\item \textit{Herbrand interpretation} of a set of definite clauses \textit{Th} is a subset of the Herbrand base of \textit{Th}, which is a set of ground atoms that are true in terms of interpretation.
+\item \textit{Herbrand Model} is a Herbrand interpretation if and only if a set \textit{Th} of clauses is satisfiable. In other words, a set of clauses \textit{Th} is unsatisfiable if no Herbrand model was found. 
+\item \textit{Least Herbrand Model} (denoted as M(P)) is a unique minimal Herbrand model for definite logic programs.  The Herbrand Model is a minimum Herbrand model if and only if none of its subsets is an Herbrand model. For normal logic programs, there may not be any least Herbrand Model.
 
-The \textit{Herbrand domain} (a.k.a \textit{Herbrand universe}) of clause sets \textit{Th} is the set of all ground terms that are constants and function symbols appeared in \textit{Th}.
-
-%\begin{examp} \normalfont (Herbrand Domain)
-%\end{examp}
-The \textit{Herbrand base} of \textit{Th} is the set of all ground predicates that are formed by predicate symbols in \textit{Th} and terms in the Herbrand domain.
-
+\end{itemize}
+%Interpretation evaluate it to true
+%Interpretation evaluate it to false
 %\begin{examp} \normalfont (Herbrand Base)
 %\end{examp}
-The \textit{Herbrand interpretation} of a set of definite clauses \textit{Th} is a subset of the Herbrand base of \textit{Th}, which is a set of ground atoms that are true in terms of interpretation.
-
-Interpretation evaluate it to true
-Interpretation evaluate it to false
-
-A \textit{Herbrand Model} is a Herbrand interpretation if and only if a set \textit{Th} of clauses is satisfiable. In other words, a set of clauses \textit{Th} is unsatisfiable if no Herbrand model was found. The Herbrand Model is a minimum Herbrand model if and only if none of its subsets is an Herbrand model. For definite logic programs, there is a unique minimal Herbrand model (the \textit{Least Herbrand Model} \textit{M(P)} ). For normal logic programs, there may not be a least Herbrand Model.
 
 \textit{Definite Logic Program} is a set of definite rule, and  a definite rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, where h , a\textsubscript{1}, ..., a\textsubscript{n} are all atoms. h is the \textit{head} of the rule and a\textsubscript{1}, ..., a\textsubscript{n} are the body of the rule.
 
 \textit{Normal Logic Program} is a set of normal rule, and a normal rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, \textit{not} b\textsubscript{1}, ..., \textit{not}  b\textsubscript{n} where h is the head of the rule,
  and a\textsubscript{1}, ..., a\textsubscript{n}, b\textsubscript{1}, ..., b\textsubscript{n} are the body of the rule (both the head and body are all atoms).
 
-To solve a normal logic program \textit{Th}, the program needs to be grounded. The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the \textit{Herbrand Domain}.
+To solve a normal logic program \textit{Th}, the program needs to be grounded. The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the Herbrand Domain.
 
 \begin{examp} \normalfont (Grounding)
 
