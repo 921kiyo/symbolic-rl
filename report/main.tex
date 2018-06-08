@@ -375,9 +375,9 @@ LOAS task is of the form T = $\langle$ B, S\textsubscript{M}, E\textsubscript{+}
 
 \subsubsection{A Context-dependent Learning from Ordered Answer Sets }
 \textit{Context-dependent learning from ordered answer sets ($ILP_{LOAS}^{context}$)} is a further generalisation of ILP\textsubscript{LOAS} with \textit{context-dependent examples}.
-Context-dependent examples are examples that each unique background knowledge (context) only applies to some examples. This way the background knowledge is more structured rather than one fixed background knowledge that are applied to all examples.
+Context-dependent examples are examples that each unique background knowledge (context) only applies to specific examples. This way the background knowledge is more structured rather than one fixed background knowledge that are applied to all examples.
 Formally, partial interpretation is of the form $\langle$ e, C $\rangle$ (called \textit{context-dependent partial interpretation (CDPI)}), where \textit{e} is a partial interpretation and C is called \textit{context}, or an ASP program without weak constraints.
-A \textit{context-dependent ordering example (CDOE)} is of the form $\langle$ $\langle$e\textsubscript{1}, C\textsubscript{1} $\rangle$, $\langle$ e\textsubscript{2}, C\textsubscript{2} $\rangle$$\rangle$. An APS program P \textit{bravely} respects \textit{o} if and only if
+A \textit{context-dependent ordering example (CDOE)} is of the form $\langle$ $\langle$e\textsubscript{1}, C\textsubscript{1} $\rangle$, $\langle$ e\textsubscript{2}, C\textsubscript{2} $\rangle$$\rangle$, which is a pair of CDPI. An APS program P \textit{bravely respects o} if and only if
 \begin{enumerate}
  \item $\exists$ $\langle$ A\textsubscript{1}, A\textsubscript{2} $\rangle$ such that A\textsubscript{1} $\in$ Answer Sets(P $\cup$ C\textsubscript{1}),  A\textsubscript{2}, $\in$ Answer Sets(P $\cup$ C\textsubscript{2}), A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2} and A\textsubscript{1} $\prec$\textsubscript{P} A\textsubscript{2}
 \end{enumerate}
@@ -397,7 +397,7 @@ A hypothesis H is an inductive solution of T if and only if
 \item $\forall$o $\in$ O\textsuperscript{c} B $\cup$ H cautiously respects o
 \end{enumerate}
 
-Two advantages of adding contex-dependent are it increases the efficiency of learning tasks, and more expressive structure of the background knowlege to particular examples.
+Two advantages of adding contex-dependent are it increases the efficiency of learning tasks, and more expressive structure of the background knowlege to particular examples. This feature will be useful when a game agent is in two different environmets as discussed in Section \ref{model_generation_and_update}.
 
 \section{Reinforcement Learning (RL)}
 \label{rl}
@@ -411,6 +411,7 @@ Reinforcement learning (RL) is a subfield of machine learning regarding how an a
 \end{figure}
 
 \subsection{Markov Decision Process (MDP)}
+\label{mdp_subsection}
 An agent interacts with an environment at a sequence of discrete time step, which is a part of the sequential history of observations, actions and rewards. The sequential history is formalised as H\textsubscript{t} = O\textsubscript{1}, R\textsubscript{1}, A\textsubscript{1}, ..., A\textsubscript{t-1}, O\textsubscript{t}, R\textsubscript{t}.  A \textit{state} is a function of the history S\textsubscript{t} = f(H\textsubscript{t}), which determines the next environment.  A state S\textsubscript{t} is said to have Markov property if and only if
 P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\vert$ S\textsubscript{1}, ..., S\textsubscript{t}]. In other words, the probability of reaching S\textsubscript{t+1} depends only on S\textsubscript{t}, which captures all the relevant information from earilier history (\cite{Puterman1994}).
 
@@ -428,6 +429,8 @@ A MDP is of the form $\langle$ S, A, T\textsubscript{a}, R\textsubscript{a}, $\g
 
 %$\displaystyle \E[R\textsubscript{t+1} \vert$ S\textsubscript{t} = s]
 \subsection{Policies and Value Functions}
+\label{policy_value_functions_subsection}
+
 \textit{value functions} estimate the expected return, or expected future rewarded,  for a given action in a given state. The expected reward for an agent is dependent on the agent's action. A solution to the sequential decision problem is called a \textit{policy $\pi$}, a sequence of actions that leads to a solution.
 % which is a distributin over actions given states.
 
@@ -463,7 +466,7 @@ An action-value function evaluate a particular state by taking an action accordi
 q\textsubscript{$\pi$} = $\displaystyle \E[R\textsubscript{t+1} $[R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ... $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a, A\textsubscript{t+1 } = a,]
 
 \subsection{Model-based vs Model-free Learning}
-
+\label{model_base_model_free_subsection}
 A model M is a representation of an MDP where the state space and action space are assumed to be known. The model represents state transitions and rewards. In this case, the problem to be solved becomes a planning problem for a series of actions to achieve the agent's goal.
 Most of the reinforcement learning problems are model-free learning, where M is not unknown and the agent learns to achieve the goal by solely interacting with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
 
@@ -483,6 +486,7 @@ Dyna learns a model from real experience and use the model to generate simulated
 This approach is more effective because the simulated experience is relatively easy to generate compared building up real experience, thus less iterations are required.
 
 \subsection{Temporal-Difference (TD) Learning}
+\label{td_learning_section}
 
 To solve a MDP, one of the approaches is called Temporal-Difference (TD) Learning.
 TD is an online model-free learning and learns directly from episodes of imcomplete experiences without a model of the environment.
@@ -504,6 +508,7 @@ However, because bootstraping is update an estimate for an estimate, some bias i
 %}\end{equation}
 
 \subsection{Q-Learning}
+\label{q_learning_section}
 
 Q-learning is off-policy TD learning defined in \cite{Watkins}, where the agent only knows about the possible states and actionns. The transition states and reward probability functions are unknown to the agent.
 It is of the form:
@@ -573,6 +578,7 @@ The proposed tentative architecture is shown in Figure \ref{proposed_architectur
 \end{figure}
 
 \subsection{ASP Representation Generation}
+\label{asp_representation_generation_subsection}
 
 At the first stage,  the input of real experience needs to be converted in ASP form, which can be used to execute the inductive learning in ILASP. The input used in ILASP is state transition, reward and action of the agent, which can be directly converted using a simple mapping table or an action language (such as BC\textsuperscript{+} as used in \cite{Ferreira2017}). The following ASP input is what is sent to ILASP. \\
 
@@ -586,7 +592,7 @@ reward(R, T).
 action(A, T).
 
 \subsection{Model Generation and Update using ILASP}
-
+\label{model_generation_and_update}
 Once the input of the real experience is converted into ASP syntax, the agent should learn the following definition of the model of the environment using ILASP. \\
 
 valid\_move(C, T):- link(C, T).
