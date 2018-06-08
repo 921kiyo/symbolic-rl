@@ -1,5 +1,23 @@
 \begin{thebibliography}{10}
 
+\bibitem{Apeldoorn2017}
+Daan Apeldoorn and Kern-Isberner Gabriele.
+\newblock {An Agent-Based Learning Approach for Finding and Exploiting
+  Heuristics in Unknown Environments}.
+\newblock {\em Proceedings of the Thirteenth International Symposium on
+  Commonsense Reasoning}, pages 1--8, 2017.
+
+\bibitem{Apeldoorn}
+Daan Apeldoorn and Gabriele Kern-isberner.
+\newblock {Towards an Understanding of What Is Learned : Extracting
+  Multi-Abstraction-Level Knowledge from Learning Agents}.
+\newblock pages 764--767.
+
+\bibitem{Apeldoorn2016}
+Daan Apeldoorn and Gabriele Kern-isberner.
+\newblock {When Should Learning Agents Switch to Explicit Knowledge ?}
+\newblock 41:174--186, 2016.
+
 \bibitem{Corapi2012}
 Domenico Corapi, Alessandra Russo, and Emil Lupu.
 \newblock {Inductive Logic Programming in Answer Set Programming}.
@@ -9,6 +27,20 @@ Domenico Corapi, Alessandra Russo, and Emil Lupu.
 Luc {De Raedt}.
 \newblock {Logical settings for concept-learning}.
 \newblock {\em Artificial Intelligence}, 95(1):187--201, 1997.
+
+\bibitem{Ferreira2017a}
+Leonardo~A. Ferreira, Reinaldo A.~C. Bianchi, Paulo~E. Santos, and Ramon~Lopez
+  de~Mantaras.
+\newblock {A method for the online construction of the set of states of a
+  Markov Decision Process using Answer Set Programming}.
+\newblock jun 2017.
+
+\bibitem{Ferreira2017}
+Leonardo~A. Ferreira, Reinaldo A.~C. Bianchi, Paulo~E. Santos, and Ramon~Lopez
+  de~Mantaras.
+\newblock {Answer Set Programming for Non-Stationary Markov Decision
+  Processes}.
+\newblock may 2017.
 
 \bibitem{Garnelo2016}
 Marta Garnelo, Kai Arulkumaran, and Murray Shanahan.
@@ -42,6 +74,11 @@ Mark Law, Alessandra Russo, and Krysia Broda.
 Mark Law, Alessandra Russo, and Krysia Broda.
 \newblock {Learning Weak Constraints in Answer Set Programming}.
 \newblock jul 2015.
+
+\bibitem{Law2017}
+Mark Law, Alessandra Russo, and Krysia Broda.
+\newblock {Inductive Learning of Answer Set Programs v3.1.0 User Manual}.
+\newblock 2017.
 
 \bibitem{Levine2015}
 Sergey Levine, Chelsea Finn, Trevor Darrell, and Pieter Abbeel.
@@ -94,6 +131,18 @@ David Silver, Aja Huang, Chris~J. Maddison, Arthur Guez, Laurent Sifre, George
 \newblock {Mastering the game of Go with deep neural networks and tree search}.
 \newblock {\em Nature}, 529(7587):484--489, 2016.
 
+\bibitem{Sridharan2017}
+Mohan Sridharan, Ben Meadows, and Rocio Gomez.
+\newblock {What can I not do? Towards an Architecture for Reasoning about and
+  Learning Affordances}.
+\newblock {\em International Conference on Automated Planning and Scheduling},
+  (Icaps):461--469, 2017.
+
+\bibitem{Su2017}
+Jiawei Su, Danilo~Vasconcellos Vargas, and Sakurai Kouichi.
+\newblock {One pixel attack for fooling deep neural networks}.
+\newblock oct 2017.
+
 \bibitem{Sutton1990}
 Richard~S. Sutton.
 \newblock {Integrated Architectures for Learning, Planning, and Reacting Based
@@ -103,5 +152,18 @@ Richard~S. Sutton.
 \bibitem{Watkins}
 Watkins.
 \newblock {Learning from Delayed Reward}.
+
+\bibitem{LeCunL1998}
+{Y.LeCun, L.Bottou, Y.Bengio} and P.Haffner.
+\newblock {Gradient-based learning applied to document recognition}.
+\newblock {\em Proceedings of the IEEE}, 86:2278--2324, 1998.
+
+\bibitem{Zambaldi2018}
+Vinicius Zambaldi, David Raposo, Adam Santoro, Victor Bapst, Yujia Li, Igor
+  Babuschkin, Karl Tuyls, David Reichert, Timothy Lillicrap, Edward Lockhart,
+  Murray Shanahan, Victoria Langston, Razvan Pascanu, Matthew Botvinick, Oriol
+  Vinyals, and Peter Battaglia.
+\newblock {Relational Deep Reinforcement Learning}.
+\newblock jun 2018.
 
 \end{thebibliography}

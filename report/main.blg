@@ -1,0 +1,68 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: plain.bst
+Database file #1: references.bib
+Repeated entry---line 497 of file references.bib
+ : @article{DeRaedt1997
+ :                     ,
+I'm skipping whatever remains of this entry
+Name 1 in "{Y.LeCun, L.Bottou, Y.Bengio}, and P.Haffner" has a comma at the end for entry LeCunL1998
+while executing---line 1049 of file plain.bst
+Warning--empty journal in Apeldoorn
+Warning--empty year in Apeldoorn
+Warning--empty journal in Apeldoorn2016
+Warning--empty journal in Ferreira2017a
+Warning--empty journal in Ferreira2017
+Warning--empty journal in Garnelo2016
+Warning--there's a number but no volume in Gelfond1988
+Warning--empty journal in Law2015
+Warning--empty journal in Law2017
+Warning--empty journal in Levine2015
+Warning--there's a number but no volume in Sridharan2017
+Warning--empty journal in Su2017
+Name 1 in "{Y.LeCun, L.Bottou, Y.Bengio}, and P.Haffner" has a comma at the end for entry LeCunL1998
+while executing---line 1090 of file plain.bst
+Warning--empty journal in Zambaldi2018
+You've used 28 entries,
+            2118 wiz_defined-function locations,
+            666 strings with 9058 characters,
+and the built_in function-call counts, 10292 in all, are:
+= -- 963
+> -- 657
+< -- 4
++ -- 260
+- -- 232
+* -- 806
+:= -- 1779
+add.period$ -- 82
+call.type$ -- 28
+change.case$ -- 199
+chr.to.int$ -- 0
+cite$ -- 41
+duplicate$ -- 322
+empty$ -- 660
+format.name$ -- 232
+if$ -- 2031
+int.to.chr$ -- 0
+int.to.str$ -- 28
+missing$ -- 27
+newline$ -- 141
+num.names$ -- 56
+pop$ -- 212
+preamble$ -- 1
+purify$ -- 172
+quote$ -- 0
+skip$ -- 238
+stack$ -- 0
+substring$ -- 541
+swap$ -- 48
+text.length$ -- 4
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 110
+warning$ -- 13
+while$ -- 92
+width$ -- 30
+write$ -- 283
+(There were 3 error messages)

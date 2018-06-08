@@ -581,22 +581,20 @@ The proposed tentative architecture is shown in Figure \ref{proposed_architectur
 
 \subsection{ASP Representation Generation}
 
-At the first stage,  the input of real experience needs to be converted in ASP form, which can be used to proceed the inductive learning in ILASP. The input used in ILASP is state transition, reward and action of the agent, which can be directly converted using a simple mapping table or an action language (such as BC\textsuperscript{+} as used in \cite{Ferreira2017}). The following ASP input is what is fed into ILASP. \\
+At the first stage,  the input of real experience needs to be converted in ASP form, which can be used to proceed the inductive learning in ILASP. The input used in ILASP is state transition, reward and action of the agent, which can be directly converted using a simple mapping table or an action language (such as BC\textsuperscript{+} as used in \cite{Ferreira2017}). The following ASP input is what is sent to ILASP. \\
 
 
 agent\_at\_before(cell(X,Y), T).
 
 agent\_at\_after(cell(X,Y), T).
 
-reward(R).
+reward(R, T).
 
-action(A).
+action(A, T).
 
 \subsection{Model Generation and Update using ILASP}
 
-TODO ADD GAME SCENARIOS
-
-Once the input of the real experience is converted in ASP syntax, the agent should learn the rule the following definition of the model of the environment using ILASP. \\
+Once the input of the real experience is converted in ASP syntax, the agent should learn the following definition of the model of the environment using ILASP. \\
 
 valid\_move(C, T):- link(C, T).
 \\
@@ -606,60 +604,51 @@ link(C2, T):- agent\_at(C1, T), adjacent(C0, C2), not obstacle(C0, C2).\\
 %  agent\_at\_after(C2, T2).\\
 agent\_at(C, T):- agent\_at\_after(C, T) \\
 
-The background knowldge is empty, and there are only positive examples in this task. Each example contains different transition history of the agent. Inclusions are valid moves and exclusions are invalid moves. Learning valid\_move is the same as learning the rule of the games (the model of the environment), and it is updated as the agent explores more in the environment.
+The background knowldge is empty, and there are only positive examples in learning this task. Each example contains different transition history of the agent. Inclusions are valid moves and exclusions are invalid moves. Learning valid\_move is the same as learning the rule of the games (the model of the environment), and it is updated as the agent explores in the environment.
 
-In addition to the rule of the game, learning the following concepts will be crucial for transfer capability, as this concept will be applicable to any types of game environments.  \\
+In addition to the rule of the game, learning the following concepts will be crucial for transfer learning, as these concept will be applicable to any types of game environments.  \\
 
 adjacent(C1, C2):- cell(C1), cell(C2). \\
-obstacle(C1, C2):- enemy(C1, C2). \\
+%obstacle(C1, C2):- enemy(C1, C2). \\
 obstacle(C1, C2):- wall(C1, C2). \\
 wall(C1, C2):- agent\_at\_before(C1, T1), agent\_at\_after(C1, T2) \\
 enermy(C1, C2):- agent\_at\_before(C1, T1), agent\_at\_after(C2, T2), reward(R), R $<$ -100 \\
 
-where it is assumed that the reward of -100 means losing the game or losing the agent's life. Once the agent has learned the concept of the game, it knows how to avoid the an obstable in the adjacent cell in a new environment. Example XX illustrates this transfer cabability. 
+where it is assumed that the reward of -100 means losing the game or losing the agent's life. Once the agent has learned the concept of the game, it knows how to avoid the an obstable in the adjacent cell in a new environment. Figure \ref{grid_world} illustrates this transfer cabability. 
 
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=10cm, height=5cm]{./figures/grid_world}
+\caption{Simple Grid World to highlight transfer capability }
+\label{grid_world}
+\end{figure}
 
-In addition, when the environment has been changed during the exploration, the agent creates a new model for this new environment. In two different but similar scenarios, the model is generalised based on the two models, and the agent's model is more general which covers both games. Thus in theory, the agent should still be able to exploit the efficient learning from the model-based learning, facilitating the transfer learning.
+If the agent A learnt the concept \textit{adjacent} in Environment 1, the agent could reason (have a policy), for example, "if the adjacent cell is a wall, moving into that cell is an invalid move", "if the adjacent cell is an enermy, moving into that cell will incur negative reward". These learnt policies could immediately used in a new environment (e.g Environment 2), even though the agent's coodinates position is different from that in previous environment (e.g Environment 1). 
+\subsection{Generation of Simulated Experience}
+Assuming the model is partially true representation of the model ,
 
+In addition, when the environment changes during the exploration, the agent should generalise its internal model to cope with the new environment in two different but similar environments,  the agent's model is more general which covers both games. Thus in theory, the agent should still be able to achieve more efficient learning from the model-based learning, facilitating the transfer learning.
+Implementation of exactly how the model is generalised will be further investigated. 
 
-Implement baseline performance (DQN, Q-learning, ASPRL)
+Assuming the model is  true representation of the partial environment, we can generate simulated experience to update Q function. The simulated experience is cheaper than real experience, which should contribute to efficient learning. However Dyna architecture is known to lead to sub-optimal policy when the model is not accurate, and the solution to this problem needs to be further considered. 
 
-Due to the complex environment of the chosen game, I will not implemnet the original DSRL, since the feature extractions from the pixel would only work in a very simple pixel environment,
-
-Pipeline
-
-The basic architecture follows the similar method in XXX, but I also add symbolic learning to these extracted symbolic features using ILASP.
-
-Apply ILASP to the ASP, which involves development of the pipeline of ILASP in Python
-
-
-\subsection{Generation of Simulated Experience using the Model}
-
-Finally use Q-learning that allow
-
-which measurement would you use? (grid word, something else? GVGAL games)
-Summarise different types of knowledge representations (Objects ?? relationship?)
-
-Common sense
-
-Lastly, I will also test the capability of transfer learning for this new method.
-
-\section{Further Research and Brief Implementation Plan}
+Alternative to using simulated experience is to directly update state representations. Once the concept "adjacent"  was learnt from a real experience, it could be incorporated in a state. 
+\section{Further Research and Plan}
 
 The next phase of the research is further research on the proposed architecture and implementation and experiments. 
 
 \subsection{Further Research}
-The proposed architecture is not finalised and will be reviewed regularly as I proceed the development of the architecture.
-More research needs to be devoded in finalising the overall architecture, and the following issues needs to be considered. 
+The proposed architecture is not finalised and will be reviewed regularly as the research is proceeded.
+More research needs to be devoded in finalising the overall architecture, and especially the following issues needs to be considered. 
 \begin{itemize}
 
 \item Further investigation of whether ILASP can learn the concept of adjacent, which is useful concept to know in any environment. 
 \item How to generalise the agent's model when the environment changes. The new environment could be very similar to the previous one, or could be a completely different environment thus the agent should create a new internal model rather than generalising the existing model.
 \item The current proposed architecture is based on Dyna with simulated experiences. However, this might not be the best overall architecture, and the feasibility of using simulated experience with the learnt model with ILASP needs to be further investigated. 
 
-\item Possibility of using other representational concepts such as \textit{Predictive Representations of State} or \textit{Affordance} [\cite{Sridharan2017}] for the agent. 
+\item Possibility of using other representational concepts such as \textit{Predictive Representations of State} or \textit{Affordance} \cite{Sridharan2017} for the agent's learning task. These concept have not been considered at the moment, but could help us transfer learning. 
 
-\item Preparation for a backup plan in case ILASP approach does not work.
+\item Preparation for a backup plan in case ILASP approach does not work, so that the reseach is feasible within 3 months of the reseach period. 
  
 \end{itemize}
 
@@ -667,9 +656,7 @@ More research needs to be devoded in finalising the overall architecture, and th
 
 Once the architecture is decided, we will implement it using Python and ILASPv3.1.0 (Clingo) \cite{Law2017}, and compare the performance with other learning methods using a game platform called GVG-AI Framework. 
 
-The two main measurements for the performance of our new architecture are learning efficiency and transfer Learning capability. 
-
-Other learning methods will be Q-Learning and Deep Q-Learning since these methods are widely used as benchmark. 
+Other learning methods to be compared as benchmark will be Q-Learning and Deep Q-Learning since these methods are widely used in other related works. The two main measurements for the performance of our new architecture are learning efficiency and transfer Learning capability as we stated our motivation in the Introduction. 
 
 GVG-AI Framework was created for the General Video Game AI Competition \footnote{http://www.gvgai.net/}, game environments for an agent that should be able to play a wide variety of games without knowing which games are to be played.
 The underline language is the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
