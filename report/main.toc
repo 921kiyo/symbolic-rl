@@ -16,8 +16,8 @@
 \contentsline {section}{\numberline {2.2}Reinforcement Learning (RL)}{11}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Markov Decision Process (MDP)}{12}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Policies and Value Functions}{12}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Model-based vs Model-free Learning}{13}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}Temporal-Difference (TD) Learning}{13}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.3}Model-based and Model-free Learning}{13}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Temporal-Difference (TD) Learning}{14}{subsection.2.2.4}
 \contentsline {subsection}{\numberline {2.2.5}Q-Learning}{14}{subsection.2.2.5}
 \contentsline {chapter}{\numberline {3}Related Work}{15}{chapter.3}
 \contentsline {chapter}{\numberline {4}Project Overview}{17}{chapter.4}

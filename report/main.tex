@@ -401,7 +401,7 @@ Two advantages of adding contex-dependent are it increases the efficiency of lea
 
 \section{Reinforcement Learning (RL)}
 \label{rl}
-Reinforcement learning (RL) is a subfield of machine learning regarding how an agent behaves in an environment in order to maximise the total reward. As shown in Figure \ref{agent_env}, the agent interacts with an environment, and at each time step the agent takes an action and receives observation, which affects the environment state and the reward (or penalty) it receives as the action outcome. In this section, we briefly introduce the background in RL necessary for our research.
+\textit{Reinforcement learning (RL)} is a subfield of machine learning regarding how an agent behaves in an environment in order to maximise its total reward. As shown in Figure \ref{agent_env}, the agent interacts with an environment, and at each time step the agent takes an action and receives observation, which affects the environment state and the reward (or penalty) it receives as the action outcome. In this section, we briefly introduce the background in RL necessary for our research.
 
 \begin{figure}[!htb]
 \centering
@@ -412,26 +412,25 @@ Reinforcement learning (RL) is a subfield of machine learning regarding how an a
 
 \subsection{Markov Decision Process (MDP)}
 \label{mdp_subsection}
-An agent interacts with an environment at a sequence of discrete time step, which is a part of the sequential history of observations, actions and rewards. The sequential history is formalised as H\textsubscript{t} = O\textsubscript{1}, R\textsubscript{1}, A\textsubscript{1}, ..., A\textsubscript{t-1}, O\textsubscript{t}, R\textsubscript{t}.  A \textit{state} is a function of the history S\textsubscript{t} = f(H\textsubscript{t}), which determines the next environment.  A state S\textsubscript{t} is said to have Markov property if and only if
-P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\vert$ S\textsubscript{1}, ..., S\textsubscript{t}]. In other words, the probability of reaching S\textsubscript{t+1} depends only on S\textsubscript{t}, which captures all the relevant information from earilier history (\cite{Puterman1994}).
+An agent interacts with an environment at a sequence of discrete time step, which is part of the sequential history of observations, actions and rewards. The sequential history is formalised as H\textsubscript{t} = O\textsubscript{1}, R\textsubscript{1}, A\textsubscript{1}, ..., A\textsubscript{t-1}, O\textsubscript{t}, R\textsubscript{t}.  A \textit{state} is a function of the history S\textsubscript{t} = f(H\textsubscript{t}), which determines the next environment.  A state S\textsubscript{t} is said to have \textit{Markov property} if and only if P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\vert$ S\textsubscript{1}, ..., S\textsubscript{t}]. In other words, the probability of reaching S\textsubscript{t+1} depends only on S\textsubscript{t}, which captures all the relevant information from earilier history (\cite{Puterman1994}).
 
-When an agent must make a sequence of decision, the sequential decision problem can be formalised using Markov decision process (MDP). MDPs formaly represent a fully observable environment of an agent for RL.
+When an agent must make a sequence of decision, the sequential decision problem can be formalised using \textit{Markov decision process (MDP)}. MDP formaly represents a fully observable environment of an agent for RL.
 
 A MDP is of the form $\langle$ S, A, T\textsubscript{a}, R\textsubscript{a}, $\gamma$ $\rangle$ where:
 
 \begin{itemize}
-\item S is the set of finite states that is observable in the environment
-\item A is the set of finite actions taken by the agent
-\item T\textsubscript{a}(s, s$^\prime$) is a state transition in the form of probability matrix Pr(S\textsubscript{t+1} = s$^\prime$ $\vert$ s\textsubscript{t} = s, a\textsubscript{t} = a), which is the probablity that action a in state s at time t will result in state s$^\prime$ at time t+1.
-\item R is a reward function R\textsubscript{a}(s, s$^\prime$) = $\displaystyle \E[R\textsubscript{t+1} $ $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a], the expected immediate reward that action a in state s at time t will return
-\item $\gamma$ is a discount factor $\gamma$ $\in$ [0,1], which represents the preference of the agent for present rewards over future rewards
+\item S is the set of finite states that is observable in the environment.
+\item A is the set of finite actions taken by the agent.
+\item T\textsubscript{a}(s, s$^\prime$) is a state transition in the form of probability matrix Pr(S\textsubscript{t+1} = s$^\prime$ $\vert$ s\textsubscript{t} = s, a\textsubscript{t} = a), which is the probablity that action \textit{a} in state \textit{s} at time \textit{t} will result in state \textit{s$^\prime$} at time \textit{t+1}.
+\item R is a reward function R\textsubscript{a}(s, s$^\prime$) = $\displaystyle \E[R\textsubscript{t+1} $ $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a], the expected immediate reward that action \textit{a} in state \textit{s} at time \textit{t} will return.
+\item $\gamma$ is a discount factor $\gamma$ $\in$ [0,1], which represents the preference of the agent for present rewards over future rewards.
 \end{itemize}
 
 %$\displaystyle \E[R\textsubscript{t+1} \vert$ S\textsubscript{t} = s]
 \subsection{Policies and Value Functions}
 \label{policy_value_functions_subsection}
 
-\textit{value functions} estimate the expected return, or expected future rewarded,  for a given action in a given state. The expected reward for an agent is dependent on the agent's action. A solution to the sequential decision problem is called a \textit{policy $\pi$}, a sequence of actions that leads to a solution.
+\textit{Value functions} estimate the expected return, or expected future rewarded,  for a given action in a given state. The expected reward for an agent is dependent on the agent's action. A solution to the sequential decision problem is called a \textit{policy $\pi$}, a sequence of actions that leads to a solution.
 % which is a distributin over actions given states.
 
 The state value function v\textsubscript{$\pi$}(s) of an MDP under a policy $\pi$ is th the expected return starting from state , which is of the form:
@@ -453,7 +452,7 @@ $\pi$\textsuperscript{*} = arg max v\textsubscript{$\pi$}(s)
 
 %Reinforcement learning is a method to get approximated optimal solution.
 
-TODO on-policy and off-policy learning.
+%TODO on-policy and off-policy learning.
 
 A\textsubscript{t} = $\pi$(S\textsubscript{t})
 
@@ -465,10 +464,10 @@ An action-value function evaluate a particular state by taking an action accordi
 
 q\textsubscript{$\pi$} = $\displaystyle \E[R\textsubscript{t+1} $[R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ... $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a, A\textsubscript{t+1 } = a,]
 
-\subsection{Model-based vs Model-free Learning}
+\subsection{Model-based and Model-free Learning}
 \label{model_base_model_free_subsection}
-A model M is a representation of an MDP where the state space and action space are assumed to be known. The model represents state transitions and rewards. In this case, the problem to be solved becomes a planning problem for a series of actions to achieve the agent's goal.
-Most of the reinforcement learning problems are model-free learning, where M is not unknown and the agent learns to achieve the goal by solely interacting with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
+A model M is a representation of an environment that an agent can used to understand how the environment should look like . Model-based learning is that the agent learns the model and plan a solution using the learnt model. Once the agent learns the model, the problem to be solved becomes a planning problem for a series of actions to achieve the agent's goal.
+Most of the reinforcement learning problems are model-free learning, where M is unknown and the agent learns to achieve the goal by solely interacting with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
 
 The performance of model-based RL is limited to optimal policy given the model M. In other words, when the model is not a representation of the true MDP, the planning algorithms will not lead to the optimal policy, but a suboptimal policy.
 
