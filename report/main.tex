@@ -146,109 +146,127 @@ Having defined the syntax of clausal logic, we now introduce its semantics under
 \begin{itemize}
 \item \textit{Herbrand Domain} (a.k.a \textit{Herbrand Universe}) of clause sets \textit{Th} is the set of all ground terms that are constants and function symbols appeared in \textit{Th}.
 \item \textit{Herbrand Base} of \textit{Th} is the set of all ground predicates that are formed by predicate symbols in \textit{Th} and terms in the Herbrand domain.
-\item \textit{Herbrand interpretation} of a set of definite clauses \textit{Th} is a subset of the Herbrand base of \textit{Th}, which is a set of ground atoms that are true in terms of interpretation.
+\item \textit{Herbrand Interpretation} of a set of definite clauses \textit{Th} is a subset of the Herbrand base of \textit{Th}, which is a set of ground atoms that are true in terms of interpretation.
 \item \textit{Herbrand Model} is a Herbrand interpretation if and only if a set \textit{Th} of clauses is satisfiable. In other words, a set of clauses \textit{Th} is unsatisfiable if no Herbrand model was found. 
-\item \textit{Least Herbrand Model} (denoted as M(P)) is a unique minimal Herbrand model for definite logic programs.  The Herbrand Model is a minimum Herbrand model if and only if none of its subsets is an Herbrand model. For normal logic programs, there may not be any least Herbrand Model.
+\item \textit{Least Herbrand Model} (denoted as M(P)) is an unique minimal Herbrand model for definite logic programs.  The Herbrand Model is a minimum Herbrand model if and only if none of its subsets is an Herbrand model. For normal logic programs, there may not be any least Herbrand Model.
 
 \end{itemize}
 %Interpretation evaluate it to true
 %Interpretation evaluate it to false
-%\begin{examp} \normalfont (Herbrand Base)
-%\end{examp}
 
-\textit{Definite Logic Program} is a set of definite rule, and  a definite rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, where h , a\textsubscript{1}, ..., a\textsubscript{n} are all atoms. h is the \textit{head} of the rule and a\textsubscript{1}, ..., a\textsubscript{n} are the body of the rule.
+\begin{examp} \normalfont (Herbrand Interpretation, Herbrand Model and M(P)) \\
 
+P = $\begin{cases}
+	p(X)  \leftarrow q(X) \\
+	q (a).
+      \end{cases}$
+
+HD = \{ a \} (Herbrand Domain)
+
+HB = \{ q(a), p(a) \} (Herbrand Base)
+
+Given above,  there are four Herbrand Interpretations = $\langle$ \{q(a)\}, \{p(a)\}, \{q(a), p(a)\}, \{\} $\rangle$, and one Herbrand Model (as well as M(P)) = \{q(a), p(a)\}
+
+\end{examp}
+
+\textit{Definite Logic Program} is a set of definite rule, and  a \textit{definite rule} is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, where h , a\textsubscript{1}, ..., a\textsubscript{n} are all atoms. h is the \textit{head} of the rule and a\textsubscript{1}, ..., a\textsubscript{n} are the \textit{body} of the rule.
 \textit{Normal Logic Program} is a set of normal rule, and a normal rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, \textit{not} b\textsubscript{1}, ..., \textit{not}  b\textsubscript{n} where h is the head of the rule,
  and a\textsubscript{1}, ..., a\textsubscript{n}, b\textsubscript{1}, ..., b\textsubscript{n} are the body of the rule (both the head and body are all atoms).
 
-To solve a normal logic program \textit{Th}, the program needs to be grounded. The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the Herbrand Domain.
+To solve a normal logic program \textit{Th}, the program needs to be grounded. The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the Herbrand Domain. The algorithm of grounding start with the empty program Q = \{  \} and the relevant grounding is constructed by adding to each rule R to Q given that R is a ground instance of a rule in P and their positive body literals already occurs in the in the of rules in Q. The algorithm terminates when no more rules can be added to Q.
 
-\begin{examp} \normalfont (Grounding)
+\begin{examp} \normalfont Grounding \\
 
-P = $\begin{cases}
+X = \{p\}, P = $\begin{cases}
 	p  \leftarrow not \ q. \\
 	q  \leftarrow p.
       \end{cases}$
+
+ground(P) in this case  is p:- not q. and q:- p. 
+
 \end{examp}
 \label{grounding}
 
-ground(P) in Example \ref{grounding} is p:- not q. and q:- p. The algorithm of grounding start with the empty program Q = \{  \} and the relevant grounding is constructed by adding to each rule R to Q given that R is a ground instance of a rule in P and their positive body literals already occurs in the in the of rules in Q. The algorithm terminates when no more rules can be added to Q.
+
 %TODO Explain grounding in ASP context.
 %The grounding of a normal logic program P can be obtained by replacing each rule in P with a ground instance of the rule, such that for each atom A in body\textsuperscript{+} (R) (TODO EXPLAIN WHAT THIS IS), already occurs in the head of another ground rule.
 Not only the entire program needs to be grounded in order for ASP solver to work, and, unlike Prolog,  but also each rule must be \textit{safe}. A rule \textit{R} is safe if every variable that occurs in the head of the rule occurs at least once in body\textsuperscript{+}(R) .
 
-Since there is no unique least Herbrand Model for a normal logic program, \cite{Gelfond1988} defined Stable Model of a normal logic program. In order to obtain the Stable model of P, P needs to be converted using \textit{Reduct} with respect to an interpretation X. First, if the body of any rule in P contains an atom which is not in X, those rules need to be removed. Second, all default negation atoms in the remaining rules in P need to be removed.
+Since there is no unique least Herbrand Model for a normal logic program, \cite{Gelfond1988} defined Stable Model of a normal logic program. In order to obtain the Stable Model of P, P needs to be converted using \textit{Reduct} with respect to an interpretation X. First, if the body of any rule in P contains an atom which is not in X, those rules need to be removed. Second, all default negation atoms in the remaining rules in P need to be removed.
 
-\begin{examp} \normalfont (Reduct)
+\begin{examp} \normalfont Reduct \\
 
-X = {p}
-
-P = $\begin{cases}
+X = \{p\},   P = $\begin{cases}
 	p  \leftarrow not\ q. \\
   q  \leftarrow not\ p. \\
   r  \leftarrow p.
       \end{cases}$
+
+The first step removes q  $\leftarrow$ not p, and the second step will remove not q. Thus reduct P\textsuperscript{x} is \{p, r $\leftarrow$ p.\}
 \end{examp}
 \label{reduct}
 
-In the Example \ref{reduct}, P\textsuperscript{x} is {p, r $\leftarrow$ p.}.
 %Any stable model is a minimal Herbrand model, and stable sets is stable models. The stable models can be found by constructing the result of the program with respect to sets of atoms X (P\textsuperscript{x} in the following 2 steps
-A stable model of P is an interpretaiton X if and only if X is the unique least Herbrand Model of ground(P)\textsuperscript{x} in the logic programs.
+A Stable Model of P is an interpretaiton X if and only if X is the unique least Herbrand Model of ground(P)\textsuperscript{x} in the logic programs.
 
 \subsection{Anwer Set Programming (ASP) Syntax}
 
-Answer set of normal logic program P is a stable model, and Answer Set Programming (ASP) is a normal logic program with extensions: constrains, choice rules and optimisation. ASP program consists of a set of rules, where each rule consists of an atom and literals.A literal is either an atom \textit{p} or its default negation (negation as a failure) \textit{not p} .
+Answer set of normal logic program P is a Stable Model, and Answer Set Programming (ASP) is a normal logic program with extensions: constrains, choice rules and optimisation. ASP program consists of a set of rules, where each rule consists of an atom and literals.
 
-A Constraint of the program P is of the form $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}, where the rule has an empty head. The constraint filters any irrelevant answer sets. When computing ground(P)\textsubscript{x}, the empty head becomes $\perp$, which cannot be in the Answer Set.
+A \textit{constraint} of the program P is of the form $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}, where the rule has an empty head. The constraint filters any irrelevant answer sets. When computing ground(P)\textsubscript{x}, the empty head becomes $\perp$, which cannot be in the Answer Set.
 There are two types of constraints: \textit{hard constraints} and \textit{hard constraints}. Hard constraints are strictly satisfied, whereas soft constraints are must not be satisfied but the sum of the violations should be minimised when solving ASP.
 
-Choice rule can express possible outcomes given an action choice, which is of the form
+A \textit{choice rule} can express possible outcomes given an action choice, which is of the form
 l\{h\textsubscript{1},...,h\textsubscript{m}\}u $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n} where  l and u are integers and h\textsubscript{i} for 1 $\leq$ i $\leq$ m are atoms. The head is called \textit{aggregates}.
 
-optimisation statement is useful to order the answer sets in terms of preference, which is of the form
+\textit{Optimisation statement} is useful to order the answer sets in terms of preference, which is of the form
 \#minimize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}] or \#maximize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}] where w\textsubscript{1},..., w\textsubscript{n} is an integer weight and a\textsubscript{1},...,a\textsubscript{n} is an ground atom.  ASP solvers compute the scores of the weighted sum of the sets of ground atoms based on the true answer sets, and find optimal Answer Sets which either maximise or minimise the score.
 
 \textit{Clingo} is one of ASP modern solvers that executes the ASP program and returns answer sets of the programs (\cite{Gebser2011}), and we will use \textit{Clingo} for the implementation of this research.
 
 %An answer set of ASP program is interpretations that make all the ruls true.
 %Non-monotonicity.
-TODO ASP has true, false and unknown
+%TODO ASP has true, false and unknown
 
 \subsection{ILP Under Answer Set Semantics}
 
-There are several ILP non-monotoic learning frameworks under the Answer set semantics . We introduce two of them: \textit{Cautious Induction} and \textit{Brave Induction} (\cite{Sakama2009}), which are foundations of \textit{Learning from Answer Sets} discussed in Section \ref{section_las}.  (for other ILP frameworks, see \cite{Otero2001}, \cite{Inoue2014}, \cite{Corapi2012} and \cite{DeRaedt1997}).
-\subsubsection{Cautious Induction}
+There are several ILP non-monotonic learning frameworks under the Answer set semantics . We introduce two of them: \textit{Cautious Induction} and \textit{Brave Induction} (\cite{Sakama2009}), which are foundations of \textit{Learning from Answer Sets} discussed in Section \ref{section_lasp}.  (for other ILP non-monotonic frameworks, see \cite{Otero2001}, \cite{Inoue2014}, \cite{Corapi2012} and \cite{DeRaedt1997}).
+\subsubsection{Cautious Induction }
 % Sakama 2008 has no concept of negative examples in this paper.
-Cautious Induction task is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples.
+Cautious Induction task \footnote{This is more general definition of Cautious Induction than the one defined in \cite{Sakama2009}, as the concept of negative examples was not included in the original definition.} is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples.
 
  H $\in$ ILP\textsubscript{cautious} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if  there is at least one answer set A of B $\cup$ H (B $\cup$ H is satisfiable) such that for every anser set A of B $\cup$ H: \\
-$\forall$ e $\in$ E\textsuperscript{+} : e $\in$ A \\
-$\forall$ e $\in$ E\textsuperscript{-} : e $\notin$ A \\
+\begin{enumerate}
+\item $\forall$ e $\in$ E\textsuperscript{+} : e $\in$ A
+\item $\forall$ e $\in$ E\textsuperscript{-} : e $\notin$ A
+\end{enumerate}
 
-\begin{examp} \normalfont Cautious Induction (Example)
+\begin{examp} \normalfont Cautious Induction \\
 
 B = $\begin{cases}
 	exercises  \leftarrow not \ eat\_out. \\
 	eat\_out \leftarrow exercises. \\
-      \end{cases}$ \\
-E\textsubscript{+} = tennis \\
-E\textsubscript{-} = eat\_out \\
+      \end{cases}$ 
+E\textsuperscript{+} = \{tennis\},      E\textsuperscript{-} = \{eat\_out \} \\
+
 One possible  H $\in$ ILP\textsubscript{cautious} is \{tennis$ \leftarrow$ exercises, $\leftarrow$ not tennis \}.
 \end{examp}
 \label{cautious_induction_example}
 
 The limitation of Cautious Induction is that positive examples must be true for all Answer Sets and negative examples must not be included in any of the Answer Sets. These conditions may be too strict in some cases, and Cautious Induction is not able to accept the case where positive examples are true in some of the Answer Sets but not all Answer Sets of the program.
 
-\begin{examp} \normalfont Limitation of Cautious Induction (Example)
+\begin{examp} \normalfont Limitation of Cautious Induction \\
 
-1\{situation(P, awake), situation(P, sleep)\}1 :- person(P).
+B = $\begin{cases}
+	1\{situation(P, awake), situation(P, sleep)\}1 \leftarrow person(P). \\
+	person(john).
 
-person(john).
+      \end{cases}$ \\
 
+Neither of situation(john, awake) nor situation(john, sleep) is false in all answer sets. In this example, it only return person(john). Thus no examples could be given to learn the choice rule.
 \end{examp}
-\label{limitation_cautious}
 
-In the example \ref{limitation_cautious}, neither of situation(john, awake) or situation(john, sleep) is false in all answer sets. In this example, it only return person(john). Thus no examples could be given to learn the choice rule.
+\label{limitation_cautious}
 
 \subsubsection{Brave Induction}
 Brave Induction task is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ where, B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples.
@@ -256,14 +274,13 @@ Brave Induction task is of the form $\langle$ B, E\textsuperscript{+}, E\textsup
 $\forall$ e $\in$ E\textsuperscript{+} : e $\in$ A \\
 $\forall$ e $\in$ E\textsuperscript{-} : e $\notin$ A \\
 
-\begin{examp} \normalfont Brave Induction (Example)
+\begin{examp} \normalfont Brave Induction (Example) \\
 
 B = $\begin{cases}
 	exercises  \leftarrow not \ eat\_out. \\
 	tennis \leftarrow holiday \\
-      \end{cases}$ \\
-E\textsubscript{+} = tennis \\
-E\textsubscript{-} = eat\_out \\
+      \end{cases}$
+E\textsubscript{+} = \{tennis\},   E\textsubscript{-} = \{eat\_out \} \\
 One possible  H $\in$ ILP\textsubscript{brave} is \{tennis\}, which returns \{tennis, holidy, exercises\} as Answer Sets.
 \end{examp}
 \label{brave_induction_example}
@@ -272,13 +289,13 @@ The limitation of Brave indction that it cannot learn constraints as shown in th
 
 TODO MORE EXPLANATION
 
-\begin{examp} \normalfont Limitation of Brave Induction (Example)
+\begin{examp} \normalfont Limitation of Brave Induction (Example) \\
 
 B = $\begin{cases}
 	1\{situation(P, awake), situation(P, sleep)\}1 \leftarrow person(P). \\
 	person(C) \leftarrow super\_person(C). \\
 	super\_person(john).
-	\end{cases}$
+	\end{cases}$ \\
 
 In order to learn the  constraint hypothesis H = \{ $\leftarrow$ not situation(P, awake), super\_person(P)\}, it is not possible to find an optimal solution.
 \end{examp}
