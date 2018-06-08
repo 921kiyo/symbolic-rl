@@ -328,7 +328,6 @@ TODO
 %      \end{cases}$ \\
 %E\textsubscript{+} = tennis \\
 %E\textsubscript{-} = eat\_out \\
-%One possible  H $\in$ ILP\textsubscript{brave} is \{tennis\}, which returns \{tennis, holidy, exercises\} as Answer Sets.
 
 \end{examp}
 \label{las_example}
@@ -337,7 +336,7 @@ TODO
 
 \subsubsection{Inductive Learning of Answer Set Programs (ILASP)}
 
-ILASP is an algorithm that is capable of solving LAS tasks, and is based on two fundamental concepts: positive solutions and violating solutions.
+\textit{Inductive Learning of Answer Set Programs (ILASP)} is an algorithm that is capable of solving LAS tasks, and is based on two fundamental concepts: positive solutions and violating solutions. 
 
 A hypothesis H is a positive solution if and only if
 \begin{enumerate}
@@ -351,11 +350,11 @@ A hypothesis H is a violating solution if and only if
 \item $\exists$ e\textsuperscript{-} $\in$ E\textsuperscript{-} $\exists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e\textsuperscript{-}\\
 \end{enumerate}
 
-Given both definitions of positive and violating solutions, ILP\textsubscript{LAS} is positive solutions that are not violating solutions.
+Given both definitions of positive and violating solutions, ILP\textsubscript{LAS} $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$is positive solutions that are not violating solutions.
 
 \subsubsection{Learning from Ordered Answer Sets (LOAS)}
 
-LOAS is an extension of ILASP by incorporating learning capability of weak constraints, is useful for modelling the agent's preferences (\cite{Law2015}).
+\textit{Learning from Ordered Answer Sets (LOAS)} is an extension of ILASP by incorporating learning capability of weak constraints, which is useful for modelling the agent's preferences \cite{Law2015}.
 Examples used for learning are ordered pairs of partial answer sets, which are of the form o = $\langle$ e\textsubscript{1},e\textsubscript{2} $\rangle$.  An ASP Program P \textit{bravely respects o } if and only if
 \begin{enumerate}
 \item $\exists$ A\textsubscript{1}, A\textsubscript{2} $\in$ Answer Sets(P) such that A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2}, and A\textsubscript{1} $\succ$\textsubscript{P} A\textsubscript{1}
@@ -366,8 +365,7 @@ P \textit{cautiously respects o } if and only if
 \item $\forall$ A\textsubscript{1}, A\textsubscript{2} $\in$ Answer Sets(P) such that A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2}, and A\textsubscript{1} $\succ$\textsubscript{P} A\textsubscript{1}
 \end{enumerate}
 
-LOAS task is of the form T = $\langle$ B, S\textsubscript{M}, E\textsubscript{+}, E\textsubscript{-}, O\textsuperscript{b},O\textsuperscript{c}$\rangle$ where O\textsuperscript{b} and O\textsuperscript{c} are brave and cautious orderings respectively, which are sets of ordering examples over set of positive partial interpretations E\textsuperscript{+}.
-A hypothesis H is an inductive solution of T if and only if
+LOAS task is of the form T = $\langle$ B, S\textsubscript{M}, E\textsubscript{+}, E\textsubscript{-}, O\textsuperscript{b},O\textsuperscript{c}$\rangle$ where O\textsuperscript{b} and O\textsuperscript{c} are brave and cautious orderings respectively, which are sets of ordering examples over set of positive partial interpretations E\textsuperscript{+}. A hypothesis H is an inductive solution of T if and only if
 \begin{enumerate}
 \item H $\subseteq$ S\textsubscript{M} in ILP\textsubscript{LOAS}(T)
 \item H' $\in$ ILP\textsubscript{LAS}($\langle$ B, S\textsubscript{LAS}(M\textsubscript{h}, M\textsubscript{b}), E\textsuperscript{+}, E\textsuperscript{-}$\rangle$) where H' is the subset of H without weak constraints
@@ -377,7 +375,7 @@ A hypothesis H is an inductive solution of T if and only if
 
 \subsubsection{A Context-dependent Learning from Ordered Answer Sets }
 \textit{Context-dependent learning from ordered answer sets ($ILP_{LOAS}^{context}$)} is a further generalisation of ILP\textsubscript{LOAS} with \textit{context-dependent examples}.
-Context-dependent examples are examples to which each unique background knowledge (context) only applies. This way the background knowledge is more structured rather than one fixed background knowledge that are applied to all examples.
+Context-dependent examples are examples that each unique background knowledge (context) only applies to some examples. This way the background knowledge is more structured rather than one fixed background knowledge that are applied to all examples.
 Formally, partial interpretation is of the form $\langle$ e, C $\rangle$ (called \textit{context-dependent partial interpretation (CDPI)}), where \textit{e} is a partial interpretation and C is called \textit{context}, or an ASP program without weak constraints.
 A \textit{context-dependent ordering example (CDOE)} is of the form $\langle$ $\langle$e\textsubscript{1}, C\textsubscript{1} $\rangle$, $\langle$ e\textsubscript{2}, C\textsubscript{2} $\rangle$$\rangle$. An APS program P \textit{bravely} respects \textit{o} if and only if
 \begin{enumerate}
