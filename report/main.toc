@@ -5,7 +5,7 @@
 \contentsline {subsection}{\numberline {2.1.1}Logic Basics}{4}{subsection.2.1.1}
 \contentsline {subsection}{\numberline {2.1.2}Stable Model Semantics}{5}{subsection.2.1.2}
 \contentsline {subsection}{\numberline {2.1.3}Anwer Set Programming (ASP) Syntax}{6}{subsection.2.1.3}
-\contentsline {subsection}{\numberline {2.1.4}ILP Under Answer Set Semantics}{7}{subsection.2.1.4}
+\contentsline {subsection}{\numberline {2.1.4}ILP under Answer Set Semantics}{7}{subsection.2.1.4}
 \contentsline {subsubsection}{Cautious Induction }{7}{section*.2}
 \contentsline {subsubsection}{Brave Induction}{8}{section*.3}
 \contentsline {subsection}{\numberline {2.1.5}Inductive Learning of Answer Set Programs (ILASP)}{9}{subsection.2.1.5}

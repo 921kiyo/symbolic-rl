@@ -90,19 +90,15 @@ First, it requires large dataset for training the model, and the learning is ver
 Second, it is considered to be a black-box, meaning that the decision making process is unknown to the human user and therefore lacks explanation of the decision making. Third, there is no thought process to the decision making, such as understanding relational representations or planning. To tackle these problems, researchers have explored several different approaches.
 One of the methods is to incorporate symbolic representations into the system \cite{Garnelo2016}. This approach is promising and shows a potential.
 
-In this paper, we extend this symbolic representation approach and explore the potential of incorporating inductive logic programming into reinforcement learning to solve the above issues.
-There are several advantages of symbolic reinforcement learning. First of all, the decision making mechanism is understandable by humans rather than being black-box.
-Second, it resembles how humans reason. Like reinforcement learning, there are some aspects of trial-and-error in human learning, but humans exploit reasonings to efficiently learn about their surrounding or situations. They also effectively use previous experience (background knowledge) when encountering similar situations.
-Finally, the recent advance of ILP research has enabled us to apply ILP in more complex situations and there are a number of new algorithms that work well in non-monotonic scenarios based on Answer Set Programmings (ASPs).
+In this paper, we extend this symbolic representation approach and explore the potential of symbolic machine learning to solve the above issues. There are several advantages of symbolic machine learning. First of all, the decision making mechanism is understandable by humans rather than being black-box.
+Second, it resembles how humans reason. Similar to reinforcement learning, there are some aspects of trial-and-error in human learning, but humans exploit reasonings to efficiently learn about their surrounding or situations. They also effectively use previous experience (e.g background knowledge) when encountering similar situations.
+Finally, the recent advance of Inductive Logic Programming (ILP) research has enabled us to apply ILP in more complex situations and there are a number of new algorithms based on Answer Set Programmings (ASPs) that work well in non-monotonic scenarios.
 
-Particularly since \cite{Garnelo2016}, there have been several researches that further explored the incorporation of symbolic reasoning into DRL, but the combining of inductive logic programming and reinforcement learning has not been explored.
-Because of the recent advancement of symbolic machine learning and deep reinforcement learning, a combination of both approaches would be the next fielf to explore.
+Particularly since \cite{Garnelo2016}, there have been several researches that further explored the incorporation of symbolic reasoning into RL, but the combining of ILP and RL has not been explored. Because of the recent advancement of ILP and RL, it is natual to consider that a combination of both approaches would be the next field to explore.
 
-In this work, our objective is to explore this new researchield and see how combination of the two different learning methods could enhance the learning capability.
+In this paper, our objective is to  explore the incorporation of ILP into RL using Inductive Learning of Answer Set Programs (ILASP), which is a state-of-art ILP method that can be applied to incomplete and more complex environments.
 
-In this paper, we further explore the incorporation of symbolic machine learning into reinforcement learning to achieve data-efficient learning using Inductive Learning of Answer Set Programs (ILASP), which is a state-of-art symbolic learning method that can be applied to incomplete and more complex environments.
-
-This background report will be part of the final report and is organised as follows: In Chapter \ref{background}, the background of logic, inductive logic programming and reinforcement learning necessary for this paper are described. Chapter \ref{related_work} discusses previous research on this particular approach. Chapter \ref{project_overview} shows the tentative architecture of our new approach, using Inductive Learning of Answer Set Programs (ILASP) to generate a model of the environment. We also discuss some of the issues we currently face with the architecture and plan the implementation. Finally the ethics checklist is provided in Chapter \ref{ethics_checklist}.
+This background report will be part of the final report and is organised as follows: In Chapter \ref{background}, the background of inductive logic programming and reinforcement learning necessary for this paper are described. Chapter \ref{related_work} discusses previous research on relevant approach. Chapter \ref{project_overview} shows the tentative architecture of our new approach, using ILASP to generate a model of the environment. We also discuss some of the issues we currently face with the architecture and plan the implementation. Finally the ethics checklist is provided in Chapter \ref{ethics_checklist}.
 
 \chapter{Background}
 \label{background}
@@ -112,7 +108,7 @@ This chapter introduces necessary background of Inductive Logic Programming (Sec
 \section{Inductive Logic Programming (ILP)}
 \label{ilp}
 
-Inductive Logic Programming (ILP) is a subfield of machine learning research area aimed at the intersection between machine learning and logic programming \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and none of negative examples, given a hypothesis language for search space and cover relation \cite{DeRaedt1997}. ILP is based on learning from entailment, as shown in Equation \ref{ilp_equation}.
+\textit{Inductive Logic Programming (ILP)} is a subfield of machine learning research area aimed at the intersection between machine learning and logic programming \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and none of negative examples, given a hypothesis language for search space and cover relation \cite{DeRaedt1997}. ILP is based on learning from entailment, as shown in Equation \ref{ilp_equation}.
 
 \begin{equation}
 B \wedge H \models E
@@ -120,16 +116,16 @@ B \wedge H \models E
 \label{ilp_equation}
 
 where E contains all of the positive examples (E\textsuperscript{+}) and none of the negative examples (E\textsuperscript{-}).
-One of the advantage of ILP over statistical machine learning is that the hypothesis the agent learnt can be easily understood by a human, as it is expressed in first-order logic, making the learning process more transparent rather than black-box.
-One of the limitations of ILP is learning efficiency. There are usually thousands or more examples in many real-world examples. Scaling ILP task to cope with large examples is a challenging task \cite{Muggleton1993}.
+One of the advantage of ILP over statistical machine learning is that the hypothesis that an agent learnt can be easily understood by a human, as it is expressed in first-order logic, making the learning process more transparent rather than black-box.
+One of the limitations of ILP is learning efficiency and scalability. There are usually thousands or more examples in many real-world examples. Scaling ILP task to cope with large examples is a challenging task \cite{Muggleton1993}.
 
-In this section, we briefly introduce basic logic notions, Anser set programming (ASP) and some of inductive leraning frameworks.
+In this section, we briefly introduce foundation of logic, Anser Set Programming (ASP) and some of inductive learning frameworks.
 
 \subsection{Logic Basics}
 
 %TODO Satisfiable
 
-To compute an inference task, the syntax of the predicate logic program needs to be converted into \textit{Conjunctive Normal Form (CNF)}, or \textit{clausal theory}, which consists of a conjunction of clauses, where a clause is disjunction of literals, and a literal can include positive literals and negative literals. A literal is either an atom \textit{p} or \textit{not p} (\textit{negation as failure}).
+To compute an inference task, the syntax of the predicate logic program needs to be converted into \textit{Conjunctive Normal Form (CNF)}, or \textit{Clausal Theory}, which consists of a conjunction of clauses, where a clause is disjunction of literals, and a literal can include positive literals and negative literals. A literal is either an atom \textit{p} or \textit{not p} (\textit{negation as failure}).
 
 \begin{examp} \normalfont Conjunctive Normal Form (Clausal Theory)
 \begin{center}
@@ -137,18 +133,18 @@ To compute an inference task, the syntax of the predicate logic program needs to
 \end{center}
 \end{examp}
 
-A \textit{Horn clause} is a subset of CNF, which is a clause with at most one positive literal, where a \textit{definite clause} (also called a \textit{rule}) contains exactly one positive literal ($\neg$ body\textsubscript{1} $\vee$ $\neg$ body\textsubscript{2} $\vee$, ..., $\vee$ $\neg$ body\textsubscript{n} $\vee$ head), and a \textit{denial} (or a \textit{constraint}) is a clause without any positive literals ($\neg$ body\textsubscript{1} $\vee$ $\neg$ body\textsubscript{2} $\vee$, ..., $\vee$ $\neg$ body\textsubscript{n}).
+A \textit{Horn clause} is a subset of CNF, which is a clause with at most one positive literal. A \textit{definite clause} (also called a \textit{rule}) contains exactly one positive literal (e.g $\neg$ body\textsubscript{1} $\vee$ $\neg$ body\textsubscript{2} $\vee$, ..., $\vee$ $\neg$ body\textsubscript{n} $\vee$ head), and a \textit{denial} (or a \textit{constraint}) is a clause without any positive literals (e.g $\neg$ body\textsubscript{1} $\vee$ $\neg$ body\textsubscript{2} $\vee$, ..., $\vee$ $\neg$ body\textsubscript{n}).
 A \textit{normal clause} extends Horn clause with negation as failure.
 
 \subsection{Stable Model Semantics}
 
-Having defined the syntax of clausal logic, we now introduce its semantics under the context of stable model. The semantics of the logic is based on the notion of interpretation, which is defined under a \textit{domain}. A domain contains all the objects that exist. It is convention to use a special interpretations called \textit{Herbrand interpretations} rather than generation interpretations.
+Having defined the syntax of clausal logic, we now introduce its semantics under the context of Stable Model. The semantics of the logic is based on the notion of interpretation, which is defined under a \textit{domain}. A domain contains all the objects that exist. In logic, it is convention to use a special interpretations called \textit{Herbrand interpretations} rather than general interpretations.
 \begin{itemize}
 \item \textit{Herbrand Domain} (a.k.a \textit{Herbrand Universe}) of clause sets \textit{Th} is the set of all ground terms that are constants and function symbols appeared in \textit{Th}.
-\item \textit{Herbrand Base} of \textit{Th} is the set of all ground predicates that are formed by predicate symbols in \textit{Th} and terms in the Herbrand domain.
+\item \textit{Herbrand Base} of \textit{Th} is the set of all ground predicates that are formed by predicate symbols in \textit{Th} and terms in the Herbrand Domain.
 \item \textit{Herbrand Interpretation} of a set of definite clauses \textit{Th} is a subset of the Herbrand base of \textit{Th}, which is a set of ground atoms that are true in terms of interpretation.
-\item \textit{Herbrand Model} is a Herbrand interpretation if and only if a set \textit{Th} of clauses is satisfiable. In other words, a set of clauses \textit{Th} is unsatisfiable if no Herbrand model was found. 
-\item \textit{Least Herbrand Model} (denoted as M(P)) is an unique minimal Herbrand model for definite logic programs.  The Herbrand Model is a minimum Herbrand model if and only if none of its subsets is an Herbrand model. For normal logic programs, there may not be any least Herbrand Model.
+\item \textit{Herbrand Model} is a Herbrand interpretation if and only if a set \textit{Th} of clauses is satisfiable. In other words, the set of clauses \textit{Th} is unsatisfiable if no Herbrand model was found. 
+\item \textit{Least Herbrand Model} (denoted as \textit{M(P)}) is an unique minimal Herbrand model for definite logic programs.  The Herbrand Model is a minimum Herbrand model if and only if none of its subsets is an Herbrand model. For normal logic programs, there may not be any least Herbrand Model.
 
 \end{itemize}
 %Interpretation evaluate it to true
@@ -160,21 +156,19 @@ P = $\begin{cases}
 	p(X)  \leftarrow q(X) \\
 	q (a).
       \end{cases}$
+HD = \{ a \} , HB = \{ q(a), p(a) \}  \\
 
-HD = \{ a \} (Herbrand Domain)
-
-HB = \{ q(a), p(a) \} (Herbrand Base)
-
+where HD is Herbrand Domain and HB is Herbrand Base.
 Given above,  there are four Herbrand Interpretations = $\langle$ \{q(a)\}, \{p(a)\}, \{q(a), p(a)\}, \{\} $\rangle$, and one Herbrand Model (as well as M(P)) = \{q(a), p(a)\}
 
 \end{examp}
 % TODO: Use the same or similar examples for all of them. 
 
-\textit{Definite Logic Program} is a set of definite rule, and  a \textit{definite rule} is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, where h , a\textsubscript{1}, ..., a\textsubscript{n} are all atoms. h is the \textit{head} of the rule and a\textsubscript{1}, ..., a\textsubscript{n} are the \textit{body} of the rule.
-\textit{Normal Logic Program} is a set of normal rule, and a normal rule is of the form h $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, \textit{not} b\textsubscript{1}, ..., \textit{not}  b\textsubscript{n} where h is the head of the rule,
- and a\textsubscript{1}, ..., a\textsubscript{n}, b\textsubscript{1}, ..., b\textsubscript{n} are the body of the rule (both the head and body are all atoms).
+\textit{Definite Logic Program} is a set of definite rules, and  a \textit{definite rule} is of the form \textit{h} $\leftarrow$ \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n}.  \textit{h} and  \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n} are all atoms. \textit{h} is the \textit{head} of the rule and \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n} are the \textit{body} of the rule.
+\textit{Normal Logic Program} is a set of normal rules, and a normal rule is of the form \textit{h} $\leftarrow$ a\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{not b}\textsubscript{1}, ..., \textit{not  b}\textsubscript{n} where \textit{h} is the head of the rule,
+ and \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{b}\textsubscript{1}, ..., \textit{b}\textsubscript{n} are the body of the rule (both the head and body are all atoms).
 
-To solve a normal logic program \textit{Th}, the program needs to be grounded. The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the Herbrand Domain. The algorithm of grounding start with the empty program Q = \{  \} and the relevant grounding is constructed by adding to each rule R to Q given that R is a ground instance of a rule in P and their positive body literals already occurs in the in the of rules in Q. The algorithm terminates when no more rules can be added to Q.
+To solve a normal logic program \textit{Th}, the program P needs to be grounded. The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the Herbrand Domain. The algorithm of grounding starts with an empty program Q = \{  \} and the relevant grounding is constructed by adding to each rule R to Q given that R is a ground instance of a rule in P and their positive body literals already occurs in the in the of rules in Q. The algorithm terminates when no more rules can be added to Q.
 
 \begin{examp} \normalfont Grounding \\
 
@@ -184,59 +178,55 @@ P = $\begin{cases}
 	p(a).
       \end{cases}$ \\
 
-ground(P) in this case  is \{p(a), q(a)\}. 
+ground(P) in this example is \{p(a), q(a)\}. 
 
 \end{examp}
 \label{grounding}
 
 %TODO Explain grounding in ASP context.
 %The grounding of a normal logic program P can be obtained by replacing each rule in P with a ground instance of the rule, such that for each atom A in body\textsuperscript{+} (R) (TODO EXPLAIN WHAT THIS IS), already occurs in the head of another ground rule.
-Not only the entire program needs to be grounded in order for ASP solver to work, and, unlike Prolog,  but also each rule must be \textit{safe}. A rule \textit{R} is safe if every variable that occurs in the head of the rule occurs at least once in body\textsuperscript{+}(R) .
-
-Since there is no unique least Herbrand Model for a normal logic program, \cite{Gelfond1988} defined Stable Model of a normal logic program. In order to obtain the Stable Model of P, P needs to be converted using \textit{Reduct} with respect to an interpretation X. First, if the body of any rule in P contains an atom which is not in X, those rules need to be removed. Second, all default negation atoms in the remaining rules in P need to be removed.
+Not only the entire program needs to be grounded in order for an ASP solver to work, but also each rule must be \textit{safe}. A rule \textit{R} is safe if every variable that occurs in the head of the rule occurs at least once in body\textsuperscript{+}(R) .
+Since there is no unique least Herbrand Model for a normal logic program, Stable Model of a normal logic program was defined in \cite{Gelfond1988}. In order to obtain the Stable Model of a program P, P needs to be converted using \textit{Reduct} with respect to an interpretation X. First, if the body of any rule in P contains an atom which is not in X, those rules need to be removed. Second, all default negation atoms in the remaining rules in P need to be removed.
 
 \begin{examp} \normalfont Reduct \\
 
-X = \{p\},   P = $\begin{cases}
+P = $\begin{cases}
 	p  \leftarrow not\ q. \\
   q  \leftarrow not\ p. \\
   r  \leftarrow p.
-      \end{cases}$ \\
+      \end{cases}$,  X = \{p\}
 
-Where X is a set of atoms. The first step removes q  $\leftarrow$ not p, and the second step will remove not q. Thus reduct P\textsuperscript{x} is \{p, r $\leftarrow$ p.\}
+Where X is a set of atoms. The first step removes \textit{q}  $\leftarrow$ \textit{not p}, and the second step removes \textit{not q}. Thus reduct P\textsuperscript{x} is \{p, r $\leftarrow$ p.\}
 \end{examp}
 \label{reduct}
 
 %Any stable model is a minimal Herbrand model, and stable sets is stable models. The stable models can be found by constructing the result of the program with respect to sets of atoms X (P\textsuperscript{x} in the following 2 steps
-A Stable Model of P is an interpretaiton X if and only if X is the unique least Herbrand Model of ground(P)\textsuperscript{x} in the logic programs.
+A Stable Model of P is an interpretaiton X if and only if X is the unique least Herbrand Model of ground(P)\textsuperscript{x} in the logic program.
 
 \subsection{Anwer Set Programming (ASP) Syntax}
 
-Answer set of normal logic program P is a Stable Model, and Answer Set Programming (ASP) is a normal logic program with extensions: constrains, choice rules and optimisation. ASP program consists of a set of rules, where each rule consists of an atom and literals.
-
-A \textit{constraint} of the program P is of the form $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}, where the rule has an empty head. The constraint filters any irrelevant answer sets. When computing ground(P)\textsubscript{x}, the empty head becomes $\perp$, which cannot be in the Answer Set.
-There are two types of constraints: \textit{hard constraints} and \textit{hard constraints}. Hard constraints are strictly satisfied, whereas soft constraints are must not be satisfied but the sum of the violations should be minimised when solving ASP.
-
+Answer set of normal logic program P is a Stable Model, and Answer Set Programming (ASP) is a normal logic program with extensions: constraints, choice rules and optimisation statements. ASP program consists of a set of rules, where each rule consists of an atom and literals.
+A \textit{constraint} of the program P is of the form $\leftarrow$ \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{not b}\textsubscript{1}, ..., \textit{not b}\textsubscript{n}, where the rule has an empty head. The constraint filters any irrelevant answer sets. When computing ground(P)\textsubscript{x}, the empty head becomes $\perp$, which cannot be in the answer sets.
+There are two types of constraints: \textit{hard constraints} and \textit{soft constraints}. Hard constraints are strictly satisfied, whereas soft constraints may not be satisfied but the sum of the violations should be minimised when solving ASP.
 A \textit{choice rule} can express possible outcomes given an action choice, which is of the form
 l\{h\textsubscript{1},...,h\textsubscript{m}\}u $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n} where  l and u are integers and h\textsubscript{i} for 1 $\leq$ i $\leq$ m are atoms. The head is called \textit{aggregates}.
+\textit{Optimisation statement} is useful to sort the answer sets in terms of preference, which is of the form
+\textit{\#minimize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}]} or \textit{\#maximize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}]} where \textit{w\textsubscript{1},..., w\textsubscript{n}} is integer weights and \textit{a\textsubscript{1},...,a\textsubscript{n}} is ground atoms.  ASP solvers compute the scores of the weighted sum of the sets of ground atoms based on the true answer sets, and find optimal answer sets which either maximise or minimise the score.
 
-\textit{Optimisation statement} is useful to order the answer sets in terms of preference, which is of the form
-\#minimize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}] or \#maximize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}] where w\textsubscript{1},..., w\textsubscript{n} is an integer weight and a\textsubscript{1},...,a\textsubscript{n} is an ground atom.  ASP solvers compute the scores of the weighted sum of the sets of ground atoms based on the true answer sets, and find optimal Answer Sets which either maximise or minimise the score.
-
-\textit{Clingo} is one of ASP modern solvers that executes the ASP program and returns answer sets of the programs (\cite{Gebser2011}), and we will use \textit{Clingo} for the implementation of this research.
+\textit{Clingo} is one of the modern ASP solvers that executes the ASP program and returns answer sets of the program (\cite{Gebser2011}), and we will use \textit{Clingo} for the implementation of this research.
 
 %An answer set of ASP program is interpretations that make all the ruls true.
 %Non-monotonicity.
 %TODO ASP has true, false and unknown
 
-\subsection{ILP Under Answer Set Semantics}
+\subsection{ILP under Answer Set Semantics}
 
-There are several ILP non-monotonic learning frameworks under the Answer set semantics . We introduce two of them: \textit{Cautious Induction} and \textit{Brave Induction} (\cite{Sakama2009}), which are foundations of \textit{Learning from Answer Sets} discussed in Section \ref{section_lasp}.  (for other ILP non-monotonic frameworks, see \cite{Otero2001}, \cite{Inoue2014}, \cite{Corapi2012} and \cite{DeRaedt1997}).
+There are several ILP non-monotonic learning frameworks under the answer set semantics . We first introduce two of them: \textit{Cautious Induction} and \textit{Brave Induction} (\cite{Sakama2009}), which are foundations of \textit{Learning from Answer Sets} discussed in Section \ref{section_lasp}, a state-of-art ILP framework that we will use for our research.  (for other non-monotonic ILP frameworks, see \cite{Otero2001}, \cite{Inoue2014}, \cite{Corapi2012} and \cite{DeRaedt1997}).
 \subsubsection{Cautious Induction }
 % Sakama 2008 has no concept of negative examples in this paper.
 Cautious Induction task \footnote{This is more general definition of Cautious Induction than the one defined in \cite{Sakama2009}, as the concept of negative examples was not included in the original definition.} is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples.
 
- H $\in$ ILP\textsubscript{cautious} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if  there is at least one answer set A of B $\cup$ H (B $\cup$ H is satisfiable) such that for every anser set A of B $\cup$ H: \\
+ H $\in$ ILP\textsubscript{cautious} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if  there is at least one answer set A of B $\cup$ H (B $\cup$ H is satisfiable) such that for every answer set A of B $\cup$ H: \\
 \begin{enumerate}
 \item $\forall$ e $\in$ E\textsuperscript{+} : e $\in$ A
 \item $\forall$ e $\in$ E\textsuperscript{-} : e $\notin$ A
@@ -254,7 +244,7 @@ One possible  H $\in$ ILP\textsubscript{cautious} is \{tennis$ \leftarrow$ exerc
 \end{examp}
 \label{cautious_induction_example}
 
-The limitation of Cautious Induction is that positive examples must be true for all Answer Sets and negative examples must not be included in any of the Answer Sets. These conditions may be too strict in some cases, and Cautious Induction is not able to accept the case where positive examples are true in some of the Answer Sets but not all Answer Sets of the program.
+The limitation of Cautious Induction is that positive examples must be true for all answer sets and negative examples must not be included in any of the answer sets. These conditions may be too strict in some cases, and Cautious Induction is not able to accept a case where positive examples are true in some of the answer sets but not all answer sets of the program.
 
 \begin{examp} \normalfont Limitation of Cautious Induction \\
 
@@ -263,7 +253,7 @@ B = $\begin{cases}
 	person(john).
       \end{cases}$ \\
 
-Neither of situation(john, awake) nor situation(john, sleep) is false in all answer sets. In this example, it only return person(john). Thus no examples could be given to learn the choice rule.
+Neither of \textit{situation(john, awake)} nor \textit{situation(john, sleep)} is false in all answer sets. In this example, it only returns person(john). Thus no examples could be given to learn the choice rule.
 \end{examp}
 
 \label{limitation_cautious}
@@ -284,11 +274,11 @@ B = $\begin{cases}
       \end{cases}$
 E\textsuperscript{+} = \{tennis\},   E\textsuperscript{-} = \{eat\_out \} \\
 
-One possible  H $\in$ ILP\textsubscript{brave} is \{tennis\}, which returns \{tennis, holidy, exercises\} as Answer Sets.
+One possible  H $\in$ ILP\textsubscript{brave} is \{tennis\}, which returns \{tennis, holidy, exercises\} as answer sets.
 \end{examp} 
 \label{brave_induction_example}
 
-The limitation of Brave indction that it cannot learn constraints, since the above conditions of examples only apply to at least one answer set A, whereas constrains rules out all Answer Sets that meet  the conditions of the Brave Induction. 
+The limitation of Brave Induction that it cannot learn constraints, since the above conditions for the examples only apply to at least one answer set A, whereas constrains rules out all answer sets that meet  the conditions of the Brave Induction. 
 
 \begin{examp} \normalfont Limitation of Brave Induction (Example) \\
 
@@ -306,12 +296,11 @@ In order to learn the  constraint hypothesis H = \{ $\leftarrow$ not situation(P
 \label{section_lasp}
 
 \subsubsection{Learning from Answer Sets (LAS)}
-\textit{Learning from Answer Sets (LAS)} was developed in \cite{Law2014} to faciliate more complex learning task that neither Cautious Induction nor Brave Induction could learn.
-Examples used in LAS are \textit{Partial Interpretations}, which are of the form $\langle$ e\textsuperscript{inc}, e\textsuperscript{exc}$\rangle$. (called \textit{inclusions} and \textit{exclusions} of e respectively).  A Herbrand Interpretations extends a partial interpretation if it includes all of e\textsuperscript{inc} and none of e\textsuperscript{exc}.
+\textit{Learning from Answer Sets (LAS)} was developed in \cite{Law2014} to faciliate more complex learning tasks that neither Cautious Induction nor Brave Induction could learn.
+Examples used in LAS are \textit{Partial Interpretations}, which are of the form $\langle$ e\textsuperscript{inc}, e\textsuperscript{exc}$\rangle$. (called \textit{inclusions} and \textit{exclusions} of \textit{e} respectively).  A Herbrand Interpretation extends a partial interpretation if it includes all of e\textsuperscript{inc} and none of e\textsuperscript{exc}.
+LAS is of the form $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is background knowledge, S\textsubscript{M} is hypothesis space, and E\textsuperscript{+} and E\textsuperscript{-} are examples of positive and negative partial interpretations. S\textsubscript{M} consists of a set of normal rules, choice rules and constraints. S\textsubscript{M} is specified by \textit{language bias} of the learning task using \textit{mode declaration}. Mode declaration specifies what can occur in a hypothesis by specifying the predicates, and consists of two parts: \textit{modeh} and \textit{modeb}.  \textit{modeh} and \textit{modeb} are the predicates that can occur in the head of the rule and body of the rule respectively. Language bias is the specification of the language in the hypothesis in order to reduce the search space for the hypothesis.
 
-LAS is of the form $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is background knowledge, S\textsubscript{M} is hypothesis space, and E\textsuperscript{+} and E\textsuperscript{-} are examples of positive and negative partial interpretations. S\textsubscript{M} consists of a set of normal rules, choice rules and constraints. S\textsubscript{M} is specified by \textit{language bias} of the learning task using \textit{mode declaration}. Mode declaration specifies what can occur in a hypothesis by specifying the predicates, and has two parts: \textit{modeh} and \textit{modeb}.  modeh and modeb are the predicates that can occur in the head of the rule and body of the rule respectively. Language bias is the specification of the language in the hypothesis in order to reduce search space for the hypothesis.
-
-Given a learning task T, the set of all possible inductive solutions of T is denoted as ILP\textsubscript{LAS}(T), and a hypothesis H is an inductive solution of ILP\textsubscript{LAS}(T) $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ such that
+Given a learning task T, the set of all possible inductive solutions of T is denoted as ILP\textsubscript{LAS}(T), and a hypothesis H is an inductive solution of ILP\textsubscript{LAS}(T) $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ such that:
 \begin{enumerate}
 \item H $\subseteq$ S\textsubscript{M}
 \item $\forall$ e $\in$ E\textsuperscript{+} : $\exists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e
@@ -337,7 +326,7 @@ Given a learning task T, the set of all possible inductive solutions of T is den
 
 \subsubsection{Inductive Learning of Answer Set Programs (ILASP)}
 
-\textit{Inductive Learning of Answer Set Programs (ILASP)} is an algorithm that is capable of solving LAS tasks, and is based on two fundamental concepts: positive solutions and violating solutions. 
+\textit{Inductive Learning of Answer Set Programs (ILASP)} is an algorithm that is capable of solving LAS tasks, and is based on two fundamental concepts: \textit{positive solutions} and \textit{violating solutions}. 
 
 A hypothesis H is a positive solution if and only if
 \begin{enumerate}
@@ -356,17 +345,17 @@ Given both definitions of positive and violating solutions, ILP\textsubscript{LA
 \subsubsection{Learning from Ordered Answer Sets (LOAS)}
 
 \textit{Learning from Ordered Answer Sets (LOAS)} is an extension of ILASP by incorporating learning capability of weak constraints, which is useful for modelling the agent's preferences \cite{Law2015}.
-Examples used for learning are ordered pairs of partial answer sets, which are of the form o = $\langle$ e\textsubscript{1},e\textsubscript{2} $\rangle$.  An ASP Program P \textit{bravely respects o } if and only if
+An examples used for learning are ordered pairs of partial answer sets, which is of the form o = $\langle$ e\textsubscript{1},e\textsubscript{2} $\rangle$.  An ASP Program P \textit{bravely respects o} if and only if:
 \begin{enumerate}
-\item $\exists$ A\textsubscript{1}, A\textsubscript{2} $\in$ Answer Sets(P) such that A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2}, and A\textsubscript{1} $\succ$\textsubscript{P} A\textsubscript{1}
+\item $\exists$ A\textsubscript{1}, A\textsubscript{2} $\in$ Answer Sets(P) such that A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2}, and A\textsubscript{1} $\succ$\textsubscript{P} A\textsubscript{2}
 \end{enumerate}
 
 P \textit{cautiously respects o } if and only if
 \begin{enumerate}
-\item $\forall$ A\textsubscript{1}, A\textsubscript{2} $\in$ Answer Sets(P) such that A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2}, and A\textsubscript{1} $\succ$\textsubscript{P} A\textsubscript{1}
+\item $\forall$ A\textsubscript{1}, A\textsubscript{2} $\in$ Answer Sets(P) such that A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2}, and A\textsubscript{1} $\succ$\textsubscript{P} A\textsubscript{2}
 \end{enumerate}
 
-LOAS task is of the form T = $\langle$ B, S\textsubscript{M}, E\textsubscript{+}, E\textsubscript{-}, O\textsuperscript{b},O\textsuperscript{c}$\rangle$ where O\textsuperscript{b} and O\textsuperscript{c} are brave and cautious orderings respectively, which are sets of ordering examples over set of positive partial interpretations E\textsuperscript{+}. A hypothesis H is an inductive solution of T if and only if
+A LOAS task is of the form T = $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-}, O\textsuperscript{b},O\textsuperscript{c}$\rangle$ where O\textsuperscript{b} and O\textsuperscript{c} are brave and cautious orderings respectively, which are sets of ordering examples over set of positive partial interpretations E\textsuperscript{+}. A hypothesis H is an inductive solution of T if and only if
 \begin{enumerate}
 \item H $\subseteq$ S\textsubscript{M} in ILP\textsubscript{LOAS}(T)
 \item H' $\in$ ILP\textsubscript{LAS}($\langle$ B, S\textsubscript{LAS}(M\textsubscript{h}, M\textsubscript{b}), E\textsuperscript{+}, E\textsuperscript{-}$\rangle$) where H' is the subset of H without weak constraints
@@ -398,7 +387,7 @@ A hypothesis H is an inductive solution of T if and only if
 \item $\forall$o $\in$ O\textsuperscript{c} B $\cup$ H cautiously respects o
 \end{enumerate}
 
-Two advantages of adding contex-dependent are it increases the efficiency of learning tasks, and more expressive structure of the background knowlege to particular examples. These features will be useful when a game agent is in two different environmets as discussed in Section \ref{model_generation_and_update}.
+The two main advantages of adding contex-dependent are that it increases the efficiency of learning tasks, and more expressive structure of the background knowlege to particular examples. These features will be useful when a game agent is in two different environmets as discussed in Section \ref{model_generation_and_update}.
 
 \section{Reinforcement Learning (RL)}
 \label{rl}
@@ -413,8 +402,7 @@ Two advantages of adding contex-dependent are it increases the efficiency of lea
 
 \subsection{Markov Decision Process (MDP)}
 \label{mdp_subsection}
-An agent interacts with an environment at a sequence of discrete time step, which is part of the sequential history of observations, actions and rewards. The sequential history is formalised as H\textsubscript{t} = O\textsubscript{1}, R\textsubscript{1}, A\textsubscript{1}, ..., A\textsubscript{t-1}, O\textsubscript{t}, R\textsubscript{t}.  A \textit{state} is a function of the history S\textsubscript{t} = f(H\textsubscript{t}), which determines the next environment.  A state S\textsubscript{t} is said to have \textit{Markov property} if and only if P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\vert$ S\textsubscript{1}, ..., S\textsubscript{t}]. In other words, the probability of reaching S\textsubscript{t+1} depends only on S\textsubscript{t}, which captures all the relevant information from earilier history (\cite{Puterman1994}).
-
+An agent interacts with an environment at a sequence of discrete time step, which is part of the sequential history of observations, actions and rewards. The sequential history is formalised as H\textsubscript{t} = O\textsubscript{1}, R\textsubscript{1}, A\textsubscript{1}, ..., A\textsubscript{t-1}, O\textsubscript{t}, R\textsubscript{t}.  A \textit{state} is a function of the history S\textsubscript{t} = f(H\textsubscript{t}), which determines the next environment.  A state S\textsubscript{t} is said to have \textit{Markov property} if and only if P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\vert$ S\textsubscript{1}, ..., S\textsubscript{t}]. In other words, the probability of reaching S\textsubscript{t+1} depends only on S\textsubscript{t}, which captures all the relevant information from the earilier history (\cite{Puterman1994}).
 When an agent must make a sequence of decision, the sequential decision problem can be formalised using \textit{Markov decision process (MDP)}. MDP formaly represents a fully observable environment of an agent for RL.
 
 A MDP is of the form $\langle$ S, A, T\textsubscript{a}, R\textsubscript{a}, $\gamma$ $\rangle$ where:
@@ -424,7 +412,7 @@ A MDP is of the form $\langle$ S, A, T\textsubscript{a}, R\textsubscript{a}, $\g
 \item A is the set of finite actions taken by the agent.
 \item T\textsubscript{a}(s, s$^\prime$) is a state transition in the form of probability matrix Pr(S\textsubscript{t+1} = s$^\prime$ $\vert$ s\textsubscript{t} = s, a\textsubscript{t} = a), which is the probablity that action \textit{a} in state \textit{s} at time \textit{t} will result in state \textit{s$^\prime$} at time \textit{t+1}.
 \item R is a reward function R\textsubscript{a}(s, s$^\prime$) = $\displaystyle \E[R\textsubscript{t+1} $ $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a], the expected immediate reward that action \textit{a} in state \textit{s} at time \textit{t} will return.
-\item $\gamma$ is a discount factor $\gamma$ $\in$ [0,1], which represents the preference of the agent for present rewards over future rewards.
+\item $\gamma$ is a discount factor $\gamma$ $\in$ [0,1], which represents the preference of the agent for the present reward over future rewards.
 \end{itemize}
 
 %$\displaystyle \E[R\textsubscript{t+1} \vert$ S\textsubscript{t} = s]
@@ -451,7 +439,7 @@ The optimal action-value function q\textsuperscript{*}(s) maximises the action-v
 q\textsuperscript{*}(s, a) = \underset{\pi}{\max} \ q\textsubscript{$\pi$}(s, a)
 \end{equation}
 
-A solution to the sequential decision problem is called a \textit{policy $\pi$}, a sequence of actions that leads to a solution. An optimal policy achieves the optimal value function (or action-value function), and it can be computed by maximising over the optimal action-value function.  
+A solution to the sequential decision problem is called a \textit{policy $\pi$}, a sequence of actions that leads to a solution. An optimal policy achieves the optimal value function (or action-value function), and it can be computed by maximising over the optimal value function (or action-value function).  
 %A policy $\pi$ is optimal if it maximises the action-value function q()
 %The transition and reward functions are not necessary to be known to compute $\pi$.
 %Among all possible value functions, an \textit{optimal policy $\pi^*$} is the one that maximise the total rewards in the environment.
@@ -541,19 +529,16 @@ Q-learning learns the value of its deterministic greedy policy from the experien
 \label{related_work}
 In this section, I summarise recent studies related to symbolic (deep) reinforcement learning.
 
- \cite{Garnelo2016} introduced Deep Symbolic Reinforcement Learning (DSRL), a proof of concept for incorporating symbolic front end as a means of converting low-dimensional symbolic representation into spatio-temporal representations, which will be the state transitions input of reinforcement learning. DSRL extracts features using convolutional neural newtworks (CNNs) \cite{LeCunL1998} and an autoencoder, which are transformed into symbolic representations for relevant object types and positions of the objects. These symbolic representations represent abstract state-space. These abstract representations are the input for the Q-learning algorithm to learn a policy on this particular state-space. DSRL was shown to outperform DRL in stochastic variant environments.
-However, there are a number of drawbacks to this approach. First, the extraction of the individual objects was done by manually defined threhold of feature activation values, given that the games were geometrically simple. Thus this approach would not scale in a slightly complex game scenarios. Second, using deep neural network front-end might also cause a problem. As demonstrated in \cite{Su2017}, a single irrelevant pixel could dramatically influence the state through the change in CNNs.
-While proposed method successfully used symbolic representations to achieve more data-efficient learning, there is still the potential to apply symbolic learning to those symbolic representations to further improve the learning efficiency, which is what we attemp to do in this paper.
+ \cite{Garnelo2016} introduced Deep Symbolic Reinforcement Learning (DSRL), a proof of concept for incorporating symbolic front end as a means of converting low-dimensional symbolic representation into spatio-temporal representations, which will be the state transitions input of reinforcement learning. DSRL extracts features using convolutional neural newtworks (CNNs) \cite{LeCunL1998} and an autoencoder, which are transformed into symbolic representations for relevant object types and positions of the objects. These symbolic representations represent abstract state-space, which are the inputs for the Q-learning algorithm to learn a policy on this particular state-space. DSRL was shown to outperform DRL in stochastic variant environments.
+However, there are a number of drawbacks to this approach. First, the extraction of the individual objects was done by manually defined threhold of feature activation values, given that the games were geometrically simple. Thus this approach would not scale in geometrically complex games. Second, using deep neural network front-end might also cause a problem. As demonstrated in \cite{Su2017}, a single irrelevant pixel could dramatically influence the state through the change in CNNs.
+In addition, while proposed method successfully used symbolic representations to achieve more data-efficient learning, there is still the potential to apply symbolic learning to those symbolic representations to further improve the learning efficiency, which is what we attemp to do in this paper.
 \cite{Garcez2018} further explored this symbolic abstraction approach by incorporating the relative position of each object with respect to every other object rather than absolute object position. They also assign priority to each Q-value function based on the relative distance of objects from an agent.
 
 \cite{Zambaldi2018} added relational reinforcement learning, a classical subfield of research aiming to combining reinforcement learning with relational learning or Inductive Logic Programming,  which added more abstract planning on top of DSRL approach. The new mode was then applied to much more complicate game environment than that used by \cite{Garnelo2016}.
-
 %They incorporated a deep RL with architectural inductive biases
 %structured representations of the game, and relatioal reasoning.
-
 %The use of symbolic representations to achieve data-efficient learning was traditionally discussed in relational reinforcement learnign (RLL).
-
-This idea of adding planning capability align with our approach of using ILP to improve a RL agent. In this paper, we explore how to effectively learn the model of the environment and effectively use it to facilitate data-efficient learning and transfer learning capability.
+This idea of adding planning capability align with our approach of using ILP to improve a RL agent. We explore how to effectively learn the model of the environment and effectively use it to facilitate data-efficient learning and transfer learning capability.
 
 %Transparency and interpretable capability of the model is another important aspect for machine learning applications.
 
@@ -561,9 +546,9 @@ This idea of adding planning capability align with our approach of using ILP to 
 
 %The history of data-efficient learning
 
-Another approach for using symbolic reinforcement learning is storing heuristics expressed by konwledge bases [\cite{Apeldoorn2017}].  An agent lerans the concept of \textit{Hierarchical Knowledge Bases (HKBs)} [which is defined in more details in \cite{Apeldoorn2016} and \cite{Apeldoorn}] at every iteration of training, which contains multiple rules (state-action pairs).  The agent then is able to decide itself when it should exploit the heuristic rather than the state-action pairs of the RL using  \textit{Strategic Depth}. This approach effectively uses the heuristic knowledge bases, which acts as a sym-symbolic model of the game.
+Another approach for using symbolic reinforcement learning is storing heuristics expressed by knowledge bases [\cite{Apeldoorn2017}).  An agent lerans the concept of \textit{Hierarchical Knowledge Bases (HKBs)} (which is defined in more details in \cite{Apeldoorn2016} and \cite{Apeldoorn}] at every iteration of training, which contain multiple rules (state-action pairs).  The agent then is able to decide itself when it should exploit the heuristic rather than the state-action pairs of the RL using  \textit{Strategic Depth}. This approach effectively uses the heuristic knowledge bases, which acts as a sym-symbolic model of the game.
 
-Another field related to our research is the combining of ASP and RL. The original concept of combining ASP and RL was in \cite{Ferreira2017}, where they developed an algorithm that efficiently finds the optimal solution of an MDP of non-stationary domains by using ASP to find the possible trajectories of an MDP. This approach focused more on efficient update of the Q function rather than inductive learning. In order to find stationary sets, an extension of ASP called BC\textsuperscript{+}, an action language,  was used. BC\textsuperscript{+} can directly translate the agent's actions into ASP form, and provide sequences of actions in Answer Sets.
+Another field related to our research is the combining of ASP and RL. The original concept of combining ASP and RL was in \cite{Ferreira2017}, where they developed an algorithm that efficiently finds the optimal solution of an MDP of non-stationary domains by using ASP to find the possible trajectories of an MDP. This approach focused more on efficient update of the Q function rather than inductive learning. In order to find stationary sets, an extension of ASP called BC\textsuperscript{+}, an action language,  was used. BC\textsuperscript{+} can directly translate the agent's actions into ASP form, and provide sequences of actions in answer sets.
 
 %ASP BC\textsuperscript{+} translation was done manually.
 
@@ -578,7 +563,7 @@ Another field related to our research is the combining of ASP and RL. The origin
 \section{Proposed Architecture}
 \label{proposed_architecture_section}
 
-The proposed tentative architecture is shown in Figure \ref{proposed_architecture}. The overall architecture is based on Sutton's Dyna architecture (\cite{Sutton1990}), which combined both model-free learning and model-based learning. What is different from Dyna is the way we generate the model of the environment, which is explained in the following subsections.
+The proposed tentative architecture is shown in Figure \ref{proposed_architecture}. The overall architecture is based on Sutton's Dyna architecture \cite{Sutton1990}, which combined both model-free learning and model-based learning. What is different from Dyna is the way we generate the model of the environment, which is explained in the following subsections.
 
 \begin{figure}[!htb]
 \centering
@@ -590,7 +575,7 @@ The proposed tentative architecture is shown in Figure \ref{proposed_architectur
 \subsection{ASP Representation Generation}
 \label{asp_representation_generation_subsection}
 
-At the first stage,  the input of real experience needs to be converted in ASP form, which can be used to execute the inductive learning in ILASP. The input used in ILASP is state transition, reward and action of the agent, which can be directly converted using a simple mapping table or an action language (such as BC\textsuperscript{+} as used in \cite{Ferreira2017}). The following ASP input is what is sent to ILASP. \\
+At the first stage,  the input of real experience needs to be converted in ASP form, which can be used to execute the inductive learning in ILASP. The input used in ILASP is state transitions, rewards and an action of the agent, which can be directly converted using a simple mapping table or an action language (such as BC\textsuperscript{+} as used in \cite{Ferreira2017}). The following ASP input is what is sent to ILASP. \\
 
 
 agent\_at\_before(cell(X,Y), T).
@@ -621,7 +606,7 @@ adjacent(C1, C2):- cell(C1), cell(C2). \\
 %obstacle(C1, C2):- enemy(C1, C2). \\
 obstacle(C1, C2):- wall(C1, C2). \\
 wall(C1, C2):- agent\_at\_before(C1, T1), agent\_at\_after(C1, T2) \\
-enemy(C1, C2):- agent\_at\_before(C1, T1), agent\_at\_after(C2, T2), reward(R), R $<$ -100 \\
+enemy(C1, C2):- agent\_at\_before(C1, T1), agent\_at\_after(C2, T2), reward(R), -100 $\geq$ R \\
 
 where it is assumed that the reward of -100 means losing the game or losing the agent's life. Once the agent has learned the concept of the game, it knows how to avoid an obstacle in an adjacent cell in a new environment. Figure \ref{grid_world} illustrates this transfer capability.
 
@@ -631,7 +616,6 @@ where it is assumed that the reward of -100 means losing the game or losing the 
 \caption{Simple Grid World to highlight transfer capability }
 \label{grid_world}
 \end{figure}
-
 If the agent A learnt the concept \textit{adjacent} in Environment 1, the agent could reason (have a policy), for example, "if the adjacent cell is a wall, moving into that cell is an invalid move", "if the adjacent cell is an enemy, moving into that cell will incur a negative reward". These learnt policies could immediately be used in a new environment (e.g Environment 2), even though the agent's coordinates position is different from that in previous environment (e.g Environment 1).
 \subsection{Generation of Simulated Experience}
 Assuming the model is  a true representation of the partial environment, we can generate simulated experience to update the Q function. The simulated experience is cheaper than real experience, which should contribute to efficient learning. However Dyna architecture is known to lead to sub-optimal policy when the model is not accurate, and the solution to this problem needs to be considered further.
