@@ -260,7 +260,6 @@ The limitation of Cautious Induction is that positive examples must be true for 
 B = $\begin{cases}
 	1\{situation(P, awake), situation(P, sleep)\}1 \leftarrow person(P). \\
 	person(john).
-
       \end{cases}$ \\
 
 Neither of situation(john, awake) nor situation(john, sleep) is false in all answer sets. In this example, it only return person(john). Thus no examples could be given to learn the choice rule.
@@ -271,23 +270,24 @@ Neither of situation(john, awake) nor situation(john, sleep) is false in all ans
 \subsubsection{Brave Induction}
 Brave Induction task is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ where, B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples.
  H $\in$ ILP\textsubscript{brave} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if there is at least one answer set A of B $\cup$ H such that: \\
-$\forall$ e $\in$ E\textsuperscript{+} : e $\in$ A \\
-$\forall$ e $\in$ E\textsuperscript{-} : e $\notin$ A \\
+\begin{enumerate}
+\item $\forall$ e $\in$ E\textsuperscript{+} : e $\in$ A \\
+\item $\forall$ e $\in$ E\textsuperscript{-} : e $\notin$ A \\
+\end{enumerate}
 
-\begin{examp} \normalfont Brave Induction (Example) \\
+\begin{examp} \normalfont Brave Induction \\
 
 B = $\begin{cases}
 	exercises  \leftarrow not \ eat\_out. \\
 	tennis \leftarrow holiday \\
       \end{cases}$
-E\textsubscript{+} = \{tennis\},   E\textsubscript{-} = \{eat\_out \} \\
+E\textsuperscript{+} = \{tennis\},   E\textsuperscript{-} = \{eat\_out \} \\
+
 One possible  H $\in$ ILP\textsubscript{brave} is \{tennis\}, which returns \{tennis, holidy, exercises\} as Answer Sets.
-\end{examp}
+\end{examp} 
 \label{brave_induction_example}
 
-The limitation of Brave indction that it cannot learn constraints as shown in the example \ref{limitation_brave}.
-
-TODO MORE EXPLANATION
+The limitation of Brave indction that it cannot learn constraints, since the above conditions of examples only apply to at least one answer set A, whereas constrains rules out all Answer Sets that meet  the conditions of the Brave Induction. 
 
 \begin{examp} \normalfont Limitation of Brave Induction (Example) \\
 
@@ -306,9 +306,9 @@ In order to learn the  constraint hypothesis H = \{ $\leftarrow$ not situation(P
 
 \subsubsection{Learning from Answer Sets (LAS)}
 \textit{Learning from Answer Sets (LAS)} was developed in \cite{Law2014} to faciliate more complex learning task that neither Cautious Induction nor Brave Induction could learn.
-Examples used in LAS are \textit{Partial Interpretations}, which are of the form $\langle$ e\textsuperscript{inc}, e\textsuperscript{exc}$\rangle$. (called \textit{inclusions} and \textit{exclusions} of e respectively).  A Herbrand Interpretations extends a partial interpretation if it include all of e\textsuperscript{inc} and none of e\textsuperscript{exc}.
+Examples used in LAS are \textit{Partial Interpretations}, which are of the form $\langle$ e\textsuperscript{inc}, e\textsuperscript{exc}$\rangle$. (called \textit{inclusions} and \textit{exclusions} of e respectively).  A Herbrand Interpretations extends a partial interpretation if it includes all of e\textsuperscript{inc} and none of e\textsuperscript{exc}.
 
-LAS is of the form $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is background knowledge, S\textsubscript{M} is hypothesis space, and E\textsuperscript{+} and E\textsuperscript{-} are examples of positive and negative partial interpretations. S\textsubscript{M} consists of a set of normal rules, choice rules and constraints. S\textsubscript{M} is specified by \textit{language bias} of the learning task using \textit{mode declaration}. Mode declaration, and specifies what can occur in an hypothesis by specifying the predicate, and has two parts: \textit{modeh} and \textit{modeb}.  modeh and modeb are the predicates that can occur in the head of the rule and body of the rule respectively. Language bias is the specification of the language in the hypothesis in order to reduce search space for the hypothesis.
+LAS is of the form $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is background knowledge, S\textsubscript{M} is hypothesis space, and E\textsuperscript{+} and E\textsuperscript{-} are examples of positive and negative partial interpretations. S\textsubscript{M} consists of a set of normal rules, choice rules and constraints. S\textsubscript{M} is specified by \textit{language bias} of the learning task using \textit{mode declaration}. Mode declaration specifies what can occur in a hypothesis by specifying the predicates, and has two parts: \textit{modeh} and \textit{modeb}.  modeh and modeb are the predicates that can occur in the head of the rule and body of the rule respectively. Language bias is the specification of the language in the hypothesis in order to reduce search space for the hypothesis.
 
 Given a learning task T, the set of all possible inductive solutions of T is denoted as ILP\textsubscript{LAS}(T), and a hypothesis H is an inductive solution of ILP\textsubscript{LAS}(T) $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ such that
 \begin{enumerate}
@@ -319,7 +319,7 @@ Given a learning task T, the set of all possible inductive solutions of T is den
 
 %S\textsubscript{M} consists of all rules given the language bias.
 
-\begin{examp} \normalfont LAS (Example)
+\begin{examp} \normalfont LAS
 
 TODO
 %B = $\begin{cases}
@@ -342,7 +342,7 @@ ILASP is an algorithm that is capable of solving LAS tasks, and is based on two 
 A hypothesis H is a positive solution if and only if
 \begin{enumerate}
 \item H $\subseteq$ S\textsubscript{M}
-\item $\forall$ e\textsuperscript{+} $\in$ $\exists$ A $\in$ AS(B $\cup$ H) such that A extends e\textsuperscript{+}
+\item $\forall$ e\textsuperscript{+} $\in$ $\exists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e\textsuperscript{+}
 \end{enumerate}
 A hypothesis H is a violating solution if and only if
 \begin{enumerate}

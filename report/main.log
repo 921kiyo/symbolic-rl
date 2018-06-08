@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  8 JUN 2018 18:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  8 JUN 2018 18:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -681,17 +681,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 258--259
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--265
+Underfull \hbox (badness 10000) in paragraph at lines 260--264
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--276
+Underfull \hbox (badness 10000) in paragraph at lines 271--273
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 277--278
+Underfull \hbox (badness 10000) in paragraph at lines 274--275
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 275--276
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 278--279
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 280--285
 
  []
 
@@ -710,7 +725,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 351--352
 
  []
 
-[9] [10] <./figures/agent_env.png, id=264, 248.93pt x 228.855pt>
+[9] [10] <./figures/agent_env.png, id=265, 248.93pt x 228.855pt>
 File: ./figures/agent_env.png Graphic file (type png)
 
 <use ./figures/agent_env.png>
@@ -719,7 +734,7 @@ Package pdftex.def Info: ./figures/agent_env.png used on input line 410.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/bch/b/n' tried instead on input line 411.
  [11 <./figures/agent_env.png>] [12]
-<./figures/dyna.png, id=287, 243.91125pt x 175.65625pt>
+<./figures/dyna.png, id=288, 243.91125pt x 175.65625pt>
 File: ./figures/dyna.png Graphic file (type png)
 
 <use ./figures/dyna.png>
@@ -744,7 +759,7 @@ e 534.
 
 ] [16]
 Chapter 4.
-<./figures/ILASRL.png, id=330, 543.02875pt x 333.245pt>
+<./figures/ILASRL.png, id=331, 543.02875pt x 333.245pt>
 File: ./figures/ILASRL.png Graphic file (type png)
 
 <use ./figures/ILASRL.png>
@@ -780,7 +795,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 606--611
 
  []
 
-<./figures/grid_world.png, id=339, 625.33624pt x 270.00874pt>
+<./figures/grid_world.png, id=340, 625.33624pt x 270.00874pt>
 File: ./figures/grid_world.png Graphic file (type png)
 
 <use ./figures/grid_world.png>
@@ -849,8 +864,8 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 818.
  ) 
 Here is how much of TeX's memory you used:
- 10807 strings out of 494353
- 156257 string characters out of 6170044
+ 10809 strings out of 494353
+ 156271 string characters out of 6170044
  288078 words of memory out of 5000000
  13787 multiletter control sequences out of 15000+600000
  44461 words of font info for 85 fonts, out of 8000000 for 9000
@@ -870,10 +885,10 @@ are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (27 pages, 255985 bytes).
+Output written on main.pdf (27 pages, 255973 bytes).
 PDF statistics:
- 467 PDF objects out of 1000 (max. 8388607)
- 412 compressed objects within 5 object streams
- 129 named destinations out of 1000 (max. 500000)
+ 468 PDF objects out of 1000 (max. 8388607)
+ 413 compressed objects within 5 object streams
+ 131 named destinations out of 1000 (max. 500000)
  218 words of extra memory for PDF output out of 10000 (max. 10000000)
 
