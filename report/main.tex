@@ -7,7 +7,14 @@
 \usepackage{csquotes}
 \usepackage{amsthm}
 \usepackage{subdepth}
-\newtheorem{theorem}{Theorem}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[chapter] % Reset theorem numbering  for each chapter
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition} % Definition numbers are dependent on theorem numbers
+\newtheorem{exmp}[thm]{Example} % same for example numbers
+
 % Ctrl + Alt + B to compile in Atom
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -19,7 +26,7 @@
 
 \newcommand{\reporttitle}{Symbolic Reinforcement Learning using Inductive Logic Programming (Background Report)}
 \newcommand{\reportauthor}{Kiyohito Kunii}
-\newcommand{\supervisor}{Professor Alessandra Russo}
+\newcommand{\supervisor}{Prof. Alessandra Russo \\ Mark Law \\  Ruben L Vereecken}
 \newcommand{\degreetype}{MSc in Computing Science}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -121,32 +128,45 @@ One of the limitations of ILP is learning efficiency and scalability. There are 
 
 In this section, we briefly introduce foundation of logic, Anser Set Programming (ASP) and some of inductive learning frameworks.
 
-\subsection{Logic Basics}
-
-%TODO Satisfiable
-
-To compute an inference task, the syntax of the predicate logic program needs to be converted into \textit{Conjunctive Normal Form (CNF)}, or \textit{Clausal Theory}, which consists of a conjunction of clauses, where a clause is disjunction of literals, and a literal can include positive literals and negative literals. A literal is either an atom \textit{p} or \textit{not p} (\textit{negation as failure}).
-
-\begin{examp} \normalfont Conjunctive Normal Form (Clausal Theory)
-\begin{center}
- \textit{(~rain $\vee$ umbrella $\vee$ rain\_shoes) $\wedge$ (~sunny $\vee$ roofer)}
-\end{center}
-\end{examp}
-
-A \textit{Horn clause} is a subset of CNF, which is a clause with at most one positive literal. A \textit{definite clause} (also called a \textit{rule}) contains exactly one positive literal (e.g $\neg$ body\textsubscript{1} $\vee$ $\neg$ body\textsubscript{2} $\vee$, ..., $\vee$ $\neg$ body\textsubscript{n} $\vee$ head), and a \textit{denial} (or a \textit{constraint}) is a clause without any positive literals (e.g $\neg$ body\textsubscript{1} $\vee$ $\neg$ body\textsubscript{2} $\vee$, ..., $\vee$ $\neg$ body\textsubscript{n}).
-A \textit{normal clause} extends Horn clause with negation as failure.
+% Not necessary here
+%\subsection{Logic Basics}
+%Satisfiable
+%To compute an inference task, the syntax of the predicate logic program needs to be converted into \textit{Conjunctive Normal Form (CNF)}, or \textit{Clausal Theory}, which consists of a conjunction of clauses, where a clause is disjunction of literals, and a literal can include positive literals and negative literals. A literal is either an atom \textit{p} or \textit{not p} (\textit{negation as failure}).
+%
+%\begin{examp} \normalfont Conjunctive Normal Form (Clausal Theory)
+%\begin{center}
+% \textit{(~rain $\vee$ umbrella $\vee$ rain\_shoes) $\wedge$ (~sunny $\vee$ roofer)}
+%\end{center}
+%\end{examp}
+%
+%A \textit{Horn clause} is a subset of CNF, which is a clause with at most one positive literal. A \textit{definite clause} (also called a \textit{rule}) contains exactly one positive literal (e.g $\neg$ body\textsubscript{1} $\vee$ $\neg$ body\textsubscript{2} $\vee$, ..., $\vee$ $\neg$ body\textsubscript{n} $\vee$ head), and a \textit{denial} (or a \textit{constraint}) is a clause without any positive literals (e.g $\neg$ body\textsubscript{1} $\vee$ $\neg$ body\textsubscript{2} $\vee$, ..., $\vee$ $\neg$ body\textsubscript{n}).
+%A \textit{normal clause} extends Horn clause with negation as failure.
 
 \subsection{Stable Model Semantics}
 
 Having defined the syntax of clausal logic, we now introduce its semantics under the context of Stable Model. The semantics of the logic is based on the notion of interpretation, which is defined under a \textit{domain}. A domain contains all the objects that exist. In logic, it is convention to use a special interpretations called \textit{Herbrand interpretations} rather than general interpretations.
-\begin{itemize}
-\item \textit{Herbrand Domain} (a.k.a \textit{Herbrand Universe}) of clause sets \textit{Th} is the set of all ground terms that are constants and function symbols appeared in \textit{Th}.
-\item \textit{Herbrand Base} of \textit{Th} is the set of all ground predicates that are formed by predicate symbols in \textit{Th} and terms in the Herbrand Domain.
-\item \textit{Herbrand Interpretation} of a set of definite clauses \textit{Th} is a subset of the Herbrand base of \textit{Th}, which is a set of ground atoms that are true in terms of interpretation.
-\item \textit{Herbrand Model} is a Herbrand interpretation if and only if a set \textit{Th} of clauses is satisfiable. In other words, the set of clauses \textit{Th} is unsatisfiable if no Herbrand model was found. 
-\item \textit{Least Herbrand Model} (denoted as \textit{M(P)}) is an unique minimal Herbrand model for definite logic programs.  The Herbrand Model is a minimum Herbrand model if and only if none of its subsets is an Herbrand model. For normal logic programs, there may not be any least Herbrand Model.
 
-\end{itemize}
+\begin{defn}
+\textit{Herbrand Domain} (a.k.a \textit{Herbrand Universe}) of clause sets \textit{Th} is the set of all ground terms that are constants and function symbols appeared in \textit{Th}.
+\end{defn}
+
+\begin{defn}
+\textit{Herbrand Base} of \textit{Th} is the set of all ground predicates that are formed by predicate symbols in \textit{Th} and terms in the Herbrand Domain.
+\end{defn}
+
+\begin{defn}
+\textit{Herbrand Interpretation} of a set of definite clauses \textit{Th} is a subset of the Herbrand base of \textit{Th}, which is a set of ground atoms that are true in terms of interpretation.
+\end{defn}
+
+\begin{defn}
+\textit{Herbrand Model} is a Herbrand interpretation if and only if a set \textit{Th} of clauses is satisfiable. In other words, the set of clauses \textit{Th} is unsatisfiable if no Herbrand model was found. 
+\end{defn}
+
+\begin{defn}
+\textit{Least Herbrand Model} (denoted as \textit{M(P)}) is an unique minimal Herbrand model for definite logic programs.  The Herbrand Model is a minimum Herbrand model if and only if none of its subsets is an Herbrand model. 
+\end{defn}
+For normal logic programs, there may not be any least Herbrand Model.
+
 %Interpretation evaluate it to true
 %Interpretation evaluate it to false
 
@@ -170,6 +190,11 @@ Given above,  there are four Herbrand Interpretations = $\langle$ \{q(a)\}, \{p(
 
 To solve a normal logic program \textit{Th}, the program P needs to be grounded. The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the Herbrand Domain. The algorithm of grounding starts with an empty program Q = \{  \} and the relevant grounding is constructed by adding to each rule R to Q given that R is a ground instance of a rule in P and their positive body literals already occurs in the in the of rules in Q. The algorithm terminates when no more rules can be added to Q.
 
+
+\begin{defn}
+\textcolor{red}{TODO GROUDING DEFINITION}
+\end{defn}
+
 \begin{examp} \normalfont Grounding \\
 
 P = $\begin{cases}
@@ -188,7 +213,14 @@ ground(P) in this example is \{p(a), q(a)\}.
 Not only the entire program needs to be grounded in order for an ASP solver to work, but also each rule must be \textit{safe}. A rule \textit{R} is safe if every variable that occurs in the head of the rule occurs at least once in body\textsuperscript{+}(R) .
 Since there is no unique least Herbrand Model for a normal logic program, Stable Model of a normal logic program was defined in \cite{Gelfond1988}. In order to obtain the Stable Model of a program P, P needs to be converted using \textit{Reduct} with respect to an interpretation X. First, if the body of any rule in P contains an atom which is not in X, those rules need to be removed. Second, all default negation atoms in the remaining rules in P need to be removed.
 
+\begin{defn}
+\textcolor{red}{TODO REDUCT DEFINITION}
+\end{defn}
+
+\textcolor{red}{TODO WRITE STEPS IN MORE DETAILS}
+
 \begin{examp} \normalfont Reduct \\
+\textcolor{red}{TODO USE NON-PROPOSITIONAL EXAMPLE}
 
 P = $\begin{cases}
 	p  \leftarrow not\ q. \\
@@ -204,6 +236,10 @@ Where X is a set of atoms. The first step removes \textit{q}  $\leftarrow$ \text
 A Stable Model of P is an interpretaiton X if and only if X is the unique least Herbrand Model of ground(P)\textsuperscript{x} in the logic program.
 
 \subsection{Anwer Set Programming (ASP) Syntax}
+
+\begin{defn}
+\textcolor{red}{TODO DEFINITION OF ASP}
+\end{defn}
 
 Answer set of normal logic program P is a Stable Model, and Answer Set Programming (ASP) is a normal logic program with extensions: constraints, choice rules and optimisation statements. ASP program consists of a set of rules, where each rule consists of an atom and literals.
 A \textit{constraint} of the program P is of the form $\leftarrow$ \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{not b}\textsubscript{1}, ..., \textit{not b}\textsubscript{n}, where the rule has an empty head. The constraint filters any irrelevant answer sets. When computing ground(P)\textsubscript{x}, the empty head becomes $\perp$, which cannot be in the answer sets.
@@ -299,7 +335,7 @@ In order to learn the  constraint hypothesis H = \{ $\leftarrow$ not situation(P
 \textit{Learning from Answer Sets (LAS)} was developed in \cite{Law2014} to faciliate more complex learning tasks that neither Cautious Induction nor Brave Induction could learn.
 Examples used in LAS are \textit{Partial Interpretations}, which are of the form $\langle$ e\textsuperscript{inc}, e\textsuperscript{exc}$\rangle$. (called \textit{inclusions} and \textit{exclusions} of \textit{e} respectively).  A Herbrand Interpretation extends a partial interpretation if it includes all of e\textsuperscript{inc} and none of e\textsuperscript{exc}.
 LAS is of the form $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is background knowledge, S\textsubscript{M} is hypothesis space, and E\textsuperscript{+} and E\textsuperscript{-} are examples of positive and negative partial interpretations. S\textsubscript{M} consists of a set of normal rules, choice rules and constraints. S\textsubscript{M} is specified by \textit{language bias} of the learning task using \textit{mode declaration}. Mode declaration specifies what can occur in a hypothesis by specifying the predicates, and consists of two parts: \textit{modeh} and \textit{modeb}.  \textit{modeh} and \textit{modeb} are the predicates that can occur in the head of the rule and body of the rule respectively. Language bias is the specification of the language in the hypothesis in order to reduce the search space for the hypothesis.
-
+\textcolor{red}{TODO LAS DEFINITION FORMALLY} \\
 Given a learning task T, the set of all possible inductive solutions of T is denoted as ILP\textsubscript{LAS}(T), and a hypothesis H is an inductive solution of ILP\textsubscript{LAS}(T) $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ such that:
 \begin{enumerate}
 \item H $\subseteq$ S\textsubscript{M}
@@ -342,29 +378,29 @@ A hypothesis H is a violating solution if and only if
 
 Given both definitions of positive and violating solutions, ILP\textsubscript{LAS} $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$is positive solutions that are not violating solutions.
 
-\subsubsection{Learning from Ordered Answer Sets (LOAS)}
+%\subsubsection{Learning from Ordered Answer Sets (LOAS)}
+%
+%\textit{Learning from Ordered Answer Sets (LOAS)} is an extension of ILASP by incorporating learning capability of weak constraints, which is useful for modelling the agent's preferences \cite{Law2015}.
+%An examples used for learning are ordered pairs of partial answer sets, which is of the form o = $\langle$ e\textsubscript{1},e\textsubscript{2} $\rangle$.  An ASP Program P \textit{bravely respects o} if and only if:
+%\begin{enumerate}
+%\item $\exists$ A\textsubscript{1}, A\textsubscript{2} $\in$ Answer Sets(P) such that A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2}, and A\textsubscript{1} $\succ$\textsubscript{P} A\textsubscript{2}
+%\end{enumerate}
+%
+%P \textit{cautiously respects o } if and only if
+%\begin{enumerate}
+%\item $\forall$ A\textsubscript{1}, A\textsubscript{2} $\in$ Answer Sets(P) such that A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2}, and A\textsubscript{1} $\succ$\textsubscript{P} A\textsubscript{2}
+%\end{enumerate}
+%
+%A LOAS task is of the form T = $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-}, O\textsuperscript{b},O\textsuperscript{c}$\rangle$ where O\textsuperscript{b} and O\textsuperscript{c} are brave and cautious orderings respectively, which are sets of ordering examples over set of positive partial interpretations E\textsuperscript{+}. A hypothesis H is an inductive solution of T if and only if
+%\begin{enumerate}
+%\item H $\subseteq$ S\textsubscript{M} in ILP\textsubscript{LOAS}(T)
+%\item H' $\in$ ILP\textsubscript{LAS}($\langle$ B, S\textsubscript{LAS}(M\textsubscript{h}, M\textsubscript{b}), E\textsuperscript{+}, E\textsuperscript{-}$\rangle$) where H' is the subset of H without weak constraints
+%\item $\forall$o $\in$ O\textsuperscript{b} B $\cup$ H bravely respects o
+%\item $\forall$o $\in$ O\textsuperscript{c} B $\cup$ H cautiously respects o
+%\end{enumerate}
 
-\textit{Learning from Ordered Answer Sets (LOAS)} is an extension of ILASP by incorporating learning capability of weak constraints, which is useful for modelling the agent's preferences \cite{Law2015}.
-An examples used for learning are ordered pairs of partial answer sets, which is of the form o = $\langle$ e\textsubscript{1},e\textsubscript{2} $\rangle$.  An ASP Program P \textit{bravely respects o} if and only if:
-\begin{enumerate}
-\item $\exists$ A\textsubscript{1}, A\textsubscript{2} $\in$ Answer Sets(P) such that A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2}, and A\textsubscript{1} $\succ$\textsubscript{P} A\textsubscript{2}
-\end{enumerate}
-
-P \textit{cautiously respects o } if and only if
-\begin{enumerate}
-\item $\forall$ A\textsubscript{1}, A\textsubscript{2} $\in$ Answer Sets(P) such that A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2}, and A\textsubscript{1} $\succ$\textsubscript{P} A\textsubscript{2}
-\end{enumerate}
-
-A LOAS task is of the form T = $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-}, O\textsuperscript{b},O\textsuperscript{c}$\rangle$ where O\textsuperscript{b} and O\textsuperscript{c} are brave and cautious orderings respectively, which are sets of ordering examples over set of positive partial interpretations E\textsuperscript{+}. A hypothesis H is an inductive solution of T if and only if
-\begin{enumerate}
-\item H $\subseteq$ S\textsubscript{M} in ILP\textsubscript{LOAS}(T)
-\item H' $\in$ ILP\textsubscript{LAS}($\langle$ B, S\textsubscript{LAS}(M\textsubscript{h}, M\textsubscript{b}), E\textsuperscript{+}, E\textsuperscript{-}$\rangle$) where H' is the subset of H without weak constraints
-\item $\forall$o $\in$ O\textsuperscript{b} B $\cup$ H bravely respects o
-\item $\forall$o $\in$ O\textsuperscript{c} B $\cup$ H cautiously respects o
-\end{enumerate}
-
-\subsubsection{A Context-dependent Learning from Ordered Answer Sets }
-\textit{Context-dependent learning from ordered answer sets ($ILP_{LOAS}^{context}$)} is a further generalisation of ILP\textsubscript{LOAS} with \textit{context-dependent examples}.
+\subsubsection{A Context-dependent Learning from Answer Sets }
+\textit{Context-dependent learning from ordered answer sets ($ILP_{LOAS}^{context}$)} is a further generalisation of ILP\textsubscript{LOAS} with \textit{context-dependent examples} \textcolor{red}{REFERENCE}.
 Context-dependent examples are examples that each unique background knowledge (context) only applies to specific examples. This way the background knowledge is more structured rather than one fixed background knowledge that are applied to all examples.
 Formally, partial interpretation is of the form $\langle$ e, C $\rangle$ (called \textit{context-dependent partial interpretation (CDPI)}), where \textit{e} is a partial interpretation and C is called \textit{context}, or an ASP program without weak constraints.
 A \textit{context-dependent ordering example (CDOE)} is of the form $\langle$ $\langle$e\textsubscript{1}, C\textsubscript{1} $\rangle$, $\langle$ e\textsubscript{2}, C\textsubscript{2} $\rangle$$\rangle$, which is a pair of CDPI. An APS program P \textit{bravely respects o} if and only if
@@ -383,8 +419,8 @@ A hypothesis H is an inductive solution of T if and only if
 \item H $\subseteq$ S\textsubscript{M} in $ILP_{LOAS}^{context}$
 \item $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{+}, $\exists$A $\exists$ A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
 \item $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{-}, $\nexists$A $\exists$ A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
-\item $\forall$o $\in$ O\textsuperscript{b} B $\cup$ H bravely respects o
-\item $\forall$o $\in$ O\textsuperscript{c} B $\cup$ H cautiously respects o
+%\item $\forall$o $\in$ O\textsuperscript{b} B $\cup$ H bravely respects o
+%\item $\forall$o $\in$ O\textsuperscript{c} B $\cup$ H cautiously respects o
 \end{enumerate}
 
 The two main advantages of adding contex-dependent are that it increases the efficiency of learning tasks, and more expressive structure of the background knowlege to particular examples. These features will be useful when a game agent is in two different environmets as discussed in Section \ref{model_generation_and_update}.
@@ -463,7 +499,7 @@ A solution to the sequential decision problem is called a \textit{policy $\pi$},
 %
 %q\textsubscript{$\pi$} = $\displaystyle \E[R\textsubscript{t+1} $[R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ... $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a, A\textsubscript{t+1 } = a,]
 
-\subsection{Model-based and Model-free Learning}
+\subsection{Model-based and Model-free Reinforcement Learning}
 \label{model_base_model_free_subsection}
 A model M is a representation of an environment that an agent can used to understand how the environment should look like . Model-based learning is that the agent learns the model and plan a solution using the learnt model. Once the agent learns the model, the problem to be solved becomes a planning problem for a series of actions to achieve the agent's goal.
 Most of the reinforcement learning problems are model-free learning, where M is unknown and the agent learns to achieve the goal by solely interacting with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
@@ -504,9 +540,6 @@ However, because bootstraping updates an estimate for an estimate, some bias are
 %\begin{equation}
 %\textbf{	V(S\textsubscript{t} \leftarrow V(S\textsubscript{t} + \alpha (R\textsubscript{t+1} + \gamma V(S\textsubscript{t+1}) - V(S\textsubscript{t}))
 %}\end{equation}
-
-\subsection{Q-Learning}
-\label{q_learning_section}
 
 \textit{Q-learning} is off-policy TD learning defined in \cite{Watkins}, where the agent only knows about the possible states and actionns. The transition states and reward probability functions are unknown to the agent.
 It is of the form:
@@ -557,8 +590,8 @@ Another field related to our research is the combining of ASP and RL. The origin
 %There are a number of research conducted in applying DNN to symbolic reasoning.
 %[From GamePlay to Symbolic Reasoning]
 
-\chapter{Project Overview}
-\label{project_overview}
+\chapter{Methods}
+\label{methods}
 
 \section{Proposed Architecture}
 \label{proposed_architecture_section}
@@ -576,7 +609,6 @@ The proposed tentative architecture is shown in Figure \ref{proposed_architectur
 \label{asp_representation_generation_subsection}
 
 At the first stage,  the input of real experience needs to be converted in ASP form, which can be used to execute the inductive learning in ILASP. The input used in ILASP is state transitions, rewards and an action of the agent, which can be directly converted using a simple mapping table or an action language (such as BC\textsuperscript{+} as used in \cite{Ferreira2017}). The following ASP input is what is sent to ILASP. \\
-
 
 agent\_at\_before(cell(X,Y), T).
 
@@ -625,9 +657,20 @@ An alternative to using simulated experience is to directly update state represe
 In addition, when the environment changes during the exploration, the agent should generalise its internal model to cope with the new environment in two different but similar environments.  As a result the agent's model becomes more general which covers both games. Thus in theory, the agent should still be able to achieve more efficient learning from the model-based learning, facilitating the transfer learning.
 Implementation of exactly how the model is generalised will be further investigated.
 
-\section{Further Research and Plan}
-\label{research_plan}
-The next phase of the research is further research on the proposed architecture, implementation and experiments.
+
+\chapter{Implementation}
+
+Once the architecture is decided, we will implement it using Python and ILASPv3.1.0 (Clingo) \cite{Law2017}, and compare the performance with other learning methods using a game platform called GVG-AI Framework.
+
+Other learning methods to be compared as benchmarks will be Q-Learning and Deep Q-Learning since these methods are widely used in other related works. Other symbolic-based approaches could also be compared as an extension. The two main measurements for the performance of our new architecture are learning efficiency and transfer learning capability as stated in the Introduction.
+
+GVG-AI Framework was created for the General Video Gamea AI Competition \footnote{http://www.gvgai.net/}, a game environment for an agent that should be able to play a wide variety of games without knowing which games are to be played.
+The underlying language is the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
+
+\chapter{Evaluation}
+
+
+\chapter{Discussion and Conclusion}
 
 \subsection{Further Research}
 The proposed architecture is not finalised and will be reviewed regularly as we do more research.
@@ -644,20 +687,10 @@ More research needs to be devoted to finalising the overall architecture, and th
 
 \end{itemize}
 
-\subsection{Experiment Implementation}
 
-Once the architecture is decided, we will implement it using Python and ILASPv3.1.0 (Clingo) \cite{Law2017}, and compare the performance with other learning methods using a game platform called GVG-AI Framework.
+ \section{Contribution}
 
-Other learning methods to be compared as benchmarks will be Q-Learning and Deep Q-Learning since these methods are widely used in other related works. Other symbolic-based approaches could also be compared as an extension. The two main measurements for the performance of our new architecture are learning efficiency and transfer learning capability as stated in the Introduction.
-
-GVG-AI Framework was created for the General Video Gamea AI Competition \footnote{http://www.gvgai.net/}, a game environment for an agent that should be able to play a wide variety of games without knowing which games are to be played.
-The underlying language is the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
-
-% \section{Contribution}
-%
-% To my knowledge, this is the first time that both symbolic learning method is incorporated into a reinforcement learning to facilitate learning process
-%
-% \section{Methods}
+ To my knowledge, this is the first time that both symbolic learning method is incorporated into a reinforcement learning to facilitate learning process
 
 
 \chapter{Ethics Checklist}
