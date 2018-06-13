@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  13 JUN 2018 17:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  13 JUN 2018 17:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -580,7 +580,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hypcap package is loaded.
 Package caption Info: End \AtBeginDocument code.
 Package backref Info: ** backref set up for natbib ** on input line 47.
-(./titlepage.tex <./figures/imperial.pdf, id=108, 362.35374pt x 95.35625pt>
+(./titlepage.tex <./figures/imperial.pdf, id=100, 362.35374pt x 95.35625pt>
 File: ./figures/imperial.pdf Graphic file (type pdf)
 
 <use ./figures/imperial.pdf>
@@ -620,152 +620,154 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.84 \chapter
+l.93 \chapter
              {Introduction} [1
 
 
 
 ]
 Chapter 1.
+(./chapters/introduction.tex
 
 LaTeX Warning: Reference `project_overview' on page 2 undefined on input line 1
-08.
+4.
 
-[2
+) [2
 
 ] [3]
 Chapter 2.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 115.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 105.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 145.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 121.
 [4
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 173--174
+Underfull \hbox (badness 10000) in paragraph at lines 149--150
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+bch on input line 179.
+LaTeX Font Info:    Try loading font information for OMS+bch on input line 155.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsbch.fd
 File: omsbch.fd 
 )
 LaTeX Font Info:    Font shape `OMS/bch/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 179.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 155.
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--180
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 198--199
+Underfull \hbox (badness 10000) in paragraph at lines 151--156
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--205
+Underfull \hbox (badness 10000) in paragraph at lines 174--175
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 176--181
 
  []
 
 [5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 265--266
+Underfull \hbox (badness 10000) in paragraph at lines 241--242
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 271--272
+Underfull \hbox (badness 10000) in paragraph at lines 247--248
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--278
+Underfull \hbox (badness 10000) in paragraph at lines 249--254
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 285--286
+Underfull \hbox (badness 10000) in paragraph at lines 261--262
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 287--291
+Underfull \hbox (badness 10000) in paragraph at lines 263--267
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 298--300
+Underfull \hbox (badness 10000) in paragraph at lines 274--276
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 301--302
+Underfull \hbox (badness 10000) in paragraph at lines 277--278
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 302--303
+Underfull \hbox (badness 10000) in paragraph at lines 278--279
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 305--306
+Underfull \hbox (badness 10000) in paragraph at lines 281--282
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 307--312
+Underfull \hbox (badness 10000) in paragraph at lines 283--288
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 319--320
+Underfull \hbox (badness 10000) in paragraph at lines 295--296
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 321--326
+Underfull \hbox (badness 10000) in paragraph at lines 297--302
 
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 376--377
+Underfull \hbox (badness 10000) in paragraph at lines 352--353
 
  []
 
-[9] <./figures/agent_env.png, id=266, 248.93pt x 228.855pt>
+[9] <./figures/agent_env.png, id=256, 248.93pt x 228.855pt>
 File: ./figures/agent_env.png Graphic file (type png)
 
 <use ./figures/agent_env.png>
-Package pdftex.def Info: ./figures/agent_env.png used on input line 434.
+Package pdftex.def Info: ./figures/agent_env.png used on input line 389.
 (pdftex.def)             Requested size: 170.72113pt x 170.72241pt.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 435.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 390.
  [10 <./figures/agent_env.png>] [11]
-<./figures/dyna.png, id=291, 243.91125pt x 175.65625pt>
+<./figures/dyna.png, id=281, 243.91125pt x 175.65625pt>
 File: ./figures/dyna.png Graphic file (type png)
 
 <use ./figures/dyna.png>
-Package pdftex.def Info: ./figures/dyna.png used on input line 513.
+Package pdftex.def Info: ./figures/dyna.png used on input line 468.
 (pdftex.def)             Requested size: 227.62413pt x 170.72942pt.
  [12 <./figures/dyna.png>] [13]
 Chapter 3.
+(./chapters/related_work.tex
 
 Package natbib Warning: Citation `Garcez2018' on page 14 undefined on input lin
-e 568.
+e 6.
 
 [14
 
-] [15]
+]) [15]
 Chapter 4.
-<./figures/ILASRL.png, id=334, 543.02875pt x 333.245pt>
+<./figures/ILASRL.png, id=324, 543.02875pt x 333.245pt>
 File: ./figures/ILASRL.png Graphic file (type png)
 
 <use ./figures/ILASRL.png>
-Package pdftex.def Info: ./figures/ILASRL.png used on input line 603.
+Package pdftex.def Info: ./figures/ILASRL.png used on input line 532.
 (pdftex.def)             Requested size: 426.80879pt x 256.09094pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 611--612
+Underfull \hbox (badness 10000) in paragraph at lines 540--541
 
  []
 
@@ -775,30 +777,30 @@ Underfull \vbox (badness 7558) has occurred while \output is active []
  [16
 
  <./figures/ILASRL.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 623--624
+Underfull \hbox (badness 10000) in paragraph at lines 552--553
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 625--632
+Underfull \hbox (badness 10000) in paragraph at lines 554--561
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 635--636
+Underfull \hbox (badness 10000) in paragraph at lines 564--565
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 637--642
+Underfull \hbox (badness 10000) in paragraph at lines 566--571
 
  []
 
-<./figures/grid_world.png, id=343, 625.33624pt x 270.00874pt>
+<./figures/grid_world.png, id=333, 625.33624pt x 270.00874pt>
 File: ./figures/grid_world.png Graphic file (type png)
 
 <use ./figures/grid_world.png>
-Package pdftex.def Info: ./figures/grid_world.png used on input line 647.
+Package pdftex.def Info: ./figures/grid_world.png used on input line 576.
 (pdftex.def)             Requested size: 284.52843pt x 142.26758pt.
  [17] [18 <./figures/grid_world.png>]
 Chapter 5.
@@ -812,7 +814,7 @@ Chapter 6.
 Chapter 7.
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 675.
+(hyperref)                than one, level fixed on input line 605.
 
 [21
 
@@ -825,24 +827,24 @@ Missing character: There is no ‚ in font bchr7t!
 Missing character: There is no Ä in font bchr7t!
 Missing character: There is no ù in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 701--762
+Overfull \hbox (9.14763pt too wide) in alignment at lines 631--692
  [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 762
+Underfull \vbox (badness 10000) detected at line 692
  []
 
 Missing character: There is no ‚ in font bchr7t!
 Missing character: There is no Ä in font bchr7t!
 Missing character: There is no ì in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 762--823
+Overfull \hbox (9.14763pt too wide) in alignment at lines 692--753
  [] [] [] 
  []
 
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 823--828
+Overfull \hbox (9.14763pt too wide) in alignment at lines 753--758
  [] [] [] 
  []
 
@@ -862,12 +864,12 @@ Missing character: There is no î in font bchri7t!
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 849.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 779.
 [27]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 849.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 779.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 849.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 849.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 779.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 779.
 
 
 Package rerunfilecheck Warning: File `main.out' has changed.
@@ -875,57 +877,43 @@ Package rerunfilecheck Warning: File `main.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: 69BE388F532B4EFBC50A44963930C078;1957
-(rerunfilecheck)             After:  25E64D0503C736EC18A1ADB5757EE3F6;1796.
-
-Package rerunfilecheck Warning: File `main.brf' has changed.
-(rerunfilecheck)                Rerun to get bibliographical references right.
-
-Package rerunfilecheck Info: Checksums for `main.brf':
-(rerunfilecheck)             Before: C88ECB1784B41753887387EA5EBBC97E;1621
-(rerunfilecheck)             After:  ADEA52E461B47D27BE3E6683FCE943FE;1599.
+(rerunfilecheck)             Before: 25E64D0503C736EC18A1ADB5757EE3F6;1796
+(rerunfilecheck)             After:  2695F0C4964B9997B8EFF46F7F0C32F7;1858.
+Package rerunfilecheck Info: File `main.brf' has not changed.
+(rerunfilecheck)             Checksum: ADEA52E461B47D27BE3E6683FCE943FE;1599.
 
 LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 849.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 779.
  ) 
 Here is how much of TeX's memory you used:
- 10828 strings out of 494353
- 156511 string characters out of 6170044
- 288547 words of memory out of 5000000
- 13801 multiletter control sequences out of 15000+600000
+ 10832 strings out of 494353
+ 156605 string characters out of 6170044
+ 288471 words of memory out of 5000000
+ 13800 multiletter control sequences out of 15000+600000
  46299 words of font info for 87 fonts, out of 8000000 for 9000
  452 hyphenation exceptions out of 8191
  41i,12n,43p,928b,587s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{subsection.4.2.2} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.4.2.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.4.2} has been referenced but does not exist
-, replaced by a fixed one
-
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/
-texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/b
-itstrea/charter/bchri8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (28 pages, 247667 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/bitstrea/charter/bchri8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (28 pages, 247415 bytes).
 PDF statistics:
- 479 PDF objects out of 1000 (max. 8388607)
- 424 compressed objects within 5 object streams
- 135 named destinations out of 1000 (max. 500000)
- 234 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 469 PDF objects out of 1000 (max. 8388607)
+ 414 compressed objects within 5 object streams
+ 133 named destinations out of 1000 (max. 500000)
+ 218 words of extra memory for PDF output out of 10000 (max. 10000000)
 
