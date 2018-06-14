@@ -17,23 +17,22 @@ def keyboard_activate():
 
     button_delay = 0.2
 
-    while True:
-        char = inkey()
+    # while True:
+    char = inkey()
 
-        if(char == "qqq"):
-            print("stop")
-            exit(0)
-        if(char == "\x1b[D"): # Left
-            print("left")
-            return 3
-        elif(char == "\x1b[C"): # Right
-            return 2
-        elif(char == "\x1b[A"): # Up
-            return 1
-        elif(char == "\x1b[B"): # Down
-            return 0
-        else:
-            print("not an arrow key!")
+    if(char == "qqq"):
+        print("stop")
+        exit(0)
+    if(char == "\x1b[D"): # Left
+        return 3
+    elif(char == "\x1b[C"): # Right
+        return 2
+    elif(char == "\x1b[A"): # Up
+        return 1
+    elif(char == "\x1b[B"): # Down
+        return 0
+    else:
+        print("not an arrow key!")
 
         # pick-up 4
         # drop-off 5
