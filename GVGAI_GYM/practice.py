@@ -17,7 +17,7 @@ from gym import wrappers
 #
 #     display.clear_output(wait=True)
 #     display.display(plt.gcf())
-
+#
 # for env in gym.envs.registry.all():
 #     if env.id.startswith('gvgai'):
 #         print(env.id)
@@ -47,8 +47,9 @@ while not done:
     observation, reward, done, _ = env.step(action)
     sum_score += reward
 
-    print("Action " + str(action) + " played at t=", str(i+1) + ", reward=" \
-            + str(reward) + ", new score=", sum_score)
+    # print("Action " + str(action) + " played at t=", str(i+1) + ", reward=" \
+    #         + str(reward) + ", new score=", sum_score)
+
     if done:
         print("Game terminates at t=" + str(i+1))
         break
