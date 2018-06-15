@@ -57,7 +57,7 @@ def play_one_game(Q, eps=0.5):
 
         observation, reward, done, _ = env.step(action)
         total_reward += reward
-
+        print("env.observation_space", env.observation_space)
         # if done:
         #     # print("Game terminates at t=" + str(i+1))
         #     # break

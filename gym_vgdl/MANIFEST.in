@@ -1,0 +1,3 @@
+include gym_vgdl/vgdl/games/*.txt
+include gym_vgdl/vgdl/sprites/oryx/*.png
+include gym_vgdl/vgdl/sprites/newset/*.png

@@ -1,0 +1,4 @@
+Basically tidy up a lot of stuff:
+* Main thing is efficiency of drawing (although system is fast enough)
+  * Return to dirtyrects system?
+* Support visualisation properly

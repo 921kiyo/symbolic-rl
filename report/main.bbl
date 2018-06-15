@@ -67,10 +67,6 @@ M.~Law, A.~Russo, and K.~Broda, ``{Inductive Learning of Answer Set
   Programs},'' {\em European Conference on Logics in Artificial Intelligence
   (JELIA)}, vol.~2, no.~Ray 2009, pp.~311--325, 2014.
 
-\bibitem{Law2015}
-M.~Law, A.~Russo, and K.~Broda, ``{Learning Weak Constraints in Answer Set
-  Programming},'' jul 2015.
-
 \bibitem{Puterman1994}
 {Puterman M.L.}, {\em {Markov Decision Processes—Discrete Stochastic Dynamic
   Programming}}.
@@ -92,6 +88,10 @@ Watkins, ``{Learning from Delayed Reward}.''
 \bibitem{Su2017}
 J.~Su, D.~V. Vargas, and S.~Kouichi, ``{One pixel attack for fooling deep
   neural networks},'' oct 2017.
+
+\bibitem{Garcez2018}
+A.~d'Avila Garcez, A.~R.~R. Dutra, and E.~Alonso, ``{Towards Symbolic
+  Reinforcement Learning with Common Sense},'' apr 2018.
 
 \bibitem{Zambaldi2018}
 V.~Zambaldi, D.~Raposo, A.~Santoro, V.~Bapst, Y.~Li, I.~Babuschkin, K.~Tuyls,
@@ -119,12 +119,6 @@ L.~A. Ferreira, R.~A.~C. Bianchi, P.~E. Santos, and R.~L. de~Mantaras,
   ``{Answer Set Programming for Non-Stationary Markov Decision Processes},''
   may 2017.
 
-\bibitem{Sridharan2017}
-M.~Sridharan, B.~Meadows, and R.~Gomez, ``{What can I not do? Towards an
-  Architecture for Reasoning about and Learning Affordances},'' {\em
-  International Conference on Automated Planning and Scheduling}, no.~Icaps,
-  pp.~461--469, 2017.
-
 \bibitem{Law2017}
 M.~Law, A.~Russo, and K.~Broda, ``{Inductive Learning of Answer Set Programs
   v3.1.0 User Manual},'' 2017.
@@ -132,5 +126,11 @@ M.~Law, A.~Russo, and K.~Broda, ``{Inductive Learning of Answer Set Programs
 \bibitem{Schaul2013}
 T.~Schaul, ``{A video game description language for model-based or interactive
   learning},'' 2013.
+
+\bibitem{Sridharan2017}
+M.~Sridharan, B.~Meadows, and R.~Gomez, ``{What can I not do? Towards an
+  Architecture for Reasoning about and Learning Affordances},'' {\em
+  International Conference on Automated Planning and Scheduling}, no.~Icaps,
+  pp.~461--469, 2017.
 
 \end{thebibliography}
