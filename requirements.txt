@@ -1,16 +1,21 @@
 backcall==0.1.0
 bleach==2.1.3
+boto3==1.7.40
+botocore==1.10.40
 certifi==2018.4.16
 chardet==3.0.4
 cmake==3.11.0
 cycler==0.10.0
 decorator==4.3.0
+docutils==0.14
 e==1.4.5
 entrypoints==0.2.3
 future==0.16.0
--e git+git@github.com:921kiyo/Individual_project.git@ea2e3bc2b353be00685ea9035054cb31f5850d1d#egg=gym
--e git+git@github.com:921kiyo/Individual_project.git@ea2e3bc2b353be00685ea9035054cb31f5850d1d#egg=gym_gvgai&subdirectory=GVGAI_GYM
--e git+git@github.com:921kiyo/Individual_project.git@ea2e3bc2b353be00685ea9035054cb31f5850d1d#egg=gym_vgdl&subdirectory=gym_vgdl
+gdata==2.0.18
+-e git+git@github.com:921kiyo/Individual_project.git@4cf936c27e2c897a4581cde0378b144458ae1061#egg=gym
+-e git+git@github.com:921kiyo/Individual_project.git@4cf936c27e2c897a4581cde0378b144458ae1061#egg=gym_gvgai&subdirectory=GVGAI_GYM
+gym-recording==0.0.1
+-e git+git@github.com:921kiyo/Individual_project.git@4cf936c27e2c897a4581cde0378b144458ae1061#egg=gym_vgdl&subdirectory=gym_vgdl
 html5lib==1.0.1
 idna==2.6
 ipykernel==4.8.2
@@ -19,6 +24,7 @@ ipython-genutils==0.2.0
 ipywidgets==7.2.1
 jedi==0.12.0
 Jinja2==2.10
+jmespath==0.9.3
 jsonschema==2.6.0
 jupyter-client==5.2.3
 jupyter-core==4.4.0
@@ -38,6 +44,7 @@ Pillow==5.1.0
 pkg-resources==0.0.0
 prompt-toolkit==1.0.15
 ptyprocess==0.5.2
+PyBrain==0.3
 pygame==1.9.3
 pyglet==1.3.2
 Pygments==2.2.0
@@ -46,6 +53,7 @@ python-dateutil==2.7.3
 pytz==2018.4
 pyzmq==17.0.0
 requests==2.18.4
+s3transfer==0.1.13
 scipy==1.1.0
 Send2Trash==1.5.0
 simplegeneric==0.8.1
@@ -55,6 +63,8 @@ testpath==0.3.1
 tornado==5.0.2
 traitlets==4.3.2
 urllib3==1.22
+venvdotapp==0.1.0
+vgdl==1.0
 wcwidth==0.1.7
 webencodings==0.5.1
 widgetsnbextension==3.2.1

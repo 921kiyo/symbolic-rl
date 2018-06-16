@@ -1,0 +1,13 @@
+Game dynamics:
+- momentum-preserving splits
+
+Example games:
+- asteroids
+
+Interfaces
+- longer-range subjective vision
+- more diverse observable feature representations
+
+Other:
+- nicer graphics, possibly based on palettes
+- visualize continuous trajectories
