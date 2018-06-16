@@ -19,12 +19,13 @@ class VGDLEnv(gym.Env):
                  obs_type='image',
                  **kwargs):
 
-
         # Variables
-        self._obs_type = obs_type
+        # self._obs_type = obs_type
+        # self._obs_type = "objects"
+        self._obs_type = "features"
         self.viewer = None
         self.game_args = kwargs
-        
+
         # Load game description and level description
         if game_file is not None:
             with open (game_file, "r") as myfile:
@@ -32,26 +33,26 @@ class VGDLEnv(gym.Env):
             with open (level_file, "r") as myfile:
                 level_desc = myfile.read()
             self.loadGame(game_desc, level_desc)
-        
-         
+
+
     def loadGame(self, game_desc, level_desc, **kwargs):
-    
+
         self.game_desc = game_desc
         self.level_desc = level_desc
         self.game_args.update(kwargs)
-                
+
         # Need to build a sample level to get the available actions and screensize....
         self.game = core.VGDLParser().parseGame(self.game_desc, **self.game_args)
         self.game.buildLevel(self.level_desc)
-        
+
         self.score_last = self.game.score
 
         # Set action space and observation space
         self._action_set = OrderedDict(self.game.getPossibleActions())
         self.action_space = spaces.Discrete(len(self._action_set))
-        
+
         self.screen_width, self.screen_height = self.game.screensize
-        
+
         if self._obs_type == 'image':
             self.observation_space = spaces.Box(low=0, high=255,
                     shape=(self.screen_height, self.screen_width, 3) )
@@ -77,8 +78,8 @@ class VGDLEnv(gym.Env):
         # Not sure what the background is needed for, it's not drawn
         #TODO: get rid of this
         self.game.background = pygame.Surface(self.game.screensize)
-        
-        
+
+
     @property
     def _n_actions(self):
         return len(self._action_set)
@@ -167,5 +168,3 @@ class Padlist(gym.ObservationWrapper):
           return padded
         else:
           return np.array(input_list, dtype=np.float32)[:max_len]
-
-

@@ -15,7 +15,7 @@
 \contentsline {subsection}{\numberline {2.2.1}Markov Decision Process (MDP)}{11}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Policies and Value Functions}{11}{subsection.2.2.2}
 \contentsline {subsection}{\numberline {2.2.3}Model-based and Model-free Reinforcement Learning}{12}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}Temporal-Difference (TD) Learning}{12}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.4}Temporal-Difference (TD) Learning}{13}{subsection.2.2.4}
 \contentsline {chapter}{\numberline {3}Related Work}{14}{chapter.3}
 \contentsline {chapter}{\numberline {4}Methods}{16}{chapter.4}
 \contentsline {section}{\numberline {4.1}Proposed Architecture}{16}{section.4.1}
