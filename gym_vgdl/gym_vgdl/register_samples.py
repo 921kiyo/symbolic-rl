@@ -3,9 +3,10 @@ from gym_vgdl.vgdl_env import VGDLEnv
 import os
 
 # Location of sample games
-DATA_DIR = os.path.join( os.path.dirname(__file__), 'vgdl', 'sample_games') 
+DATA_DIR = os.path.join( os.path.dirname(__file__), 'vgdl', 'sample_games')
 
 sample_games = [
+    'aaa',
     'aliens',
     'boulderdash',
     'chase',
@@ -17,6 +18,8 @@ sample_games = [
 
 # A list of relevant classes for each sample game
 classes = {
+    'aaa':        ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+                       'straight', 'wall' ],
     'aliens':         ['avatar', 'alien', 'base', 'bomb', 'sam'],
     'boulderdash':    ['avatar', 'boulder', 'butterfly', 'crab', 'diamond',
                        'exitdoor', 'wall'],
@@ -31,6 +34,7 @@ classes = {
 
 # A list of relevant resources for each sample game
 resources = {
+    'aaa':        [],
     'aliens':         [],
     'boulderdash':    ['diamond'],
     'chase':          [],
