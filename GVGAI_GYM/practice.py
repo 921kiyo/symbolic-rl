@@ -22,8 +22,9 @@ from gym import wrappers
 #     if env.id.startswith('gvgai'):
 #         print(env.id)
 
-# env = gym.make("gvgai-aliens-lvl0-v0")
-env = gym.make("gvgai-aaa-lvl0-v0")
+env = gym.make("gvgai-aliens-lvl0-v0")
+# env = gym.make("gvgai-aaa-lvl0-v0")
+# env = gym.make("gvgai-aaa-lvl0-v0")
 
 done = False
 count = 0

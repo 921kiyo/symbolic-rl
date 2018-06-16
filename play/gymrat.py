@@ -43,4 +43,3 @@ if __name__ == '__main__':
             break
 
     controller.env.close()
-
