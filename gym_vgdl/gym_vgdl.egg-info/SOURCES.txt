@@ -1,6 +1,5 @@
 MANIFEST.in
 README.md
-setup.py
 gym_vgdl/__init__.py
 gym_vgdl/list_space.py
 gym_vgdl/register_samples.py
