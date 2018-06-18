@@ -1,5 +1,3 @@
-# %matplotlib inline
-
 import matplotlib
 import gym
 import gym_vgdl
@@ -17,8 +15,6 @@ import sys
 
 from collections import defaultdict
 from lib import plotting
-
-# matplotlib.style.use("ggplot")
 
 # env = gym.make('vgdl_aliens-v0')
 # env = gym.make('vgdl_boulderdash-v0')
