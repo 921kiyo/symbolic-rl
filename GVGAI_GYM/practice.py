@@ -1,5 +1,5 @@
 import gym
-import gym_gvgai
+import gym_vgdl
 import numpy as np
 
 import matplotlib.pyplot as plt
@@ -7,24 +7,7 @@ from IPython import display
 from controller import keyboard_activate
 from gym import wrappers
 
-
-# def show_state(env, step=0, name="", info=""):
-#     plt.figure(3)
-#     plt.clf()
-#     plt.imshow(env.render(mode="rgb_array"))
-#     plt.title("%s | Steap %d %s" % (name, step, info))
-#     plt.axis("off")
-#
-#     display.clear_output(wait=True)
-#     display.display(plt.gcf())
-#
-# for env in gym.envs.registry.all():
-#     if env.id.startswith('gvgai'):
-#         print(env.id)
-
-env = gym.make("gvgai-aliens-lvl0-v0")
-# env = gym.make("gvgai-aaa-lvl0-v0")
-# env = gym.make("gvgai-aaa-lvl0-v0")
+env = gym.make("gvgai-aaa-lvl0-v0")
 
 done = False
 count = 0
