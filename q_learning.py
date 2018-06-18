@@ -60,7 +60,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
         # for t in itertools.count():
         for t in range(200):
-            # env.render()
+            env.render()
             # time.sleep(0.1)
             # Take a step
             action_probs = policy(state_int, i_episode)
@@ -80,6 +80,9 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 reward = reward - 1
 
             next_state_int = convert_state(next_state[1], next_state[0])
+            print("After action ", action, ", the state is now at x=",
+                    next_state[0], ", y=", next_state[1], " reward: ", reward,
+                    " at time ", t, " at episode ", i_episode)
             # Update stats
             stats.episode_rewards[i_episode] += reward
             stats.episode_lengths[i_episode] = t
@@ -104,6 +107,5 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
     return Q, stats
 
-# Q, stats = q_learning(env, 500)
-Q, stats = q_learning(env, 200)
+Q, stats = q_learning(env, 100)
 plotting.plot_episode_stats(stats)
