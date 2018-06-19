@@ -508,6 +508,12 @@ Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\texts
 %\begin{equation}
 
 where $\alpha$ is the learning rate, $\gamma$ is a discount rate between 0 and 1. The equation is used to update the state-action value function called Q function. The function Q(S,A) predicts the best action A in state S to maximise the total cumulative rewards.
+
+TODO 
+\begin{equation}
+Q(s\textsubscript{t},a\textsubscript{t}) = E [R\textsubscript{t+1} + \gamma R\textsubscript{t+2} + \gamma^2 R\textsubscript{t+3} + ... \vert s\textsubscript{t},a\textsubscript{t} ]
+\end{equation}
+
 The optimal Q-function Q\textsuperscript{*}(s,a) is directly approximated by the learned action-value function Q.
 
 % Model free can be done using Monte Carlo Policy evaluation
