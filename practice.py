@@ -17,7 +17,9 @@ import py2asp
 def convert_state(x, y):
     return (x-1)*19+y
 
-env = gym.make('vgdl_aaa1-v0')
+# env = gym.make('vgdl_aaa1-v0')
+env = gym.make('vgdl_aaa2-v0')
+# env = gym.make('vgdl_aaa3-v0')
 
 done = False
 count = 0
@@ -31,14 +33,19 @@ print("Space size is ", env.observation_space)
 previous_state = s
 for t in range(100):
 # while not done:
-    # env.render()
-    # time.sleep(0.01)
+    env.render()
+    time.sleep(0.1)
     count+=1
     action = env.action_space.sample()
     print("---------------------------------")
     print(py2asp.agent_before(previous_state[0], previous_state[1], t))
 
     next_state, reward, done, _ = env.step(action)
+
+    if done:
+        reward = 100
+    else:
+        reward = reward - 1
     # print("After action ", action, ", the state is now at x=", next_state[0], ", y=", next_state[1], " reward: ", reward, " at time ", t)
 
     print(py2asp.agent_after(next_state[0], next_state[1], t))
