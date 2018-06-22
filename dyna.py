@@ -18,17 +18,10 @@ import sys
 from collections import defaultdict
 from lib import plotting
 
-
 # ASP conversion
 import py2asp
 
-
-# env = gym.make('vgdl_aliens-v0')
-# env = gym.make('vgdl_boulderdash-v0')
-# env = gym.make('vgdl_portals-v0')
-# env = gym.make('vgdl_survivezombies-v0')
-env = gym.make('vgdl_aaa1-v0')
-# env = gym.make('vgdl_aaa2-v0')
+env = gym.make('vgdl_aaa_small-v0')
 
 def make_epsilon_greedy_policy(Q, epsilon, nA):
     def policy_fn(observation, episodes):
@@ -66,7 +59,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
         state_int = convert_state(state[1], state[0])
 
         # for t in itertools.count():
-        for t in range(200):
+        for t in range(20):
             env.render()
             # time.sleep(0.1)
             # Take a step
@@ -115,4 +108,5 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     return Q, stats
 
 Q, stats = q_learning(env, 100)
-plotting.plot_episode_stats(stats)
+# plotting.plot_episode_stats(stats)
+plotting.plot_episode_stats_simple(stats)

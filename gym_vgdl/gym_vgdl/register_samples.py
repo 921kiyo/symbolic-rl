@@ -6,9 +6,10 @@ import os
 DATA_DIR = os.path.join( os.path.dirname(__file__), 'vgdl', 'sample_games')
 
 sample_games = [
-    'aaa1',
-    'aaa2',
-    'aaa3',
+    'aaa_field',
+    'aaa_L_shape',
+    'aaa_maze',
+    'aaa_small',
     'aliens',
     'boulderdash',
     'chase',
@@ -20,13 +21,15 @@ sample_games = [
 
 # A list of relevant classes for each sample game
 classes = {
-    'aaa1':        ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+    'aaa_field':        ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
                        'straight', 'wall' ],
-    'aaa2':        ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+    'aaa_L_shape':        ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
                        'straight', 'wall' ],
-    'aaa3':        ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+    'aaa_maze':        ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
                        'straight', 'wall' ],
-    'aliens':         ['avatar', 'alien', 'base', 'bomb', 'sam'],
+    'aaa_small':        ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+                       'straight', 'wall' ],
+    'aliens':          ['avatar', 'alien', 'base', 'bomb', 'sam'],
     'boulderdash':    ['avatar', 'boulder', 'butterfly', 'crab', 'diamond',
                        'exitdoor', 'wall'],
     'chase':          ['avatar', 'angry', 'carcass', 'scared', 'wall'],
@@ -40,9 +43,10 @@ classes = {
 
 # A list of relevant resources for each sample game
 resources = {
-    'aaa1':        [],
-    'aaa2':        [],
-    'aaa3':        [],
+    'aaa_field':        [],
+    'aaa_L_shape':        [],
+    'aaa_maze':        [],
+    'aaa_small':        [],
     'aliens':         [],
     'boulderdash':    ['diamond'],
     'chase':          [],

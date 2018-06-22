@@ -26,8 +26,7 @@ import py2asp
 # env = gym.make('vgdl_portals-v0')
 # env = gym.make('vgdl_survivezombies-v0')
 
-# env = gym.make('vgdl_aaa1-v0')
-env = gym.make('vgdl_aaa2-v0')
+env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa3-v0')
 
 def make_epsilon_greedy_policy(Q, epsilon, nA):
