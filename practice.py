@@ -4,7 +4,6 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 from IPython import display
-from controller import keyboard_activate
 from gym import wrappers
 
 import time
@@ -17,9 +16,7 @@ import py2asp
 def convert_state(x, y):
     return (x-1)*19+y
 
-# env = gym.make('vgdl_aaa1-v0')
-env = gym.make('vgdl_aaa2-v0')
-# env = gym.make('vgdl_aaa3-v0')
+env = gym.make('vgdl_aaa_field-v0')
 
 done = False
 count = 0

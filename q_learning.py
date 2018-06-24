@@ -4,14 +4,17 @@ import gym_vgdl
 import numpy as np
 
 from gym import wrappers
+# from play.gym_recording.wrappers import TraceRecordingWrapper
+# from parent.play.gym_recording import playback
+# from parent.play.gym_recording.wrappers import trace_recording
 
 import time
-
 
 # Q-learning
 import itertools
 import pandas as pd
 import sys
+import os.path
 
 from collections import defaultdict
 from lib import plotting
@@ -27,6 +30,8 @@ import py2asp
 # env = gym.make('vgdl_survivezombies-v0')
 
 env = gym.make('vgdl_aaa_field-v0')
+# trace_path = os.path.dirname(ospath.realpath(__file__))
+# env = TraceRecordingWrapper(env, trace_path)
 # env = gym.make('vgdl_aaa3-v0')
 
 def make_epsilon_greedy_policy(Q, epsilon, nA):
