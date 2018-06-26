@@ -5,8 +5,8 @@ import numpy as np
 
 from gym import wrappers
 # from play.gym_recording.wrappers import TraceRecordingWrapper
-# from parent.play.gym_recording import playback
-# from parent.play.gym_recording.wrappers import trace_recording
+# from play.gym_recording import playback
+from gym_recording.wrappers import trace_recording
 
 import time
 
