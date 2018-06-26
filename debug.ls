@@ -1,5 +1,5 @@
 
-% #pos({state_after(cell(1,2), 2)}, {}, {state_before(cell(1,1), 1). move(cell(1,1), cell(1,2)). time(1,2). action(up, 1). wall(cell(0,0)). wall(cell(0,1)). wall(cell(1,0)). }).
+#pos({state_after(cell(1,2), 2)}, {}, {state_before(cell(1,1), 1). move(cell(1,1), cell(1,2)). time(1,2). action(up, 1). wall(cell(0,0)). wall(cell(0,1)). wall(cell(1,0)). }).
 #pos({state_after(cell(1,2), 2)}, {}, {state_before(cell(1,1), 1). move(cell(1,1), cell(1,2)). time(1,2). }).
 cell(cell(1..6, 1..6)).
 
