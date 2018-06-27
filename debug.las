@@ -1,10 +1,8 @@
-% #pos({state_after((1,2), 2)}, {}, {}).
-
-:- not state_after((1,2), 2).
-
-% state_after((X,Y), T).
+#pos({state_after((1,2), 2)}, {}, {}).
 
 cell((1..6, 1..6)).
-time(1..20).
+time(1..5).
 
-% #modeh(state_after(var(cell), var(time))).
+#modeh(state_after(var(cell), var(time))).
+#modeb(1, cell(var(cell))).
+#modeb(1, time(var(time))).
