@@ -12,6 +12,7 @@ adjacent(non, (X,Y),(X,Y)) :- cell((X,Y)), cell((X,Y)).
 #modeb(1, adjacent(const(action), var(cell), var(cell))).
 #modeb(1, state_before(var(cell))).
 #modeb(1, action(const(action))).
+#maxv(3).
 
 #constant(action, right).
 #constant(action, left).
