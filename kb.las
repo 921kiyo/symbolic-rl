@@ -1,788 +1,133 @@
+%
+% cell((1..13, 1..13)).
+%
+% adjacent(left,(X+1,Y),(X,Y)) :- cell((X,Y)), cell((X+1,Y)).
+% adjacent(right, (X,Y),(X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).
+% adjacent(down, (X,Y+1),(X,Y)) :- cell((X,Y)), cell((X,Y+1)).
+% adjacent(up, (X,Y),(X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
+% adjacent(non, (X,Y),(X,Y)) :- cell((X,Y)), cell((X,Y)).
+%
+% #modeh(state_after(var(cell))).
+%
+% #modeb(1, adjacent(const(action), var(cell), var(cell))).
+% #modeb(1, state_before(var(cell))).
+% #modeb(1, action(const(action))).
+% #maxv(3).
+%
+% #constant(action, right).
+% #constant(action, left).
+% #constant(action, down).
+% #constant(action, up).
+% #constant(action, non).
 
-cell((1..13, 1..13)).
+
+% This is a tiny maze, where w is walls, g is a goal, A is an agent and + is a path
+% GAME MAP
+% 0123456
+% wwwwwww 5
+% w++++gw 4
+% w+wwwww 3
+% w+w+w+w 2
+% wA++++w 1
+% wwwwwww 0
+
+#pos({state_after((1,2))}, {}, {state_before((1,1)). action(up). wall((0, 1)). wall((0, 2)). wall((0, 3)). wall((2, 2)).wall((2, 3)). :- wall((1, 3)). :- wall((1, 1)). :- wall((2, 1)).}).
+% Adding below counter examples as exclusions, because action other than "up" should not make the same change as above. Only action "up" will move the agent from (1,1) to (1,2)
+#pos({}, {state_after((1,2))}, {state_before((1,1)). action(down). wall((0, 1)). wall((0, 2)). wall((0, 3)). wall((2, 2)).wall((2, 3)). :- wall((1, 3)). :- wall((1, 1)). :- wall((2, 1)).}).
+#pos({}, {state_after((1,2))}, {state_before((1,1)). action(right). wall((0, 1)). wall((0, 2)). wall((0, 3)). wall((2, 2)).wall((2, 3)). :- wall((1, 3)). :- wall((1, 1)). :- wall((2, 1)).}).
+#pos({}, {state_after((1,2))}, {state_before((1,1)). action(left). wall((0, 1)). wall((0, 2)). wall((0, 3)). wall((2, 2)).wall((2, 3)). :- wall((1, 3)). :- wall((1, 1)). :- wall((2, 1)).}).
+
+% 0123456
+% wwwwwww 5
+% w++++gw 4
+% w+wwwww 3
+% wAw+w+w 2
+% w+++++w 1
+% wwwwwww 0
+
+#pos({state_after((2,1))}, {}, {state_before((1,1)). action(right). wall((1,0)). wall((2,0)). wall((3,0)). wall((2,2)). :- wall((1,1)). :- wall((1,1)). :- wall((1,2)). :- wall((3,2)). :- wall((3,1)). }).
+#pos({}, {state_after((2,1))}, {state_before((1,1)). action(left). wall((1,0)). wall((2,0)). wall((3,0)). wall((2,2)). :- wall((1,1)). :- wall((1,1)). :- wall((1,2)). :- wall((3,2)). :- wall((3,1)).}).
+#pos({}, {state_after((2,1))}, {state_before((1,1)). action(up). wall((1,0)). wall((2,0)). wall((3,0)). wall((2,2)). :- wall((1,1)). :- wall((1,1)). :- wall((1,2)). :- wall((3,2)). :- wall((3,1)).}).
+#pos({}, {state_after((2,1))}, {state_before((1,1)). action(down). wall((1,0)). wall((2,0)). wall((3,0)). wall((2,2)). :- wall((1,1)). :- wall((1,1)). :- wall((1,2)). :- wall((3,2)). :- wall((3,1)).}).
+
+% 0123456
+% wwwwwww 5
+% w++++gw 4
+% w+wwwww 3
+% w+w+w+w 2
+% w+A+++w 1
+% wwwwwww 0
+
+#pos({state_after((1,1))}, {}, {state_before((2,1)). action(left). wall((1,0)). wall((0,1)). wall((0,0)). wall((2,0)). wall((0,2)). wall((2,2)). :- wall((2,1)). :- wall((1,2)).}).
+#pos({}, {state_after((1,1))}, {state_before((2,1)). action(right). wall((1,0)). wall((0,1)). wall((0,0)). wall((2,0)). wall((0,2)). wall((2,2)). :- wall((2,1)). :- wall((1,2)).}).
+#pos({}, {state_after((1,1))}, {state_before((2,1)). action(up). wall((1,0)). wall((0,1)). wall((0,0)). wall((2,0)). wall((0,2)). wall((2,2)). :- wall((2,1)). :- wall((1,2)).}).
+#pos({}, {state_after((1,1))}, {state_before((2,1)). action(down). wall((1,0)). wall((0,1)). wall((0,0)). wall((2,0)). wall((0,2)). wall((2,2)). :- wall((2,1)). :- wall((1,2)).}).
+
+% 0123456
+% wwwwwww 5
+% w++++gw 4
+% w+wwwww 3
+% w+w+w+w 2
+% wA++++w 1
+% wwwwwww 0
+
+#pos({state_after((1,3))}, {}, {state_before((1,2)). action(up). wall((0,4)). wall((0,3)). wall((0,2)). wall((2,2)). wall((2,3)). :- wall((1, 4)). :- wall((2, 4)). :- wall((1, 2)). }).
+#pos({}, {state_after((1,3))}, {state_before((1,2)). action(down). wall((0,4)). wall((0,3)). wall((0,2)). wall((2,2)). wall((2,3)). :- wall((1, 4)). :- wall((2, 4)). :- wall((1, 2)). }).
+#pos({}, {state_after((1,3))}, {state_before((1,2)). action(right). wall((0,4)). wall((0,3)). wall((0,2)). wall((2,2)). wall((2,3)). :- wall((1, 4)). :- wall((2, 4)). :- wall((1, 2)). }).
+#pos({}, {state_after((1,3))}, {state_before((1,2)). action(left). wall((0,4)). wall((0,3)). wall((0,2)). wall((2,2)). wall((2,3)). :- wall((1, 4)). :- wall((2, 4)). :- wall((1, 2)). }).
+
+% 0123456
+% wwwwwww 5
+% w++++gw 4
+% wAwwwww 3
+% w+w+w+w 2
+% w+++++w 1
+% wwwwwww 0
+
+#pos({state_after((1,4))}, {}, {state_before((2,4)). action(left). wall((0,5)). wall((1,5)). wall((2,5)). wall((0,4)). wall((0,3)). wall((2,3)). :- wall((2, 4)). :- wall((1, 3)). }).
+#pos({}, {state_after((1,4))}, {state_before((2,4)). action(right). wall((0,5)). wall((1,5)). wall((2,5)). wall((0,4)). wall((0,3)). wall((2,3)). :- wall((2, 4)). :- wall((1, 3)). }).
+#pos({}, {state_after((1,4))}, {state_before((2,4)). action(down). wall((0,5)). wall((1,5)). wall((2,5)). wall((0,4)). wall((0,3)). wall((2,3)). :- wall((2, 4)). :- wall((1, 3)). }).
+#pos({}, {state_after((1,4))}, {state_before((2,4)). action(up). wall((0,5)). wall((1,5)). wall((2,5)). wall((0,4)). wall((0,3)). wall((2,3)). :- wall((2, 4)). :- wall((1, 3)). }).
+
+% 0123456
+% wwwwwww 5
+% wA+++gw 4
+% w+wwwww 3
+% w+w+w+w 2
+% w+++++w 1
+% wwwwwww 0
+
+#pos({state_after((1,4))}, {}, {state_before((1,4)). action(left). wall((0,5)). wall((1,5)). wall((2,5)). wall((0,4)). wall((0,3)). wall((2,3)). :- wall((2, 4)). :- wall((1, 3)). }).
+% ADDING BELOW MAKES IT BREAK
+% #pos({}, {state_after((1,4))}, {state_before((1,4)). action(right). wall((0,5)). wall((1,5)). wall((2,5)). wall((0,4)). wall((0,3)). wall((2,3)). :- wall((2, 4)). :- wall((1, 3)). }).
+% #pos({}, {state_after((1,4))}, {state_before((1,4)). action(down). wall((0,5)). wall((1,5)). wall((2,5)). wall((0,4)). wall((0,3)). wall((2,3)). :- wall((2, 4)). :- wall((1, 3)). }).
+% #pos({}, {state_after((1,4))}, {state_before((1,4)). action(up). wall((0,5)). wall((1,5)). wall((2,5)). wall((0,4)). wall((0,3)). wall((2,3)). :- wall((2, 4)). :- wall((1, 3)). }).
+
+% The agent hits a wall and did not move.
+% 0123456
+% wwwwwww 5
+% wA+++gw 4
+% w+wwwww 3
+% w+w+w+w 2
+% w+++++w 1
+% wwwwwww 0
+
+cell((0..6, 0..5)).
 
 adjacent(left,(X+1,Y),(X,Y)) :- cell((X,Y)), cell((X+1,Y)).
 adjacent(right, (X,Y),(X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).
 adjacent(down, (X,Y+1),(X,Y)) :- cell((X,Y)), cell((X,Y+1)).
 adjacent(up, (X,Y),(X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
-adjacent(non, (X,Y),(X,Y)) :- cell((X,Y)), cell((X,Y)).
 
 #modeh(state_after(var(cell))).
 
 #modeb(1, adjacent(const(action), var(cell), var(cell))).
 #modeb(1, state_before(var(cell))).
 #modeb(1, action(const(action))).
-#maxv(3).
+#modeb(1, wall(var(cell))).
+% #maxv(3).
 
 #constant(action, right).
 #constant(action, left).
 #constant(action, down).
 #constant(action, up).
-#constant(action, non).
-
-#pos({state_after((7,6))}, {}, {state_before((7,7)). action(down).}).
-#pos({state_after((7,5))}, {}, {state_before((7,6)). action(down).}).
-#pos({state_after((7,4))}, {}, {state_before((7,5)). action(down).}).
-#pos({state_after((7,3))}, {}, {state_before((7,4)). action(down).}).
-#pos({state_after((7,2))}, {}, {state_before((7,3)). action(down).}).
-#pos({state_after((7,1))}, {}, {state_before((7,2)). action(down).}).
-#pos({state_after((7,1))}, {}, {state_before((7,1)). action(down).}).
-#pos({state_after((7,2))}, {}, {state_before((7,1)). action(up).}).
-#pos({state_after((7,3))}, {}, {state_before((7,2)). action(up).}).
-#pos({state_after((7,4))}, {}, {state_before((7,3)). action(up).}).
-#pos({state_after((7,5))}, {}, {state_before((7,4)). action(up).}).
-#pos({state_after((7,6))}, {}, {state_before((7,5)). action(up).}).
-#pos({state_after((7,7))}, {}, {state_before((7,6)). action(up).}).
-#pos({state_after((7,8))}, {}, {state_before((7,7)). action(up).}).
-#pos({state_after((7,7))}, {}, {state_before((7,8)). action(down).}).
-#pos({state_after((6,7))}, {}, {state_before((7,7)). action(left).}).
-#pos({state_after((6,6))}, {}, {state_before((6,7)). action(down).}).
-#pos({state_after((6,5))}, {}, {state_before((6,6)). action(down).}).
-#pos({state_after((6,4))}, {}, {state_before((6,5)). action(down).}).
-#pos({state_after((6,3))}, {}, {state_before((6,4)). action(down).}).
-#pos({state_after((8,7))}, {}, {state_before((7,7)). action(right).}).
-#pos({state_after((8,6))}, {}, {state_before((8,7)). action(down).}).
-#pos({state_after((8,5))}, {}, {state_before((8,6)). action(down).}).
-#pos({state_after((8,4))}, {}, {state_before((8,5)). action(down).}).
-#pos({state_after((8,3))}, {}, {state_before((8,4)). action(down).}).
-#pos({state_after((8,2))}, {}, {state_before((8,3)). action(down).}).
-#pos({state_after((8,1))}, {}, {state_before((8,2)). action(down).}).
-#pos({state_after((8,1))}, {}, {state_before((8,1)). action(down).}).
-#pos({state_after((8,2))}, {}, {state_before((8,1)). action(up).}).
-#pos({state_after((8,3))}, {}, {state_before((8,2)). action(up).}).
-#pos({state_after((8,4))}, {}, {state_before((8,3)). action(up).}).
-#pos({state_after((8,5))}, {}, {state_before((8,4)). action(up).}).
-#pos({state_after((8,6))}, {}, {state_before((8,5)). action(up).}).
-#pos({state_after((8,7))}, {}, {state_before((8,6)). action(up).}).
-#pos({state_after((8,8))}, {}, {state_before((8,7)). action(up).}).
-#pos({state_after((8,7))}, {}, {state_before((8,8)). action(down).}).
-#pos({state_after((7,7))}, {}, {state_before((8,7)). action(left).}).
-#pos({state_after((7,7))}, {}, {state_before((7,7)). action(non).}).
-#pos({state_after((7,6))}, {}, {state_before((7,7)). action(down).}).
-#pos({state_after((6,6))}, {}, {state_before((7,6)). action(left).}).
-#pos({state_after((7,8))}, {}, {state_before((7,7)). action(up).}).
-#pos({state_after((7,9))}, {}, {state_before((7,8)). action(up).}).
-#pos({state_after((7,8))}, {}, {state_before((7,9)). action(down).}).
-#pos({state_after((6,8))}, {}, {state_before((7,8)). action(left).}).
-#pos({state_after((6,7))}, {}, {state_before((6,8)). action(down).}).
-#pos({state_after((6,8))}, {}, {state_before((6,7)). action(up).}).
-#pos({state_after((6,9))}, {}, {state_before((6,8)). action(up).}).
-#pos({state_after((6,8))}, {}, {state_before((6,9)). action(down).}).
-#pos({state_after((5,8))}, {}, {state_before((6,8)). action(left).}).
-#pos({state_after((5,7))}, {}, {state_before((5,8)). action(down).}).
-#pos({state_after((5,6))}, {}, {state_before((5,7)). action(down).}).
-#pos({state_after((5,5))}, {}, {state_before((5,6)). action(down).}).
-#pos({state_after((5,4))}, {}, {state_before((5,5)). action(down).}).
-#pos({state_after((5,3))}, {}, {state_before((5,4)). action(down).}).
-#pos({state_after((5,2))}, {}, {state_before((5,3)). action(down).}).
-#pos({state_after((5,1))}, {}, {state_before((5,2)). action(down).}).
-#pos({state_after((5,1))}, {}, {state_before((5,1)). action(down).}).
-#pos({state_after((5,2))}, {}, {state_before((5,1)). action(up).}).
-#pos({state_after((5,3))}, {}, {state_before((5,2)). action(up).}).
-#pos({state_after((5,4))}, {}, {state_before((5,3)). action(up).}).
-#pos({state_after((6,7))}, {}, {state_before((7,7)). action(left).}).
-#pos({state_after((5,7))}, {}, {state_before((6,7)). action(left).}).
-#pos({state_after((5,8))}, {}, {state_before((5,7)). action(up).}).
-#pos({state_after((5,9))}, {}, {state_before((5,8)). action(up).}).
-#pos({state_after((5,8))}, {}, {state_before((5,9)). action(down).}).
-#pos({state_after((4,8))}, {}, {state_before((5,8)). action(left).}).
-#pos({state_after((4,7))}, {}, {state_before((4,8)). action(down).}).
-#pos({state_after((4,6))}, {}, {state_before((4,7)). action(down).}).
-#pos({state_after((4,5))}, {}, {state_before((4,6)). action(down).}).
-#pos({state_after((4,4))}, {}, {state_before((4,5)). action(down).}).
-#pos({state_after((4,3))}, {}, {state_before((4,4)). action(down).}).
-#pos({state_after((4,2))}, {}, {state_before((4,3)). action(down).}).
-#pos({state_after((4,1))}, {}, {state_before((4,2)). action(down).}).
-#pos({state_after((4,1))}, {}, {state_before((4,1)). action(down).}).
-#pos({state_after((4,2))}, {}, {state_before((4,1)). action(up).}).
-#pos({state_after((4,3))}, {}, {state_before((4,2)). action(up).}).
-#pos({state_after((4,4))}, {}, {state_before((4,3)). action(up).}).
-#pos({state_after((4,5))}, {}, {state_before((4,4)). action(up).}).
-#pos({state_after((5,5))}, {}, {state_before((4,5)). action(right).}).
-#pos({state_after((5,6))}, {}, {state_before((5,5)). action(up).}).
-#pos({state_after((8,7))}, {}, {state_before((7,7)). action(right).}).
-#pos({state_after((9,7))}, {}, {state_before((8,7)). action(right).}).
-#pos({state_after((9,6))}, {}, {state_before((9,7)). action(down).}).
-#pos({state_after((9,5))}, {}, {state_before((9,6)). action(down).}).
-#pos({state_after((9,4))}, {}, {state_before((9,5)). action(down).}).
-#pos({state_after((9,3))}, {}, {state_before((9,4)). action(down).}).
-#pos({state_after((9,2))}, {}, {state_before((9,3)). action(down).}).
-#pos({state_after((9,1))}, {}, {state_before((9,2)). action(down).}).
-#pos({state_after((9,1))}, {}, {state_before((9,1)). action(down).}).
-#pos({state_after((9,1))}, {}, {state_before((9,1)). action(non).}).
-#pos({state_after((9,2))}, {}, {state_before((9,1)). action(up).}).
-#pos({state_after((9,3))}, {}, {state_before((9,2)). action(up).}).
-#pos({state_after((9,4))}, {}, {state_before((9,3)). action(up).}).
-#pos({state_after((9,5))}, {}, {state_before((9,4)). action(up).}).
-#pos({state_after((9,6))}, {}, {state_before((9,5)). action(up).}).
-#pos({state_after((9,7))}, {}, {state_before((9,6)). action(up).}).
-#pos({state_after((9,8))}, {}, {state_before((9,7)). action(up).}).
-#pos({state_after((9,7))}, {}, {state_before((9,8)). action(down).}).
-#pos({state_after((8,7))}, {}, {state_before((9,7)). action(left).}).
-#pos({state_after((8,7))}, {}, {state_before((8,7)). action(non).}).
-#pos({state_after((7,7))}, {}, {state_before((7,7)). action(non).}).
-#pos({state_after((7,6))}, {}, {state_before((7,7)). action(down).}).
-#pos({state_after((8,6))}, {}, {state_before((7,6)). action(right).}).
-#pos({state_after((7,6))}, {}, {state_before((8,6)). action(left).}).
-#pos({state_after((7,6))}, {}, {state_before((7,6)). action(non).}).
-#pos({state_after((7,5))}, {}, {state_before((7,6)). action(down).}).
-#pos({state_after((6,5))}, {}, {state_before((7,5)). action(left).}).
-#pos({state_after((6,6))}, {}, {state_before((6,5)). action(up).}).
-#pos({state_after((6,7))}, {}, {state_before((6,6)). action(up).}).
-#pos({state_after((7,7))}, {}, {state_before((6,7)). action(right).}).
-#pos({state_after((7,8))}, {}, {state_before((7,7)). action(up).}).
-#pos({state_after((8,8))}, {}, {state_before((7,8)). action(right).}).
-#pos({state_after((8,9))}, {}, {state_before((8,8)). action(up).}).
-#pos({state_after((8,8))}, {}, {state_before((8,9)). action(down).}).
-#pos({state_after((7,8))}, {}, {state_before((8,8)). action(left).}).
-#pos({state_after((7,8))}, {}, {state_before((7,8)). action(non).}).
-#pos({state_after((7,7))}, {}, {state_before((7,8)). action(down).}).
-#pos({state_after((6,7))}, {}, {state_before((7,7)). action(left).}).
-#pos({state_after((6,7))}, {}, {state_before((6,7)). action(non).}).
-#pos({state_after((6,6))}, {}, {state_before((6,7)). action(down).}).
-#pos({state_after((8,7))}, {}, {state_before((7,7)). action(right).}).
-#pos({state_after((8,6))}, {}, {state_before((8,7)). action(down).}).
-#pos({state_after((9,6))}, {}, {state_before((8,6)). action(right).}).
-#pos({state_after((8,6))}, {}, {state_before((9,6)). action(left).}).
-#pos({state_after((8,6))}, {}, {state_before((8,6)). action(non).}).
-#pos({state_after((8,5))}, {}, {state_before((8,6)). action(down).}).
-#pos({state_after((7,5))}, {}, {state_before((8,5)). action(left).}).
-#pos({state_after((8,5))}, {}, {state_before((7,5)). action(right).}).
-#pos({state_after((9,5))}, {}, {state_before((8,5)). action(right).}).
-#pos({state_after((8,5))}, {}, {state_before((9,5)). action(left).}).
-#pos({state_after((8,5))}, {}, {state_before((8,5)). action(non).}).
-#pos({state_after((8,4))}, {}, {state_before((8,5)). action(down).}).
-#pos({state_after((7,4))}, {}, {state_before((8,4)). action(left).}).
-#pos({state_after((6,4))}, {}, {state_before((7,4)). action(left).}).
-#pos({state_after((6,5))}, {}, {state_before((6,4)). action(up).}).
-#pos({state_after((5,5))}, {}, {state_before((6,5)). action(left).}).
-#pos({state_after((4,5))}, {}, {state_before((5,5)). action(left).}).
-#pos({state_after((4,6))}, {}, {state_before((4,5)). action(up).}).
-#pos({state_after((4,7))}, {}, {state_before((4,6)). action(up).}).
-#pos({state_after((4,8))}, {}, {state_before((4,7)). action(up).}).
-#pos({state_after((7,6))}, {}, {state_before((7,7)). action(down).}).
-#pos({state_after((7,7))}, {}, {state_before((7,6)). action(up).}).
-#pos({state_after((7,8))}, {}, {state_before((7,7)). action(up).}).
-#pos({state_after((7,9))}, {}, {state_before((7,8)). action(up).}).
-#pos({state_after((7,9))}, {}, {state_before((7,9)). action(up).}).
-#pos({state_after((6,9))}, {}, {state_before((7,9)). action(left).}).
-#pos({state_after((6,9))}, {}, {state_before((6,9)). action(up).}).
-#pos({state_after((5,9))}, {}, {state_before((6,9)). action(left).}).
-#pos({state_after((5,9))}, {}, {state_before((5,9)). action(up).}).
-#pos({state_after((4,9))}, {}, {state_before((5,9)). action(left).}).
-#pos({state_after((4,8))}, {}, {state_before((4,9)). action(down).}).
-#pos({state_after((4,9))}, {}, {state_before((4,8)). action(up).}).
-#pos({state_after((4,9))}, {}, {state_before((4,9)). action(up).}).
-#pos({state_after((3,9))}, {}, {state_before((4,9)). action(left).}).
-#pos({state_after((3,8))}, {}, {state_before((3,9)). action(down).}).
-#pos({state_after((3,7))}, {}, {state_before((3,8)). action(down).}).
-#pos({state_after((3,6))}, {}, {state_before((3,7)). action(down).}).
-#pos({state_after((3,5))}, {}, {state_before((3,6)). action(down).}).
-#pos({state_after((3,4))}, {}, {state_before((3,5)). action(down).}).
-#pos({state_after((3,3))}, {}, {state_before((3,4)). action(down).}).
-#pos({state_after((6,7))}, {}, {state_before((7,7)). action(left).}).
-#pos({state_after((6,8))}, {}, {state_before((6,7)). action(up).}).
-#pos({state_after((7,8))}, {}, {state_before((6,8)). action(right).}).
-#pos({state_after((6,8))}, {}, {state_before((7,8)). action(left).}).
-#pos({state_after((6,8))}, {}, {state_before((6,8)). action(non).}).
-#pos({state_after((6,7))}, {}, {state_before((6,8)). action(down).}).
-#pos({state_after((5,7))}, {}, {state_before((6,7)). action(left).}).
-#pos({state_after((4,7))}, {}, {state_before((5,7)). action(left).}).
-#pos({state_after((3,7))}, {}, {state_before((4,7)). action(left).}).
-#pos({state_after((3,8))}, {}, {state_before((3,7)). action(up).}).
-#pos({state_after((3,9))}, {}, {state_before((3,8)). action(up).}).
-#pos({state_after((3,9))}, {}, {state_before((3,9)). action(up).}).
-#pos({state_after((2,9))}, {}, {state_before((3,9)). action(left).}).
-#pos({state_after((2,8))}, {}, {state_before((2,9)). action(down).}).
-#pos({state_after((2,7))}, {}, {state_before((2,8)). action(down).}).
-#pos({state_after((2,6))}, {}, {state_before((2,7)). action(down).}).
-#pos({state_after((2,5))}, {}, {state_before((2,6)). action(down).}).
-#pos({state_after((2,4))}, {}, {state_before((2,5)). action(down).}).
-#pos({state_after((2,3))}, {}, {state_before((2,4)). action(down).}).
-#pos({state_after((2,2))}, {}, {state_before((2,3)). action(down).}).
-#pos({state_after((7,7))}, {}, {state_before((7,7)). action(non).}).
-#pos({state_after((8,7))}, {}, {state_before((7,7)). action(right).}).
-#pos({state_after((8,8))}, {}, {state_before((8,7)). action(up).}).
-#pos({state_after((9,8))}, {}, {state_before((8,8)). action(right).}).
-#pos({state_after((9,9))}, {}, {state_before((9,8)). action(up).}).
-#pos({state_after((9,8))}, {}, {state_before((9,9)). action(down).}).
-#pos({state_after((8,8))}, {}, {state_before((9,8)). action(left).}).
-#pos({state_after((8,8))}, {}, {state_before((8,8)). action(non).}).
-#pos({state_after((8,7))}, {}, {state_before((8,8)). action(down).}).
-#pos({state_after((7,7))}, {}, {state_before((8,7)). action(left).}).
-#pos({state_after((7,6))}, {}, {state_before((7,7)). action(down).}).
-#pos({state_after((6,6))}, {}, {state_before((7,6)). action(left).}).
-#pos({state_after((5,6))}, {}, {state_before((6,6)). action(left).}).
-#pos({state_after((5,7))}, {}, {state_before((5,6)). action(up).}).
-#pos({state_after((6,7))}, {}, {state_before((5,7)). action(right).}).
-#pos({state_after((6,7))}, {}, {state_before((6,7)). action(non).}).
-#pos({state_after((6,6))}, {}, {state_before((6,7)). action(down).}).
-#pos({state_after((7,6))}, {}, {state_before((6,6)). action(right).}).
-#pos({state_after((8,6))}, {}, {state_before((7,6)). action(right).}).
-#pos({state_after((8,7))}, {}, {state_before((8,6)). action(up).}).
-#pos({state_after((7,8))}, {}, {state_before((7,7)). action(up).}).
-#pos({state_after((8,8))}, {}, {state_before((7,8)). action(right).}).
-#pos({state_after((8,9))}, {}, {state_before((8,8)). action(up).}).
-#pos({state_after((8,9))}, {}, {state_before((8,9)). action(up).}).
-#pos({state_after((7,9))}, {}, {state_before((8,9)). action(left).}).
-#pos({state_after((8,9))}, {}, {state_before((7,9)). action(right).}).
-#pos({state_after((9,9))}, {}, {state_before((8,9)). action(right).}).
-#pos({state_after((9,9))}, {}, {state_before((9,9)). action(up).}).
-#pos({state_after((8,9))}, {}, {state_before((9,9)). action(left).}).
-#pos({state_after((8,9))}, {}, {state_before((8,9)). action(non).}).
-#pos({state_after((8,8))}, {}, {state_before((8,9)). action(down).}).
-#pos({state_after((7,8))}, {}, {state_before((8,8)). action(left).}).
-#pos({state_after((7,8))}, {}, {state_before((7,8)). action(non).}).
-#pos({state_after((7,9))}, {}, {state_before((7,8)). action(up).}).
-#pos({state_after((7,9))}, {}, {state_before((7,9)). action(non).}).
-#pos({state_after((7,8))}, {}, {state_before((7,9)). action(down).}).
-#pos({state_after((6,8))}, {}, {state_before((7,8)). action(left).}).
-#pos({state_after((6,9))}, {}, {state_before((6,8)). action(up).}).
-#pos({state_after((7,9))}, {}, {state_before((6,9)). action(right).}).
-#pos({state_after((7,9))}, {}, {state_before((7,9)). action(up).}).
-#pos({state_after((6,7))}, {}, {state_before((7,7)). action(left).}).
-#pos({state_after((6,8))}, {}, {state_before((6,7)). action(up).}).
-#pos({state_after((5,8))}, {}, {state_before((6,8)). action(left).}).
-#pos({state_after((6,8))}, {}, {state_before((5,8)). action(right).}).
-#pos({state_after((6,8))}, {}, {state_before((6,8)). action(non).}).
-#pos({state_after((7,8))}, {}, {state_before((6,8)). action(right).}).
-#pos({state_after((7,9))}, {}, {state_before((7,8)). action(up).}).
-#pos({state_after((6,9))}, {}, {state_before((7,9)). action(left).}).
-#pos({state_after((6,9))}, {}, {state_before((6,9)). action(non).}).
-#pos({state_after((6,8))}, {}, {state_before((6,9)). action(down).}).
-#pos({state_after((6,9))}, {}, {state_before((6,8)). action(up).}).
-#pos({state_after((6,9))}, {}, {state_before((6,9)). action(up).}).
-#pos({state_after((5,9))}, {}, {state_before((6,9)). action(left).}).
-#pos({state_after((6,9))}, {}, {state_before((5,9)). action(right).}).
-#pos({state_after((6,9))}, {}, {state_before((6,9)). action(non).}).
-#pos({state_after((7,9))}, {}, {state_before((6,9)). action(right).}).
-#pos({state_after((8,9))}, {}, {state_before((7,9)). action(right).}).
-#pos({state_after((8,9))}, {}, {state_before((8,9)). action(up).}).
-#pos({state_after((7,9))}, {}, {state_before((8,9)). action(left).}).
-#pos({state_after((7,9))}, {}, {state_before((7,9)). action(non).}).
-#pos({state_after((8,7))}, {}, {state_before((7,7)). action(right).}).
-#pos({state_after((9,7))}, {}, {state_before((8,7)). action(right).}).
-#pos({state_after((10,7))}, {}, {state_before((9,7)). action(right).}).
-#pos({state_after((10,6))}, {}, {state_before((10,7)). action(down).}).
-#pos({state_after((10,5))}, {}, {state_before((10,6)). action(down).}).
-#pos({state_after((10,4))}, {}, {state_before((10,5)). action(down).}).
-#pos({state_after((10,3))}, {}, {state_before((10,4)). action(down).}).
-#pos({state_after((10,2))}, {}, {state_before((10,3)). action(down).}).
-#pos({state_after((10,1))}, {}, {state_before((10,2)). action(down).}).
-#pos({state_after((10,1))}, {}, {state_before((10,1)). action(down).}).
-#pos({state_after((10,2))}, {}, {state_before((10,1)). action(up).}).
-#pos({state_after((10,3))}, {}, {state_before((10,2)). action(up).}).
-#pos({state_after((10,4))}, {}, {state_before((10,3)). action(up).}).
-#pos({state_after((10,5))}, {}, {state_before((10,4)). action(up).}).
-#pos({state_after((10,6))}, {}, {state_before((10,5)). action(up).}).
-#pos({state_after((10,7))}, {}, {state_before((10,6)). action(up).}).
-#pos({state_after((10,8))}, {}, {state_before((10,7)). action(up).}).
-#pos({state_after((10,7))}, {}, {state_before((10,8)). action(down).}).
-#pos({state_after((9,7))}, {}, {state_before((10,7)). action(left).}).
-#pos({state_after((9,7))}, {}, {state_before((9,7)). action(non).}).
-#pos({state_after((7,6))}, {}, {state_before((7,7)). action(down).}).
-#pos({state_after((7,6))}, {}, {state_before((7,6)). action(non).}).
-#pos({state_after((7,5))}, {}, {state_before((7,6)). action(down).}).
-#pos({state_after((7,5))}, {}, {state_before((7,5)). action(non).}).
-#pos({state_after((7,4))}, {}, {state_before((7,5)). action(down).}).
-#pos({state_after((8,4))}, {}, {state_before((7,4)). action(right).}).
-#pos({state_after((9,4))}, {}, {state_before((8,4)). action(right).}).
-#pos({state_after((8,4))}, {}, {state_before((9,4)). action(left).}).
-#pos({state_after((8,4))}, {}, {state_before((8,4)). action(non).}).
-#pos({state_after((8,3))}, {}, {state_before((8,4)). action(down).}).
-#pos({state_after((7,3))}, {}, {state_before((8,3)). action(left).}).
-#pos({state_after((6,3))}, {}, {state_before((7,3)). action(left).}).
-#pos({state_after((6,2))}, {}, {state_before((6,3)). action(down).}).
-#pos({state_after((6,1))}, {}, {state_before((6,2)). action(down).}).
-#pos({state_after((6,1))}, {}, {state_before((6,1)). action(down).}).
-#pos({state_after((6,2))}, {}, {state_before((6,1)). action(up).}).
-#pos({state_after((6,3))}, {}, {state_before((6,2)). action(up).}).
-#pos({state_after((6,4))}, {}, {state_before((6,3)). action(up).}).
-#pos({state_after((5,4))}, {}, {state_before((6,4)). action(left).}).
-#pos({state_after((5,5))}, {}, {state_before((5,4)). action(up).}).
-#pos({state_after((7,8))}, {}, {state_before((7,7)). action(up).}).
-#pos({state_after((8,8))}, {}, {state_before((7,8)). action(right).}).
-#pos({state_after((9,8))}, {}, {state_before((8,8)). action(right).}).
-#pos({state_after((10,8))}, {}, {state_before((9,8)). action(right).}).
-#pos({state_after((10,9))}, {}, {state_before((10,8)). action(up).}).
-#pos({state_after((10,8))}, {}, {state_before((10,9)). action(down).}).
-#pos({state_after((9,8))}, {}, {state_before((10,8)). action(left).}).
-#pos({state_after((9,8))}, {}, {state_before((9,8)). action(non).}).
-#pos({state_after((9,7))}, {}, {state_before((9,8)). action(down).}).
-#pos({state_after((9,6))}, {}, {state_before((9,7)). action(down).}).
-#pos({state_after((10,6))}, {}, {state_before((9,6)). action(right).}).
-#pos({state_after((9,6))}, {}, {state_before((10,6)). action(left).}).
-#pos({state_after((9,6))}, {}, {state_before((9,6)). action(non).}).
-#pos({state_after((9,5))}, {}, {state_before((9,6)). action(down).}).
-#pos({state_after((10,5))}, {}, {state_before((9,5)). action(right).}).
-#pos({state_after((9,5))}, {}, {state_before((10,5)). action(left).}).
-#pos({state_after((9,5))}, {}, {state_before((9,5)). action(non).}).
-#pos({state_after((9,4))}, {}, {state_before((9,5)). action(down).}).
-#pos({state_after((10,4))}, {}, {state_before((9,4)). action(right).}).
-#pos({state_after((9,4))}, {}, {state_before((10,4)). action(left).}).
-#pos({state_after((8,7))}, {}, {state_before((7,7)). action(right).}).
-#pos({state_after((8,7))}, {}, {state_before((8,7)). action(non).}).
-#pos({state_after((8,6))}, {}, {state_before((8,7)). action(down).}).
-#pos({state_after((7,6))}, {}, {state_before((8,6)). action(left).}).
-#pos({state_after((6,6))}, {}, {state_before((7,6)). action(left).}).
-#pos({state_after((6,6))}, {}, {state_before((6,6)). action(non).}).
-#pos({state_after((6,5))}, {}, {state_before((6,6)). action(down).}).
-#pos({state_after((7,5))}, {}, {state_before((6,5)). action(right).}).
-#pos({state_after((7,6))}, {}, {state_before((7,5)). action(up).}).
-#pos({state_after((7,5))}, {}, {state_before((7,6)). action(down).}).
-#pos({state_after((6,5))}, {}, {state_before((7,5)). action(left).}).
-#pos({state_after((6,5))}, {}, {state_before((6,5)). action(non).}).
-#pos({state_after((6,4))}, {}, {state_before((6,5)). action(down).}).
-#pos({state_after((7,4))}, {}, {state_before((6,4)). action(right).}).
-#pos({state_after((7,4))}, {}, {state_before((7,4)). action(non).}).
-#pos({state_after((7,3))}, {}, {state_before((7,4)). action(down).}).
-#pos({state_after((8,3))}, {}, {state_before((7,3)). action(right).}).
-#pos({state_after((9,3))}, {}, {state_before((8,3)). action(right).}).
-#pos({state_after((8,3))}, {}, {state_before((9,3)). action(left).}).
-#pos({state_after((8,3))}, {}, {state_before((8,3)). action(non).}).
-#pos({state_after((7,6))}, {}, {state_before((7,7)). action(down).}).
-#pos({state_after((6,6))}, {}, {state_before((7,6)). action(left).}).
-#pos({state_after((6,7))}, {}, {state_before((6,6)). action(up).}).
-#pos({state_after((5,7))}, {}, {state_before((6,7)). action(left).}).
-#pos({state_after((5,7))}, {}, {state_before((5,7)). action(non).}).
-#pos({state_after((5,6))}, {}, {state_before((5,7)). action(down).}).
-#pos({state_after((4,6))}, {}, {state_before((5,6)). action(left).}).
-#pos({state_after((3,6))}, {}, {state_before((4,6)). action(left).}).
-#pos({state_after((3,7))}, {}, {state_before((3,6)). action(up).}).
-#pos({state_after((2,7))}, {}, {state_before((3,7)). action(left).}).
-#pos({state_after((2,8))}, {}, {state_before((2,7)). action(up).}).
-#pos({state_after((2,9))}, {}, {state_before((2,8)). action(up).}).
-#pos({state_after((2,9))}, {}, {state_before((2,9)). action(up).}).
-#pos({state_after((1,9))}, {}, {state_before((2,9)). action(left).}).
-#pos({state_after((1,8))}, {}, {state_before((1,9)). action(down).}).
-#pos({state_after((1,7))}, {}, {state_before((1,8)). action(down).}).
-#pos({state_after((1,6))}, {}, {state_before((1,7)). action(down).}).
-#pos({state_after((1,5))}, {}, {state_before((1,6)). action(down).}).
-#pos({state_after((1,4))}, {}, {state_before((1,5)). action(down).}).
-#pos({state_after((1,3))}, {}, {state_before((1,4)). action(down).}).
-#pos({state_after((8,7))}, {}, {state_before((7,7)). action(right).}).
-#pos({state_after((8,8))}, {}, {state_before((8,7)). action(up).}).
-#pos({state_after((8,8))}, {}, {state_before((8,8)). action(non).}).
-#pos({state_after((8,9))}, {}, {state_before((8,8)). action(up).}).
-#pos({state_after((9,9))}, {}, {state_before((8,9)). action(right).}).
-#pos({state_after((10,9))}, {}, {state_before((9,9)). action(right).}).
-#pos({state_after((10,9))}, {}, {state_before((10,9)). action(up).}).
-#pos({state_after((9,9))}, {}, {state_before((10,9)). action(left).}).
-#pos({state_after((9,9))}, {}, {state_before((9,9)). action(non).}).
-#pos({state_after((9,8))}, {}, {state_before((9,9)). action(down).}).
-#pos({state_after((9,9))}, {}, {state_before((9,8)). action(up).}).
-#pos({state_after((9,9))}, {}, {state_before((9,9)). action(up).}).
-#pos({state_after((8,9))}, {}, {state_before((9,9)). action(left).}).
-#pos({state_after((8,9))}, {}, {state_before((8,9)). action(non).}).
-#pos({state_after((9,9))}, {}, {state_before((8,9)). action(right).}).
-#pos({state_after((10,9))}, {}, {state_before((9,9)). action(right).}).
-#pos({state_after((11,9))}, {}, {state_before((10,9)). action(right).}).
-#pos({state_after((11,8))}, {}, {state_before((11,9)). action(down).}).
-#pos({state_after((11,7))}, {}, {state_before((11,8)). action(down).}).
-#pos({state_after((11,6))}, {}, {state_before((11,7)). action(down).}).
-#pos({state_after((6,7))}, {}, {state_before((7,7)). action(left).}).
-#pos({state_after((7,7))}, {}, {state_before((6,7)). action(right).}).
-#pos({state_after((7,7))}, {}, {state_before((7,7)). action(non).}).
-#pos({state_after((8,7))}, {}, {state_before((7,7)). action(right).}).
-#pos({state_after((9,7))}, {}, {state_before((8,7)). action(right).}).
-#pos({state_after((9,8))}, {}, {state_before((9,7)). action(up).}).
-#pos({state_after((8,8))}, {}, {state_before((9,8)). action(left).}).
-#pos({state_after((9,8))}, {}, {state_before((8,8)). action(right).}).
-#pos({state_after((10,8))}, {}, {state_before((9,8)). action(right).}).
-#pos({state_after((11,8))}, {}, {state_before((10,8)). action(right).}).
-#pos({state_after((11,9))}, {}, {state_before((11,8)). action(up).}).
-#pos({state_after((11,9))}, {}, {state_before((11,9)). action(up).}).
-#pos({state_after((10,9))}, {}, {state_before((11,9)). action(left).}).
-#pos({state_after((10,9))}, {}, {state_before((10,9)). action(non).}).
-#pos({state_after((10,8))}, {}, {state_before((10,9)). action(down).}).
-#pos({state_after((10,8))}, {}, {state_before((10,8)). action(non).}).
-#pos({state_after((10,7))}, {}, {state_before((10,8)). action(down).}).
-#pos({state_after((11,7))}, {}, {state_before((10,7)). action(right).}).
-#pos({state_after((11,8))}, {}, {state_before((11,7)). action(up).}).
-#pos({state_after((10,8))}, {}, {state_before((11,8)). action(left).}).
-#pos({state_after((7,6))}, {}, {state_before((7,7)). action(down).}).
-#pos({state_after((8,6))}, {}, {state_before((7,6)). action(right).}).
-#pos({state_after((9,6))}, {}, {state_before((8,6)). action(right).}).
-#pos({state_after((9,7))}, {}, {state_before((9,6)). action(up).}).
-#pos({state_after((8,7))}, {}, {state_before((9,7)). action(left).}).
-#pos({state_after((8,7))}, {}, {state_before((8,7)). action(non).}).
-#pos({state_after((8,6))}, {}, {state_before((8,7)). action(down).}).
-#pos({state_after((8,6))}, {}, {state_before((8,6)). action(non).}).
-#pos({state_after((8,5))}, {}, {state_before((8,6)). action(down).}).
-#pos({state_after((8,6))}, {}, {state_before((8,5)). action(up).}).
-#pos({state_after((8,7))}, {}, {state_before((8,6)). action(up).}).
-#pos({state_after((8,8))}, {}, {state_before((8,7)). action(up).}).
-#pos({state_after((8,7))}, {}, {state_before((8,8)). action(down).}).
-#pos({state_after((9,7))}, {}, {state_before((8,7)). action(right).}).
-#pos({state_after((10,7))}, {}, {state_before((9,7)). action(right).}).
-#pos({state_after((10,7))}, {}, {state_before((10,7)). action(non).}).
-#pos({state_after((10,6))}, {}, {state_before((10,7)). action(down).}).
-#pos({state_after((11,6))}, {}, {state_before((10,6)). action(right).}).
-#pos({state_after((11,5))}, {}, {state_before((11,6)). action(down).}).
-#pos({state_after((11,4))}, {}, {state_before((11,5)). action(down).}).
-#pos({state_after((6,7))}, {}, {state_before((7,7)). action(left).}).
-#pos({state_after((6,6))}, {}, {state_before((6,7)). action(down).}).
-#pos({state_after((5,6))}, {}, {state_before((6,6)). action(left).}).
-#pos({state_after((6,6))}, {}, {state_before((5,6)). action(right).}).
-#pos({state_after((6,6))}, {}, {state_before((6,6)). action(non).}).
-#pos({state_after((7,6))}, {}, {state_before((6,6)). action(right).}).
-#pos({state_after((7,6))}, {}, {state_before((7,6)). action(non).}).
-#pos({state_after((7,7))}, {}, {state_before((7,6)). action(up).}).
-#pos({state_after((7,8))}, {}, {state_before((7,7)). action(up).}).
-#pos({state_after((7,8))}, {}, {state_before((7,8)). action(non).}).
-#pos({state_after((7,7))}, {}, {state_before((7,8)). action(down).}).
-#pos({state_after((8,7))}, {}, {state_before((7,7)). action(right).}).
-#pos({state_after((7,7))}, {}, {state_before((8,7)). action(left).}).
-#pos({state_after((6,7))}, {}, {state_before((7,7)). action(left).}).
-#pos({state_after((5,7))}, {}, {state_before((6,7)). action(left).}).
-#pos({state_after((5,8))}, {}, {state_before((5,7)). action(up).}).
-#pos({state_after((5,8))}, {}, {state_before((5,8)). action(non).}).
-#pos({state_after((5,7))}, {}, {state_before((5,8)). action(down).}).
-#pos({state_after((4,7))}, {}, {state_before((5,7)). action(left).}).
-#pos({state_after((5,7))}, {}, {state_before((4,7)). action(right).}).
-#pos({state_after((7,6))}, {}, {state_before((7,7)). action(down).}).
-#pos({state_after((7,5))}, {}, {state_before((7,6)). action(down).}).
-#pos({state_after((8,5))}, {}, {state_before((7,5)). action(right).}).
-#pos({state_after((7,5))}, {}, {state_before((8,5)). action(left).}).
-#pos({state_after((7,5))}, {}, {state_before((7,5)). action(non).}).
-#pos({state_after((7,4))}, {}, {state_before((7,5)). action(down).}).
-#pos({state_after((7,5))}, {}, {state_before((7,4)). action(up).}).
-#pos({state_after((6,5))}, {}, {state_before((7,5)). action(left).}).
-#pos({state_after((6,6))}, {}, {state_before((6,5)). action(up).}).
-#pos({state_after((6,5))}, {}, {state_before((6,6)). action(down).}).
-#pos({state_after((5,5))}, {}, {state_before((6,5)). action(left).}).
-#pos({state_after((6,5))}, {}, {state_before((5,5)). action(right).}).
-#pos({state_after((6,5))}, {}, {state_before((6,5)). action(non).}).
-#pos({state_after((7,5))}, {}, {state_before((6,5)). action(right).}).
-#pos({state_after((8,5))}, {}, {state_before((7,5)). action(right).}).
-#pos({state_after((9,5))}, {}, {state_before((8,5)). action(right).}).
-#pos({state_after((9,6))}, {}, {state_before((9,5)). action(up).}).
-#pos({state_after((8,6))}, {}, {state_before((9,6)). action(left).}).
-#pos({state_after((9,6))}, {}, {state_before((8,6)). action(right).}).
-#pos({state_after((10,6))}, {}, {state_before((9,6)). action(right).}).
-#pos({state_after((7,8))}, {}, {state_before((7,7)). action(up).}).
-#pos({state_after((6,8))}, {}, {state_before((7,8)). action(left).}).
-#pos({state_after((5,8))}, {}, {state_before((6,8)). action(left).}).
-#pos({state_after((5,9))}, {}, {state_before((5,8)). action(up).}).
-#pos({state_after((5,9))}, {}, {state_before((5,9)). action(non).}).
-#pos({state_after((5,8))}, {}, {state_before((5,9)). action(down).}).
-#pos({state_after((4,8))}, {}, {state_before((5,8)). action(left).}).
-#pos({state_after((3,8))}, {}, {state_before((4,8)). action(left).}).
-#pos({state_after((2,8))}, {}, {state_before((3,8)). action(left).}).
-#pos({state_after((1,8))}, {}, {state_before((2,8)). action(left).}).
-#pos({state_after((1,9))}, {}, {state_before((1,8)). action(up).}).
-#pos({state_after((1,9))}, {}, {state_before((1,9)). action(up).}).
-#pos({state_after((1,9))}, {}, {state_before((1,9)). action(left).}).
-#pos({state_after((2,9))}, {}, {state_before((1,9)). action(right).}).
-#pos({state_after((3,9))}, {}, {state_before((2,9)). action(right).}).
-#pos({state_after((4,9))}, {}, {state_before((3,9)). action(right).}).
-#pos({state_after((5,9))}, {}, {state_before((4,9)). action(right).}).
-#pos({state_after((5,9))}, {}, {state_before((5,9)). action(up).}).
-#pos({state_after((4,9))}, {}, {state_before((5,9)). action(left).}).
-#pos({state_after((4,9))}, {}, {state_before((4,9)). action(non).}).
-#pos({state_after((6,7))}, {}, {state_before((7,7)). action(left).}).
-#pos({state_after((6,7))}, {}, {state_before((6,7)). action(non).}).
-#pos({state_after((6,8))}, {}, {state_before((6,7)). action(up).}).
-#pos({state_after((6,7))}, {}, {state_before((6,8)). action(down).}).
-#pos({state_after((6,6))}, {}, {state_before((6,7)). action(down).}).
-#pos({state_after((5,6))}, {}, {state_before((6,6)). action(left).}).
-#pos({state_after((5,6))}, {}, {state_before((5,6)). action(non).}).
-#pos({state_after((5,5))}, {}, {state_before((5,6)). action(down).}).
-#pos({state_after((5,5))}, {}, {state_before((5,5)). action(non).}).
-#pos({state_after((5,4))}, {}, {state_before((5,5)). action(down).}).
-#pos({state_after((4,4))}, {}, {state_before((5,4)). action(left).}).
-#pos({state_after((3,4))}, {}, {state_before((4,4)). action(left).}).
-#pos({state_after((3,5))}, {}, {state_before((3,4)). action(up).}).
-#pos({state_after((3,6))}, {}, {state_before((3,5)). action(up).}).
-#pos({state_after((2,6))}, {}, {state_before((3,6)). action(left).}).
-#pos({state_after((2,7))}, {}, {state_before((2,6)). action(up).}).
-#pos({state_after((1,7))}, {}, {state_before((2,7)). action(left).}).
-#pos({state_after((1,8))}, {}, {state_before((1,7)). action(up).}).
-#pos({state_after((1,8))}, {}, {state_before((1,8)). action(left).}).
-#pos({state_after((2,8))}, {}, {state_before((1,8)). action(right).}).
-#pos({state_after((6,7))}, {}, {state_before((7,7)). action(left).}).
-#pos({state_after((5,7))}, {}, {state_before((6,7)). action(left).}).
-#pos({state_after((5,7))}, {}, {state_before((5,7)). action(non).}).
-#pos({state_after((6,7))}, {}, {state_before((5,7)). action(right).}).
-#pos({state_after((5,7))}, {}, {state_before((6,7)). action(left).}).
-#pos({state_after((5,6))}, {}, {state_before((5,7)). action(down).}).
-#pos({state_after((5,7))}, {}, {state_before((5,6)). action(up).}).
-#pos({state_after((5,8))}, {}, {state_before((5,7)). action(up).}).
-#pos({state_after((5,8))}, {}, {state_before((5,8)). action(non).}).
-#pos({state_after((6,8))}, {}, {state_before((5,8)). action(right).}).
-#pos({state_after((6,8))}, {}, {state_before((6,8)). action(non).}).
-#pos({state_after((6,9))}, {}, {state_before((6,8)). action(up).}).
-#pos({state_after((5,9))}, {}, {state_before((6,9)). action(left).}).
-#pos({state_after((5,9))}, {}, {state_before((5,9)). action(non).}).
-#pos({state_after((6,9))}, {}, {state_before((5,9)). action(right).}).
-#pos({state_after((6,9))}, {}, {state_before((6,9)). action(up).}).
-#pos({state_after((6,9))}, {}, {state_before((6,9)). action(non).}).
-#pos({state_after((6,8))}, {}, {state_before((6,9)). action(down).}).
-#pos({state_after((5,8))}, {}, {state_before((6,8)). action(left).}).
-#pos({state_after((5,9))}, {}, {state_before((5,8)). action(up).}).
-#pos({state_after((7,7))}, {}, {state_before((7,7)). action(non).}).
-#pos({state_after((7,8))}, {}, {state_before((7,7)). action(up).}).
-#pos({state_after((7,9))}, {}, {state_before((7,8)). action(up).}).
-#pos({state_after((6,9))}, {}, {state_before((7,9)). action(left).}).
-#pos({state_after((7,9))}, {}, {state_before((6,9)). action(right).}).
-#pos({state_after((7,9))}, {}, {state_before((7,9)). action(up).}).
-#pos({state_after((8,9))}, {}, {state_before((7,9)). action(right).}).
-#pos({state_after((8,8))}, {}, {state_before((8,9)). action(down).}).
-#pos({state_after((7,8))}, {}, {state_before((8,8)). action(left).}).
-#pos({state_after((8,8))}, {}, {state_before((7,8)). action(right).}).
-#pos({state_after((8,8))}, {}, {state_before((8,8)). action(non).}).
-#pos({state_after((8,9))}, {}, {state_before((8,8)). action(up).}).
-#pos({state_after((8,9))}, {}, {state_before((8,9)). action(up).}).
-#pos({state_after((7,9))}, {}, {state_before((8,9)). action(left).}).
-#pos({state_after((7,9))}, {}, {state_before((7,9)). action(non).}).
-#pos({state_after((7,8))}, {}, {state_before((7,9)). action(down).}).
-#pos({state_after((6,8))}, {}, {state_before((7,8)). action(left).}).
-#pos({state_after((7,8))}, {}, {state_before((6,8)). action(right).}).
-#pos({state_after((7,9))}, {}, {state_before((7,8)). action(up).}).
-#pos({state_after((6,9))}, {}, {state_before((7,9)). action(left).}).
-#pos({state_after((8,7))}, {}, {state_before((7,7)). action(right).}).
-#pos({state_after((8,6))}, {}, {state_before((8,7)). action(down).}).
-#pos({state_after((8,6))}, {}, {state_before((8,6)). action(non).}).
-#pos({state_after((7,6))}, {}, {state_before((8,6)). action(left).}).
-#pos({state_after((6,6))}, {}, {state_before((7,6)). action(left).}).
-#pos({state_after((5,6))}, {}, {state_before((6,6)). action(left).}).
-#pos({state_after((4,6))}, {}, {state_before((5,6)). action(left).}).
-#pos({state_after((5,6))}, {}, {state_before((4,6)). action(right).}).
-#pos({state_after((5,6))}, {}, {state_before((5,6)). action(non).}).
-#pos({state_after((6,6))}, {}, {state_before((5,6)). action(right).}).
-#pos({state_after((6,6))}, {}, {state_before((6,6)). action(non).}).
-#pos({state_after((6,7))}, {}, {state_before((6,6)). action(up).}).
-#pos({state_after((6,6))}, {}, {state_before((6,7)). action(down).}).
-#pos({state_after((6,5))}, {}, {state_before((6,6)). action(down).}).
-#pos({state_after((6,4))}, {}, {state_before((6,5)). action(down).}).
-#pos({state_after((6,4))}, {}, {state_before((6,4)). action(non).}).
-#pos({state_after((6,3))}, {}, {state_before((6,4)). action(down).}).
-#pos({state_after((5,3))}, {}, {state_before((6,3)). action(left).}).
-#pos({state_after((4,3))}, {}, {state_before((5,3)). action(left).}).
-#pos({state_after((3,3))}, {}, {state_before((4,3)). action(left).}).
-#pos({state_after((7,6))}, {}, {state_before((7,7)). action(down).}).
-#pos({state_after((8,6))}, {}, {state_before((7,6)). action(right).}).
-#pos({state_after((8,5))}, {}, {state_before((8,6)). action(down).}).
-#pos({state_after((8,5))}, {}, {state_before((8,5)). action(non).}).
-#pos({state_after((8,4))}, {}, {state_before((8,5)). action(down).}).
-#pos({state_after((8,5))}, {}, {state_before((8,4)). action(up).}).
-#pos({state_after((7,5))}, {}, {state_before((8,5)). action(left).}).
-#pos({state_after((7,5))}, {}, {state_before((7,5)). action(non).}).
-#pos({state_after((7,4))}, {}, {state_before((7,5)). action(down).}).
-#pos({state_after((6,4))}, {}, {state_before((7,4)). action(left).}).
-#pos({state_after((6,5))}, {}, {state_before((6,4)). action(up).}).
-#pos({state_after((5,5))}, {}, {state_before((6,5)). action(left).}).
-#pos({state_after((5,6))}, {}, {state_before((5,5)). action(up).}).
-#pos({state_after((5,5))}, {}, {state_before((5,6)). action(down).}).
-#pos({state_after((4,5))}, {}, {state_before((5,5)). action(left).}).
-#pos({state_after((3,5))}, {}, {state_before((4,5)). action(left).}).
-#pos({state_after((2,5))}, {}, {state_before((3,5)). action(left).}).
-#pos({state_after((2,6))}, {}, {state_before((2,5)). action(up).}).
-#pos({state_after((1,6))}, {}, {state_before((2,6)). action(left).}).
-#pos({state_after((1,7))}, {}, {state_before((1,6)). action(up).}).
-#pos({state_after((6,7))}, {}, {state_before((7,7)). action(left).}).
-#pos({state_after((6,7))}, {}, {state_before((6,7)). action(non).}).
-#pos({state_after((6,8))}, {}, {state_before((6,7)). action(up).}).
-#pos({state_after((6,9))}, {}, {state_before((6,8)). action(up).}).
-#pos({state_after((5,9))}, {}, {state_before((6,9)). action(left).}).
-#pos({state_after((4,9))}, {}, {state_before((5,9)). action(left).}).
-#pos({state_after((4,8))}, {}, {state_before((4,9)). action(down).}).
-#pos({state_after((5,8))}, {}, {state_before((4,8)). action(right).}).
-#pos({state_after((4,8))}, {}, {state_before((5,8)). action(left).}).
-#pos({state_after((4,8))}, {}, {state_before((4,8)). action(non).}).
-#pos({state_after((4,7))}, {}, {state_before((4,8)). action(down).}).
-#pos({state_after((4,7))}, {}, {state_before((4,7)). action(non).}).
-#pos({state_after((4,6))}, {}, {state_before((4,7)). action(down).}).
-#pos({state_after((4,6))}, {}, {state_before((4,6)). action(non).}).
-#pos({state_after((4,5))}, {}, {state_before((4,6)). action(down).}).
-#pos({state_after((4,5))}, {}, {state_before((4,5)). action(non).}).
-#pos({state_after((4,4))}, {}, {state_before((4,5)). action(down).}).
-#pos({state_after((5,4))}, {}, {state_before((4,4)). action(right).}).
-#pos({state_after((6,4))}, {}, {state_before((5,4)). action(right).}).
-#pos({state_after((5,4))}, {}, {state_before((6,4)). action(left).}).
-#pos({state_after((7,8))}, {}, {state_before((7,7)). action(up).}).
-#pos({state_after((7,8))}, {}, {state_before((7,8)). action(non).}).
-#pos({state_after((8,8))}, {}, {state_before((7,8)). action(right).}).
-#pos({state_after((9,8))}, {}, {state_before((8,8)). action(right).}).
-#pos({state_after((9,8))}, {}, {state_before((9,8)). action(non).}).
-#pos({state_after((10,8))}, {}, {state_before((9,8)). action(right).}).
-#pos({state_after((10,9))}, {}, {state_before((10,8)). action(up).}).
-#pos({state_after((10,9))}, {}, {state_before((10,9)). action(up).}).
-#pos({state_after((9,9))}, {}, {state_before((10,9)). action(left).}).
-#pos({state_after((9,9))}, {}, {state_before((9,9)). action(non).}).
-#pos({state_after((10,9))}, {}, {state_before((9,9)). action(right).}).
-#pos({state_after((11,9))}, {}, {state_before((10,9)). action(right).}).
-#pos({state_after((12,9))}, {}, {state_before((11,9)). action(right).}).
-#pos({state_after((12,8))}, {}, {state_before((12,9)). action(down).}).
-#pos({state_after((12,7))}, {}, {state_before((12,8)). action(down).}).
-#pos({state_after((12,6))}, {}, {state_before((12,7)). action(down).}).
-#pos({state_after((12,5))}, {}, {state_before((12,6)). action(down).}).
-#pos({state_after((12,4))}, {}, {state_before((12,5)). action(down).}).
-#pos({state_after((12,3))}, {}, {state_before((12,4)). action(down).}).
-#pos({state_after((12,2))}, {}, {state_before((12,3)). action(down).}).
-#pos({state_after((7,6))}, {}, {state_before((7,7)). action(down).}).
-#pos({state_after((7,5))}, {}, {state_before((7,6)). action(down).}).
-#pos({state_after((6,5))}, {}, {state_before((7,5)). action(left).}).
-#pos({state_after((6,4))}, {}, {state_before((6,5)). action(down).}).
-#pos({state_after((7,4))}, {}, {state_before((6,4)). action(right).}).
-#pos({state_after((8,4))}, {}, {state_before((7,4)). action(right).}).
-#pos({state_after((7,4))}, {}, {state_before((8,4)). action(left).}).
-#pos({state_after((7,4))}, {}, {state_before((7,4)). action(non).}).
-#pos({state_after((7,3))}, {}, {state_before((7,4)). action(down).}).
-#pos({state_after((7,3))}, {}, {state_before((7,3)). action(non).}).
-#pos({state_after((7,2))}, {}, {state_before((7,3)). action(down).}).
-#pos({state_after((6,2))}, {}, {state_before((7,2)). action(left).}).
-#pos({state_after((5,2))}, {}, {state_before((6,2)). action(left).}).
-#pos({state_after((4,2))}, {}, {state_before((5,2)). action(left).}).
-#pos({state_after((3,2))}, {}, {state_before((4,2)). action(left).}).
-#pos({state_after((3,1))}, {}, {state_before((3,2)). action(down).}).
-#pos({state_after((3,1))}, {}, {state_before((3,1)). action(down).}).
-#pos({state_after((3,2))}, {}, {state_before((3,1)). action(up).}).
-#pos({state_after((3,3))}, {}, {state_before((3,2)). action(up).}).
-#pos({state_after((3,2))}, {}, {state_before((3,3)). action(down).}).
-#pos({state_after((8,7))}, {}, {state_before((7,7)). action(right).}).
-#pos({state_after((9,7))}, {}, {state_before((8,7)). action(right).}).
-#pos({state_after((9,7))}, {}, {state_before((9,7)). action(non).}).
-#pos({state_after((9,6))}, {}, {state_before((9,7)). action(down).}).
-#pos({state_after((9,6))}, {}, {state_before((9,6)). action(non).}).
-#pos({state_after((9,5))}, {}, {state_before((9,6)). action(down).}).
-#pos({state_after((8,5))}, {}, {state_before((9,5)). action(left).}).
-#pos({state_after((9,5))}, {}, {state_before((8,5)). action(right).}).
-#pos({state_after((10,5))}, {}, {state_before((9,5)). action(right).}).
-#pos({state_after((11,5))}, {}, {state_before((10,5)). action(right).}).
-#pos({state_after((11,6))}, {}, {state_before((11,5)). action(up).}).
-#pos({state_after((11,7))}, {}, {state_before((11,6)). action(up).}).
-#pos({state_after((10,7))}, {}, {state_before((11,7)). action(left).}).
-#pos({state_after((10,8))}, {}, {state_before((10,7)). action(up).}).
-#pos({state_after((9,8))}, {}, {state_before((10,8)). action(left).}).
-#pos({state_after((9,7))}, {}, {state_before((9,8)). action(down).}).
-#pos({state_after((10,7))}, {}, {state_before((9,7)). action(right).}).
-#pos({state_after((9,7))}, {}, {state_before((10,7)). action(left).}).
-#pos({state_after((9,8))}, {}, {state_before((9,7)). action(up).}).
-#pos({state_after((9,9))}, {}, {state_before((9,8)). action(up).}).
-#pos({state_after((8,7))}, {}, {state_before((7,7)). action(right).}).
-#pos({state_after((9,7))}, {}, {state_before((8,7)). action(right).}).
-#pos({state_after((9,7))}, {}, {state_before((9,7)). action(non).}).
-#pos({state_after((9,6))}, {}, {state_before((9,7)). action(down).}).
-#pos({state_after((10,6))}, {}, {state_before((9,6)). action(right).}).
-#pos({state_after((10,6))}, {}, {state_before((10,6)). action(non).}).
-#pos({state_after((10,5))}, {}, {state_before((10,6)). action(down).}).
-#pos({state_after((10,5))}, {}, {state_before((10,5)). action(non).}).
-#pos({state_after((10,4))}, {}, {state_before((10,5)). action(down).}).
-#pos({state_after((11,4))}, {}, {state_before((10,4)). action(right).}).
-#pos({state_after((11,3))}, {}, {state_before((11,4)). action(down).}).
-#pos({state_after((11,2))}, {}, {state_before((11,3)). action(down).}).
-#pos({state_after((11,1))}, {}, {state_before((11,2)). action(down).}).
-#pos({state_after((11,1))}, {}, {state_before((11,1)). action(down).}).
-#pos({state_after((11,2))}, {}, {state_before((11,1)). action(up).}).
-#pos({state_after((11,3))}, {}, {state_before((11,2)). action(up).}).
-#pos({state_after((11,4))}, {}, {state_before((11,3)). action(up).}).
-#pos({state_after((11,5))}, {}, {state_before((11,4)). action(up).}).
-#pos({state_after((10,5))}, {}, {state_before((11,5)). action(left).}).
-#pos({state_after((10,6))}, {}, {state_before((10,5)). action(up).}).
-#pos({state_after((7,6))}, {}, {state_before((7,7)). action(down).}).
-#pos({state_after((7,6))}, {}, {state_before((7,6)). action(non).}).
-#pos({state_after((6,6))}, {}, {state_before((7,6)). action(left).}).
-#pos({state_after((5,6))}, {}, {state_before((6,6)). action(left).}).
-#pos({state_after((4,6))}, {}, {state_before((5,6)). action(left).}).
-#pos({state_after((4,7))}, {}, {state_before((4,6)). action(up).}).
-#pos({state_after((4,8))}, {}, {state_before((4,7)). action(up).}).
-#pos({state_after((4,9))}, {}, {state_before((4,8)). action(up).}).
-#pos({state_after((4,9))}, {}, {state_before((4,9)). action(up).}).
-#pos({state_after((3,9))}, {}, {state_before((4,9)). action(left).}).
-#pos({state_after((3,9))}, {}, {state_before((3,9)). action(non).}).
-#pos({state_after((3,8))}, {}, {state_before((3,9)). action(down).}).
-#pos({state_after((4,8))}, {}, {state_before((3,8)). action(right).}).
-#pos({state_after((3,8))}, {}, {state_before((4,8)). action(left).}).
-#pos({state_after((3,8))}, {}, {state_before((3,8)). action(non).}).
-#pos({state_after((3,7))}, {}, {state_before((3,8)). action(down).}).
-#pos({state_after((4,7))}, {}, {state_before((3,7)). action(right).}).
-#pos({state_after((3,7))}, {}, {state_before((4,7)). action(left).}).
-#pos({state_after((3,7))}, {}, {state_before((3,7)). action(non).}).
-#pos({state_after((3,6))}, {}, {state_before((3,7)). action(down).}).
-#pos({state_after((6,7))}, {}, {state_before((7,7)). action(left).}).
-#pos({state_after((5,7))}, {}, {state_before((6,7)). action(left).}).
-#pos({state_after((4,7))}, {}, {state_before((5,7)). action(left).}).
-#pos({state_after((4,7))}, {}, {state_before((4,7)). action(non).}).
-#pos({state_after((5,7))}, {}, {state_before((4,7)). action(right).}).
-#pos({state_after((5,7))}, {}, {state_before((5,7)). action(non).}).
-#pos({state_after((5,6))}, {}, {state_before((5,7)). action(down).}).
-#pos({state_after((5,6))}, {}, {state_before((5,6)). action(non).}).
-#pos({state_after((5,7))}, {}, {state_before((5,6)). action(up).}).
-#pos({state_after((5,8))}, {}, {state_before((5,7)). action(up).}).
-#pos({state_after((4,8))}, {}, {state_before((5,8)). action(left).}).
-#pos({state_after((4,8))}, {}, {state_before((4,8)). action(non).}).
-#pos({state_after((4,7))}, {}, {state_before((4,8)). action(down).}).
-#pos({state_after((4,6))}, {}, {state_before((4,7)). action(down).}).
-#pos({state_after((3,6))}, {}, {state_before((4,6)). action(left).}).
-#pos({state_after((4,6))}, {}, {state_before((3,6)). action(right).}).
-#pos({state_after((4,6))}, {}, {state_before((4,6)). action(non).}).
-#pos({state_after((5,6))}, {}, {state_before((4,6)). action(right).}).
-#pos({state_after((5,5))}, {}, {state_before((5,6)). action(down).}).
-#pos({state_after((5,5))}, {}, {state_before((5,5)). action(non).}).
-#pos({state_after((7,8))}, {}, {state_before((7,7)). action(up).}).
-#pos({state_after((6,8))}, {}, {state_before((7,8)). action(left).}).
-#pos({state_after((5,8))}, {}, {state_before((6,8)). action(left).}).
-#pos({state_after((5,7))}, {}, {state_before((5,8)). action(down).}).
-#pos({state_after((4,7))}, {}, {state_before((5,7)). action(left).}).
-#pos({state_after((3,7))}, {}, {state_before((4,7)). action(left).}).
-#pos({state_after((3,8))}, {}, {state_before((3,7)). action(up).}).
-#pos({state_after((3,9))}, {}, {state_before((3,8)). action(up).}).
-#pos({state_after((3,9))}, {}, {state_before((3,9)). action(up).}).
-#pos({state_after((2,9))}, {}, {state_before((3,9)). action(left).}).
-#pos({state_after((2,9))}, {}, {state_before((2,9)). action(non).}).
-#pos({state_after((2,8))}, {}, {state_before((2,9)). action(down).}).
-#pos({state_after((3,8))}, {}, {state_before((2,8)). action(right).}).
-#pos({state_after((2,8))}, {}, {state_before((3,8)). action(left).}).
-#pos({state_after((2,8))}, {}, {state_before((2,8)). action(non).}).
-#pos({state_after((2,7))}, {}, {state_before((2,8)). action(down).}).
-#pos({state_after((3,7))}, {}, {state_before((2,7)). action(right).}).
-#pos({state_after((2,7))}, {}, {state_before((3,7)). action(left).}).
-#pos({state_after((2,7))}, {}, {state_before((2,7)). action(non).}).
-#pos({state_after((2,6))}, {}, {state_before((2,7)). action(down).}).
-#pos({state_after((8,7))}, {}, {state_before((7,7)). action(right).}).
-#pos({state_after((8,7))}, {}, {state_before((8,7)). action(non).}).
-#pos({state_after((8,8))}, {}, {state_before((8,7)). action(up).}).
-#pos({state_after((9,8))}, {}, {state_before((8,8)). action(right).}).
-#pos({state_after((9,8))}, {}, {state_before((9,8)). action(non).}).
-#pos({state_after((8,8))}, {}, {state_before((9,8)). action(left).}).
-#pos({state_after((8,8))}, {}, {state_before((8,8)). action(non).}).
-#pos({state_after((8,7))}, {}, {state_before((8,8)). action(down).}).
-#pos({state_after((8,6))}, {}, {state_before((8,7)). action(down).}).
-#pos({state_after((9,6))}, {}, {state_before((8,6)). action(right).}).
-#pos({state_after((10,6))}, {}, {state_before((9,6)). action(right).}).
-#pos({state_after((10,7))}, {}, {state_before((10,6)). action(up).}).
-#pos({state_after((11,7))}, {}, {state_before((10,7)). action(right).}).
-#pos({state_after((12,7))}, {}, {state_before((11,7)). action(right).}).
-#pos({state_after((12,8))}, {}, {state_before((12,7)). action(up).}).
-#pos({state_after((12,9))}, {}, {state_before((12,8)). action(up).}).
-#pos({state_after((12,9))}, {}, {state_before((12,9)). action(up).}).
-#pos({state_after((11,9))}, {}, {state_before((12,9)). action(left).}).
-#pos({state_after((11,9))}, {}, {state_before((11,9)). action(non).}).
-#pos({state_after((11,8))}, {}, {state_before((11,9)). action(down).}).
-#pos({state_after((7,6))}, {}, {state_before((7,7)). action(down).}).
-#pos({state_after((8,6))}, {}, {state_before((7,6)). action(right).}).
-#pos({state_after((8,5))}, {}, {state_before((8,6)). action(down).}).
-#pos({state_after((8,5))}, {}, {state_before((8,5)). action(non).}).
-#pos({state_after((8,4))}, {}, {state_before((8,5)). action(down).}).
-#pos({state_after((9,4))}, {}, {state_before((8,4)). action(right).}).
-#pos({state_after((9,4))}, {}, {state_before((9,4)). action(non).}).
-#pos({state_after((9,3))}, {}, {state_before((9,4)). action(down).}).
-#pos({state_after((10,3))}, {}, {state_before((9,3)). action(right).}).
-#pos({state_after((9,3))}, {}, {state_before((10,3)). action(left).}).
-#pos({state_after((9,3))}, {}, {state_before((9,3)). action(non).}).
-#pos({state_after((9,2))}, {}, {state_before((9,3)). action(down).}).
-#pos({state_after((8,2))}, {}, {state_before((9,2)). action(left).}).
-#pos({state_after((7,2))}, {}, {state_before((8,2)). action(left).}).
-#pos({state_after((8,2))}, {}, {state_before((7,2)). action(right).}).
-#pos({state_after((9,2))}, {}, {state_before((8,2)). action(right).}).
-#pos({state_after((10,2))}, {}, {state_before((9,2)). action(right).}).
-#pos({state_after((9,2))}, {}, {state_before((10,2)). action(left).}).
-#pos({state_after((9,2))}, {}, {state_before((9,2)). action(non).}).
-#pos({state_after((9,1))}, {}, {state_before((9,2)). action(down).}).
-#pos({state_after((8,7))}, {}, {state_before((7,7)). action(right).}).
-#pos({state_after((9,7))}, {}, {state_before((8,7)). action(right).}).
-#pos({state_after((10,7))}, {}, {state_before((9,7)). action(right).}).
-#pos({state_after((10,7))}, {}, {state_before((10,7)). action(non).}).
-#pos({state_after((10,6))}, {}, {state_before((10,7)). action(down).}).
-#pos({state_after((9,6))}, {}, {state_before((10,6)). action(left).}).
