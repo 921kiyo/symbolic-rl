@@ -39,21 +39,9 @@ def convert_state(x, y):
 
 def send_state_transition(previous_state,next_state, action):
     with open("output.txt", "a") as myfile:
-        pos, exc1, exc2, exc3, exc4 = py2asp.positive_example(next_state,previous_state, action)
+        pos = py2asp.positive_example(next_state,previous_state, action)
         pos += "\n"
-        exc1 += "\n"
-        exc2 += "\n"
-        exc3 += "\n"
         myfile.write(pos)
-        myfile.write(exc1)
-        myfile.write(exc2)
-        myfile.write(exc3)
-        if(exc4 != ""):
-            exc4 += "\n"
-            myfile.write(exc4)
-        # pos = py2asp.positive_example(next_state,previous_state, action)+"\n"
-
-        # myfile.write(str(action))
 
 def convert_action(action):
     # 0: UP
@@ -109,7 +97,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             action = np.random.choice(np.arange(len(action_probs)), p=action_probs)
             # action = env.action_space.sample()
             next_state, reward, done, _ = env.step(action)
-            import ipdb; ipdb.set_trace()
+            # import ipdb; ipdb.set_trace()
             if done:
                 reward = 100
             else:
