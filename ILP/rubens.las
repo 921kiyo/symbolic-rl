@@ -7,21 +7,24 @@ adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
 
 #modeh(state_after(var(cell))).
 
-#modeb(1, adjacent(var(action), var(cell), var(cell))).
-#modeb(1, state_before(var(cell))).
-#modeb(1, action(var(action))).
+#modeb(1, adjacent(const(action), var(cell), var(cell))).
+#modeb(1, state_before(var(cell)), (positive)).
+#modeb(1, action(const(action)),(positive)).
 #modeb(1, wall(var(cell))).
-% #maxv(3).
+
+#max_penalty(50).
+
 
 #constant(action, right).
 #constant(action, left).
 #constant(action, down).
 #constant(action, up).
 
+
 #pos({state_after((1,3))}, {state_after((1,4))}, {state_before((1,4)). action(down). wall((0,4)). wall((1,5)). :- wall((1,3)). :- wall((2,4)).}).
 #pos({state_after((1,2))}, {state_after((1,3))}, {state_before((1,3)). action(down). wall((0,3)). wall((2,3)). :- wall((1,2)). :- wall((1,4)).}).
 #pos({state_after((1,1))}, {state_after((1,2))}, {state_before((1,2)). action(down). wall((0,2)). wall((2,2)). :- wall((1,1)). :- wall((1,3)).}).
-#pos({state_after((1,1))}, {state_after((1,2))}, {state_before((1,1)). action(down). wall((1,0)). wall((0,1)). :- wall((2,1)). :- wall((1,2)).}).
+#pos({state_after((1,1))}, {state_after((1,0))}, {state_before((1,1)). action(down). wall((1,0)). wall((0,1)). :- wall((2,1)). :- wall((1,2)).}).
 
 % #pos({state_after((1,3))}, {state_after((1,2))}, {state_before((1,3)). action(down). wall((1,2)). wall((2,3)). :- wall((1,2)). :- wall((1,4)).}).
 

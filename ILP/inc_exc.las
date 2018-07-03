@@ -11,7 +11,6 @@ adjacent(up, (X,Y),(X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
 #modeb(1, state_before(var(cell))).
 #modeb(1, action(const(action))).
 #modeb(1, wall(var(cell))).
-% #maxv(3).
 
 #constant(action, right).
 #constant(action, left).

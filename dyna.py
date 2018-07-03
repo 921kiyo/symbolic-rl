@@ -109,6 +109,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             action = np.random.choice(np.arange(len(action_probs)), p=action_probs)
             # action = env.action_space.sample()
             next_state, reward, done, _ = env.step(action)
+            import ipdb; ipdb.set_trace()
             if done:
                 reward = 100
             else:
