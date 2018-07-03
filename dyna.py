@@ -21,7 +21,7 @@ from lib import plotting
 # ASP conversion
 import py2asp
 
-env = gym.make('vgdl_aaa_field-v0')
+env = gym.make('vgdl_aaa_small-v0')
 
 def make_epsilon_greedy_policy(Q, epsilon, nA):
     def policy_fn(observation, episodes):
@@ -39,7 +39,9 @@ def convert_state(x, y):
 
 def send_state_transition(previous_state,next_state, action):
     with open("output.txt", "a") as myfile:
-        myfile.write(py2asp.positive_example(next_state,previous_state, action)+"\n")
+        # pos, exc1, exc2, exc3, exc4 = py2asp.positive_example(next_state,previous_state, action)+"\n"
+        pos = py2asp.positive_example(next_state,previous_state, action)+"\n"
+        myfile.write(pos)
         # myfile.write(str(action))
 
 def convert_action(action):
@@ -72,6 +74,9 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
         episode_rewards=np.zeros(num_episodes))
 
     policy = make_epsilon_greedy_policy(Q, epsilon, env.action_space.n)
+
+    # TODO clear output.txt
+
     for i_episode in range(num_episodes):
 
         if(i_episode+1) % 100 == 0:
