@@ -33,15 +33,26 @@ def make_epsilon_greedy_policy(Q, epsilon, nA):
     return policy_fn
 
 def convert_state(x, y):
-    # return (x-1)*6+y
-    return (x-1)*19+y
+    return (x-1)*6+y
+    # return (x-1)*19+y
 
 
 def send_state_transition(previous_state,next_state, action):
     with open("output.txt", "a") as myfile:
-        # pos, exc1, exc2, exc3, exc4 = py2asp.positive_example(next_state,previous_state, action)+"\n"
-        pos = py2asp.positive_example(next_state,previous_state, action)+"\n"
+        pos, exc1, exc2, exc3, exc4 = py2asp.positive_example(next_state,previous_state, action)
+        pos += "\n"
+        exc1 += "\n"
+        exc2 += "\n"
+        exc3 += "\n"
         myfile.write(pos)
+        myfile.write(exc1)
+        myfile.write(exc2)
+        myfile.write(exc3)
+        if(exc4 != ""):
+            exc4 += "\n"
+            myfile.write(exc4)
+        # pos = py2asp.positive_example(next_state,previous_state, action)+"\n"
+
         # myfile.write(str(action))
 
 def convert_action(action):
@@ -85,27 +96,28 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
         # Reset the env and pick the first action
         state = env.reset()
-        state_int = convert_state(state[1], state[0])
+        state_int = convert_state(state[0], state[1])
 
         previous_state = state
         # for t in itertools.count():
         for t in range(20):
             env.render()
-            # time.sleep(0.1)
+            # time.sleep(0.5)
             # Take a step
             action_probs = policy(state_int, i_episode)
 
             action = np.random.choice(np.arange(len(action_probs)), p=action_probs)
             # action = env.action_space.sample()
-
             next_state, reward, done, _ = env.step(action)
             if done:
                 reward = 100
             else:
                 reward = reward - 1
 
-            next_state_int = convert_state(next_state[1], next_state[0])
-
+            next_state_int = convert_state(next_state[0], next_state[1])
+            # print("-------------")
+            # print("next_state[1] ", next_state[1])
+            # print("next_state[0] ", next_state[0])
             action_string = convert_action(action)
             send_state_transition(previous_state, next_state, action_string)
 

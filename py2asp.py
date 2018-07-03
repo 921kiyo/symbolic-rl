@@ -15,7 +15,6 @@ def add_walls(previous_state):
     y = previous_state[1]
     x = int(x)
     y = int(y)
-
     if(x == 1 and y == 4):
         return "wall((0,4)). wall((1,5)). :- wall((1,3)). :- wall((2,4))."
     elif(x == 2 and y == 4):
@@ -42,18 +41,40 @@ def add_walls(previous_state):
         return "wall((3,0)). wall((3,2)). :- wall((2,1)). :- wall((4,1))."
     elif(x == 4 and y == 1):
         return "wall((4,0)). wall((4,2)). :- wall((3,1)). :- wall((5,1))."
+    elif(x == 5 and y == 1):
+        return "wall((5,0)). wall((6,1)). wall((5,2)). :- wall((4,1))."
     else:
         return ""
  # 0123456
  # wwwwwww 0
- # w+++Agw 1
+ # w++++gw 1
  # w+wwwww 2
  # w+w+w+w 3
- # w+++++w 4
+ # wA++++w 4
  # wwwwwww 5
+
+def get_other_actions(action):
+    if(action == "up"): # UP
+        return "down", "left", "right", "non"
+    elif(action == "down"): # DOWN
+        return "up", "left", "right", "non"
+    elif(action == "left"): # LEFT
+        return "up", "down", "right", "non"
+    elif(action == "right"): # RIGHT
+        return "up", "down", "left", "non"
+    elif(action == "non"): # NON
+        return "up", "down", "right", "left"
 
 def positive_example(next_state, previous_state, action):
     walls = ""
     walls = add_walls(previous_state)
     pos = "#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + walls + "})."
-    return pos
+    act1, act2, act3, act4 = get_other_actions(action)
+    exc1 = "#pos({}, {state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + act1 + "). " + walls + "})."
+    exc2 = "#pos({}, {state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + act2 + "). " + walls + "})."
+    exc3 = "#pos({}, {state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + act3 + "). " + walls + "})."
+    exc4 = ""
+    if(act4 != "non"):
+        exc4 = "#pos({}, {state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + act4 + "). " + walls + "})."
+
+    return pos, exc1, exc2, exc3, exc4
