@@ -67,7 +67,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     """
 
     Q = defaultdict(lambda: np.zeros(env.action_space.n))
-    walls=env.unwrapped.game.getSprites('wall')
+    walls= env.unwrapped.game.getSprites('wall')
     wall_list = []
     for wall in walls:
         x = wall.rect.left/5
@@ -81,7 +81,8 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     policy = make_epsilon_greedy_policy(Q, epsilon, env.action_space.n)
 
     # TODO clear output.txt
-
+    
+    # import ipdb; ipdb.set_trace()
     for i_episode in range(num_episodes):
 
         if(i_episode+1) % 100 == 0:
