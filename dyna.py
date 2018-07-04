@@ -4,11 +4,10 @@ import matplotlib
 import gym
 import gym_vgdl
 import numpy as np
-
+import os
 from gym import wrappers
 
 import time
-
 
 # Q-learning
 import itertools
@@ -18,7 +17,7 @@ import sys
 from collections import defaultdict
 from lib import plotting
 
-# ASP conversion
+# ASP syntax conversion
 import py2asp
 
 env = gym.make('vgdl_aaa_small-v0')
@@ -44,11 +43,6 @@ def send_state_transition(previous_state,next_state, action, wall_list):
         myfile.write(pos)
 
 def convert_action(action):
-    # 0: UP
-    # 1: DOWN
-    # 2: LEFT
-    # 3: RIGHT
-    # 4: NON
     if(action == 0):
         return "down"
     elif(action == 1):
@@ -59,6 +53,15 @@ def convert_action(action):
         return "right"
     elif(action == 4):
         return "non"
+
+def silentremove():
+    dir = os.getcwd()
+    filename =os.path.join(dir, "output.txt")
+    try:
+        os.remove(filename)
+    except OSError:
+        print("output.txt could not be found...")
+        pass
 
 def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     """
@@ -80,8 +83,9 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
     policy = make_epsilon_greedy_policy(Q, epsilon, env.action_space.n)
 
-    # TODO clear output.txt
-    
+    # Remove output.txt
+    silentremove()
+
     # import ipdb; ipdb.set_trace()
     for i_episode in range(num_episodes):
 
