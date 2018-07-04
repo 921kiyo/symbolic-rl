@@ -37,9 +37,9 @@ def convert_state(x, y):
     # return (x-1)*19+y
 
 
-def send_state_transition(previous_state,next_state, action):
+def send_state_transition(previous_state,next_state, action, wall_list):
     with open("output.txt", "a") as myfile:
-        pos = py2asp.positive_example(next_state,previous_state, action)
+        pos = py2asp.positive_example(next_state,previous_state, action, wall_list)
         pos += "\n"
         myfile.write(pos)
 
@@ -67,6 +67,12 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     """
 
     Q = defaultdict(lambda: np.zeros(env.action_space.n))
+    walls=env.unwrapped.game.getSprites('wall')
+    wall_list = []
+    for wall in walls:
+        x = wall.rect.left/5
+        y = wall.rect.top/5
+        wall_list.append((int(x),int(y)))
 
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
@@ -91,13 +97,14 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
         for t in range(20):
             env.render()
             # time.sleep(0.5)
+            # exit(1)
             # Take a step
             action_probs = policy(state_int, i_episode)
 
             action = np.random.choice(np.arange(len(action_probs)), p=action_probs)
             # action = env.action_space.sample()
             next_state, reward, done, _ = env.step(action)
-            # import ipdb; ipdb.set_trace()
+
             if done:
                 reward = 100
             else:
@@ -108,12 +115,12 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             # print("next_state[1] ", next_state[1])
             # print("next_state[0] ", next_state[0])
             action_string = convert_action(action)
-            send_state_transition(previous_state, next_state, action_string)
 
+            # Make ASP syntax of state transition
+            send_state_transition(previous_state, next_state, action_string, wall_list)
+            # import ipdb; ipdb.set_trace()
             previous_state = next_state
-            # print("After action ", action, ", the state is now at x=",
-            #         next_state[0], ", y=", next_state[1], " reward: ", reward,
-            #         " at time ", t, " at episode ", i_episode)
+
             # Update stats
             stats.episode_rewards[i_episode] += reward
             stats.episode_lengths[i_episode] = t
