@@ -20,6 +20,8 @@ from lib import plotting
 # ASP syntax conversion
 import py2asp
 
+FILENAME = "output.txt"
+
 env = gym.make('vgdl_aaa_small-v0')
 
 def make_epsilon_greedy_policy(Q, epsilon, nA):
@@ -37,7 +39,7 @@ def convert_state(x, y):
 
 
 def send_state_transition(previous_state,next_state, action, wall_list):
-    with open("output.txt", "a") as myfile:
+    with open(FILENAME, "a") as myfile:
         pos = py2asp.positive_example(next_state,previous_state, action, wall_list)
         pos += "\n"
         myfile.write(pos)
@@ -56,12 +58,20 @@ def convert_action(action):
 
 def silentremove():
     dir = os.getcwd()
-    filename =os.path.join(dir, "output.txt")
+    filename =os.path.join(dir, FILENAME)
     try:
         os.remove(filename)
     except OSError:
         print("output.txt could not be found...")
         pass
+
+def copy_las_base():
+    with open("las_base.las") as f:
+        # lines = f.readlines()
+        # lines = [l for l in lines if "ROW" in l]
+        with open(FILENAME, "w") as out:
+            for line in f:
+                out.write(line)
 
 def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     """
@@ -85,6 +95,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
     # Remove output.txt
     silentremove()
+    copy_las_base()
 
     # import ipdb; ipdb.set_trace()
     for i_episode in range(num_episodes):
