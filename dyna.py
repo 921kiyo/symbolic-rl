@@ -23,6 +23,7 @@ from lib import plotting
 import py2asp
 
 FILENAME = "output.txt"
+BACKGROUND = "background.lp"
 
 env = gym.make('vgdl_aaa_small-v0')
 
@@ -40,10 +41,17 @@ def convert_state(x, y):
     # return (x-1)*19+y
 
 def send_state_transition(previous_state,next_state, action, wall_list):
+    pos = py2asp.positive_example(next_state,previous_state, action, wall_list)
+    pos += "\n"
     with open(FILENAME, "a") as myfile:
-        pos = py2asp.positive_example(next_state,previous_state, action, wall_list)
-        pos += "\n"
         myfile.write(pos)
+
+def add_background(previous_state, wall_list):
+    walls = py2asp.add_walls(previous_state, wall_list)
+    walls += "\n"
+
+    with open(BACKGROUND, "a") as myfile:
+        myfile.write(walls)
 
 def convert_action(action):
     if(action == 0):
@@ -138,7 +146,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             # Make ASP syntax of state transition
             send_state_transition(previous_state, next_state, action_string, wall_list)
             # Meanwhile, accumulate all background knowlege
-
+            add_background(previous_state, wall_list)
             # import ipdb; ipdb.set_trace()
             previous_state = next_state
 
