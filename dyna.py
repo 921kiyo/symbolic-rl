@@ -9,6 +9,8 @@ from gym import wrappers
 
 import time
 
+import subprocess
+
 # Q-learning
 import itertools
 import pandas as pd
@@ -36,7 +38,6 @@ def make_epsilon_greedy_policy(Q, epsilon, nA):
 def convert_state(x, y):
     return (x-1)*6+y
     # return (x-1)*19+y
-
 
 def send_state_transition(previous_state,next_state, action, wall_list):
     with open(FILENAME, "a") as myfile:
@@ -67,8 +68,6 @@ def silentremove():
 
 def copy_las_base():
     with open("las_base.las") as f:
-        # lines = f.readlines()
-        # lines = [l for l in lines if "ROW" in l]
         with open(FILENAME, "w") as out:
             for line in f:
                 out.write(line)
@@ -113,7 +112,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
         for t in range(20):
             env.render()
             # time.sleep(0.5)
-            # exit(1)
+
             # Take a step
             action_probs = policy(state_int, i_episode)
 
@@ -123,6 +122,10 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
             if done:
                 reward = 100
+                # Run ILASP to get H
+                hypothesis = subprocess.check_output(["ILASP", "--version=2i", FILENAME, "-ml=10"], universal_newlines=True)
+                print("HYPOTHESIS: ", hypothesis)
+                exit(1)
             else:
                 reward = reward - 1
 
@@ -134,6 +137,8 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
             # Make ASP syntax of state transition
             send_state_transition(previous_state, next_state, action_string, wall_list)
+            # Meanwhile, accumulate all background knowlege
+
             # import ipdb; ipdb.set_trace()
             previous_state = next_state
 
