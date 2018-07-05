@@ -104,7 +104,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     silentremove()
     copy_las_base()
 
-    # import ipdb; ipdb.set_trace()
+    import ipdb; ipdb.set_trace()
     for i_episode in range(num_episodes):
 
         if(i_episode+1) % 100 == 0:
@@ -131,9 +131,9 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             if done:
                 reward = 100
                 # Run ILASP to get H
-                hypothesis = subprocess.check_output(["ILASP", "--version=2i", FILENAME, "-ml=10"], universal_newlines=True)
-                print("HYPOTHESIS: ", hypothesis)
-                exit(1)
+                # hypothesis = subprocess.check_output(["ILASP", "--version=2i", FILENAME, "-ml=10"], universal_newlines=True)
+                # print("HYPOTHESIS: ", hypothesis)
+                # exit(1)
             else:
                 reward = reward - 1
 
