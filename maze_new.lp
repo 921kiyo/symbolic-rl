@@ -37,9 +37,11 @@ state_at(V0, T+1) :- time(T), adjacent(left, V0, V1), state_at(V1, T), action(le
 state_at(V0, T+1) :- time(T), adjacent(down, V0, V1), state_at(V1, T), action(down, T), not wall(V0).
 state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, T), not wall(V0).
 
+% TODO1 Conversion from state_before to state_at plus time notion
+% TODO2 Conversion from  state_at plus time notion to state_before
+
 % TODO Execute the plan and see what happens
 % TODO Update H and B at which point? How much more example should I collect?
-% TODO Conversion from state_before to state_at plus time notion
 
 % Time stamp should be the same as the maximum number of actions an agent can take, which is defined in RL Q-learning
 time(1..10).

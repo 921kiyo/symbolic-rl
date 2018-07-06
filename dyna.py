@@ -1,5 +1,5 @@
 # Model contains state, action next state and reward tuples.
-
+ # import ipdb; ipdb.set_trace()
 import matplotlib
 import gym
 import gym_vgdl
@@ -102,9 +102,9 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
     # Remove output.txt
     silentremove()
+    # Add mode bias and adjacent definition for ILASP
     copy_las_base()
 
-    # import ipdb; ipdb.set_trace()
     for i_episode in range(num_episodes):
 
         if(i_episode+1) % 100 == 0:
@@ -133,21 +133,23 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 # Run ILASP to get H
                 # hypothesis = subprocess.check_output(["ILASP", "--version=2i", FILENAME, "-ml=10"], universal_newlines=True)
                 # print("HYPOTHESIS: ", hypothesis)
+                # send_h(hypothesis)
+                # send_background(BACKGROUND)
+                # planning_actions = subprocess.check_output(["clingo", "--n", "0", ASP, "--outf=2"], universal_newlines=True)
+                # planning_actions = convert_state_time(planning_actions)
+                # Execute the planning
+                # execute_planning(planning_actionss)
                 # exit(1)
             else:
                 reward = reward - 1
 
             next_state_int = convert_state(next_state[0], next_state[1])
-            # print("-------------")
-            # print("next_state[1] ", next_state[1])
-            # print("next_state[0] ", next_state[0])
             action_string = convert_action(action)
 
             # Make ASP syntax of state transition
             send_state_transition(previous_state, next_state, action_string, wall_list)
             # Meanwhile, accumulate all background knowlege
             add_background(previous_state, wall_list)
-            # import ipdb; ipdb.set_trace()
             previous_state = next_state
 
             # Update stats
