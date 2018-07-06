@@ -50,10 +50,7 @@ state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, 
 % state_at(V1, T+1) :- time(T), adjacent(up, V0, V1), action(up, T), wall(V0).
 
 % TODO WALLS
-% TODO Shortest Path
 % TODO Update H and B
-% Reduce unnecessary path
-
 
 time(1..4).
 % #minimize[goal=1].
@@ -73,6 +70,8 @@ goalMet:- goal(T).
 #show state_at/2. 
 #show action/2.
 
+% TODO This is not quite right, but works fine.
+% Find the shortest path using optimization statement
 % #minimize{1 : goal(T)=time(T)}.
 #minimize{1, X, T: action(X,T); 1, X, T: state_at(X,T)}.
 
