@@ -9,36 +9,51 @@ adjacent(down,(X,Y+1),(X,Y)):- cell((X,Y)), cell((X,Y+1)).
 state_at((1,1),1).
 
 % Learnt Hypothesis
-% THIS IS ONE OF NEW HYPOTHESIS (proposed, not sure is ILASP can return this kind of H)
-% state_at(V1, T+1):- adjacent(up, V0, V1), state_at(V0, T), action(up, T), time(T).
-0{state_at(V1, T+1)}1:- adjacent(up, V0, V1), state_at(V0, T), time(T).
-0{state_at(V1, T+1)}1:- adjacent(down, V0, V1), state_at(V0, T), time(T).
-0{state_at(V1, T+1)}1:- adjacent(right, V0, V1), state_at(V0, T), time(T).
-0{state_at(V1, T+1)}1:- adjacent(left, V0, V1), state_at(V0, T), time(T).
+state_at(V1, T+1):- adjacent(up, V0, V1), state_at(V0, T), time(T), action(up, T).
+state_at(V1, T+1):- adjacent(down, V0, V1), state_at(V0, T), time(T), action(down, T).
+state_at(V1, T+1):- adjacent(right, V0, V1), state_at(V0, T), time(T), action(right, T).
+state_at(V1, T+1):- adjacent(left, V0, V1), state_at(V0, T), time(T), action(left, T).
 
-time(1..3).
+% Learnt Hypothesis
+% state_after(V1) :- adjacent(up, V0, V1), action(up), wall(V0).
+% state_after(V0) :- adjacent(up, V0, V1), action(down), wall(V1).
+% state_after(V0) :- state_before(V0), action(non).
+% state_after(V1) :- adjacent(right, V0, V1), action(right), wall(V0).
+% state_after(V0) :- adjacent(right, V0, V1), action(left), wall(V1).
+% state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).
+% state_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).
+% state_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).
+% state_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0).
+
+% state_at(V1, T+1) :- time(T), adjacent(up, V0, V1), action(up, T), wall(V0).
+% state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), action(down, T), wall(V1).
+% state_at(V0, T+1) :- time(T), state_at(V0, T), action(non, T).
+% state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), action(right, T), wall(V0).
+% state_at(V0, T+1) :- time(T), adjacent(right, V0, V1), action(left, T), wall(V1).
+% state_at(V0, T+1) :- time(T), adjacent(right, V0, V1), state_at(V1, T), action(right, T), not wall(V0).
+% state_at(V0, T+1) :- time(T), adjacent(left, V0, V1), state_at(V1, T), action(left, T), not wall(V0).
+% state_at(V0, T+1) :- time(T), adjacent(down, V0, V1), state_at(V1, T), action(down, T), not wall(V0).
+% state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, T), not wall(V0).
+
+time(1..2).
 
 % #minimize[goal=1].
 
-% TODO The agent cannot be in two different places at the same time.
-% TODO Action at a time 
-
+% The agent cannot be in two different places at the same time.
 :- state_at(V1, T), state_at(V2, T), V1 != V2.
 
+
+% Specify the goal of the planning
 finished(T):- goal(T2), time(T), T >= T2.
-
 goal(T):- state_at((2,2), T), not finished(T-1).
-
 goalMet:- goal(T).
 :- not goalMet.
 
-#show state_at/2.
+#show state_at/2. 
+#show action/2.
 
-% action(down, T):- time(T).
-% action(up, T):- time(T).
-% action(right, T):- time(T).
-% action(left, T):- time(T).
-% action(non, T):- time(T).
+% Take only one action at a time
+1{action(down, T); action(up, T); action(right, T); action(left, T); action(non, T)}1 :- time(T).
 
 % Collected wall information (Refundant so far)
 % wall((1, 5)). wall((0, 4)).
