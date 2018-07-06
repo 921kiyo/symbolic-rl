@@ -71,5 +71,4 @@ def positive_example(next_state, previous_state, action, wall_list):
     walls = add_walls(previous_state, wall_list)
     exclusions = get_exclusions(previous_state, next_state)
     pos = "#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + walls + "})."
-
     return pos

@@ -17,10 +17,7 @@ import pandas as pd
 import sys
 
 from collections import defaultdict
-from lib import plotting
-
-# ASP syntax conversion
-import py2asp
+from lib import plotting, py2asp, helper
 
 FILENAME = "output.txt"
 BACKGROUND = "background.lp"
@@ -35,50 +32,6 @@ def make_epsilon_greedy_policy(Q, epsilon, nA):
         A[best_action] += (1.0 - new_epsilon)
         return A
     return policy_fn
-
-def convert_state(x, y):
-    return (x-1)*6+y
-    # return (x-1)*19+y
-
-def send_state_transition(previous_state,next_state, action, wall_list):
-    pos = py2asp.positive_example(next_state,previous_state, action, wall_list)
-    pos += "\n"
-    with open(FILENAME, "a") as myfile:
-        myfile.write(pos)
-
-def add_background(previous_state, wall_list):
-    walls = py2asp.add_walls(previous_state, wall_list)
-    walls += "\n"
-
-    with open(BACKGROUND, "a") as myfile:
-        myfile.write(walls)
-
-def convert_action(action):
-    if(action == 0):
-        return "down"
-    elif(action == 1):
-        return "up"
-    elif(action == 2):
-        return "left"
-    elif(action == 3):
-        return "right"
-    elif(action == 4):
-        return "non"
-
-def silentremove():
-    dir = os.getcwd()
-    filename =os.path.join(dir, FILENAME)
-    try:
-        os.remove(filename)
-    except OSError:
-        print("output.txt could not be found...")
-        pass
-
-def copy_las_base():
-    with open("las_base.las") as f:
-        with open(FILENAME, "w") as out:
-            for line in f:
-                out.write(line)
 
 def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     """
@@ -101,9 +54,9 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     policy = make_epsilon_greedy_policy(Q, epsilon, env.action_space.n)
 
     # Remove output.txt
-    silentremove()
+    helper.silentremove(FILENAME)
     # Add mode bias and adjacent definition for ILASP
-    copy_las_base()
+    helper.copy_las_base(FILENAME)
 
     for i_episode in range(num_episodes):
 
@@ -113,7 +66,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
         # Reset the env and pick the first action
         state = env.reset()
-        state_int = convert_state(state[0], state[1])
+        state_int = helper.convert_state(state[0], state[1])
 
         previous_state = state
         # for t in itertools.count():
@@ -143,13 +96,13 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             else:
                 reward = reward - 1
 
-            next_state_int = convert_state(next_state[0], next_state[1])
-            action_string = convert_action(action)
+            next_state_int = helper.convert_state(next_state[0], next_state[1])
+            action_string = helper.convert_action(action)
 
             # Make ASP syntax of state transition
-            send_state_transition(previous_state, next_state, action_string, wall_list)
+            helper.send_state_transition(previous_state, next_state, action_string, wall_list, FILENAME)
             # Meanwhile, accumulate all background knowlege
-            add_background(previous_state, wall_list)
+            helper.add_background(previous_state, wall_list, BACKGROUND)
             previous_state = next_state
 
             # Update stats
