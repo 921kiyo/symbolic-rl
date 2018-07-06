@@ -104,7 +104,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     silentremove()
     copy_las_base()
 
-    import ipdb; ipdb.set_trace()
+    # import ipdb; ipdb.set_trace()
     for i_episode in range(num_episodes):
 
         if(i_episode+1) % 100 == 0:
@@ -119,7 +119,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
         # for t in itertools.count():
         for t in range(20):
             env.render()
-            # time.sleep(0.5)
+            time.sleep(0.2)
 
             # Take a step
             action_probs = policy(state_int, i_episode)
