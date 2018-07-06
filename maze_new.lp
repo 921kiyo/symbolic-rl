@@ -39,13 +39,23 @@ state_at((1,1),1).
 % state_at(V0, T+1) :- time(T), state_at(V0, T), action(non, T).
 % state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), action(right, T), wall(V0).
 % state_at(V0, T+1) :- time(T), adjacent(right, V0, V1), action(left, T), wall(V1).
-state_at(V0, T+1) :- time(T), adjacent(right, V0, V1), state_at(V1, T), action(right, T), not wall(V0).
-state_at(V0, T+1) :- time(T), adjacent(left, V0, V1), state_at(V1, T), action(left, T), not wall(V0).
-state_at(V0, T+1) :- time(T), adjacent(down, V0, V1), state_at(V1, T), action(down, T), not wall(V0).
+
+% These are the basic notions of actions
+% state_at(V0, T+1) :- time(T), adjacent(right, V0, V1), state_at(V1, T), action(right, T), not wall(V0).
+% state_at(V0, T+1) :- time(T), adjacent(left, V0, V1), state_at(V1, T), action(left, T), not wall(V0).
+% state_at(V0, T+1) :- time(T), adjacent(down, V0, V1), state_at(V1, T), action(down, T), not wall(V0).
+
 state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, T), not wall(V0).
 
+% state_at(V1, T+1) :- time(T), adjacent(up, V0, V1), action(up, T), wall(V0).
 
-time(1..2).
+% TODO WALLS
+% TODO Shortest Path
+% TODO Update H and B
+% Reduce unnecessary path
+
+
+time(1..4).
 % #minimize[goal=1].
 
 % The agent cannot be in two different places at the same time.
@@ -63,9 +73,11 @@ goalMet:- goal(T).
 #show state_at/2. 
 #show action/2.
 
+% #minimize{1 : goal(T)=time(T)}.
+#minimize{1, X, T: action(X,T); 1, X, T: state_at(X,T)}.
 
 % Collected wall information (Refundant so far)
-wall((1, 5)). wall((0, 4)).
+% wall((1, 5)). wall((0, 4)).
 wall((2, 3)). wall((0, 3)).
 % wall((2, 2)). wall((0, 2)).
 % wall((0, 1)). wall((1, 0)).
