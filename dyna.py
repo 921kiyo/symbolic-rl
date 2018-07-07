@@ -21,7 +21,7 @@ from lib import plotting, py2asp, helper
 
 FILENAME = "output.txt"
 BACKGROUND = "background.lp"
-
+CLINGOFILE = "clingo.lp"
 env = gym.make('vgdl_aaa_small-v0')
 
 def make_epsilon_greedy_policy(Q, epsilon, nA):
@@ -53,8 +53,10 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
     policy = make_epsilon_greedy_policy(Q, epsilon, env.action_space.n)
 
-    # Remove output.txt
+    # Clean up first
     helper.silentremove(FILENAME)
+    helper.silentremove(BACKGROUND)
+    helper.silentremove(CLINGOFILE)
     # Add mode bias and adjacent definition for ILASP
     helper.copy_las_base(FILENAME)
 
@@ -72,7 +74,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
         # for t in itertools.count():
         for t in range(20):
             env.render()
-            time.sleep(0.2)
+            # time.sleep(0.1)
 
             # Take a step
             action_probs = policy(state_int, i_episode)
@@ -83,16 +85,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
             if done:
                 reward = 100
-                # Run ILASP to get H
-                # hypothesis = subprocess.check_output(["ILASP", "--version=2i", FILENAME, "-ml=10"], universal_newlines=True)
-                # print("HYPOTHESIS: ", hypothesis)
-                # send_h(hypothesis)
-                # send_background(BACKGROUND)
-                # planning_actions = subprocess.check_output(["clingo", "--n", "0", ASP, "--outf=2"], universal_newlines=True)
-                # planning_actions = convert_state_time(planning_actions)
-                # Execute the planning
-                # execute_planning(planning_actionss)
-                # exit(1)
+                helper.execute_planning(FILENAME, BACKGROUND, CLINGOFILE)
             else:
                 reward = reward - 1
 
