@@ -22,6 +22,7 @@ from lib import plotting, py2asp, helper
 FILENAME = "output.txt"
 BACKGROUND = "background.lp"
 CLINGOFILE = "clingo.lp"
+TIME_RANGE = 20
 env = gym.make('vgdl_aaa_small-v0')
 
 def make_epsilon_greedy_policy(Q, epsilon, nA):
@@ -69,10 +70,11 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
         # Reset the env and pick the first action
         state = env.reset()
         state_int = helper.convert_state(state[0], state[1])
+        starting_point = state
 
         previous_state = state
         # for t in itertools.count():
-        for t in range(20):
+        for t in range(TIME_RANGE):
             env.render()
             # time.sleep(0.1)
 
@@ -85,7 +87,9 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
             if done:
                 reward = 100
-                helper.execute_planning(FILENAME, BACKGROUND, CLINGOFILE)
+                goal_state = next_state
+                helper.make_lp(FILENAME, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE)
+                helper.run_clingo(CLINGOFILE)
             else:
                 reward = reward - 1
 

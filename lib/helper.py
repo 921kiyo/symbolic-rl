@@ -55,37 +55,65 @@ def convert_las_asp(hypothesis):
     hypothesis = hypothesis.replace("state_before(V1)", "state_at(V1, T)")
     hypothesis = hypothesis.replace("state_before(V0)", "state_at(V0, T)")
     hypothesis = hypothesis.replace(":-", ":- time(T),")
+    hypothesis = hypothesis.replace("action(up)", "action(up, T)")
+    hypothesis = hypothesis.replace("action(down)", "action(down, T)")
+    hypothesis = hypothesis.replace("action(right)", "action(right, T)")
+    hypothesis = hypothesis.replace("action(left)", "action(left, T)")
+    hypothesis = hypothesis.replace("action(non)", "action(non, T)")
     hypothesis += "\n"
     return hypothesis
 
 
-def execute_planning(filename, background, clingofile):
+def make_lp(filename, background, clingofile, start_state, goal_state, time_range):
     # Run ILASP to get H
     hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10"], universal_newlines=True)
-
+    # hypothesis = "XXX"
     # Convert syntax of H for ASP solver
     hypothesis = convert_las_asp(hypothesis)
 
     # starting point
-    # goal point
+    start_state = "state_at((" + str(int(start_state[0])) + ", " + str(int(start_state[1])) + "), 1).\n"
+    # goal state
+    goal_state = "state_at((" + str(int(goal_state[0])) + ", " + str(int(goal_state[1])) + "), T),"
+    
+    # TODO automatically get this info as well
     # action choice rule
+    actions = "1{action(down, T); action(up, T); action(right, T); action(left, T); action(non, T)}1 :- time(T), not finished(T).\n"
     # show, minimizes
+    show = "#show state_at/2.\n #show action/2.\n"
     # goal specification
+    goal = "finished(T):- goal(T2), time(T), T >= T2.\n goal(T):- " + goal_state + " not finished(T-1).\n" + \
+    "goalMet:- goal(T).\n:- not goalMet.\n"
     # time range
+    time = "time(1.." + str(time_range) + ").\n"
     # cell range
+    cell = "cell((0..6, 0..5)).\n"
     # adjacent definitions
-    kb = "XXXX"
+    given = ":- state_at(V1, T), state_at(V2, T), V1 != V2.\n" +\
+    "adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).\n\
+    adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).\n\
+    adjacent(up, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).\n\
+    adjacent(down,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).\n"
+
+    # optimisation statement
+    minimize = "#minimize{1, X, T: action(X,T)}.\n"
+    kb = start_state + actions + show + goal + time + cell + minimize + given
     # Send H and BK to clingofile
     send_kb(kb, clingofile)
     send_kb(hypothesis, clingofile)
-    
     send_background(background, clingofile)
-    exit(1)
+
+def run_clingo(clingofile):
     # Get planning using clingo
-    # planning_actions = subprocess.check_output(["clingo", "--n", "0", clingofile, "--outf=2"], universal_newlines=True)
+    # planning_actions = subprocess.check_output(["clingo", "-n", "0", clingofile, "--outf=2"], universal_newlines=True)
     # planning_actions = convert_state_time(planning_actions)
     # Execute the planning
     # execute_planning(planning_actionss)
+    
+    # explore a little bit
+
+    print("run clingo")
+    pass
 
 def send_kb(kb, clingofile):
     with open(clingofile, "a") as c:
