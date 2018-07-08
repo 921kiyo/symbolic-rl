@@ -130,13 +130,8 @@ def run_clingo(clingofile):
     
     planning_actions = convert_asp_las(planning_actions)
     print("PLANNING ", planning_actions)
-    states_array, action_dict = extract_planning(planning_actions)
-    print("states_array",states_array)
-    print("action_dict", action_dict)
-    # Execute the planning
-    # execute_planning(planning_actionss)
-    # explore a little bit  
-    exit(1)
+    states_array, actions_array = extract_planning(planning_actions)
+    return states_array, actions_array
 
 def get_keyword(string):
     size = len(string)
@@ -150,7 +145,6 @@ def get_keyword(string):
     return key
 
 def extract_action(action):
-    size = len(action)
     start_index = len("action(")
     
     end_index = start_index

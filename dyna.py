@@ -88,7 +88,11 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 reward = 100
                 goal_state = next_state
                 helper.make_lp(FILENAME, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE)
-                helper.run_clingo(CLINGOFILE)
+                states_array, actions_array = helper.run_clingo(CLINGOFILE)
+                
+                # Execute the planning
+                # execute_planning(planning_actionss)
+                # explore a little bit  
             else:
                 reward = reward - 1
 
