@@ -1,7 +1,7 @@
 import os
 from lib import py2asp
 import subprocess
-
+import re
 def convert_state(x, y):
     return (x-1)*6+y
     # return (x-1)*19+y
@@ -127,17 +127,60 @@ def run_clingo(clingofile):
         print(e.output)
     
     # planning_actions = "state_at((1,4),1) state_at((1,3),2) action(down,1) state_at((1,2),3) action(down,2) action(down,3) state_at((1,1),4) state_at((2,1),5) action(right,4) action(right,5) state_at((3,1),6) action(right,6) state_at((4,1),7) action(right,7) state_at((5,1),8)"
-    print("PLANNING ", planning_actions)
+    
     planning_actions = convert_asp_las(planning_actions)
+    print("PLANNING ", planning_actions)
+    states_array, action_dict = extract_planning(planning_actions)
+    print("states_array",states_array)
+    print("action_dict", action_dict)
     # Execute the planning
     # execute_planning(planning_actionss)
     # explore a little bit  
     exit(1)
 
+def get_keyword(string):
+    size = len(string)
+    start_index = size
+    end_index = size - 1         
+    for i in range(end_index, 0, -1):
+        if string[i] == ",":
+            start_index = i
+            break
+    key = int(string[start_index+1: end_index])
+    return key
+
+def extract_action(action):
+    size = len(action)
+    start_index = len("action(")
+    
+    end_index = start_index
+    for a in range(len(action)):
+        if action[a] == ",":
+            end_index = a
+    return action[start_index: end_index]
+
+def extract_planning(string):
+    states = re.findall("state_at\(\([0-9]+,[0-9]+\),[0-9]\)", string)
+    actions = re.findall("action\([a-z]+,[0-9]+\)", string)
+
+    states_key = []
+    for state in states:
+        key = get_keyword(state)
+        states_key.append((key, state))
+    states_sorted = sorted(states_key, key=lambda tup: tup[0])
+
+    actions_key = []
+    for action in actions:
+        action_key = get_keyword(action)
+        act = extract_action(action)
+        actions_key.append((action_key, act))
+    actions_sorted = sorted(actions_key, key=lambda tup: tup[0])
+    
+    return states_sorted, actions_sorted 
+
 def send_kb(kb, clingofile):
     with open(clingofile, "a") as c:
         c.write(kb)
-
 
 def send_background(input, output):
     with open(input) as f:
