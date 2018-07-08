@@ -1,2 +1,5 @@
 /venv
 /__pycache__
+background.lp
+clingo.lp
+output.txt

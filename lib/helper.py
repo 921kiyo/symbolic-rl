@@ -105,15 +105,18 @@ def make_lp(filename, background, clingofile, start_state, goal_state, time_rang
 
 def run_clingo(clingofile):
     # Get planning using clingo
-    # planning_actions = subprocess.check_output(["clingo", "-n", "0", clingofile, "--outf=2"], universal_newlines=True)
+    try:
+        planning_actions = subprocess.check_output(["clingo", "-n", "0", clingofile], universal_newlines=True)
+    except subprocess.CalledProcessError as e:
+        print(e.output)
+    
     # planning_actions = convert_state_time(planning_actions)
     # Execute the planning
     # execute_planning(planning_actionss)
     
     # explore a little bit
-
-    print("run clingo")
-    pass
+    
+    exit(1)
 
 def send_kb(kb, clingofile):
     with open(clingofile, "a") as c:
