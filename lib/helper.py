@@ -102,19 +102,37 @@ def make_lp(filename, background, clingofile, start_state, goal_state, time_rang
     send_kb(hypothesis, clingofile)
     send_background(background, clingofile)
 
+def convert_asp_las(planning):
+    planning = planning.replace("clingo version", "%clingo version")
+    planning = planning.replace("Reading", "%Reading")
+    planning = planning.replace("Solving", "%Solving")
+    planning = planning.replace("Answer:", "%Answer:")
+    planning = planning.replace("Optimization", "%Optimization")
+    planning = planning.replace("OPTIMUM", "%OPTIMUM")
+    planning = planning.replace("Models", "%Models")
+    planning = planning.replace("Optimum", "%Optimum")
+    planning = planning.replace("Calls", "%Calls")
+    planning = planning.replace("Time", "%Time")
+    planning = planning.replace("CPU", "%CPU")
+    planning += "\n"
+    return planning
+
 def run_clingo(clingofile):
     # Get planning using clingo
     try:
         planning_actions = subprocess.check_output(["clingo", "-n", "0", clingofile], universal_newlines=True)
     except subprocess.CalledProcessError as e:
+        planning_actions = e.output
         # When Clingo returns UNSATISFIABLE
         print(e.output)
     
-    # planning_actions = convert_state_time(planning_actions)
+    # planning_actions = "state_at((1,4),1) state_at((1,3),2) action(down,1) state_at((1,2),3) action(down,2) action(down,3) state_at((1,1),4) state_at((2,1),5) action(right,4) action(right,5) state_at((3,1),6) action(right,6) state_at((4,1),7) action(right,7) state_at((5,1),8)"
+    print("PLANNING ", planning_actions)
+    planning_actions = convert_asp_las(planning_actions)
     # Execute the planning
     # execute_planning(planning_actionss)
-    print("Running Clingo now...")
     # explore a little bit  
+    exit(1)
 
 def send_kb(kb, clingofile):
     with open(clingofile, "a") as c:

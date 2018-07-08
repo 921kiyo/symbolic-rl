@@ -76,7 +76,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
         # for t in itertools.count():
         for t in range(TIME_RANGE):
             env.render()
-            time.sleep(0.1)
+            # time.sleep(0.1)
 
             # Take a step
             action_probs = policy(state_int, i_episode)
