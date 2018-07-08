@@ -21,7 +21,7 @@ from lib import plotting
 
 
 # ASP conversion
-import py2asp
+from lib import py2asp
 
 
 # env = gym.make('vgdl_aliens-v0')
@@ -73,7 +73,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
         # for t in itertools.count():
         for t in range(200):
             env.render()
-            # time.sleep(0.1)
+            time.sleep(0.1)
             # Take a step
             action_probs = policy(state_int, i_episode)
 
@@ -113,6 +113,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             td_delta = td_target - Q[state_int][action]
 
             Q[state_int][action] += alpha * td_delta
+
             if done:
                 break
 

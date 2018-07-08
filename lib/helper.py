@@ -2,6 +2,9 @@ import os
 from lib import py2asp
 import subprocess
 import re
+
+import time
+
 def convert_state(x, y):
     return (x-1)*6+y
     # return (x-1)*19+y
@@ -129,9 +132,31 @@ def run_clingo(clingofile):
     # planning_actions = "state_at((1,4),1) state_at((1,3),2) action(down,1) state_at((1,2),3) action(down,2) action(down,3) state_at((1,1),4) state_at((2,1),5) action(right,4) action(right,5) state_at((3,1),6) action(right,6) state_at((4,1),7) action(right,7) state_at((5,1),8)"
     
     planning_actions = convert_asp_las(planning_actions)
-    print("PLANNING ", planning_actions)
     states_array, actions_array = extract_planning(planning_actions)
     return states_array, actions_array
+
+def execute_planning(env, states, actions):
+    print("Planning executing.....")
+
+    for action in actions:
+        print("Planning phase... ")
+        env.render()
+        time.sleep(0.3)
+        action_int = get_action(action[1])
+        env.step(action_int)
+    pass
+
+def get_action(action):
+    if(action == "down"):
+        return 0 
+    elif(action == "up"):
+        return 1
+    elif(action == "left"):
+        return 2
+    elif(action == "right"):
+        return 3
+    elif(action == "non"):
+        return 4
 
 def get_keyword(string):
     size = len(string)
