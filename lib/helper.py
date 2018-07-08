@@ -63,11 +63,10 @@ def convert_las_asp(hypothesis):
     hypothesis += "\n"
     return hypothesis
 
-
 def make_lp(filename, background, clingofile, start_state, goal_state, time_range):
     # Run ILASP to get H
-    hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10"], universal_newlines=True)
-    # hypothesis = "XXX"
+    # hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10"], universal_newlines=True)
+    hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
     # Convert syntax of H for ASP solver
     hypothesis = convert_las_asp(hypothesis)
 
@@ -108,15 +107,14 @@ def run_clingo(clingofile):
     try:
         planning_actions = subprocess.check_output(["clingo", "-n", "0", clingofile], universal_newlines=True)
     except subprocess.CalledProcessError as e:
+        # When Clingo returns UNSATISFIABLE
         print(e.output)
     
     # planning_actions = convert_state_time(planning_actions)
     # Execute the planning
     # execute_planning(planning_actionss)
-    
-    # explore a little bit
-    
-    exit(1)
+    print("Running Clingo now...")
+    # explore a little bit  
 
 def send_kb(kb, clingofile):
     with open(clingofile, "a") as c:
