@@ -69,7 +69,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
         # Reset the env and pick the first action
         state = env.reset()
-        state_int = helper.convert_state(state[0], state[1])
+        state_int = helper.convert_state(state[0], state[1], WIDTH)
         starting_point = state
         previous_state = state
 
@@ -87,7 +87,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
         # for t in itertools.count():
         for t in range(TIME_RANGE):
             env.render()
-            # time.sleep(0.05)
+            # time.sleep(0.1)
 
             # Take a step
             action_probs = policy(state_int, i_episode)
@@ -103,15 +103,10 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             else:
                 reward = reward - 1
 
-            next_state_int = helper.convert_state(next_state[0], next_state[1])
+            next_state_int = helper.convert_state(next_state[0], next_state[1], WIDTH)
             action_string = helper.convert_action(action)
 
             # Make ASP syntax of state transition
-            # print("---------")
-            # print("previous_state ", previous_state)
-            # print("next_state ", next_state)
-            # print("action_string ", action_string)
-            # print("wall_list ", wall_list)
             helper.send_state_transition(previous_state, next_state, action_string, wall_list, FILENAME)
             # Meanwhile, accumulate all background knowlege
             helper.add_background(previous_state, wall_list, BACKGROUND)

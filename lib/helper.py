@@ -5,9 +5,10 @@ import re
 
 import time
 
-def convert_state(x, y):
-    return (x-1)*6+y
-    # return (x-1)*19+y
+def convert_state(x, y, width):
+    x += 1
+    y += 1
+    return (y-1)*width+x
 
 def send_state_transition(previous_state,next_state, action, wall_list, filename):
     pos = py2asp.positive_example(next_state,previous_state, action, wall_list)
