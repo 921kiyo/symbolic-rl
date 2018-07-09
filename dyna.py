@@ -75,7 +75,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
         # Once the plan is obtained, execute the plan
         if is_las:
-            helper.make_lp(FILENAME, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE)
+            helper.make_lp(FILENAME, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE, WIDTH, HEIGHT)
             states_array, actions_array = helper.run_clingo(CLINGOFILE)
             # Execute the planning
             is_plan_successful = helper.execute_planning(env, states_array, actions_array)

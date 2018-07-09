@@ -76,7 +76,7 @@ def convert_las_asp(hypothesis):
     hypothesis += "\n"
     return hypothesis
 
-def make_lp(filename, background, clingofile, start_state, goal_state, time_range):
+def make_lp(filename, background, clingofile, start_state, goal_state, time_range, width, height):
     # Run ILASP to get H
     # hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10"], universal_newlines=True)
     hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
@@ -98,7 +98,7 @@ def make_lp(filename, background, clingofile, start_state, goal_state, time_rang
     # time range
     time = "time(1.." + str(time_range) + ").\n"
     # cell range
-    cell = "cell((0..6, 0..5)).\n"
+    cell = "cell((0..{}, 0..{})).\n".format(width-1, height-1)
     # adjacent definitions
     given = ":- state_at(V1, T), state_at(V2, T), V1 != V2.\n" +\
     "adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).\n\
