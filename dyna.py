@@ -25,6 +25,10 @@ CLINGOFILE = "clingo.lp"
 TIME_RANGE = 20
 env = gym.make('vgdl_aaa_small-v0')
 
+HEIGHT = env.unwrapped.game.height
+WIDTH = env.unwrapped.game.width
+# import ipdb; ipdb.set_trace()
+
 def make_epsilon_greedy_policy(Q, epsilon, nA):
     def policy_fn(observation, episodes):
         new_epsilon = epsilon*(1/(episodes+1))
@@ -67,7 +71,6 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
         state = env.reset()
         state_int = helper.convert_state(state[0], state[1])
         starting_point = state
-
         previous_state = state
 
         # Once the plan is obtained, execute the plan
@@ -75,13 +78,16 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             helper.make_lp(FILENAME, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE)
             states_array, actions_array = helper.run_clingo(CLINGOFILE)
             # Execute the planning
-            helper.execute_planning(env, states_array, actions_array)
+            is_plan_successful = helper.execute_planning(env, states_array, actions_array)
             # explore a little bit
+            print("is_plan_successful ", is_plan_successful)
+            if is_plan_successful:
+                is_las = False
 
         # for t in itertools.count():
         for t in range(TIME_RANGE):
             env.render()
-            # time.sleep(0.1)
+            # time.sleep(0.05)
 
             # Take a step
             action_probs = policy(state_int, i_episode)
@@ -101,6 +107,11 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             action_string = helper.convert_action(action)
 
             # Make ASP syntax of state transition
+            # print("---------")
+            # print("previous_state ", previous_state)
+            # print("next_state ", next_state)
+            # print("action_string ", action_string)
+            # print("wall_list ", wall_list)
             helper.send_state_transition(previous_state, next_state, action_string, wall_list, FILENAME)
             # Meanwhile, accumulate all background knowlege
             helper.add_background(previous_state, wall_list, BACKGROUND)

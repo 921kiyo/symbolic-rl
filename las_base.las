@@ -16,9 +16,9 @@ adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).
 adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).
 
 % (X,Y+1) is above next to (X,Y)
-adjacent(up, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).
+adjacent(down, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).
 
-adjacent(down,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
+adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
 
 #modeh(state_after(var(cell))).
 

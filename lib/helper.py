@@ -102,8 +102,8 @@ def make_lp(filename, background, clingofile, start_state, goal_state, time_rang
     given = ":- state_at(V1, T), state_at(V2, T), V1 != V2.\n" +\
     "adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).\n\
     adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).\n\
-    adjacent(up, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).\n\
-    adjacent(down,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).\n"
+    adjacent(down, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).\n\
+    adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).\n"
 
     # optimisation statement
     minimize = "#minimize{1, X, T: action(X,T)}.\n"
@@ -144,20 +144,26 @@ def run_clingo(clingofile):
     return states_array, actions_array
 
 def execute_planning(env, states, actions):
-    print("Planning executing.....")
-
+    done = False
     for action in actions:
-        print("Planning phase... ")
+        print("Planning phase... ", "take action ", action[1])
         env.render()
         time.sleep(0.3)
         action_int = get_action(action[1])
-        env.step(action_int)
-    pass
+        next_state, reward, done, _ = env.step(action_int)
+        print("next_state ", next_state)
+
+    if done:
+        print("done ", done)
+        return done
+
+    print("what is done ", done)
+    return False
 
 def get_action(action):
-    if(action == "down"):
+    if(action == "up"):
         return 0
-    elif(action == "up"):
+    elif(action == "down"):
         return 1
     elif(action == "left"):
         return 2
