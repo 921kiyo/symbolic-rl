@@ -39,15 +39,11 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     Args:
         alpha: TD learning rate
     """
-    is_las = False
 
     Q = defaultdict(lambda: np.zeros(env.action_space.n))
-    walls= env.unwrapped.game.getSprites('wall')
-    wall_list = []
-    for wall in walls:
-        x = wall.rect.left/5
-        y = wall.rect.top/5
-        wall_list.append((int(x),int(y)))
+
+    wall_list = helper.get_all_walls(env)
+    is_las = False
 
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
@@ -74,13 +70,14 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
         previous_state = state
 
+        # Once the plan is obtained, execute the plan
         if is_las:
             helper.make_lp(FILENAME, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE)
             states_array, actions_array = helper.run_clingo(CLINGOFILE)
             # Execute the planning
             helper.execute_planning(env, states_array, actions_array)
             # explore a little bit
-    
+
         # for t in itertools.count():
         for t in range(TIME_RANGE):
             env.render()
@@ -96,7 +93,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             if done:
                 reward = 100
                 goal_state = next_state
-                is_las = True  
+                is_las = True
             else:
                 reward = reward - 1
 

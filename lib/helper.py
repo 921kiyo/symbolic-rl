@@ -22,6 +22,15 @@ def add_background(previous_state, wall_list, background):
     with open(background, "a") as myfile:
         myfile.write(walls)
 
+def get_all_walls(env):
+    walls= env.unwrapped.game.getSprites('wall')
+    wall_list = []
+    for wall in walls:
+        x = wall.rect.left/5
+        y = wall.rect.top/5
+        wall_list.append((int(x),int(y)))
+    return wall_list
+
 def convert_action(action):
     if(action == 0):
         return "down"
@@ -72,12 +81,11 @@ def make_lp(filename, background, clingofile, start_state, goal_state, time_rang
     hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
     # Convert syntax of H for ASP solver
     hypothesis = convert_las_asp(hypothesis)
-
     # starting point
     start_state = "state_at((" + str(int(start_state[0])) + ", " + str(int(start_state[1])) + "), 1).\n"
     # goal state
     goal_state = "state_at((" + str(int(goal_state[0])) + ", " + str(int(goal_state[1])) + "), T),"
-    
+
     # TODO automatically get this info as well
     # action choice rule
     actions = "1{action(down, T); action(up, T); action(right, T); action(left, T); action(non, T)}1 :- time(T), not finished(T).\n"
@@ -128,9 +136,9 @@ def run_clingo(clingofile):
         planning_actions = e.output
         # When Clingo returns UNSATISFIABLE
         print(e.output)
-    
+
     # planning_actions = "state_at((1,4),1) state_at((1,3),2) action(down,1) state_at((1,2),3) action(down,2) action(down,3) state_at((1,1),4) state_at((2,1),5) action(right,4) action(right,5) state_at((3,1),6) action(right,6) state_at((4,1),7) action(right,7) state_at((5,1),8)"
-    
+
     planning_actions = convert_asp_las(planning_actions)
     states_array, actions_array = extract_planning(planning_actions)
     return states_array, actions_array
@@ -148,7 +156,7 @@ def execute_planning(env, states, actions):
 
 def get_action(action):
     if(action == "down"):
-        return 0 
+        return 0
     elif(action == "up"):
         return 1
     elif(action == "left"):
@@ -161,7 +169,7 @@ def get_action(action):
 def get_keyword(string):
     size = len(string)
     start_index = size
-    end_index = size - 1         
+    end_index = size - 1
     for i in range(end_index, 0, -1):
         if string[i] == ",":
             start_index = i
@@ -171,7 +179,7 @@ def get_keyword(string):
 
 def extract_action(action):
     start_index = len("action(")
-    
+
     end_index = start_index
     for a in range(len(action)):
         if action[a] == ",":
@@ -194,8 +202,8 @@ def extract_planning(string):
         act = extract_action(action)
         actions_key.append((action_key, act))
     actions_sorted = sorted(actions_key, key=lambda tup: tup[0])
-    
-    return states_sorted, actions_sorted 
+
+    return states_sorted, actions_sorted
 
 def send_kb(kb, clingofile):
     with open(clingofile, "a") as c:

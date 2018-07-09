@@ -37,10 +37,6 @@ state_at(V0, T+1) :- time(T), adjacent(left, V0, V1), state_at(V1, T), action(le
 state_at(V0, T+1) :- time(T), adjacent(down, V0, V1), state_at(V1, T), action(down, T), not wall(V0).
 state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, T), not wall(V0).
 
-% TODO2 Conversion from  state_at plus time notion to state_before
-% TODO Execute the plan and see what happens
-% TODO Update H and B at which point? How much more example should I collect?
-
 % Time stamp should be the same as the maximum number of actions an agent can take, which is defined in RL Q-learning
 time(1..10).
 
@@ -57,9 +53,8 @@ goalMet:- goal(T).
 1{action(down, T); action(up, T); action(right, T); action(left, T); action(non, T)}1 :- time(T), not finished(T).
 
 % These #show restrict what will appear in the answer sets. I am only interested in state and action
-#show state_at/2. 
+#show state_at/2.
 #show action/2.
-
 
 % Find the shortest path using optimization statement
 % TODO This optimisation statement may not be quite right, but works fine for now.
@@ -92,5 +87,3 @@ goalMet:- goal(T).
 % wall((1, 5)). wall((0, 4)).
 % wall((1, 5)). wall((0, 4)).
 % wall((2, 5)). wall((2, 3)).
-
-
