@@ -157,7 +157,7 @@ def execute_planning(env, states, actions):
         print("done ", done)
         return done
 
-    print("what is done ", done)
+    print("Done must be false ", done)
     return False
 
 def get_action(action):
