@@ -24,6 +24,7 @@ BACKGROUND = "background.lp"
 CLINGOFILE = "clingo.lp"
 TIME_RANGE = 20
 env = gym.make('vgdl_aaa_small-v0')
+# env = gym.make('vgdl_aaa_L_shape-v0')
 
 HEIGHT = env.unwrapped.game.height
 WIDTH = env.unwrapped.game.width

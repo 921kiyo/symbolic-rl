@@ -51,7 +51,7 @@ def silentremove(filename):
         os.remove(file)
     except OSError:
         print(filename + " could not be found...")
-        pass
+        return
 
 def copy_las_base(filename):
     with open("las_base.las") as f:
@@ -100,8 +100,12 @@ def make_lp(filename, background, clingofile, start_state, goal_state, time_rang
     # cell range
     cell = "cell((0..{}, 0..{})).\n".format(width-1, height-1)
     # adjacent definitions
-    given = ":- state_at(V1, T), state_at(V2, T), V1 != V2.\n" +\
-    "adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).\n\
+    # given = ":- state_at(V1, T), state_at(V2, T), V1 != V2.\n" +\
+    # "adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).\n\
+    # adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).\n\
+    # adjacent(down, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).\n\
+    # adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).\n"
+    given = "adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).\n\
     adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).\n\
     adjacent(down, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).\n\
     adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).\n"
@@ -132,7 +136,7 @@ def convert_asp_las(planning):
 def run_clingo(clingofile):
     # Get planning using clingo
     try:
-        planning_actions = subprocess.check_output(["clingo", "-n", "0", clingofile], universal_newlines=True)
+        planning_actions = subprocess.check_output(["clingo", "-n", "0", clingofile, "--opt-mode=opt"], universal_newlines=True)
     except subprocess.CalledProcessError as e:
         planning_actions = e.output
         # When Clingo returns UNSATISFIABLE

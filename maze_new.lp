@@ -12,24 +12,12 @@ adjacent(down,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
 % Starting point
 state_at((1,1),1).
 
-% ILASP H before syntax conversion
-% state_after(V1) :- adjacent(up, V0, V1), action(up), wall(V0).
-% state_after(V0) :- adjacent(up, V0, V1), action(down), wall(V1).
-% state_after(V0) :- state_before(V0), action(non).
-% state_after(V1) :- adjacent(right, V0, V1), action(right), wall(V0).
-% state_after(V0) :- adjacent(right, V0, V1), action(left), wall(V1).
-% state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).
-% state_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).
-% state_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).
-% state_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0).
-
 % ILASP learnt H after syntax conversion from state_before/after to state_at + time stamp.
-% Below learnt Hs are useless
-% state_at(V1, T+1) :- time(T), adjacent(up, V0, V1), action(up, T), wall(V0).
-% state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), action(down, T), wall(V1).
-% state_at(V0, T+1) :- time(T), state_at(V0, T), action(non, T).
-% state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), action(right, T), wall(V0).
-% state_at(V0, T+1) :- time(T), adjacent(right, V0, V1), action(left, T), wall(V1).
+state_at(V1, T+1) :- time(T), adjacent(up, V0, V1), action(up, T), wall(V0).
+state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), action(down, T), wall(V1).
+state_at(V0, T+1) :- time(T), state_at(V0, T), action(non, T).
+state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), action(right, T), wall(V0).
+state_at(V0, T+1) :- time(T), adjacent(right, V0, V1), action(left, T), wall(V1).
 
 % Below 4 Hs are useful
 state_at(V0, T+1) :- time(T), adjacent(right, V0, V1), state_at(V1, T), action(right, T), not wall(V0).
@@ -41,13 +29,18 @@ state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, 
 time(1..10).
 
 % The agent cannot be in two different places at the same time.
-:- state_at(V1, T), state_at(V2, T), V1 != V2.
+% :- state_at(V1, T), state_at(V2, T), V1 != V2.
 
 % Specify the goal, which can be found in RL exploration.
 finished(T):- goal(T2), time(T), T >= T2.
 goal(T):- state_at((2,2), T), not finished(T-1).
 goalMet:- goal(T).
 :- not goalMet.
+
+% This does not work
+% goal(T):- state_at((2,2), T), not goal(T-1).
+% goalMet:- goal(T).
+% :- not goalMet.
 
 % Take only one action at a time
 1{action(down, T); action(up, T); action(right, T); action(left, T); action(non, T)}1 :- time(T), not finished(T).
@@ -57,12 +50,16 @@ goalMet:- goal(T).
 #show action/2.
 
 % Find the shortest path using optimization statement
-% TODO This optimisation statement may not be quite right, but works fine for now.
-% #minimize{1, X, T: action(X,T); 1, X, T: state_at(X,T)}.
-#minimize{1, X, T: action(X,T)}.
+#minimize{1, X, T: action(X,T); 1, X, T: state_at(X,T)}.
 
-% Collected wall information (Refundant so far)
-% wall((1, 5)). wall((0, 4)).
+% Collected wall information (Redundant so far)
+% wall((1, 5)).
+
+wall((3, 3)).
+wall((3, 4)).
+
+% #pos({state_after((1,2))}, {state_after((3,2))}, {state_before((1,1)). action(up). wall((3,3)).}).
+% #pos({state_after((1,3))}, {state_after((3,2))}, {state_before((1,2)). action(up). wall((3,3)).}).
 % wall((2, 3)). wall((0, 3)).
 % wall((2, 2)). wall((0, 2)).
 % wall((0, 1)). wall((1, 0)).
