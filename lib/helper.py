@@ -2,6 +2,7 @@ import os
 from lib import py2asp
 import subprocess
 import re
+import json
 
 import time
 
@@ -118,35 +119,25 @@ def make_lp(filename, background, clingofile, start_state, goal_state, time_rang
     send_kb(hypothesis, clingofile)
     send_background(background, clingofile)
 
-def convert_asp_las(planning):
-    planning = planning.replace("clingo version", "%clingo version")
-    planning = planning.replace("Reading", "%Reading")
-    planning = planning.replace("Solving", "%Solving")
-    planning = planning.replace("Answer:", "%Answer:")
-    planning = planning.replace("Optimization", "%Optimization")
-    planning = planning.replace("OPTIMUM", "%OPTIMUM")
-    planning = planning.replace("Models", "%Models")
-    planning = planning.replace("Optimum", "%Optimum")
-    planning = planning.replace("Calls", "%Calls")
-    planning = planning.replace("Time", "%Time")
-    planning = planning.replace("CPU", "%CPU")
-    planning += "\n"
-    return planning
-
 def run_clingo(clingofile):
     # Get planning using clingo
     try:
-        planning_actions = subprocess.check_output(["clingo", "-n", "0", clingofile, "--opt-mode=opt"], universal_newlines=True)
+        planning_actions = subprocess.check_output(["clingo", "-n", "0", clingofile, "--opt-mode=opt", "--outf=2"], universal_newlines=True)
     except subprocess.CalledProcessError as e:
         planning_actions = e.output
         # When Clingo returns UNSATISFIABLE
-        print(e.output)
+        # print(e)
+        # print(e.output)
 
-    # planning_actions = "state_at((1,4),1) state_at((1,3),2) action(down,1) state_at((1,2),3) action(down,2) action(down,3) state_at((1,1),4) state_at((2,1),5) action(right,4) action(right,5) state_at((3,1),6) action(right,6) state_at((4,1),7) action(right,7) state_at((5,1),8)"
+    json_plan = json.loads(planning_actions)
 
-    planning_actions = convert_asp_las(planning_actions)
-    states_array, actions_array = extract_planning(planning_actions)
-    return states_array, actions_array
+    size_asp = len(json_plan["Call"][0]["Witnesses"])
+
+    state_action_array = json_plan["Call"][0]["Witnesses"][size_asp-1]["Value"]
+
+    states, actions = sort_planning(state_action_array)
+
+    return states, actions
 
 def execute_planning(env, states, actions):
     done = False
@@ -197,9 +188,15 @@ def extract_action(action):
             end_index = a
     return action[start_index: end_index]
 
-def extract_planning(string):
-    states = re.findall("state_at\(\([0-9]+,[0-9]+\),[0-9]\)", string)
-    actions = re.findall("action\([a-z]+,[0-9]+\)", string)
+def sort_planning(state_action_array):
+    states = []
+    actions = []
+
+    for i in state_action_array:
+        if "state_at" in i:
+            states.append(i)
+        if "action" in i:
+            actions.append(i)
 
     states_key = []
     for state in states:
@@ -215,6 +212,25 @@ def extract_planning(string):
     actions_sorted = sorted(actions_key, key=lambda tup: tup[0])
 
     return states_sorted, actions_sorted
+
+# def extract_planning(string):
+#     states = re.findall("state_at\(\([0-9]+,[0-9]+\),[0-9]\)", string)
+#     actions = re.findall("action\([a-z]+,[0-9]+\)", string)
+#
+#     states_key = []
+#     for state in states:
+#         key = get_keyword(state)
+#         states_key.append((key, state))
+#     states_sorted = sorted(states_key, key=lambda tup: tup[0])
+#
+#     actions_key = []
+#     for action in actions:
+#         action_key = get_keyword(action)
+#         act = extract_action(action)
+#         actions_key.append((action_key, act))
+#     actions_sorted = sorted(actions_key, key=lambda tup: tup[0])
+#
+#     return states_sorted, actions_sorted
 
 def send_kb(kb, clingofile):
     with open(clingofile, "a") as c:

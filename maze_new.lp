@@ -1,4 +1,3 @@
-% TODO should this be given? Or set an arbitorary large number??
 cell((0..6, 0..5)).
 
 % Adjacent definition is given
@@ -34,6 +33,9 @@ time(1..10).
 % Specify the goal, which can be found in RL exploration.
 finished(T):- goal(T2), time(T), T >= T2.
 goal(T):- state_at((2,2), T), not finished(T-1).
+
+% goal(T+1):- goal(T). % This does not work obviously
+% goal(T):- state_at((2,2), T).
 goalMet:- goal(T).
 :- not goalMet.
 
@@ -44,6 +46,7 @@ goalMet:- goal(T).
 
 % Take only one action at a time
 1{action(down, T); action(up, T); action(right, T); action(left, T); action(non, T)}1 :- time(T), not finished(T).
+% 1{action(down, T); action(up, T); action(right, T); action(left, T); action(non, T)}1 :- time(T), not goal(T).
 
 % These #show restrict what will appear in the answer sets. I am only interested in state and action
 #show state_at/2.
@@ -51,7 +54,7 @@ goalMet:- goal(T).
 
 % Find the shortest path using optimization statement
 #minimize{1, X, T: action(X,T); 1, X, T: state_at(X,T)}.
-
+% #minimize{1, X, T: action(X,T)}.
 % Collected wall information (Redundant so far)
 % wall((1, 5)).
 
