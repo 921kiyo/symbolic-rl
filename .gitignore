@@ -4,3 +4,4 @@ lib/__pycache__
 background.lp
 clingo.lp
 output.txt
+.vscode
