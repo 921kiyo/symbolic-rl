@@ -169,16 +169,46 @@ def get_action(action):
     elif(action == "non"):
         return 4
 
-def get_keyword(string):
-    size = len(string)
+def update_T(state):
+    size = len(state)
+    time, start_index, end_index = get_T(state)
+    time += 1
+    return state[0:start_index+1] + str(time) + state[end_index:size]
+
+def get_T(state):
+    size = len(state)
     start_index = size
     end_index = size - 1
     for i in range(end_index, 0, -1):
-        if string[i] == ",":
+        if state[i] == ",":
             start_index = i
             break
-    key = int(string[start_index+1: end_index])
-    return key
+    return int(state[start_index+1: end_index]), start_index, end_index
+
+def get_X(state):
+    first_blacket_seen = False
+    start_index = end_index = 0
+    for index, char in enumerate(state):
+        if(char == "(" and first_blacket_seen):
+            start_index = index
+        if char == "(":
+            first_blacket_seen = True
+        if char == ",":
+            end_index = index
+            break
+    return int(state[start_index+1: end_index])
+
+def get_Y(state):
+    start_index = end_index = 0
+    start_index_found = False
+    for index, char in enumerate(state):
+        if (char == "," and start_index_found == False):
+            start_index = index
+            start_index_found = True
+        if char == ")":
+            end_index = index
+            break
+    return int(state[start_index+1: end_index])
 
 def extract_action(action):
     start_index = len("action(")
@@ -201,13 +231,13 @@ def sort_planning(state_action_array):
 
     states_key = []
     for state in states:
-        key = get_keyword(state)
+        key,_,_ = get_T(state)
         states_key.append((key, state))
     states_sorted = sorted(states_key, key=lambda tup: tup[0])
 
     actions_key = []
     for action in actions:
-        action_key = get_keyword(action)
+        action_key = get_T(action)
         act = extract_action(action)
         actions_key.append((action_key, act))
     actions_sorted = sorted(actions_key, key=lambda tup: tup[0])
@@ -220,13 +250,13 @@ def sort_planning(state_action_array):
 #
 #     states_key = []
 #     for state in states:
-#         key = get_keyword(state)
+#         key = get_T(state)
 #         states_key.append((key, state))
 #     states_sorted = sorted(states_key, key=lambda tup: tup[0])
 #
 #     actions_key = []
 #     for action in actions:
-#         action_key = get_keyword(action)
+#         action_key = get_T(action)
 #         act = extract_action(action)
 #         actions_key.append((action_key, act))
 #     actions_sorted = sorted(actions_key, key=lambda tup: tup[0])

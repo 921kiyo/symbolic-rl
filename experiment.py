@@ -3,18 +3,24 @@ import re
 import json
 from lib import helper
 
-def get_inc_exc(state_list, action):
+def generate_pos(state_list, action):
     print(action)
     print(state_list)
 
 def execute_pseudo_action(current_state, action):
-    pass
+    current_state = helper.update_T(current_state)
+    # if(action == "up"):
+    #     pass
+    # print("get_X ", helper.get_X(current_state))
+    # print("get_Y ", helper.get_Y(current_state))
 
 def execute_pseudo_plan(start_state, actions):
     current_state = start_state
-
-    for action in actions:
-        execute_pseudo_action(current_state, action)
+    action = "up"
+    # for action in actions:
+    current_state = execute_pseudo_action(current_state, action)
+        # generate_pos()
+        # print(current_state)
 
 try:
     planning_actions = subprocess.check_output(["clingo", "-n", "0", "maze_new.lp", "--opt-mode=opt", "--outf=2"], universal_newlines=True)
