@@ -22,7 +22,6 @@ def already_in_background(wall, background):
 def add_each_wall(wall, background):
     with open(background, "a") as myfile:
         myfile.write(wall)
-        print("added..", wall)
 
 def add_walls(previous_state, wall_list):
     x = int(previous_state[0])
