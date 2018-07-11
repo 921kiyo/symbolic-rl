@@ -10,6 +10,22 @@ def reward(r, t):
 def action(a, t):
     return "action(" + str(a) + ", " + str(t) + ")."
 
+def already_in_background(wall, background):
+    wall = "wall({})".format(str(wall))
+    with open(background, "r") as searchfile:
+        for line in searchfile:
+            if(wall in line):
+                print("already in background at line ", line)
+                searchfile.close()
+                return True
+    print("NOT already in background")
+    return False
+
+def add_each_wall(wall, background):
+    with open(background, "a") as myfile:
+        myfile.write(wall)
+        print("added..", wall)
+
 def add_walls(previous_state, wall_list):
     x = int(previous_state[0])
     y = int(previous_state[1])
@@ -23,6 +39,7 @@ def add_walls(previous_state, wall_list):
         walls += "wall({}). ".format((x-1,y))
     if((x,y-1) in wall_list):
         walls += "wall({}). ".format((x,y-1))
+
     return walls
 
 def get_exclusions(previous_state, next_state):

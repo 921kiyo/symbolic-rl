@@ -18,11 +18,21 @@ def send_state_transition(previous_state,next_state, action, wall_list, filename
         myfile.write(pos)
 
 def add_background(previous_state, wall_list, background):
-    walls = py2asp.add_walls(previous_state, wall_list)
-    walls += "\n"
-
-    with open(background, "a") as myfile:
-        myfile.write(walls)
+    x = int(previous_state[0])
+    y = int(previous_state[1])
+    print("Wall list ", wall_list)
+    if(((x+1,y) in wall_list) and (py2asp.already_in_background((x+1,y), background) == False)):
+        wall = "wall({}).".format((x+1,y)) + "\n"
+        py2asp.add_each_wall(wall, background)
+    if(((x,y+1) in wall_list) and (py2asp.already_in_background((x,y+1), background) == False)):
+        wall = "wall({}).".format((x,y+1)) + "\n"
+        py2asp.add_each_wall(wall, background)
+    if(((x-1,y) in wall_list) and (py2asp.already_in_background((x-1,y), background) == False)):
+        wall = "wall({}).".format((x-1,y)) + "\n"
+        py2asp.add_each_wall(wall, background)
+    if(((x,y-1) in wall_list) and (py2asp.already_in_background((x,y-1), background) == False)):
+        wall = "wall({}).".format((x,y-1)) + "\n"
+        py2asp.add_each_wall(wall, background)
 
 def get_all_walls(env):
     walls= env.unwrapped.game.getSprites('wall')
@@ -52,13 +62,18 @@ def silentremove(filename):
         os.remove(file)
     except OSError:
         print(filename + " could not be found...")
-        return
+        
+    with open(filename, "a") as myfile:
+        myfile.close()
+    return
 
 def copy_las_base(filename):
     with open("las_base.las") as f:
         with open(filename, "w") as out:
             for line in f:
                 out.write(line)
+        out.close()
+    f.close()
 
 def convert_las_asp(hypothesis):
     hypothesis = hypothesis.replace("Pre-processing", "%Pre-processing")

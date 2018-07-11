@@ -64,6 +64,8 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     helper.copy_las_base(FILENAME)
 
     for i_episode in range(num_episodes):
+
+        # Display the progress
         if(i_episode+1) % 100 == 0:
             print("\rEpisode {}/{}.".format(i_episode+1, num_episodes), end="")
             sys.stdout.flush()
