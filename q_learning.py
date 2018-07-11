@@ -19,10 +19,8 @@ import os.path
 from collections import defaultdict
 from lib import plotting
 
-
 # ASP conversion
 from lib import py2asp
-
 
 # env = gym.make('vgdl_aliens-v0')
 # env = gym.make('vgdl_boulderdash-v0')

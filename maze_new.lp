@@ -12,9 +12,10 @@ adjacent(down,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
 state_at((1,1),1).
 
 % ILASP learnt H after syntax conversion from state_before/after to state_at + time stamp.
+state_at(V0, T+1) :- time(T), state_at(V0, T), action(non, T).
+% These 4 are not useful
 state_at(V1, T+1) :- time(T), adjacent(up, V0, V1), action(up, T), wall(V0).
 state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), action(down, T), wall(V1).
-state_at(V0, T+1) :- time(T), state_at(V0, T), action(non, T).
 state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), action(right, T), wall(V0).
 state_at(V0, T+1) :- time(T), adjacent(right, V0, V1), action(left, T), wall(V1).
 
@@ -27,12 +28,9 @@ state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, 
 % Time stamp should be the same as the maximum number of actions an agent can take, which is defined in RL Q-learning
 time(1..10).
 
-% The agent cannot be in two different places at the same time.
-% :- state_at(V1, T), state_at(V2, T), V1 != V2.
-
 % Specify the goal, which can be found in RL exploration.
 finished(T):- goal(T2), time(T), T >= T2.
-goal(T):- state_at((2,2), T), not finished(T-1).
+goal(T):- state_at((1,4), T), not finished(T-1).
 
 % goal(T+1):- goal(T). % This does not work obviously
 % goal(T):- state_at((2,2), T).

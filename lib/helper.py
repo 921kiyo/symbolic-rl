@@ -132,7 +132,8 @@ def run_clingo(clingofile):
     json_plan = json.loads(planning_actions)
 
     size_asp = len(json_plan["Call"][0]["Witnesses"])
-
+    
+    # Extract only the optimal answer set
     state_action_array = json_plan["Call"][0]["Witnesses"][size_asp-1]["Value"]
 
     states, actions = sort_planning(state_action_array)

@@ -19,7 +19,7 @@ import sys
 from collections import defaultdict
 from lib import plotting, py2asp, helper
 
-FILENAME = "output.txt"
+FILENAME = "output.las"
 BACKGROUND = "background.lp"
 CLINGOFILE = "clingo.lp"
 TIME_RANGE = 20
