@@ -185,6 +185,19 @@ def get_T(state):
             break
     return int(state[start_index+1: end_index]), start_index, end_index
 
+def update_Y(state, step):
+    size = len(state)
+    y, start_index, end_index = get_Y(state)
+    y += step
+    return state[0:start_index+1] + str(y) + state[end_index:size]
+
+def update_X(state, step):
+    size = len(state)
+    x, start_index, end_index = get_X(state)
+    x += step
+    return state[0:start_index+1] + str(x) + state[end_index:size]
+
+
 def get_X(state):
     first_blacket_seen = False
     start_index = end_index = 0
@@ -196,7 +209,7 @@ def get_X(state):
         if char == ",":
             end_index = index
             break
-    return int(state[start_index+1: end_index])
+    return int(state[start_index+1: end_index]), start_index, end_index
 
 def get_Y(state):
     start_index = end_index = 0
@@ -208,7 +221,7 @@ def get_Y(state):
         if char == ")":
             end_index = index
             break
-    return int(state[start_index+1: end_index])
+    return int(state[start_index+1: end_index]), start_index, end_index
 
 def extract_action(action):
     start_index = len("action(")
@@ -237,7 +250,7 @@ def sort_planning(state_action_array):
 
     actions_key = []
     for action in actions:
-        action_key = get_T(action)
+        action_key,_,_ = get_T(action)
         act = extract_action(action)
         actions_key.append((action_key, act))
     actions_sorted = sorted(actions_key, key=lambda tup: tup[0])
