@@ -1,8 +1,8 @@
-def agent_before(x, y, t):
-    return "agent_at_before"+ "((" + str(x) + ", " + str(y) + "), " + str(t) + ")."
+def state_before(x, y):
+    return "state_before"+ "((" + str(x) + ", " + str(y) + "))."
 
-def agent_after(x, y, t):
-    return "agent_at_after"+ "((" + str(x) + ", " + str(y) + "), " + str(t) + ")."
+def state_after(x, y):
+    return "state_after"+ "((" + str(x) + ", " + str(y) + "))"
 
 def reward(r, t):
     return "reward(" + str(r) + ", " + str(t) + ")."

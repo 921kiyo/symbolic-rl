@@ -132,7 +132,7 @@ def run_clingo(clingofile):
     json_plan = json.loads(planning_actions)
 
     size_asp = len(json_plan["Call"][0]["Witnesses"])
-    
+
     # Extract only the optimal answer set
     state_action_array = json_plan["Call"][0]["Witnesses"][size_asp-1]["Value"]
 
@@ -196,7 +196,6 @@ def update_X(state, step):
     x, start_index, end_index = get_X(state)
     x += step
     return state[0:start_index+1] + str(x) + state[end_index:size]
-
 
 def get_X(state):
     first_blacket_seen = False
