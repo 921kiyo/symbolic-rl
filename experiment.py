@@ -89,7 +89,6 @@ print(actions)
 
 start_state = states[0][1]
 
-# TODO
 walls = "wall((1, 5)). wall((0, 4))."
 
 execute_pseudo_plan(start_state, actions, states, walls)

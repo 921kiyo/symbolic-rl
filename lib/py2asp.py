@@ -15,10 +15,8 @@ def already_in_background(wall, background):
     with open(background, "r") as searchfile:
         for line in searchfile:
             if(wall in line):
-                print("already in background at line ", line)
                 searchfile.close()
                 return True
-    print("NOT already in background")
     return False
 
 def add_each_wall(wall, background):

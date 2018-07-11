@@ -20,7 +20,6 @@ def send_state_transition(previous_state,next_state, action, wall_list, filename
 def add_background(previous_state, wall_list, background):
     x = int(previous_state[0])
     y = int(previous_state[1])
-    print("Wall list ", wall_list)
     if(((x+1,y) in wall_list) and (py2asp.already_in_background((x+1,y), background) == False)):
         wall = "wall({}).".format((x+1,y)) + "\n"
         py2asp.add_each_wall(wall, background)
@@ -43,6 +42,8 @@ def get_all_walls(env):
         wall_list.append((int(x),int(y)))
     return wall_list
 
+
+# TODO generarize more
 def convert_action(action):
     if(action == 0):
         return "down"
