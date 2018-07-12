@@ -1,8 +1,8 @@
 def state_before(x, y):
-    return "state_before"+ "((" + str(x) + ", " + str(y) + "))."
+    return "state_before"+ "((" + str(x) + "," + str(y) + "))."
 
 def state_after(x, y):
-    return "state_after"+ "((" + str(x) + ", " + str(y) + "))"
+    return "state_after"+ "((" + str(x) + "," + str(y) + "))"
 
 def state_at(x,y,t):
     x = str(int(x))

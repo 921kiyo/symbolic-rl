@@ -66,7 +66,7 @@ def execute_pseudo_action(current_state, action):
     elif(action == "non"):
         return current_state
 
-def get_wall_list(walls, file):
+def get_wall_list(file):
     wall_list = []
     with open(file) as f:
         for line in f:
@@ -74,13 +74,12 @@ def get_wall_list(walls, file):
                 x,_,_ = abduction.get_X(line)
                 y,_,_ = abduction.get_Y(line)
                 wall_list.append((x,y))
-    print("wall_list ", wall_list)
     return wall_list
-
 
 def execute_pseudo_plan(start_state, actions, states, wall_list):
     current_state = start_state
     for action in actions:
+        print("---------------")
         print("old ", current_state)
         print("action ", action[1])
         state_before = current_state
@@ -90,10 +89,14 @@ def execute_pseudo_plan(start_state, actions, states, wall_list):
 
         pos = generate_pos(state_before, state_after, states, action[1], wall_list)
 
-        print("POS ", pos)
+        return pos
+
+def add_new_pos(pos, file):
+    with open(file, "a") as f:
+        f.write(pos)
 
 try:
-    planning_actions = subprocess.check_output(["clingo", "-n", "0", "clingo.lp", "--opt-mode=opt", "--outf=2"], universal_newlines=True)
+    planning_actions = subprocess.check_output(["clingo", "-n", "0", "clingo2.lp", "--opt-mode=opt", "--outf=2"], universal_newlines=True)
 except subprocess.CalledProcessError as e:
     planning_actions = e.output
     # When Clingo returns UNSATISFIABLE
@@ -116,15 +119,13 @@ print(actions)
 
 start_state = states[0][1]
 
-# TODO Get only relevant surrounding walls
-# walls = "wall((1, 5)). wall((0, 4))."
-walls = ""
+wall_list = get_wall_list("clingo2.lp")
 
-wall_list = get_wall_list(walls, "clingo.lp")
-# wall_list  [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (0, 1), (6, 1), (0, 2), (2, 2), (3, 2), (4, 2), (5, 2), (6, 2), (0, 3), (2, 3), (4, 3), (6, 3), (0, 4), (6, 4), (0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5), (6, 5)]
+pos = execute_pseudo_plan(start_state, actions, states, wall_list)
 
-execute_pseudo_plan(start_state, actions, states, wall_list)
-
+print("POS ", pos)
+add_new_pos(pos, "output2.las")
+# update_h("output2.las")
 for action in actions:
     key = action[0]
     state_list = []
@@ -135,6 +136,7 @@ for action in actions:
 
     # if len(state_list) > 1:
     #     get_inc_exc(state_list, action)
+
 
 # state_at((1,4),1) 
 # action(up,1) 

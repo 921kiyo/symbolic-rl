@@ -10,9 +10,9 @@ def convert_state(x, y, width):
 # TODO generarize more
 def convert_action(action):
     if(action == 0):
-        return "down"
-    elif(action == 1):
         return "up"
+    elif(action == 1):
+        return "down"
     elif(action == 2):
         return "left"
     elif(action == 3):
