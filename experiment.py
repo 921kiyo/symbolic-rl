@@ -9,17 +9,20 @@ def check_if_in_answersets(state, states):
             return True
     return False
 
-def get_plan_exclusions(state, states):
-    current_time,_,_ = abduction.get_T(state)
+def get_plan_exclusions(state_at_before, state_at_after, states):
+    current_time,_,_ = abduction.get_T(state_at_before)
     exclusion_list = []
 
     for s in states:
-        if current_time == s[0] and state != s[1]:
+        # print(current_time)
+        # print("s[0]", s[0])
+        # print("staets ", state_at_after)
+        if current_time+1 == int(s[0]) and state_at_after != s[1]:
+            # print("s[1] ", s[1])
             x_after, _, _ = abduction.get_X(s[1])
             y_after, _, _ = abduction.get_Y(s[1])
             state_after = py_asp.state_after(x_after, y_after)
             exclusion_list.append(state_after)
-
     exclusions = ""
     for exclusion in exclusion_list:
         exclusions += exclusion
@@ -35,8 +38,8 @@ def generate_pos(state_at_before, state_at_after, states, action, walls):
     y_after, _, _ = abduction.get_Y(state_at_after)
     state_before = py_asp.state_before(x_before, y_before)
     state_after = py_asp.state_after(x_after, y_after)
-    exclusions = get_plan_exclusions(state_at_before, states)
-    return "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls
+    exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
+    return "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."
 
 def execute_pseudo_action(current_state, action):
     current_state = abduction.update_T(current_state)
@@ -54,12 +57,12 @@ def execute_pseudo_action(current_state, action):
 def execute_pseudo_plan(start_state, actions, states, walls):
     current_state = start_state
     for action in actions:
-        # print("old ", current_state)
-        # print("action ", action[1])
+        print("old ", current_state)
+        print("action ", action[1])
         state_before = current_state
         current_state = execute_pseudo_action(current_state, action[1])
         state_after = current_state
-        # print("new ",current_state)
+        print("new ",current_state)
 
         pos = generate_pos(state_before, state_after, states, action[1], walls)
 
@@ -89,7 +92,9 @@ print(actions)
 
 start_state = states[0][1]
 
-walls = "wall((1, 5)). wall((0, 4))."
+# TODO Get only relevant surrounding walls
+# walls = "wall((1, 5)). wall((0, 4))."
+walls = ""
 
 execute_pseudo_plan(start_state, actions, states, walls)
 
@@ -103,3 +108,26 @@ for action in actions:
 
     # if len(state_list) > 1:
     #     get_inc_exc(state_list, action)
+
+# state_at((1,4),1) 
+# action(up,1) 
+# state_at((1,3),2)
+
+# state_at((1,1),2) 
+# state_at((2,1),2) 
+# state_at((3,1),2) 
+# state_at((4,1),2) 
+# state_at((5,1),2) 
+# state_at((0,2),2) 
+# state_at((6,2),2) 
+# state_at((0,3),2) 
+# state_at((2,3),2) 
+# state_at((3,3),2) 
+# state_at((4,3),2) 
+# state_at((5,3),2) 
+# state_at((0,4),2) 
+# state_at((2,4),2) 
+# state_at((4,4),2) 
+# state_at((6,4),2) 
+# state_at((0,5),2) 
+# state_at((6,5),2) 
