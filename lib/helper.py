@@ -42,7 +42,6 @@ def get_all_walls(env):
         wall_list.append((int(x),int(y)))
     return wall_list
 
-
 # TODO generarize more
 def convert_action(action):
     if(action == 0):
@@ -156,22 +155,32 @@ def run_clingo(clingofile):
 
     return states, actions
 
-def execute_planning(env, states, actions):
-    done = False
-    for action in actions:
-        print("Planning phase... ", "take action ", action[1])
-        env.render()
-        time.sleep(0.3)
-        action_int = get_action(action[1])
-        next_state, reward, done, _ = env.step(action_int)
-        print("next_state ", next_state)
+def execute_planning(env, states, action):
+    print("Planning phase... ", "take action ", action[1])
+    env.render()
+    time.sleep(0.3)
+    action_int = get_action(action[1])
+    next_state, reward, done, _ = env.step(action_int)
 
-    if done:
-        print("done ", done)
-        return done
+    return next_state, reward, done,
 
-    print("Done must be false ", done)
-    return False
+# def execute_planning(env, states, actions):
+#     done = False
+#     for action in actions:
+#         print("Planning phase... ", "take action ", action[1])
+#         env.render()
+#         time.sleep(0.3)
+#         action_int = get_action(action[1])
+#         next_state, reward, done, _ = env.step(action_int)
+#         print("next_state ", next_state)
+#         print("done ", done)
+
+#     if done:
+#         print("done ", done)
+#         return done
+
+#     print("Done must be false ", done)
+#     return False
 
 def get_action(action):
     if(action == "up"):
