@@ -14,11 +14,7 @@ def get_plan_exclusions(state_at_before, state_at_after, states):
     exclusion_list = []
 
     for s in states:
-        # print(current_time)
-        # print("s[0]", s[0])
-        # print("staets ", state_at_after)
         if current_time+1 == int(s[0]) and state_at_after != s[1]:
-            # print("s[1] ", s[1])
             x_after, _, _ = abduction.get_X(s[1])
             y_after, _, _ = abduction.get_Y(s[1])
             state_after = py_asp.state_after(x_after, y_after)
@@ -29,7 +25,7 @@ def get_plan_exclusions(state_at_before, state_at_after, states):
         exclusions += ", "
     return exclusions[0:len(exclusions)-2]
 
-def generate_pos(state_at_before, state_at_after, states, action, walls):
+def generate_pos(state_at_before, state_at_after, states, action, wall_list):
     # print(check_if_in_answersets(state_at_before, states))
     # print(check_if_in_answersets(state_at_after, states))
     x_before, _, _ = abduction.get_X(state_at_before)
@@ -39,7 +35,23 @@ def generate_pos(state_at_before, state_at_after, states, action, walls):
     state_before = py_asp.state_before(x_before, y_before)
     state_after = py_asp.state_after(x_after, y_after)
     exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
+    walls = add_surrounding_walls(x_before, y_before, wall_list)
     return "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."
+
+
+# TODO redundant
+def add_surrounding_walls(x, y, wall_list):
+    walls = ""
+    if((x+1,y) in wall_list):
+        walls += "wall({}). ".format((x+1,y))
+    if((x,y+1) in wall_list):
+        walls += "wall({}). ".format((x,y+1))
+    if((x-1,y) in wall_list):
+        walls += "wall({}). ".format((x-1,y))
+    if((x,y-1) in wall_list):
+        walls += "wall({}). ".format((x,y-1))
+
+    return walls
 
 def execute_pseudo_action(current_state, action):
     current_state = abduction.update_T(current_state)
@@ -54,7 +66,19 @@ def execute_pseudo_action(current_state, action):
     elif(action == "non"):
         return current_state
 
-def execute_pseudo_plan(start_state, actions, states, walls):
+def get_wall_list(walls, file):
+    wall_list = []
+    with open(file) as f:
+        for line in f:
+            if "wall((" in line:
+                x,_,_ = abduction.get_X(line)
+                y,_,_ = abduction.get_Y(line)
+                wall_list.append((x,y))
+    print("wall_list ", wall_list)
+    return wall_list
+
+
+def execute_pseudo_plan(start_state, actions, states, wall_list):
     current_state = start_state
     for action in actions:
         print("old ", current_state)
@@ -64,7 +88,7 @@ def execute_pseudo_plan(start_state, actions, states, walls):
         state_after = current_state
         print("new ",current_state)
 
-        pos = generate_pos(state_before, state_after, states, action[1], walls)
+        pos = generate_pos(state_before, state_after, states, action[1], wall_list)
 
         print("POS ", pos)
 
@@ -96,7 +120,10 @@ start_state = states[0][1]
 # walls = "wall((1, 5)). wall((0, 4))."
 walls = ""
 
-execute_pseudo_plan(start_state, actions, states, walls)
+wall_list = get_wall_list(walls, "clingo.lp")
+# wall_list  [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (0, 1), (6, 1), (0, 2), (2, 2), (3, 2), (4, 2), (5, 2), (6, 2), (0, 3), (2, 3), (4, 3), (6, 3), (0, 4), (6, 4), (0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5), (6, 5)]
+
+execute_pseudo_plan(start_state, actions, states, wall_list)
 
 for action in actions:
     key = action[0]

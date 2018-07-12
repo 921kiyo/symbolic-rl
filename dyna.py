@@ -49,7 +49,6 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
     wall_list = induction.get_all_walls(env)
     is_las = False
-
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes))
