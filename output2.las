@@ -34,6 +34,8 @@ adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
 #constant(action, down).
 #constant(action, up).
 #constant(action, non).
+
+#pos({state_after((1,3))}, {state_after((1,1)), state_after((2,1)), state_after((3,1)), state_after((4,1)), state_after((5,1)), state_after((0,2)), state_after((6,2)), state_after((0,3)), state_after((2,3)), state_after((3,3)), state_after((4,3)), state_after((5,3)), state_after((0,4)), state_after((2,4)), state_after((4,4)), state_after((6,4)), state_after((0,5)), state_after((6,5))}, {state_before((1,4)). action(up). wall((1, 5)). wall((0, 4)). }).
 #pos({state_after((1,4))}, {state_after((2,4)),state_after((1,5)),state_after((0,4)),state_after((1,3))}, {state_before((1,4)). action(non). wall((1, 5)). wall((0, 4)). }).
 #pos({state_after((1,3))}, {state_after((2,4)),state_after((1,5)),state_after((0,4)),state_after((1,4))}, {state_before((1,4)). action(up). wall((1, 5)). wall((0, 4)). }).
 #pos({state_after((1,3))}, {state_after((2,3)),state_after((1,4)),state_after((0,3)),state_after((1,2))}, {state_before((1,3)). action(right). wall((2, 3)). wall((0, 3)). }).
@@ -191,3 +193,4 @@ adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
 #pos({state_after((4,1))}, {state_after((5,1)),state_after((4,2)),state_after((3,1)),state_after((4,0))}, {state_before((4,1)). action(down). wall((4, 2)). wall((4, 0)). }).
 #pos({state_after((5,1))}, {state_after((4,2)),state_after((3,1)),state_after((4,0)),state_after((4,1))}, {state_before((4,1)). action(right). wall((4, 2)). wall((4, 0)). }).
 #pos({state_after((5,1))}, {state_after((6,1)),state_after((5,2)),state_after((4,1)),state_after((5,0))}, {state_before((5,1)). action(up). wall((6, 1)). wall((5, 2)). wall((5, 0)). }).
+#pos({state_after((1,3))}, {state_after((1,1)), state_after((2,1)), state_after((3,1)), state_after((4,1)), state_after((5,1)), state_after((0,2)), state_after((6,2)), state_after((0,3)), state_after((2,3)), state_after((3,3)), state_after((4,3)), state_after((5,3)), state_after((0,4)), state_after((2,4)), state_after((4,4)), state_after((6,4)), state_after((0,5)), state_after((6,5))}, {state_before((1,4)). action(up). wall((1, 5)). wall((0, 4)). }).

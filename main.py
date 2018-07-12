@@ -70,13 +70,15 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                     pass
                 
                 # H should be updated
+
+                # TODO FIX this
                 predicted_state = states_plan[action_index+1][1]
                 if(predicted_state != observed_state):
                     print("H is probably not correct!")
 
                 else:
                     print("fine")
-
+                import ipdb; ipdb.set_trace()
                 
                 # explore a little bit
                 
