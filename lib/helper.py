@@ -1,10 +1,6 @@
 import os
-from lib import py2asp
 import subprocess
-import re
 import json
-
-import time
 
 def convert_state(x, y, width):
     x += 1
