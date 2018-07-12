@@ -18,6 +18,7 @@ state_at(V1, T+1) :- time(T), adjacent(up, V0, V1), action(up, T), wall(V0).
 state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), action(down, T), wall(V1).
 state_at(V0, T+1) :- time(T), adjacent(right, V0, V1), action(left, T), wall(V1).
 state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), action(right, T), wall(V0).
+
 state_at(V0, T+1) :- time(T), state_at(V0, T), action(non, T).
 state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), state_at(V0, T), action(left, T), not wall(V1).
 state_at(V1, T+1) :- time(T), adjacent(left, V0, V1), state_at(V0, T), action(right, T), not wall(V1).
@@ -31,6 +32,7 @@ state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, 
 % state_at(V1, T+1) :- time(T), adjacent(left, V0, V1), action(left, T), wall(V0).
 % state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), action(right, T), wall(V0).
 % state_at(V0, T+1) :- time(T), adjacent(down, V0, V1), state_at(V0, T), action(up, T), wall(V1).
+
 % state_at(V0, T+1) :- time(T), state_at(V0, T), action(non, T).
 % state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), state_at(V0, T), action(left, T), not wall(V1).
 % state_at(V0, T+1) :- time(T), adjacent(right, V0, V1), state_at(V1, T), action(right, T), not wall(V0).
