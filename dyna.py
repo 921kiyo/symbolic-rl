@@ -17,7 +17,7 @@ import pandas as pd
 import sys
 
 from collections import defaultdict
-from lib import plotting, py2asp, helper
+from lib import plotting, py_asp, helper, induction, abduction
 
 FILENAME = "output.las"
 BACKGROUND = "background.lp"
@@ -47,7 +47,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
     Q = defaultdict(lambda: np.zeros(env.action_space.n))
 
-    wall_list = helper.get_all_walls(env)
+    wall_list = induction.get_all_walls(env)
     is_las = False
 
     stats = plotting.EpisodeStats(
@@ -61,7 +61,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     helper.silentremove(BACKGROUND)
     helper.silentremove(CLINGOFILE)
     # Add mode bias and adjacent definition for ILASP
-    helper.copy_las_base(FILENAME)
+    induction.copy_las_base(FILENAME)
 
     for i_episode in range(num_episodes):
 
@@ -78,14 +78,19 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
         # Once the plan is obtained, execute the plan
         if is_las:
-            helper.make_lp(FILENAME, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE, WIDTH, HEIGHT)
-            states_array, actions_array = helper.run_clingo(CLINGOFILE)
+            abduction.make_lp(FILENAME, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE, WIDTH, HEIGHT)
+            states_array, actions_array = abduction.run_clingo(CLINGOFILE)
             # Execute the planning
-            is_plan_successful = helper.execute_planning(env, states_array, actions_array)
+            for action_index, action in enumerate(actions_array):
+                env.render()
+                time.sleep(0.3)
+                action_int = helper.get_action(action[1])
+                next_state, reward, done, _ = env.step(action_int)
+                observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
             # explore a little bit
-            print("is_plan_successful ", is_plan_successful)
-            if is_plan_successful:
-                is_las = False
+            # print("is_plan_successful ", is_plan_successful)
+            # if is_plan_successful:
+            #     is_las = False
 
         # for t in itertools.count():
         for t in range(TIME_RANGE):
@@ -110,9 +115,9 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             action_string = helper.convert_action(action)
 
             # Make ASP syntax of state transition
-            helper.send_state_transition(previous_state, next_state, action_string, wall_list, FILENAME)
+            induction.send_state_transition(previous_state, next_state, action_string, wall_list, FILENAME)
             # Meanwhile, accumulate all background knowlege
-            helper.add_background(previous_state, wall_list, BACKGROUND)
+            abduction.add_background(previous_state, wall_list, BACKGROUND)
             previous_state = next_state
 
             # Update stats

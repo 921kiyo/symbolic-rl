@@ -16,7 +16,7 @@ import pandas as pd
 import sys
 
 from collections import defaultdict
-from lib import plotting, py2asp, helper
+from lib import plotting, py_asp, helper, induction, abduction
 
 import gym, gym_vgdl
 
@@ -30,7 +30,7 @@ HEIGHT = env.unwrapped.game.height
 WIDTH = env.unwrapped.game.width
 
 def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
-    wall_list = helper.get_all_walls(env)
+    wall_list = induction.get_all_walls(env)
     is_las = False
     
     # Clean up first
@@ -38,7 +38,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     helper.silentremove(BACKGROUND)
     helper.silentremove(CLINGOFILE)
     # Add mode bias and adjacent definition for ILASP
-    helper.copy_las_base(FILENAME)
+    induction.copy_las_base(FILENAME)
 
     for i_episode in range(num_episodes):
         # Reset the env and pick the first action
@@ -49,8 +49,8 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
         # Once the plan is obtained, execute the plan
         if is_las:
             # TODO fix this, causing duplicates. 
-            helper.make_lp(FILENAME, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE, WIDTH, HEIGHT)
-            states_plan, actions_array = helper.run_clingo(CLINGOFILE)
+            abduction.make_lp(FILENAME, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE, WIDTH, HEIGHT)
+            states_plan, actions_array = abduction.run_clingo(CLINGOFILE)
             # Execute the planning
             for action_index, action in enumerate(actions_array):
                 print("------------------------------")
@@ -59,9 +59,9 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 time.sleep(0.3)
                 action_int = helper.get_action(action[1])
                 next_state, reward, done, _ = env.step(action_int)
-                observed_state = py2asp.state_at(next_state[0], next_state[1], action_index+2)
+                observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
 
-                new_wall_added = helper.add_background(previous_state, wall_list, BACKGROUND)
+                new_wall_added = abduction.add_background(previous_state, wall_list, BACKGROUND)
                 # B should be updated
                 # import ipdb; ipdb.set_trace()
                 if new_wall_added:
@@ -110,9 +110,9 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 # print("previous_state ", previous_state)
                 # print("next_state ", next_state)
                 # print("wall_list ", wall_list)
-                helper.send_state_transition(previous_state, next_state, action_string, wall_list, FILENAME)
+                induction.send_state_transition(previous_state, next_state, action_string, wall_list, FILENAME)
                 # Meanwhile, accumulate all background knowlege
-                helper.add_background(previous_state, wall_list, BACKGROUND)
+                abduction.add_background(previous_state, wall_list, BACKGROUND)
                 previous_state = next_state
 
                 # Update stats

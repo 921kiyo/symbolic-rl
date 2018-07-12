@@ -1,33 +1,11 @@
-def state_before(x, y):
-    return "state_before"+ "((" + str(x) + ", " + str(y) + "))."
-
-def state_after(x, y):
-    return "state_after"+ "((" + str(x) + ", " + str(y) + "))"
-
-def state_at(x,y,t):
-    x = str(int(x))
-    y = str(int(y))
-    t = str(int(t))
-    return "state_at(({},{}),{})".format(x,y,t)
-
-def reward(r, t):
-    return "reward(" + str(r) + ", " + str(t) + ")."
-
-def action(a, t):
-    return "action(" + str(a) + ", " + str(t) + ")."
-
-def already_in_background(wall, background):
-    wall = "wall({})".format(str(wall))
-    with open(background, "r") as searchfile:
-        for line in searchfile:
-            if(wall in line):
-                searchfile.close()
-                return True
-    return False
-
-def add_each_wall(wall, background):
-    with open(background, "a") as myfile:
-        myfile.write(wall)
+def get_all_walls(env):
+    walls= env.unwrapped.game.getSprites('wall')
+    wall_list = []
+    for wall in walls:
+        x = wall.rect.left/5
+        y = wall.rect.top/5
+        wall_list.append((int(x),int(y)))
+    return wall_list
 
 def add_walls(previous_state, wall_list):
     x = int(previous_state[0])
@@ -92,3 +70,23 @@ def positive_example(next_state, previous_state, action, wall_list):
     exclusions = get_exclusions(previous_state, next_state)
     pos = "#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + walls + "})."
     return pos
+
+def send_state_transition(previous_state,next_state, action, wall_list, filename):
+    pos = positive_example(next_state,previous_state, action, wall_list)
+    pos += "\n"
+    with open(filename, "a") as myfile:
+        myfile.write(pos)
+
+def copy_las_base(filename):
+    with open("las_base.las") as f:
+        with open(filename, "w") as out:
+            for line in f:
+                out.write(line)
+        out.close()
+    f.close()
+
+def update_h():
+    pass
+
+def update_bk():
+    pass
