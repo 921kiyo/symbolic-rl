@@ -20,18 +20,24 @@ def send_state_transition(previous_state,next_state, action, wall_list, filename
 def add_background(previous_state, wall_list, background):
     x = int(previous_state[0])
     y = int(previous_state[1])
+    is_new = False
     if(((x+1,y) in wall_list) and (py2asp.already_in_background((x+1,y), background) == False)):
         wall = "wall({}).".format((x+1,y)) + "\n"
         py2asp.add_each_wall(wall, background)
+        is_new = True
     if(((x,y+1) in wall_list) and (py2asp.already_in_background((x,y+1), background) == False)):
         wall = "wall({}).".format((x,y+1)) + "\n"
         py2asp.add_each_wall(wall, background)
+        is_new = True
     if(((x-1,y) in wall_list) and (py2asp.already_in_background((x-1,y), background) == False)):
         wall = "wall({}).".format((x-1,y)) + "\n"
         py2asp.add_each_wall(wall, background)
+        is_new = True
     if(((x,y-1) in wall_list) and (py2asp.already_in_background((x,y-1), background) == False)):
         wall = "wall({}).".format((x,y-1)) + "\n"
         py2asp.add_each_wall(wall, background)
+        is_new = True
+    return is_new
 
 def get_all_walls(env):
     walls= env.unwrapped.game.getSprites('wall')
@@ -91,6 +97,12 @@ def convert_las_asp(hypothesis):
     hypothesis = hypothesis.replace("action(non)", "action(non, T)")
     hypothesis += "\n"
     return hypothesis
+
+def update_h():
+    pass
+
+def update_bk():
+    pass
 
 def make_lp(filename, background, clingofile, start_state, goal_state, time_range, width, height):
     # Run ILASP to get H
@@ -154,33 +166,6 @@ def run_clingo(clingofile):
     states, actions = sort_planning(state_action_array)
 
     return states, actions
-
-def execute_planning(env, states, action):
-    print("Planning phase... ", "take action ", action[1])
-    env.render()
-    time.sleep(0.3)
-    action_int = get_action(action[1])
-    next_state, reward, done, _ = env.step(action_int)
-
-    return next_state, reward, done,
-
-# def execute_planning(env, states, actions):
-#     done = False
-#     for action in actions:
-#         print("Planning phase... ", "take action ", action[1])
-#         env.render()
-#         time.sleep(0.3)
-#         action_int = get_action(action[1])
-#         next_state, reward, done, _ = env.step(action_int)
-#         print("next_state ", next_state)
-#         print("done ", done)
-
-#     if done:
-#         print("done ", done)
-#         return done
-
-#     print("Done must be false ", done)
-#     return False
 
 def get_action(action):
     if(action == "up"):
@@ -309,6 +294,3 @@ def send_background(input, output):
         with open(output, "a") as out:
             for line in f:
                 out.write(line)
-
-def convert_state_time(planning_actions):
-    pass

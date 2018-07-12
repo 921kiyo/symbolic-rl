@@ -48,17 +48,46 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
         # Once the plan is obtained, execute the plan
         if is_las:
+            # TODO fix this, causing duplicates. 
             helper.make_lp(FILENAME, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE, WIDTH, HEIGHT)
-            states_array, actions_array = helper.run_clingo(CLINGOFILE)
+            states_plan, actions_array = helper.run_clingo(CLINGOFILE)
             # Execute the planning
-            for action in actions_array:
-                next_state, reward, done = helper.execute_planning(env, states_array, action)
-            # explore a little bit
+            for action_index, action in enumerate(actions_array):
+                print("------------------------------")
+                print("Planning phase... ", "take action ", action[1])
+                env.render()
+                time.sleep(0.3)
+                action_int = helper.get_action(action[1])
+                next_state, reward, done, _ = env.step(action_int)
+                observed_state = py2asp.state_at(next_state[0], next_state[1], action_index+2)
+
+                new_wall_added = helper.add_background(previous_state, wall_list, BACKGROUND)
+                # B should be updated
+                # import ipdb; ipdb.set_trace()
+                if new_wall_added:
+                    print("new walls added!")
+                    # ILASP kicks in again
+                    pass
+                
+                # H should be updated
+                predicted_state = states_plan[action_index+1][1]
+                if(predicted_state != observed_state):
+                    print("H is probably not correct!")
+
+                else:
+                    print("fine")
+
+                
+                # explore a little bit
+                
                 print("done ", done)
                 if done:
                     is_las = False
                     break
                 state = next_state
+                previous_state = next_state
+
+        # Random action
         else:
             # for t in itertools.count():
             for t in range(TIME_RANGE):
@@ -78,9 +107,9 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 action_string = helper.convert_action(action)
 
                 # Make ASP syntax of state transition
-                print("previous_state ", previous_state)
-                print("next_state ", next_state)
-                print("wall_list ", wall_list)
+                # print("previous_state ", previous_state)
+                # print("next_state ", next_state)
+                # print("wall_list ", wall_list)
                 helper.send_state_transition(previous_state, next_state, action_string, wall_list, FILENAME)
                 # Meanwhile, accumulate all background knowlege
                 helper.add_background(previous_state, wall_list, BACKGROUND)

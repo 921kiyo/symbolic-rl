@@ -4,6 +4,12 @@ def state_before(x, y):
 def state_after(x, y):
     return "state_after"+ "((" + str(x) + ", " + str(y) + "))"
 
+def state_at(x,y,t):
+    x = str(int(x))
+    y = str(int(y))
+    t = str(int(t))
+    return "state_at(({},{}),{})".format(x,y,t)
+
 def reward(r, t):
     return "reward(" + str(r) + ", " + str(t) + ")."
 
