@@ -1,7 +1,7 @@
 import subprocess
 import re
 import json
-from lib import helper, py2asp
+from lib import plotting, py_asp, helper, induction, abduction
 
 def check_if_in_answersets(state, states):
     for s in states:
@@ -10,14 +10,14 @@ def check_if_in_answersets(state, states):
     return False
 
 def get_plan_exclusions(state, states):
-    current_time,_,_ = helper.get_T(state)
+    current_time,_,_ = abduction.get_T(state)
     exclusion_list = []
 
     for s in states:
         if current_time == s[0] and state != s[1]:
-            x_after, _, _ = helper.get_X(s[1])
-            y_after, _, _ = helper.get_Y(s[1])
-            state_after = py2asp.state_after(x_after, y_after)
+            x_after, _, _ = abduction.get_X(s[1])
+            y_after, _, _ = abduction.get_Y(s[1])
+            state_after = py_asp.state_after(x_after, y_after)
             exclusion_list.append(state_after)
 
     exclusions = ""
@@ -29,25 +29,25 @@ def get_plan_exclusions(state, states):
 def generate_pos(state_at_before, state_at_after, states, action, walls):
     # print(check_if_in_answersets(state_at_before, states))
     # print(check_if_in_answersets(state_at_after, states))
-    x_before, _, _ = helper.get_X(state_at_before)
-    y_before, _, _ = helper.get_Y(state_at_before)
-    x_after, _, _ = helper.get_X(state_at_after)
-    y_after, _, _ = helper.get_Y(state_at_after)
-    state_before = py2asp.state_before(x_before, y_before)
-    state_after = py2asp.state_after(x_after, y_after)
+    x_before, _, _ = abduction.get_X(state_at_before)
+    y_before, _, _ = abduction.get_Y(state_at_before)
+    x_after, _, _ = abduction.get_X(state_at_after)
+    y_after, _, _ = abduction.get_Y(state_at_after)
+    state_before = py_asp.state_before(x_before, y_before)
+    state_after = py_asp.state_after(x_after, y_after)
     exclusions = get_plan_exclusions(state_at_before, states)
     return "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls
 
 def execute_pseudo_action(current_state, action):
-    current_state = helper.update_T(current_state)
+    current_state = abduction.update_T(current_state)
     if(action == "up"):
-        return helper.update_Y(current_state, -1)
+        return abduction.update_Y(current_state, -1)
     elif(action == "down"):
-        return helper.update_Y(current_state, 1)
+        return abduction.update_Y(current_state, 1)
     elif(action == "right"):
-        return helper.update_X(current_state, 1)
+        return abduction.update_X(current_state, 1)
     elif(action == "left"):
-        return helper.update_X(current_state, -1)
+        return abduction.update_X(current_state, -1)
     elif(action == "non"):
         return current_state
 
@@ -80,7 +80,7 @@ size_asp = len(json_plan["Call"][0]["Witnesses"])
 # Extract only the optimal answer set
 state_action_array = json_plan["Call"][0]["Witnesses"][size_asp-1]["Value"]
 
-states, actions = helper.sort_planning(state_action_array)
+states, actions = abduction.sort_planning(state_action_array)
 
 # print(states)
 print(actions)
