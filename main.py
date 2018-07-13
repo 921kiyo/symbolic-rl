@@ -66,7 +66,8 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
                 print("observed_state ",observed_state)
                 new_wall_added = abduction.add_new_walls(previous_state, wall_list, CLINGOFILE)
-                # B should be updated
+                
+                # B UPDATE
                 if new_wall_added:
                     print("new walls added!")
                     # add the new walls and run clingo again to replan
@@ -77,7 +78,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 pos += "\n"
                 induction.add_new_pos(pos, LASFILE)
                 
-                # If exclusions are not empty, H should be updated
+                # H UPDATE
                 if any_exclusion:
                     print("exclusion is there ", pos)
                     hypothesis = induction.run_ILASP(LASFILE)
@@ -87,13 +88,13 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 else:
                     print("No exclusion!!")
 
-                # TODO FIX this
-                # predicted_state = states_plan[action_index+1][1]
-                # if(predicted_state != observed_state):
-                #     print("H is probably not correct!")
+                predicted_state = states_plan[action_index+1][1]
+                print("predicted_state ", predicted_state)
+                # H UPDATE
+                if(predicted_state != observed_state):
+                    print("H is probably not correct!")
 
-                # else:
-                #     print("fine")
+                
                 
                 # explore a little bit
                 
@@ -129,7 +130,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 # print("wall_list ", wall_list)
                 induction.send_state_transition(previous_state, next_state, action_string, wall_list, LASFILE)
                 # Meanwhile, accumulate all background knowlege
-                abduction.add_background(previous_state, wall_list, BACKGROUND)
+                abduction.add_new_walls(previous_state, wall_list, BACKGROUND)
                 previous_state = next_state
 
                 # Update stats
