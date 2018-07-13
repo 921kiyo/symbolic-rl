@@ -53,6 +53,8 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE, WIDTH, HEIGHT)
                 first_abduction = True
             states_plan, actions_array = abduction.run_clingo(CLINGOFILE)
+            print("ASP states ", states_plan)
+            print("ASP actions ", actions_array)
             # Execute the planning
             for action_index, action in enumerate(actions_array):
                 print("------------------------------")
@@ -65,24 +67,26 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 print("observed_state ",observed_state)
                 new_wall_added = abduction.add_background(previous_state, wall_list, BACKGROUND)
                 # B should be updated
-                # import ipdb; ipdb.set_trace()
                 if new_wall_added:
                     print("new walls added!")
                     # ILASP kicks in again
                     pass
                 
-                # H should be updated
-
                 # New walls collected
                 wall_list = induction.get_wall_list(CLINGOFILE)
-                pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], wall_list)
+                any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], wall_list)
                 pos += "\n"
-                
                 induction.add_new_pos(pos, LASFILE)
-                hypothesis = induction.run_ILASP(LASFILE)
-                print("New H ", hypothesis)
-                induction.update_h(hypothesis, CLINGOFILE)
-                # If exclusions are not empty, add this to ILASP
+                
+                # If exclusions are not empty, H should be updated
+                if any_exclusion:
+                    print("exclusion is there ", pos)
+                    hypothesis = induction.run_ILASP(LASFILE)
+                    print("New H ", hypothesis)
+                    induction.update_h(hypothesis, CLINGOFILE)
+                    break
+                else:
+                    print("No exclusion!!")
 
                 # TODO FIX this
                 # predicted_state = states_plan[action_index+1][1]
@@ -91,7 +95,6 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
                 # else:
                 #     print("fine")
-                # import ipdb; ipdb.set_trace()
                 
                 # explore a little bit
                 

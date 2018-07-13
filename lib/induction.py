@@ -97,7 +97,10 @@ def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list
     state_after = py_asp.state_after(x_after, y_after)
     exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
     walls = add_surrounding_walls(x_before, y_before, wall_list)
-    return "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."
+    if exclusions == "":
+        return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."
+    else:
+        return True, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."    
 
 # TODO redundant
 def add_surrounding_walls(x, y, wall_list):
@@ -155,9 +158,9 @@ def execute_pseudo_plan(start_state, actions, states, wall_list):
         state_after = current_state
         print("new ",current_state)
 
-        pos = generate_plan_pos(state_before, state_after, states, action[1], wall_list)
+        any_exclusion, pos = generate_plan_pos(state_before, state_after, states, action[1], wall_list)
 
-        return pos
+        return any_exclusion, pos
 
 def add_new_pos(pos, file):
     with open(file, "a") as f:

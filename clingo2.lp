@@ -13,36 +13,6 @@ adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).
     adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).
     adjacent(down, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).
     adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
-
-state_at(V1, T+1) :- time(T), adjacent(up, V0, V1), action(up, T), wall(V0).
-state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), action(down, T), wall(V1).
-state_at(V0, T+1) :- time(T), adjacent(right, V0, V1), action(left, T), wall(V1).
-state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), action(right, T), wall(V0).
-
-state_at(V0, T+1) :- time(T), state_at(V0, T), action(non, T).
-state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), state_at(V0, T), action(left, T), not wall(V1).
-state_at(V1, T+1) :- time(T), adjacent(left, V0, V1), state_at(V0, T), action(right, T), not wall(V1).
-state_at(V0, T+1) :- time(T), adjacent(down, V0, V1), state_at(V1, T), action(down, T), not wall(V0).
-state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, T), not wall(V0).
-
-% PLAN 1
-% state_at((1,4),1) state_at((1,1),2) action(up,1) state_at((2,1),2) state_at((3,1),2) state_at((4,1),2) state_at((5,1),2) state_at((0,2),2) state_at((6,2),2) state_at((0,3),2) state_at((2,3),2) state_at((3,3),2) state_at((4,3),2) state_at((5,3),2) state_at((0,4),2) state_at((2,4),2) state_at((4,4),2) state_at((6,4),2) state_at((0,5),2) state_at((6,5),2) state_at((1,3),2)
-
-% state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), action(down, T), wall(V1).
-% state_at(V1, T+1) :- time(T), adjacent(left, V0, V1), action(left, T), wall(V0).
-% state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), action(right, T), wall(V0).
-% state_at(V0, T+1) :- time(T), adjacent(down, V0, V1), state_at(V0, T), action(up, T), wall(V1).
-
-% state_at(V0, T+1) :- time(T), state_at(V0, T), action(non, T).
-% state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), state_at(V0, T), action(left, T), not wall(V1).
-% state_at(V0, T+1) :- time(T), adjacent(right, V0, V1), state_at(V1, T), action(right, T), not wall(V0).
-% state_at(V1, T+1) :- time(T), adjacent(up, V0, V1), state_at(V0, T), action(down, T), not wall(V1).
-% state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, T), not wall(V0).
-
-
-% PLAN 2
-% state_at((1,4),1) state_at((0,0),2) action(down,1) state_at((6,0),2) state_at((0,1),2) state_at((2,1),2) state_at((3,1),2) state_at((4,1),2) state_at((5,1),2) state_at((0,2),2) state_at((2,2),2) state_at((4,2),2) state_at((6,2),2) state_at((0,3),2) state_at((6,3),2) state_at((1,4),2) state_at((2,4),2) state_at((3,4),2) state_at((4,4),2) state_at((5,4),2)
-
 wall((1, 5)).
 wall((0, 4)).
 wall((2, 3)).
@@ -66,3 +36,18 @@ wall((4, 2)).
 wall((4, 0)).
 wall((6, 1)).
 wall((5, 0)).
+%START
+state_at(V0, T+1) :- time(T), state_at(V0, T), action(non, T).
+state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, T), not wall(V0).
+state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V0, T), action(down, T), wall(V1).
+state_at(V1, T+1) :- time(T), adjacent(left, V0, V1), state_at(V0, T), action(right, T), not wall(V1).
+state_at(V0, T+1) :- time(T), adjacent(left, V0, V1), state_at(V1, T), action(left, T), not wall(V0).
+state_at(V1, T+1) :- time(T), adjacent(up, V0, V1), state_at(V0, T), action(down, T), not wall(V1).
+state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), state_at(V1, T), action(right, T), wall(V0).
+state_at(V1, T+1) :- time(T), adjacent(left, V0, V1), state_at(V1, T), action(left, T), wall(V0).
+state_at(V0, T+1) :- time(T), adjacent(down, V0, V1), state_at(V0, T), action(up, T), wall(V1).
+%Pre-processing  : 0.136s
+%Solve time      : 125.547s
+%Total           : 125.683s
+
+%END
