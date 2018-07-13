@@ -48,10 +48,10 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
         previous_state_at = py_asp.state_at(state[0], state[1], 1)
         # Once the plan is obtained, execute the plan
         if is_las:
-            # TODO fix this, causing duplicates.
             if first_abduction == False:
                 abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE, WIDTH, HEIGHT)
                 first_abduction = True
+     
             states_plan, actions_array = abduction.run_clingo(CLINGOFILE)
             print("ASP states ", states_plan)
             print("ASP actions ", actions_array)
@@ -65,14 +65,13 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 next_state, reward, done, _ = env.step(action_int)
                 observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
                 print("observed_state ",observed_state)
-                new_wall_added = abduction.add_background(previous_state, wall_list, BACKGROUND)
+                new_wall_added = abduction.add_new_walls(previous_state, wall_list, CLINGOFILE)
                 # B should be updated
                 if new_wall_added:
                     print("new walls added!")
-                    # ILASP kicks in again
-                    pass
+                    # add the new walls and run clingo again to replan
+                    break
                 
-                # New walls collected
                 wall_list = induction.get_wall_list(CLINGOFILE)
                 any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], wall_list)
                 pos += "\n"

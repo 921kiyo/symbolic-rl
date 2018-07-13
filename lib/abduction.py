@@ -12,11 +12,11 @@ def already_in_background(wall, background):
                 return True
     return False
 
-def add_each_wall(wall, background):
-    with open(background, "a") as myfile:
+def add_each_wall(wall, filename):
+    with open(filename, "a") as myfile:
         myfile.write(wall)
 
-def add_background(previous_state, wall_list, background):
+def add_new_walls(previous_state, wall_list, background):
     x = int(previous_state[0])
     y = int(previous_state[1])
     is_new_b = False
