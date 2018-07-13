@@ -1,4 +1,5 @@
-from lib import py_asp
+from lib import plotting, py_asp, helper, induction
+
 import subprocess
 import json
 
@@ -39,10 +40,8 @@ def add_background(previous_state, wall_list, background):
 
 def make_lp(filename, backgroundfile, clingofile, start_state, goal_state, time_range, width, height):
     # Run ILASP to get H
-    hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10"], universal_newlines=True)
-    # hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
-    # Convert syntax of H for ASP solver
-    hypothesis = py_asp.convert_las_asp(hypothesis)
+    hypothesis = induction.run_ILASP(filename)
+
     # starting point
     start_state = "state_at((" + str(int(start_state[0])) + ", " + str(int(start_state[1])) + "), 1).\n"
     # goal state
@@ -71,7 +70,9 @@ def make_lp(filename, backgroundfile, clingofile, start_state, goal_state, time_
     kb = start_state + actions + show + goal + time + cell + minimize + given
     # Send H and BK to clingofile
     send_kb(kb, clingofile)
+    send_kb("%START\n", clingofile)
     send_kb(hypothesis, clingofile)
+    send_kb("%END\n", clingofile)
     send_background(backgroundfile, clingofile)
 
 def send_kb(kb, clingofile):

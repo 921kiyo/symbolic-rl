@@ -21,9 +21,6 @@ state_action_array = json_plan["Call"][0]["Witnesses"][size_asp-1]["Value"]
 
 states, actions = abduction.sort_planning(state_action_array)
 
-# print(states)
-print(actions)
-
 # If there are more than 1 state at each T
 
 start_state = states[0][1]
@@ -34,15 +31,3 @@ pos = induction.execute_pseudo_plan(start_state, actions, states, wall_list)
 
 print("POS ", pos)
 induction.add_new_pos(pos, "output2.las")
-
-for action in actions:
-    key = action[0]
-    state_list = []
-
-    # for state in states:
-    #     if state[0] == key:
-    #         state_list.append(state)
-
-    # if len(state_list) > 1:
-    #     get_inc_exc(state_list, action)
-

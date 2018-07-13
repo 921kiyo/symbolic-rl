@@ -1,4 +1,7 @@
-from lib import plotting, py_asp, helper, induction, abduction
+import os
+from lib import plotting, py_asp, helper, abduction
+
+import subprocess
 
 def get_all_walls(env):
     walls= env.unwrapped.game.getSprites('wall')
@@ -116,6 +119,17 @@ def check_if_in_answersets(state, states):
             return True
     return False
 
+def get_wall_list(file):
+    wall_list = []
+    with open(file) as f:
+        for line in f:
+            if "wall((" in line:
+                x,_,_ = abduction.get_X(line)
+                y,_,_ = abduction.get_Y(line)
+                wall_list.append((x,y))
+    return wall_list
+
+# Probably not needed
 def execute_pseudo_action(current_state, action):
     current_state = abduction.update_T(current_state)
     if(action == "up"):
@@ -129,16 +143,7 @@ def execute_pseudo_action(current_state, action):
     elif(action == "non"):
         return current_state
 
-def get_wall_list(file):
-    wall_list = []
-    with open(file) as f:
-        for line in f:
-            if "wall((" in line:
-                x,_,_ = abduction.get_X(line)
-                y,_,_ = abduction.get_Y(line)
-                wall_list.append((x,y))
-    return wall_list
-
+# Probably not needed
 def execute_pseudo_plan(start_state, actions, states, wall_list):
     current_state = start_state
     for action in actions:
@@ -157,7 +162,6 @@ def execute_pseudo_plan(start_state, actions, states, wall_list):
 def add_new_pos(pos, file):
     with open(file, "a") as f:
         f.write(pos)
-
 
 def positive_example(next_state, previous_state, action, wall_list):
     walls = add_walls(previous_state, wall_list)
@@ -179,8 +183,30 @@ def copy_las_base(filename):
         out.close()
     f.close()
 
-def update_h():
-    pass
+
+def update_h(hypothesis, clingofile):
+    flag = False
+    with open(clingofile) as f:
+        for line in f:
+            if line == "%START\n":
+                flag = True
+            if flag == False:
+                with open("temp.lp", "a") as newfile:
+                    newfile.write(line)
+            if line == "%END\n":
+                flag = False
+    os.rename("temp.lp", clingofile)
+
+    abduction.send_kb("%START\n", clingofile)
+    abduction.send_kb(hypothesis, clingofile)
+    abduction.send_kb("%END\n", clingofile)
+
+def run_ILASP(filename):
+    hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10"], universal_newlines=True)
+    # hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
+    # Convert syntax of H for ASP solver
+    hypothesis = py_asp.convert_las_asp(hypothesis)
+    return hypothesis
 
 def update_bk():
     pass

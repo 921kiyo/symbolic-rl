@@ -20,7 +20,7 @@ from lib import plotting, py_asp, helper, induction, abduction
 
 import gym, gym_vgdl
 
-FILENAME = "output.las"
+LASFILE = "output.las"
 BACKGROUND = "background.lp"
 CLINGOFILE = "clingo.lp"
 TIME_RANGE = 20
@@ -32,24 +32,26 @@ WIDTH = env.unwrapped.game.width
 def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     wall_list = induction.get_all_walls(env)
     is_las = False
-    
+    first_abduction = False
     # Clean up first
-    helper.silentremove(FILENAME)
+    helper.silentremove(LASFILE)
     helper.silentremove(BACKGROUND)
     helper.silentremove(CLINGOFILE)
     # Add mode bias and adjacent definition for ILASP
-    induction.copy_las_base(FILENAME)
+    induction.copy_las_base(LASFILE)
 
     for i_episode in range(num_episodes):
         # Reset the env and pick the first action
         state = env.reset()
         starting_point = state
         previous_state = state
-
+        previous_state_at = py_asp.state_at(state[0], state[1], 1)
         # Once the plan is obtained, execute the plan
         if is_las:
-            # TODO fix this, causing duplicates. 
-            abduction.make_lp(FILENAME, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE, WIDTH, HEIGHT)
+            # TODO fix this, causing duplicates.
+            if first_abduction == False:
+                abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE, WIDTH, HEIGHT)
+                first_abduction = True
             states_plan, actions_array = abduction.run_clingo(CLINGOFILE)
             # Execute the planning
             for action_index, action in enumerate(actions_array):
@@ -60,7 +62,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 action_int = helper.get_action(action[1])
                 next_state, reward, done, _ = env.step(action_int)
                 observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
-
+                print("observed_state ",observed_state)
                 new_wall_added = abduction.add_background(previous_state, wall_list, BACKGROUND)
                 # B should be updated
                 # import ipdb; ipdb.set_trace()
@@ -71,25 +73,35 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 
                 # H should be updated
 
-                # TODO FIX this
-                predicted_state = states_plan[action_index+1][1]
-                if(predicted_state != observed_state):
-                    print("H is probably not correct!")
-                    
+                # New walls collected
+                wall_list = induction.get_wall_list(CLINGOFILE)
+                pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], wall_list)
+                pos += "\n"
+                
+                induction.add_new_pos(pos, LASFILE)
+                hypothesis = induction.run_ILASP(LASFILE)
+                print("New H ", hypothesis)
+                induction.update_h(hypothesis, CLINGOFILE)
+                # If exclusions are not empty, add this to ILASP
 
-                else:
-                    print("fine")
-                import ipdb; ipdb.set_trace()
+                # TODO FIX this
+                # predicted_state = states_plan[action_index+1][1]
+                # if(predicted_state != observed_state):
+                #     print("H is probably not correct!")
+
+                # else:
+                #     print("fine")
+                # import ipdb; ipdb.set_trace()
                 
                 # explore a little bit
                 
-                print("done ", done)
-                if done:
-                    is_las = False
-                    break
+                # print("done ", done)
+                # if done:
+                #     is_las = False
+                #     break
                 state = next_state
                 previous_state = next_state
-
+                previous_state_at = observed_state
         # Random action
         else:
             # for t in itertools.count():
@@ -113,7 +125,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 # print("previous_state ", previous_state)
                 # print("next_state ", next_state)
                 # print("wall_list ", wall_list)
-                induction.send_state_transition(previous_state, next_state, action_string, wall_list, FILENAME)
+                induction.send_state_transition(previous_state, next_state, action_string, wall_list, LASFILE)
                 # Meanwhile, accumulate all background knowlege
                 abduction.add_background(previous_state, wall_list, BACKGROUND)
                 previous_state = next_state
