@@ -193,3 +193,33 @@ def extract_action(action):
         if action[a] == ",":
             end_index = a
     return action[start_index: end_index]
+
+def get_predicted_state(current_state, action, states):
+    # if not check_if_in_answersets()
+    current_state = update_T(current_state)
+    if(action == "up"):
+        new_state = update_Y(current_state, -1)
+        if induction.check_if_in_answersets(new_state, states):
+            return new_state
+        else:
+            return current_state
+    elif(action == "down"):
+        new_state = update_Y(current_state, 1)
+        if induction.check_if_in_answersets(new_state, states):
+            return new_state
+        else:
+            return current_state
+    elif(action == "right"):
+        new_state = update_X(current_state, 1)
+        if induction.check_if_in_answersets(new_state, states):
+            return new_state
+        else:
+            return current_state
+    elif(action == "left"):
+        new_state = update_X(current_state, -1)
+        if induction.check_if_in_answersets(new_state, states):
+            return new_state
+        else:
+            return current_state
+    elif(action == "non"):
+        return current_state

@@ -19,12 +19,12 @@ import sys
 from collections import defaultdict
 from lib import plotting, py_asp, helper, induction, abduction
 
-FILENAME = "output.las"
+LASFILE = "output.las"
 BACKGROUND = "background.lp"
 CLINGOFILE = "clingo.lp"
 TIME_RANGE = 20
-env = gym.make('vgdl_aaa_small-v0')
-# env = gym.make('vgdl_aaa_L_shape-v0')
+# env = gym.make('vgdl_aaa_small-v0')
+env = gym.make('vgdl_aaa_L_shape-v0')
 
 HEIGHT = env.unwrapped.game.height
 WIDTH = env.unwrapped.game.width
@@ -56,11 +56,11 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     policy = make_epsilon_greedy_policy(Q, epsilon, env.action_space.n)
 
     # Clean up first
-    helper.silentremove(FILENAME)
+    helper.silentremove(LASFILE)
     helper.silentremove(BACKGROUND)
     helper.silentremove(CLINGOFILE)
     # Add mode bias and adjacent definition for ILASP
-    induction.copy_las_base(FILENAME)
+    induction.copy_las_base(LASFILE, HEIGHT, WIDTH)
 
     for i_episode in range(num_episodes):
 
@@ -77,7 +77,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
         # Once the plan is obtained, execute the plan
         if is_las:
-            abduction.make_lp(FILENAME, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE, WIDTH, HEIGHT)
+            abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE, WIDTH, HEIGHT)
             states_array, actions_array = abduction.run_clingo(CLINGOFILE)
             # Execute the planning
             for action_index, action in enumerate(actions_array):
@@ -114,7 +114,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             action_string = helper.convert_action(action)
 
             # Make ASP syntax of state transition
-            induction.send_state_transition(previous_state, next_state, action_string, wall_list, FILENAME)
+            induction.send_state_transition(previous_state, next_state, action_string, wall_list, LASFILE)
             # Meanwhile, accumulate all background knowlege
             abduction.add_background(previous_state, wall_list, BACKGROUND)
             previous_state = next_state

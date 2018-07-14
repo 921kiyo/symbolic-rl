@@ -87,8 +87,6 @@ def get_plan_exclusions(state_at_before, state_at_after, states):
     return exclusions[0:len(exclusions)-2]
 
 def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list):
-    # print(check_if_in_answersets(state_at_before, states))
-    # print(check_if_in_answersets(state_at_after, states))
     x_before, _, _ = abduction.get_X(state_at_before)
     y_before, _, _ = abduction.get_Y(state_at_before)
     x_after, _, _ = abduction.get_X(state_at_after)
@@ -208,8 +206,12 @@ def update_h(hypothesis, clingofile):
 
 def run_ILASP(filename):
     print("ILASP running...")
-    hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10"], universal_newlines=True)
-    # hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
+    try:
+        hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10"], universal_newlines=True)
+        # hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
+    except subprocess.CalledProcessError as e:
+        print("Error...", e.output)
+        hypothesis = e.output
     # Convert syntax of H for ASP solver
     hypothesis = py_asp.convert_las_asp(hypothesis)
     return hypothesis
