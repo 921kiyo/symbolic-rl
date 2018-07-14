@@ -87,6 +87,7 @@ def send_background(input, output):
 
 def run_clingo(clingofile):
     # Get planning using clingo
+    print("clingo running...")
     try:
         planning_actions = subprocess.check_output(["clingo", "-n", "0", clingofile, "--opt-mode=opt", "--outf=2"], universal_newlines=True)
     except subprocess.CalledProcessError as e:

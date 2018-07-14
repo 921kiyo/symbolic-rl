@@ -178,13 +178,15 @@ def send_state_transition(previous_state,next_state, action, wall_list, filename
     with open(filename, "a") as myfile:
         myfile.write(pos)
 
-def copy_las_base(filename):
+def copy_las_base(filename, height, width):
+    cell = "cell((0..{}, 0..{})).\n".format(width, height)
+    with open(filename, "w") as base:
+        base.write(cell)
+
     with open("las_base.las") as f:
-        with open(filename, "w") as out:
+        with open(filename, "a") as out:
             for line in f:
                 out.write(line)
-        out.close()
-    f.close()
 
 
 def update_h(hypothesis, clingofile):
@@ -205,6 +207,7 @@ def update_h(hypothesis, clingofile):
     abduction.send_kb("%END\n", clingofile)
 
 def run_ILASP(filename):
+    print("ILASP running...")
     hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10"], universal_newlines=True)
     # hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
     # Convert syntax of H for ASP solver

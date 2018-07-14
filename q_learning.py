@@ -20,14 +20,15 @@ from collections import defaultdict
 from lib import plotting
 
 # ASP conversion
-from lib import py2asp
+from lib import plotting, py_asp, helper, induction, abduction
 
 # env = gym.make('vgdl_aliens-v0')
 # env = gym.make('vgdl_boulderdash-v0')
 # env = gym.make('vgdl_portals-v0')
 # env = gym.make('vgdl_survivezombies-v0')
 
-env = gym.make('vgdl_aaa_field-v0')
+# env = gym.make('vgdl_aaa_field-v0')
+env = gym.make('vgdl_aaa_square-v0')
 # trace_path = os.path.dirname(ospath.realpath(__file__))
 # env = TraceRecordingWrapper(env, trace_path)
 # env = gym.make('vgdl_aaa3-v0')
@@ -71,15 +72,15 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
         # for t in itertools.count():
         for t in range(200):
             env.render()
-            time.sleep(0.1)
+            # time.sleep(0.1)
             # Take a step
             action_probs = policy(state_int, i_episode)
 
             action = np.random.choice(np.arange(len(action_probs)), p=action_probs)
             # action = env.action_space.sample()
 
-            print("---------------------------------")
-            print(py2asp.agent_before(previous_state[0], previous_state[1], t))
+            # print("---------------------------------")
+            # print(py_asp.agent_before(previous_state[0], previous_state[1], t))
             # 0: UP
             # 1: DOWN
             # 2: LEFT
@@ -91,9 +92,9 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             else:
                 reward = reward - 1
 
-            print(py2asp.agent_after(next_state[0], next_state[1], t))
-            print(py2asp.reward(reward, t))
-            print(py2asp.action(action, t))
+            # print(py_asp.agent_after(next_state[0], next_state[1], t))
+            # print(py_asp.reward(reward, t))
+            # print(py_asp.action(action, t))
             previous_state = next_state
 
             next_state_int = convert_state(next_state[1], next_state[0])

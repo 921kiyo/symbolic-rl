@@ -23,13 +23,18 @@ import gym, gym_vgdl
 LASFILE = "output.las"
 BACKGROUND = "background.lp"
 CLINGOFILE = "clingo.lp"
-TIME_RANGE = 20
-env = gym.make('vgdl_aaa_small-v0')
+# TIME_RANGE = 20
+# env = gym.make('vgdl_aaa_small-v0')
+
+TIME_RANGE = 450
+TIME_RANGE2 = 30
+env = gym.make('vgdl_aaa_maze-v0')
 
 HEIGHT = env.unwrapped.game.height
 WIDTH = env.unwrapped.game.width
+# import ipdb; ipdb.set_trace()
 
-def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
+def k_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     wall_list = induction.get_all_walls(env)
     is_las = False
     first_abduction = False
@@ -38,7 +43,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     helper.silentremove(BACKGROUND)
     helper.silentremove(CLINGOFILE)
     # Add mode bias and adjacent definition for ILASP
-    induction.copy_las_base(LASFILE)
+    induction.copy_las_base(LASFILE, HEIGHT, WIDTH)
 
     for i_episode in range(num_episodes):
         # Reset the env and pick the first action
@@ -49,7 +54,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
         # Once the plan is obtained, execute the plan
         if is_las:
             if first_abduction == False:
-                abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE, WIDTH, HEIGHT)
+                abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE2, WIDTH, HEIGHT)
                 first_abduction = True
      
             states_plan, actions_array = abduction.run_clingo(CLINGOFILE)
@@ -93,8 +98,6 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 # H UPDATE
                 if(predicted_state != observed_state):
                     print("H is probably not correct!")
-
-                
                 
                 # explore a little bit
                 
@@ -142,4 +145,4 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
                 state = next_state
 
-q_learning(env, 100)
+k_learning(env, 100)

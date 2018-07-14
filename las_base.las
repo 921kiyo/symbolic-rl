@@ -8,8 +8,6 @@
 % wA++++w 4
 % wwwwwww 5
 
-cell((0..6, 0..5)).
-
 % (X+1,Y) is right next to (X,Y)
 adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).
 
