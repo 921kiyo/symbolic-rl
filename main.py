@@ -47,7 +47,7 @@ WIDTH = env.unwrapped.game.width
 #         return A
 #     return policy_fn
 
-def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.5):
+def k_learning(env, num_episodes, discount_factor=0.9, epsilon=1):
     
     # Q = defaultdict(lambda: np.zeros(env.action_space.n))
     # policy = make_epsilon_greedy_policy(Q, epsilon, env.action_space.n)
@@ -65,12 +65,16 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.5):
     # Add mode bias and adjacent definition for ILASP
     induction.copy_las_base(LASFILE, HEIGHT, WIDTH)
 
+    is_start = True
+
     for i_episode in range(num_episodes):
         # Reset the env and pick the first action
-        state = env.reset()
+        print("==============NEW EPISODE======================")
         # TODO DO I want ot update this in every episode??
-        agent_position = env.unwrapped.game.getFeatures()
-        print("reset the starting position to the beginning")   
+        if is_start:
+            state = env.reset()
+            agent_position = env.unwrapped.game.getFeatures()
+            print("reset the starting position to the beginning")   
         previous_state = state
         previous_state_at = py_asp.state_at(state[0], state[1], 1)
         any_exclusion = False
@@ -80,11 +84,13 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.5):
                 abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, WIDTH, HEIGHT)
                 first_abduction = True
 
-            # When B is updated, run abduction to do replan
             abduction.add_starting_position(agent_position, CLINGOFILE)
+            print("REPLAN AGAIN")
+            # time.sleep(1.5)
+            # When B is updated, run abduction to do replan
             states_plan, actions_array = abduction.run_clingo(CLINGOFILE)
-            print("ASP states ", states_plan)
-            print("ASP actions ", actions_array)
+            # print("ASP states ", states_plan)
+            # print("ASP actions ", actions_array)
             # Execute the planning
             for action_index, action in enumerate(actions_array):
                 print("------------------------------")
@@ -95,66 +101,77 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.5):
                 threshold = random.uniform(0,1)                
                 action_int = helper.get_action(action[1])
                 planned_action = action_int
+                if threshold > epsilon:
+                    action_int = env.action_space.sample()
+                    print("Taking a pure random action")
+                    is_start = False
+                    next_state, reward, done, _ = env.step(action_int)
 
-                # if threshold > epsilon:
-                #     print("Random action, threshold is ", threshold)
-                #     action_int = env.action_space.sample()
-                #     if planned_action != action_int:
-                #         agent_position = env.unwrapped.game.getFeatures()
-                #         break
-                next_state, reward, done, _ = env.step(action_int)
-                observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
-                print("previous_state ", previous_state)
-                print("observed_state ",observed_state)
-                new_wall_added = abduction.add_new_walls(previous_state, wall_list, CLINGOFILE)
-                
-                # B UPDATE
-                if new_wall_added:
-                    print("new walls added!")
-                    # add the new walls and run clingo again to replan
+                    agent_position = env.unwrapped.game.getFeatures()
+                    print("agent_position ", agent_position)
+                    
+                    state = next_state
+                    previous_state = next_state
+                    observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
+                    previous_state_at = observed_state
                     break
-                
-                walls = induction.get_wall_list(CLINGOFILE)
-                any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], walls)
-                pos += "\n"
-                induction.add_new_pos(pos, LASFILE)
-                
-                # H UPDATE
-                # if any_exclusion:
-                #     pass
-                #     # print("exclusion is there ", pos)
-                #     # hypothesis = induction.run_ILASP(LASFILE)
-                #     # print("New H ", hypothesis)
-                #     # induction.update_h(hypothesis, CLINGOFILE)
-                #     # break
-                # else:
-                    # print("No exclusion!!")
-                
-                predicted_state = abduction.get_predicted_state(previous_state_at, action[1], states_plan)
-                print("predicted_state ", predicted_state)
+                else:
+                    next_state, reward, done, _ = env.step(action_int)
+                    observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
+                    # print("previous_state ", previous_state)
+                    print("observed_state ",observed_state)
+                    new_wall_added = abduction.add_new_walls(previous_state, wall_list, CLINGOFILE)
+                    
+                    # B UPDATE
+                    if new_wall_added:
+                        print("new walls added!")
+                        is_start = True
+                        # add the new walls and run clingo again to replan
+                        break
+                    
+                    walls = induction.get_wall_list(CLINGOFILE)
+                    any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], walls)
+                    pos += "\n"
+                    induction.add_new_pos(pos, LASFILE)
+                    
+                    # H UPDATE
+                    # if any_exclusion:
+                    #     pass
+                    #     # print("exclusion is there ", pos)
+                    #     # hypothesis = induction.run_ILASP(LASFILE)
+                    #     # print("New H ", hypothesis)
+                    #     # induction.update_h(hypothesis, CLINGOFILE)
+                    #     # break
+                    # else:
+                        # print("No exclusion!!")
+                    
+                    predicted_state = abduction.get_predicted_state(previous_state_at, action[1], states_plan)
+                    print("predicted_state ", predicted_state)
 
-                # H UPDATE
-                if(predicted_state != observed_state):
-                    print("H is probably not correct!")
+                    # H UPDATE
+                    if(predicted_state != observed_state):
+                        print("H is probably not correct!")
 
-                # explore a little bit
+                    # explore a little bit
+                    
+                    # print("done ", done)
+                    # if done:
+                    #     is_las = False
+                    #     break
+                    state = next_state
+                    previous_state = next_state
+                    previous_state_at = observed_state
                 
-                # print("done ", done)
-                # if done:
-                #     is_las = False
-                #     break
-                state = next_state
-                previous_state = next_state
-                previous_state_at = observed_state
-            
-            if any_exclusion:
-                print("exclusion is there ", pos)
-                hypothesis = induction.run_ILASP(LASFILE)
-                print("New H ", hypothesis)
-                induction.update_h(hypothesis, CLINGOFILE)
-            else:
-                print("No exclusion!!")
-        # Random action
+                    is_start = True
+                    if any_exclusion:
+                        print("exclusion is there ", pos)
+                        hypothesis = induction.run_ILASP(LASFILE)
+                        print("New H ", hypothesis)
+                        induction.update_h(hypothesis, CLINGOFILE)
+                    else:
+                        print("No exclusion!!")
+
+        # Random action until ILASP kicks in
         else:
             # for t in itertools.count():
             for t in range(TIME_RANGE):
@@ -191,4 +208,4 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.5):
 
                 state = next_state
 
-k_learning(env, 100)
+k_learning(env, 200)
