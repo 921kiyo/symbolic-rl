@@ -206,9 +206,13 @@ def update_h(hypothesis, clingofile):
 
 def run_ILASP(filename):
     print("ILASP running...")
+    dir = os.path.dirname(os.path.abspath(__file__))
+    dir = os.path.join(dir, 'las_log')
+    cache = "--cached-rel=" + dir
     try:
-        hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10"], universal_newlines=True)
-        # hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
+        # hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-nc"], universal_newlines=True)
+        # hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-nc", cache], universal_newlines=True)
+        hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
     except subprocess.CalledProcessError as e:
         print("Error...", e.output)
         hypothesis = e.output

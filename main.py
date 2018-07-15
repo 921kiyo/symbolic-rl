@@ -7,7 +7,7 @@ import os
 from gym import wrappers
 
 import time
-
+import random
 import subprocess
 
 # Q-learning
@@ -34,12 +34,25 @@ TIME_RANGE = 300
 TIME_RANGE2 = 20
 env = gym.make('vgdl_aaa_L_shape-v0')
 
-
 HEIGHT = env.unwrapped.game.height
 WIDTH = env.unwrapped.game.width
 # import ipdb; ipdb.set_trace()
 
-def k_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
+# def make_epsilon_greedy_policy(Q, epsilon, nA):
+#     def policy_fn(observation, episodes):
+#         new_epsilon = epsilon*(1/(episodes+1))
+#         A = np.ones(nA, dtype=float)* new_epsilon/nA
+#         best_action = np.argmax(Q[observation])
+#         A[best_action] += (1.0 - new_epsilon)
+#         return A
+#     return policy_fn
+
+def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.5):
+    
+    # Q = defaultdict(lambda: np.zeros(env.action_space.n))
+    # policy = make_epsilon_greedy_policy(Q, epsilon, env.action_space.n)
+    
+     
     wall_list = induction.get_all_walls(env)
     print("correct wall_list ", wall_list)
     # import ipdb; ipdb.set_trace()
@@ -55,16 +68,20 @@ def k_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     for i_episode in range(num_episodes):
         # Reset the env and pick the first action
         state = env.reset()
-        starting_point = state
+        # TODO DO I want ot update this in every episode??
+        agent_position = env.unwrapped.game.getFeatures()
+        print("reset the starting position to the beginning")   
         previous_state = state
         previous_state_at = py_asp.state_at(state[0], state[1], 1)
         any_exclusion = False
         # Once the plan is obtained, execute the plan
         if is_las:
             if first_abduction == False:
-                abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, starting_point, goal_state, TIME_RANGE2, WIDTH, HEIGHT)
+                abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, WIDTH, HEIGHT)
                 first_abduction = True
-     
+
+            # When B is updated, run abduction to do replan
+            abduction.add_starting_position(agent_position, CLINGOFILE)
             states_plan, actions_array = abduction.run_clingo(CLINGOFILE)
             print("ASP states ", states_plan)
             print("ASP actions ", actions_array)
@@ -74,7 +91,17 @@ def k_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 print("Planning phase... ", "take action ", action[1])
                 env.render()
                 time.sleep(0.1)
+
+                threshold = random.uniform(0,1)                
                 action_int = helper.get_action(action[1])
+                planned_action = action_int
+
+                # if threshold > epsilon:
+                #     print("Random action, threshold is ", threshold)
+                #     action_int = env.action_space.sample()
+                #     if planned_action != action_int:
+                #         agent_position = env.unwrapped.game.getFeatures()
+                #         break
                 next_state, reward, done, _ = env.step(action_int)
                 observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
                 print("previous_state ", previous_state)
@@ -93,25 +120,23 @@ def k_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 induction.add_new_pos(pos, LASFILE)
                 
                 # H UPDATE
-                if any_exclusion:
-                    pass
-                    # print("exclusion is there ", pos)
-                    # hypothesis = induction.run_ILASP(LASFILE)
-                    # print("New H ", hypothesis)
-                    # induction.update_h(hypothesis, CLINGOFILE)
-                    # break
-                else:
-                    print("No exclusion!!")
+                # if any_exclusion:
+                #     pass
+                #     # print("exclusion is there ", pos)
+                #     # hypothesis = induction.run_ILASP(LASFILE)
+                #     # print("New H ", hypothesis)
+                #     # induction.update_h(hypothesis, CLINGOFILE)
+                #     # break
+                # else:
+                    # print("No exclusion!!")
                 
-                # print("previous_state_at ", previous_state_at)
-                # print("ACtion ", action)
                 predicted_state = abduction.get_predicted_state(previous_state_at, action[1], states_plan)
-                # predicted_state = states_plan[action_index+1][1]
                 print("predicted_state ", predicted_state)
+
                 # H UPDATE
                 if(predicted_state != observed_state):
                     print("H is probably not correct!")
-                
+
                 # explore a little bit
                 
                 # print("done ", done)
@@ -127,7 +152,8 @@ def k_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
                 hypothesis = induction.run_ILASP(LASFILE)
                 print("New H ", hypothesis)
                 induction.update_h(hypothesis, CLINGOFILE)
-
+            else:
+                print("No exclusion!!")
         # Random action
         else:
             # for t in itertools.count():

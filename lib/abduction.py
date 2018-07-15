@@ -3,6 +3,8 @@ from lib import plotting, py_asp, helper, induction
 import subprocess
 import json
 
+import os
+
 def already_in_background(wall, background):
     wall = "wall({})".format(str(wall))
     with open(background, "r") as searchfile:
@@ -43,7 +45,7 @@ def make_lp(filename, backgroundfile, clingofile, start_state, goal_state, time_
     hypothesis = induction.run_ILASP(filename)
 
     # starting point
-    start_state = "state_at((" + str(int(start_state[0])) + ", " + str(int(start_state[1])) + "), 1).\n"
+    start_state = "%AAA\n" + "state_at((" + str(int(start_state[0])) + ", " + str(int(start_state[1])) + "), 1).\n" + "%BBB\n"
     # goal state
     goal_state = "state_at((" + str(int(goal_state[0])) + ", " + str(int(goal_state[1])) + "), T),"
 
@@ -94,7 +96,7 @@ def run_clingo(clingofile):
         planning_actions = e.output
         # When Clingo returns UNSATISFIABLE
         # print(e)
-        # print(e.output)
+        print(e.output)
 
     json_plan = json.loads(planning_actions)
 
@@ -193,6 +195,22 @@ def extract_action(action):
         if action[a] == ",":
             end_index = a
     return action[start_index: end_index]
+
+def add_starting_position(agent_position, clingofile):
+    start_state = "%AAA\n" + "state_at((" + str(int(agent_position[0])) + ", " + str(int(agent_position[1])) + "), 1).\n" + "%BBB\n"
+    flag = False
+    with open(clingofile) as f:
+        for line in f:
+            if line == "%AAA\n":
+                flag = True
+            if flag == False:
+                with open("temp.lp", "a") as newfile:
+                    newfile.write(line)
+            if line == "%BBB\n":
+                flag = False
+    os.rename("temp.lp", clingofile)
+
+    send_kb(start_state, clingofile)
 
 def get_predicted_state(current_state, action, states):
     # if not check_if_in_answersets()
