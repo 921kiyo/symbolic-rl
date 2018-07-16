@@ -23,6 +23,10 @@ import gym, gym_vgdl
 LASFILE = "output.las"
 BACKGROUND = "background.lp"
 CLINGOFILE = "clingo.lp"
+
+# Increase this to make the decay faster
+DECAY_PARAM = 1
+
 # TIME_RANGE = 20
 # env = gym.make('vgdl_aaa_small-v0')
 
@@ -30,13 +34,14 @@ CLINGOFILE = "clingo.lp"
 # TIME_RANGE2 = 30
 # env = gym.make('vgdl_aaa_maze-v0')
 
+# incease param to make it faster
+
 TIME_RANGE = 300
 TIME_RANGE2 = 20
 env = gym.make('vgdl_aaa_L_shape-v0')
 
 HEIGHT = env.unwrapped.game.height
 WIDTH = env.unwrapped.game.width
-# import ipdb; ipdb.set_trace()
 
 # def make_epsilon_greedy_policy(Q, epsilon, nA):
 #     def policy_fn(observation, episodes):
@@ -47,15 +52,10 @@ WIDTH = env.unwrapped.game.width
 #         return A
 #     return policy_fn
 
-def k_learning(env, num_episodes, discount_factor=0.9, epsilon=1):
-    
-    # Q = defaultdict(lambda: np.zeros(env.action_space.n))
-    # policy = make_epsilon_greedy_policy(Q, epsilon, env.action_space.n)
-    
-     
+def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
+
     wall_list = induction.get_all_walls(env)
-    print("correct wall_list ", wall_list)
-    # import ipdb; ipdb.set_trace()
+
     is_las = False
     first_abduction = False
     # Clean up first
@@ -68,6 +68,10 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=1):
     is_start = True
 
     for i_episode in range(num_episodes):
+
+        # Decaying epsilon greedy params
+        epsilon = epsilon*(1/(i_episode+1)^DECAY_PARAM)
+
         # Reset the env and pick the first action
         print("==============NEW EPISODE======================")
         # TODO DO I want ot update this in every episode??
@@ -101,7 +105,7 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=1):
                 threshold = random.uniform(0,1)                
                 action_int = helper.get_action(action[1])
                 planned_action = action_int
-                if threshold > epsilon:
+                if threshold < epsilon:
                     action_int = env.action_space.sample()
                     print("Taking a pure random action")
                     is_start = False
@@ -163,13 +167,13 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=1):
                     previous_state_at = observed_state
                 
                     is_start = True
-                    if any_exclusion:
-                        print("exclusion is there ", pos)
-                        hypothesis = induction.run_ILASP(LASFILE)
-                        print("New H ", hypothesis)
-                        induction.update_h(hypothesis, CLINGOFILE)
-                    else:
-                        print("No exclusion!!")
+            if any_exclusion:
+                print("exclusion is there ", pos)
+                hypothesis = induction.run_ILASP(LASFILE)
+                print("New H ", hypothesis)
+                induction.update_h(hypothesis, CLINGOFILE)
+            else:
+                print("No exclusion!!")
 
         # Random action until ILASP kicks in
         else:
