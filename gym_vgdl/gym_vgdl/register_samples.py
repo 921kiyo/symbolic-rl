@@ -80,7 +80,7 @@ def register_sample_games():
                     'obs_type': obs_type,
                     'notable_sprites': classes[game],
                     'notable_resources': resources[game],
-                    'block_size': 5 if obs_type == 'image' else 10
+                    'block_size': 24 if obs_type == 'image' else 10
                 },
                 timestep_limit=1000,
                 nondeterministic=True,

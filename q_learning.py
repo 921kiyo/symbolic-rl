@@ -28,17 +28,16 @@ from lib import plotting, py_asp, helper, induction, abduction
 # env = gym.make('vgdl_survivezombies-v0')
 
 # env = gym.make('vgdl_aaa_field-v0')
-env = gym.make('vgdl_aaa_square-v0')
+# env = gym.make('vgdl_aaa_square-v0')
 # trace_path = os.path.dirname(ospath.realpath(__file__))
 # env = TraceRecordingWrapper(env, trace_path)
 # env = gym.make('vgdl_aaa3-v0')
-TIME_RANGE = 20
-# env = gym.make('vgdl_aaa_L_shape-v0')
+TIME_RANGE = 400
+env = gym.make('vgdl_aaa_L_shape-v0')
 
 # env = gym.make('vgdl_aaa_maze-v0')
 
-env = gym.make('vgdl_aaa_small-v0')
-
+# env = gym.make('vgdl_aaa_small-v0')
 
 def make_epsilon_greedy_policy(Q, epsilon, nA):
     def policy_fn(observation, episodes):
@@ -96,7 +95,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             next_state, reward, done, _ = env.step(action)
             print("next_state ", next_state)
             if done:
-                # exit(1)
+                exit(1)
                 reward = 100
             else:
                 reward = reward - 1
@@ -133,6 +132,6 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
     return Q, stats
 
-# Q, stats = q_learning(env, 150)
-# # plotting.plot_episode_stats(stats)
-# plotting.plot_episode_stats_simple(stats)
+Q, stats = q_learning(env, 200)
+# plotting.plot_episode_stats(stats)
+plotting.plot_episode_stats_simple(stats)

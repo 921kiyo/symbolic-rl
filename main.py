@@ -26,16 +26,16 @@ CLINGOFILE = "clingo.lp"
 # Increase this to make the decay faster
 DECAY_PARAM = 1
 
-TIME_RANGE = TIME_RANGE2 = 20
-env = gym.make('vgdl_aaa_small-v0')
+# TIME_RANGE = TIME_RANGE2 = 20
+# env = gym.make('vgdl_aaa_small-v0')
 
 # TIME_RANGE = 450
 # TIME_RANGE2 = 30
 # env = gym.make('vgdl_aaa_maze-v0')
 
-# TIME_RANGE = 300
-# TIME_RANGE2 = 20
-# env = gym.make('vgdl_aaa_L_shape-v0')
+TIME_RANGE = 300
+TIME_RANGE2 = 20
+env = gym.make('vgdl_aaa_L_shape-v0')
 
 HEIGHT = env.unwrapped.game.height
 WIDTH = env.unwrapped.game.width
@@ -65,7 +65,6 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
         # epsilon = epsilon*(1/(i_episode+1)**DECAY_PARAM)
         # print("epsilon ", epsilon)
 
-
         # Reset the env and pick the first action
         print("==============NEW EPISODE======================")
         # TODO DO I want ot update this in every episode??
@@ -81,9 +80,7 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
             if first_abduction == False:
                 abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, WIDTH, HEIGHT)
                 first_abduction = True
-
             abduction.add_starting_position(agent_position, CLINGOFILE)
-            # print("REPLAN AGAIN")
             # time.sleep(1.5)
             # When B is updated, run abduction to do replan
             states_plan, actions_array = abduction.run_clingo(CLINGOFILE)
@@ -121,10 +118,8 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                     stats.episode_rewards[i_episode] += reward
                     stats.episode_lengths[i_episode] = action_index
 
-                    print("done?? ", done)
                     if done:
                         pass
-
                     break
                 else:
                     next_state, reward, done, _ = env.step(action_int)
@@ -135,6 +130,7 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                         reward = 100
                     else:
                         reward = reward - 1
+
                     # if done:
                     #     reward = 100
                     # else:
@@ -198,7 +194,7 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                 if done:
                     reward = 100
                     goal_state = next_state
-                    
+                    print("GOAL STATE ", goal_state)
                     is_las = True
                 else:
                     reward = reward - 1
@@ -222,6 +218,6 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
 
     return stats
 
-# stats = k_learning(env, 200, epsilon=0)
-# # plotting.plot_episode_stats(stats)
-# plotting.plot_episode_stats_simple(stats)
+stats = k_learning(env, 200, epsilon=0)
+# plotting.plot_episode_stats(stats)
+plotting.plot_episode_stats_simple(stats)
