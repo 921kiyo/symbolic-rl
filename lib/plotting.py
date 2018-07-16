@@ -97,12 +97,31 @@ def plot_episode_stats(stats, smoothing_window=10, noshow=False):
 
     return fig1, fig2, fig3
 
-def plot_episode_stats_simple(stats, smoothing_window=10, noshow=False):
+def plot_episode_stats_simple(stats, smoothing_window=10, noshow=False, color="green"):
 
     # Plot the episode reward over time
     fig2 = plt.figure(figsize=(10,5))
     rewards_smoothed = pd.Series(stats.episode_rewards).rolling(smoothing_window, min_periods=smoothing_window).mean()
-    plt.plot(rewards_smoothed)
+    plt.plot(rewards_smoothed, color=color)
+    plt.xlabel("Episode")
+    plt.ylabel("Episode Reward (Smoothed)")
+    plt.title("Episode Reward over Time (Smoothed over window size {})".format(smoothing_window))
+    if noshow:
+        plt.close(fig2)
+    else:
+        plt.show(fig2)
+
+    return fig2
+
+
+def plot_episode_stats_multiple(stats, stats2, smoothing_window=10, noshow=False):
+
+    # Plot the episode reward over time
+    fig2 = plt.figure(figsize=(10,5))
+    rewards_smoothed = pd.Series(stats.episode_rewards).rolling(smoothing_window, min_periods=smoothing_window).mean()
+    rewards_smoothed2 = pd.Series(stats2.episode_rewards).rolling(smoothing_window, min_periods=smoothing_window).mean()
+
+    plt.plot(rewards_smoothed, "r--", rewards_smoothed2, "b")
     plt.xlabel("Episode")
     plt.ylabel("Episode Reward (Smoothed)")
     plt.title("Episode Reward over Time (Smoothed over window size {})".format(smoothing_window))

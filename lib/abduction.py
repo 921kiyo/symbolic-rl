@@ -48,7 +48,8 @@ def make_lp(filename, backgroundfile, clingofile, start_state, goal_state, time_
     start_state = "%AAA\n" + "state_at((" + str(int(start_state[0])) + ", " + str(int(start_state[1])) + "), 1).\n" + "%BBB\n"
     # goal state
     goal_state = "state_at((" + str(int(goal_state[0])) + ", " + str(int(goal_state[1])) + "), T),"
-
+    # goal_state = "state_at((17, 1), T),"
+    
     # TODO automatically get this info as well
     # action choice rule
     actions = "1{action(down, T); action(up, T); action(right, T); action(left, T); action(non, T)}1 :- time(T), not finished(T).\n"

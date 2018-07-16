@@ -15,7 +15,6 @@ import itertools
 import pandas as pd
 import sys
 
-from collections import defaultdict
 from lib import plotting, py_asp, helper, induction, abduction
 
 import gym, gym_vgdl
@@ -27,30 +26,19 @@ CLINGOFILE = "clingo.lp"
 # Increase this to make the decay faster
 DECAY_PARAM = 1
 
-# TIME_RANGE = 20
-# env = gym.make('vgdl_aaa_small-v0')
+TIME_RANGE = TIME_RANGE2 = 20
+env = gym.make('vgdl_aaa_small-v0')
 
 # TIME_RANGE = 450
 # TIME_RANGE2 = 30
 # env = gym.make('vgdl_aaa_maze-v0')
 
-# incease param to make it faster
-
-TIME_RANGE = 300
-TIME_RANGE2 = 20
-env = gym.make('vgdl_aaa_L_shape-v0')
+# TIME_RANGE = 300
+# TIME_RANGE2 = 20
+# env = gym.make('vgdl_aaa_L_shape-v0')
 
 HEIGHT = env.unwrapped.game.height
 WIDTH = env.unwrapped.game.width
-
-# def make_epsilon_greedy_policy(Q, epsilon, nA):
-#     def policy_fn(observation, episodes):
-#         new_epsilon = epsilon*(1/(episodes+1))
-#         A = np.ones(nA, dtype=float)* new_epsilon/nA
-#         best_action = np.argmax(Q[observation])
-#         A[best_action] += (1.0 - new_epsilon)
-#         return A
-#     return policy_fn
 
 def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
 
@@ -67,10 +55,16 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
 
     is_start = True
 
+    stats = plotting.EpisodeStats(
+        episode_lengths=np.zeros(num_episodes),
+        episode_rewards=np.zeros(num_episodes))
+
     for i_episode in range(num_episodes):
 
         # Decaying epsilon greedy params
-        epsilon = epsilon*(1/(i_episode+1)^DECAY_PARAM)
+        # epsilon = epsilon*(1/(i_episode+1)**DECAY_PARAM)
+        # print("epsilon ", epsilon)
+
 
         # Reset the env and pick the first action
         print("==============NEW EPISODE======================")
@@ -89,28 +83,32 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                 first_abduction = True
 
             abduction.add_starting_position(agent_position, CLINGOFILE)
-            print("REPLAN AGAIN")
+            # print("REPLAN AGAIN")
             # time.sleep(1.5)
             # When B is updated, run abduction to do replan
             states_plan, actions_array = abduction.run_clingo(CLINGOFILE)
-            # print("ASP states ", states_plan)
-            # print("ASP actions ", actions_array)
+            print("ASP states ", states_plan)
+            print("ASP actions ", actions_array)
             # Execute the planning
             for action_index, action in enumerate(actions_array):
                 print("------------------------------")
                 print("Planning phase... ", "take action ", action[1])
                 env.render()
-                time.sleep(0.1)
+                # time.sleep(0.1)
 
                 threshold = random.uniform(0,1)                
                 action_int = helper.get_action(action[1])
 
+                # explore a little bit
                 if threshold < epsilon:
                     action_int = env.action_space.sample()
                     print("Taking a pure random action")
                     is_start = False
                     next_state, reward, done, _ = env.step(action_int)
-
+                    if done:
+                        reward = 100
+                    else:
+                        reward = reward - 1
                     agent_position = env.unwrapped.game.getFeatures()
                     print("agent_position ", agent_position)
                     
@@ -118,14 +116,39 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                     previous_state = next_state
                     observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
                     previous_state_at = observed_state
+                    
+                    # Update stats
+                    stats.episode_rewards[i_episode] += reward
+                    stats.episode_lengths[i_episode] = action_index
+
+                    print("done?? ", done)
+                    if done:
+                        pass
+
                     break
                 else:
                     next_state, reward, done, _ = env.step(action_int)
+                    x = int(next_state[0])
+                    y = int(next_state[1])
+                    if x == 5 and y == 1:
+                        print("KIND OF ")
+                        reward = 100
+                    else:
+                        reward = reward - 1
+                    # if done:
+                    #     reward = 100
+                    # else:
+                    #     reward = reward - 1
+                    
                     observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
                     # print("previous_state ", previous_state)
                     print("observed_state ",observed_state)
                     new_wall_added = abduction.add_new_walls(previous_state, wall_list, CLINGOFILE)
                     
+                    # Update stats
+                    stats.episode_rewards[i_episode] += reward
+                    stats.episode_lengths[i_episode] = action_index
+
                     # B UPDATE
                     if new_wall_added:
                         print("new walls added!")
@@ -145,17 +168,15 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                     if(predicted_state != observed_state):
                         print("H is probably not correct!")
 
-                    # explore a little bit
-                    
-                    # print("done ", done)
-                    # if done:
-                    #     is_las = False
-                    #     break
+                    if done:
+                        # is_las = False
+                        break
+                
                     state = next_state
                     previous_state = next_state
                     previous_state_at = observed_state
                 
-                    is_start = True
+            is_start = True
             if any_exclusion:
                 print("exclusion is there ", pos)
                 hypothesis = induction.run_ILASP(LASFILE)
@@ -177,6 +198,7 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                 if done:
                     reward = 100
                     goal_state = next_state
+                    
                     is_las = True
                 else:
                     reward = reward - 1
@@ -190,12 +212,16 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                 previous_state = next_state
 
                 # Update stats
-                # stats.episode_rewards[i_episode] += reward
-                # stats.episode_lengths[i_episode] = t
+                stats.episode_rewards[i_episode] += reward
+                stats.episode_lengths[i_episode] = t
 
                 if done:
                     break
 
                 state = next_state
 
-k_learning(env, 200)
+    return stats
+
+# stats = k_learning(env, 200, epsilon=0)
+# # plotting.plot_episode_stats(stats)
+# plotting.plot_episode_stats_simple(stats)
