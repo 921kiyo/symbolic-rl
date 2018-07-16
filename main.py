@@ -104,7 +104,7 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
 
                 threshold = random.uniform(0,1)                
                 action_int = helper.get_action(action[1])
-                planned_action = action_int
+
                 if threshold < epsilon:
                     action_int = env.action_space.sample()
                     print("Taking a pure random action")
@@ -137,18 +137,7 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                     any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], walls)
                     pos += "\n"
                     induction.add_new_pos(pos, LASFILE)
-                    
-                    # H UPDATE
-                    # if any_exclusion:
-                    #     pass
-                    #     # print("exclusion is there ", pos)
-                    #     # hypothesis = induction.run_ILASP(LASFILE)
-                    #     # print("New H ", hypothesis)
-                    #     # induction.update_h(hypothesis, CLINGOFILE)
-                    #     # break
-                    # else:
-                        # print("No exclusion!!")
-                    
+                                        
                     predicted_state = abduction.get_predicted_state(previous_state_at, action[1], states_plan)
                     print("predicted_state ", predicted_state)
 
@@ -195,9 +184,6 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                 action_string = helper.convert_action(action)
 
                 # Make ASP syntax of state transition
-                # print("previous_state ", previous_state)
-                # print("next_state ", next_state)
-                # print("wall_list ", wall_list)
                 induction.send_state_transition(previous_state, next_state, action_string, wall_list, LASFILE)
                 # Meanwhile, accumulate all background knowlege
                 abduction.add_new_walls(previous_state, wall_list, BACKGROUND)
