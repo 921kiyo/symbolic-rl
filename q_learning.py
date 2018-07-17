@@ -65,7 +65,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
     policy = make_epsilon_greedy_policy(Q, epsilon, env.action_space.n)
     for i_episode in range(num_episodes):
-        print("------------------------------")
+        # print("------------------------------")
         if(i_episode+1) % 100 == 0:
             print("\rEpisode {}/{}.".format(i_episode+1, num_episodes), end="")
             sys.stdout.flush()
@@ -93,9 +93,9 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             # 3: RIGHT
 
             next_state, reward, done, _ = env.step(action)
-            print("next_state ", next_state)
+            # print("next_state ", next_state)
             if done:
-                exit(1)
+                # exit(1)
                 reward = 100
             else:
                 reward = reward - 1
@@ -126,9 +126,11 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             state_int = next_state_int
 
     # Display the final Q-Table
-    # for key, value in enumerate(Q.items()):
-    #     print(value)
-    #     print("\n")
+    # print("HELLO")
+    for key, value in enumerate(Q.items()):
+        print(key)
+        print(value)
+        print("\n")
 
     return Q, stats
 

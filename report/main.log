@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.28)  10 JUL 2018 14:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.28)  17 JUL 2018 16:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -582,7 +582,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hypcap package is loaded.
 Package caption Info: End \AtBeginDocument code.
 Package backref Info: ** backref set up for natbib ** on input line 47.
-(./titlepage.tex <./figures/imperial.pdf, id=100, 362.35374pt x 95.35625pt>
+(./titlepage.tex <./figures/imperial.pdf, id=156, 362.35374pt x 95.35625pt>
 File: ./figures/imperial.pdf Graphic file (type pdf)
 
 <use ./figures/imperial.pdf>
@@ -616,12 +616,15 @@ LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <12> not available
  [1
 
 
-] (./main.toc)
+] (./main.toc
+[2
+
+])
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
+ [3] [4
 
-[2
 
 ]
 Chapter 1.
@@ -630,14 +633,16 @@ Chapter 1.
 LaTeX Warning: Reference `project_overview' on page 1 undefined on input line 1
 4.
 
+
+LaTeX Warning: Reference `ethics_checklist' on page 1 undefined on input line 1
+4.
+
 )pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.99 
       [1
-
-
 
 ] [2]
 Chapter 2.
@@ -665,164 +670,159 @@ Underfull \hbox (badness 10000) in paragraph at lines 151--156
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 174--175
+Underfull \hbox (badness 10000) in paragraph at lines 173--174
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 176--181
+Underfull \hbox (badness 10000) in paragraph at lines 175--180
 
  []
 
 [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 241--242
+Underfull \hbox (badness 10000) in paragraph at lines 240--241
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 247--248
+Underfull \hbox (badness 10000) in paragraph at lines 246--247
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 249--254
+Underfull \hbox (badness 10000) in paragraph at lines 248--253
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 261--262
+Underfull \hbox (badness 10000) in paragraph at lines 260--261
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 263--267
+Underfull \hbox (badness 10000) in paragraph at lines 262--266
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 274--276
+Underfull \hbox (badness 10000) in paragraph at lines 273--275
 
  []
 
 [6]
+Underfull \hbox (badness 10000) in paragraph at lines 276--277
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 277--278
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 278--279
+Underfull \hbox (badness 10000) in paragraph at lines 280--281
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 281--282
+Underfull \hbox (badness 10000) in paragraph at lines 282--287
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 283--288
+Underfull \hbox (badness 10000) in paragraph at lines 294--295
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 295--296
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 297--302
+Underfull \hbox (badness 10000) in paragraph at lines 296--301
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 352--353
+Underfull \hbox (badness 10000) in paragraph at lines 351--352
 
  []
 
-[8] <./figures/agent_env.png, id=260, 248.93pt x 228.855pt>
+[8] <./figures/agent_env.png, id=340, 248.93pt x 228.855pt>
 File: ./figures/agent_env.png Graphic file (type png)
 
 <use ./figures/agent_env.png>
-Package pdftex.def Info: ./figures/agent_env.png used on input line 389.
+Package pdftex.def Info: ./figures/agent_env.png used on input line 388.
 (pdftex.def)             Requested size: 170.72113pt x 170.72241pt.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 390.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 389.
  [9 <./figures/agent_env.png>] [10]
-<./figures/dyna.png, id=286, 243.91125pt x 175.65625pt>
+<./figures/dyna.png, id=365, 243.91125pt x 175.65625pt>
 File: ./figures/dyna.png Graphic file (type png)
 
 <use ./figures/dyna.png>
-Package pdftex.def Info: ./figures/dyna.png used on input line 470.
+Package pdftex.def Info: ./figures/dyna.png used on input line 469.
 (pdftex.def)             Requested size: 227.62413pt x 170.72942pt.
 
 Underfull \vbox (badness 1661) has occurred while \output is active []
 
  [11 <./figures/dyna.png>] [12]
 Chapter 3.
-(./chapters/related_work.tex [13
+(./chapters/implementation.tex
+<./figures/architecture.png, id=384, 566.115pt x 412.54124pt>
+File: ./figures/architecture.png Graphic file (type png)
 
-]) [14]
-Chapter 4.
-<./figures/ILASRL.png, id=332, 543.02875pt x 333.245pt>
-File: ./figures/ILASRL.png Graphic file (type png)
+<use ./figures/architecture.png>
+Package pdftex.def Info: ./figures/architecture.png used on input line 8.
+(pdftex.def)             Requested size: 438.17227pt x 319.3133pt.
+ [13
 
-<use ./figures/ILASRL.png>
-Package pdftex.def Info: ./figures/ILASRL.png used on input line 540.
-(pdftex.def)             Requested size: 426.80879pt x 256.09094pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 548--549
-
- []
-
-
-Underfull \vbox (badness 7558) has occurred while \output is active []
-
- [15
-
- <./figures/ILASRL.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 560--561
+ <./figures/architecture.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 17--18
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 562--569
+Underfull \hbox (badness 10000) in paragraph at lines 29--30
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 572--573
+Underfull \hbox (badness 10000) in paragraph at lines 31--38
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 574--579
+Underfull \hbox (badness 10000) in paragraph at lines 41--42
 
  []
 
-<./figures/grid_world.png, id=341, 625.33624pt x 270.00874pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 43--48
+
+ []
+
+
+Underfull \vbox (badness 5417) has occurred while \output is active []
+
+ [14]
+<./figures/grid_world.png, id=403, 625.33624pt x 270.00874pt>
 File: ./figures/grid_world.png Graphic file (type png)
 
 <use ./figures/grid_world.png>
-Package pdftex.def Info: ./figures/grid_world.png used on input line 584.
+Package pdftex.def Info: ./figures/grid_world.png used on input line 81.
 (pdftex.def)             Requested size: 284.52843pt x 142.26758pt.
- [16] [17 <./figures/grid_world.png>]
+ [15 <./figures/grid_world.png>]) [16]
+Chapter 4.
+(./chapters/evaluation.tex) [17
+
+]
 Chapter 5.
-(./chapters/implementation.tex) [18
+(./chapters/related_work.tex [18
 
-]
+]) [19]
 Chapter 6.
-(./chapters/evaluation.tex) [19
-
-]
-Chapter 7.
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 609.
-
 [20
 
-]
-Chapter 8.
+] [21]
+Chapter 7.
+(./chapters/ethics.tex
 Missing character: There is no â in font bchr7t!
 Missing character: There is no € in font bchr7t!
 Missing character: There is no œ in font bchr7t!
@@ -830,61 +830,61 @@ Missing character: There is no â in font bchr7t!
 Missing character: There is no € in font bchr7t!
 Missing character: There is no  in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 634--695
+Overfull \hbox (9.14763pt too wide) in alignment at lines 3--64
  [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 695
+Underfull \vbox (badness 10000) detected at line 64
  []
 
 Missing character: There is no â in font bchr7t!
 Missing character: There is no € in font bchr7t!
 Missing character: There is no “ in font bchr7t!
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 695--756
+Overfull \hbox (9.14763pt too wide) in alignment at lines 64--125
  [] [] [] 
  []
 
 
-Overfull \hbox (9.14763pt too wide) in alignment at lines 756--761
+Overfull \hbox (9.14763pt too wide) in alignment at lines 125--130
  [] [] [] 
  []
 
-[21
+[22
 
-] [22] (./main.bbl (./main.brf)
+] [23]) (./main.bbl (./main.brf)
 \tf@brf=\write5
 \openout5 = `main.brf'.
 
- [23] [24
+ [24] [25
 
 ]
 Missing character: There is no â in font bchri7t!
 Missing character: There is no € in font bchri7t!
 Missing character: There is no ” in font bchri7t!
- [25])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 782.
- [26]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 782.
+ [26])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 588.
+ [27]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 588.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 782.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 782.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 588.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 588.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 25E64D0503C736EC18A1ADB5757EE3F6;1796.
+(rerunfilecheck)             Checksum: 4042640BCAF4BE6D73CBF9BC7C2E71C1;2865.
 Package rerunfilecheck Info: File `main.brf' has not changed.
-(rerunfilecheck)             Checksum: 805C1F168B69CB1049B648EEFF30B19F;1642.
+(rerunfilecheck)             Checksum: 9D073DAA67979273C6D61642B605D268;1650.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 782.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 588.
  ) 
 Here is how much of TeX's memory you used:
- 10843 strings out of 494953
- 156812 string characters out of 6180976
- 287369 words of memory out of 5000000
- 13772 multiletter control sequences out of 15000+600000
+ 10882 strings out of 494953
+ 157430 string characters out of 6180976
+ 287588 words of memory out of 5000000
+ 13791 multiletter control sequences out of 15000+600000
  46299 words of font info for 87 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  41i,12n,43p,928b,587s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -897,15 +897,16 @@ ts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
 nts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (29 pages, 255246 bytes).
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (32 pages, 272813 bytes).
 PDF statistics:
- 478 PDF objects out of 1000 (max. 8388607)
- 421 compressed objects within 5 object streams
- 134 named destinations out of 1000 (max. 500000)
- 218 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 569 PDF objects out of 1000 (max. 8388607)
+ 507 compressed objects within 6 object streams
+ 151 named destinations out of 1000 (max. 500000)
+ 330 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -92,7 +92,8 @@ def run_clingo(clingofile):
     # Get planning using clingo
     print("clingo running...")
     try:
-        planning_actions = subprocess.check_output(["clingo", "-n", "0", clingofile, "--opt-mode=opt", "--outf=2"], universal_newlines=True)
+        # planning_actions = subprocess.check_output(["clingo", "-n", "0", clingofile, "--opt-mode=opt", "--outf=2"], universal_newlines=True)
+        planning_actions = subprocess.check_output(["clingo5", "--opt-strat=usc,stratify", "-n", "0", clingofile, "--opt-mode=opt", "--outf=2"], universal_newlines=True)
     except subprocess.CalledProcessError as e:
         planning_actions = e.output
         # When Clingo returns UNSATISFIABLE
