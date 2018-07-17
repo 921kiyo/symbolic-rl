@@ -14,7 +14,9 @@ The proposed tentative architecture is shown in Figure \ref{proposed_architectur
 \subsection{Experience Accumulation}
 \label{experience_accumulation}
 
-After the agent took an action, these experiences need to be recorded in two ways: state transition experience and environment experience
+The first step is to accumulate experience. The agent explores the environment randomly until it reaches the goal once. Until then, it keeps accumulating stuff. 
+
+Every time the agent takes an action, these experiences need to be recorded in two ways: state transition experience and environment experience
 
 State transition experiences will be used as positive examples for ILASP, which is of the form
 
@@ -34,6 +36,28 @@ agent\_at\_after((X,Y), T).
 reward(R, T).
 
 action(A, T).
+
+\subsection{Induction}
+\label{induction}
+Once the agent hits the goal once, ILASP gets triggered and try to learn a hypothesis. 
+
+generate hypothesis H,
+
+later on H should be kept improving as we collect more examples as well as background knowledge.
+
+\subsection{Generate a plan}
+\label{Generate a plan}
+
+Generate a plan using abduction
+
+\subsection{Plan execution}
+\label{Plan execution}
+TODO ALGORITHMS HERE
+
+
+TODO ALGORITHMS HERE
+
+
 
 \subsection{Model Generation and Update using ILASP}
 \label{model_generation_and_update}
