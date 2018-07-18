@@ -57,7 +57,6 @@ def k_learning(env, num_episodes, epsilon=0.65):
     induction.copy_las_base(LASFILE, HEIGHT, WIDTH)
 
     wall_list = induction.get_all_walls(env)
-
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes))
@@ -99,8 +98,6 @@ def k_learning(env, num_episodes, epsilon=0.65):
             for action_index, action in enumerate(actions_array):
                 print("------------------------------")
                 print("Planning phase... ", "take action ", action[1])
-                env.render()
-                # time.sleep(0.1)
 
                 # Flip a coin
                 threshold = random.uniform(0,1)                
@@ -180,7 +177,10 @@ def k_learning(env, num_episodes, epsilon=0.65):
                     state = next_state
                     previous_state = next_state
                     previous_state_at = observed_state
-                
+
+                env.render()
+                time.sleep(0.1)  
+
             if is_exclusion:
                 print("exclusion is there ", pos)
                 hypothesis = induction.run_ILASP(LASFILE)
@@ -191,21 +191,26 @@ def k_learning(env, num_episodes, epsilon=0.65):
 
         # Random action until ILASP kicks in
         else:
+            state_so_far = []
             # for t in itertools.count():
             for t in range(TIME_RANGE):
+                
                 env.render()
                 # time.sleep(0.1)
 
                 # Take a step
                 action = env.action_space.sample()
                 next_state, reward, done, _ = env.step(action)
+                
+                state_so_far.append((next_state[0],next_state[1]))
 
                 reward = helper.update_reward(reward, done)
 
                 if done:
-                    goal_state = next_state
+                    goal_state = state_so_far[-2]
                     print("GOAL STATE ", goal_state)
                     is_las = True
+                    break
 
                 # if done:
                 #     reward = 100
@@ -221,6 +226,7 @@ def k_learning(env, num_episodes, epsilon=0.65):
                 induction.send_state_transition_pos(previous_state, next_state, action_string, wall_list, LASFILE)
                 # Meanwhile, accumulate all background knowlege
                 abduction.add_new_walls(previous_state, wall_list, BACKGROUND)
+                # induction.add_surrounding_walls((previous_state, wall_list, BACKGROUND))
                 previous_state = next_state
 
                 # Update stats
@@ -234,6 +240,6 @@ def k_learning(env, num_episodes, epsilon=0.65):
 
     return stats
 
-stats = k_learning(env, 200, epsilon=0)
+stats = k_learning(env, 100, epsilon=0)
 # plotting.plot_episode_stats(stats)
 plotting.plot_episode_stats_simple(stats)

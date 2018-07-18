@@ -10,8 +10,8 @@ def get_all_walls(env):
     walls= env.unwrapped.game.getSprites('wall')
     wall_list = []
     for wall in walls:
-        x = wall.rect.left/5
-        y = wall.rect.top/5
+        x = wall.rect.left/24
+        y = wall.rect.top/24
         wall_list.append((int(x),int(y)))
     return wall_list
 
@@ -183,9 +183,9 @@ def run_ILASP(filename):
     dir = os.path.join(dir, 'las_log')
     cache = "--cached-rel=" + dir
     try:
-        # hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-nc"], universal_newlines=True)
+        # hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
+        hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-nc"], universal_newlines=True)
         # hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-nc", cache], universal_newlines=True)
-        hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
     except subprocess.CalledProcessError as e:
         print("Error...", e.output)
         hypothesis = e.output
