@@ -104,7 +104,7 @@ def run_clingo(clingofile):
         planning_actions = e.output
         # When Clingo returns UNSATISFIABLE
         print("Clingo error...")
-        print(e.output)
+        # print(e.output)
 
     json_plan = json.loads(planning_actions)
 

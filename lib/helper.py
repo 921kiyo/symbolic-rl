@@ -19,6 +19,8 @@ def convert_action(action):
         return "right"
     elif(action == 4):
         return "non"
+    else:
+        print("this action does not exist...", str(action))
 
 def silentremove(filename):
     dir = os.getcwd()
@@ -43,6 +45,9 @@ def get_action(action):
         return 3
     elif(action == "non"):
         return 4
+    else:
+        print("this action does not exist...", action)
+        return -1
 
 def append_to_file(pos, file):
     '''

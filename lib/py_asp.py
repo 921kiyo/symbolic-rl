@@ -10,6 +10,20 @@ def state_at(x,y,t):
     t = str(int(t))
     return "state_at(({},{}),{})".format(x,y,t)
 
+def get_action(integer):
+    if integer == 0:
+        return "up"
+    if integer == 1:
+        return "down"
+    if integer == 2:
+        return "left"
+    if integer == 3:
+        return "right"
+    if integer == 4:
+        return "non"
+    else:
+        return "this action not exist " + str(integer)
+
 def reward(r, t):
     return "reward(" + str(r) + ", " + str(t) + ")."
 

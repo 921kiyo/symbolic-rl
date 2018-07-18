@@ -82,8 +82,10 @@ def k_learning(env, num_episodes, epsilon=0.65):
         previous_state_at = py_asp.state_at(state[0], state[1], 1)
         any_exclusion = False
         is_exclusion = False
-        # Once the plan is obtained, execute the plan
+        
+        state_so_far = []
 
+        # Once the plan is obtained, execute the plan
         if is_las:
             if first_abduction == False:
                 abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, WIDTH, HEIGHT)
@@ -106,12 +108,15 @@ def k_learning(env, num_episodes, epsilon=0.65):
                 if threshold < epsilon:
                     print("Taking a pure random action")
                     action_int = env.action_space.sample()
-
+                    print("action_int ", action_int)
+                    print("random action is ", helper.convert_action(action_int))
                     next_state, reward, done, _ = env.step(action_int)
                     reward = helper.update_reward(reward, done)
+                    state_so_far.append((next_state[0],next_state[1]))
+
 
                     observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
-                    print("observed_state ",observed_state)
+                    print("observed_state in random ",observed_state)
                 
                     # Update stats
                     stats.episode_rewards[i_episode] += reward
@@ -135,13 +140,18 @@ def k_learning(env, num_episodes, epsilon=0.65):
                     state = next_state
                     previous_state = next_state
                     previous_state_at = observed_state
+                    print("next_state ", next_state)
 
+                    if done:
+                        is_start = True
+                        break
                     break
                 else:
                     action_int = helper.get_action(action[1])
                 
                     next_state, reward, done, _ = env.step(action_int)
                     reward = helper.update_reward(reward, done)
+                    state_so_far.append((next_state[0],next_state[1]))
 
                     observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
                     print("observed_state ",observed_state)
@@ -169,17 +179,17 @@ def k_learning(env, num_episodes, epsilon=0.65):
                     # if not, update H
                     if(predicted_state != observed_state):
                         print("H is probably not correct!")
-
-                    if done:
-                        is_start = True
-                        break
             
                     state = next_state
                     previous_state = next_state
                     previous_state_at = observed_state
 
+                    if done:
+                        is_start = True
+                        break
+
                 env.render()
-                time.sleep(0.1)  
+                time.sleep(0.2)  
 
             if is_exclusion:
                 print("exclusion is there ", pos)
@@ -191,7 +201,7 @@ def k_learning(env, num_episodes, epsilon=0.65):
 
         # Random action until ILASP kicks in
         else:
-            state_so_far = []
+            # state_so_far = []
             # for t in itertools.count():
             for t in range(TIME_RANGE):
                 
@@ -211,14 +221,6 @@ def k_learning(env, num_episodes, epsilon=0.65):
                     print("GOAL STATE ", goal_state)
                     is_las = True
                     break
-
-                # if done:
-                #     reward = 100
-                #     goal_state = next_state
-                #     print("GOAL STATE ", goal_state)
-                #     is_las = True
-                # else:
-                #     reward = reward - 1
 
                 action_string = helper.convert_action(action)
 
@@ -240,6 +242,6 @@ def k_learning(env, num_episodes, epsilon=0.65):
 
     return stats
 
-stats = k_learning(env, 100, epsilon=0)
+stats = k_learning(env, 100, epsilon=0.3)
 # plotting.plot_episode_stats(stats)
 plotting.plot_episode_stats_simple(stats)
