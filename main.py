@@ -81,7 +81,7 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
             if first_abduction == False:
                 abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, WIDTH, HEIGHT)
                 first_abduction = True
-            abduction.add_starting_position(agent_position, CLINGOFILE)
+            abduction.update_agent_position(agent_position, CLINGOFILE)
             # When B is updated, run abduction to do replan
             states_plan, actions_array = abduction.run_clingo(CLINGOFILE)
             print("ASP states ", states_plan)
@@ -155,7 +155,7 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                     walls = induction.get_seen_walls(CLINGOFILE)
                     any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], walls)
                     pos += "\n"
-                    induction.add_new_pos(pos, LASFILE)
+                    helper.append_to_file(pos, LASFILE)
                                         
                     predicted_state = abduction.get_predicted_state(previous_state_at, action[1], states_plan)
                     print("predicted_state ", predicted_state)

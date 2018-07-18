@@ -149,20 +149,13 @@ def generate_explore_pos(next_state, previous_state, action, wall_list):
     pos = "#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + walls + "})."
     return pos
 
-def add_new_pos(pos, lasfile):
-    '''
-    Add a new pos to a las file.
-    '''
-    with open(lasfile, "a") as f:
-        f.write(pos)
-
 def send_state_transition_pos(previous_state,next_state, action, wall_list, lasfile):
     '''
     Generate a pos and add it to lasfile
     '''
     pos = generate_explore_pos(next_state,previous_state, action, wall_list)
     pos += "\n"
-    add_new_pos(pos, lasfile)
+    helper.append_to_file(pos, lasfile)
 
 def copy_las_base(lasfile, height, width):
     '''

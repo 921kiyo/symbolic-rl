@@ -43,3 +43,10 @@ def get_action(action):
         return 3
     elif(action == "non"):
         return 4
+
+def append_to_file(pos, file):
+    '''
+    Add a new pos to a las file.
+    '''
+    with open(file, "a") as f:
+        f.write(pos)

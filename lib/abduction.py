@@ -5,44 +5,49 @@ import json
 
 import os
 
-def already_in_background(wall, background):
+def is_wall_in_background(wall, backgroundfile):
     wall = "wall({})".format(str(wall))
-    with open(background, "r") as searchfile:
+    with open(backgroundfile, "r") as searchfile:
         for line in searchfile:
             if(wall in line):
                 searchfile.close()
                 return True
     return False
 
-def add_each_wall(wall, filename):
-    with open(filename, "a") as myfile:
-        myfile.write(wall)
+# TODO Can I simplify this?
+def add_new_walls(previous_state, wall_list, backgroundfile):
+    '''
+    Check the surrounding and see if there is any new walls
 
-def add_new_walls(previous_state, wall_list, background):
+    Output: Boolean to tell whether a new wall has been added to B
+    '''
     x = int(previous_state[0])
     y = int(previous_state[1])
     is_new_b = False
-    if(((x+1,y) in wall_list) and (already_in_background((x+1,y), background) == False)):
+    if(((x+1,y) in wall_list) and (is_wall_in_background((x+1,y), backgroundfile) == False)):
         wall = "wall({}).".format((x+1,y)) + "\n"
-        add_each_wall(wall, background)
+        helper.append_to_file(wall, backgroundfile)
         is_new_b = True
-    if(((x,y+1) in wall_list) and (already_in_background((x,y+1), background) == False)):
+    if(((x,y+1) in wall_list) and (is_wall_in_background((x,y+1), backgroundfile) == False)):
         wall = "wall({}).".format((x,y+1)) + "\n"
-        add_each_wall(wall, background)
+        helper.append_to_file(wall, backgroundfile)
         is_new_b = True
-    if(((x-1,y) in wall_list) and (already_in_background((x-1,y), background) == False)):
+    if(((x-1,y) in wall_list) and (is_wall_in_background((x-1,y), backgroundfile) == False)):
         wall = "wall({}).".format((x-1,y)) + "\n"
-        add_each_wall(wall, background)
+        helper.append_to_file(wall, backgroundfile)
         is_new_b = True
-    if(((x,y-1) in wall_list) and (already_in_background((x,y-1), background) == False)):
+    if(((x,y-1) in wall_list) and (is_wall_in_background((x,y-1), backgroundfile) == False)):
         wall = "wall({}).".format((x,y-1)) + "\n"
-        add_each_wall(wall, background)
+        helper.append_to_file(wall, backgroundfile)
         is_new_b = True
     return is_new_b
 
-def make_lp(filename, backgroundfile, clingofile, start_state, goal_state, time_range, width, height):
+def make_lp(lasfile, backgroundfile, clingofile, start_state, goal_state, time_range, width, height):
+    '''
+    Collect all info necessary to run clingo and send them to "clingofile"
+    '''
     # Run ILASP to get H
-    hypothesis = induction.run_ILASP(filename)
+    hypothesis = induction.run_ILASP(lasfile)
 
     # starting point
     start_state = "%AAA\n" + "state_at((" + str(int(start_state[0])) + ", " + str(int(start_state[1])) + "), 1).\n" + "%BBB\n"
@@ -53,8 +58,9 @@ def make_lp(filename, backgroundfile, clingofile, start_state, goal_state, time_
     # TODO automatically get this info as well
     # action choice rule
     actions = "1{action(down, T); action(up, T); action(right, T); action(left, T); action(non, T)}1 :- time(T), not finished(T).\n"
-    # show, minimizes
+    
     show = "#show state_at/2.\n #show action/2.\n"
+    # TODO update goal specification
     # goal specification
     goal = "finished(T):- goal(T2), time(T), T >= T2.\n goal(T):- " + goal_state + " not finished(T-1).\n" + \
     "goalMet:- goal(T).\n:- not goalMet.\n"
@@ -72,24 +78,24 @@ def make_lp(filename, backgroundfile, clingofile, start_state, goal_state, time_
     minimize = "#minimize{1, X, T: action(X,T)}.\n"
     kb = start_state + actions + show + goal + time + cell + minimize + given
     # Send H and BK to clingofile
-    send_kb(kb, clingofile)
-    send_kb("%START\n", clingofile)
-    send_kb(hypothesis, clingofile)
-    send_kb("%END\n", clingofile)
-    send_background(backgroundfile, clingofile)
+    helper.append_to_file(kb, clingofile)
+    helper.append_to_file("%START\n", clingofile)
+    helper.append_to_file(hypothesis, clingofile)
+    helper.append_to_file("%END\n", clingofile)
+    send_background_to_clingo(backgroundfile, clingofile)
 
-def send_kb(kb, clingofile):
-    with open(clingofile, "a") as c:
-        c.write(kb)
-
-def send_background(input, output):
+def send_background_to_clingo(input, output):
     with open(input) as f:
         with open(output, "a") as out:
             for line in f:
                 out.write(line)
 
 def run_clingo(clingofile):
-    # Get planning using clingo
+    '''
+    Run clingo to get a sequnce of action plan
+    
+    Output: sorted action and state arrays
+    '''
     print("clingo running...")
     try:
         # planning_actions = subprocess.check_output(["clingo", "-n", "0", clingofile, "--opt-mode=opt", "--outf=2"], universal_newlines=True)
@@ -102,19 +108,24 @@ def run_clingo(clingofile):
 
     json_plan = json.loads(planning_actions)
 
+    # Extract only the optimal answer set (last one)
     size_asp = len(json_plan["Call"][0]["Witnesses"])
-
-    # Extract only the optimal answer set
     state_action_array = json_plan["Call"][0]["Witnesses"][size_asp-1]["Value"]
 
     states, actions = sort_planning(state_action_array)
-
     return states, actions
 
 def sort_planning(state_action_array):
+    '''
+    Run clingo to get a sequnce of action plan
+    
+    Output: sorted action and state arrays
+    '''
+
     states = []
     actions = []
 
+    # Loop through the string and put state_at and action into different arrays
     for i in state_action_array:
         if "state_at" in i:
             states.append(i)
@@ -123,8 +134,10 @@ def sort_planning(state_action_array):
 
     states_key = []
     for state in states:
-        key,_,_ = get_T(state)
-        states_key.append((key, state))
+        # key is integer T
+        state_key,_,_ = get_T(state)
+        states_key.append((state_key, state))
+    # Sort them by T
     states_sorted = sorted(states_key, key=lambda tup: tup[0])
 
     actions_key = []
@@ -132,11 +145,17 @@ def sort_planning(state_action_array):
         action_key,_,_ = get_T(action)
         act = extract_action(action)
         actions_key.append((action_key, act))
+    # Sort them by T
     actions_sorted = sorted(actions_key, key=lambda tup: tup[0])
 
     return states_sorted, actions_sorted
 
 def update_T(state):
+    '''
+    Increment T by 1
+    
+    Output: string "state_at"
+    '''
     size = len(state)
     time, start_index, end_index = get_T(state)
     time += 1
@@ -190,6 +209,11 @@ def get_Y(state):
     return int(state[start_index+1: end_index]), start_index, end_index
 
 def extract_action(action):
+    '''
+    Input:  e.g action(right,13)
+    Output: e.g right    
+    '''
+
     start_index = len("action(")
 
     end_index = start_index
@@ -198,7 +222,11 @@ def extract_action(action):
             end_index = a
     return action[start_index: end_index]
 
-def add_starting_position(agent_position, clingofile):
+def update_agent_position(agent_position, clingofile):
+    '''
+    Update planning starting point based on the location of the agent
+    '''
+    # Replace everything between "AAA" and "BBB" in clingo file with a new agent position
     start_state = "%AAA\n" + "state_at((" + str(int(agent_position[0])) + ", " + str(int(agent_position[1])) + "), 1).\n" + "%BBB\n"
     flag = False
     with open(clingofile) as f:
@@ -212,45 +240,15 @@ def add_starting_position(agent_position, clingofile):
                 flag = False
     os.rename("temp.lp", clingofile)
 
-    send_kb(start_state, clingofile)
+    helper.append_to_file(start_state, clingofile)
 
-def check_if_in_answersets(state, states):
-    for s in states:
-        if(state == s[1]):
-            return True
-    return False
-
-def get_predicted_state(current_state, action, states):
-    # if not check_if_in_answersets()
-    current_state = update_T(current_state)
-    if(action == "up"):
-        new_state = update_Y(current_state, -1)
-        if check_if_in_answersets(new_state, states):
-            return new_state
-        else:
-            return current_state
-    elif(action == "down"):
-        new_state = update_Y(current_state, 1)
-        if check_if_in_answersets(new_state, states):
-            return new_state
-        else:
-            return current_state
-    elif(action == "right"):
-        new_state = update_X(current_state, 1)
-        if check_if_in_answersets(new_state, states):
-            return new_state
-        else:
-            return current_state
-    elif(action == "left"):
-        new_state = update_X(current_state, -1)
-        if check_if_in_answersets(new_state, states):
-            return new_state
-        else:
-            return current_state
-    elif(action == "non"):
-        return current_state
 
 def update_h(hypothesis, clingofile):
+    '''
+    Update planning starting point based on the location of the agent
+    '''
+
+    # Replace everything between "START" and "END" in clingo file with a new H
     flag = False
     with open(clingofile) as f:
         for line in f:
@@ -263,6 +261,50 @@ def update_h(hypothesis, clingofile):
                 flag = False
     os.rename("temp.lp", clingofile)
 
-    send_kb("%START\n", clingofile)
-    send_kb(hypothesis, clingofile)
-    send_kb("%END\n", clingofile)
+    helper.append_to_file("%START\n", clingofile)
+    helper.append_to_file(hypothesis, clingofile)
+    helper.append_to_file("%END\n", clingofile)
+
+def is_state_in_states(state, states):
+    '''
+    check if state is in states answer sets
+    '''
+
+    for s in states:
+        if(state == s[1]):
+            return True
+    return False
+
+# TODO Do I want to do this?
+def get_predicted_state(current_state, action, states):
+    '''
+    check if state is in states answer sets
+    '''
+
+    current_state = update_T(current_state)
+    if(action == "up"):
+        new_state = update_Y(current_state, -1)
+        if is_state_in_states(new_state, states):
+            return new_state
+        else:
+            return current_state
+    elif(action == "down"):
+        new_state = update_Y(current_state, 1)
+        if is_state_in_states(new_state, states):
+            return new_state
+        else:
+            return current_state
+    elif(action == "right"):
+        new_state = update_X(current_state, 1)
+        if is_state_in_states(new_state, states):
+            return new_state
+        else:
+            return current_state
+    elif(action == "left"):
+        new_state = update_X(current_state, -1)
+        if is_state_in_states(new_state, states):
+            return new_state
+        else:
+            return current_state
+    elif(action == "non"):
+        return current_state
