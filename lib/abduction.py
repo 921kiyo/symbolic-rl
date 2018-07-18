@@ -214,32 +214,55 @@ def add_starting_position(agent_position, clingofile):
 
     send_kb(start_state, clingofile)
 
+def check_if_in_answersets(state, states):
+    for s in states:
+        if(state == s[1]):
+            return True
+    return False
+
 def get_predicted_state(current_state, action, states):
     # if not check_if_in_answersets()
     current_state = update_T(current_state)
     if(action == "up"):
         new_state = update_Y(current_state, -1)
-        if induction.check_if_in_answersets(new_state, states):
+        if check_if_in_answersets(new_state, states):
             return new_state
         else:
             return current_state
     elif(action == "down"):
         new_state = update_Y(current_state, 1)
-        if induction.check_if_in_answersets(new_state, states):
+        if check_if_in_answersets(new_state, states):
             return new_state
         else:
             return current_state
     elif(action == "right"):
         new_state = update_X(current_state, 1)
-        if induction.check_if_in_answersets(new_state, states):
+        if check_if_in_answersets(new_state, states):
             return new_state
         else:
             return current_state
     elif(action == "left"):
         new_state = update_X(current_state, -1)
-        if induction.check_if_in_answersets(new_state, states):
+        if check_if_in_answersets(new_state, states):
             return new_state
         else:
             return current_state
     elif(action == "non"):
         return current_state
+
+def update_h(hypothesis, clingofile):
+    flag = False
+    with open(clingofile) as f:
+        for line in f:
+            if line == "%START\n":
+                flag = True
+            if flag == False:
+                with open("temp.lp", "a") as newfile:
+                    newfile.write(line)
+            if line == "%END\n":
+                flag = False
+    os.rename("temp.lp", clingofile)
+
+    send_kb("%START\n", clingofile)
+    send_kb(hypothesis, clingofile)
+    send_kb("%END\n", clingofile)

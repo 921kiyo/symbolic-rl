@@ -4,6 +4,9 @@ from lib import plotting, py_asp, helper, abduction
 import subprocess
 
 def get_all_walls(env):
+    '''
+    Output: wall array. e.g [(X1,Y1), (X2,Y2)...]
+    '''
     walls= env.unwrapped.game.getSprites('wall')
     wall_list = []
     for wall in walls:
@@ -13,6 +16,9 @@ def get_all_walls(env):
     return wall_list
 
 def add_surrounding_walls(x, y, wall_list):
+    '''
+    Output: wall(X1,Y1). wall(X2,Y2). ...
+    '''
     walls = ""
     if((x+1,y) in wall_list):
         walls += "wall({}). ".format((x+1,y))
@@ -22,11 +28,29 @@ def add_surrounding_walls(x, y, wall_list):
         walls += "wall({}). ".format((x-1,y))
     if((x,y-1) in wall_list):
         walls += "wall({}). ".format((x,y-1))
-
     return walls
 
+def get_seen_walls(file):
+    '''
+    Collect all walls that are already seen
+
+    Output: [(X1,Y1), (X2,Y2), ...]
+    '''
+    wall_list = []
+    with open(file) as f:
+        for line in f:
+            if "wall((" in line:
+                x,_,_ = abduction.get_X(line)
+                y,_,_ = abduction.get_Y(line)
+                wall_list.append((x,y))
+    return wall_list
 
 def get_exclusions(previous_state, next_state):
+    '''
+    Get all state_after that did not happen while exploring
+
+    Output: "state_after((X1,Y1)), state_after((X2,Y2)), ... 
+    '''
     previous_x = int(previous_state[0])
     previous_y = int(previous_state[1])
     next_x = int(next_state[0])
@@ -69,6 +93,13 @@ def get_exclusions(previous_state, next_state):
                 ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + "))"
 
 def get_plan_exclusions(state_at_before, state_at_after, states):
+    '''
+    Go through the states plan at time T, and get all state_after that did not happen,
+    and return them as exclusions (since they are not useful state plan)
+
+    Output: "state_after((X1,Y1)), state_after((X2,Y2)), ... 
+    '''
+
     current_time,_,_ = abduction.get_T(state_at_before)
     exclusion_list = []
 
@@ -78,6 +109,8 @@ def get_plan_exclusions(state_at_before, state_at_after, states):
             y_after, _, _ = abduction.get_Y(s[1])
             state_after = py_asp.state_after(x_after, y_after)
             exclusion_list.append(state_after)
+    
+    # Take each element in exclcusion_list and concatinate them in string
     exclusions = ""
     for exclusion in exclusion_list:
         exclusions += exclusion
@@ -85,12 +118,18 @@ def get_plan_exclusions(state_at_before, state_at_after, states):
     return exclusions[0:len(exclusions)-2]
 
 def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list):
+    '''
+    Generate a positive example for ILASP from the plan
+
+    Output: #pos({state_after((3,6))}, {state_after((4,6)), ...}, {state_before((3,6)). action(non). }).
+    '''
     x_before, _, _ = abduction.get_X(state_at_before)
     y_before, _, _ = abduction.get_Y(state_at_before)
     x_after, _, _ = abduction.get_X(state_at_after)
     y_after, _, _ = abduction.get_Y(state_at_after)
     state_before = py_asp.state_before(x_before, y_before)
     state_after = py_asp.state_after(x_after, y_after)
+    # TODO is this correct way to do??
     exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
     walls = add_surrounding_walls(x_before, y_before, wall_list)
     if exclusions == "":
@@ -98,97 +137,54 @@ def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list
     else:
         return True, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."    
 
-def check_if_in_answersets(state, states):
-    for s in states:
-        if(state == s[1]):
-            return True
-    return False
+# TODO could be redundant
+def generate_explore_pos(next_state, previous_state, action, wall_list):
+    '''
+    Generate a pos in the exploration phase
 
-def get_wall_list(file):
-    wall_list = []
-    with open(file) as f:
-        for line in f:
-            if "wall((" in line:
-                x,_,_ = abduction.get_X(line)
-                y,_,_ = abduction.get_Y(line)
-                wall_list.append((x,y))
-    return wall_list
-
-# Probably not needed
-def execute_pseudo_action(current_state, action):
-    current_state = abduction.update_T(current_state)
-    if(action == "up"):
-        return abduction.update_Y(current_state, -1)
-    elif(action == "down"):
-        return abduction.update_Y(current_state, 1)
-    elif(action == "right"):
-        return abduction.update_X(current_state, 1)
-    elif(action == "left"):
-        return abduction.update_X(current_state, -1)
-    elif(action == "non"):
-        return current_state
-
-# Probably not needed
-def execute_pseudo_plan(start_state, actions, states, wall_list):
-    current_state = start_state
-    for action in actions:
-        print("---------------")
-        print("old ", current_state)
-        print("action ", action[1])
-        state_before = current_state
-        current_state = execute_pseudo_action(current_state, action[1])
-        state_after = current_state
-        print("new ",current_state)
-
-        any_exclusion, pos = generate_plan_pos(state_before, state_after, states, action[1], wall_list)
-
-        return any_exclusion, pos
-
-def add_new_pos(pos, file):
-    with open(file, "a") as f:
-        f.write(pos)
-
-def positive_example(next_state, previous_state, action, wall_list):
+    Output: #pos({state_after((3,6))}, {state_after((4,6)), ...}, {state_before((3,6)). action(non). }).
+    '''
     walls = add_surrounding_walls(int(previous_state[0]),int(previous_state[1]), wall_list)
     exclusions = get_exclusions(previous_state, next_state)
     pos = "#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + walls + "})."
     return pos
 
-def send_state_transition(previous_state,next_state, action, wall_list, filename):
-    pos = positive_example(next_state,previous_state, action, wall_list)
-    pos += "\n"
-    with open(filename, "a") as myfile:
-        myfile.write(pos)
+def add_new_pos(pos, lasfile):
+    '''
+    Add a new pos to a las file.
+    '''
+    with open(lasfile, "a") as f:
+        f.write(pos)
 
-def copy_las_base(filename, height, width):
+def send_state_transition_pos(previous_state,next_state, action, wall_list, lasfile):
+    '''
+    Generate a pos and add it to lasfile
+    '''
+    pos = generate_explore_pos(next_state,previous_state, action, wall_list)
+    pos += "\n"
+    add_new_pos(pos, lasfile)
+
+def copy_las_base(lasfile, height, width):
+    '''
+    make a lasfile for ILASP
+    '''
+
     cell = "cell((0..{}, 0..{})).\n".format(width, height)
-    with open(filename, "w") as base:
+
+    with open(lasfile, "w") as base:
         base.write(cell)
 
     with open("las_base.las") as f:
-        with open(filename, "a") as out:
+        with open(lasfile, "a") as out:
             for line in f:
                 out.write(line)
 
-
-def update_h(hypothesis, clingofile):
-    flag = False
-    with open(clingofile) as f:
-        for line in f:
-            if line == "%START\n":
-                flag = True
-            if flag == False:
-                with open("temp.lp", "a") as newfile:
-                    newfile.write(line)
-            if line == "%END\n":
-                flag = False
-    os.rename("temp.lp", clingofile)
-
-    abduction.send_kb("%START\n", clingofile)
-    abduction.send_kb(hypothesis, clingofile)
-    abduction.send_kb("%END\n", clingofile)
-
 def run_ILASP(filename):
+    '''
+    run ILASP and get H
+
+    Output: H
+    '''
     print("ILASP running...")
     dir = os.path.dirname(os.path.abspath(__file__))
     dir = os.path.join(dir, 'las_log')
@@ -201,8 +197,36 @@ def run_ILASP(filename):
         print("Error...", e.output)
         hypothesis = e.output
     # Convert syntax of H for ASP solver
+    # TODO Can I return this in JSON format as well?
     hypothesis = py_asp.convert_las_asp(hypothesis)
     return hypothesis
 
-def update_bk():
-    pass
+# # Probably not needed
+# def execute_pseudo_action(current_state, action):
+#     current_state = abduction.update_T(current_state)
+#     if(action == "up"):
+#         return abduction.update_Y(current_state, -1)
+#     elif(action == "down"):
+#         return abduction.update_Y(current_state, 1)
+#     elif(action == "right"):
+#         return abduction.update_X(current_state, 1)
+#     elif(action == "left"):
+#         return abduction.update_X(current_state, -1)
+#     elif(action == "non"):
+#         return current_state
+
+# # Probably not needed
+# def execute_pseudo_plan(start_state, actions, states, wall_list):
+#     current_state = start_state
+#     for action in actions:
+#         print("---------------")
+#         print("old ", current_state)
+#         print("action ", action[1])
+#         state_before = current_state
+#         current_state = execute_pseudo_action(current_state, action[1])
+#         state_after = current_state
+#         print("new ",current_state)
+
+#         any_exclusion, pos = generate_plan_pos(state_before, state_after, states, action[1], wall_list)
+
+#         return any_exclusion, pos

@@ -152,7 +152,7 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                         # add the new walls and run clingo again to replan
                         break
                     
-                    walls = induction.get_wall_list(CLINGOFILE)
+                    walls = induction.get_seen_walls(CLINGOFILE)
                     any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], walls)
                     pos += "\n"
                     induction.add_new_pos(pos, LASFILE)
@@ -176,7 +176,7 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                 print("exclusion is there ", pos)
                 hypothesis = induction.run_ILASP(LASFILE)
                 print("New H ", hypothesis)
-                induction.update_h(hypothesis, CLINGOFILE)
+                abduction.update_h(hypothesis, CLINGOFILE)
             else:
                 print("No exclusion!!")
 
@@ -201,7 +201,7 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                 action_string = helper.convert_action(action)
 
                 # Make ASP syntax of state transition
-                induction.send_state_transition(previous_state, next_state, action_string, wall_list, LASFILE)
+                induction.send_state_transition_pos(previous_state, next_state, action_string, wall_list, LASFILE)
                 # Meanwhile, accumulate all background knowlege
                 abduction.add_new_walls(previous_state, wall_list, BACKGROUND)
                 previous_state = next_state
