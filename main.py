@@ -40,7 +40,7 @@ env = gym.make('vgdl_aaa_L_shape-v0')
 HEIGHT = env.unwrapped.game.height
 WIDTH = env.unwrapped.game.width
 
-def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
+def k_learning(env, num_episodes, epsilon=0.65):
 
     wall_list = induction.get_all_walls(env)
 
@@ -70,8 +70,11 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
         # TODO DO I want ot update this in every episode??
         if is_start:
             state = env.reset()
-            agent_position = env.unwrapped.game.getFeatures()
             print("reset the starting position to the beginning")   
+
+        agent_position = env.unwrapped.game.getFeatures()
+        print("agent_position ", agent_position)
+
         previous_state = state
         previous_state_at = py_asp.state_at(state[0], state[1], 1)
         any_exclusion = False
@@ -81,8 +84,9 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
             if first_abduction == False:
                 abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, WIDTH, HEIGHT)
                 first_abduction = True
+            
             abduction.update_agent_position(agent_position, CLINGOFILE)
-            # When B is updated, run abduction to do replan
+
             states_plan, actions_array = abduction.run_clingo(CLINGOFILE)
             print("ASP states ", states_plan)
             print("ASP actions ", actions_array)
@@ -93,21 +97,17 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                 env.render()
                 # time.sleep(0.1)
 
+                # Flip a coin
                 threshold = random.uniform(0,1)                
                 action_int = helper.get_action(action[1])
 
-                # explore a little bit
+                # if threshold is less than epsilon, explore randomly a little bit
                 if threshold < epsilon:
                     action_int = env.action_space.sample()
                     print("Taking a pure random action")
                     is_start = False
                     next_state, reward, done, _ = env.step(action_int)
-                    if done:
-                        reward = 100
-                    else:
-                        reward = reward - 1
-                    agent_position = env.unwrapped.game.getFeatures()
-                    print("agent_position ", agent_position)
+                    reward = helper.update_reward(reward, done)
                     
                     state = next_state
                     previous_state = next_state
@@ -125,16 +125,13 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                     next_state, reward, done, _ = env.step(action_int)
                     x = int(next_state[0])
                     y = int(next_state[1])
-                    if x == 5 and y == 1:
-                        print("KIND OF ")
-                        reward = 100
-                    else:
-                        reward = reward - 1
-
-                    # if done:
+                    # if x == 5 and y == 1:
+                    #     print("KIND OF ")
                     #     reward = 100
                     # else:
                     #     reward = reward - 1
+
+                    reward = helper.update_reward(reward, done)
                     
                     observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
                     # print("previous_state ", previous_state)
@@ -190,13 +187,21 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                 # Take a step
                 action = env.action_space.sample()
                 next_state, reward, done, _ = env.step(action)
+
+                reward = helper.update_reward(reward, done)
+
                 if done:
-                    reward = 100
                     goal_state = next_state
                     print("GOAL STATE ", goal_state)
                     is_las = True
-                else:
-                    reward = reward - 1
+
+                # if done:
+                #     reward = 100
+                #     goal_state = next_state
+                #     print("GOAL STATE ", goal_state)
+                #     is_las = True
+                # else:
+                #     reward = reward - 1
 
                 action_string = helper.convert_action(action)
 

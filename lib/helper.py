@@ -50,3 +50,9 @@ def append_to_file(pos, file):
     '''
     with open(file, "a") as f:
         f.write(pos)
+
+def update_reward(reward, done):
+    if done:
+        return 100
+    else:
+        return reward - 1
