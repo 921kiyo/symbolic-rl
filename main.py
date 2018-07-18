@@ -42,32 +42,36 @@ WIDTH = env.unwrapped.game.width
 
 def k_learning(env, num_episodes, epsilon=0.65):
 
-    wall_list = induction.get_all_walls(env)
-
+    # check whether las file is in use
     is_las = False
+    # check if 
     first_abduction = False
-    # Clean up first
+
+    is_start = True
+
+    # Clean up all the files first
     helper.silentremove(LASFILE)
     helper.silentremove(BACKGROUND)
     helper.silentremove(CLINGOFILE)
     # Add mode bias and adjacent definition for ILASP
     induction.copy_las_base(LASFILE, HEIGHT, WIDTH)
 
-    is_start = True
+    wall_list = induction.get_all_walls(env)
 
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes))
 
-    for i_episode in range(num_episodes):
-
+    i_episode = 0
+    while i_episode < num_episodes:
         # Decaying epsilon greedy params
         # epsilon = epsilon*(1/(i_episode+1)**DECAY_PARAM)
         # print("epsilon ", epsilon)
 
         # Reset the env and pick the first action
         print("==============NEW EPISODE======================")
-        # TODO DO I want ot update this in every episode??
+
+        # TODO DO I want to update this in every episode??
         if is_start:
             state = env.reset()
             print("reset the starting position to the beginning")   
@@ -78,6 +82,7 @@ def k_learning(env, num_episodes, epsilon=0.65):
         previous_state = state
         previous_state_at = py_asp.state_at(state[0], state[1], 1)
         any_exclusion = False
+        is_exclusion = False
         # Once the plan is obtained, execute the plan
 
         if is_las:
@@ -99,77 +104,84 @@ def k_learning(env, num_episodes, epsilon=0.65):
 
                 # Flip a coin
                 threshold = random.uniform(0,1)                
-                action_int = helper.get_action(action[1])
 
                 # if threshold is less than epsilon, explore randomly a little bit
                 if threshold < epsilon:
-                    action_int = env.action_space.sample()
                     print("Taking a pure random action")
-                    is_start = False
+                    action_int = env.action_space.sample()
+
                     next_state, reward, done, _ = env.step(action_int)
                     reward = helper.update_reward(reward, done)
-                    
-                    state = next_state
-                    previous_state = next_state
-                    observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
-                    previous_state_at = observed_state
-                    
-                    # Update stats
-                    stats.episode_rewards[i_episode] += reward
-                    stats.episode_lengths[i_episode] = action_index
 
-                    if done:
-                        pass
-                    break
-                else:
-                    next_state, reward, done, _ = env.step(action_int)
-                    x = int(next_state[0])
-                    y = int(next_state[1])
-                    # if x == 5 and y == 1:
-                    #     print("KIND OF ")
-                    #     reward = 100
-                    # else:
-                    #     reward = reward - 1
-
-                    reward = helper.update_reward(reward, done)
-                    
                     observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
-                    # print("previous_state ", previous_state)
                     print("observed_state ",observed_state)
-                    new_wall_added = abduction.add_new_walls(previous_state, wall_list, CLINGOFILE)
-                    
+                
                     # Update stats
                     stats.episode_rewards[i_episode] += reward
                     stats.episode_lengths[i_episode] = action_index
 
-                    # B UPDATE
+                    new_wall_added = abduction.add_new_walls(previous_state, wall_list, CLINGOFILE)
                     if new_wall_added:
                         print("new walls added!")
-                        is_start = True
-                        # add the new walls and run clingo again to replan
-                        break
-                    
+                
+                    # Add pos 
                     walls = induction.get_seen_walls(CLINGOFILE)
                     any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], walls)
                     pos += "\n"
                     helper.append_to_file(pos, LASFILE)
-                                        
+
+                    if any_exclusion:
+                        is_exclusion = True
+
+                    is_start = False
+
+                    state = next_state
+                    previous_state = next_state
+                    previous_state_at = observed_state
+
+                    break
+                else:
+                    action_int = helper.get_action(action[1])
+                
+                    next_state, reward, done, _ = env.step(action_int)
+                    reward = helper.update_reward(reward, done)
+
+                    observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
+                    print("observed_state ",observed_state)
+                
+                    # Update stats
+                    stats.episode_rewards[i_episode] += reward
+                    stats.episode_lengths[i_episode] = action_index
+
+                    new_wall_added = abduction.add_new_walls(previous_state, wall_list, CLINGOFILE)
+                    if new_wall_added:
+                        print("new walls added!")
+                
+                    # Add pos 
+                    walls = induction.get_seen_walls(CLINGOFILE)
+                    any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], walls)
+                    pos += "\n"
+                    helper.append_to_file(pos, LASFILE)
+                    
+                    if any_exclusion:
+                        is_exclusion = True
+
+                    # Check if the prediction is the same as observed state
                     predicted_state = abduction.get_predicted_state(previous_state_at, action[1], states_plan)
                     print("predicted_state ", predicted_state)
-
-                    # H UPDATE
+                    # if not, update H
                     if(predicted_state != observed_state):
                         print("H is probably not correct!")
 
                     if done:
+                        is_start = True
                         break
-                
+            
                     state = next_state
                     previous_state = next_state
                     previous_state_at = observed_state
                 
-            is_start = True
-            if any_exclusion:
+            if is_exclusion:
                 print("exclusion is there ", pos)
                 hypothesis = induction.run_ILASP(LASFILE)
                 print("New H ", hypothesis)
