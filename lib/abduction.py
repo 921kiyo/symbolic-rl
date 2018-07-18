@@ -97,8 +97,8 @@ def run_clingo(clingofile):
     except subprocess.CalledProcessError as e:
         planning_actions = e.output
         # When Clingo returns UNSATISFIABLE
-        # print(e)
-        # print(e.output)
+        print("Clingo error...")
+        print(e.output)
 
     json_plan = json.loads(planning_actions)
 

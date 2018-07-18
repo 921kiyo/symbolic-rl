@@ -76,12 +76,12 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
         previous_state_at = py_asp.state_at(state[0], state[1], 1)
         any_exclusion = False
         # Once the plan is obtained, execute the plan
+
         if is_las:
             if first_abduction == False:
                 abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, WIDTH, HEIGHT)
                 first_abduction = True
             abduction.add_starting_position(agent_position, CLINGOFILE)
-            # time.sleep(1.5)
             # When B is updated, run abduction to do replan
             states_plan, actions_array = abduction.run_clingo(CLINGOFILE)
             print("ASP states ", states_plan)
@@ -165,7 +165,6 @@ def k_learning(env, num_episodes, discount_factor=0.9, epsilon=0.65):
                         print("H is probably not correct!")
 
                     if done:
-                        # is_las = False
                         break
                 
                     state = next_state

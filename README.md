@@ -9,18 +9,16 @@ Imperial College London MSc Individual Project
 - Math for ML
 
 
-### July Extension
+##
 
-Extension
-### Half august
-Evaluation
-### Mid-July to Mid-August
-- Finish Writing the report
 
-### Mid-August to September
+Requirements 
 
-- Polish the report
+Clingo5
 
+ILASP 2i
+
+the manual can be found in here
 
 ## ILASP Tips
 
