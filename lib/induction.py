@@ -12,11 +12,8 @@ def get_all_walls(env):
         wall_list.append((int(x),int(y)))
     return wall_list
 
-def add_walls(previous_state, wall_list):
-    x = int(previous_state[0])
-    y = int(previous_state[1])
+def add_surrounding_walls(x, y, wall_list):
     walls = ""
-
     if((x+1,y) in wall_list):
         walls += "wall({}). ".format((x+1,y))
     if((x,y+1) in wall_list):
@@ -27,6 +24,7 @@ def add_walls(previous_state, wall_list):
         walls += "wall({}). ".format((x,y-1))
 
     return walls
+
 
 def get_exclusions(previous_state, next_state):
     previous_x = int(previous_state[0])
@@ -100,20 +98,6 @@ def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list
     else:
         return True, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."    
 
-# TODO redundant
-def add_surrounding_walls(x, y, wall_list):
-    walls = ""
-    if((x+1,y) in wall_list):
-        walls += "wall({}). ".format((x+1,y))
-    if((x,y+1) in wall_list):
-        walls += "wall({}). ".format((x,y+1))
-    if((x-1,y) in wall_list):
-        walls += "wall({}). ".format((x-1,y))
-    if((x,y-1) in wall_list):
-        walls += "wall({}). ".format((x,y-1))
-
-    return walls
-
 def check_if_in_answersets(state, states):
     for s in states:
         if(state == s[1]):
@@ -165,7 +149,7 @@ def add_new_pos(pos, file):
         f.write(pos)
 
 def positive_example(next_state, previous_state, action, wall_list):
-    walls = add_walls(previous_state, wall_list)
+    walls = add_surrounding_walls(int(previous_state[0]),int(previous_state[1]), wall_list)
     exclusions = get_exclusions(previous_state, next_state)
     pos = "#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + walls + "})."
     return pos
@@ -210,9 +194,9 @@ def run_ILASP(filename):
     dir = os.path.join(dir, 'las_log')
     cache = "--cached-rel=" + dir
     try:
-        hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-nc"], universal_newlines=True)
+        # hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-nc"], universal_newlines=True)
         # hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-nc", cache], universal_newlines=True)
-        # hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
+        hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
     except subprocess.CalledProcessError as e:
         print("Error...", e.output)
         hypothesis = e.output
