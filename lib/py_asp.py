@@ -31,9 +31,6 @@ def action(a, t):
     return "action(" + str(a) + ", " + str(t) + ")."
 
 def convert_las_asp(hypothesis):
-    hypothesis = hypothesis.replace("Pre-processing", "%Pre-processing")
-    hypothesis = hypothesis.replace("Solve", "%Solve")
-    hypothesis = hypothesis.replace("Total", "%Total")
     hypothesis = hypothesis.replace("state_after(V1)", "state_at(V1, T+1)")
     hypothesis = hypothesis.replace("state_after(V0)", "state_at(V0, T+1)")
     hypothesis = hypothesis.replace("state_before(V1)", "state_at(V1, T)")
