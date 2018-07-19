@@ -109,9 +109,19 @@ def k_learning(env, num_episodes, epsilon=0.65):
                     print("Taking a pure random action")
                     action_int = env.action_space.sample()
                     print("action_int ", action_int)
-                    print("random action is ", helper.convert_action(action_int))
+                    action_string = helper.convert_action(action_int)
+                    print("random action is ", action_string)
                     next_state, reward, done, _ = env.step(action_int)
-                    reward = helper.update_reward(reward, done)
+                                                         
+                    x = int(next_state[0])
+                    y = int(next_state[1])
+
+                    if x == 17 and y == 1:
+                        reward = 100
+                    else:
+                        reward = -1
+                    
+                    # reward = helper.update_reward(reward, done)
                     state_so_far.append((next_state[0],next_state[1]))
 
 
@@ -128,7 +138,7 @@ def k_learning(env, num_episodes, epsilon=0.65):
                 
                     # Add pos 
                     walls = induction.get_seen_walls(CLINGOFILE)
-                    any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], walls)
+                    any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action_string, walls)
                     pos += "\n"
                     helper.append_to_file(pos, LASFILE)
 
@@ -141,16 +151,27 @@ def k_learning(env, num_episodes, epsilon=0.65):
                     previous_state = next_state
                     previous_state_at = observed_state
                     print("next_state ", next_state)
-
-                    if done:
+                    
+                    if x == 17 and y == 1:
                         is_start = True
                         break
+
+                    # if done:
+                    #     is_start = True
+                    #     break
                     break
                 else:
                     action_int = helper.get_action(action[1])
                 
                     next_state, reward, done, _ = env.step(action_int)
-                    reward = helper.update_reward(reward, done)
+
+                    x = int(next_state[0])
+                    y = int(next_state[1])                   
+                    if x == 17 and y == 1:
+                        reward = 100
+                    else:
+                        reward = -1
+                    # reward = helper.update_reward(reward, done)
                     state_so_far.append((next_state[0],next_state[1]))
 
                     observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
@@ -184,9 +205,12 @@ def k_learning(env, num_episodes, epsilon=0.65):
                     previous_state = next_state
                     previous_state_at = observed_state
 
-                    if done:
+                    if x == 17 and y == 1:
                         is_start = True
                         break
+                    # if done:
+                    #     is_start = True
+                    #     break
 
                 env.render()
                 time.sleep(0.2)  
