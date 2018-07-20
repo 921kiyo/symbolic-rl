@@ -31,11 +31,9 @@ from lib.helper import gen_log_dir
 
 print("ILASP running...")
 dir = os.path.dirname(os.path.abspath(__file__))
-# dir = os.path.join(dir, 'las_log/cache.las')
-# cache = "--cached-rel=" + dir
+dir = os.path.join(dir, 'log/cache.las')
+cache = "--cached-rel=" + dir
 print("dir ", dir)
-
-# ILASP --version=2i output2.las -ml=10 --clingo5 --clingo "clingo5 --opt-strat=usc,stratify"
 
 filename = "output2.las"
 try:
@@ -43,7 +41,7 @@ try:
     # hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."    
     # Clingo 5
     clingo5 = "clingo5 --opt-strat=usc,stratify"
-    hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "--clingo5", "--clingo", clingo5], universal_newlines=True)
+    hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "--clingo5", "--clingo", clingo5, cache], universal_newlines=True)
     
     # Normal 
     # hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-nc", ], universal_newlines=True)

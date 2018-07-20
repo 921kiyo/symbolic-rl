@@ -22,6 +22,8 @@ import gym, gym_vgdl
 LASFILE = "output.las"
 BACKGROUND = "background.lp"
 CLINGOFILE = "clingo.lp"
+LAS_CACHE = "cache.las"
+LAS_CACHE_PATH = "log"
 
 # Increase this to make the decay faster
 DECAY_PARAM = 1
@@ -40,6 +42,7 @@ env = gym.make('vgdl_aaa_L_shape-v0')
 HEIGHT = env.unwrapped.game.height
 WIDTH = env.unwrapped.game.width
 
+
 def k_learning(env, num_episodes, epsilon=0.65):
 
     # check whether las file is in use
@@ -53,6 +56,9 @@ def k_learning(env, num_episodes, epsilon=0.65):
     helper.silentremove(LASFILE)
     helper.silentremove(BACKGROUND)
     helper.silentremove(CLINGOFILE)
+    helper.silentremove(LAS_CACHE, LAS_CACHE_PATH)
+
+    helper.create_file(LAS_CACHE, LAS_CACHE_PATH)
     # Add mode bias and adjacent definition for ILASP
     induction.copy_las_base(LASFILE, HEIGHT, WIDTH)
 

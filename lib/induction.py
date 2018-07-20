@@ -188,7 +188,7 @@ def run_ILASP(filename):
         
         # Clingo 5
         clingo5 = "clingo5 --opt-strat=usc,stratify"
-        hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "--clingo5", "--clingo", clingo5], universal_newlines=True)
+        hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5], universal_newlines=True)
         
         # Normal 
         # hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-nc", "-q"], universal_newlines=True)

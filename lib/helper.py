@@ -23,8 +23,19 @@ def convert_action(action):
     else:
         print("this action does not exist...", str(action))
 
-def silentremove(filename):
+def create_file(filename, extra_path=None):
     dir = os.getcwd()
+    if extra_path:
+        dir = os.path.join(dir, extra_path)
+    file =os.path.join(dir, filename)
+    with open(file, "w+") as file:
+        pass
+
+def silentremove(filename, extra_path=None):
+    dir = os.getcwd()
+    if extra_path:
+        dir = os.path.join(dir, extra_path)
+    
     file =os.path.join(dir, filename)
     try:
         os.remove(file)
