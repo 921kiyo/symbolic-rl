@@ -1,13 +1,3 @@
-% MAZE
-
-% 0123456
-% wwwwwww 0
-% w++++gw 1
-% w+wwwww 2
-% w+w+w+w 3
-% wA++++w 4
-% wwwwwww 5
-
 % (X+1,Y) is right next to (X,Y)
 adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).
 
