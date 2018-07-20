@@ -25,8 +25,8 @@ CLINGOFILE = "clingo.lp"
 LAS_CACHE = "cache.las"
 LAS_CACHE_PATH = "log"
 
-dir = os.path.dirname(os.path.abspath(__file__))
-dir = os.path.join(dir, LAS_CACHE_PATH)
+base_dir = os.path.dirname(os.path.abspath(__file__))
+dir = os.path.join(base_dir, LAS_CACHE_PATH)
 CACHE = os.path.join(dir, LAS_CACHE)
 
 # Increase this to make the decay faster
@@ -46,8 +46,13 @@ env = gym.make('vgdl_aaa_L_shape-v0')
 HEIGHT = env.unwrapped.game.height
 WIDTH = env.unwrapped.game.width
 
+def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
 
-def k_learning(env, num_episodes, epsilon=0.65):
+    # Log everything and keep it here
+    if record_prefix:
+        log_dir = os.path.join(base_dir, "log")
+        log_dir = helper.gen_log_dir(log_dir, record_prefix)
+        print("log_dir ", log_dir)
 
     # check whether las file is in use
     is_las = False
@@ -64,6 +69,7 @@ def k_learning(env, num_episodes, epsilon=0.65):
 
     helper.create_file(LAS_CACHE, LAS_CACHE_PATH)
     # Add mode bias and adjacent definition for ILASP
+
     induction.copy_las_base(LASFILE, HEIGHT, WIDTH)
 
     wall_list = induction.get_all_walls(env)
@@ -276,6 +282,6 @@ def k_learning(env, num_episodes, epsilon=0.65):
 
     return stats
 
-stats = k_learning(env, 100, epsilon=0.3)
+stats = k_learning(env, 100, epsilon=0.3, record_prefix=None)
 # plotting.plot_episode_stats(stats)
 plotting.plot_episode_stats_simple(stats)

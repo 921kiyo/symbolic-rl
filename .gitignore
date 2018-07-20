@@ -6,3 +6,4 @@ clingo.lp
 output.txt
 output.las
 .vscode
+log/cache.las
