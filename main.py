@@ -69,7 +69,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
 
     helper.create_file(LAS_CACHE, LAS_CACHE_PATH)
     # Add mode bias and adjacent definition for ILASP
-
     induction.copy_las_base(LASFILE, HEIGHT, WIDTH)
 
     wall_list = induction.get_all_walls(env)
@@ -109,7 +108,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
             
             abduction.update_agent_position(agent_position, CLINGOFILE)
 
-            states_plan, actions_array = abduction.run_clingo(CLINGOFILE)
+            answer_sets = abduction.run_clingo(CLINGOFILE)
+            states_plan, actions_array = abduction.sort_planning(answer_sets)
             print("ASP states ", states_plan)
             print("ASP actions ", actions_array)
             # Execute the planning
@@ -139,8 +139,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
                     
                     # reward = helper.update_reward(reward, done)
                     state_so_far.append((next_state[0],next_state[1]))
-
-
                     observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
                     print("observed_state in random ",observed_state)
                 

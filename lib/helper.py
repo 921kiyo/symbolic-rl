@@ -31,18 +31,6 @@ def create_file(filename, extra_path=None):
     with open(file, "w+") as file:
         pass
 
-
-def copy_file(inputfile, outputfile):
-    '''
-    Copyt file
-    '''
-
-    with open(inputfile) as f:
-        with open(outputfile, "a") as out:
-            for line in f:
-                out.write(line)
-
-
 def silentremove(filename, extra_path=None):
     dir = os.getcwd()
     if extra_path:
@@ -85,6 +73,25 @@ def update_reward(reward, done):
         return 100
     else:
         return reward - 1
+
+def log_input(inputfile, base_dir, episode, filename):
+    unique_file = gen_unique_filename(base_dir, episode, filename)
+    copy_file(inputfile, unique_file)
+
+def log_output(output, base_dir, episode, filename):
+
+    unique_file = gen_unique_filename(base_dir, episode, filename)
+    with open(unique_file, "a") as out:
+                out.write(output)
+
+def copy_file(inputfile, outputfile):
+    '''
+    Copyt file
+    '''
+    with open(inputfile) as f:
+        with open(outputfile, "a") as out:
+            for line in f:
+                out.write(line)
 
 def gen_unique_filename(base_dir, episode, filename):
     time_str = time.strftime("%d-%m-%Y-%H-%M-%S", time.gmtime())
