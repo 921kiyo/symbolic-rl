@@ -1,6 +1,7 @@
 import os
 import subprocess
 import json
+import time
 
 def convert_state(x, y, width):
     x += 1
@@ -61,3 +62,30 @@ def update_reward(reward, done):
         return 100
     else:
         return reward - 1
+
+def gen_log_dir(base_dir, prefix='', symlink=True):
+    # Create a folder to hold results
+    time_str = time.strftime("%d-%m-%Y-%H-%M-%S", time.gmtime())
+    if prefix == '' or prefix is None:
+        base_log_dir = time_str
+    else:
+        base_log_dir = '{}_{}'.format(prefix, time_str)
+    log_dir = base_dir + '/' + base_log_dir
+    os.makedirs(log_dir, exist_ok=True)
+
+    if symlink:
+        link_path = base_dir + '/last'
+
+        try:
+            # Clean up old softlink
+            os.remove(link_path)
+        except OSError as ex:
+            pass # All G
+
+        try:
+            os.symlink(base_log_dir, link_path)
+        except FileExistsError as e:
+            # Race conditions, what can you do
+            pass
+
+    return log_dir
