@@ -25,6 +25,10 @@ CLINGOFILE = "clingo.lp"
 LAS_CACHE = "cache.las"
 LAS_CACHE_PATH = "log"
 
+dir = os.path.dirname(os.path.abspath(__file__))
+dir = os.path.join(dir, LAS_CACHE_PATH)
+CACHE = os.path.join(dir, LAS_CACHE)
+
 # Increase this to make the decay faster
 DECAY_PARAM = 1
 
@@ -94,7 +98,7 @@ def k_learning(env, num_episodes, epsilon=0.65):
         # Once the plan is obtained, execute the plan
         if is_las:
             if first_abduction == False:
-                abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, WIDTH, HEIGHT)
+                abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, WIDTH, HEIGHT,CACHE)
                 first_abduction = True
             
             abduction.update_agent_position(agent_position, CLINGOFILE)
@@ -223,7 +227,7 @@ def k_learning(env, num_episodes, epsilon=0.65):
 
             if is_exclusion:
                 print("exclusion is there ", pos)
-                hypothesis = induction.run_ILASP(LASFILE)
+                hypothesis = induction.run_ILASP(LASFILE, CACHE)
                 print("New H ", hypothesis)
                 abduction.update_h(hypothesis, CLINGOFILE)
             else:

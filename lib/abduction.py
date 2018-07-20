@@ -42,12 +42,12 @@ def add_new_walls(previous_state, wall_list, backgroundfile):
         is_new_b = True
     return is_new_b
 
-def make_lp(lasfile, backgroundfile, clingofile, start_state, goal_state, time_range, width, height):
+def make_lp(lasfile, backgroundfile, clingofile, start_state, goal_state, time_range, width, height, cache_path):
     '''
     Collect all info necessary to run clingo and send them to "clingofile"
     '''
     # Run ILASP to get H
-    hypothesis = induction.run_ILASP(lasfile)
+    hypothesis = induction.run_ILASP(lasfile, cache_path)
 
     # starting point
     start_state = "%AAA\n" + "state_at((" + str(int(start_state[0])) + ", " + str(int(start_state[1])) + "), 1).\n" + "%BBB\n"

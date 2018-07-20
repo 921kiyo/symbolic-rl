@@ -172,29 +172,27 @@ def copy_las_base(lasfile, height, width):
             for line in f:
                 out.write(line)
 
-def run_ILASP(filename):
+def run_ILASP(filename, cache_path=None):
     '''
     run ILASP and get H
 
     Output: H
     '''
     print("ILASP running...")
-    dir = os.path.dirname(os.path.abspath(__file__))
-    dir = os.path.join(dir, 'las_log/cache.las')
-    cache = "--cached-rel=" + dir
     try:
-        # Hardcoded
+        # Hardcoded best H
         # hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
         
         # Clingo 5
         clingo5 = "clingo5 --opt-strat=usc,stratify"
-        hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5], universal_newlines=True)
+        if cache_path:
+            cache_path = "--cached-rel=" + cache_path
+            hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5, cache_path], universal_newlines=True)
+        else:
+            hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5], universal_newlines=True)
         
         # Normal 
         # hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-nc", "-q"], universal_newlines=True)
-        
-        # Cache
-        # hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-nc", "-q", cache], universal_newlines=True)
     except subprocess.CalledProcessError as e:
         print("Error...", e.output)
         hypothesis = e.output
