@@ -112,8 +112,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
             if record_prefix:
                 inputfile = os.path.join(base_dir, CLINGOFILE)
 
-                helper.log_input("lp", inputfile, log_dir, i_episode, "clingo")
-                helper.log_output("lp", answer_sets, log_dir, i_episode, "clingo")
+                helper.log_asp(inputfile, answer_sets, log_dir, i_episode)
 
             states_plan, actions_array = abduction.sort_planning(answer_sets)
             print("ASP states ", states_plan)

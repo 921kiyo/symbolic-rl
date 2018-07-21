@@ -74,17 +74,25 @@ def update_reward(reward, done):
     else:
         return reward - 1
 
-def log_input(extension, inputfile, base_dir, episode, filename):
-    unique_file = gen_unique_filename(extension, "input", base_dir, episode, filename)
-    # import ipdb; ipdb.set_trace()
+def log_asp(inputfile, output, base_dir, episode):
+    unique_file = gen_unique_filename("lp", base_dir, episode, "clingo")
     copy_file(inputfile, unique_file)
-
-def log_output(extension, output, base_dir, episode, filename):
-    unique_file = gen_unique_filename(extension, "output", base_dir, episode, filename)
     with open(unique_file, "a") as out:
+        out.write("%ANSWER SETS\n\n")
         for i in output:
-            i = i + "\n"
+            i = "%" + i + "\n"
             out.write(i)
+
+# def log_input(extension, inputfile, base_dir, episode, filename):
+#     unique_file = gen_unique_filename(extension, "input", base_dir, episode, filename)
+#     copy_file(inputfile, unique_file)
+
+# def log_output(extension, output, base_dir, episode, filename):
+#     unique_file = gen_unique_filename(extension, "output", base_dir, episode, filename)
+#     with open(unique_file, "a") as out:
+#         for i in output:
+#             i = i + "\n"
+#             out.write(i)
 
 def copy_file(inputfile, outputfile):
     '''
@@ -95,10 +103,9 @@ def copy_file(inputfile, outputfile):
             for line in f:
                 out.write(line)
 
-def gen_unique_filename(extension, input_output, base_dir, episode, filename):
-    time_str = time.strftime("%d-%m-%Y-%H-%M-%S-%f", time.gmtime())
+def gen_unique_filename(extension, base_dir, episode, filename):
     current_time = int(round(time.time() * 1000))
-    base_log_dir = '{}_spisode{}_{}_{}'.format(filename, episode, input_output, current_time)
+    base_log_dir = '{}_spisode{}_{}'.format(filename, episode, current_time)
     file_path = base_dir + '/' + base_log_dir
 
     return file_path + "." + extension
