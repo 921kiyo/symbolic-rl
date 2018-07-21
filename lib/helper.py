@@ -74,15 +74,17 @@ def update_reward(reward, done):
     else:
         return reward - 1
 
-def log_input(inputfile, base_dir, episode, filename):
-    unique_file = gen_unique_filename(base_dir, episode, filename)
+def log_input(extension, inputfile, base_dir, episode, filename):
+    unique_file = gen_unique_filename(extension, "input", base_dir, episode, filename)
+    # import ipdb; ipdb.set_trace()
     copy_file(inputfile, unique_file)
 
-def log_output(output, base_dir, episode, filename):
-
-    unique_file = gen_unique_filename(base_dir, episode, filename)
+def log_output(extension, output, base_dir, episode, filename):
+    unique_file = gen_unique_filename(extension, "output", base_dir, episode, filename)
     with open(unique_file, "a") as out:
-                out.write(output)
+        for i in output:
+            i = i + "\n"
+            out.write(i)
 
 def copy_file(inputfile, outputfile):
     '''
@@ -93,14 +95,13 @@ def copy_file(inputfile, outputfile):
             for line in f:
                 out.write(line)
 
-def gen_unique_filename(base_dir, episode, filename):
-    time_str = time.strftime("%d-%m-%Y-%H-%M-%S", time.gmtime())
-    
-    base_log_dir = '{}_{}_{}'.format(filename, episode, time_str)
+def gen_unique_filename(extension, input_output, base_dir, episode, filename):
+    time_str = time.strftime("%d-%m-%Y-%H-%M-%S-%f", time.gmtime())
+    current_time = int(round(time.time() * 1000))
+    base_log_dir = '{}_spisode{}_{}_{}'.format(filename, episode, input_output, current_time)
     file_path = base_dir + '/' + base_log_dir
-    os.makedirs(file_path, exist_ok=True)
 
-    return file_path
+    return file_path + "." + extension
 
 def gen_log_dir(base_dir, prefix='', symlink=True):
     # Create a folder to hold results

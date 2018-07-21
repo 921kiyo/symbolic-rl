@@ -47,7 +47,7 @@ HEIGHT = env.unwrapped.game.height
 WIDTH = env.unwrapped.game.width
 
 def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
-
+    log_dir = None
     # Log everything and keep it here
     if record_prefix:
         log_dir = os.path.join(base_dir, "log")
@@ -109,6 +109,12 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
             abduction.update_agent_position(agent_position, CLINGOFILE)
 
             answer_sets = abduction.run_clingo(CLINGOFILE)
+            if record_prefix:
+                inputfile = os.path.join(base_dir, CLINGOFILE)
+
+                helper.log_input("lp", inputfile, log_dir, i_episode, "clingo")
+                helper.log_output("lp", answer_sets, log_dir, i_episode, "clingo")
+
             states_plan, actions_array = abduction.sort_planning(answer_sets)
             print("ASP states ", states_plan)
             print("ASP actions ", actions_array)
@@ -280,6 +286,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
 
     return stats
 
-stats = k_learning(env, 100, epsilon=0.3, record_prefix=None)
+stats = k_learning(env, 100, epsilon=0.3, record_prefix="None")
 # plotting.plot_episode_stats(stats)
 plotting.plot_episode_stats_simple(stats)
