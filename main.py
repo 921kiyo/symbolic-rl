@@ -103,7 +103,13 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
         # Once the plan is obtained, execute the plan
         if is_las:
             if first_abduction == False:
-                abduction.make_lp(LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, WIDTH, HEIGHT,CACHE)
+                # Run ILASP to get H
+                hypothesis = induction.run_ILASP(LASFILE, CACHE)
+                if record_prefix:
+                    inputfile = os.path.join(base_dir, LASFILE)
+                    helper.log_las(inputfile, hypothesis, log_dir, i_episode)
+                
+                abduction.make_lp(hypothesis, LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, WIDTH, HEIGHT)
                 first_abduction = True
             
             abduction.update_agent_position(agent_position, CLINGOFILE)
@@ -237,6 +243,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
             if is_exclusion:
                 print("exclusion is there ", pos)
                 hypothesis = induction.run_ILASP(LASFILE, CACHE)
+                if record_prefix:
+                    inputfile = os.path.join(base_dir, LASFILE)
+                    helper.log_las(inputfile, hypothesis, log_dir, i_episode)
+
                 print("New H ", hypothesis)
                 abduction.update_h(hypothesis, CLINGOFILE)
             else:
@@ -285,6 +295,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
 
     return stats
 
-stats = k_learning(env, 100, epsilon=0.3, record_prefix="None")
+stats = k_learning(env, 100, epsilon=0.3, record_prefix=None)
 # plotting.plot_episode_stats(stats)
 plotting.plot_episode_stats_simple(stats)

@@ -83,16 +83,24 @@ def log_asp(inputfile, output, base_dir, episode):
             i = "%" + i + "\n"
             out.write(i)
 
-# def log_input(extension, inputfile, base_dir, episode, filename):
-#     unique_file = gen_unique_filename(extension, "input", base_dir, episode, filename)
-#     copy_file(inputfile, unique_file)
+def log_las(inputfile, hypothesis, base_dir, episode):
+    unique_file = gen_unique_filename("las", base_dir, episode, "las")
+    new_h = comment_h(hypothesis)
+    new_h = "%" + new_h
+    with open(unique_file, "a") as out:
+        out.write("%ILASP\n\n")
+        out.write(new_h)
+    
+    copy_file(inputfile, unique_file)
 
-# def log_output(extension, output, base_dir, episode, filename):
-#     unique_file = gen_unique_filename(extension, "output", base_dir, episode, filename)
-#     with open(unique_file, "a") as out:
-#         for i in output:
-#             i = i + "\n"
-#             out.write(i)
+def comment_h(hypothesis):
+    new_h = ""
+    for h in hypothesis:
+        if h == "\n":
+            new_h += "\n%"
+        else:
+            new_h += h
+    return new_h
 
 def copy_file(inputfile, outputfile):
     '''

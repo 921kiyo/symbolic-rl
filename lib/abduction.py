@@ -42,13 +42,10 @@ def add_new_walls(previous_state, wall_list, backgroundfile):
         is_new_b = True
     return is_new_b
 
-def make_lp(lasfile, backgroundfile, clingofile, start_state, goal_state, time_range, width, height, cache_path):
+def make_lp(hypothesis, lasfile, backgroundfile, clingofile, start_state, goal_state, time_range, width, height):
     '''
     Collect all info necessary to run clingo and send them to "clingofile"
     '''
-    # Run ILASP to get H
-    hypothesis = induction.run_ILASP(lasfile, cache_path)
-
     # starting point
     start_state = "%AAA\n" + "state_at((" + str(int(start_state[0])) + ", " + str(int(start_state[1])) + "), 1).\n" + "%BBB\n"
     # goal state
@@ -67,7 +64,7 @@ def make_lp(lasfile, backgroundfile, clingofile, start_state, goal_state, time_r
     # time range
     time = "time(1.." + str(time_range) + ").\n"
     # cell range
-    cell = "cell((0..{}, 0..{})).\n".format(width-1, height-1)
+    cell = "\ncell((0..{}, 0..{})).\n".format(width-1, height-1)
     # adjacent definitions
     given = "adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).\n\
     adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).\n\
