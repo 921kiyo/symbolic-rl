@@ -9,23 +9,25 @@ import subprocess
 
 from lib.helper import gen_log_dir
 
-# TIME_RANGE = 400
+TIME_RANGE = 400
 # env = gym.make('vgdl_zelda_features-v0')
+# env = gym.make('vgdl_portals-v0')
+env = gym.make('vgdl_aaa_teleport-v0')
 # print(env.unwrapped.observer.get_observation())
 # print(list(env.unwrapped.observer.get_observation()))
 
-# for i_episode in range(TIME_RANGE):
+for i_episode in range(TIME_RANGE):
 
-#     # Reset the env and pick the first action
-#     state = env.reset()
+    # Reset the env and pick the first action
+    state = env.reset()
 
-#     for t in range(TIME_RANGE):
-#         env.render()
-#         time.sleep(0.1)
-#         # Take a step
-#         action = env.action_space.sample()
-#         next_state, reward, done, _ = env.step(action)
+    for t in range(TIME_RANGE):
+        env.render()
+        time.sleep(0.1)
+        # Take a step
+        action = env.action_space.sample()
+        next_state, reward, done, _ = env.step(action)
 
-#         if done:
-#             break
+        if done:
+            break
 

@@ -8,6 +8,7 @@ DATA_DIR = os.path.join( os.path.dirname(__file__), 'vgdl', 'sample_games')
 sample_games = [
     'aaa_field',
     'aaa_L_shape',
+    'aaa_teleport',
     'aaa_maze',
     'aaa_small',
     'aaa_square',
@@ -22,17 +23,19 @@ sample_games = [
 
 # A list of relevant classes for each sample game
 classes = {
-    'aaa_field':        ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+    'aaa_field':      ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
                        'straight', 'wall' ],
-    'aaa_L_shape':        ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+    'aaa_L_shape':    ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
                        'straight', 'wall' ],
-    'aaa_maze':        ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+    'aaa_teleport':   ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
                        'straight', 'wall' ],
-    'aaa_small':        ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+    'aaa_maze':       ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
                        'straight', 'wall' ],
-    'aaa_square':        ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+    'aaa_small':      ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
                        'straight', 'wall' ],
-    'aliens':          ['avatar', 'alien', 'base', 'bomb', 'sam'],
+    'aaa_square':     ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+                       'straight', 'wall' ],
+    'aliens':         ['avatar', 'alien', 'base', 'bomb', 'sam'],
     'boulderdash':    ['avatar', 'boulder', 'butterfly', 'crab', 'diamond',
                        'exitdoor', 'wall'],
     'chase':          ['avatar', 'angry', 'carcass', 'scared', 'wall'],
@@ -46,11 +49,12 @@ classes = {
 
 # A list of relevant resources for each sample game
 resources = {
-    'aaa_field':        [],
-    'aaa_L_shape':        [],
-    'aaa_maze':        [],
-    'aaa_small':        [],
-    'aaa_square':        [],
+    'aaa_field':      [],
+    'aaa_L_shape':    [],
+    'aaa_teleport':   [],
+    'aaa_maze':       [],
+    'aaa_small':      [],
+    'aaa_square':     [],
     'aliens':         [],
     'boulderdash':    ['diamond'],
     'chase':          [],
