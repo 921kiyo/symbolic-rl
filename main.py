@@ -15,6 +15,8 @@ import itertools
 import pandas as pd
 import sys
 
+import pickle
+
 from lib import plotting, py_asp, helper, induction, abduction
 
 import gym, gym_vgdl
@@ -84,7 +86,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
 
         # Reset the env and pick the first action
         print("==============NEW EPISODE======================")
-
         # TODO DO I want to update this in every episode??
         if is_start:
             state = env.reset()
@@ -145,6 +146,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
 
                     if x == 17 and y == 1:
                         reward = 100
+                        i_episode += 1
+                        break
                     else:
                         reward = -1
                     
@@ -179,6 +182,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
                     
                     if x == 17 and y == 1:
                         is_start = True
+                        i_episode += 1
                         break
 
                     # if done:
@@ -232,13 +236,14 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
 
                     if x == 17 and y == 1:
                         is_start = True
+                        i_episode += 1
                         break
                     # if done:
                     #     is_start = True
                     #     break
 
                 env.render()
-                time.sleep(0.2)  
+                # time.sleep(0.2)  
 
             if is_exclusion:
                 print("exclusion is there ", pos)
@@ -295,6 +300,13 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
 
     return stats
 
-stats = k_learning(env, 100, epsilon=0.3, record_prefix=None)
+# epsilon 0 means no exploration
+stats = k_learning(env, 10, epsilon=0, record_prefix=None)
 # plotting.plot_episode_stats(stats)
 plotting.plot_episode_stats_simple(stats)
+
+# picklepath = base_dir + "/stats.pkl"
+# print("picklepath ", picklepath)
+# output = open(picklepath, "wb")
+# pickle.dump(stats, output)
+# output.close()

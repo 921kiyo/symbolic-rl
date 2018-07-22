@@ -22,6 +22,7 @@ from lib import plotting
 # ASP conversion
 from lib import plotting, py_asp, helper, induction, abduction
 
+import pickle
 # env = gym.make('vgdl_aliens-v0')
 # env = gym.make('vgdl_boulderdash-v0')
 # env = gym.make('vgdl_portals-v0')
@@ -38,6 +39,8 @@ env = gym.make('vgdl_aaa_L_shape-v0')
 # env = gym.make('vgdl_aaa_maze-v0')
 
 # env = gym.make('vgdl_aaa_small-v0')
+
+base_dir = os.path.dirname(os.path.abspath(__file__))
 
 def make_epsilon_greedy_policy(Q, epsilon, nA):
     def policy_fn(observation, episodes):
@@ -134,6 +137,13 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
     return Q, stats
 
-Q, stats = q_learning(env, 200)
+Q, stats = q_learning(env, 20)
 # plotting.plot_episode_stats(stats)
-plotting.plot_episode_stats_simple(stats)
+# import ipdb; ipdb.set_trace()
+# plotting.plot_episode_stats_simple(stats)
+
+# picklepath = base_dir + "/stats.pkl"
+# print("picklepath ", picklepath)
+# output = open(picklepath, "wb")
+# pickle.dump(stats, output)
+# output.close()
