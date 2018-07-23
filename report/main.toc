@@ -33,9 +33,9 @@
 \contentsline {subsection}{\numberline {4.1.1}Evaluation Methods}{19}{subsection.4.1.1}
 \contentsline {subsection}{\numberline {4.1.2}Settings}{19}{subsection.4.1.2}
 \contentsline {subsection}{\numberline {4.1.3}Results}{19}{subsection.4.1.3}
-\contentsline {subsection}{\numberline {4.1.4}Strengths}{19}{subsection.4.1.4}
-\contentsline {subsection}{\numberline {4.1.5}Limitations}{19}{subsection.4.1.5}
-\contentsline {subsection}{\numberline {4.1.6}Discussion}{19}{subsection.4.1.6}
+\contentsline {subsection}{\numberline {4.1.4}Discussion}{19}{subsection.4.1.4}
+\contentsline {subsubsection}{Strengths}{19}{section*.13}
+\contentsline {subsubsection}{Limitations}{19}{section*.14}
 \contentsline {section}{\numberline {4.2}Transfer Learning Evaluation}{19}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Limitations}{19}{subsection.4.2.1}
 \contentsline {chapter}{\numberline {5}Related Work}{20}{chapter.5}
