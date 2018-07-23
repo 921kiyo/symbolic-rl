@@ -142,27 +142,47 @@ If the hypotheses were not accurate, clingo might not generate all the actions l
 
 \subsection{Plan execution}
 \label{Plan execution}
-TODO ALGORITHMS HERE
+
+Define them here
+
+This is formally defined in Algorithm. 
 
 \begin{algorithm}
-\caption{Distinct sequence of numbers}\label{euclid}
+\caption{ILASP(RL)}\label{euclid}
 \begin{algorithmic}[1]
-\Procedure{DISTINCT (A=[A\textsubscript{1}, ..., A\textsubscript{N}])}{}
-\State $\textit{N} \gets \text{length of }\textit{A}$
-\State $\textit{T} = new\ HashTable(N)$
-\For{i from 0 to N} 
-    \If {$ A[i]\ is \ in \ T$}
-        \State \Return $FALSE$
-    \Else 
-        \State Add A[i] to T   
-    \EndIf
-\EndFor
-\State \Return $TRUE$
+\Procedure{ILASP(RL) (B and E)}{}
+
+\While {True}
+
+    \State $\textit{H (inductive solutions)} \gets \text{run ILASP(T)}$
+    \State $\textit{plan(actions, states) answer sets} \gets \text{AS(B, H)}$
+    \While {actions in P}
+        \State $\textit{observed state} \gets \text{run clingo(T)}$
+        \If {$ \textit{observed state} \neq \textit{predicted state} $}
+            \State $\textit{H} \gets \text{run ILASP(T)}$
+            \EndIf
+        % \If {$ \textit{observed state not equal \textit{predicted state $} 
+        % \EndIf
+    \EndWhile
+    % \If {$ new \ background \ encountered $}
+    %     % \State $\textit{H} \gets \text{run ILASP(T)}$
+    % \EndIf
+    % \For{i from 0 to N} 
+    %     \If {$ A[i]\ is \ in \ T$}
+    %         \State \Return $FALSE$
+    %     \Else 
+    %         \State Add A[i] to T   
+    %     \EndIf
+    % \EndFor
+% \State \Return $TRUE$
+\EndWhile
+
 \EndProcedure
+\caption{XXXX }
 \end{algorithmic}
 \end{algorithm}
-    
 
+    
 
 \subsection{Model Generation and Update using ILASP}
 \label{model_generation_and_update}

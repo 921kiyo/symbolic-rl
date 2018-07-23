@@ -457,6 +457,8 @@ TODO BELLMAN OPTIMALITY EQUATION
 %
 %q\textsubscript{$\pi$} = $\displaystyle \E[R\textsubscript{t+1} $[R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ... $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a, A\textsubscript{t+1 } = a,]
 
+TODO Value iterations
+
 \subsection{Model-based and Model-free Reinforcement Learning}
 \label{model_base_model_free_subsection}
 A model M is a representation of an environment that an agent can used to understand how the environment should look like . Model-based learning is that the agent learns the model and plan a solution using the learnt model. Once the agent learns the model, the problem to be solved becomes a planning problem for a series of actions to achieve the agent's goal.
@@ -521,6 +523,14 @@ The optimal Q-function Q\textsuperscript{*}(s,a) is directly approximated by the
 % U(s) = max a Q(s,a)
 % The function is estimated by Q-learning, which repeately updates Q(s,a) using the Bellman Equation.
 Q-learning learns the value of its deterministic greedy policy from the experience and gradually converge to the optimal Q-function. It also explored following \textit{$\epsilon$-greedy policy}, which is a stochastic greedy policy, but with the probability of $\epsilon$, the agent chooses an action randomly instea of the greedy action.
+
+\subsection{Function Approximation}
+\label{function_approximation}
+
+
+TODO 
+
+Linear Value Function Approximation
 
 \chapter{Implementation and Methodology}
 \label{methods}
