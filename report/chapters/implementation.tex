@@ -20,10 +20,10 @@ Every time the agent takes an action, these experiences need to be recorded in t
 
 State transition experiences will be used as positive examples for ILASP, which is of the form
 
-#pos({state_after((X2,Y2))}, {all other state_after that did not happen}, {state_before((X1,Y1)). action(A). }).
+%\#pos({state_after((X2,Y2))}, {all other state_after that did not happen}, {state_before((X1,Y1)). action(A). }).
 
 For example, 
-#pos({state_after((3,5))}, {state_after((4,6)),state_after((3,7)),state_after((2,6)),state_after((3,6))}, {state_before((3,6)). action(up). }).
+%\#pos({state_after((3,5))}, {state_after((4,6)),state_after((3,7)),state_after((2,6)),state_after((3,6))}, {state_before((3,6)). action(up). }).
 
 At the first stage,  the input of real experience needs to be converted in ASP form, which can be used to execute the inductive learning in ILASP. The input used in ILASP is state transitions, 
 rewards and an action of the agent, which can be directly converted using a simple mapping table or an action language (such as BC\textsuperscript{+} as used in \cite{Ferreira2017}). 
