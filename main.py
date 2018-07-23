@@ -43,12 +43,13 @@ DECAY_PARAM = 1
 
 TIME_RANGE = 300
 TIME_RANGE2 = 20
-env = gym.make('vgdl_aaa_L_shape-v0')
+# env = gym.make('vgdl_aaa_L_shape-v0')
+env = gym.make('vgdl_aaa_small-v0')
 
 HEIGHT = env.unwrapped.game.height
 WIDTH = env.unwrapped.game.width
 
-def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
+def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=False):
     log_dir = None
     # Log everything and keep it here
     if record_prefix:
@@ -71,7 +72,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
 
     helper.create_file(LAS_CACHE, LAS_CACHE_PATH)
     # Add mode bias and adjacent definition for ILASP
-    induction.copy_las_base(LASFILE, HEIGHT, WIDTH)
+    induction.copy_las_base(LASFILE, HEIGHT, WIDTH, is_link)
 
     wall_list = induction.get_all_walls(env)
     stats = plotting.EpisodeStats(
@@ -243,7 +244,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
                     #     break
 
                 env.render()
-                # time.sleep(0.2)  
+                time.sleep(0.1)  
 
             if is_exclusion:
                 print("exclusion is there ", pos)
@@ -283,7 +284,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
                 action_string = helper.convert_action(action)
 
                 # Make ASP syntax of state transition
-                induction.send_state_transition_pos(previous_state, next_state, action_string, wall_list, LASFILE)
+                induction.send_state_transition_pos(previous_state, next_state, action_string, wall_list, LASFILE, BACKGROUND)
                 # Meanwhile, accumulate all background knowlege
                 abduction.add_new_walls(previous_state, wall_list, BACKGROUND)
                 # induction.add_surrounding_walls((previous_state, wall_list, BACKGROUND))
@@ -301,7 +302,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None):
     return stats
 
 # epsilon 0 means no exploration
-stats = k_learning(env, 10, epsilon=0, record_prefix=None)
+
+# stats = k_learning(env, 10, epsilon=0, record_prefix="Field", is_link=False)
+
+stats = k_learning(env, 10, epsilon=0, record_prefix=None, is_link=True)
 # plotting.plot_episode_stats(stats)
 plotting.plot_episode_stats_simple(stats)
 

@@ -34,8 +34,8 @@ import pickle
 # env = TraceRecordingWrapper(env, trace_path)
 # env = gym.make('vgdl_aaa3-v0')
 TIME_RANGE = 400
-env = gym.make('vgdl_aaa_L_shape-v0')
-
+# env = gym.make('vgdl_aaa_L_shape-v0')
+env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_aaa_maze-v0')
 
 # env = gym.make('vgdl_aaa_small-v0')
@@ -129,18 +129,17 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             state_int = next_state_int
 
     # Display the final Q-Table
-    # print("HELLO")
-    for key, value in enumerate(Q.items()):
-        print(key)
-        print(value)
-        print("\n")
+    # for key, value in enumerate(Q.items()):
+    #     print(key)
+    #     print(value)
+    #     print("\n")
 
     return Q, stats
 
-Q, stats = q_learning(env, 20)
+Q, stats = q_learning(env, 100)
 # plotting.plot_episode_stats(stats)
 # import ipdb; ipdb.set_trace()
-# plotting.plot_episode_stats_simple(stats)
+plotting.plot_episode_stats_simple(stats)
 
 # picklepath = base_dir + "/stats.pkl"
 # print("picklepath ", picklepath)

@@ -45,7 +45,7 @@ def get_seen_walls(file):
                 wall_list.append((x,y))
     return wall_list
 
-def get_exclusions(previous_state, next_state):
+def get_exclusions(previous_state, next_state, action):
     '''
     Get all state_after that did not happen while exploring
 
@@ -56,41 +56,51 @@ def get_exclusions(previous_state, next_state):
     next_x = int(next_state[0])
     next_y = int(next_state[1])
 
+    # Right
     exc1_x, exc1_y = previous_x+1, previous_y
+    # Down
     exc2_x, exc2_y = previous_x, previous_y+1
+    # Left
     exc3_x, exc3_y = previous_x-1, previous_y
+    # Up
     exc4_x, exc4_y = previous_x, previous_y-1
+    # Non
     exc5_x, exc5_y = previous_x, previous_y
 
     if(next_x == exc1_x and next_y == exc1_y):
-        return "state_after((" + str(exc2_x) + "," + str(exc2_y) + \
+        return False,"state_after((" + str(exc2_x) + "," + str(exc2_y) + \
                 ")),state_after((" + str(exc3_x) + "," + str(exc3_y) + \
                 ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + \
                 ")),state_after((" + str(exc5_x) + "," + str(exc5_y) + "))"
 
     elif(next_x == exc2_x and next_y == exc2_y):
-        return "state_after((" + str(exc1_x) + "," + str(exc1_y) + \
+        return False,"state_after((" + str(exc1_x) + "," + str(exc1_y) + \
                 ")),state_after((" + str(exc3_x) + "," + str(exc3_y) + \
                 ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + \
                 ")),state_after((" + str(exc5_x) + "," + str(exc5_y) + "))"
 
     elif(next_x == exc3_x and next_y == exc3_y):
-        return "state_after((" + str(exc1_x) + "," + str(exc1_y) + \
+        return False,"state_after((" + str(exc1_x) + "," + str(exc1_y) + \
                 ")),state_after((" + str(exc2_x) + "," + str(exc2_y) + \
                 ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + \
                 ")),state_after((" + str(exc5_x) + "," + str(exc5_y) + "))"
 
     elif(next_x == exc4_x and next_y == exc4_y):
-        return "state_after((" + str(exc1_x) + "," + str(exc1_y) + \
+        return False,"state_after((" + str(exc1_x) + "," + str(exc1_y) + \
                 ")),state_after((" + str(exc2_x) + "," + str(exc2_y) + \
                 ")),state_after((" + str(exc3_x) + "," + str(exc3_y) + \
                 ")),state_after((" + str(exc5_x) + "," + str(exc5_y) + "))"
 
     elif(next_x == exc5_x and next_y == exc5_y):
-        return "state_after((" + str(exc1_x) + "," + str(exc1_y) + \
+        return False, "state_after((" + str(exc1_x) + "," + str(exc1_y) + \
                 ")),state_after((" + str(exc2_x) + "," + str(exc2_y) + \
                 ")),state_after((" + str(exc3_x) + "," + str(exc3_y) + \
                 ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + "))"
+    elif(action == "up"):
+        return True, "state_after((" + str(exc1_x) + "," + str(exc1_y) + \
+                ")),state_after((" + str(exc2_x) + "," + str(exc2_y) + \
+                ")),state_after((" + str(exc3_x) + "," + str(exc3_y) + \
+                ")),state_after((" + str(exc5_x) + "," + str(exc5_y) + "))"
 
 def get_plan_exclusions(state_at_before, state_at_after, states):
     '''
@@ -137,7 +147,26 @@ def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list
     else:
         return True, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."    
 
-# TODO could be redundant
+def get_next_state(current_state, action):
+    x = int(current_state[0])
+    y = int(current_state[1])
+    if(action == "up"):
+        return x, y-1
+    elif(action == "down"):
+        return x, y+1
+    elif(action == "right"):
+        return x+1, y
+    elif(action == "left"):
+        return x-1, y
+    elif(action == "non"):
+        return x, y
+
+def get_link(previous_state, next_state, action):
+    x,y = get_next_state(previous_state, action)
+    next_x = int(next_state[0])
+    next_y = int(next_state[1])
+    return "link(({},{}), ({},{})). ".format(x,y,next_x,next_y)
+
 def generate_explore_pos(next_state, previous_state, action, wall_list):
     '''
     Generate a pos in the exploration phase
@@ -145,27 +174,38 @@ def generate_explore_pos(next_state, previous_state, action, wall_list):
     Output: #pos({state_after((3,6))}, {state_after((4,6)), ...}, {state_before((3,6)). action(non). }).
     '''
     walls = add_surrounding_walls(int(previous_state[0]),int(previous_state[1]), wall_list)
-    exclusions = get_exclusions(previous_state, next_state)
-    pos = "#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + walls + "})."
-    return pos
+    is_link, exclusions = get_exclusions(previous_state, next_state, action)
+    # If exclusions is empty, there must be a link
+    # if exclusions == "":
+    if is_link:
+        link = get_link(previous_state, next_state, action)
+        return link, "#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + link + walls + "})."    
+    else:
+        return "","#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + walls + "})."
+    # return pos
 
-def send_state_transition_pos(previous_state,next_state, action, wall_list, lasfile):
+def send_state_transition_pos(previous_state,next_state, action, wall_list, lasfile, background):
     '''
     Generate a pos and add it to lasfile
     '''
-    pos = generate_explore_pos(next_state,previous_state, action, wall_list)
+    link, pos = generate_explore_pos(next_state,previous_state, action, wall_list)
     pos += "\n"
     helper.append_to_file(pos, lasfile)
 
-def copy_las_base(lasfile, height, width):
+    if link != "":
+        helper.append_to_file(link, background)
+
+def copy_las_base(lasfile, height, width, is_link):
     '''
     make a lasfile for ILASP
     '''
 
     cell = "cell((0..{}, 0..{})).\n".format(width, height)
-
     with open(lasfile, "w") as base:
         base.write(cell)
+        if is_link == True:
+            link = "#modeb(1, link(var(cell), var(cell)), (positive)).\n"
+            base.write(link)
 
     with open("las_base.las") as f:
         with open(lasfile, "a") as out:
@@ -182,7 +222,7 @@ def run_ILASP(filename, cache_path=None):
     try:
         # Hardcoded best H
         hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
-        
+        # ILASP --version=2i output.las -ml=10 -nc --clingo5 --clingo "clingo5 --opt-strat=usc,stratify"
         # Clingo 5
         clingo5 = "clingo5 --opt-strat=usc,stratify"
         if cache_path:
@@ -200,7 +240,7 @@ def run_ILASP(filename, cache_path=None):
     hypothesis = py_asp.convert_las_asp(hypothesis)
     return hypothesis
 
-# # Probably not needed
+# Probably not needed
 # def execute_pseudo_action(current_state, action):
 #     current_state = abduction.update_T(current_state)
 #     if(action == "up"):
@@ -213,19 +253,3 @@ def run_ILASP(filename, cache_path=None):
 #         return abduction.update_X(current_state, -1)
 #     elif(action == "non"):
 #         return current_state
-
-# # Probably not needed
-# def execute_pseudo_plan(start_state, actions, states, wall_list):
-#     current_state = start_state
-#     for action in actions:
-#         print("---------------")
-#         print("old ", current_state)
-#         print("action ", action[1])
-#         state_before = current_state
-#         current_state = execute_pseudo_action(current_state, action[1])
-#         state_after = current_state
-#         print("new ",current_state)
-
-#         any_exclusion, pos = generate_plan_pos(state_before, state_after, states, action[1], wall_list)
-
-#         return any_exclusion, pos
