@@ -90,7 +90,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         # TODO DO I want to update this in every episode??
         if is_start:
             state = env.reset()
-            print("reset the starting position to the beginning")   
+            print("reset the starting position to the beginning")  
 
         agent_position = env.unwrapped.game.getFeatures()
         print("agent_position ", agent_position)
@@ -305,7 +305,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
 # stats = k_learning(env, 10, epsilon=0, record_prefix="Field", is_link=False)
 
-stats = k_learning(env, 10, epsilon=0, record_prefix=None, is_link=True)
+stats = k_learning(env, 10, epsilon=0.3, record_prefix=None, is_link=True)
 # plotting.plot_episode_stats(stats)
 plotting.plot_episode_stats_simple(stats)
 

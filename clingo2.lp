@@ -1,8 +1,9 @@
 1{action(down, T); action(up, T); action(right, T); action(left, T); action(non, T)}1 :- time(T), not finished(T).
 #show state_at/2.
- #show action/2.
+#show action/2.
 finished(T):- goal(T2), time(T), T >= T2.
- goal(T):- state_at((5, 1), T), not finished(T-1).
+goal(T):- state_at((5, 1), T), not finished(T-1).
+
 goalMet:- goal(T).
 :- not goalMet.
 time(1..20).
@@ -26,7 +27,8 @@ wall((3, 2)).
 wall((4, 5)).
 wall((6, 4)).
 wall((5, 5)).
-link((5,3), (1,1)). wall((0, 1)).
+link((5,3), (1,1)). 
+wall((0, 1)).
 wall((1, 0)).
 wall((2, 2)).
 wall((2, 0)).
@@ -34,7 +36,16 @@ wall((3, 0)).
 wall((4, 2)).
 wall((4, 0)).
 %START
-state_at(V1, T+1) :- time(T), link(V0, V1).
+% state_at(V1, T+1) :- time(T), link(V0, V1), adjacent(up, V0, Below), state_at(Below, T), not wall(V0).
+
+% state_at(V1, T) :- time(T), link(V0, V1), state_at(V2, T), adjacent(up, V0, V2), action(up, T), not wall(V2).
+state_at(V1, T) :- time(T), link(V0, V1), state_at(V2, T), adjacent(up, V0, V2), action(up, T).
+
+% state_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\n
+% state_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0).
+
+% state_at(V1, T+1) :- time(T), link(V0, V1), action(up, T).
+
 state_at(V0, T+1) :- time(T), state_at(V0, T), action(non, T).
 state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), state_at(V0, T), action(left, T), not wall(V1).
 state_at(V1, T+1) :- time(T), adjacent(left, V0, V1), state_at(V0, T), action(right, T), not wall(V1).
@@ -48,6 +59,7 @@ state_at(V1, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, 
 %END
 %AAA
 state_at((1, 4), 1).
+% state_at((5, 4), 1).
 %BBB
 
 % ANSWER SETS FROM THE ABOVE CODE
@@ -67,6 +79,9 @@ state_at((1, 4), 1).
 % "state_at((4,1),6)", 
 % "state_at((1,1),6)", 
 % "state_at((2,1),6)",  
+% "state_at((5,1),6)", 
+% "state_at((5,4),6)"
+
 
 % "state_at((1,1),2)", 
 % "state_at((2,1),3)", 
@@ -80,8 +95,6 @@ state_at((1, 4), 1).
 % "state_at((4,1),5)", 
 % "state_at((2,1),5)",
 
-% "state_at((5,1),6)", 
-% "state_at((5,4),6)"
 
 % "state_at((1,1),7)", 
 % "state_at((1,1),8)", 
@@ -99,6 +112,80 @@ state_at((1, 4), 1).
 % "state_at((1,1),20)", 
 % "state_at((1,1),21)", 
 
- 
+
+% "state_at((1,4),1)", 
+% "state_at((1,1),1)", 
+% "state_at((1,1),2)", 
+% "state_at((1,1),3)", 
+% "state_at((1,1),4)", 
+% "state_at((1,1),5)", 
+% "state_at((1,1),6)", 
+% "state_at((1,1),7)", 
+% "state_at((1,1),8)", 
+% "state_at((1,1),9)", 
+% "state_at((1,1),10)", 
+% "state_at((1,1),11)", 
+% "state_at((1,1),12)", 
+% "state_at((1,1),13)", 
+% "state_at((1,1),14)", 
+% "state_at((1,1),15)", 
+% "state_at((1,1),16)", 
+% "state_at((1,1),17)", 
+% "state_at((1,1),18)", 
+% "state_at((1,1),19)", 
+
+% "state_at((1,1),20)", 
+% "state_at((2,1),5)", "action(right,4)", 
+% "state_at((2,1),4)", "action(right,3)", 
+% "state_at((2,1),3)", "action(right,2)", 
+% "state_at((2,1),2)", "action(right,1)", 
+% "state_at((2,4),2)", 
+% "state_at((3,4),3)", 
+% "state_at((3,1),3)", 
+% "state_at((3,1),4)", 
+% "state_at((3,1),5)", 
+% "state_at((4,1),5)", 
+% "state_at((4,1),4)", 
+% "state_at((4,4),4)", 
+% "state_at((5,4),5)", 
+% "state_at((5,1),5)"
 
 
+% "state_at((1,4),1)", 
+% "state_at((2,4),2)", "action(right,1)", "action(right,2)", 
+% "state_at((3,4),3)", "action(right,3)", 
+% "state_at((4,4),4)", "action(right,4)", 
+% "state_at((5,4),5)", 
+% "state_at((5,3),6)", "action(up,5)", 
+% "state_at((5,2),7)", "action(up,6)", 
+% "state_at((1,1),6)", 
+% "state_at((1,1),7)", "action(up,7)", 
+% "state_at((5,1),8)", 
+% "state_at((1,1),8)"
+
+
+
+% "state_at((1,4),1)", "action(right,1)",
+% "state_at((2,4),2)", "action(right,2)", 
+% "state_at((3,4),3)", "action(right,3)", 
+% "state_at((4,4),4)", "action(right,4)", 
+% "state_at((5,4),5)", 
+% "state_at((5,3),6)", "action(up,5)", 
+% "state_at((5,2),7)", "action(up,6)", 
+% "state_at((1,1),6)", 
+% "state_at((1,1),7)", "action(up,7)", 
+% "state_at((5,1),8)", 
+% "state_at((1,1),8)"
+
+"state_at((1,4),1)", 
+"state_at((2,4),2)", "action(right,1)", "action(right,2)", 
+"state_at((3,4),3)", "action(right,3)", 
+"state_at((4,4),4)", "action(right,4)", 
+"state_at((5,4),5)", 
+"state_at((5,3),6)", "action(up,5)", 
+"state_at((1,1),5)", 
+"state_at((1,1),6)", 
+"state_at((5,2),7)", "action(up,6)", 
+"state_at((1,1),7)", "action(up,7)", 
+"state_at((5,1),8)", 
+"state_at((1,1),8)"

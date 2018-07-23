@@ -15,6 +15,11 @@ def get_all_walls(env):
         wall_list.append((int(x),int(y)))
     return wall_list
 
+# def get_links(env):
+#     entry1 = (5,3)
+#     exit1 = (1,1)
+#     return entry1, exit1
+
 def add_surrounding_walls(x, y, wall_list):
     '''
     Output: wall(X1,Y1). wall(X2,Y2). ...
