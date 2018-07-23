@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.28)  23 JUL 2018 09:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.23)  23 JUL 2018 11:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **main.tex
 (./main.tex
 LaTeX2e <2016/02/01>
-Babel <3.9q> and hyphenation patterns for 3 language(s) loaded.
+Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
@@ -304,12 +304,51 @@ Package: amsthm 2015/03/04 v2.20.2
 (/usr/share/texlive/texmf-dist/tex/latex/subdepth/subdepth.sty
 Package: subdepth 2007/09/02 v0.1 Unify subscript depths
 )
-\c@thm=\count119
- (./includes.tex (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count119
+\float@exts=\toks29
+\float@box=\box28
+\@float@everytoks=\toks30
+\@floatcapt=\box29
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\@float@every@algorithm=\toks31
+\c@algorithm=\count120
+)
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
+
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count121
+\c@ALG@rem=\count122
+\c@ALG@nested=\count123
+\ALG@tlm=\skip53
+\ALG@thistlm=\skip54
+\c@ALG@Lnr=\count124
+\c@ALG@blocknr=\count125
+\c@ALG@storecount=\count126
+\c@ALG@tmpcounter=\count127
+\ALG@tmplength=\skip55
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+)
+\c@thm=\count128
+ (./includes.tex
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
-\Gm@cnth=\count120
-\Gm@cntv=\count121
-\c@Gm@tempcnt=\count122
+\Gm@cnth=\count129
+\Gm@cntv=\count130
+\c@Gm@tempcnt=\count131
 \Gm@bindingoffset=\dimen120
 \Gm@wd@mp=\dimen121
 \Gm@odd@mp=\dimen122
@@ -318,27 +357,27 @@ Package: geometry 2010/09/12 v5.6 Page Geometry
 \Gm@layoutheight=\dimen125
 \Gm@layouthoffset=\dimen126
 \Gm@layoutvoffset=\dimen127
-\Gm@dimlist=\toks29
+\Gm@dimlist=\toks32
 )
 (/usr/share/texlive/texmf-dist/tex/latex/textpos/textpos.sty
 Package: textpos 2014/01/03 v1.7j
 
 Package: textpos 2014/01/03 1.7j, absolute positioning of text on the page
-\TP@textbox=\box28
+\TP@textbox=\box30
 \TPHorizModule=\dimen128
 \TPVertModule=\dimen129
 \TP@margin=\dimen130
 \TP@absmargin=\dimen131
 Grid set 16 x 16 = 37.34424pt x 52.81541pt
 \TPboxrulesize=\dimen132
-\TP@tbargs=\toks30
+\TP@tbargs=\toks33
 \TP@prevdepth=\dimen133
 ) (/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip53
-\bibsep=\skip54
+\bibhang=\skip56
+\bibsep=\skip57
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count123
+\c@NAT@ctr=\count132
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
 Package: tabularx 2014/10/28 v2.10 `tabularx' package (DPC)
@@ -347,49 +386,49 @@ Package: tabularx 2014/10/28 v2.10 `tabularx' package (DPC)
 \TX@old@col=\dimen136
 \TX@target=\dimen137
 \TX@delta=\dimen138
-\TX@cols=\count124
-\TX@ftn=\toks31
+\TX@cols=\count133
+\TX@ftn=\toks34
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
-\LTleft=\skip55
-\LTright=\skip56
-\LTpre=\skip57
-\LTpost=\skip58
-\LTchunksize=\count125
+\LTleft=\skip58
+\LTright=\skip59
+\LTpre=\skip60
+\LTpost=\skip61
+\LTchunksize=\count134
 \LTcapwidth=\dimen139
-\LT@head=\box29
-\LT@firsthead=\box30
-\LT@foot=\box31
-\LT@lastfoot=\box32
-\LT@cols=\count126
-\LT@rows=\count127
-\c@LT@tables=\count128
-\c@LT@chunks=\count129
-\LT@p@ftn=\toks32
+\LT@head=\box31
+\LT@firsthead=\box32
+\LT@foot=\box33
+\LT@lastfoot=\box34
+\LT@cols=\count135
+\LT@rows=\count136
+\c@LT@tables=\count137
+\c@LT@chunks=\count138
+\LT@p@ftn=\toks35
 )
 (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
 \bigstrutjot=\dimen140
 )
 (/usr/share/texlive/texmf-dist/tex/latex/subfigure/subfigure.sty
 Package: subfigure 2002/03/15 v2.1.5 subfigure package
-\subfigtopskip=\skip59
-\subfigcapskip=\skip60
+\subfigtopskip=\skip62
+\subfigcapskip=\skip63
 \subfigcaptopadj=\dimen141
-\subfigbottomskip=\skip61
+\subfigbottomskip=\skip64
 \subfigcapmargin=\dimen142
-\subfiglabelskip=\skip62
-\c@subfigure=\count130
-\c@lofdepth=\count131
-\c@subtable=\count132
-\c@lotdepth=\count133
+\subfiglabelskip=\skip65
+\c@subfigure=\count139
+\c@lofdepth=\count140
+\c@subtable=\count141
+\c@lotdepth=\count142
 
 ****************************************
 * Local config file subfigure.cfg used *
 ****************************************
 (/usr/share/texlive/texmf-dist/tex/latex/subfigure/subfigure.cfg)
-\subfig@top=\skip63
-\subfig@bottom=\skip64
+\subfig@top=\skip66
+\subfig@bottom=\skip67
 )
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
@@ -405,7 +444,8 @@ Package caption3 Info: TeX engine: e-TeX on input line 67.
 \caption@parindent=\dimen148
 \caption@hangindent=\dimen149
 )
-\c@ContinuedFloat=\count134
+\c@ContinuedFloat=\count143
+Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: longtable package is loaded.
 
@@ -420,15 +460,15 @@ LaTeX Warning: Command \refstepcounter  has changed.
                Check if current package is valid.
 
 ) (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-\fancy@headwidth=\skip65
-\f@ncyO@elh=\skip66
-\f@ncyO@erh=\skip67
-\f@ncyO@olh=\skip68
-\f@ncyO@orh=\skip69
-\f@ncyO@elf=\skip70
-\f@ncyO@erf=\skip71
-\f@ncyO@olf=\skip72
-\f@ncyO@orf=\skip73
+\fancy@headwidth=\skip68
+\f@ncyO@elh=\skip69
+\f@ncyO@erh=\skip70
+\f@ncyO@olh=\skip71
+\f@ncyO@orh=\skip72
+\f@ncyO@elf=\skip73
+\f@ncyO@erf=\skip74
+\f@ncyO@olf=\skip75
+\f@ncyO@orf=\skip76
 )
 (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2016/02/24 3.9q The Babel package
@@ -438,11 +478,9 @@ Language: english 2012/08/20 v3.3p English support from the babel system
 
 (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2016/02/24 3.9q Babel common definitions
-\babel@savecnt=\count135
+\babel@savecnt=\count144
 \U@D=\dimen150
 )
-\l@british = a dialect from \language\l@english 
-\l@UKenglish = a dialect from \language\l@english 
 \l@canadian = a dialect from \language\l@american 
 \l@australian = a dialect from \language\l@british 
 \l@newzealand = a dialect from \language\l@british 
@@ -484,34 +522,34 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 48.
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/hypcap.sty
 Package: hypcap 2011/02/16 v1.11 Adjusting the anchors of captions (HO)
 )) (./notation.tex)
-\c@examp=\count136
+\c@examp=\count145
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
-No file main.aux.
+(./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Try loading font information for OT1+bch on input line 47.
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1bch.fd
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Try loading font information for OT1+bch on input line 49.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1bch.fd
 File: ot1bch.fd 2004/10/18 font definitions for OT1/bch.
 )
-\AtBeginShipoutBox=\box33
-Package hyperref Info: Link coloring ON on input line 47.
+\AtBeginShipoutBox=\box35
+Package hyperref Info: Link coloring ON on input line 49.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -519,28 +557,30 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count137
+\c@section@level=\count146
 )
-LaTeX Info: Redefining \ref on input line 47.
-LaTeX Info: Redefining \pageref on input line 47.
-LaTeX Info: Redefining \nameref on input line 47.
+LaTeX Info: Redefining \ref on input line 49.
+LaTeX Info: Redefining \pageref on input line 49.
+LaTeX Info: Redefining \nameref on input line 49.
+
+(./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count138
+\scratchcounter=\count147
 \scratchdimen=\dimen151
-\scratchbox=\box34
-\nofMPsegments=\count139
-\nofMParguments=\count140
-\everyMPshowfont=\toks33
-\MPscratchCnt=\count141
+\scratchbox=\box36
+\nofMPsegments=\count148
+\nofMParguments=\count149
+\everyMPshowfont=\toks36
+\MPscratchCnt=\count150
 \MPscratchDim=\dimen152
-\MPnumerator=\count142
-\makeMPintoPDFobject=\count143
-\everyMPtoPDFconversion=\toks34
+\MPnumerator=\count151
+\makeMPintoPDFobject=\count152
+\everyMPtoPDFconversion=\toks37
 )
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -579,8 +619,8 @@ LaTeX Info: Redefining \nameref on input line 47.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hypcap package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package backref Info: ** backref set up for natbib ** on input line 47.
-(./titlepage.tex <./figures/imperial.pdf, id=4, 362.35374pt x 95.35625pt>
+Package backref Info: ** backref set up for natbib ** on input line 49.
+(./titlepage.tex <./figures/imperial.pdf, id=168, 362.35374pt x 95.35625pt>
 File: ./figures/imperial.pdf Graphic file (type pdf)
 
 <use ./figures/imperial.pdf>
@@ -610,15 +650,19 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./figures/imperial.pdf>])
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <12> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 60.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 62.
  [1
 
 
-]
+] (./main.toc
+[2
+
+])
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
- [2
+ [3] [4
+
 
 ]
 Chapter 1.
@@ -644,12 +688,6 @@ Package natbib Warning: Citation `Garnelo2016' on page 1 undefined on input lin
 e 10.
 
 
-LaTeX Warning: Reference `background' on page 1 undefined on input line 14.
-
-
-LaTeX Warning: Reference `related_work' on page 1 undefined on input line 14.
-
-
 LaTeX Warning: Reference `project_overview' on page 1 undefined on input line 1
 4.
 
@@ -661,210 +699,185 @@ LaTeX Warning: Reference `ethics_checklist' on page 1 undefined on input line 1
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.99 
-      [1
-
-
+l.101 
+       [1
 
 ] [2]
 Chapter 2.
-
-LaTeX Warning: Reference `ilp' on page 3 undefined on input line 103.
-
-
-LaTeX Warning: Reference `rl' on page 3 undefined on input line 103.
-
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 105.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 107.
 
 Package natbib Warning: Citation `Muggleton1991' on page 3 undefined on input l
-ine 108.
+ine 110.
 
 
 Package natbib Warning: Citation `DeRaedt1997' on page 3 undefined on input lin
-e 108.
-
-
-LaTeX Warning: Reference `ilp_equation' on page 3 undefined on input line 108.
+e 110.
 
 
 Package natbib Warning: Citation `Muggleton1993' on page 3 undefined on input l
-ine 117.
+ine 119.
 
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 121.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 123.
 [3
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 149--150
+Underfull \hbox (badness 10000) in paragraph at lines 151--152
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+bch on input line 155.
+LaTeX Font Info:    Try loading font information for OMS+bch on input line 157.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsbch.fd
 File: omsbch.fd 
 )
 LaTeX Font Info:    Font shape `OMS/bch/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 155.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 157.
 
-Underfull \hbox (badness 10000) in paragraph at lines 151--156
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 173--174
+Underfull \hbox (badness 10000) in paragraph at lines 153--158
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--180
+Underfull \hbox (badness 10000) in paragraph at lines 175--176
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 177--182
 
  []
 
 
 Package natbib Warning: Citation `Gelfond1988' on page 4 undefined on input lin
-e 189.
+e 191.
 
 [4]
 
 Package natbib Warning: Citation `Gebser2011' on page 5 undefined on input line
- 227.
+ 229.
 
 
 Package natbib Warning: Citation `Sakama2009' on page 5 undefined on input line
- 235.
-
-
-LaTeX Warning: Reference `section_lasp' on page 5 undefined on input line 235.
+ 237.
 
 
 Package natbib Warning: Citation `Otero2001' on page 5 undefined on input line 
-235.
+237.
 
 
 Package natbib Warning: Citation `Inoue2014' on page 5 undefined on input line 
-235.
+237.
 
 
 Package natbib Warning: Citation `Corapi2012' on page 5 undefined on input line
- 235.
+ 237.
 
 
 Package natbib Warning: Citation `DeRaedt1997' on page 5 undefined on input lin
-e 235.
+e 237.
 
 [5]
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 238.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 240.
 
 
 Package natbib Warning: Citation `Sakama2009' on page 6 undefined on input line
- 238.
+ 240.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 240--241
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 246--247
+Underfull \hbox (badness 10000) in paragraph at lines 242--243
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 248--253
+Underfull \hbox (badness 10000) in paragraph at lines 248--249
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--261
+Underfull \hbox (badness 10000) in paragraph at lines 250--255
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 262--266
+Underfull \hbox (badness 10000) in paragraph at lines 262--263
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--275
+Underfull \hbox (badness 10000) in paragraph at lines 264--268
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 275--277
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 276--277
+Underfull \hbox (badness 10000) in paragraph at lines 278--279
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 277--278
+Underfull \hbox (badness 10000) in paragraph at lines 279--280
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 280--281
+Underfull \hbox (badness 10000) in paragraph at lines 282--283
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 282--287
+Underfull \hbox (badness 10000) in paragraph at lines 284--289
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 294--295
+Underfull \hbox (badness 10000) in paragraph at lines 296--297
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 296--301
+Underfull \hbox (badness 10000) in paragraph at lines 298--303
 
  []
 
 
 Package natbib Warning: Citation `Law2014' on page 7 undefined on input line 31
-0.
+2.
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 351--352
+Underfull \hbox (badness 10000) in paragraph at lines 353--354
 
  []
 
-[8]
-
-LaTeX Warning: Reference `model_generation_and_update' on page 9 undefined on i
-nput line 380.
-
-
-LaTeX Warning: Reference `agent_env' on page 9 undefined on input line 384.
-
-<./figures/agent_env.png, id=106, 248.93pt x 228.855pt>
+[8] <./figures/agent_env.png, id=324, 248.93pt x 228.855pt>
 File: ./figures/agent_env.png Graphic file (type png)
 
 <use ./figures/agent_env.png>
-Package pdftex.def Info: ./figures/agent_env.png used on input line 388.
+Package pdftex.def Info: ./figures/agent_env.png used on input line 390.
 (pdftex.def)             Requested size: 170.72113pt x 170.72241pt.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 389.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 391.
 
 
 Package natbib Warning: Citation `Puterman1994' on page 9 undefined on input li
-ne 395.
+ne 397.
 
 [9 <./figures/agent_env.png>] [10]
 
 Package natbib Warning: Citation `Sutton1990' on page 11 undefined on input lin
-e 465.
+e 467.
 
-
-LaTeX Warning: Reference `dyna' on page 11 undefined on input line 465.
-
-<./figures/dyna.png, id=131, 243.91125pt x 175.65625pt>
+<./figures/dyna.png, id=346, 243.91125pt x 175.65625pt>
 File: ./figures/dyna.png Graphic file (type png)
 
 <use ./figures/dyna.png>
-Package pdftex.def Info: ./figures/dyna.png used on input line 469.
+Package pdftex.def Info: ./figures/dyna.png used on input line 471.
 (pdftex.def)             Requested size: 227.62413pt x 170.72942pt.
 
 Underfull \vbox (badness 1661) has occurred while \output is active []
@@ -872,20 +885,16 @@ Underfull \vbox (badness 1661) has occurred while \output is active []
  [11 <./figures/dyna.png>]
 
 Package natbib Warning: Citation `Watkins' on page 12 undefined on input line 5
-00.
+02.
 
 [12]
 Chapter 3.
 (./chapters/implementation.tex
 
-LaTeX Warning: Reference `proposed_architecture' on page 13 undefined on input 
-line 4.
-
-
 Package natbib Warning: Citation `Sutton1990' on page 13 undefined on input lin
 e 4.
 
-<./figures/architecture.png, id=148, 566.115pt x 412.54124pt>
+<./figures/architecture.png, id=361, 566.115pt x 412.54124pt>
 File: ./figures/architecture.png Graphic file (type png)
 
 <use ./figures/architecture.png>
@@ -894,111 +903,149 @@ Package pdftex.def Info: ./figures/architecture.png used on input line 8.
  [13
 
  <./figures/architecture.png>]
+Overfull \hbox (29.86092pt too wide) in paragraph at lines 23--24
+[]\OT1/bch/m/n/12 #pos(state[]after((X2,Y2)), all other state[]after that did n
+ot hap-pen, state[]before((X1,Y1)).
+ []
+
+
+Overfull \hbox (64.16423pt too wide) in paragraph at lines 35--36
+[]\OT1/bch/m/n/12 #pos(state[]after((1,3)), state[]after((2,4)),state[]after((1
+,5)),state[]after((0,4)),state[]after((1,4)),
+ []
+
+
+Overfull \hbox (64.16423pt too wide) in paragraph at lines 44--45
+[]\OT1/bch/m/n/12 #pos(state[]after((1,3)), state[]after((2,3)),state[]after((1
+,4)),state[]after((0,3)),state[]after((1,2)),
+ []
+
 
 Package natbib Warning: Citation `Ferreira2017' on page 14 undefined on input l
-ine 29.
+ine 50.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 28--31
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 64--65
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 66--73
+Underfull \hbox (badness 10000) in paragraph at lines 49--52
 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 76--77
+Underfull \hbox (badness 10000) in paragraph at lines 85--93
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 78--83
+Underfull \hbox (badness 10000) in paragraph at lines 94--99
+
+ []
+
+[15]
+Overfull \hbox (12.5234pt too wide) in paragraph at lines 127--131
+[]\OT1/bch/m/n/12 state[]after(V0) :- ad-ja-cent(right, V0, V1), state[]before(
+V1), ac-tion(right), not wall(V0).
+ []
+
+
+Overfull \hbox (21.16342pt too wide) in paragraph at lines 127--131
+\OT1/bch/m/n/12 state[]after(V0) :- ad-ja-cent(down, V0, V1), state[]before(V1)
+, ac-tion(down), not wall(V0).
+ []
+
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 148.
+
+Underfull \hbox (badness 10000) in paragraph at lines 169--170
 
  []
 
 
-LaTeX Warning: Reference `grid_world' on page 15 undefined on input line 84.
+Underfull \hbox (badness 10000) in paragraph at lines 171--178
+
+ []
+
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 183--184
+
+ []
 
 
-Package natbib Warning: Citation `Law2017' on page 15 undefined on input line 9
-2.
+Underfull \hbox (badness 10000) in paragraph at lines 185--190
+
+ []
 
 
-Package natbib Warning: Citation `Schaul2013' on page 15 undefined on input lin
-e 97.
+Package natbib Warning: Citation `Law2017' on page 17 undefined on input line 1
+98.
 
-[15] <./figures/grid_world.png, id=173, 625.33624pt x 270.00874pt>
+
+Package natbib Warning: Citation `Schaul2013' on page 17 undefined on input lin
+e 206.
+
+[17] <./figures/grid_world.png, id=392, 625.33624pt x 270.00874pt>
 File: ./figures/grid_world.png Graphic file (type png)
 
 <use ./figures/grid_world.png>
-Package pdftex.def Info: ./figures/grid_world.png used on input line 116.
+Package pdftex.def Info: ./figures/grid_world.png used on input line 225.
 (pdftex.def)             Requested size: 284.52843pt x 142.26758pt.
-) [16 <./figures/grid_world.png>]
+) [18 <./figures/grid_world.png>]
 Chapter 4.
-(./chapters/evaluation.tex) [17
+(./chapters/evaluation.tex) [19
 
 ]
 Chapter 5.
 (./chapters/related_work.tex
 
-Package natbib Warning: Citation `Garnelo2016' on page 18 undefined on input li
+Package natbib Warning: Citation `Garnelo2016' on page 20 undefined on input li
 ne 3.
 
 
-Package natbib Warning: Citation `LeCunL1998' on page 18 undefined on input lin
+Package natbib Warning: Citation `LeCunL1998' on page 20 undefined on input lin
 e 3.
 
 
-Package natbib Warning: Citation `Su2017' on page 18 undefined on input line 4.
+Package natbib Warning: Citation `Su2017' on page 20 undefined on input line 4.
 
 
 
-Package natbib Warning: Citation `Garcez2018' on page 18 undefined on input lin
+Package natbib Warning: Citation `Garcez2018' on page 20 undefined on input lin
 e 6.
 
 
-Package natbib Warning: Citation `Zambaldi2018' on page 18 undefined on input l
+Package natbib Warning: Citation `Zambaldi2018' on page 20 undefined on input l
 ine 8.
 
 
-Package natbib Warning: Citation `Garnelo2016' on page 18 undefined on input li
+Package natbib Warning: Citation `Garnelo2016' on page 20 undefined on input li
 ne 8.
 
 
-Package natbib Warning: Citation `Apeldoorn2017' on page 18 undefined on input 
+Package natbib Warning: Citation `Apeldoorn2017' on page 20 undefined on input 
 line 18.
 
 
-Package natbib Warning: Citation `Apeldoorn2016' on page 18 undefined on input 
+Package natbib Warning: Citation `Apeldoorn2016' on page 20 undefined on input 
 line 18.
 
 
-Package natbib Warning: Citation `Apeldoorn' on page 18 undefined on input line
+Package natbib Warning: Citation `Apeldoorn' on page 20 undefined on input line
  18.
-
-[18
-
-]
-
-Package natbib Warning: Citation `Ferreira2017' on page 19 undefined on input l
-ine 20.
-
-) [19]
-Chapter 6.
-
-Package natbib Warning: Citation `Sridharan2017' on page 20 undefined on input 
-line 561.
 
 [20
 
-] [21]
+]
+
+Package natbib Warning: Citation `Ferreira2017' on page 21 undefined on input l
+ine 20.
+
+) [21]
+Chapter 6.
+
+Package natbib Warning: Citation `Sridharan2017' on page 22 undefined on input 
+line 570.
+
+[22
+
+] [23]
 Chapter 7.
 (./chapters/ethics.tex
 Missing character: There is no â in font bchr7t!
@@ -1029,44 +1076,38 @@ Overfull \hbox (9.14763pt too wide) in alignment at lines 125--130
  [] [] [] 
  []
 
-[22
+[24
 
-] [23])
+] [25])
 No file main.bbl.
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 588.
-[24]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 588.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 597.
+[26]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 597.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 588.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 588.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 597.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 597.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 6D18BEEADCA1A36926569508E56C1698;3074.
 
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  6D18BEEADCA1A36926569508E56C1698;3074.
 
 LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 588.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 597.
  ) 
 Here is how much of TeX's memory you used:
- 10664 strings out of 494953
- 153973 string characters out of 6180976
- 285042 words of memory out of 5000000
- 13616 multiletter control sequences out of 15000+600000
- 48230 words of font info for 89 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
- 41i,12n,43p,928b,523s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 11350 strings out of 493029
+ 163801 string characters out of 6136234
+ 301922 words of memory out of 5000000
+ 14518 multiletter control sequences out of 15000+600000
+ 51967 words of font info for 93 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 41i,12n,43p,928b,522s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fon
@@ -1076,15 +1117,16 @@ ts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
 nts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (27 pages, 249963 bytes).
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (31 pages, 271888 bytes).
 PDF statistics:
- 309 PDF objects out of 1000 (max. 8388607)
- 256 compressed objects within 3 object streams
- 120 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 513 PDF objects out of 1000 (max. 8388607)
+ 453 compressed objects within 5 object streams
+ 127 named destinations out of 1000 (max. 500000)
+ 354 words of extra memory for PDF output out of 10000 (max. 10000000)
 

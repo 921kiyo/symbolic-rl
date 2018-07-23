@@ -14,20 +14,43 @@ The proposed tentative architecture is shown in Figure \ref{proposed_architectur
 \subsection{Experience Accumulation}
 \label{experience_accumulation}
 
-The first step is to accumulate experience. The agent explores the environment randomly until it reaches the goal once. Until then, it keeps accumulating stuff. 
+The first step is to accumulate experience by interacting with the environment. The agent explores the environment randomly until it reaches the goal once. 
+Every time the agent takes an action during the exploration phase, these experiences need to be recorded in two ways: state transition experience and environment experience.
 
-Every time the agent takes an action, these experiences need to be recorded in two ways: state transition experience and environment experience
+\subsubsection{State transition experience}
+State transition experiences will be used as E in ILASP, especially positive examples for ILASP in ASP syntax, which is of the form
 
-State transition experiences will be used as positive examples for ILASP, which is of the form
+\#pos({state\_after((X2,Y2))}, {all other state\_after that did not happen}, {state\_before((X1,Y1)). action(A). surrounding information}).
 
-%\#pos({state_after((X2,Y2))}, {all other state_after that did not happen}, {state_before((X1,Y1)). action(A). }).
+where ,  
+\begin{itemize}
+    \item inclusions contain one state\_after((X2,Y2)), which represents the position of the agent in x and y axis after an action is taken 
+    \item exclusions contain all other state\_after((X,Y)) that did not occur
+    \item context example include state\_before((X1,Y1)), which represents the position of the agent in x and y axis before an action is taken,
+    action(A) is the action the agent has taken, and surrounding information, such as walls, if any. 
+\end{itemize}
 
-For example, 
-%\#pos({state_after((3,5))}, {state_after((4,6)),state_after((3,7)),state_after((2,6)),state_after((3,6))}, {state_before((3,6)). action(up). }).
+More concrete examples of the positive examples are as follow. 
 
-At the first stage,  the input of real experience needs to be converted in ASP form, which can be used to execute the inductive learning in ILASP. The input used in ILASP is state transitions, 
+\#pos({state\_after((1,3))}, {state\_after((2,4)),state\_after((1,5)),state\_after((0,4)),state\_after((1,4))}, {state\_before((1,4)). action(up). wall((1, 5)). wall((0, 4)). })
+
+Here the agent takes an action "up" to move from (1,3) to (1,4) cell. All other alternative states that the agent could have ended up by taking different actions 
+(down, right, left, and not move) are in the exclusions. Finally surrounding walls information are in the context.
+
+This example will be used to learn how to move up as one of the agent's hypotheses.
+
+Another example is 
+
+\#pos({state\_after((1,3))}, {state\_after((2,3)),state\_after((1,4)),state\_after((0,3)),state\_after((1,2))}, {state\_before((1,3)). action(up). wall((2, 3)). wall((0, 3)). wall((1, 2)). }).
+
+where the agent tried to move up, from (1,3) to (1,2), but ended up in the same cell at (1,3). This is because there is a wall at (1,2), and the agent learns in order to move an above cell,
+there must not be a wall in the above cell. 
+
+At the first stage, the input of real experience needs to be converted in ASP form, which can be used to execute the inductive learning in ILASP. The input used in ILASP is state transitions, 
 rewards and an action of the agent, which can be directly converted using a simple mapping table or an action language (such as BC\textsuperscript{+} as used in \cite{Ferreira2017}). 
 The following ASP input is what is sent to ILASP. \\
+
+There is no negative example as XXXX. 
 
 agent\_at\_before((X,Y), T).
 
@@ -37,26 +60,108 @@ reward(R, T).
 
 action(A, T).
 
+\subsubsection{Environment experience}
+
+While the agent explores in the environment, it also remembers all the surrounding information as background knowledge, 
+which will be used to generate a sequence of actions plan using H. In a simple maze, these could be all wall position that the agent has seen so far, which can be 
+
+wall((1, 5)). which represents the location of the wall. 
+
+Another example could be a location of a teleportation if the agent sees it. 
+
+These environment experiences are part of context examples in the positive examples. 
+
+Together with the positive examples (E) as described above. 
+
 \subsection{Induction}
 \label{induction}
-Once the agent hits the goal once, ILASP gets triggered and try to learn a hypothesis. 
+
+Once the agent hits the goal once, ILASP gets triggered and try to learn a hypothesis using the positive examples the agent accumulated so far. 
 
 generate hypothesis H,
 
-later on H should be kept improving as we collect more examples as well as background knowledge.
+In addition to the positive examples, the following definitions are supplied
+
+cell((0..7, 0..6)). \\
+\#modeb(1, link(var(cell), var(cell)), (positive)). \\
+% (X+1,Y) is right next to (X,Y)
+adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)). \\
+adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)). \\
+% (X,Y+1) is above next to (X,Y)
+adjacent(down, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)). \\
+adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)). \\
+
+\#modeh(state\_after(var(cell))). \\
+\#modeb(1, adjacent(const(action), var(cell), var(cell))). \\
+\#modeb(1, state\_before(var(cell)), (positive)). \\
+\#modeb(1, action(const(action)),(positive)). \\
+\#modeb(1, wall(var(cell))). \\
+
+Without these in the form of mode bias, the search space for ILASp will be empty. 
+Positive excludes the possibility of negation as a failure in order to reduce the search space.
+
+\#max\_penalty(100).
+
+By default it is XX, 
+
+\#constant(action, right).
+\#constant(action, left).
+\#constant(action, down).
+\#constant(action, up).
+\#constant(action, non).
+
+The actions in the body have to be constant
+
+Together with the above defition as well as accumulated positive examples, ILASP is able to learn an hypothesis. The quality of H depends on the experiences for the agent. 
+For example, In the early phase of learning, the agent does not have many examples, and learns an hypothesis that may not be insightfull. 
+For example, if the agent has only one positive example, 
+
+XXX
+
+The learnt hypothesis is XXX
+
+This hypothesis, for example, does not explain how to move "down". In order to learn how to move "down", it needs an positive example of moving up. 
+
+later on H improving as we collect more examples as well as background knowledge.
+
+state\_after(V0) :- adjacent(right, V0, V1), state\_before(V1), action(right), not wall(V0).
+state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).
+state\_after(V0) :- adjacent(down, V0, V1), state\_before(V1), action(down), not wall(V0).
+state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).
+
+These learnt H will be used to generate a plan in the abduction phase. 
+
+After executing the plan, the agent will have more positive examples, which will be used to improve the quality of H. 
 
 \subsection{Generate a plan}
 \label{Generate a plan}
 
 Generate a plan using abduction
 
+If the hypotheses were not accurate, clingo might not generate all the actions leading to the goals. 
+
 \subsection{Plan execution}
 \label{Plan execution}
 TODO ALGORITHMS HERE
 
-
-TODO ALGORITHMS HERE
-
+\begin{algorithm}
+\caption{Distinct sequence of numbers}\label{euclid}
+\begin{algorithmic}[1]
+\Procedure{DISTINCT (A=[A\textsubscript{1}, ..., A\textsubscript{N}])}{}
+\State $\textit{N} \gets \text{length of }\textit{A}$
+\State $\textit{T} = new\ HashTable(N)$
+\For{i from 0 to N} 
+    \If {$ A[i]\ is \ in \ T$}
+        \State \Return $FALSE$
+    \Else 
+        \State Add A[i] to T   
+    \EndIf
+\EndFor
+\State \Return $TRUE$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+    
 
 
 \subsection{Model Generation and Update using ILASP}
@@ -71,7 +176,9 @@ link(C2, T):- agent\_at(C1, T), adjacent(C0, C2), not obstacle(C0, C2).\\
 %  agent\_at\_after(C2, T2).\\
 agent\_at(C, T):- agent\_at\_after(C, T) \\
 
-The background knowledge is empty, and there are only positive examples in learning this task. Each example contains a different transition history of the agent. Inclusions are valid moves and exclusions are invalid moves. Learning valid\_move is the same as learning the rule of the games (the model of the environment), and it is updated as the agent explores in the environment.
+The background knowledge is empty, and there are only positive examples in learning this task. Each example contains a different transition history of the agent. 
+Inclusions are valid moves and exclusions are invalid moves. 
+Learning valid\_move is the same as learning the rule of the games (the model of the environment), and it is updated as the agent explores in the environment.
 
 In addition to the rules of the game, learning the following concepts will be crucial for transfer learning, as these concepts will be applicable to any types of game environment.  \\
 
@@ -81,19 +188,21 @@ obstacle(C1, C2):- wall(C1, C2). \\
 wall(C1, C2):- agent\_at\_before(C1, T1), agent\_at\_after(C1, T2) \\
 enemy(C1, C2):- agent\_at\_before(C1, T1), agent\_at\_after(C2, T2), reward(R), -100 $\geq$ R \\
 
-where it is assumed that the reward of -100 means losing the game or losing the agent's life. Once the agent has learned the concept of the game, it knows how to avoid an obstacle in an adjacent cell in a new environment. Figure \ref{grid_world} illustrates this transfer capability.
-
-
+where it is assumed that the reward of -100 means losing the game or losing the agent's life. 
+Once the agent has learned the concept of the game, it knows how to avoid an obstacle in an adjacent cell in a new environment. 
+Figure \ref{grid_world} illustrates this transfer capability.
 
 \section{Algorithms}
 \label{algorithms}
 
-
 Once the architecture is decided, we will implement it using Python and ILASPv3.1.0 (Clingo) \cite{Law2017}, and compare the performance with other learning methods using a game platform called GVG-AI Framework.
 
-Other learning methods to be compared as benchmarks will be Q-Learning and Deep Q-Learning since these methods are widely used in other related works. Other symbolic-based approaches could also be compared as an extension. The two main measurements for the performance of our new architecture are learning efficiency and transfer learning capability as stated in the Introduction.
+Other learning methods to be compared as benchmarks will be Q-Learning and Deep Q-Learning since these methods are widely used in other related works. 
+Other symbolic-based approaches could also be compared as an extension. 
+The two main measurements for the performance of our new architecture are learning efficiency and transfer learning capability as stated in the Introduction.
 
-GVG-AI Framework was created for the General Video Gamea AI Competition \footnote{http://www.gvgai.net/}, a game environment for an agent that should be able to play a wide variety of games without knowing which games are to be played.
+GVG-AI Framework was created for the General Video Gamea AI Competition \footnote{http://www.gvgai.net/}, 
+a game environment for an agent that should be able to play a wide variety of games without knowing which games are to be played.
 The underlying language is the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
 
 TODO OPENAI paper citation
@@ -117,11 +226,15 @@ The game is formalised as MDP as follows:
 \caption{Simple Grid World to highlight transfer capability }
 \label{grid_world}
 \end{figure}
-If the agent A learnt the concept \textit{adjacent} in Environment 1, the agent could reason (have a policy), for example, "if the adjacent cell is a wall, moving into that cell is an invalid move", "if the adjacent cell is an enemy, moving into that cell will incur a negative reward". These learnt policies could immediately be used in a new environment (e.g Environment 2), even though the agent's coordinates position is different from that in previous environment (e.g Environment 1).
+If the agent A learnt the concept \textit{adjacent} in Environment 1, the agent could reason (have a policy), for example, "if the adjacent cell is a wall, moving into that cell is an invalid move", "if the adjacent cell is an enemy, 
+moving into that cell will incur a negative reward". These learnt policies could immediately be used in a new environment (e.g Environment 2), even though the agent's coordinates position is different from that in previous environment (e.g Environment 1).
+
 \subsection{Generation of Simulated Experience}
-Assuming the model is  a true representation of the partial environment, we can generate simulated experience to update the Q function. The simulated experience is cheaper than real experience, which should contribute to efficient learning. However Dyna architecture is known to lead to sub-optimal policy when the model is not accurate, and the solution to this problem needs to be considered further.
+Assuming the model is  a true representation of the partial environment, we can generate simulated experience to update the Q function. The simulated experience is cheaper than real experience, 
+which should contribute to efficient learning. However Dyna architecture is known to lead to sub-optimal policy when the model is not accurate, and the solution to this problem needs to be considered further.
 
 An alternative to using simulated experience is to directly update state representations. Once the concept "adjacent"  was learnt from a real experience, it could be incorporated in a state.
 
-In addition, when the environment changes during the exploration, the agent should generalise its internal model to cope with the new environment in two different but similar environments.  As a result the agent's model becomes more general which covers both games. Thus in theory, the agent should still be able to achieve more efficient learning from the model-based learning, facilitating the transfer learning.
+In addition, when the environment changes during the exploration, the agent should generalise its internal model to cope with the new environment in two different but similar environments. 
+As a result the agent's model becomes more general which covers both games. Thus in theory, the agent should still be able to achieve more efficient learning from the model-based learning, facilitating the transfer learning.
 Implementation of exactly how the model is generalised will be further investigated.
