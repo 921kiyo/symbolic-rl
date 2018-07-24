@@ -49,6 +49,9 @@ env = gym.make('vgdl_aaa_small-v0')
 HEIGHT = env.unwrapped.game.height
 WIDTH = env.unwrapped.game.width
 
+TEMP_X = 5
+TEMP_Y = 1
+
 def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=False):
     log_dir = None
     # Log everything and keep it here
@@ -75,6 +78,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     induction.copy_las_base(LASFILE, HEIGHT, WIDTH, is_link)
 
     wall_list = induction.get_all_walls(env)
+    # import ipdb; ipdb.set_trace()
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes))
@@ -94,7 +98,13 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
         agent_position = env.unwrapped.game.getFeatures()
         print("agent_position ", agent_position)
+        x = int(state[0])
+        y = int(state[1])
 
+        if x == TEMP_X and y == TEMP_Y:
+            is_start = True
+            break
+        
         previous_state = state
         previous_state_at = py_asp.state_at(state[0], state[1], 1)
         any_exclusion = False
@@ -114,6 +124,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 abduction.make_lp(hypothesis, LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, WIDTH, HEIGHT)
                 first_abduction = True
             
+            print("agent_position ", agent_position)
             abduction.update_agent_position(agent_position, CLINGOFILE)
 
             answer_sets = abduction.run_clingo(CLINGOFILE)
@@ -145,7 +156,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     x = int(next_state[0])
                     y = int(next_state[1])
 
-                    if x == 17 and y == 1:
+                    if x == TEMP_X and y == TEMP_Y:
                         reward = 100
                         i_episode += 1
                         break
@@ -167,7 +178,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 
                     # Add pos 
                     walls = induction.get_seen_walls(CLINGOFILE)
-                    any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action_string, walls)
+                    walls = walls + wall_list
+                    any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action_string, walls, is_link)
                     pos += "\n"
                     helper.append_to_file(pos, LASFILE)
 
@@ -181,7 +193,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     previous_state_at = observed_state
                     print("next_state ", next_state)
                     
-                    if x == 17 and y == 1:
+                    if x == TEMP_X and y == TEMP_Y:
                         is_start = True
                         i_episode += 1
                         break
@@ -194,10 +206,12 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     action_int = helper.get_action(action[1])
                 
                     next_state, reward, done, _ = env.step(action_int)
+                    
+                    is_start = False
 
                     x = int(next_state[0])
                     y = int(next_state[1])                   
-                    if x == 17 and y == 1:
+                    if x == TEMP_X and y == TEMP_Y:
                         reward = 100
                     else:
                         reward = -1
@@ -217,7 +231,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 
                     # Add pos 
                     walls = induction.get_seen_walls(CLINGOFILE)
-                    any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], walls)
+                    walls = walls + wall_list
+                    any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], walls, is_link)
                     pos += "\n"
                     helper.append_to_file(pos, LASFILE)
                     
@@ -235,7 +250,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     previous_state = next_state
                     previous_state_at = observed_state
 
-                    if x == 17 and y == 1:
+                    if x == TEMP_X and y == TEMP_Y:
                         is_start = True
                         i_episode += 1
                         break
@@ -305,7 +320,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
 # stats = k_learning(env, 10, epsilon=0, record_prefix="Field", is_link=False)
 
-stats = k_learning(env, 10, epsilon=0.3, record_prefix=None, is_link=True)
+stats = k_learning(env, 10, epsilon=0.2, record_prefix="another", is_link=True)
 # plotting.plot_episode_stats(stats)
 plotting.plot_episode_stats_simple(stats)
 

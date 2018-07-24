@@ -123,7 +123,10 @@ def get_plan_exclusions(state_at_before, state_at_after, states):
             x_after, _, _ = abduction.get_X(s[1])
             y_after, _, _ = abduction.get_Y(s[1])
             state_after = py_asp.state_after(x_after, y_after)
-            exclusion_list.append(state_after)
+            if state_after == "state_after((5,3))":
+                continue
+            else:
+                exclusion_list.append(state_after)
     
     # Take each element in exclcusion_list and concatinate them in string
     exclusions = ""
@@ -132,25 +135,6 @@ def get_plan_exclusions(state_at_before, state_at_after, states):
         exclusions += ", "
     return exclusions[0:len(exclusions)-2]
 
-def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list):
-    '''
-    Generate a positive example for ILASP from the plan
-
-    Output: #pos({state_after((3,6))}, {state_after((4,6)), ...}, {state_before((3,6)). action(non). }).
-    '''
-    x_before, _, _ = abduction.get_X(state_at_before)
-    y_before, _, _ = abduction.get_Y(state_at_before)
-    x_after, _, _ = abduction.get_X(state_at_after)
-    y_after, _, _ = abduction.get_Y(state_at_after)
-    state_before = py_asp.state_before(x_before, y_before)
-    state_after = py_asp.state_after(x_after, y_after)
-    # TODO is this correct way to do??
-    exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
-    walls = add_surrounding_walls(x_before, y_before, wall_list)
-    if exclusions == "":
-        return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."
-    else:
-        return True, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."    
 
 def get_next_state(current_state, action):
     x = int(current_state[0])
@@ -171,6 +155,34 @@ def get_link(previous_state, next_state, action):
     next_x = int(next_state[0])
     next_y = int(next_state[1])
     return "link(({},{}), ({},{})). ".format(x,y,next_x,next_y)
+
+def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list, is_link):
+    '''
+    Generate a positive example for ILASP from the plan
+
+    Output: #pos({state_after((3,6))}, {state_after((4,6)), ...}, {state_before((3,6)). action(non). }).
+    '''
+
+    x_before, _, _ = abduction.get_X(state_at_before)
+    y_before, _, _ = abduction.get_Y(state_at_before)
+    x_after, _, _ = abduction.get_X(state_at_after)
+    y_after, _, _ = abduction.get_Y(state_at_after)
+    state_before = py_asp.state_before(x_before, y_before)
+    state_after = py_asp.state_after(x_after, y_after)
+    # TODO is this correct way to do??
+    exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
+    walls = add_surrounding_walls(x_before, y_before, wall_list)
+    
+    link = ""
+    if is_link:
+        if(x_before == 5 and y_before == 4 and action == "up"):
+            link = "link((5,3), (1,1))."
+            # import ipdb; ipdb.set_trace()
+    
+    if exclusions == "":
+        return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."
+    else:
+        return True, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."    
 
 def generate_explore_pos(next_state, previous_state, action, wall_list):
     '''
@@ -198,6 +210,8 @@ def send_state_transition_pos(previous_state,next_state, action, wall_list, lasf
     helper.append_to_file(pos, lasfile)
 
     if link != "":
+        link += "\n"
+
         helper.append_to_file(link, background)
 
 def copy_las_base(lasfile, height, width, is_link):

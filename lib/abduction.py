@@ -25,19 +25,19 @@ def add_new_walls(previous_state, wall_list, backgroundfile):
     y = int(previous_state[1])
     is_new_b = False
     if(((x+1,y) in wall_list) and (is_wall_in_background((x+1,y), backgroundfile) == False)):
-        wall = "wall({}).".format((x+1,y)) + "\n"
+        wall = "\nwall({}).\n".format((x+1,y))
         helper.append_to_file(wall, backgroundfile)
         is_new_b = True
     if(((x,y+1) in wall_list) and (is_wall_in_background((x,y+1), backgroundfile) == False)):
-        wall = "wall({}).".format((x,y+1)) + "\n"
+        wall = "\nwall({}).\n".format((x,y+1))
         helper.append_to_file(wall, backgroundfile)
         is_new_b = True
     if(((x-1,y) in wall_list) and (is_wall_in_background((x-1,y), backgroundfile) == False)):
-        wall = "wall({}).".format((x-1,y)) + "\n"
+        wall = "\nwall({}).\n".format((x-1,y))
         helper.append_to_file(wall, backgroundfile)
         is_new_b = True
     if(((x,y-1) in wall_list) and (is_wall_in_background((x,y-1), backgroundfile) == False)):
-        wall = "wall({}).".format((x,y-1)) + "\n"
+        wall = "\nwall({}).\n".format((x,y-1))
         helper.append_to_file(wall, backgroundfile)
         is_new_b = True
     return is_new_b
