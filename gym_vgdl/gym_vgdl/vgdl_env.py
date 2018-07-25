@@ -1,7 +1,8 @@
+import os
 from collections import OrderedDict
 import gym
 from gym import spaces
-from .vgdl import core
+import vgdl
 import pygame
 import numpy as np
 from .list_space import list_space
@@ -19,12 +20,12 @@ class VGDLEnv(gym.Env):
                  obs_type='image',
                  **kwargs):
 
+
         # Variables
-        # self._obs_type = obs_type
-        # self._obs_type = "objects"
-        self._obs_type = "features"
+        self._obs_type = obs_type
         self.viewer = None
         self.game_args = kwargs
+        self.notable_sprites = kwargs.get('notable_sprites', None)
 
         # Load game description and level description
         if game_file is not None:
@@ -32,6 +33,7 @@ class VGDLEnv(gym.Env):
                 game_desc = myfile.read()
             with open (level_file, "r") as myfile:
                 level_desc = myfile.read()
+            self.level_name = os.path.basename(level_file).split('.')[0]
             self.loadGame(game_desc, level_desc)
 
 
@@ -42,7 +44,7 @@ class VGDLEnv(gym.Env):
         self.game_args.update(kwargs)
 
         # Need to build a sample level to get the available actions and screensize....
-        self.game = core.VGDLParser().parseGame(self.game_desc, **self.game_args)
+        self.game = vgdl.VGDLParser().parseGame(self.game_desc, **self.game_args)
         self.game.buildLevel(self.level_desc)
 
         self.score_last = self.game.score
@@ -57,27 +59,19 @@ class VGDLEnv(gym.Env):
             self.observation_space = spaces.Box(low=0, high=255,
                     shape=(self.screen_height, self.screen_width, 3) )
         elif self._obs_type == 'objects':
-            # An objects observation consists of a list of observations,
-            # one for each sprite (including walls).
-            # An observation is [y, x, orient_y, orient_x, *class_one_hot, *resources]
+            from .state import NotableSpritesObserver
+            self.observer = NotableSpritesObserver(self.game, self.notable_sprites)
             self.observation_space = list_space( spaces.Box(low=-100, high=100,
-                    shape=(self.game.lenObservation(),) ) )
+                    shape=self.observer.observation_shape) )
         elif self._obs_type == 'features':
+            from .state import AvatarOrientedObserver
+            self.observer = AvatarOrientedObserver(self.game)
             self.observation_space = spaces.Box(low=0, high=100,
-                    shape=(self.game.lenFeatures(),) )
+                    shape=self.observer.observation_shape)
 
-        # Keep a Surface for drawing on (screen)
-        # and a bigger one that is actually rendered (display)
-        self.zoom = 25 // self.game.block_size
-        self.display_size = np.array(self.game.screensize) * self.zoom
-        self.display = pygame.display.set_mode(self.display_size, 0, 32)
-        self.screen = pygame.Surface(self.game.screensize)
-        self.game.screen = self.screen
-        self.game.screen.fill((0, 0, 0))
 
-        # Not sure what the background is needed for, it's not drawn
-        #TODO: get rid of this
-        self.game.background = pygame.Surface(self.game.screensize)
+        # For rendering purposes
+        self.mode_initialised = None
 
 
     @property
@@ -101,21 +95,20 @@ class VGDLEnv(gym.Env):
         pygame.display.update()
 
     def _get_image(self):
-        self._draw_screen()
+        # self._draw_screen()
         return np.flipud(np.rot90(pygame.surfarray.array3d(
-            self.screen).astype(np.uint8)))
+            self.game.screen).astype(np.uint8)))
 
     def _get_obs(self):
         if self._obs_type == 'image':
             return self._get_image()
-        elif self._obs_type == 'objects':
-            return self.game.getObservation()
-        elif self._obs_type == 'features':
-            return self.game.getFeatures()
-
+        else:
+            return self.observer.get_observation().as_array()
 
     def step(self, a):
-        self.game.tick(self._action_keys[a], True)
+        if not self.mode_initialised:
+            raise Exception('Please call `render` at least once for initialisation')
+        self.game.tick(self._action_keys[a])
         state = self._get_obs()
         reward = self.game.score - self.score_last
         self.score_last = self.game.score
@@ -130,14 +123,20 @@ class VGDLEnv(gym.Env):
         return state
 
     def render(self, mode='human', close=False):
+        headless = mode != 'human'
+        # Only initialise the screen once, vgdl will update from here on
+        if not self.mode_initialised == mode:
+            self.mode_initialised = mode
+            self.game.initScreen(headless, zoom=25 // self.game.block_size, title=self.level_name)
+
         if close:
             pygame.display.quit()
         if mode == 'rgb_array':
             img = self._get_image()
             return img
         elif mode == 'human':
-            # For now, pygame is always used for drawing
-            self._update_display()
+            # This happens inside game.tick
+            # self._update_display()
             return True
 
     def close(self):
@@ -168,3 +167,5 @@ class Padlist(gym.ObservationWrapper):
           return padded
         else:
           return np.array(input_list, dtype=np.float32)[:max_len]
+
+

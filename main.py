@@ -78,7 +78,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     induction.copy_las_base(LASFILE, HEIGHT, WIDTH, is_link)
 
     wall_list = induction.get_all_walls(env)
-    # import ipdb; ipdb.set_trace()
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes))
@@ -320,7 +319,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
 # stats = k_learning(env, 10, epsilon=0, record_prefix="Field", is_link=False)
 
-stats = k_learning(env, 10, epsilon=0.2, record_prefix="another", is_link=True)
+stats = k_learning(env, 10, epsilon=0.2, record_prefix="link", is_link=True)
 # plotting.plot_episode_stats(stats)
 plotting.plot_episode_stats_simple(stats)
 

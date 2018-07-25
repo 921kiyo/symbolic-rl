@@ -6,12 +6,6 @@ import os
 DATA_DIR = os.path.join( os.path.dirname(__file__), 'vgdl', 'sample_games')
 
 sample_games = [
-    'aaa_field',
-    'aaa_L_shape',
-    'aaa_teleport',
-    'aaa_maze',
-    'aaa_small',
-    'aaa_square',
     'aliens',
     'boulderdash',
     'chase',
@@ -23,18 +17,6 @@ sample_games = [
 
 # A list of relevant classes for each sample game
 classes = {
-    'aaa_field':      ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
-                       'straight', 'wall' ],
-    'aaa_L_shape':    ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
-                       'straight', 'wall' ],
-    'aaa_teleport':   ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
-                       'straight', 'wall' ],
-    'aaa_maze':       ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
-                       'straight', 'wall' ],
-    'aaa_small':      ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
-                       'straight', 'wall' ],
-    'aaa_square':     ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
-                       'straight', 'wall' ],
     'aliens':         ['avatar', 'alien', 'base', 'bomb', 'sam'],
     'boulderdash':    ['avatar', 'boulder', 'butterfly', 'crab', 'diamond',
                        'exitdoor', 'wall'],
@@ -49,12 +31,6 @@ classes = {
 
 # A list of relevant resources for each sample game
 resources = {
-    'aaa_field':      [],
-    'aaa_L_shape':    [],
-    'aaa_teleport':   [],
-    'aaa_maze':       [],
-    'aaa_small':      [],
-    'aaa_square':     [],
     'aliens':         [],
     'boulderdash':    ['diamond'],
     'chase':          [],
@@ -84,7 +60,8 @@ def register_sample_games():
                     'obs_type': obs_type,
                     'notable_sprites': classes[game],
                     'notable_resources': resources[game],
-                    'block_size': 24 if obs_type == 'image' else 10
+                    # Use 24 (size of sprites) to render the full sprites
+                    'block_size': 5 if obs_type == 'image' else 10
                 },
                 timestep_limit=1000,
                 nondeterministic=True,

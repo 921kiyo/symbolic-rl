@@ -22,7 +22,7 @@
 \contentsline {subsection}{\numberline {3.1.1}Experience Accumulation}{14}{subsection.3.1.1}
 \contentsline {subsubsection}{State transition experience}{14}{section*.10}
 \contentsline {subsubsection}{Environment experience}{15}{section*.11}
-\contentsline {subsection}{\numberline {3.1.2}Induction}{15}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.2}Inductive Learning}{15}{subsection.3.1.2}
 \contentsline {subsection}{\numberline {3.1.3}Generate a plan}{16}{subsection.3.1.3}
 \contentsline {subsection}{\numberline {3.1.4}Plan execution}{16}{subsection.3.1.4}
 \contentsline {subsection}{\numberline {3.1.5}Model Generation and Update using ILASP}{16}{subsection.3.1.5}

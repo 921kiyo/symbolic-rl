@@ -13,6 +13,7 @@ import math
 import os
 import sys
 
+VGDL_GLOBAL_IMG_LIB = {}
 
 class VGDLParser(object):
     """ Parses a string into a Game object. """
@@ -575,8 +576,11 @@ class VGDLSprite(object):
 
         # TODO: Load images into a central dictionary to save loading a separate image for each object
         if self.img:
-            pth = 'sprites/' + self.img + '.png'
-            self.image = pygame.image.load(os.path.join(os.path.dirname(__file__), pth))
+            if VGDL_GLOBAL_IMG_LIB.get(self.img) is None:
+                pth = 'sprites/' + self.img + '.png'
+                img = pygame.image.load(os.path.join(os.path.dirname(__file__), pth))
+                VGDL_GLOBAL_IMG_LIB[self.img] = img
+            self.image = VGDL_GLOBAL_IMG_LIB[self.img]
             self.scale_image = pygame.transform.scale(self.image, (int(size[0] * (1-self.shrinkfactor)), int(size[1] * (1-self.shrinkfactor))))#.convert_alpha()
 
 
