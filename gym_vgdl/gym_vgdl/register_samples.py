@@ -6,6 +6,11 @@ import os
 DATA_DIR = os.path.join( os.path.dirname(__file__), 'vgdl', 'sample_games')
 
 sample_games = [
+    'aaa_field',
+    'aaa_H_shape',
+    'aaa_teleport',
+    'aaa_medium',
+    'aaa_small',
     'aliens',
     'boulderdash',
     'chase',
@@ -17,6 +22,17 @@ sample_games = [
 
 # A list of relevant classes for each sample game
 classes = {
+    'aaa_field':      ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+                       'straight', 'wall' ],
+    'aaa_H_shape':    ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+                       'straight', 'wall' ],
+    'aaa_teleport':   ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+                       'straight', 'wall' ],
+    'aaa_medium':       ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+                       'straight', 'wall' ],
+    'aaa_small':      ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+                       'straight', 'wall' ],
+
     'aliens':         ['avatar', 'alien', 'base', 'bomb', 'sam'],
     'boulderdash':    ['avatar', 'boulder', 'butterfly', 'crab', 'diamond',
                        'exitdoor', 'wall'],
@@ -31,6 +47,11 @@ classes = {
 
 # A list of relevant resources for each sample game
 resources = {
+    'aaa_field':      [],
+    'aaa_H_shape':    [],
+    'aaa_teleport':   [],
+    'aaa_medium':       [],
+    'aaa_small':      [],
     'aliens':         [],
     'boulderdash':    ['diamond'],
     'chase':          [],

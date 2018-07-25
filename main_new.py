@@ -95,7 +95,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
             state = env.reset()
             print("reset the starting position to the beginning")  
         
-        agent_position = env.unwrapped.game.getFeatures()
+
+        agent_position = env.unwrapped.observer.get_observation()
+        # import ipdb; ipdb.set_trace()
+        # agent_position = env.unwrapped.game.getFeatures()
         print("agent_position ", agent_position)
         x = int(state[0])
         y = int(state[1])
@@ -319,7 +322,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
 # stats = k_learning(env, 10, epsilon=0, record_prefix="Field", is_link=False)
 
-stats = k_learning(env, 10, epsilon=0.2, record_prefix="new", is_link=True)
+stats = k_learning(env, 10, epsilon=0.2, record_prefix=None, is_link=True)
 # plotting.plot_episode_stats(stats)
 plotting.plot_episode_stats_simple(stats)
 

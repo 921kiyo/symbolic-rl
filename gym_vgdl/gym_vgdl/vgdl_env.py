@@ -22,7 +22,8 @@ class VGDLEnv(gym.Env):
 
 
         # Variables
-        self._obs_type = obs_type
+        # self._obs_type = obs_type
+        self._obs_type = "features"
         self.viewer = None
         self.game_args = kwargs
         self.notable_sprites = kwargs.get('notable_sprites', None)
