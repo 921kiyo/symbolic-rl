@@ -8,7 +8,6 @@ def get_all_walls(env):
     Output: wall array. e.g [(X1,Y1), (X2,Y2)...]
     '''
     walls= env.unwrapped.game.getSprites('wall')
-    import ipdb; ipdb.set_trace()
     wall_list = []
     for wall in walls:
         x = wall.rect.left/24

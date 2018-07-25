@@ -82,7 +82,7 @@ def register_sample_games():
                     'notable_sprites': classes[game],
                     'notable_resources': resources[game],
                     # Use 24 (size of sprites) to render the full sprites
-                    'block_size': 5 if obs_type == 'image' else 10
+                    'block_size': 24 if obs_type == 'image' else 10
                 },
                 timestep_limit=1000,
                 nondeterministic=True,

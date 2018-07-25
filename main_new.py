@@ -78,6 +78,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     induction.copy_las_base(LASFILE, HEIGHT, WIDTH, is_link)
 
     wall_list = induction.get_all_walls(env)
+    # import ipdb; ipdb.set_trace()
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes))
@@ -97,7 +98,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         
 
         agent_position = env.unwrapped.observer.get_observation()
-        # import ipdb; ipdb.set_trace()
+        agent_position = agent_position["position"]
         # agent_position = env.unwrapped.game.getFeatures()
         print("agent_position ", agent_position)
         x = int(state[0])
