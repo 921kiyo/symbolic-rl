@@ -177,7 +177,6 @@ def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list
     if is_link:
         if(x_before == 5 and y_before == 4 and action == "up"):
             link = "link((5,3), (1,1))."
-            # import ipdb; ipdb.set_trace()
     
     if exclusions == "":
         return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."
@@ -199,7 +198,6 @@ def generate_explore_pos(next_state, previous_state, action, wall_list):
         return link, "#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + link + walls + "})."    
     else:
         return "","#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + walls + "})."
-    # return pos
 
 def send_state_transition_pos(previous_state,next_state, action, wall_list, lasfile, background):
     '''
