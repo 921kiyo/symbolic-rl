@@ -49,8 +49,6 @@ env = gym.make('vgdl_aaa_small-v0')
 HEIGHT = env.unwrapped.game.height
 WIDTH = env.unwrapped.game.width
 
-# TEMP_X = 5
-# TEMP_Y = 1
 
 def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=False):
     log_dir = None
@@ -58,7 +56,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     if record_prefix:
         log_dir = os.path.join(base_dir, "log")
         log_dir = helper.gen_log_dir(log_dir, record_prefix)
-        print("log_dir ", log_dir)
 
     # check whether las file is in use
     is_las = False
@@ -78,25 +75,28 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     induction.copy_las_base(LASFILE, HEIGHT, WIDTH, is_link)
 
     wall_list = induction.get_all_walls(env)
-    # import ipdb; ipdb.set_trace()
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes))
 
     i_episode = 0
+    
     while i_episode < num_episodes:
+        print("==============NEW EPISODE======================")
+        print("i_episode ", i_episode)
+        print("num_episodes ", num_episodes)
+        # print("stats ", stats)
         # Decaying epsilon greedy params
-        # epsilon = epsilon*(1/(i_episode+1)**DECAY_PARAM)
+        epsilon = epsilon*(1/(i_episode+1)**DECAY_PARAM)
         # print("epsilon ", epsilon)
 
         # Reset the env and pick the first action
-        print("==============NEW EPISODE======================")
+        
         # TODO DO I want to update this in every episode??
         if is_start:
             state = env.reset()
             print("reset the starting position to the beginning")  
         
-
         agent_position = env.unwrapped.observer.get_observation()
         agent_position = agent_position["position"]
         # agent_position = env.unwrapped.game.getFeatures()
@@ -145,7 +145,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 if threshold < epsilon:
                     print("Taking a pure random action")
                     action_int = env.action_space.sample()
-                    print("action_int ", action_int)
                     action_string = helper.convert_action(action_int)
                     print("random action is ", action_string)
                     next_state, reward, done, _ = env.step(action_int)
@@ -154,11 +153,9 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     y = int(next_state[1])
 
                     if done:
-                        reward = 100
-                        i_episode += 1
-                        break
+                        reward = reward + 100
                     else:
-                        reward = -1
+                        reward = reward - 1
                     
                     observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
                     print("observed_state in random ",observed_state)
@@ -190,9 +187,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     
                     if done:
                         is_start = True
-                        i_episode += 1
+                        i_episode = i_episode + 1
                         break
-
                     break
                 else:
                     action_int = helper.get_action(action[1])
@@ -204,9 +200,9 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     x = int(next_state[0])
                     y = int(next_state[1])
                     if done:                 
-                        reward = 100
+                        reward = reward + 100
                     else:
-                        reward = -1
+                        reward = reward - 1
 
                     observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
                     print("observed_state ",observed_state)
@@ -242,11 +238,11 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                     if done:
                         is_start = True
-                        i_episode += 1
+                        i_episode = i_episode + 1
                         break
 
                 env.render()
-                time.sleep(0.1)  
+                # time.sleep(0.1)  
 
             if is_exclusion:
                 print("exclusion is there ", pos)
@@ -273,12 +269,12 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 next_state, reward, done, _ = env.step(action)
                 
                 if done:
-                    reward = 100
+                    reward = reward + 100
                     goal_state = next_state
                     is_las = True
                     break
                 else:
-                    reward -=1
+                    reward =reward - 1
 
                 action_string = helper.convert_action(action)
 
@@ -294,13 +290,14 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 stats.episode_lengths[i_episode] = t
 
                 if done:
-                    break
+                    i_episode += 1
+                    # break
 
                 state = next_state
         
         if x == int(goal_state[0]) and y == int(goal_state[1]):
             is_start = True
-            break
+            # break
 
     return stats
 
@@ -308,7 +305,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
 # stats = k_learning(env, 10, epsilon=0, record_prefix="Field", is_link=False)
 
-stats = k_learning(env, 10, epsilon=0.2, record_prefix=None, is_link=True)
+stats = k_learning(env, 100, epsilon=0.2, record_prefix=None, is_link=True)
 # plotting.plot_episode_stats(stats)
 plotting.plot_episode_stats_simple(stats)
 
