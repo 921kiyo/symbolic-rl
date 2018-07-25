@@ -68,12 +68,6 @@ def append_to_file(pos, file):
     with open(file, "a") as f:
         f.write(pos)
 
-def update_reward(reward, done):
-    if done:
-        return 100
-    else:
-        return reward - 1
-
 def log_asp(inputfile, output, base_dir, episode):
     unique_file = gen_unique_filename("lp", base_dir, episode, "clingo")
     copy_file(inputfile, unique_file)

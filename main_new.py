@@ -49,8 +49,8 @@ env = gym.make('vgdl_aaa_small-v0')
 HEIGHT = env.unwrapped.game.height
 WIDTH = env.unwrapped.game.width
 
-TEMP_X = 5
-TEMP_Y = 1
+# TEMP_X = 5
+# TEMP_Y = 1
 
 def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=False):
     log_dir = None
@@ -103,17 +103,11 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         print("agent_position ", agent_position)
         x = int(state[0])
         y = int(state[1])
-
-        if x == TEMP_X and y == TEMP_Y:
-            is_start = True
-            break
         
         previous_state = state
         previous_state_at = py_asp.state_at(state[0], state[1], 1)
         any_exclusion = False
         is_exclusion = False
-        
-        state_so_far = []
 
         # Once the plan is obtained, execute the plan
         if is_las:
@@ -159,15 +153,13 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     x = int(next_state[0])
                     y = int(next_state[1])
 
-                    if x == TEMP_X and y == TEMP_Y:
+                    if done:
                         reward = 100
                         i_episode += 1
                         break
                     else:
                         reward = -1
                     
-                    # reward = helper.update_reward(reward, done)
-                    state_so_far.append((next_state[0],next_state[1]))
                     observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
                     print("observed_state in random ",observed_state)
                 
@@ -196,14 +188,11 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     previous_state_at = observed_state
                     print("next_state ", next_state)
                     
-                    if x == TEMP_X and y == TEMP_Y:
+                    if done:
                         is_start = True
                         i_episode += 1
                         break
 
-                    # if done:
-                    #     is_start = True
-                    #     break
                     break
                 else:
                     action_int = helper.get_action(action[1])
@@ -213,13 +202,11 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     is_start = False
 
                     x = int(next_state[0])
-                    y = int(next_state[1])                   
-                    if x == TEMP_X and y == TEMP_Y:
+                    y = int(next_state[1])
+                    if done:                 
                         reward = 100
                     else:
                         reward = -1
-                    # reward = helper.update_reward(reward, done)
-                    state_so_far.append((next_state[0],next_state[1]))
 
                     observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
                     print("observed_state ",observed_state)
@@ -253,13 +240,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     previous_state = next_state
                     previous_state_at = observed_state
 
-                    if x == TEMP_X and y == TEMP_Y:
+                    if done:
                         is_start = True
                         i_episode += 1
                         break
-                    # if done:
-                    #     is_start = True
-                    #     break
 
                 env.render()
                 time.sleep(0.1)  
@@ -278,7 +262,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
         # Random action until ILASP kicks in
         else:
-            # state_so_far = []
             # for t in itertools.count():
             for t in range(TIME_RANGE):
                 
@@ -289,15 +272,13 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 action = env.action_space.sample()
                 next_state, reward, done, _ = env.step(action)
                 
-                state_so_far.append((next_state[0],next_state[1]))
-
-                reward = helper.update_reward(reward, done)
-
                 if done:
-                    goal_state = state_so_far[-2]
-                    print("GOAL STATE ", goal_state)
+                    reward = 100
+                    goal_state = next_state
                     is_las = True
                     break
+                else:
+                    reward -=1
 
                 action_string = helper.convert_action(action)
 
@@ -316,6 +297,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     break
 
                 state = next_state
+        
+        if x == int(goal_state[0]) and y == int(goal_state[1]):
+            is_start = True
+            break
 
     return stats
 

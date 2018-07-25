@@ -2,7 +2,6 @@ from lib import plotting, py_asp, helper, induction
 
 import subprocess
 import json
-
 import os
 
 def is_wall_in_background(wall, backgroundfile):
