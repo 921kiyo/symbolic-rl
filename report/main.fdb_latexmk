@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1532511770 "main.aux" "main.bbl" "main" 1532511770
+["bibtex main"] 1532516133 "main.aux" "main.bbl" "main" 1532516133
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/ieeetr.bst" 1292289607 18361 1a00e58565e7f19bf2b3e1bfb82254ae ""
-  "main.aux" 1532511769 11645 d58d6c8dcf26475b040eada21efe99c1 ""
+  "main.aux" 1532516133 11935 f5ec30e5f049a162f1f5fd1f129d5817 ""
   "main.bcf" 0 -1 0 ""
   "references.bib" 1528479218 88144 a0c8013434b7014feb2b1ddccc7660e2 ""
   (generated)
   "main.bbl"
-["pdflatex"] 1532511769 "/home/kiyo/Desktop/Individual_project/report/main.tex" "main.pdf" "main" 1532511769
+["pdflatex"] 1532516132 "/home/kiyo/Desktop/Individual_project/report/main.tex" "main.pdf" "main" 1532516132
   "/etc/texmf/web2c/texmf.cnf" 1532340835 1101 af7716885e081ab43982cab7b4672c1a ""
   "/home/kiyo/Desktop/Individual_project/report/main.tex" 1532341441 37552 db5973c069179b64fb260ef92808b85d ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -141,8 +141,8 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1532340882 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1532340894 3856087 03617337c790f021411325b37995f257 ""
   "chapters/ethics.tex" 1531826893 4925 d9c2c0660fdb89e718193d9f7f2b3635 ""
-  "chapters/evaluation.tex" 1532344780 607 1ef8d4c050cba514749fb5480b6cd37a ""
-  "chapters/implementation.tex" 1532511768 12979 818f90ade750ddd20d2e51e84efb53cc ""
+  "chapters/evaluation.tex" 1532516131 1839 2cb253b54a8d5feb47d23e9c794a94de ""
+  "chapters/implementation.tex" 1532515371 15051 957a3f5f62369d25df05c054ae07e9f9 ""
   "chapters/introduction.tex" 1528968270 3035 890f16857285c396a9c213952b612c01 ""
   "chapters/related_work.tex" 1528968270 4591 110660bc7b0a41382b8370e17c5f97ee ""
   "figures/agent_env.png" 1527707744 8876 70d56925069c74e7a7bf25077cd34dbe ""
@@ -151,14 +151,14 @@
   "figures/grid_world.png" 1528416112 9898 dfc3ad7c8b7cb3ac3e9c21fefdde72b4 ""
   "figures/imperial.pdf" 1526573725 14992 7f9429838e925fcd04acfa4d283703b5 ""
   "includes.tex" 1528479218 3009 27f428f26b30ba8d8d7d5c68b1a20cee ""
-  "main.aux" 1532511769 8 a94a2480d3289e625eea47cd1b285758 ""
+  "main.aux" 1532516132 8 a94a2480d3289e625eea47cd1b285758 ""
   "main.bbl" 0 -1 0 "bibtex main"
   "main.tex" 1532341441 37552 db5973c069179b64fb260ef92808b85d ""
   "notation.tex" 1526573725 362 dde8d17bdd645c497ea48e05d51963bd ""
   "titlepage.tex" 1526573725 1995 b33c89e3a284110d3cc1b5b405785394 ""
   (generated)
-  "main.pdf"
-  "main.aux"
   "main.out"
-  "main.log"
   "main.toc"
+  "main.aux"
+  "main.pdf"
+  "main.log"

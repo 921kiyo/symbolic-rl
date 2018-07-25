@@ -25,26 +25,29 @@
 \contentsline {subsection}{\numberline {3.1.2}Inductive Learning}{15}{subsection.3.1.2}
 \contentsline {subsection}{\numberline {3.1.3}Generate a plan}{16}{subsection.3.1.3}
 \contentsline {subsection}{\numberline {3.1.4}Plan execution}{16}{subsection.3.1.4}
-\contentsline {subsection}{\numberline {3.1.5}Model Generation and Update using ILASP}{16}{subsection.3.1.5}
-\contentsline {section}{\numberline {3.2}Algorithms}{17}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Generation of Simulated Experience}{18}{subsection.3.2.1}
-\contentsline {chapter}{\numberline {4}Evaluation}{19}{chapter.4}
-\contentsline {section}{\numberline {4.1}Learning Evaluation}{19}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Evaluation Methods}{19}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Settings}{19}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Results}{19}{subsection.4.1.3}
-\contentsline {subsection}{\numberline {4.1.4}Discussion}{19}{subsection.4.1.4}
-\contentsline {subsubsection}{Strengths}{19}{section*.13}
-\contentsline {subsubsection}{Limitations}{19}{section*.14}
-\contentsline {section}{\numberline {4.2}Transfer Learning Evaluation}{19}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Limitations}{19}{subsection.4.2.1}
-\contentsline {chapter}{\numberline {5}Related Work}{20}{chapter.5}
-\contentsline {chapter}{\numberline {6}Conclusion and Further Research}{22}{chapter.6}
-\contentsline {section}{\numberline {6.1}Contribution}{22}{section.6.1}
-\contentsline {section}{\numberline {6.2}Further Research}{22}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Value iteration approach}{22}{subsection.6.2.1}
-\contentsline {subsection}{\numberline {6.2.2}Weak Constraint}{22}{subsection.6.2.2}
-\contentsline {subsection}{\numberline {6.2.3}probabilistic inductive logic programming}{23}{subsection.6.2.3}
-\contentsline {subsection}{\numberline {6.2.4}generalisation of the current approach}{23}{subsection.6.2.4}
-\contentsline {section}{\numberline {6.3}Conclusion}{23}{section.6.3}
-\contentsline {chapter}{\numberline {7}Ethics}{24}{chapter.7}
+\contentsline {subsection}{\numberline {3.1.5}Model Generation and Update using ILASP}{17}{subsection.3.1.5}
+\contentsline {section}{\numberline {3.2}Algorithms}{18}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Generation of Simulated Experience}{19}{subsection.3.2.1}
+\contentsline {chapter}{\numberline {4}Evaluation}{20}{chapter.4}
+\contentsline {section}{\numberline {4.1}Learning Evaluation}{20}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Settings}{20}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Experiment1}{20}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Experiment2}{20}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}Experiment3}{21}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}Experiment4}{21}{subsection.4.1.5}
+\contentsline {subsection}{\numberline {4.1.6}Results}{21}{subsection.4.1.6}
+\contentsline {subsection}{\numberline {4.1.7}Discussion}{21}{subsection.4.1.7}
+\contentsline {subsubsection}{Strengths}{21}{section*.13}
+\contentsline {subsubsection}{Limitations}{21}{section*.14}
+\contentsline {section}{\numberline {4.2}Transfer Learning Evaluation}{21}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Limitations}{21}{subsection.4.2.1}
+\contentsline {chapter}{\numberline {5}Related Work}{22}{chapter.5}
+\contentsline {chapter}{\numberline {6}Conclusion and Further Research}{24}{chapter.6}
+\contentsline {section}{\numberline {6.1}Contribution}{24}{section.6.1}
+\contentsline {section}{\numberline {6.2}Further Research}{24}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Value iteration approach}{24}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}Weak Constraint}{24}{subsection.6.2.2}
+\contentsline {subsection}{\numberline {6.2.3}probabilistic inductive logic programming}{25}{subsection.6.2.3}
+\contentsline {subsection}{\numberline {6.2.4}generalisation of the current approach}{25}{subsection.6.2.4}
+\contentsline {section}{\numberline {6.3}Conclusion}{25}{section.6.3}
+\contentsline {chapter}{\numberline {7}Ethics}{26}{chapter.7}

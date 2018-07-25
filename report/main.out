@@ -22,19 +22,22 @@
 \BOOKMARK [2][]{subsection.3.2.1}{3.2.1 Generation of Simulated Experience}{section.3.2}% 22
 \BOOKMARK [0][]{chapter.4}{4 Evaluation}{}% 23
 \BOOKMARK [1][]{section.4.1}{4.1 Learning Evaluation}{chapter.4}% 24
-\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 Evaluation Methods}{section.4.1}% 25
-\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Settings}{section.4.1}% 26
-\BOOKMARK [2][]{subsection.4.1.3}{4.1.3 Results}{section.4.1}% 27
-\BOOKMARK [2][]{subsection.4.1.4}{4.1.4 Discussion}{section.4.1}% 28
-\BOOKMARK [1][]{section.4.2}{4.2 Transfer Learning Evaluation}{chapter.4}% 29
-\BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Limitations}{section.4.2}% 30
-\BOOKMARK [0][]{chapter.5}{5 Related Work}{}% 31
-\BOOKMARK [0][]{chapter.6}{6 Conclusion and Further Research}{}% 32
-\BOOKMARK [1][]{section.6.1}{6.1 Contribution}{chapter.6}% 33
-\BOOKMARK [1][]{section.6.2}{6.2 Further Research}{chapter.6}% 34
-\BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Value iteration approach}{section.6.2}% 35
-\BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Weak Constraint}{section.6.2}% 36
-\BOOKMARK [2][]{subsection.6.2.3}{6.2.3 probabilistic inductive logic programming}{section.6.2}% 37
-\BOOKMARK [2][]{subsection.6.2.4}{6.2.4 generalisation of the current approach}{section.6.2}% 38
-\BOOKMARK [1][]{section.6.3}{6.3 Conclusion}{chapter.6}% 39
-\BOOKMARK [0][]{chapter.7}{7 Ethics}{}% 40
+\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 Settings}{section.4.1}% 25
+\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Experiment1}{section.4.1}% 26
+\BOOKMARK [2][]{subsection.4.1.3}{4.1.3 Experiment2}{section.4.1}% 27
+\BOOKMARK [2][]{subsection.4.1.4}{4.1.4 Experiment3}{section.4.1}% 28
+\BOOKMARK [2][]{subsection.4.1.5}{4.1.5 Experiment4}{section.4.1}% 29
+\BOOKMARK [2][]{subsection.4.1.6}{4.1.6 Results}{section.4.1}% 30
+\BOOKMARK [2][]{subsection.4.1.7}{4.1.7 Discussion}{section.4.1}% 31
+\BOOKMARK [1][]{section.4.2}{4.2 Transfer Learning Evaluation}{chapter.4}% 32
+\BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Limitations}{section.4.2}% 33
+\BOOKMARK [0][]{chapter.5}{5 Related Work}{}% 34
+\BOOKMARK [0][]{chapter.6}{6 Conclusion and Further Research}{}% 35
+\BOOKMARK [1][]{section.6.1}{6.1 Contribution}{chapter.6}% 36
+\BOOKMARK [1][]{section.6.2}{6.2 Further Research}{chapter.6}% 37
+\BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Value iteration approach}{section.6.2}% 38
+\BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Weak Constraint}{section.6.2}% 39
+\BOOKMARK [2][]{subsection.6.2.3}{6.2.3 probabilistic inductive logic programming}{section.6.2}% 40
+\BOOKMARK [2][]{subsection.6.2.4}{6.2.4 generalisation of the current approach}{section.6.2}% 41
+\BOOKMARK [1][]{section.6.3}{6.3 Conclusion}{chapter.6}% 42
+\BOOKMARK [0][]{chapter.7}{7 Ethics}{}% 43
