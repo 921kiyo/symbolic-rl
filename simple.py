@@ -10,12 +10,12 @@ import subprocess
 from lib.helper import gen_log_dir
 
 TIME_RANGE = 400
-env = gym.make('vgdl_zelda_features-v0')
+# env = gym.make('vgdl_zelda_features-v0')
+# env = gym.make('vgdl_experiment1-v0')
+env = gym.make('vgdl_experiment4_after-v0')
 # env = gym.make('vgdl_portals-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
 # env = gym.make('vgdl_aaa_small-v0')
-# print(env.unwrapped.observer.get_observation())
-# print(list(env.unwrapped.observer.get_observation()))
 
 for i_episode in range(TIME_RANGE):
 
