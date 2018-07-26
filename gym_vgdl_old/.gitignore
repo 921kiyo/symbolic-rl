@@ -1,5 +1,0 @@
-# Ignore all python compiled files
-*.pyc
-gym_vgdl.egg-info
-gym_vgdl/__pycache__
-gym_vgdl/vgdl/__pycache__
