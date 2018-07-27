@@ -23,4 +23,3 @@ adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
 #constant(action, up).
 #constant(action, non).
 
-link((5,3), (1,1)). 
