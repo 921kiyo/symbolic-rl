@@ -29,16 +29,8 @@ CACHE = os.path.join(dir, LAS_CACHE)
 # Increase this to make the decay faster
 DECAY_PARAM = 1
 
-# TIME_RANGE = TIME_RANGE2 = 20
-# env = gym.make('vgdl_aaa_small-v0')
-
-# TIME_RANGE = 450
-# TIME_RANGE2 = 30
-# env = gym.make('vgdl_aaa_maze-v0')
-
 TIME_RANGE = 300
 TIME_RANGE2 = 30
-
 
 def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=False):
     height = env.unwrapped.game.height
@@ -294,10 +286,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     return stats
 
 # epsilon 0 means no exploration
-# env = gym.make('vgdl_experiment3.5-v0')
-env = gym.make('vgdl_aaa_small-v0')
+env = gym.make('vgdl_experiment3.5-v0')
+# env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-stats = k_learning(env, 150, epsilon=0, record_prefix=None, is_link=True)
+stats = k_learning(env, 150, epsilon=0, record_prefix="fix_updateH", is_link=True)
 
 # plotting.plot_episode_stats(stats)
 # plotting.plot_episode_stats_simple(stats)

@@ -6,6 +6,7 @@ import os
 DATA_DIR = os.path.join( os.path.dirname(__file__), 'vgdl', 'sample_games')
 
 sample_games = [
+    'test',
     'aaa_field',
     'aaa_H_shape',
     'aaa_teleport',
@@ -29,6 +30,8 @@ sample_games = [
 
 # A list of relevant classes for each sample game
 classes = {
+    'test':      ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
+                       'straight', 'wall' ],
     'aaa_field':      ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
                        'straight', 'wall' ],
     'aaa_H_shape':    ['avatar',  'goal', 'portalentry', 'portalexit', 'random',
@@ -67,6 +70,7 @@ classes = {
 
 # A list of relevant resources for each sample game
 resources = {
+    'test':      [],
     'aaa_field':      [],
     'aaa_H_shape':    [],
     'aaa_teleport':   [],

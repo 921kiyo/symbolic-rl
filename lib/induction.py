@@ -96,32 +96,12 @@ def get_exclusions(previous_state, next_state, action):
                 ")),state_after((" + str(exc2_x) + "," + str(exc2_y) + \
                 ")),state_after((" + str(exc3_x) + "," + str(exc3_y) + \
                 ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + "))"
-    elif(action == "up"):
+    else:
         return True, "state_after((" + str(exc1_x) + "," + str(exc1_y) + \
                 ")),state_after((" + str(exc2_x) + "," + str(exc2_y) + \
                 ")),state_after((" + str(exc3_x) + "," + str(exc3_y) + \
-                ")),state_after((" + str(exc5_x) + "," + str(exc5_y) + "))"
-    elif(action == "down"):
-        return True, "state_after((" + str(exc1_x) + "," + str(exc1_y) + \
-                ")),state_after((" + str(exc3_x) + "," + str(exc3_y) + \
                 ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + \
                 ")),state_after((" + str(exc5_x) + "," + str(exc5_y) + "))"
-    elif(action == "right"):
-        return True, "state_after((" + str(exc1_x) + "," + str(exc1_y) + \
-                ")),state_after((" + str(exc2_x) + "," + str(exc2_y) + \
-                ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + \
-                ")),state_after((" + str(exc5_x) + "," + str(exc5_y) + "))"
-    elif(action == "left"):
-        return True, "state_after((" + str(exc1_x) + "," + str(exc1_y) + \
-                ")),state_after((" + str(exc3_x) + "," + str(exc3_y) + \
-                ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + \
-                ")),state_after((" + str(exc5_x) + "," + str(exc5_y) + "))"
-    elif(action == "non"):
-        return True, "state_after((" + str(exc1_x) + "," + str(exc1_y) + \
-                ")),state_after((" + str(exc2_x) + "," + str(exc2_y) + \
-                ")),state_after((" + str(exc3_x) + "," + str(exc3_y) + \
-                ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + "))"
-
 
 def get_plan_exclusions(state_at_before, state_at_after, states):
     '''
@@ -139,10 +119,10 @@ def get_plan_exclusions(state_at_before, state_at_after, states):
             x_after, _, _ = abduction.get_X(s[1])
             y_after, _, _ = abduction.get_Y(s[1])
             state_after = py_asp.state_after(x_after, y_after)
-            if state_after == "state_after((9,3))":
-                continue
-            else:
-                exclusion_list.append(state_after)
+            # if state_after == "state_after((9,3))":
+            #     continue
+            # else:
+            exclusion_list.append(state_after)
     
     # Take each element in exclcusion_list and concatinate them in string
     exclusions = ""
@@ -150,7 +130,6 @@ def get_plan_exclusions(state_at_before, state_at_after, states):
         exclusions += exclusion
         exclusions += ", "
     return exclusions[0:len(exclusions)-2]
-
 
 def get_next_state(current_state, action):
     x = int(current_state[0])
@@ -193,7 +172,7 @@ def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list
     if is_link:
         if(x_before == 9 and y_before == 4 and action == "up"):
             link = "link((9,3), (17,3))."
-    
+
     if exclusions == "":
         return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."
     else:
@@ -237,7 +216,7 @@ def copy_las_base(lasfile, height, width, is_link):
     with open(lasfile, "w") as base:
         base.write(cell)
         if is_link == True:
-            link = "#modeb(1, link(var(cell), var(cell)), (positive)).\n"
+            link = "#modeb(1, link(var(cell), var(cell))).\n"
             base.write(link)
 
     with open("las_base.las") as f:
