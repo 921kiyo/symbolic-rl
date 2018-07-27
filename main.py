@@ -58,12 +58,11 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     is_start = True
 
     # Clean up all the files first
-    helper.silentremove(LASFILE)
-    helper.silentremove(BACKGROUND)
-    helper.silentremove(CLINGOFILE)
-    helper.silentremove(LAS_CACHE, LAS_CACHE_PATH)
-
-    helper.create_file(LAS_CACHE, LAS_CACHE_PATH)
+    helper.silentremove(base_dir, LASFILE)
+    helper.silentremove(base_dir, BACKGROUND)
+    helper.silentremove(base_dir, CLINGOFILE)
+    helper.silentremove(base_dir, LAS_CACHE, LAS_CACHE_PATH)
+    helper.create_file(base_dir, LAS_CACHE, LAS_CACHE_PATH)
     # Add mode bias and adjacent definition for ILASP
     induction.copy_las_base(LASFILE, HEIGHT, WIDTH, is_link)
 
@@ -296,9 +295,9 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
 # epsilon 0 means no exploration
 # env = gym.make('vgdl_experiment3.5-v0')
-# env = gym.make('vgdl_aaa_small-v0')
+env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-# stats = k_learning(env, 150, epsilon=0.2, record_prefix="teleport", is_link=True)
+stats = k_learning(env, 150, epsilon=0, record_prefix=None, is_link=True)
 
 # plotting.plot_episode_stats(stats)
 # plotting.plot_episode_stats_simple(stats)

@@ -27,8 +27,10 @@ def make_epsilon_greedy_policy(Q, epsilon, nA):
         return A
     return policy_fn
 
-def convert_state(x, y):
-    return (x-1)*19+y
+
+# TODO remove
+# def convert_state(x, y):
+#     return (x-1)*19+y
 
 def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
     """

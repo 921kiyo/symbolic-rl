@@ -8,7 +8,6 @@ def convert_state(x, y, width):
     y += 1
     return (y-1)*width+x
 
-# TODO generarize more
 def convert_action(action):
     if(action == 0):
         return "up"
@@ -22,29 +21,7 @@ def convert_action(action):
         return "non"
     else:
         print("this action does not exist...", str(action))
-
-def create_file(filename, extra_path=None):
-    dir = os.getcwd()
-    if extra_path:
-        dir = os.path.join(dir, extra_path)
-    file =os.path.join(dir, filename)
-    with open(file, "w+") as file:
-        pass
-
-def silentremove(filename, extra_path=None):
-    dir = os.getcwd()
-    if extra_path:
-        dir = os.path.join(dir, extra_path)
-    
-    file =os.path.join(dir, filename)
-    try:
-        os.remove(file)
-    except OSError:
-        print(filename + " could not be found...")
-        
-    with open(filename, "a") as myfile:
-        myfile.close()
-    return
+        return None
 
 def get_action(action):
     if(action == "up"):
@@ -61,6 +38,37 @@ def get_action(action):
         print("this action does not exist...", action)
         return -1
 
+def create_file(base_dir, filename, extra_path=None):
+    # Used to create for LAS cache file
+    dir = base_dir
+    if extra_path:
+        dir = os.path.join(base_dir, extra_path)
+    file =os.path.join(dir, filename)
+    with open(file, "w+") as file:
+        pass
+
+def remove_file(file):
+    try:
+        os.remove(file)
+    except OSError:
+        print(file + " could not be found...")
+        return False
+    return True
+
+def silentremove(base_dir, filename, extra_path=None):
+    dir = base_dir
+    if extra_path:
+        dir = os.path.join(base_dir, extra_path)
+    
+    file =os.path.join(dir, filename)
+
+    remove_file(file)    
+    
+    # After deleting the old file, replace it with a new empty one
+    with open(filename, "a") as myfile:
+        myfile.close()
+    return
+
 def append_to_file(pos, file):
     '''
     Add a new pos to a las file.
@@ -68,7 +76,16 @@ def append_to_file(pos, file):
     with open(file, "a") as f:
         f.write(pos)
 
+# TODO Update this using episode
+def gen_unique_filename(extension, base_dir, episode, filename):
+    current_time = int(round(time.time() * 1000))
+    base_log_dir = '{}_spisode{}_{}'.format(filename, episode, current_time)
+    file_path = base_dir + '/' + base_log_dir
+
+    return file_path + "." + extension
+
 def log_asp(inputfile, output, base_dir, episode):
+
     unique_file = gen_unique_filename("lp", base_dir, episode, "clingo")
     copy_file(inputfile, unique_file)
     with open(unique_file, "a") as out:
@@ -80,7 +97,6 @@ def log_asp(inputfile, output, base_dir, episode):
 def log_las(inputfile, hypothesis, base_dir, episode):
     unique_file = gen_unique_filename("las", base_dir, episode, "las")
     new_h = comment_h(hypothesis)
-    new_h = "%" + new_h
     with open(unique_file, "a") as out:
         out.write("%ILASP\n\n")
         out.write(new_h)
@@ -88,13 +104,14 @@ def log_las(inputfile, hypothesis, base_dir, episode):
     copy_file(inputfile, unique_file)
 
 def comment_h(hypothesis):
+    hypothesis = "%" + hypothesis
     new_h = ""
     for h in hypothesis:
         if h == "\n":
             new_h += "\n%"
         else:
             new_h += h
-    return new_h
+    return new_h[0:-1]
 
 def copy_file(inputfile, outputfile):
     '''
@@ -104,13 +121,6 @@ def copy_file(inputfile, outputfile):
         with open(outputfile, "a") as out:
             for line in f:
                 out.write(line)
-
-def gen_unique_filename(extension, base_dir, episode, filename):
-    current_time = int(round(time.time() * 1000))
-    base_log_dir = '{}_spisode{}_{}'.format(filename, episode, current_time)
-    file_path = base_dir + '/' + base_log_dir
-
-    return file_path + "." + extension
 
 def gen_log_dir(base_dir, prefix='', symlink=True):
     # Create a folder to hold results
