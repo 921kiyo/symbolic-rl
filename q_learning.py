@@ -27,17 +27,13 @@ def make_epsilon_greedy_policy(Q, epsilon, nA):
         return A
     return policy_fn
 
-
-# TODO remove
-# def convert_state(x, y):
-#     return (x-1)*19+y
-
-def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
+def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
     """
     Args:
         alpha: TD learning rate
     """
-
+    height = env.unwrapped.game.height
+    width = env.unwrapped.game.width
     Q = defaultdict(lambda: np.zeros(env.action_space.n))
 
     stats = plotting.EpisodeStats(
@@ -53,7 +49,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
         # Reset the env and pick the first action
         state = env.reset()
-        state_int = convert_state(state[1], state[0])
+        state_int = helper.convert_state(state[1], state[0], width)
 
         previous_state = state
         # for t in itertools.count():
@@ -80,7 +76,7 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
             previous_state = next_state
 
-            next_state_int = convert_state(next_state[1], next_state[0])
+            next_state_int = helper.convert_state(next_state[1], next_state[0], width)
 
             # Update stats
             stats.episode_rewards[i_episode] += reward
@@ -108,9 +104,9 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
     return Q, stats
 
-# env = gym.make('vgdl_experiment3.5-v0')
+env = gym.make('vgdl_experiment3.5-v0')
 
-# Q, stats = q_learning(env, 50)
+Q, stats = q_learning(env, 50)
 
 # plotting.plot_episode_stats(stats)
-# plotting.plot_episode_stats_simple(stats)
+plotting.plot_episode_stats_simple(stats)

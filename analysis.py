@@ -19,7 +19,7 @@ plotting.store_stats(stats, base_dir, "test")
 stats2 = plotting.load_stats(base_dir, "test")
 
 # plotting.plot_episode_stats_simple(stats=stats, noshow=True, color="green")
-# stats2 = k_learning(env, 100, epsilon=0.2, record_prefix="experiment2", is_link=True)
+stats2 = k_learning(env, 50, epsilon=0.3, record_prefix="experiment2", is_link=True)
 plotting.plot_episode_stats_simple(stats2, color="blue")
 
 # plotting.plot_episode_stats_multiple(stats, stats2)

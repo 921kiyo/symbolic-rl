@@ -41,8 +41,8 @@ TIME_RANGE2 = 30
 
 
 def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=False):
-    HEIGHT = env.unwrapped.game.height
-    WIDTH = env.unwrapped.game.width
+    height = env.unwrapped.game.height
+    width = env.unwrapped.game.width
 
     log_dir = None
     # Log everything and keep it here
@@ -64,7 +64,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     helper.silentremove(base_dir, LAS_CACHE, LAS_CACHE_PATH)
     helper.create_file(base_dir, LAS_CACHE, LAS_CACHE_PATH)
     # Add mode bias and adjacent definition for ILASP
-    induction.copy_las_base(LASFILE, HEIGHT, WIDTH, is_link)
+    induction.copy_las_base(LASFILE, height, width, is_link)
 
     wall_list = induction.get_all_walls(env)
     stats = plotting.EpisodeStats(
@@ -110,7 +110,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     inputfile = os.path.join(base_dir, LASFILE)
                     helper.log_las(inputfile, hypothesis, log_dir, i_episode)
                 
-                abduction.make_lp(hypothesis, LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, WIDTH, HEIGHT)
+                abduction.make_lp(hypothesis, LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, width, height)
                 first_abduction = True
             
             print("agent_position ", agent_position)

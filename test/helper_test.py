@@ -50,12 +50,15 @@ class TestHelper(unittest.TestCase):
         self.assertEqual(size, 5)
 
     def test_gen_unique_filename(self):
+        # TODO
         pass
 
     def test_log_asp(self):
+        # TODO
         pass
     
     def test_log_las(self):
+        # TODO
         pass
 
     def test_comment_h(self):
@@ -70,6 +73,7 @@ class TestHelper(unittest.TestCase):
         helper.remove_file(output_file)
 
     def test_gen_log_dir(self):
+        # TODO
         pass
 
 if __name__ == '__main__':
