@@ -15,11 +15,6 @@ def get_all_walls(env):
         wall_list.append((int(x),int(y)))
     return wall_list
 
-# def get_links(env):
-#     entry1 = (5,3)
-#     exit1 = (1,1)
-#     return entry1, exit1
-
 def add_surrounding_walls(x, y, wall_list):
     '''
     Output: wall(X1,Y1). wall(X2,Y2). ...
@@ -106,6 +101,27 @@ def get_exclusions(previous_state, next_state, action):
                 ")),state_after((" + str(exc2_x) + "," + str(exc2_y) + \
                 ")),state_after((" + str(exc3_x) + "," + str(exc3_y) + \
                 ")),state_after((" + str(exc5_x) + "," + str(exc5_y) + "))"
+    elif(action == "down"):
+        return True, "state_after((" + str(exc1_x) + "," + str(exc1_y) + \
+                ")),state_after((" + str(exc3_x) + "," + str(exc3_y) + \
+                ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + \
+                ")),state_after((" + str(exc5_x) + "," + str(exc5_y) + "))"
+    elif(action == "right"):
+        return True, "state_after((" + str(exc1_x) + "," + str(exc1_y) + \
+                ")),state_after((" + str(exc2_x) + "," + str(exc2_y) + \
+                ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + \
+                ")),state_after((" + str(exc5_x) + "," + str(exc5_y) + "))"
+    elif(action == "left"):
+        return True, "state_after((" + str(exc1_x) + "," + str(exc1_y) + \
+                ")),state_after((" + str(exc3_x) + "," + str(exc3_y) + \
+                ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + \
+                ")),state_after((" + str(exc5_x) + "," + str(exc5_y) + "))"
+    elif(action == "non"):
+        return True, "state_after((" + str(exc1_x) + "," + str(exc1_y) + \
+                ")),state_after((" + str(exc2_x) + "," + str(exc2_y) + \
+                ")),state_after((" + str(exc3_x) + "," + str(exc3_y) + \
+                ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + "))"
+
 
 def get_plan_exclusions(state_at_before, state_at_after, states):
     '''
@@ -123,7 +139,7 @@ def get_plan_exclusions(state_at_before, state_at_after, states):
             x_after, _, _ = abduction.get_X(s[1])
             y_after, _, _ = abduction.get_Y(s[1])
             state_after = py_asp.state_after(x_after, y_after)
-            if state_after == "state_after((5,3))":
+            if state_after == "state_after((9,3))":
                 continue
             else:
                 exclusion_list.append(state_after)
@@ -175,8 +191,8 @@ def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list
     
     link = ""
     if is_link:
-        if(x_before == 5 and y_before == 4 and action == "up"):
-            link = "link((5,3), (1,1))."
+        if(x_before == 9 and y_before == 4 and action == "up"):
+            link = "link((9,3), (17,3))."
     
     if exclusions == "":
         return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."
@@ -238,26 +254,26 @@ def run_ILASP(filename, cache_path=None):
     print("ILASP running...")
     try:
         # Hardcoded best H
-        hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
-        hypothesis = "state_at(V0, T+1) :- time(T), state_at(V0, T), action(non, T). \
-state_at(V1, T+1) :- time(T), link(V0, V1), adjacent(up, V0, V2), state_before(V2). \
-state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), state_at(V0, T), action(left, T), not wall(V1). \
-state_at(V1, T+1) :- time(T), adjacent(left, V0, V1), state_at(V0, T), action(right, T), not wall(V1). \
-state_at(V0, T+1) :- time(T), adjacent(down, V0, V1), state_at(V1, T), action(down, T), not wall(V0). \
-state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, T), not wall(V0). \
-state_at(V0, T+1) :- time(T), adjacent(left, V0, V1), state_at(V0, T), action(right, T), wall(V1). \
-state_at(V1, T+1) :- time(T), adjacent(left, V0, V1), state_at(V1, T), action(left, T), wall(V0). \
-state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V0, T), action(down, T), wall(V1). \
-state_at(V1, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, T), wall(V0)."
+        # hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
+#         hypothesis = "state_at(V0, T+1) :- time(T), state_at(V0, T), action(non, T). \
+# state_at(V1, T+1) :- time(T), link(V0, V1), adjacent(up, V0, V2), state_before(V2). \
+# state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), state_at(V0, T), action(left, T), not wall(V1). \
+# state_at(V1, T+1) :- time(T), adjacent(left, V0, V1), state_at(V0, T), action(right, T), not wall(V1). \
+# state_at(V0, T+1) :- time(T), adjacent(down, V0, V1), state_at(V1, T), action(down, T), not wall(V0). \
+# state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, T), not wall(V0). \
+# state_at(V0, T+1) :- time(T), adjacent(left, V0, V1), state_at(V0, T), action(right, T), wall(V1). \
+# state_at(V1, T+1) :- time(T), adjacent(left, V0, V1), state_at(V1, T), action(left, T), wall(V0). \
+# state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V0, T), action(down, T), wall(V1). \
+# state_at(V1, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, T), wall(V0)."
 
         # ILASP --version=2i output.las -ml=10 -nc --clingo5 --clingo "clingo5 --opt-strat=usc,stratify"
         # Clingo 5
-        # clingo5 = "clingo5 --opt-strat=usc,stratify"
-        # if cache_path:
-        #     cache_path = "--cached-rel=" + cache_path
-        #     hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5, cache_path], universal_newlines=True)
-        # else:
-        #     hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5], universal_newlines=True)
+        clingo5 = "clingo5 --opt-strat=usc,stratify"
+        if cache_path:
+            cache_path = "--cached-rel=" + cache_path
+            hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5, cache_path], universal_newlines=True)
+        else:
+            hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5], universal_newlines=True)
         
         # Normal 
         # hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-nc", "-q"], universal_newlines=True)

@@ -42,15 +42,13 @@ DECAY_PARAM = 1
 # env = gym.make('vgdl_aaa_maze-v0')
 
 TIME_RANGE = 300
-TIME_RANGE2 = 20
-# env = gym.make('vgdl_aaa_L_shape-v0')
-env = gym.make('vgdl_aaa_small-v0')
-
-HEIGHT = env.unwrapped.game.height
-WIDTH = env.unwrapped.game.width
+TIME_RANGE2 = 30
 
 
 def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=False):
+    HEIGHT = env.unwrapped.game.height
+    WIDTH = env.unwrapped.game.width
+
     log_dir = None
     # Log everything and keep it here
     if record_prefix:
@@ -87,9 +85,9 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         print("num_episodes ", num_episodes)
         # print("stats ", stats)
         # Decaying epsilon greedy params
-        epsilon = epsilon*(1/(i_episode+1)**DECAY_PARAM)
+        
+        # epsilon = epsilon*(1/(i_episode+1)**DECAY_PARAM)
         # print("epsilon ", epsilon)
-
         # Reset the env and pick the first action
         
         # TODO DO I want to update this in every episode??
@@ -295,19 +293,20 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                 state = next_state
         
-        if x == int(goal_state[0]) and y == int(goal_state[1]):
-            is_start = True
-            # break
+        # if x == int(goal_state[0]) and y == int(goal_state[1]):
+        #     is_start = True
+        #     # break
 
     return stats
 
 # epsilon 0 means no exploration
+# env = gym.make('vgdl_experiment3.5-v0')
+# env = gym.make('vgdl_aaa_small-v0')
+# env = gym.make('vgdl_aaa_teleport-v0')
+# stats = k_learning(env, 150, epsilon=0.2, record_prefix="teleport", is_link=True)
 
-# stats = k_learning(env, 10, epsilon=0, record_prefix="Field", is_link=False)
-
-stats = k_learning(env, 100, epsilon=0.2, record_prefix=None, is_link=True)
 # plotting.plot_episode_stats(stats)
-plotting.plot_episode_stats_simple(stats)
+# plotting.plot_episode_stats_simple(stats)
 
 # picklepath = base_dir + "/stats.pkl"
 # print("picklepath ", picklepath)
