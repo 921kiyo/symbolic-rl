@@ -1,10 +1,6 @@
  # import ipdb; ipdb.set_trace()
-import matplotlib
-import gym
-import gym_vgdl
 import numpy as np
 import os
-from gym import wrappers
 
 import time
 import random
@@ -12,7 +8,6 @@ import subprocess
 
 # Q-learning
 import itertools
-import pandas as pd
 import sys
 
 import pickle
