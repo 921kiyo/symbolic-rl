@@ -1,45 +1,20 @@
-import matplotlib
 import gym
 import gym_vgdl
 import numpy as np
-
-from gym import wrappers
-# from play.gym_recording.wrappers import TraceRecordingWrapper
-# from play.gym_recording import playback
-from gym_recording.wrappers import trace_recording
 
 import time
 
 # Q-learning
 import itertools
-import pandas as pd
 import sys
 import os.path
+import pickle
 
 from collections import defaultdict
-from lib import plotting
 
-# ASP conversion
 from lib import plotting, py_asp, helper, induction, abduction
 
-import pickle
-# env = gym.make('vgdl_aliens-v0')
-# env = gym.make('vgdl_boulderdash-v0')
-# env = gym.make('vgdl_portals-v0')
-# env = gym.make('vgdl_survivezombies-v0')
-
-# env = gym.make('vgdl_aaa_field-v0')
-# env = gym.make('vgdl_aaa_square-v0')
-# trace_path = os.path.dirname(ospath.realpath(__file__))
-# env = TraceRecordingWrapper(env, trace_path)
-# env = gym.make('vgdl_aaa3-v0')
-
-# env = gym.make('vgdl_aaa_L_shape-v0')
-# env = gym.make('vgdl_aaa_small-v0')
-
 TIME_RANGE = 100
-
-# TIME_RANGE = 400
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
