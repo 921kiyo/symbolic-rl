@@ -1,0 +1,12 @@
+\select@language {english}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Agent and Environment\relax }}{11}{figure.caption.10}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Relationships among learning, planning and acting\relax }}{13}{figure.caption.11}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Proposed reinforcement learning architecture. ILASP learns to generate a model and updates based on the interaction with the environment, which is used to facilite the policy evaluation. \relax }}{15}{figure.caption.12}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Simple Grid World to highlight transfer capability \relax }}{20}{figure.caption.15}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
