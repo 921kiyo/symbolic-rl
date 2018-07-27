@@ -4,11 +4,22 @@ import pandas as pd
 from collections import namedtuple
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+import pickle
 
-EpisodeStats = namedtuple("Stats",["episode_lengths", "episode_rewards"])
+EpisodeStats = namedtuple("EpisodeStats",["episode_lengths", "episode_rewards"])
 
-# TODO What do I want to visualise?
-# 
+def store_stats(stats, base_dir, filename):
+    filename = "/" + filename + ".pkl"
+    picklepath = base_dir + filename
+    output = open(picklepath, "wb")
+    pickle.dump(stats, output)
+    output.close()
+
+def load_stats(base_dir, filename):
+    filename = "/" + filename + ".pkl"
+    picklepath = base_dir + filename
+    stats = pickle.load(open(picklepath, "rb"))
+    return stats
 
 def plot_episode_stats(stats, smoothing_window=10, noshow=False):
     # Plot the episode length over time

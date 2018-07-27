@@ -33,12 +33,13 @@ import pickle
 # trace_path = os.path.dirname(ospath.realpath(__file__))
 # env = TraceRecordingWrapper(env, trace_path)
 # env = gym.make('vgdl_aaa3-v0')
-TIME_RANGE = 400
-# env = gym.make('vgdl_aaa_L_shape-v0')
-env = gym.make('vgdl_aaa_small-v0')
-# env = gym.make('vgdl_aaa_maze-v0')
 
+# env = gym.make('vgdl_aaa_L_shape-v0')
 # env = gym.make('vgdl_aaa_small-v0')
+
+TIME_RANGE = 100
+
+# TIME_RANGE = 400
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -89,23 +90,17 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
             # action = env.action_space.sample()
 
             # print("---------------------------------")
-            # print(py_asp.agent_before(previous_state[0], previous_state[1], t))
             # 0: UP
             # 1: DOWN
             # 2: LEFT
             # 3: RIGHT
 
             next_state, reward, done, _ = env.step(action)
-            # print("next_state ", next_state)
             if done:
-                # exit(1)
                 reward = 100
             else:
                 reward = reward - 1
 
-            # print(py_asp.agent_after(next_state[0], next_state[1], t))
-            # print(py_asp.reward(reward, t))
-            # print(py_asp.action(action, t))
             previous_state = next_state
 
             next_state_int = convert_state(next_state[1], next_state[0])
@@ -136,13 +131,9 @@ def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.1):
 
     return Q, stats
 
-Q, stats = q_learning(env, 100)
-# plotting.plot_episode_stats(stats)
-# import ipdb; ipdb.set_trace()
-plotting.plot_episode_stats_simple(stats)
+# env = gym.make('vgdl_experiment3.5-v0')
 
-# picklepath = base_dir + "/stats.pkl"
-# print("picklepath ", picklepath)
-# output = open(picklepath, "wb")
-# pickle.dump(stats, output)
-# output.close()
+# Q, stats = q_learning(env, 50)
+
+# plotting.plot_episode_stats(stats)
+# plotting.plot_episode_stats_simple(stats)
