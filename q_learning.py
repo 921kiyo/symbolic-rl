@@ -32,7 +32,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
     Args:
         alpha: TD learning rate
     """
-    height = env.unwrapped.game.height
+    # height = env.unwrapped.game.height
     width = env.unwrapped.game.width
     Q = defaultdict(lambda: np.zeros(env.action_space.n))
 
@@ -52,7 +52,6 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
         state_int = helper.convert_state(state[1], state[0], width)
 
         previous_state = state
-        # for t in itertools.count():
         for t in range(TIME_RANGE):
             env.render()
             # time.sleep(0.1)
