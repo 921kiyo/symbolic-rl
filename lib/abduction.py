@@ -260,12 +260,12 @@ def get_predicted_state(current_state, action, states):
     elif(action == "non"):
         return current_state
 
-def update_agent_position(agent_position, clingofile):
+def update_agent_position(agent_position, clingofile, time):
     '''
     Update planning starting point based on the location of the agent
     '''
     # Replace everything between "AAA" and "BBB" in clingo file with a new agent position
-    start_state = "%AAA\n" + "state_at((" + str(int(agent_position[0])) + ", " + str(int(agent_position[1])) + "), 1).\n" + "%BBB\n"
+    start_state = "%AAA\n" + "state_at((" + str(int(agent_position[0])) + ", " + str(int(agent_position[1])) + "), " + str(time) + ").\n" + "%BBB\n"
     flag = False
     with open(clingofile) as f:
         for line in f:

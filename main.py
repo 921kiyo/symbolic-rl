@@ -63,8 +63,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes))
-
-    # i_episode = 0
     
     for i_episode in range(num_episodes):
     # while i_episode < num_episodes:
@@ -74,61 +72,60 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         # Decaying epsilon greedy params        
         new_epsilon = epsilon*(1/(i_episode+1)**DECAY_PARAM)
         
-        # if is_start:
         state = env.reset()
-        
-        agent_position = env.unwrapped.observer.get_observation()["position"]
-        
+                
         previous_state = state
         previous_state_at = py_asp.state_at(state[0], state[1], 1)
         any_exclusion = False
         is_exclusion = False
 
+        time = 0
         # Once the plan is obtained, execute the plan
         if is_las:
-            for t in range(TIME_RANGE):
+            while time < TIME_RANGE:
                 if first_abduction == False:
                     # Run ILASP to get H
                     hypothesis = induction.run_ILASP(LASFILE, CACHE)
+                    abduction.make_lp(hypothesis, LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, cell_range)
+                    first_abduction = True
+                    
+                    # Logging set up
                     if record_prefix:
                         inputfile = os.path.join(base_dir, LASFILE)
                         helper.log_las(inputfile, hypothesis, log_dir, i_episode)
-                    
-                    abduction.make_lp(hypothesis, LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, cell_range)
-                    first_abduction = True
-                
-                # agent_position = env.unwrapped.observer.get_observation()["position"]
+
+                # Update the starting position for Clingo 
+                agent_position = env.unwrapped.observer.get_observation()["position"]
                 print("agent_position ", agent_position)
-                abduction.update_agent_position(agent_position, CLINGOFILE)
-
+                abduction.update_agent_position(agent_position, CLINGOFILE, time)
+                
+                # Run clingo to get a plan
                 answer_sets = abduction.run_clingo(CLINGOFILE)
-                if record_prefix:
-                    inputfile = os.path.join(base_dir, CLINGOFILE)
-
-                    helper.log_asp(inputfile, answer_sets, log_dir, i_episode)
-
                 states_plan, actions_array = abduction.sort_planning(answer_sets)
                 print("ASP states ", states_plan)
                 print("ASP actions ", actions_array)
+
+                # Logging clingo
+                if record_prefix:
+                    inputfile = os.path.join(base_dir, CLINGOFILE)
+                    helper.log_asp(inputfile, answer_sets, log_dir, i_episode)
+
                 # Execute the planning
                 for action_index, action in enumerate(actions_array):
+                    # TODO fix this timestamp
+                    time = time + 1
                     print("------------------------------")
                     print("Planning phase... ", "take action ", action[1])
-
-                    # Flip a coin
-                    threshold = random.uniform(0,1)                
-
-                    # if threshold is less than epsilon, explore randomly a little bit
+                                    
+                    # Flip a coin. If threshold < epsilon, explore randomly
+                    threshold = random.uniform(0,1)
                     if threshold < new_epsilon:
-                        print("Taking a pure random action")
+                        print("Taking a pure random action...")
                         action_int = env.action_space.sample()
-                        action_string = helper.convert_action(action_int)
-                        print("random action is ", action_string)
+                        print("random action is ", helper.convert_action(action_int))
+
                         next_state, reward, done, _ = env.step(action_int)
                                                             
-                        x = int(next_state[0])
-                        y = int(next_state[1])
-
                         if done:
                             reward = reward + 100
                         else:
@@ -155,27 +152,19 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                         if any_exclusion:
                             is_exclusion = True
 
-                        # is_start = False
-
                         state = next_state
                         previous_state = next_state
                         previous_state_at = observed_state
                         print("next_state ", next_state)
                         
                         if done:
-                            # is_start = True
-                            # i_episode = i_episode + 1
                             break
                         # break
                     else:
-                        action_int = helper.get_action(action[1])
-                    
+                        # Following the plan
+                        action_int = helper.get_action(action[1])                    
                         next_state, reward, done, _ = env.step(action_int)
                         
-                        # is_start = False
-
-                        x = int(next_state[0])
-                        y = int(next_state[1])
                         if done:                 
                             reward = reward + 100
                         else:
@@ -214,8 +203,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                         previous_state_at = observed_state
 
                         if done:
-                            # is_start = True
-                            # i_episode = i_episode + 1
                             break
                     env.render()
                     # time.sleep(0.1)  
