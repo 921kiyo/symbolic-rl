@@ -102,7 +102,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     inputfile = os.path.join(base_dir, LASFILE)
                     helper.log_las(inputfile, hypothesis, log_dir, i_episode)
                 
-                abduction.make_lp(hypothesis, LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, width, height)
+                cell_range = "\ncell((0..{}, 0..{})).\n".format(width-1, height-1)
+                abduction.make_lp(hypothesis, LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, cell_range)
                 first_abduction = True
             
             print("agent_position ", agent_position)
@@ -286,10 +287,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     return stats
 
 # epsilon 0 means no exploration
-# env = gym.make('vgdl_experiment1-v0')
+env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-# stats = k_learning(env, 150, epsilon=0.4, record_prefix="fix_updateH", is_link=True)
+stats = k_learning(env, 150, epsilon=0.4, record_prefix=None, is_link=True)
 
 # plotting.plot_episode_stats(stats)
 # plotting.plot_episode_stats_simple(stats)

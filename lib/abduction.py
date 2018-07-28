@@ -5,6 +5,11 @@ import json
 import os
 
 def is_wall_in_background(wall, backgroundfile):
+    '''
+    Input: wall tuple and background file (fullpath)
+
+    Output: Boolean to tell whether the wall is already in the background
+    '''
     wall = "wall({})".format(str(wall))
     with open(backgroundfile, "r") as searchfile:
         for line in searchfile:
@@ -13,7 +18,6 @@ def is_wall_in_background(wall, backgroundfile):
                 return True
     return False
 
-# TODO Can I simplify this?
 def add_new_walls(previous_state, wall_list, backgroundfile):
     '''
     Check the surrounding and see if there is any new walls
@@ -41,43 +45,40 @@ def add_new_walls(previous_state, wall_list, backgroundfile):
         is_new_b = True
     return is_new_b
 
-def make_lp(hypothesis, lasfile, backgroundfile, clingofile, start_state, goal_state, time_range, width, height):
+def make_lp(hypothesis, lasfile, backgroundfile, clingofile, start_state, goal_state, time_range, cell_range):
     '''
     Collect all info necessary to run clingo and send them to "clingofile"
     '''
     # starting point
     start_state = "%AAA\n" + "state_at((" + str(int(start_state[0])) + ", " + str(int(start_state[1])) + "), 1).\n" + "%BBB\n"
-    # goal state
-    goal_state = "state_at((" + str(int(goal_state[0])) + ", " + str(int(goal_state[1])) + "), T),"
-    # goal_state = "state_at((17, 1), T),"
-    
-    # TODO automatically get this info as well
     # action choice rule
     actions = "1{action(down, T); action(up, T); action(right, T); action(left, T); action(non, T)}1 :- time(T), not finished(T).\n"
-    
     show = "#show state_at/2.\n #show action/2.\n"
+
     # TODO update goal specification
     # goal specification
+    goal_state = "state_at((" + str(int(goal_state[0])) + ", " + str(int(goal_state[1])) + "), T),"
     goal = "finished(T):- goal(T2), time(T), T >= T2.\n goal(T):- " + goal_state + " not finished(T-1).\n" + \
     "goalMet:- goal(T).\n:- not goalMet.\n"
     # time range
     time = "time(1.." + str(time_range) + ").\n"
-    # cell range
-    cell = "\ncell((0..{}, 0..{})).\n".format(width-1, height-1)
+    
+    # optimisation statement
+    minimize = "#minimize{1, X, T: action(X,T)}.\n"
     # adjacent definitions
-    given = "adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).\n\
+    adjacent = "adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).\n\
     adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).\n\
     adjacent(down, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).\n\
     adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).\n"
 
-    # optimisation statement
-    minimize = "#minimize{1, X, T: action(X,T)}.\n"
-    kb = start_state + actions + show + goal + time + cell + minimize + given
-    # Send H and BK to clingofile
+    kb = start_state + actions + show + goal + time + cell_range + minimize + adjacent
+    # Send BK to clingofile
     helper.append_to_file(kb, clingofile)
+    # Send H to clingofile
     helper.append_to_file("%START\n", clingofile)
     helper.append_to_file(hypothesis, clingofile)
     helper.append_to_file("%END\n", clingofile)
+    # Send wall background to clingofile
     send_background_to_clingo(backgroundfile, clingofile)
 
 def send_background_to_clingo(input, output):
@@ -109,18 +110,15 @@ def run_clingo(clingofile):
     answer_sets = json_plan["Call"][0]["Witnesses"][size_asp-1]["Value"]
     return answer_sets
 
-def sort_planning(state_action_array):
+def sort_planning(answer_sets):
     '''
-    Run clingo to get a sequnce of action plan
-    
     Output: sorted action and state arrays
     '''
-
     states = []
     actions = []
 
     # Loop through the string and put state_at and action into different arrays
-    for i in state_action_array:
+    for i in answer_sets:
         if "state_at" in i:
             states.append(i)
         if "action" in i:
@@ -216,6 +214,52 @@ def extract_action(action):
             end_index = a
     return action[start_index: end_index]
 
+def is_state_in_states(state, states):
+    '''
+    check if state is in states answer sets
+    
+    states: [(1, 'state_at((4,6),1)'), (2, 'state_at((5,6),2)'), (3, 'state_at((6,6),3)')]
+    state:  'state_at((4,6),1)'
+    '''
+
+    for s in states:
+        if(state == s[1]):
+            return True
+    return False
+
+# TODO Do I want to do this?
+def get_predicted_state(current_state, action, states):
+    '''
+    check if state is in states answer sets
+    '''
+    current_state = update_T(current_state)
+    if(action == "up"):
+        new_state = update_Y(current_state, -1)
+        if is_state_in_states(new_state, states):
+            return new_state
+        else:
+            return current_state
+    elif(action == "down"):
+        new_state = update_Y(current_state, 1)
+        if is_state_in_states(new_state, states):
+            return new_state
+        else:
+            return current_state
+    elif(action == "right"):
+        new_state = update_X(current_state, 1)
+        if is_state_in_states(new_state, states):
+            return new_state
+        else:
+            return current_state
+    elif(action == "left"):
+        new_state = update_X(current_state, -1)
+        if is_state_in_states(new_state, states):
+            return new_state
+        else:
+            return current_state
+    elif(action == "non"):
+        return current_state
+
 def update_agent_position(agent_position, clingofile):
     '''
     Update planning starting point based on the location of the agent
@@ -258,47 +302,3 @@ def update_h(hypothesis, clingofile):
     helper.append_to_file("%START\n", clingofile)
     helper.append_to_file(hypothesis, clingofile)
     helper.append_to_file("%END\n", clingofile)
-
-def is_state_in_states(state, states):
-    '''
-    check if state is in states answer sets
-    '''
-
-    for s in states:
-        if(state == s[1]):
-            return True
-    return False
-
-# TODO Do I want to do this?
-def get_predicted_state(current_state, action, states):
-    '''
-    check if state is in states answer sets
-    '''
-
-    current_state = update_T(current_state)
-    if(action == "up"):
-        new_state = update_Y(current_state, -1)
-        if is_state_in_states(new_state, states):
-            return new_state
-        else:
-            return current_state
-    elif(action == "down"):
-        new_state = update_Y(current_state, 1)
-        if is_state_in_states(new_state, states):
-            return new_state
-        else:
-            return current_state
-    elif(action == "right"):
-        new_state = update_X(current_state, 1)
-        if is_state_in_states(new_state, states):
-            return new_state
-        else:
-            return current_state
-    elif(action == "left"):
-        new_state = update_X(current_state, -1)
-        if is_state_in_states(new_state, states):
-            return new_state
-        else:
-            return current_state
-    elif(action == "non"):
-        return current_state
