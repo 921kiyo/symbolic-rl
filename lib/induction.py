@@ -248,11 +248,11 @@ def run_ILASP(filename, cache_path=None):
         # ILASP --version=2i output.las -ml=10 -nc --clingo5 --clingo "clingo5 --opt-strat=usc,stratify"
         # Clingo 5
         clingo5 = "clingo5 --opt-strat=usc,stratify"
-        if cache_path:
-            cache_path = "--cached-rel=" + cache_path
-            hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5, cache_path], universal_newlines=True)
-        else:
-            hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5], universal_newlines=True)
+        # if cache_path:
+        #     cache_path = "--cached-rel=" + cache_path
+        #     hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5, cache_path], universal_newlines=True)
+        # else:
+        #     hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5], universal_newlines=True)
         
         # Normal 
         # hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-nc", "-q"], universal_newlines=True)

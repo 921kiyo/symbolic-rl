@@ -69,11 +69,11 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         print("==============NEW EPISODE======================")
         print("i_episode ", i_episode)
         print("num_episodes ", num_episodes)
-        # print("stats ", stats)
         # Decaying epsilon greedy params
         
         # epsilon = epsilon*(1/(i_episode+1)**DECAY_PARAM)
-        # print("epsilon ", epsilon)
+        new_epsilon = epsilon*(1/(i_episode+1))
+        print("new_epsilon ", new_epsilon)
         # Reset the env and pick the first action
         
         # TODO DO I want to update this in every episode??
@@ -126,7 +126,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 threshold = random.uniform(0,1)                
 
                 # if threshold is less than epsilon, explore randomly a little bit
-                if threshold < epsilon:
+                if threshold < new_epsilon:
                     print("Taking a pure random action")
                     action_int = env.action_space.sample()
                     action_string = helper.convert_action(action_int)
@@ -286,10 +286,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     return stats
 
 # epsilon 0 means no exploration
-env = gym.make('vgdl_experiment3.5-v0')
+# env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-stats = k_learning(env, 150, epsilon=0, record_prefix="fix_updateH", is_link=True)
+# stats = k_learning(env, 150, epsilon=0.4, record_prefix="fix_updateH", is_link=True)
 
 # plotting.plot_episode_stats(stats)
 # plotting.plot_episode_stats_simple(stats)
