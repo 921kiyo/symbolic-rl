@@ -33,8 +33,7 @@ def add_surrounding_walls(x, y, wall_list):
 def get_seen_walls(file):
     '''
     Collect all walls that are already seen
-
-    Output: [(X1,Y1), (X2,Y2), ...]
+    Output: [(X1,Y1), (X2,Y2), ...] list of tuples
     '''
     wall_list = []
     with open(file) as f:
@@ -45,7 +44,7 @@ def get_seen_walls(file):
                 wall_list.append((x,y))
     return wall_list
 
-def get_exclusions(previous_state, next_state, action):
+def get_exclusions(previous_state, next_state):
     '''
     Get all state_after that did not happen while exploring
 
@@ -188,16 +187,15 @@ def generate_explore_pos(next_state, previous_state, action, wall_list):
     Output: #pos({state_after((3,6))}, {state_after((4,6)), ...}, {state_before((3,6)). action(non). }).
     '''
     walls = add_surrounding_walls(int(previous_state[0]),int(previous_state[1]), wall_list)
-    is_link, exclusions = get_exclusions(previous_state, next_state, action)
-    # If exclusions is empty, there must be a link
-    # if exclusions == "":
+    is_link, exclusions = get_exclusions(previous_state, next_state)
+
     if is_link:
         link = get_link(previous_state, next_state, action)
         return link, "#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + link + walls + "})."    
     else:
         return "","#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + walls + "})."
 
-def send_state_transition_pos(previous_state,next_state, action, wall_list, lasfile, background):
+def send_state_transition_pos(previous_state, next_state, action, wall_list, lasfile, background):
     '''
     Generate a pos and add it to lasfile
     '''
@@ -207,10 +205,9 @@ def send_state_transition_pos(previous_state,next_state, action, wall_list, lasf
 
     if link != "":
         link += "\n"
-
         helper.append_to_file(link, background)
 
-def copy_las_base(lasfile, height, width, is_link):
+def copy_las_base(lasfile, height, width, is_link=False):
     '''
     make a lasfile for ILASP
     '''
@@ -237,16 +234,6 @@ def run_ILASP(filename, cache_path=None):
     try:
         # Hardcoded best H
         hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
-#         hypothesis = "state_at(V0, T+1) :- time(T), state_at(V0, T), action(non, T). \
-# state_at(V1, T+1) :- time(T), link(V0, V1), adjacent(up, V0, V2), state_before(V2). \
-# state_at(V1, T+1) :- time(T), adjacent(right, V0, V1), state_at(V0, T), action(left, T), not wall(V1). \
-# state_at(V1, T+1) :- time(T), adjacent(left, V0, V1), state_at(V0, T), action(right, T), not wall(V1). \
-# state_at(V0, T+1) :- time(T), adjacent(down, V0, V1), state_at(V1, T), action(down, T), not wall(V0). \
-# state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, T), not wall(V0). \
-# state_at(V0, T+1) :- time(T), adjacent(left, V0, V1), state_at(V0, T), action(right, T), wall(V1). \
-# state_at(V1, T+1) :- time(T), adjacent(left, V0, V1), state_at(V1, T), action(left, T), wall(V0). \
-# state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V0, T), action(down, T), wall(V1). \
-# state_at(V1, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, T), wall(V0)."
 
         # ILASP --version=2i output.las -ml=10 -nc --clingo5 --clingo "clingo5 --opt-strat=usc,stratify"
         # Clingo 5

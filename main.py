@@ -123,7 +123,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                         print("Taking a pure random action...")
                         action_int = env.action_space.sample()
                         print("random action is ", helper.convert_action(action_int))
-
+                        
+                        # TODO AFTER THIS AND ELSE, CAN I SOMEHOW COMBINE THEM TO SIMPLIFY??
                         next_state, reward, done, _ = env.step(action_int)
                                                             
                         if done:
@@ -157,6 +158,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                         previous_state_at = observed_state
                         print("next_state ", next_state)
                         
+                        # TODO AFTER THIS AND ELSE, CAN I SOMEHOW COMBINE THEM TO SIMPLIFY??
                         if done:
                             break
                         # break

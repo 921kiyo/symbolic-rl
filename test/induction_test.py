@@ -1,6 +1,6 @@
 import unittest
 
-from lib import induction
+from lib import induction, helper
 
 import os, os.path
 import gym, gym_vgdl
@@ -20,21 +20,81 @@ class TestInduction(unittest.TestCase):
     def test_add_surrounding_walls(self):
         walls = induction.get_all_walls(env)
         surrounding = induction.add_surrounding_walls(1,1,walls)
-        print(surrounding)
+        self.assertEqual(surrounding, "wall((1, 2)). wall((0, 1)). wall((1, 0)). ")
+
+    def test_get_seen_walls(self):
+        wall_file = os.path.join(BASE_DIR, "walls.txt")
+        result = induction.get_seen_walls(wall_file)
+        self.assertEqual(result, [(1, 2), (0, 1), (1, 0)])
+
+    def test_get_exclusions(self):
+        previous_state = [1,1]
+        next_state = [1,2]
+        is_link, exclusions = induction.get_exclusions(previous_state, next_state)
+        self.assertFalse(is_link)
+        self.assertEqual(exclusions, 'state_after((2,1)),state_after((0,1)),state_after((1,0)),state_after((1,1))')
+
+    def test_get_plan_exclusions(self):
+        state_at_before = "state_at((1,1),1)"
+        state_at_after = "state_at((1,2),2)"
+        states = [(2,"state_at((1,2),2)"),(2,"state_at((2,2),2)")]
+        exclusions = induction.get_plan_exclusions(state_at_before, state_at_after, states)
+        self.assertEqual(exclusions, "state_after((2,2))")
+
+    def test_get_next_state(self):
+        current_state = [1,1]
+        action = "up"
+        x, y = induction.get_next_state(current_state, action)
+        self.assertEqual(x, 1)
+        self.assertEqual(y, 0)
+
+    def test_get_link(self):
+        previous_state = [1,1]
+        next_state = [3,3]
+        action = "up"
+        link = induction.get_link(previous_state, next_state, action)
+        self.assertEqual(link, "link((1,0), (3,3)). ")
+
+    def test_generate_plan_pos(self):
+        # TODO
+        state_at_before = None
+        state_at_after = None
+        states = None
+        action = None
+        wall_list = None
+        is_link = False
         pass
 
-    def test_comment_h(self):
+    def test_generate_explore_pos(self):
+        # TODO
         pass
 
-    def test_copy_file(self):
+    def test_send_state_transition_pos(self):
+        previous_state = [1,1]
+        next_state = [2,1]
+        action = "right"
+        wall_list = induction.get_all_walls(env)
+        lasfile = os.path.join(BASE_DIR, "las_test2.las")
+        helper.silentremove(BASE_DIR, "las_test2.las")
+        background = os.path.join(BASE_DIR, "background_test4.lp")
+        helper.silentremove(BASE_DIR, "background_test4.lp")
+        induction.send_state_transition_pos(previous_state, next_state, action, wall_list, lasfile, background)
+        size_las = os.stat(lasfile).st_size
+        size_background = os.stat(background).st_size
+        self.assertGreater(size_las, 0)
+        self.assertEqual(size_background, 0)
+
+    def test_copy_las_base(self):
+        # TODO
+        # las_file = os.path.join(BASE_DIR, "las_test3.las")
+
+        # induction.copy_las_base(las_file, 4,4, False)
         pass
 
-    def test_gen_unique_filename(self):
-        pass
-
-    def test_gen_log_dir(self):
-        pass
-
+    def test_run_ILASP(self):
+        las_file = os.path.join(BASE_DIR, "las_test4.las")
+        hypothesis = induction.run_ILASP(las_file)
+        self.assertEqual(hypothesis[0:8], "state_at")
 
 if __name__ == '__main__':
     unittest.main()
