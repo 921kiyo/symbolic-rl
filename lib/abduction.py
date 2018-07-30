@@ -61,7 +61,7 @@ def make_lp(hypothesis, lasfile, backgroundfile, clingofile, start_state, goal_s
     goal = "finished(T):- goal(T2), time(T), T >= T2.\n goal(T):- " + goal_state + " not finished(T-1).\n" + \
     "goalMet:- goal(T).\n:- not goalMet.\n"
     # time range
-    time = "time(1.." + str(time_range) + ").\n"
+    time = "time(0.." + str(time_range) + ").\n"
     
     # optimisation statement
     minimize = "#minimize{1, X, T: action(X,T)}.\n"

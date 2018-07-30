@@ -231,22 +231,23 @@ def run_ILASP(filename, cache_path=None):
     Output: H
     '''
     print("ILASP running...")
-    try:
-        # Hardcoded best H
-        hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
+    # Hardcoded best H
+    hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
+
+    # try:
 
         # ILASP --version=2i output.las -ml=10 -nc --clingo5 --clingo "clingo5 --opt-strat=usc,stratify"
         # Clingo 5
-        clingo5 = "clingo5 --opt-strat=usc,stratify"
-        if cache_path:
-            cache_path = "--cached-rel=" + cache_path
-            hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5, cache_path], universal_newlines=True)
-        else:
-            hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5], universal_newlines=True)
+        # clingo5 = "clingo5 --opt-strat=usc,stratify"
+        # if cache_path:
+        #     cache_path = "--cached-rel=" + cache_path
+        #     hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5, cache_path], universal_newlines=True)
+        # else:
+        #     hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5], universal_newlines=True)
         
-    except subprocess.CalledProcessError as e:
-        print("Error...", e.output)
-        hypothesis = e.output
+    # except subprocess.CalledProcessError as e:
+    #     print("Error...", e.output)
+    #     hypothesis = e.output
     # Convert syntax of H for ASP solver
     hypothesis = py_asp.convert_las_asp(hypothesis)
     return hypothesis
