@@ -96,7 +96,6 @@
 % Figure~\ref{fig:logo} is an example of a figure.
 
 \chapter{Introduction}
-TODO LIST OF FIGURES
 \label{introduction}
 
 % Including this part of chapter
@@ -169,10 +168,15 @@ Given above,  there are four Herbrand Interpretations = $\langle$ \{q(a)\}, \{p(
 \textit{Normal Logic Program} is a set of normal rules, and a normal rule is of the form \textit{h} $\leftarrow$ a\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{not b}\textsubscript{1}, ..., \textit{not  b}\textsubscript{n} where \textit{h} is the head of the rule,
  and \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{b}\textsubscript{1}, ..., \textit{b}\textsubscript{n} are the body of the rule (both the head and body are all atoms).
 
-To solve a normal logic program \textit{Th}, the program P needs to be grounded. The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the Herbrand Domain. The algorithm of grounding starts with an empty program Q = \{  \} and the relevant grounding is constructed by adding to each rule R to Q given that R is a ground instance of a rule in P and their positive body literals already occurs in the in the of rules in Q. The algorithm terminates when no more rules can be added to Q.
-
+To solve a normal logic program \textit{Th}, the program P needs to be grounded. The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the Herbrand Domain. 
 \begin{defn}
-\textcolor{red}{TODO GROUDING DEFINITION}
+The algorithm of grounding starts with an empty program Q = \{  \} and the relevant grounding is constructed by adding to each rule R to Q such that
+\begin{itemize}
+\item R is a ground instance of a rule in P.
+\item Their positive body literals already occurs in the in the of rules in Q. 
+\end{itemize}
+The algorithm terminates when no more rules can be added to Q.
+
 \end{defn}
 
 \begin{examp} \normalfont Grounding \\
@@ -191,24 +195,37 @@ ground(P) in this example is \{p(a), q(a)\}.
 %TODO Explain grounding in ASP context.
 %The grounding of a normal logic program P can be obtained by replacing each rule in P with a ground instance of the rule, such that for each atom A in body\textsuperscript{+} (R) (TODO EXPLAIN WHAT THIS IS), already occurs in the head of another ground rule.
 Not only the entire program needs to be grounded in order for an ASP solver to work, but also each rule must be \textit{safe}. A rule \textit{R} is safe if every variable that occurs in the head of the rule occurs at least once in body\textsuperscript{+}(R) .
-Since there is no unique least Herbrand Model for a normal logic program, Stable Model of a normal logic program was defined in \cite{Gelfond1988}. In order to obtain the Stable Model of a program P, P needs to be converted using \textit{Reduct} with respect to an interpretation X. First, if the body of any rule in P contains an atom which is not in X, those rules need to be removed. Second, all default negation atoms in the remaining rules in P need to be removed.
-
+Since there is no unique least Herbrand Model for a normal logic program, Stable Model of a normal logic program was defined in \cite{Gelfond1988}. In order to obtain the Stable Model of a program P, P needs to be converted using \textit{Reduct} with respect to an interpretation X. 
 \begin{defn}
-\textcolor{red}{TODO REDUCT DEFINITION}
+\begin{itemize}
+The \textit{reduct} of P with respect to X can be constructed such that
+\item If the body of any rule in P contains an atom which is not in X, those rules need to be removed. 
+\item All default negation atoms in the remaining rules in P need to be removed.
+\end{itemize}
 \end{defn}
 
-\textcolor{red}{TODO WRITE STEPS IN MORE DETAILS}
-
 \begin{examp} \normalfont Reduct \\
-\textcolor{red}{TODO USE NON-PROPOSITIONAL EXAMPLE}
+
 
 P = $\begin{cases}
-	p  \leftarrow not\ q. \\
-  q  \leftarrow not\ p. \\
-  r  \leftarrow p.
-      \end{cases}$,  X = \{p\}
+	p(X)  \leftarrow not\ q(X). \\
+  	q (X) \leftarrow not\ p(X). \\
+      \end{cases}$,  X = \{p(a), q(b)\}
 
-Where X is a set of atoms. The first step removes \textit{q}  $\leftarrow$ \textit{not p}, and the second step removes \textit{not q}. Thus reduct P\textsuperscript{x} is \{p, r $\leftarrow$ p.\}
+Where X is a set of atoms. ground(P) is 
+
+p(a)  $\leftarrow$ not\ q(a). \\
+p(b)  $\leftarrow$ not\ q(b). \\
+q(a) $\leftarrow$ not\ p(a). \\
+q(b) $\leftarrow$ not\ p(b). \\
+
+ The first step removes p(b)  $\leftarrow$ not\ q(b). and q(a) $\leftarrow$ not\ p(a).
+
+p(a)  $\leftarrow$ not\ q(a). \\
+q(b) $\leftarrow$ not\ p(b). \\
+
+The second step removes negation atoms from the body. \\
+Thus reduct P\textsuperscript{x} is (ground(P))\textsuperscript{x} =  \{p(a), q(b).\}
 \end{examp}
 \label{reduct}
 
@@ -218,14 +235,16 @@ A Stable Model of P is an interpretaiton X if and only if X is the unique least 
 \subsection{Anwer Set Programming (ASP) Syntax}
 
 \begin{defn}
-\textcolor{red}{TODO DEFINITION OF ASP}
+Answer set of normal logic program P is a Stable Model, and Answer Set Programming (ASP) is a normal logic program with extensions: constraints, choice rules and optimisation statements. ASP program consists of a set of rules, where each rule consists of an atom and literals.
 \end{defn}
 
-Answer set of normal logic program P is a Stable Model, and Answer Set Programming (ASP) is a normal logic program with extensions: constraints, choice rules and optimisation statements. ASP program consists of a set of rules, where each rule consists of an atom and literals.
+
 A \textit{constraint} of the program P is of the form $\leftarrow$ \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{not b}\textsubscript{1}, ..., \textit{not b}\textsubscript{n}, where the rule has an empty head. The constraint filters any irrelevant answer sets. When computing ground(P)\textsubscript{x}, the empty head becomes $\perp$, which cannot be in the answer sets.
 There are two types of constraints: \textit{hard constraints} and \textit{soft constraints}. Hard constraints are strictly satisfied, whereas soft constraints may not be satisfied but the sum of the violations should be minimised when solving ASP.
+
 A \textit{choice rule} can express possible outcomes given an action choice, which is of the form
 l\{h\textsubscript{1},...,h\textsubscript{m}\}u $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n} where  l and u are integers and h\textsubscript{i} for 1 $\leq$ i $\leq$ m are atoms. The head is called \textit{aggregates}.
+
 \textit{Optimisation statement} is useful to sort the answer sets in terms of preference, which is of the form
 \textit{\#minimize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}]} or \textit{\#maximize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}]} where \textit{w\textsubscript{1},..., w\textsubscript{n}} is integer weights and \textit{a\textsubscript{1},...,a\textsubscript{n}} is ground atoms.  ASP solvers compute the scores of the weighted sum of the sets of ground atoms based on the true answer sets, and find optimal answer sets which either maximise or minimise the score.
 
@@ -315,13 +334,18 @@ In order to learn the  constraint hypothesis H = \{ $\leftarrow$ not situation(P
 \textit{Learning from Answer Sets (LAS)} was developed in \cite{Law2014} to faciliate more complex learning tasks that neither Cautious Induction nor Brave Induction could learn.
 Examples used in LAS are \textit{Partial Interpretations}, which are of the form $\langle$ e\textsuperscript{inc}, e\textsuperscript{exc}$\rangle$. (called \textit{inclusions} and \textit{exclusions} of \textit{e} respectively).  A Herbrand Interpretation extends a partial interpretation if it includes all of e\textsuperscript{inc} and none of e\textsuperscript{exc}.
 LAS is of the form $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is background knowledge, S\textsubscript{M} is hypothesis space, and E\textsuperscript{+} and E\textsuperscript{-} are examples of positive and negative partial interpretations. S\textsubscript{M} consists of a set of normal rules, choice rules and constraints. S\textsubscript{M} is specified by \textit{language bias} of the learning task using \textit{mode declaration}. Mode declaration specifies what can occur in a hypothesis by specifying the predicates, and consists of two parts: \textit{modeh} and \textit{modeb}.  \textit{modeh} and \textit{modeb} are the predicates that can occur in the head of the rule and body of the rule respectively. Language bias is the specification of the language in the hypothesis in order to reduce the search space for the hypothesis.
-\textcolor{red}{TODO LAS DEFINITION FORMALLY} \\
+
+\begin{defn}{Learning from Answer Sets (LAS)}
+
 Given a learning task T, the set of all possible inductive solutions of T is denoted as ILP\textsubscript{LAS}(T), and a hypothesis H is an inductive solution of ILP\textsubscript{LAS}(T) $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ such that:
 \begin{enumerate}
 \item H $\subseteq$ S\textsubscript{M}
 \item $\forall$ e $\in$ E\textsuperscript{+} : $\exists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e
 \item $\forall$ e $\in$ E\textsuperscript{-} : $\nexists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e
 \end{enumerate}
+
+\end{defn}
+
 
 %S\textsubscript{M} consists of all rules given the language bias.
 
@@ -359,7 +383,7 @@ A hypothesis H is a violating solution if and only if
 Given both definitions of positive and violating solutions, ILP\textsubscript{LAS} $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$is positive solutions that are not violating solutions.
 
 \subsubsection{A Context-dependent Learning from Answer Sets }
-\textit{Context-dependent learning from ordered answer sets ($ILP_{LOAS}^{context}$)} is a further generalisation of ILP\textsubscript{LOAS} with \textit{context-dependent examples} \textcolor{red}{REFERENCE}.
+\textit{Context-dependent learning from ordered answer sets ($ILP_{LOAS}^{context}$)} is a further generalisation of ILP\textsubscript{LOAS} with \textit{context-dependent examples} \cite{Law2016}
 Context-dependent examples are examples that each unique background knowledge (context) only applies to specific examples. This way the background knowledge is more structured rather than one fixed background knowledge that are applied to all examples.
 Formally, partial interpretation is of the form $\langle$ e, C $\rangle$ (called \textit{context-dependent partial interpretation (CDPI)}), where \textit{e} is a partial interpretation and C is called \textit{context}, or an ASP program without weak constraints.
 A \textit{context-dependent ordering example (CDOE)} is of the form $\langle$ $\langle$e\textsubscript{1}, C\textsubscript{1} $\rangle$, $\langle$ e\textsubscript{2}, C\textsubscript{2} $\rangle$$\rangle$, which is a pair of CDPI. An APS program P \textit{bravely respects o} if and only if
