@@ -76,17 +76,16 @@ def append_to_file(pos, file):
     with open(file, "a") as f:
         f.write(pos)
 
-# TODO Update this using episode
-def gen_unique_filename(extension, base_dir, episode, filename):
-    current_time = int(round(time.time() * 1000))
-    base_log_dir = '{}_spisode{}_{}'.format(filename, episode, current_time)
+def gen_unique_filename(extension, base_dir, episode, filename, time):
+    # current_time = int(round(time.time() * 1000))
+    base_log_dir = '{}_episode{}_at_{}'.format(filename, episode, time)
     file_path = base_dir + '/' + base_log_dir
 
     return file_path + "." + extension
 
-def log_asp(inputfile, output, base_dir, episode):
+def log_asp(inputfile, output, base_dir, episode, time):
 
-    unique_file = gen_unique_filename("lp", base_dir, episode, "clingo")
+    unique_file = gen_unique_filename("lp", base_dir, episode, "clingo", time)
     copy_file(inputfile, unique_file)
     with open(unique_file, "a") as out:
         out.write("%ANSWER SETS\n\n")
@@ -94,8 +93,8 @@ def log_asp(inputfile, output, base_dir, episode):
             i = "%" + i + "\n"
             out.write(i)
 
-def log_las(inputfile, hypothesis, base_dir, episode):
-    unique_file = gen_unique_filename("las", base_dir, episode, "las")
+def log_las(inputfile, hypothesis, base_dir, episode, time):
+    unique_file = gen_unique_filename("las", base_dir, episode, "las", time)
     new_h = comment_h(hypothesis)
     with open(unique_file, "a") as out:
         out.write("%ILASP\n\n")

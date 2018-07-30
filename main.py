@@ -91,7 +91,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     # Logging set up
                     if record_prefix:
                         inputfile = os.path.join(base_dir, LASFILE)
-                        helper.log_las(inputfile, hypothesis, log_dir, i_episode)
+                        helper.log_las(inputfile, hypothesis, log_dir, i_episode, time)
 
                 # Update the starting position for Clingo
                 agent_position = env.unwrapped.observer.get_observation()["position"]
@@ -107,7 +107,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 # Logging clingo
                 if record_prefix:
                     inputfile = os.path.join(base_dir, CLINGOFILE)
-                    helper.log_asp(inputfile, answer_sets, log_dir, i_episode)
+                    helper.log_asp(inputfile, answer_sets, log_dir, i_episode, time)
 
                 # Execute the planning
                 for action_index, action in enumerate(actions_array):
@@ -213,7 +213,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     hypothesis = induction.run_ILASP(LASFILE, CACHE)
                     if record_prefix:
                         inputfile = os.path.join(base_dir, LASFILE)
-                        helper.log_las(inputfile, hypothesis, log_dir, i_episode)
+                        helper.log_las(inputfile, hypothesis, log_dir, i_episode, time)
 
                     print("New H ", hypothesis)
                     abduction.update_h(hypothesis, CLINGOFILE)
@@ -268,6 +268,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 # env = gym.make('vgdl_aaa_small-v0')
 env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-stats = k_learning(env, 50, epsilon=0, record_prefix=None, is_link=False)
+stats = k_learning(env, 50, epsilon=0, record_prefix="None", is_link=False)
 
 plotting.plot_episode_stats_simple(stats)
