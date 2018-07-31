@@ -32,6 +32,8 @@ DECAY_PARAM = 1
 TIME_RANGE = 300
 TIME_RANGE2 = 30
 
+is_print = False
+
 def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=False):
     height = env.unwrapped.game.height
     width = env.unwrapped.game.width
@@ -63,7 +65,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         episode_rewards=np.zeros(num_episodes))
 
     for i_episode in range(num_episodes):
-    # while i_episode < num_episodes:
         print("==============NEW EPISODE======================")
         print("i_episode ", i_episode)
 
@@ -95,14 +96,17 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                 # Update the starting position for Clingo
                 agent_position = env.unwrapped.observer.get_observation()["position"]
-                print("agent_position ", agent_position)
+                if is_print:
+                    print("agent_position ", agent_position)
                 abduction.update_agent_position(agent_position, CLINGOFILE, time)
 
                 # Run clingo to get a plan
                 answer_sets = abduction.run_clingo(CLINGOFILE)
                 states_plan, actions_array = abduction.sort_planning(answer_sets)
-                print("ASP states ", states_plan)
-                print("ASP actions ", actions_array)
+                
+                if is_print:
+                    print("ASP states ", states_plan)
+                    print("ASP actions ", actions_array)
 
                 # Logging clingo
                 if record_prefix:
@@ -113,15 +117,18 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 for action_index, action in enumerate(actions_array):
                     # TODO fix this timestamp
                     time = time + 1
-                    print("------------------------------")
-                    print("Planning phase... ", "take action ", action[1])
+                    if is_print:
+                        print("------------------------------")
+                        print("Planning phase... ", "take action ", action[1])
 
                     # Flip a coin. If threshold < epsilon, explore randomly
                     threshold = random.uniform(0,1)
                     if threshold < new_epsilon:
-                        print("Taking a pure random action...")
+                        if is_print:
+                            print("Taking a pure random action...")
                         action_int = env.action_space.sample()
-                        print("random action is ", helper.convert_action(action_int))
+                        if is_print:
+                            print("random action is ", helper.convert_action(action_int))
 
                         # TODO AFTER THIS AND ELSE, CAN I SOMEHOW COMBINE THEM TO SIMPLIFY??
                         next_state, reward, done, _ = env.step(action_int)
@@ -132,7 +139,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                             reward = reward - 1
 
                         observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
-                        print("observed_state in random ",observed_state)
+                        if is_print:
+                            print("observed_state in random ",observed_state)
 
                         # Update stats
                         stats.episode_rewards[i_episode] += reward
@@ -155,7 +163,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                         state = next_state
                         previous_state = next_state
                         previous_state_at = observed_state
-                        print("next_state ", next_state)
+                        if is_print:
+                            print("next_state ", next_state)
 
                         # TODO AFTER THIS AND ELSE, CAN I SOMEHOW COMBINE THEM TO SIMPLIFY??
                         if done:
@@ -172,7 +181,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                             reward = reward - 1
 
                         observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
-                        print("observed_state ",observed_state)
+                        if is_print:
+                            print("observed_state ",observed_state)
 
                         # Update stats
                         stats.episode_rewards[i_episode] += reward
@@ -194,7 +204,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                         # Check if the prediction is the same as observed state
                         predicted_state = abduction.get_predicted_state(previous_state_at, action[1], states_plan)
-                        print("predicted_state ", predicted_state)
+                        if is_print:
+                            print("predicted_state ", predicted_state)
                         # if not, update H
                         if(predicted_state != observed_state):
                             print("H is probably not correct!")
@@ -209,16 +220,19 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     # time.sleep(0.1)
 
                 if is_exclusion:
-                    print("exclusion is there ", pos)
+                    if is_print:
+                        print("exclusion is there ", pos)
                     hypothesis = induction.run_ILASP(LASFILE, CACHE)
                     if record_prefix:
                         inputfile = os.path.join(base_dir, LASFILE)
                         helper.log_las(inputfile, hypothesis, log_dir, i_episode, time)
-
-                    print("New H ", hypothesis)
+                    
+                    if is_print:
+                        print("New H ", hypothesis)
                     abduction.update_h(hypothesis, CLINGOFILE)
                 else:
-                    print("No exclusion!!")
+                    if is_print:
+                        print("No exclusion!!")
 
                 if done:
                     break
@@ -254,13 +268,9 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 stats.episode_lengths[i_episode] = t
 
                 if done:
-                    # i_episode += 1
                     break
 
                 state = next_state
-
-            # if x == int(goal_state[0]) and y == int(goal_state[1]):
-            #     # break
 
     return stats
 
@@ -268,6 +278,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 # env = gym.make('vgdl_aaa_small-v0')
 env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-stats = k_learning(env, 50, epsilon=0, record_prefix="None", is_link=False)
+stats = k_learning(env, 50, epsilon=0, record_prefix=None, is_link=False)
 
 plotting.plot_episode_stats_simple(stats)
