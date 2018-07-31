@@ -7,6 +7,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import pickle
 
 EpisodeStats = namedtuple("EpisodeStats",["episode_lengths", "episode_rewards"])
+EpisodeStats_test = namedtuple("EpisodeStats_test",["episode_lengths_test", "episode_rewards_test"])
 
 def store_stats(stats, base_dir, filename):
     filename = "/" + filename + ".pkl"
@@ -73,6 +74,25 @@ def plot_episode_stats_simple(stats, smoothing_window=10, noshow=False, color="g
         plt.show(fig2)
 
     return fig2
+
+def plot_episode_stats_test(stats, stats_test, smoothing_window=10, noshow=False, color="green"):
+
+    # Plot the episode reward over time
+    fig2 = plt.figure(figsize=(10,5))
+    rewards_smoothed = pd.Series(stats.episode_rewards).rolling(smoothing_window, min_periods=smoothing_window).mean()
+    rewards_smoothed2 = pd.Series(stats_test.episode_rewards_test).rolling(smoothing_window, min_periods=smoothing_window).mean()
+    plt.plot(rewards_smoothed, "r--", rewards_smoothed2, "b")
+    # plt.plot(rewards_smoothed, color=color)
+    plt.xlabel("Episode")
+    plt.ylabel("Episode Reward (Smoothed)")
+    plt.title("Episode Reward over Time (Smoothed over window size {})".format(smoothing_window))
+    if noshow:
+        plt.close(fig2)
+    else:
+        plt.show(fig2)
+
+    return fig2
+
 
 
 def plot_episode_stats_multiple(stats, stats2, smoothing_window=10, noshow=False):

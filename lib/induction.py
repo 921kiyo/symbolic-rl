@@ -112,9 +112,10 @@ def get_plan_exclusions(state_at_before, state_at_after, states):
 
     current_time,_,_ = abduction.get_T(state_at_before)
     exclusion_list = []
-    # print("state_at_after!!!!", state_at_after)
-    # print("states!!! ", states)
-    # print("current_time!! ", current_time)
+    print("state_at_before!!", state_at_before)
+    print("state_at_after!!!!", state_at_after)
+    print("states!!! ", states)
+    print("current_time!! ", current_time)
     for s in states:
         if current_time+1 == int(s[0]) and state_at_after != s[1]:
             x_after, _, _ = abduction.get_X(s[1])
@@ -124,7 +125,8 @@ def get_plan_exclusions(state_at_before, state_at_after, states):
             #     continue
             # else:
             exclusion_list.append(state_after)
-    
+
+    print("exclusion_list ", exclusion_list)
     # Take each element in exclcusion_list and concatinate them in string
     exclusions = ""
     for exclusion in exclusion_list:
@@ -234,20 +236,19 @@ def run_ILASP(filename, cache_path=None):
     # Hardcoded best H
     hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
 
-    # try:
-
+    try:
         # ILASP --version=2i output.las -ml=10 -nc --clingo5 --clingo "clingo5 --opt-strat=usc,stratify"
         # Clingo 5
-        # clingo5 = "clingo5 --opt-strat=usc,stratify"
-        # if cache_path:
-        #     cache_path = "--cached-rel=" + cache_path
-        #     hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5, cache_path], universal_newlines=True)
-        # else:
-        #     hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5], universal_newlines=True)
+        clingo5 = "clingo5 --opt-strat=usc,stratify"
+        if cache_path:
+            cache_path = "--cached-rel=" + cache_path
+            hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5, cache_path], universal_newlines=True)
+        else:
+            hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5], universal_newlines=True)
         
-    # except subprocess.CalledProcessError as e:
-    #     print("Error...", e.output)
-    #     hypothesis = e.output
+    except subprocess.CalledProcessError as e:
+        print("Error...", e.output)
+        hypothesis = e.output
     # Convert syntax of H for ASP solver
     hypothesis = py_asp.convert_las_asp(hypothesis)
     return hypothesis

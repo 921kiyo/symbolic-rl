@@ -75,7 +75,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         agent_position = env.unwrapped.observer.get_observation()["position"]
 
         previous_state = state
-        previous_state_at = py_asp.state_at(state[0], state[1], 1)
+        previous_state_at = py_asp.state_at(state[0], state[1], 0)
         any_exclusion = False
         is_exclusion = False
 
@@ -115,7 +115,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                 # Execute the planning
                 for action_index, action in enumerate(actions_array):
-                    print("actions_array!!!", actions_array)
                     # TODO fix this timestamp
                     time = time + 1
                     if is_print:
@@ -276,9 +275,9 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     return stats
 
 # env = gym.make('vgdl_experiment1-v0')
-# env = gym.make('vgdl_aaa_small-v0')
-env = gym.make('vgdl_aaa_field-v0')
+env = gym.make('vgdl_aaa_small-v0')
+# env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-stats = k_learning(env, 50, epsilon=0, record_prefix=None, is_link=False)
+stats = k_learning(env, 50, epsilon=0, record_prefix="None", is_link=False)
 
 plotting.plot_episode_stats_simple(stats)

@@ -27,6 +27,42 @@ def make_epsilon_greedy_policy(Q, epsilon, nA):
         return A
     return policy_fn
 
+def run_experiment(env, state_int, Q, stats_test, i_episode, witdh, time_range):
+    # Display the final Q-Table
+    # print("Q-table so far")
+    # for key, value in enumerate(Q.items()):
+    #     print(key)
+    #     print(value)
+    #     print("\n")
+    
+    policy = make_epsilon_greedy_policy(Q, 0, env.action_space.n)
+
+    current_state = state_int
+    for t in range(time_range):
+        env.render()
+        # time.sleep(0.1)
+        print("running test.....", current_state)
+        action_probs = policy(current_state, 0)
+        action = np.argmax(action_probs)
+        next_state, reward, done, _ = env.step(action)
+
+        current_state = helper.convert_state(next_state[1], next_state[0], witdh)
+        
+        if done:
+            reward = 100
+        else:
+            reward = reward - 1    
+        print("reward here is ", reward)
+        print("i_episode here is ", i_episode)
+        # Update stats
+        for i in range(i_episode-9, i_episode+1):
+            stats_test.episode_rewards_test[i] += reward
+            stats_test.episode_lengths_test[i] = t
+        
+        if done:
+            break
+
+
 def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
     """
     Args:
@@ -39,10 +75,14 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes))
+    
+    stats_test = plotting.EpisodeStats_test(
+        episode_lengths_test=np.zeros(num_episodes),
+        episode_rewards_test=np.zeros(num_episodes))
 
     policy = make_epsilon_greedy_policy(Q, epsilon, env.action_space.n)
     for i_episode in range(num_episodes):
-        # print("------------------------------")
+        print("------------------------------")
         if(i_episode+1) % 100 == 0:
             print("\rEpisode {}/{}.".format(i_episode+1, num_episodes), end="")
             sys.stdout.flush()
@@ -52,6 +92,10 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
         state_int = helper.convert_state(state[1], state[0], width)
 
         previous_state = state
+
+        if(i_episode+1) % 10 == 0:
+            run_experiment(env,state_int, Q, stats_test, i_episode, width, TIME_RANGE)
+
         for t in range(TIME_RANGE):
             env.render()
             # time.sleep(0.1)
@@ -101,11 +145,13 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
     #     print(value)
     #     print("\n")
 
-    return Q, stats
+    return Q, stats, stats_test
 
 env = gym.make('vgdl_experiment3.5-v0')
 
-Q, stats = q_learning(env, 50)
+Q, stats, stats_test = q_learning(env, 50)
+# import ipdb; ipdb.set_trace()
+plotting.plot_episode_stats_test(stats, stats_test)
 
 # plotting.plot_episode_stats(stats)
-plotting.plot_episode_stats_simple(stats)
+# plotting.plot_episode_stats_simple(stats)
