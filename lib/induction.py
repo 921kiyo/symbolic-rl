@@ -167,7 +167,7 @@ def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list
     state_after = py_asp.state_after(x_after, y_after)
     # TODO is this correct way to do??
     exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
-    print("exclusions!!! ", exclusions)
+    # print("exclusions!!! ", exclusions)
     walls = add_surrounding_walls(x_before, y_before, wall_list)
     
     link = ""

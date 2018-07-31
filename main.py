@@ -32,7 +32,7 @@ DECAY_PARAM = 1
 TIME_RANGE = 300
 TIME_RANGE2 = 30
 
-is_print = False
+is_print = True
 
 def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=False):
     height = env.unwrapped.game.height
@@ -115,6 +115,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                 # Execute the planning
                 for action_index, action in enumerate(actions_array):
+                    print("actions_array!!!", actions_array)
                     # TODO fix this timestamp
                     time = time + 1
                     if is_print:
@@ -138,7 +139,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                         else:
                             reward = reward - 1
 
-                        observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
+                        observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+1)
                         if is_print:
                             print("observed_state in random ",observed_state)
 
@@ -180,7 +181,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                         else:
                             reward = reward - 1
 
-                        observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+2)
+                        observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+1)
                         if is_print:
                             print("observed_state ",observed_state)
 
