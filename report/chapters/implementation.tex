@@ -1,13 +1,15 @@
 \section{Proposed Architecture}
 \label{proposed_architecture_section}
 
-The proposed tentative architecture is shown in Figure \ref{proposed_architecture}. The overall architecture is based on Sutton's Dyna architecture \cite{Sutton1990}, which combined both model-free learning and model-based learning. What is different from Dyna is the way we generate the model of the environment, which is explained in the following subsections.
+The overall architecture is shown in Figure \ref{proposed_architecture}. By interacting with the environment, the agent accumulates state transition experiences, which is used by ILASP to learn a hypothesis.
+The agent also record surrounding information it has seen as background knowledge, which will be used to make a plan together with the hypothesis that ILASP learns. 
+Each steps are described in details below. 
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/architecture}
 % \includegraphics[width=10cm, height=9cm]{./figures/architecture}
-\caption{Proposed reinforcement learning architecture. ILASP learns to generate a model and updates based on the interaction with the environment, which is used to facilite the policy evaluation. }
+\caption{Proposed reinforcement learning architecture. ILASP learns to generate a model and updates based on the interaction with the environment, which is used to hypothesis. }
 \label{proposed_architecture}
 \end{figure}
 
@@ -30,12 +32,23 @@ where ,
     action(A) is the action the agent has taken, and surrounding information, such as walls, if any. 
 \end{itemize}
 
-More concrete examples of the positive examples are as follow. 
 
-\#pos({state\_after((1,3))}, {state\_after((2,4)),state\_after((1,5)),state\_after((0,4)),state\_after((1,4))}, {state\_before((1,4)). action(up). wall((1, 5)). wall((0, 4)). })
+At the first stage, the input of real experience needs to be converted in ASP form, which can be used to execute the inductive learning in ILASP. The input used in ILASP is state transitions, 
+rewards and an action of the agent, which can be directly converted using a simple mapping table or an action language (such as BC\textsuperscript{+} as used in \cite{Ferreira2017}). 
+The following ASP input is what is sent to ILASP. \\
 
-Here the agent takes an action "up" to move from (1,3) to (1,4) cell. All other alternative states that the agent could have ended up by taking different actions 
+There is no negative example as XXXX. 
+
+\begin{examp} \normalfont (Positive examples). 
+
+Suppose an agent takes an action "up" to move from (1,3) to (1,4) cell. All other alternative states that the agent could have ended up by taking different actions 
 (down, right, left, and not move) are in the exclusions. Finally surrounding walls information are in the context.
+
+\#pos(\{state\_after((1,3))\}, \\
+    \{state\_after((2,4)),state\_after((1,5)),state\_after((0,4)),state\_after((1,4))\}, \\
+    \{state\_before((1,4)). action(up). wall((1, 5)). wall((0, 4)). \})
+
+
 
 This example will be used to learn how to move up as one of the agent's hypotheses.
 
@@ -46,12 +59,10 @@ Another example is
 where the agent tried to move up, from (1,3) to (1,2), but ended up in the same cell at (1,3). This is because there is a wall at (1,2), and the agent learns in order to move an above cell,
 there must not be a wall in the above cell. 
 
-At the first stage, the input of real experience needs to be converted in ASP form, which can be used to execute the inductive learning in ILASP. The input used in ILASP is state transitions, 
-rewards and an action of the agent, which can be directly converted using a simple mapping table or an action language (such as BC\textsuperscript{+} as used in \cite{Ferreira2017}). 
-The following ASP input is what is sent to ILASP. \\
+\end{examp}
+\label{state_transition_example}
 
-There is no negative example as XXXX. 
-
+% TODO do I need this??
 agent\_at\_before((X,Y), T).
 
 agent\_at\_after((X,Y), T).
@@ -251,23 +262,6 @@ enemy(C1, C2):- agent\_at\_before(C1, T1), agent\_at\_after(C2, T2), reward(R), 
 where it is assumed that the reward of -100 means losing the game or losing the agent's life. 
 Once the agent has learned the concept of the game, it knows how to avoid an obstacle in an adjacent cell in a new environment. 
 Figure \ref{grid_world} illustrates this transfer capability.
-
-\section{Algorithms}
-\label{algorithms}
-
-Once the architecture is decided, we will implement it using Python and ILASPv3.1.0 (Clingo) \cite{Law2017}, and compare the performance with other learning methods using a game platform called GVG-AI Framework.
-
-Other learning methods to be compared as benchmarks will be Q-Learning and Deep Q-Learning since these methods are widely used in other related works. 
-Other symbolic-based approaches could also be compared as an extension. 
-The two main measurements for the performance of our new architecture are learning efficiency and transfer learning capability as stated in the Introduction.
-
-GVG-AI Framework was created for the General Video Gamea AI Competition \footnote{http://www.gvgai.net/}, 
-a game environment for an agent that should be able to play a wide variety of games without knowing which games are to be played.
-The underlying language is the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
-
-TODO OPENAI paper citation
-
-The game is formalised as MDP as follows:
 
 \begin{itemize}
 

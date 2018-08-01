@@ -4,8 +4,14 @@
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Agent and Environment\relax }}{12}{figure.caption.10}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Relationships among learning, planning and acting\relax }}{14}{figure.caption.11}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Proposed reinforcement learning architecture. ILASP learns to generate a model and updates based on the interaction with the environment, which is used to facilite the policy evaluation. \relax }}{16}{figure.caption.12}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Proposed reinforcement learning architecture. ILASP learns to generate a model and updates based on the interaction with the environment, which is used to hypothesis. \relax }}{17}{figure.caption.12}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces GAME \relax }}{23}{figure.caption.15}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces PLACEHOLDER\relax }}{23}{figure.caption.16}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces PLACEHOLDER\relax }}{24}{figure.caption.17}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces PLACEHOLDER\relax }}{24}{figure.caption.18}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Before (left) and after (right) transfer learning\relax }}{25}{figure.caption.19}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces PLACEHOLDER\relax }}{25}{figure.caption.20}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

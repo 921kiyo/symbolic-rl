@@ -124,14 +124,14 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     # Flip a coin. If threshold < epsilon, explore randomly
                     threshold = random.uniform(0,1)
                     if threshold < new_epsilon:
-                        if is_print:
-                            print("Taking a pure random action...")
                         action_int = env.action_space.sample()
                         if is_print:
+                            print("Taking a pure random action...")
                             print("random action is ", helper.convert_action(action_int))
                     else:
                         # Following the plan
                         action_int = helper.get_action(action[1])
+                    
                     next_state, reward, done, _ = env.step(action_int)
 
                     if done:
@@ -173,9 +173,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     state = next_state
                     previous_state = next_state
                     previous_state_at = observed_state
-
-                    if done:
-                        break
                     
                     env.render()
                     # time.sleep(0.1)
