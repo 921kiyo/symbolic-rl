@@ -3,7 +3,7 @@
 
 The overall architecture is shown in Figure \ref{proposed_architecture}. By interacting with the environment, the agent accumulates state transition experiences, which is used by ILASP to learn a hypothesis.
 The agent also record surrounding information it has seen as background knowledge, which will be used to make a plan together with the hypothesis that ILASP learns. 
-Each steps are described in details below. 
+Each steps are described in details in the following subsections. 
 
 \begin{figure}[!htb]
 \centering
@@ -15,7 +15,8 @@ Each steps are described in details below.
 
 \subsection{Experience Accumulation}
 \label{experience_accumulation}
-
+\textcolor{red}{Draw an illustration of the difference between exploration and las part}\\
+\textcolor{red}{Related these with Definition of ILASP}\\
 The first step is to accumulate experience by interacting with the environment. The agent explores the environment randomly until it reaches the goal once. 
 Every time the agent takes an action during the exploration phase, these experiences need to be recorded in two ways: state transition experience and environment experience.
 
@@ -109,6 +110,8 @@ adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)). \\
 \#modeb(1, wall(var(cell))). \\
 
 Without these in the form of mode bias, the search space for ILASp will be empty. 
+
+The full details for ILASP learning tasks is described in Appendix XXX.
 Positive excludes the possibility of negation as a failure in order to reduce the search space.
 
 \#max\_penalty(100).
@@ -235,39 +238,38 @@ This is formally defined in Algorithm.
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Model Generation and Update using ILASP}
-\label{model_generation_and_update}
-Once the input of the real experience is converted into ASP syntax, the agent should learn the following definition of the model of the environment using ILASP. \\
 
-valid\_move(C, T):- link(C, T).
-\\
-link(C2, T):- agent\_at(C1, T), adjacent(C0, C2), not obstacle(C0, C2).\\
-%state\_transition(C1, C2, T2):-
-%  agent\_at\_before(C1, T1),
-%  agent\_at\_after(C2, T2).\\
-agent\_at(C, T):- agent\_at\_after(C, T) \\
+Everytime the agent executes an action by following the plan, it checks whether the observed state is that is expected. 
 
-The background knowledge is empty, and there are only positive examples in learning this task. Each example contains a different transition history of the agent. 
-Inclusions are valid moves and exclusions are invalid moves. 
-Learning valid\_move is the same as learning the rule of the games (the model of the environment), and it is updated as the agent explores in the environment.
+If there is a difference between the two, either
 
-In addition to the rules of the game, learning the following concepts will be crucial for transfer learning, as these concepts will be applicable to any types of game environment.  \\
+B is incorrect
 
-adjacent(C1, C2):- cell(C1), cell(C2). \\
-%obstacle(C1, C2):- enemy(C1, C2). \\
-obstacle(C1, C2):- wall(C1, C2). \\
-wall(C1, C2):- agent\_at\_before(C1, T1), agent\_at\_after(C1, T2) \\
-enemy(C1, C2):- agent\_at\_before(C1, T1), agent\_at\_after(C2, T2), reward(R), -100 $\geq$ R \\
+H is not sophisticated enough, 
 
-where it is assumed that the reward of -100 means losing the game or losing the agent's life. 
-Once the agent has learned the concept of the game, it knows how to avoid an obstacle in an adjacent cell in a new environment. 
-Figure \ref{grid_world} illustrates this transfer capability.
+If that is the case, the agent runs ILASP again using more positive examples it collected during the plan execution. 
+
 
 \begin{itemize}
-
 \item States: XXX
 \item Actions: The agent can move up, down, right or left
 \item Rewards: XXX
 \item Transitions: XXX
-
 \end{itemize}
+
+\subsection{Exploration}
+\label{exploration}
+
+our algorithm kicks in once the agent reaches a goal once. However it is likely that the agent has not seen all the environment
+and therefore is likely to be in a sub-optimal plan. Therefore, similar to RL algorithm, the agent also has to explore a new state. 
+There are a number of exploration strategy in RL (such as \textcolor{red}{Ask Chris on these papers}). 
+One of the most commonly used strategy is $\epsilon$-greedy strategy. As described in Chapter XXX, the agent takes an random action 
+
+This strategy may not be appropriate in cases there safety is a priority (since it is random action.)
+It is simple to implement. 
+In the case of our algorithm, the agent discard the plan from the abduction with a probably of epsilon and takes a random action in order to avoid getting stuck in a sub-optimal path. 
+When the agent takes an random action and move into a new state, the agents creates a new plan from the new state and continue to move forward.
+
+This exploration point will be highlighted in Experiment XXX.
+
+Epsilon needs to be larger than Q-learnig because

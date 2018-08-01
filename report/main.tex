@@ -461,7 +461,7 @@ q\textsuperscript{*}(s, a) = \underset{\pi}{\max} \ q\textsubscript{$\pi$}(s, a)
 
 A solution to the sequential decision problem is called a \textit{policy $\pi$}, a sequence of actions that leads to a solution. An optimal policy achieves the optimal value function (or action-value function), and it can be computed by maximising over the optimal value function (or action-value function).
 
-TODO BELLMAN OPTIMALITY EQUATION
+\textcolor{red}{TODO BELLMAN OPTIMALITY EQUATION}
 %A policy $\pi$ is optimal if it maximises the action-value function q()
 %The transition and reward functions are not necessary to be known to compute $\pi$.
 %Among all possible value functions, an \textit{optimal policy $\pi^*$} is the one that maximise the total rewards in the environment.
@@ -485,10 +485,13 @@ TODO BELLMAN OPTIMALITY EQUATION
 %
 %q\textsubscript{$\pi$} = $\displaystyle \E[R\textsubscript{t+1} $[R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ... $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a, A\textsubscript{t+1 } = a,]
 
-TODO Value iterations
+\textcolor{red}{TODO Value iterations}
 
 \subsection{Model-based and Model-free Reinforcement Learning}
 \label{model_base_model_free_subsection}
+
+\textcolor{red}{TODO delte dyna and focus more on model-based approach}
+
 A model M is a representation of an environment that an agent can used to understand how the environment should look like . Model-based learning is that the agent learns the model and plan a solution using the learnt model. Once the agent learns the model, the problem to be solved becomes a planning problem for a series of actions to achieve the agent's goal.
 Most of the reinforcement learning problems are model-free learning, where M is unknown and the agent learns to achieve the goal by solely interacting with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
 
@@ -539,10 +542,17 @@ Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\texts
 
 where $\alpha$ is the learning rate, $\gamma$ is a discount rate between 0 and 1. The equation is used to update the state-action value function called Q function. The function Q(S,A) predicts the best action A in state S to maximise the total cumulative rewards.
 
+
+\textcolor{red}{ADD Q-Learning Algorithm}
 TODO 
 \begin{equation}
 Q(s\textsubscript{t},a\textsubscript{t}) = E [R\textsubscript{t+1} + \gamma R\textsubscript{t+2} + \gamma^2 R\textsubscript{t+3} + ... \vert s\textsubscript{t},a\textsubscript{t} ]
 \end{equation}
+
+
+Q-learning is guaranteed to converge to a optimal policy in a fininte tabulara representation.
+\textcolor{red}{Paper Jaakkola et al. 1993}
+
 
 The optimal Q-function Q\textsuperscript{*}(s,a) is directly approximated by the learned action-value function Q.
 
@@ -636,143 +646,7 @@ Learning the concept of being adjacent
 \pagebreak
 \begin{appendices}
 
-\section{Ethics checklist}
-\label{ethics_table}
-
-
-{
-\renewcommand*{\arraystretch}{1.3}
-\begin{longtable}{ |p{13.2cm}|p{0.6cm}|p{0.6cm}| }
-\hline
- & \bf Yes & \bf No \\
-\hline
-
-\multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 1: HUMAN EMBRYOS/FOETUSES} \\
-\hline
-
-Does your project involve Human Embryonic Stem Cells? & & \checkmark\\
-\hline
-
-Does your project involve the use of human embryos? & & \checkmark\\
-\hline
-
-Does your project involve the use of human foetal tissues / cells? & & \checkmark\\
-\hline
-
-\multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 2: HUMANS} \\
-\hline
-
-Does your project involve human participants? & & \checkmark\\
-\hline
-
-\multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 3: HUMAN CELLS / TISSUES} \\
-\hline
-
-Does your project involve human cells or tissues? (Other than from “Human Embryos/Foetuses” i.e. Section 1)? & & \checkmark\\
-\hline
-
-\multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 4: PROTECTION OF PERSONAL DATA} \\
-\hline
-
-Does your project involve personal data collection and/or processing? & & \checkmark\\
-\hline
-
-Does it involve the collection and/or processing of sensitive personal data (e.g. health, sexual lifestyle, ethnicity, political opinion, religious or philosophical conviction)? & & \checkmark\\
-\hline
-
-Does it involve processing of genetic information? & & \checkmark\\
-\hline
-
-Does it involve tracking or observation of participants? It should be noted that this issue is not limited to surveillance or localization data. It also applies to Wan data such as IP address, MACs, cookies etc. & & \checkmark\\
-\hline
-
-Does your project involve further processing of previously collected personal data (secondary use)? For example Does your project involve merging existing data sets? & & \checkmark\\
-\hline
-
-\multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 5: ANIMALS} \\
-\hline
-
-Does your project involve animals? & & \checkmark\\
-\hline
-
-
-\multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 6: DEVELOPING COUNTRIES} \\
-\hline
-
-Does your project involve developing countries? & & \checkmark\\
-\hline
-
-If your project involves low and/or lower-middle income countries, are any benefit-sharing actions planned? & & \checkmark\\
-\hline
-
-Could the situation in the country put the individuals taking part in the project at risk? & & \checkmark\\
-\hline
-
-\multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 7: ENVIRONMENTAL PROTECTION AND SAFETY} \\
-\hline
-
-Does your project involve the use of elements that may cause harm to the environment, animals or plants? & & \checkmark\\
-\hline
-
-Does your project deal with endangered fauna and/or flora /protected areas? & & \checkmark \\
-\hline
-
-Does your project involve the use of elements that may cause harm to humans, including project staff? & & \checkmark\\
-\hline
-
-Does your project involve other harmful materials or equipment, e.g. high-powered laser systems? & & \checkmark\\
-\hline
-
-
-\multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 8: DUAL USE} \\
-\hline
-
-Does your project have the potential for military applications? & & \checkmark\\
-\hline
-
-Does your project have an exclusive civilian application focus? & & \checkmark\\
-\hline
-
-Will your project use or produce goods or information that will require export licenses in accordance with legislation on dual use items? & & \checkmark\\
-\hline
-
-Does your project affect current standards in military ethics – e.g., global ban on weapons of mass destruction, issues of proportionality, discrimination of combatants and accountability in drone and autonomous robotics developments, incendiary or laser weapons? & & \checkmark\\
-\hline
-
-\multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 9: MISUSE} \\
-\hline
-
-Does your project have the potential for malevolent/criminal/terrorist abuse? & & \checkmark\\
-\hline
-
-Does your project involve information on/or the use of biological-, chemical-, nuclear/radiological-security sensitive materials and explosives, and means of their delivery? & & \checkmark\\
-\hline
-
-Does your project involve the development of technologies or the creation of information that could have severe negative impacts on human rights standards (e.g. privacy, stigmatization, discrimination), if misapplied? & \checkmark& \\
-\hline
-
-Does your project have the potential for terrorist or criminal abuse e.g. infrastructural vulnerability studies, cybersecurity related project? & & \checkmark\\
-\hline
-
-\multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 10: LEGAL ISSUES} \\
-\hline
-
-Will your project use or produce software for which there are copyright licensing implications? & \checkmark& \\
-\hline
-
-Will your project use or produce goods or information for which there are data protection, or other legal implications? & & \checkmark\\
-\hline
-
-\multicolumn{3}{|l|}{\cellcolor{green!25}\bf Section 11: OTHER ETHICS ISSUES} \\
-\hline
-
-Are there any other ethics issues that should be taken into consideration? & & \checkmark \\
-\hline
-
-\end{longtable}
-}
-
-
+\input{chapters/appendix}
 
 \end{appendices}
 
