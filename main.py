@@ -129,79 +129,39 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                         action_int = env.action_space.sample()
                         if is_print:
                             print("random action is ", helper.convert_action(action_int))
-
-                        # TODO AFTER THIS AND ELSE, CAN I SOMEHOW COMBINE THEM TO SIMPLIFY??
-                        next_state, reward, done, _ = env.step(action_int)
-
-                        if done:
-                            reward = reward + 100
-                        else:
-                            reward = reward - 1
-
-                        observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+1)
-                        if is_print:
-                            print("observed_state in random ",observed_state)
-
-                        # Update stats
-                        stats.episode_rewards[i_episode] += reward
-                        stats.episode_lengths[i_episode] = action_index
-
-                        new_wall_added = abduction.add_new_walls(previous_state, wall_list, CLINGOFILE)
-                        if new_wall_added:
-                            print("new walls added!")
-
-                        # Add pos
-                        walls = induction.get_seen_walls(CLINGOFILE)
-                        walls = walls + wall_list
-                        any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action_string, walls, is_link)
-                        pos += "\n"
-                        helper.append_to_file(pos, LASFILE)
-
-                        if any_exclusion:
-                            is_exclusion = True
-
-                        state = next_state
-                        previous_state = next_state
-                        previous_state_at = observed_state
-                        if is_print:
-                            print("next_state ", next_state)
-
-                        # TODO AFTER THIS AND ELSE, CAN I SOMEHOW COMBINE THEM TO SIMPLIFY??
-                        if done:
-                            break
-                        # break
                     else:
                         # Following the plan
                         action_int = helper.get_action(action[1])
-                        next_state, reward, done, _ = env.step(action_int)
+                    next_state, reward, done, _ = env.step(action_int)
 
-                        if done:
-                            reward = reward + 100
-                        else:
-                            reward = reward - 1
+                    if done:
+                        reward = reward + 100
+                    else:
+                        reward = reward - 1
 
-                        observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+1)
-                        if is_print:
-                            print("observed_state ",observed_state)
+                    observed_state = py_asp.state_at(next_state[0], next_state[1], action_index+1)
+                    if is_print:
+                        print("observed_state ",observed_state)
 
-                        # Update stats
-                        stats.episode_rewards[i_episode] += reward
-                        stats.episode_lengths[i_episode] = action_index
+                    # Update stats
+                    stats.episode_rewards[i_episode] += reward
+                    stats.episode_lengths[i_episode] = action_index
 
-                        new_wall_added = abduction.add_new_walls(previous_state, wall_list, CLINGOFILE)
-                        if new_wall_added:
-                            print("new walls added!")
+                    new_wall_added = abduction.add_new_walls(previous_state, wall_list, CLINGOFILE)
+                    if new_wall_added:
+                        print("new walls added!")
 
-                        # Add pos
-                        walls = induction.get_seen_walls(CLINGOFILE)
-                        walls = walls + wall_list
-                        any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], walls, is_link)
-                        pos += "\n"
-                        helper.append_to_file(pos, LASFILE)
+                    # Add pos
+                    walls = induction.get_seen_walls(CLINGOFILE)
+                    walls = walls + wall_list
+                    any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], walls, is_link)
+                    pos += "\n"
+                    helper.append_to_file(pos, LASFILE)
 
-                        if any_exclusion:
-                            is_exclusion = True
+                    if any_exclusion:
+                        is_exclusion = True
 
+                    if threshold >= new_epsilon:
                         # Check if the prediction is the same as observed state
                         predicted_state = abduction.get_predicted_state(previous_state_at, action[1], states_plan)
                         if is_print:
@@ -210,12 +170,13 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                         if(predicted_state != observed_state):
                             print("H is probably not correct!")
 
-                        state = next_state
-                        previous_state = next_state
-                        previous_state_at = observed_state
+                    state = next_state
+                    previous_state = next_state
+                    previous_state_at = observed_state
 
-                        if done:
-                            break
+                    if done:
+                        break
+                    
                     env.render()
                     # time.sleep(0.1)
 
