@@ -277,23 +277,3 @@ The game is formalised as MDP as follows:
 \item Transitions: XXX
 
 \end{itemize}
-
-% Not sure about this part
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=10cm, height=5cm]{./figures/grid_world}
-\caption{Simple Grid World to highlight transfer capability }
-\label{grid_world}
-\end{figure}
-If the agent A learnt the concept \textit{adjacent} in Environment 1, the agent could reason (have a policy), for example, "if the adjacent cell is a wall, moving into that cell is an invalid move", "if the adjacent cell is an enemy, 
-moving into that cell will incur a negative reward". These learnt policies could immediately be used in a new environment (e.g Environment 2), even though the agent's coordinates position is different from that in previous environment (e.g Environment 1).
-
-\subsection{Generation of Simulated Experience}
-Assuming the model is  a true representation of the partial environment, we can generate simulated experience to update the Q function. The simulated experience is cheaper than real experience, 
-which should contribute to efficient learning. However Dyna architecture is known to lead to sub-optimal policy when the model is not accurate, and the solution to this problem needs to be considered further.
-
-An alternative to using simulated experience is to directly update state representations. Once the concept "adjacent"  was learnt from a real experience, it could be incorporated in a state.
-
-In addition, when the environment changes during the exploration, the agent should generalise its internal model to cope with the new environment in two different but similar environments. 
-As a result the agent's model becomes more general which covers both games. Thus in theory, the agent should still be able to achieve more efficient learning from the model-based learning, facilitating the transfer learning.
-Implementation of exactly how the model is generalised will be further investigated.

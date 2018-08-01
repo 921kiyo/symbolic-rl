@@ -3,61 +3,64 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
 The style file: ieeetr.bst
 Database file #1: references.bib
-Repeated entry---line 497 of file references.bib
- : @article{DeRaedt1997
- :                     ,
+Repeated entry---line 61 of file references.bib
+ : @article{Zambaldi2018
+ :                      ,
 I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "Muggleton1993"
+Warning--I didn't find a database entry for "Puterman1994"
+Warning--I didn't find a database entry for "Schaul2013"
+Warning--I didn't find a database entry for "LeCunL1998"
+Warning--I didn't find a database entry for "Apeldoorn2016"
+Warning--I didn't find a database entry for "Apeldoorn"
+Warning--I didn't find a database entry for "Sridharan2017"
 Warning--empty journal in Levine2015
 Warning--empty journal in Garnelo2016
+Warning--empty journal in Law2016
 Warning--empty journal in Ferreira2017
 Warning--empty journal in Law2017
-Name 1 in "{Y.LeCun, L.Bottou, Y.Bengio}, and P.Haffner" has a comma at the end for entry LeCunL1998
-while executing---line 969 of file ieeetr.bst
 Warning--empty journal in Su2017
 Warning--empty journal in Garcez2018
 Warning--empty journal in Zambaldi2018
-Warning--empty journal in Apeldoorn2016
-Warning--empty journal in Apeldoorn
-Warning--empty year in Apeldoorn
-You've used 28 entries,
+You've used 22 entries,
             1876 wiz_defined-function locations,
-            651 strings with 8617 characters,
-and the built_in function-call counts, 7687 in all, are:
-= -- 717
-> -- 387
+            624 strings with 7792 characters,
+and the built_in function-call counts, 5991 in all, are:
+= -- 529
+> -- 351
 < -- 0
-+ -- 141
-- -- 113
-* -- 589
-:= -- 1137
-add.period$ -- 28
-call.type$ -- 28
-change.case$ -- 27
++ -- 126
+- -- 104
+* -- 489
+:= -- 923
+add.period$ -- 21
+call.type$ -- 22
+change.case$ -- 22
 chr.to.int$ -- 0
-cite$ -- 38
-duplicate$ -- 360
-empty$ -- 674
-format.name$ -- 113
-if$ -- 1807
+cite$ -- 30
+duplicate$ -- 272
+empty$ -- 504
+format.name$ -- 104
+if$ -- 1378
 int.to.chr$ -- 0
-int.to.str$ -- 28
-missing$ -- 27
-newline$ -- 88
-num.names$ -- 28
-pop$ -- 93
+int.to.str$ -- 22
+missing$ -- 21
+newline$ -- 69
+num.names$ -- 22
+pop$ -- 69
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 252
+skip$ -- 179
 stack$ -- 0
-substring$ -- 499
-swap$ -- 141
+substring$ -- 347
+swap$ -- 99
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 10
-while$ -- 79
-width$ -- 30
-write$ -- 252
-(There were 2 error messages)
+warning$ -- 8
+while$ -- 58
+width$ -- 24
+write$ -- 197
+(There was 1 error message)
