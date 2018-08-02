@@ -69,12 +69,12 @@ def silentremove(base_dir, filename, extra_path=None):
         myfile.close()
     return
 
-def append_to_file(pos, file):
+def append_to_file(data, file):
     '''
-    Add a new pos to a las file.
+    Add a new data to a las file.
     '''
     with open(file, "a") as f:
-        f.write(pos)
+        f.write(data)
 
 def gen_unique_filename(extension, base_dir, episode, filename, time):
     # current_time = int(round(time.time() * 1000))

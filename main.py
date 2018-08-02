@@ -1,16 +1,6 @@
  # import ipdb; ipdb.set_trace()
 import numpy as np
-import os
-
-import time
-import random
-import subprocess
-
-# Q-learning
-import itertools
-import sys
-
-import pickle
+import os, time, random, subprocess
 
 from lib import plotting, py_asp, helper, induction, abduction
 
@@ -22,9 +12,9 @@ CLINGOFILE = "clingo.lp"
 LAS_CACHE = "cache.las"
 LAS_CACHE_PATH = "log"
 
-base_dir = os.path.dirname(os.path.abspath(__file__))
-dir = os.path.join(base_dir, LAS_CACHE_PATH)
-CACHE = os.path.join(dir, LAS_CACHE)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+dir = os.path.join(BASE_DIR, LAS_CACHE_PATH)
+CACHE_DIR = os.path.join(dir, LAS_CACHE)
 
 # Increase this to make the decay faster
 DECAY_PARAM = 1
@@ -42,7 +32,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     log_dir = None
     # Log everything and keep it here
     if record_prefix:
-        log_dir = os.path.join(base_dir, "log")
+        log_dir = os.path.join(BASE_DIR, "log")
         log_dir = helper.gen_log_dir(log_dir, record_prefix)
 
     # check whether las file is in use
@@ -51,11 +41,11 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     first_abduction = False
 
     # Clean up all the files first
-    helper.silentremove(base_dir, LASFILE)
-    helper.silentremove(base_dir, BACKGROUND)
-    helper.silentremove(base_dir, CLINGOFILE)
-    helper.silentremove(base_dir, LAS_CACHE, LAS_CACHE_PATH)
-    helper.create_file(base_dir, LAS_CACHE, LAS_CACHE_PATH)
+    helper.silentremove(BASE_DIR, LASFILE)
+    helper.silentremove(BASE_DIR, BACKGROUND)
+    helper.silentremove(BASE_DIR, CLINGOFILE)
+    helper.silentremove(BASE_DIR, LAS_CACHE, LAS_CACHE_PATH)
+    helper.create_file(BASE_DIR, LAS_CACHE, LAS_CACHE_PATH)
     # Add mode bias and adjacent definition for ILASP
     induction.copy_las_base(LASFILE, height, width, is_link)
 
@@ -85,13 +75,13 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
             while time < TIME_RANGE:
                 if first_abduction == False:
                     # Run ILASP to get H
-                    hypothesis = induction.run_ILASP(LASFILE, CACHE)
+                    hypothesis = induction.run_ILASP(LASFILE, CACHE_DIR)
                     abduction.make_lp(hypothesis, LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, cell_range)
                     first_abduction = True
 
                     # Logging set up
                     if record_prefix:
-                        inputfile = os.path.join(base_dir, LASFILE)
+                        inputfile = os.path.join(BASE_DIR, LASFILE)
                         helper.log_las(inputfile, hypothesis, log_dir, i_episode, time)
 
                 # Update the starting position for Clingo
@@ -110,7 +100,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                 # Logging clingo
                 if record_prefix:
-                    inputfile = os.path.join(base_dir, CLINGOFILE)
+                    inputfile = os.path.join(BASE_DIR, CLINGOFILE)
                     helper.log_asp(inputfile, answer_sets, log_dir, i_episode, time)
 
                 # Execute the planning
@@ -180,9 +170,9 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 if is_exclusion:
                     if is_print:
                         print("exclusion is there ", pos)
-                    hypothesis = induction.run_ILASP(LASFILE, CACHE)
+                    hypothesis = induction.run_ILASP(LASFILE, CACHE_DIR)
                     if record_prefix:
-                        inputfile = os.path.join(base_dir, LASFILE)
+                        inputfile = os.path.join(BASE_DIR, LASFILE)
                         helper.log_las(inputfile, hypothesis, log_dir, i_episode, time)
                     
                     if is_print:
