@@ -50,16 +50,37 @@ class TestHelper(unittest.TestCase):
         self.assertEqual(size, 5)
 
     def test_gen_unique_filename(self):
-        # TODO
-        pass
+        # remove = os.path.join(BASE_DIR, "")
+        extension = "txt"
+        episode = 1
+        filename = "unique"
+        time = 1
+        unique_filename = helper.gen_unique_filename(extension, "", episode, filename, time)
+        self.assertEqual(unique_filename, "/unique_episode1_at_1.txt")
 
     def test_log_asp(self):
-        # TODO
-        pass
-    
+        helper.silentremove(BASE_DIR, "clingo_episode2_at_1.lp")
+        inputfile  = os.path.join(BASE_DIR, "input_log.txt")
+        output = "asp"
+        episode = 2
+        time = 1
+        helper.log_asp(inputfile, output, BASE_DIR, episode, time)
+        unique_path = os.path.join(BASE_DIR, "clingo_episode2_at_1.lp")
+        with open(unique_path, "r") as file:
+            result = file.readlines()
+        self.assertEqual(result, ['HELLO%ANSWER SETS\n', '\n', '%a\n', '%s\n', '%p\n'])
+
     def test_log_las(self):
-        # TODO
-        pass
+        helper.silentremove(BASE_DIR, "las_episode2_at_1.las")
+        inputfile  = os.path.join(BASE_DIR, "input_log.txt")
+        hypothesis = "h"
+        episode = 2
+        time = 1
+        helper.log_las(inputfile, hypothesis, BASE_DIR, episode, time)
+        unique_path = os.path.join(BASE_DIR, "las_episode2_at_1.las")
+        with open(unique_path, "r") as file:
+            result = file.readlines()
+        self.assertEqual(result, ['%ILASP\n', '\n', '%HELLO'])
 
     def test_comment_h(self):
         h = "hello\n world\n"
@@ -71,10 +92,6 @@ class TestHelper(unittest.TestCase):
         helper.copy_file(self.__class__.created_file, output_file)
         self.assertTrue(os.path.exists(output_file))
         helper.remove_file(output_file)
-
-    def test_gen_log_dir(self):
-        # TODO
-        pass
 
 if __name__ == '__main__':
     unittest.main()
