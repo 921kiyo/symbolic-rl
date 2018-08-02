@@ -1,7 +1,5 @@
-import os
+import os, subprocess
 from lib import plotting, py_asp, helper, abduction
-
-import subprocess
 
 def get_all_walls(env):
     '''

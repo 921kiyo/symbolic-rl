@@ -1,7 +1,4 @@
-import os
-import subprocess
-import json
-import time
+import os, subprocess, time
 
 def convert_state(x, y, width):
     x += 1
