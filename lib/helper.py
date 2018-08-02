@@ -118,7 +118,7 @@ def copy_file(inputfile, outputfile):
             for line in f:
                 out.write(line)
 
-def gen_log_dir(base_dir, prefix='', symlink=True):
+def gen_log_dir(base_dir, prefix='', symlink=False):
     # Create a folder to hold results
     time_str = time.strftime("%d-%m-%Y-%H-%M-%S", time.gmtime())
     if prefix == '' or prefix is None:
