@@ -27,26 +27,22 @@ def make_epsilon_greedy_policy(Q, epsilon, nA):
         return A
     return policy_fn
 
-def run_experiment(env, state_int, Q, stats_test, i_episode, witdh, time_range):
-    # Display the final Q-Table
-    # print("Q-table so far")
-    # for key, value in enumerate(Q.items()):
-    #     print(key)
-    #     print(value)
-    #     print("\n")
+def run_experiment(env, state_int, Q, stats_test, i_episode, width, time_range):
     
     policy = make_epsilon_greedy_policy(Q, 0, env.action_space.n)
 
-    current_state = state_int
+    # current_state = state_int
+    current_state = env.reset()
+    current_state_int = helper.convert_state(current_state[1], current_state[0], width)
     for t in range(time_range):
         env.render()
         # time.sleep(0.1)
-        print("running test.....", current_state)
-        action_probs = policy(current_state, 0)
+        print("running test.....", current_state_int)
+        action_probs = policy(current_state_int, 0)
         action = np.argmax(action_probs)
         next_state, reward, done, _ = env.step(action)
 
-        current_state = helper.convert_state(next_state[1], next_state[0], witdh)
+        current_state_int = helper.convert_state(next_state[1], next_state[0], width)
         
         if done:
             reward = 100
@@ -55,9 +51,9 @@ def run_experiment(env, state_int, Q, stats_test, i_episode, witdh, time_range):
         print("reward here is ", reward)
         print("i_episode here is ", i_episode)
         # Update stats
-        for i in range(i_episode-9, i_episode+1):
-            stats_test.episode_rewards_test[i] += reward
-            stats_test.episode_lengths_test[i] = t
+        # for i in range(i_episode-9, i_episode+1):
+        stats_test.episode_rewards_test[i_episode] += reward
+        stats_test.episode_lengths_test[i_episode] = t
         
         if done:
             break
@@ -88,13 +84,8 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
             sys.stdout.flush()
 
         # Reset the env and pick the first action
-        state = env.reset()
-        state_int = helper.convert_state(state[1], state[0], width)
-
-        previous_state = state
-
-        if(i_episode+1) % 10 == 0:
-            run_experiment(env,state_int, Q, stats_test, i_episode, width, TIME_RANGE)
+        previous_state = env.reset()
+        state_int = helper.convert_state(previous_state[1], previous_state[0], width)
 
         for t in range(TIME_RANGE):
             env.render()
@@ -136,9 +127,11 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
             if done:
                 break
 
-            state = next_state
+            previous_state = next_state
             state_int = next_state_int
 
+        # if(i_episode+1) % 10 == 0:
+        run_experiment(env,state_int, Q, stats_test, i_episode, width, TIME_RANGE)
     # Display the final Q-Table
     # for key, value in enumerate(Q.items()):
     #     print(key)
@@ -147,9 +140,12 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
 
     return Q, stats, stats_test
 
-env = gym.make('vgdl_experiment3.5-v0')
+env = gym.make('vgdl_experiment1-v0')
 
-Q, stats, stats_test = q_learning(env, 50)
+Q, stats, stats_test = q_learning(env, 100)
+
+plotting.store_stats(stats, base_dir, "experiment1_q")
+plotting.store_stats(stats_test, base_dir, "experiment1_q_test")
 # import ipdb; ipdb.set_trace()
 plotting.plot_episode_stats_test(stats, stats_test)
 
