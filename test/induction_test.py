@@ -56,18 +56,21 @@ class TestInduction(unittest.TestCase):
         self.assertEqual(link, "link((1,0), (3,3)). ")
 
     def test_generate_plan_pos(self):
-        # TODO
-        state_at_before = None
-        state_at_after = None
-        states = None
-        action = None
-        wall_list = None
-        is_link = False
-        pass
+        state_at_before = "state_at((1,1),1)"
+        state_at_after = "state_at((1,2),2)"
+        states = [(2,"state_at((1,2),2)")]
+        action = "down"
+        wall_list = [(2,1)]
+        _, pos = induction.generate_plan_pos(state_at_before, state_at_after, states, action, wall_list)
+        self.assertEqual(pos, "#pos({state_after((1,2))}, {}, {state_before((1,1)). action(down). wall((2, 1)). }).")
 
     def test_generate_explore_pos(self):
-        # TODO
-        pass
+        next_state = [1,2]
+        previous_state = [1,1]
+        action = "down"
+        wall_list = [(2,1)]
+        _, pos = induction.generate_explore_pos(next_state, previous_state, action, wall_list)
+        self.assertEqual(pos, "#pos({state_after((1,2))}, {state_after((2,1)),state_after((0,1)),state_after((1,0)),state_after((1,1))}, {state_before((1,1)). action(down). wall((2, 1)). }).")
 
     def test_send_state_transition_pos(self):
         previous_state = [1,1]
@@ -85,11 +88,15 @@ class TestInduction(unittest.TestCase):
         self.assertEqual(size_background, 0)
 
     def test_copy_las_base(self):
-        # TODO
-        # las_file = os.path.join(BASE_DIR, "las_test3.las")
-
-        # induction.copy_las_base(las_file, 4,4, False)
-        pass
+        helper.silentremove(BASE_DIR, "las_base1.las")
+        lasbase = os.path.join(BASE_DIR, "las_base1.las")
+        induction.copy_las_base(lasbase, 1,1)
+        result = ""
+        with open(lasbase, "r") as file:
+            lines = file.readlines()
+            for l in lines:
+                result = result + l
+        self.assertEqual(result, "cell((0..1, 0..1)).\n")
 
     def test_run_ILASP(self):
         las_file = os.path.join(BASE_DIR, "las_test4.las")
