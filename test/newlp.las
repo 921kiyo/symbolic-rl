@@ -8,7 +8,7 @@ finished(T):- goal(T2), time(T), T >= T2.
  goal(T):- state_at((2, 2), T), not finished(T-1).
 goalMet:- goal(T).
 :- not goalMet.
-time(1..10).
+time(0..10).
 cell#minimize{1, X, T: action(X,T)}.
 adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).
     adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).

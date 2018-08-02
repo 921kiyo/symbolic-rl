@@ -60,7 +60,9 @@ class TestAbduction(unittest.TestCase):
         self.assertEqual(result, "hello")
 
     def test_run_clingo(self):
-        pass
+        clingofile = os.path.join(BASE_DIR, "clingo_test2.lp")
+        result = abduction.run_clingo(clingofile)
+        self.assertEqual(result, ['state_at((1,1),0)', 'state_at((2,1),1)', 'action(right,0)'])
 
     def test_sort_planning(self):
         asp = ['action(right,2)', 'action(up,1)', 'state_at((1,0),2)','state_at((1,1),1)', 'state_at((2,0),3)']
