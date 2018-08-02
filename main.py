@@ -17,8 +17,8 @@ CACHE_DIR = os.path.join(dir, LAS_CACHE)
 # Increase this to make the decay faster
 DECAY_PARAM = 1
 
-TIME_RANGE = 100
-TIME_RANGE2 = 30
+TIME_RANGE = 150
+# TIME_RANGE2 = 30
 
 is_print = True
 
@@ -27,7 +27,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     height = env.unwrapped.game.height
     width = env.unwrapped.game.width
     cell_range = "\ncell((0..{}, 0..{})).\n".format(width-1, height-1)
-
 
     # Log everything and keep the record here
     log_dir = None
@@ -78,7 +77,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 if first_abduction == False:
                     # Run ILASP to get H
                     hypothesis = induction.run_ILASP(LASFILE, CACHE_DIR)
-                    abduction.make_lp(hypothesis, LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE2, cell_range)
+                    abduction.make_lp(hypothesis, LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE, cell_range)
                     first_abduction = True
                     # Logging set up and record ILASP
                     if record_prefix:
@@ -88,6 +87,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 # Update the starting position for Clingo
                 agent_position = env.unwrapped.observer.get_observation()["position"]
                 abduction.update_agent_position(agent_position, CLINGOFILE, time)
+                abduction.update_time_range(agent_position, CLINGOFILE, time, TIME_RANGE)
 
                 # Run clingo to get a plan
                 answer_sets = abduction.run_clingo(CLINGOFILE)
@@ -211,14 +211,12 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 if done:
                     break
 
-                state = next_state
-
     return stats
 
 # env = gym.make('vgdl_experiment1-v0')
 env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-stats = k_learning(env, 50, epsilon=0, record_prefix="None", is_link=False)
+stats = k_learning(env, 50, epsilon=0.2, record_prefix="None", is_link=False)
 
 plotting.plot_episode_stats_simple(stats)

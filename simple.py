@@ -12,33 +12,32 @@ from lib import plotting, helper
 
 
 TIME_RANGE = 400
-# env = gym.make('vgdl_zelda_features-v0')
 # env = gym.make('vgdl_experiment1-v0')
-env = gym.make('vgdl_experiment5-v0')
-# env = gym.make('vgdl_portals-v0')
-# env = gym.make('vgdl_aaa_teleport-v0')
-# env = gym.make('vgdl_aaa_small-v0')
-
-# for i_episode in range(TIME_RANGE):
-
-#     # Reset the env and pick the first action
-#     state = env.reset()
-
-#     for t in range(TIME_RANGE):
-#         env.render()
-#         time.sleep(0.5)
-#         # Take a step
-#         # action = env.action_space.sample()
-#         next_state, reward, done, _ = env.step(4)
-
-#         if done:
-#             break
+# env = gym.make('vgdl_experiment3.5-v0')
+env = gym.make('vgdl_experiment4_after-v0')
+# env = gym.make('vgdl_experiment5-v0')
 
 
-base_dir = os.path.dirname(os.path.abspath(__file__))
+for i_episode in range(TIME_RANGE):
 
-stats = plotting.load_stats(base_dir, "experiment1_q")
-stats_test = plotting.load_stats(base_dir, "experiment1_q_test")
-plotting.plot_episode_stats_test(stats, stats_test)
+    # Reset the env and pick the first action
+    state = env.reset()
+
+    for t in range(TIME_RANGE):
+        env.render()
+        time.sleep(0.1)
+        # Take a step
+        action = env.action_space.sample()
+        next_state, reward, done, _ = env.step(action)
+
+        if done:
+            break
+
+
+# base_dir = os.path.dirname(os.path.abspath(__file__))
+
+# stats = plotting.load_stats(base_dir, "experiment1_q")
+# stats_test = plotting.load_stats(base_dir, "experiment1_q_test")
+# plotting.plot_episode_stats_test(stats, stats_test)
 
 # import ipdb; ipdb.set_trace()

@@ -59,7 +59,7 @@ def make_lp(hypothesis, lasfile, backgroundfile, clingofile, start_state, goal_s
     goal = "finished(T):- goal(T2), time(T), T >= T2.\n goal(T):- " + goal_state + " not finished(T-1).\n" + \
     "goalMet:- goal(T).\n:- not goalMet.\n"
     # time range
-    time = "time(0.." + str(time_range) + ").\n"
+    time = "%CCC\n" +"time(0.." + str(time_range) + ").\n" + "%DDD\n"
     
     # optimisation statement
     minimize = "#minimize{1, X, T: action(X,T)}.\n"
@@ -256,6 +256,26 @@ def get_predicted_state(current_state, action, states):
             return current_state
     elif(action == "non"):
         return current_state
+
+def update_time_range(agent_position, clingofile, time, time_range):
+    '''
+    Update planning starting point based on the location of the agent
+    '''
+    # Replace everything between "CCC" and "DDD" in clingo file with a new agent position
+    time = "%CCC\n" +"time("+ str(time) +".." + str(time_range) + ").\n" + "%DDD\n"
+    flag = False
+    with open(clingofile) as f:
+        for line in f:
+            if line == "%CCC\n":
+                flag = True
+            if flag == False:
+                with open("temp.lp", "a") as newfile:
+                    newfile.write(line)
+            if line == "%DDD\n":
+                flag = False
+    os.rename("temp.lp", clingofile)
+
+    helper.append_to_file(time, clingofile)
 
 def update_agent_position(agent_position, clingofile, time):
     '''

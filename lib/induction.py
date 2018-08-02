@@ -110,10 +110,10 @@ def get_plan_exclusions(state_at_before, state_at_after, states):
 
     current_time,_,_ = abduction.get_T(state_at_before)
     exclusion_list = []
-    print("state_at_before!!", state_at_before)
-    print("state_at_after!!!!", state_at_after)
-    print("states!!! ", states)
-    print("current_time!! ", current_time)
+    # print("state_at_before!!", state_at_before)
+    # print("state_at_after!!!!", state_at_after)
+    # print("states!!! ", states)
+    # print("current_time!! ", current_time)
     for s in states:
         if current_time+1 == int(s[0]) and state_at_after != s[1]:
             x_after, _, _ = abduction.get_X(s[1])
@@ -218,10 +218,10 @@ def copy_las_base(lasfile, height, width, is_link=False):
             link = "#modeb(1, link(var(cell), var(cell))).\n"
             base.write(link)
 
-    # with open("las_base.las") as f:
-    #     with open(lasfile, "a") as out:
-    #         for line in f:
-    #             out.write(line)
+    with open("las_base.las") as f:
+        with open(lasfile, "a") as out:
+            for line in f:
+                out.write(line)
 
 def run_ILASP(filename, cache_path=None):
     '''
