@@ -1,9 +1,7 @@
  # import ipdb; ipdb.set_trace()
 import numpy as np
 import os, time, random, subprocess
-
 from lib import plotting, py_asp, helper, induction, abduction
-
 import gym, gym_vgdl
 
 LASFILE = "output.las"

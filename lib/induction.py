@@ -152,7 +152,7 @@ def get_link(previous_state, next_state, action):
     next_y = int(next_state[1])
     return "link(({},{}), ({},{})). ".format(x,y,next_x,next_y)
 
-def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list, is_link):
+def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list, is_link=False):
     '''
     Generate a positive example for ILASP from the plan
 
@@ -167,7 +167,6 @@ def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list
     state_after = py_asp.state_after(x_after, y_after)
     # TODO is this correct way to do??
     exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
-    # print("exclusions!!! ", exclusions)
     walls = add_surrounding_walls(x_before, y_before, wall_list)
     
     link = ""
@@ -219,10 +218,10 @@ def copy_las_base(lasfile, height, width, is_link=False):
             link = "#modeb(1, link(var(cell), var(cell))).\n"
             base.write(link)
 
-    with open("las_base.las") as f:
-        with open(lasfile, "a") as out:
-            for line in f:
-                out.write(line)
+    # with open("las_base.las") as f:
+    #     with open(lasfile, "a") as out:
+    #         for line in f:
+    #             out.write(line)
 
 def run_ILASP(filename, cache_path=None):
     '''

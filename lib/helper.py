@@ -74,7 +74,6 @@ def append_to_file(data, file):
         f.write(data)
 
 def gen_unique_filename(extension, base_dir, episode, filename, time):
-    # current_time = int(round(time.time() * 1000))
     base_log_dir = '{}_episode{}_at_{}'.format(filename, episode, time)
     file_path = base_dir + '/' + base_log_dir
 

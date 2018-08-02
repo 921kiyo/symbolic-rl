@@ -1,9 +1,5 @@
-import unittest
-
 from lib import helper
-
-import os, os.path
-
+import os, os.path, unittest
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 

@@ -225,7 +225,6 @@ def is_state_in_states(state, states):
             return True
     return False
 
-# TODO Do I want to do this?
 def get_predicted_state(current_state, action, states):
     '''
     check if state is in states answer sets
