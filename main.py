@@ -68,6 +68,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
         previous_state_at = py_asp.state_at(previous_state[0], previous_state[1], 0)
         any_exclusion = False
+        is_exclusion = False
 
         time = 0
         # Once the agent reaches the goal, the algorithm kicks in
@@ -140,7 +141,9 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], walls, is_link)
                     pos += "\n"
                     helper.append_to_file(pos, LASFILE)
-                    
+
+                    if any_exclusion:
+                        is_exclusion = True
                     # when followed the plan (not random action)
                     if threshold >= new_epsilon:
                         # Check if the prediction is the same as observed state
@@ -161,23 +164,22 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     env.render()
                     # time.sleep(0.1)
                     time = time + 1
-                    
-                if any_exclusion:
+                
+                    if done:
+                        break
+                
+                if is_exclusion:
                     if is_print:
-                        print("exclusion is there ", pos)
+                        print("exclusion is there ", pos)                    
                     hypothesis = induction.run_ILASP(LASFILE, CACHE_DIR)
+                    abduction.update_h(hypothesis, CLINGOFILE)
+
                     if record_prefix:
                         inputfile = os.path.join(BASE_DIR, LASFILE)
                         helper.log_las(inputfile, hypothesis, log_dir, i_episode, time-1)
-                    
-                    abduction.update_h(hypothesis, CLINGOFILE)
-                else:
-                    if is_print:
-                        print("No exclusion!!")
-
+                
                 if done:
                     break
-
         # Random action until ILASP kicks in
         else:
             for t in range(TIME_RANGE):
@@ -213,10 +215,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
     return stats
 
-# env = gym.make('vgdl_experiment1-v0')
-env = gym.make('vgdl_aaa_small-v0')
+env = gym.make('vgdl_experiment1-v0')
+# env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-stats = k_learning(env, 50, epsilon=0.2, record_prefix="None", is_link=False)
+stats = k_learning(env, 50, epsilon=0.2, record_prefix="experiment1", is_link=False)
 
 plotting.plot_episode_stats_simple(stats)

@@ -93,12 +93,13 @@ def run_clingo(clingofile):
     '''
     print("clingo running...")
     try:
+        # clingo5 --opt-strat=usc,stratify -n 0 clingo2.lp --opt-mode=opt --outf=2
         # planning_actions = subprocess.check_output(["clingo", "-n", "0", clingofile, "--opt-mode=opt", "--outf=2"], universal_newlines=True)
         planning_actions = subprocess.check_output(["clingo5", "--opt-strat=usc,stratify", "-n", "0", clingofile, "--opt-mode=opt", "--outf=2"], universal_newlines=True)
     except subprocess.CalledProcessError as e:
         planning_actions = e.output
         # When Clingo returns UNSATISFIABLE
-        print("Clingo error...")
+        print("Clingo error...", planning_actions)
         # print(e.output)
 
     json_plan = json.loads(planning_actions)
