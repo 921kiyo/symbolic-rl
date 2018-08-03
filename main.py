@@ -62,7 +62,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
         # Decaying epsilon greedy params
         new_epsilon = epsilon*(1/(i_episode+1)**DECAY_PARAM)
-
+        print("new_epsilon ", new_epsilon)
         previous_state = env.reset()
         agent_position = env.unwrapped.observer.get_observation()["position"]
 
@@ -74,7 +74,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         # Once the agent reaches the goal, the algorithm kicks in
         if reached_goal:
             while time < TIME_RANGE:
-
                 if first_abduction == False:
                     # Run ILASP to get H
                     hypothesis = induction.run_ILASP(LASFILE, CACHE_DIR)
@@ -115,7 +114,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     else:
                         # Following the plan
                         action_int = helper.get_action(action[1])
+                        if is_print:
+                            print("Following the plan...", helper.convert_action(action_int))
                     
+                    action_string = helper.convert_action(action_int)
                     next_state, reward, done, _ = env.step(action_int)
                     if done:
                         reward = reward + 100
@@ -138,7 +140,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     # Add pos
                     walls = induction.get_seen_walls(CLINGOFILE)
                     walls = walls + wall_list
-                    any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action[1], walls, is_link)
+                    any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action_string, walls, is_link)
                     pos += "\n"
                     helper.append_to_file(pos, LASFILE)
 
@@ -222,4 +224,5 @@ env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
 stats = k_learning(env, 50, epsilon=0.2, record_prefix="experiment1", is_link=False)
 
+plotting.store_stats(stats, BASE_DIR, "experiment1_ILASP")
 plotting.plot_episode_stats_simple(stats)
