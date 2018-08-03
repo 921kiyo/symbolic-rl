@@ -538,13 +538,56 @@ It is of the form:
 \begin{equation}
 Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\textsubscript{t}) +  \alpha(R\textsubscript{t+1} + \gamma  max (a+t) Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))
 \end{equation}
-%\begin{equation}
 
 where $\alpha$ is the learning rate, $\gamma$ is a discount rate between 0 and 1. The equation is used to update the state-action value function called Q function. The function Q(S,A) predicts the best action A in state S to maximise the total cumulative rewards.
 
+\begin{algorithm}
+\caption{Q-learning (off-policy TD control)}\label{euclid}
+\begin{algorithmic}[1]
+\Procedure{ILASP(RL) (B and E)}{}
 
-\textcolor{red}{ADD Q-Learning Algorithm}
-TODO 
+\State $\text{Initialise Q(s,a) arbitrarily}$
+\State $\text{Repeat (for each episode)}$
+\State $\text{Choose a from s using policy derived from Q (e.g, epsilon-greedy)}$
+\State $\text{Take action a, observe r,  s$\prime$}$
+%\begin{equation}
+%Q(s,a) \leftarrow Q(s,a) +  \alpha(R\textsubscript{t+1} + \gamma  max (a+t) Q(s$\prime$, a$\prime$) - Q(s\textsubscript{t}, a\textsubscript{t}))
+%s \gets s$\prime$
+%\end{equation}
+
+
+
+
+%    \State $\textit{H (inductive solutions)} \gets \text{run ILASP(T)}$
+%    \State $\textit{plan(actions, states) answer sets} \gets \text{AS(B, H)}$
+%    \While {actions in P}
+%        \State $\textit{observed state} \gets \text{run clingo(T)}$
+%        \If {$ \textit{observed state} \neq \textit{predicted state} $}
+%            \State $\textit{H} \gets \text{run ILASP(T)}$
+%            \EndIf
+        % \If {$ \textit{observed state not equal \textit{predicted state $} 
+        % \EndIf
+%    \EndWhile
+    % \If {$ new \ background \ encountered $}
+    %     % \State $\textit{H} \gets \text{run ILASP(T)}$
+    % \EndIf
+    % \For{i from 0 to N} 
+    %     \If {$ A[i]\ is \ in \ T$}
+    %         \State \Return $FALSE$
+    %     \Else 
+    %         \State Add A[i] to T   
+    %     \EndIf
+    % \EndFor
+% \State \Return $TRUE$
+%\EndWhile
+
+\EndProcedure
+\caption{XXXX }
+\end{algorithmic}
+\end{algorithm}
+
+
+
 \begin{equation}
 Q(s\textsubscript{t},a\textsubscript{t}) = E [R\textsubscript{t+1} + \gamma R\textsubscript{t+2} + \gamma^2 R\textsubscript{t+3} + ... \vert s\textsubscript{t},a\textsubscript{t} ]
 \end{equation}
@@ -552,7 +595,6 @@ Q(s\textsubscript{t},a\textsubscript{t}) = E [R\textsubscript{t+1} + \gamma R\te
 
 Q-learning is guaranteed to converge to a optimal policy in a fininte tabulara representation.
 \textcolor{red}{Paper Jaakkola et al. 1993}
-
 
 The optimal Q-function Q\textsuperscript{*}(s,a) is directly approximated by the learned action-value function Q.
 
@@ -567,9 +609,78 @@ Q-learning learns the value of its deterministic greedy policy from the experien
 
 \subsubsection{Linear Value Function Approximation}
 
-TODO 
+Q-learning with tarbular method works when every state has Q(s,a). In case of very large MDPs, however, 
+it may not be possible to represent all states with a lookup table.
+For example,  robot arms has a continuous states in 3D dimentional space. 
+
+These problems motivate the use of function approximation, which estimates value function with function approximation. 
+
+Formally,
+\begin{equation}
+\hat{q}(s,a) \approx q\textsubscript{$\pi$} (s,a)
+\end{equation}
+
+Represent state by a \textit{feature vector}
+
+\begin{equation}
+x(S) = \begin{pmatrix} x\textsubscript{1}(S) \\ \vdots \\ x\textsubscript{n}(S)  \end{pmatrix}
+\end{equation}
+
+
+Represent value function by a linear combination of features
+
+\begin{equation}
+\hat{v}(S,w) = x(S)\textsuperscript{T}w = \sum_{j=1}^{n} x\textsubscript{j} (S) w\textsubscript{j}
+\end{equation}
+
+Objective function is 
+The error in a state s is the square of the difference between the approximate value 
+$\hat{v}$(S,w) and the true value v(S,w). 
+\begin{equation}
+J(w) = \displaystyle \E \textsubscript{$\pi$} \big[ (v\textsubscript{$\pi$}(S) -  \hat{v}(S,w))\textsuperscript{2} \big]
+\end{equation}
+
+\subsubsection{Stochastic gradient descent (SGD)}
+Stochastic gradient descent methods are commonly used for most of function approximation methods.
+
+TODO EXPLAIN ONLINE VS OFFLINE LEARNING
+
+SGD adjusts the weights vector by a fraction of alpha in the direction what will reduce the error on that example the most. Formally, it is defined as 
+
+The dradient of J(w) is defined as 
+
+\begin{equation}
+\bigtriangledown\textsubscript{w} J(w) =  \begin{pmatrix} \frac{\partial J(w)}{\partial w\textsubscript{1}}  \\ \vdots \\ \frac{\partial J(w)}{\partial w\textsubscript{n}}   \end{pmatrix}
+\end{equation}
+
+Use SGD updates with linear function approximation. The gradient of the approximate value function with respect to w is 
+
+\textcolor{red}{Add proof here}
+
+\begin{equation}
+\bigtriangledown \hat{v}(s,w) = x(s)
+\end{equation}
+
+Thus the general SGD update defined in XX can be simplified to 
+
+\begin{equation}
+w\textsubscript{t+1} \doteq w\textsubscript{t} + \alpha \big[ U\textsubscript{t} - \hat{v}(S\textsubscript{t}, w\textsubscript{t})\big] x(S\textsubscript{t})
+\end{equation}
+
+
+
+Linear TD(0) is guaranteed to converge to clobal optimum
+
 
 \subsubsection{Tile Coding}
+For linear method, there are different ways to represents states as features, such as polynomials, fourier basis, or radial basis functions to name a few. Feature construction depends on a problem you are solving. In this report, we describe \textit{Tile Coding} which will be used for our benchmark. 
+
+
+Coarse coding
+
+
+Tile coding 
+
 
 \subsubsection{Deep Neural Network}
 

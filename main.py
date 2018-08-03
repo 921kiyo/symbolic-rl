@@ -144,6 +144,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                     if any_exclusion:
                         is_exclusion = True
+
                     # when followed the plan (not random action)
                     if threshold >= new_epsilon:
                         # Check if the prediction is the same as observed state
