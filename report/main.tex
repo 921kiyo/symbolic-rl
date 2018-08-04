@@ -556,8 +556,6 @@ where $\alpha$ is the learning rate, $\gamma$ is a discount rate between 0 and 1
 %\end{equation}
 
 
-
-
 %    \State $\textit{H (inductive solutions)} \gets \text{run ILASP(T)}$
 %    \State $\textit{plan(actions, states) answer sets} \gets \text{AS(B, H)}$
 %    \While {actions in P}
@@ -606,14 +604,61 @@ Q-learning learns the value of its deterministic greedy policy from the experien
 
 \subsection{Function Approximation}
 \label{function_approximation}
-
-\subsubsection{Linear Value Function Approximation}
-
 Q-learning with tarbular method works when every state has Q(s,a). In case of very large MDPs, however, 
 it may not be possible to represent all states with a lookup table.
 For example,  robot arms has a continuous states in 3D dimentional space. 
 
-These problems motivate the use of function approximation, which estimates value function with function approximation. 
+These problems motivate the use of function approximation, which estimates value function with function approximation.  Not only it is  represented in tabular form, but also in the form of a parameterized function with weight vector w $\in \R\textsuperscript{d}$ where $\R\textsuperscript{d}$ is XXX
+
+Unlike Q-table, changing one weight updates the estimated value of not only one state, but many states, and this generalisation makes it more flexible to apply different scenarios that tabular approach could not be applied. 
+
+The reason we are introduing this function approximation is not because we will use it in our new algorithm, but for the benchmark that we compare our algorithm with. 
+
+\subsubsection{The Prediction Objective ($\overline{VE}$)}
+With function approximation, an update at one state changes many other states, and therefore the values of all states will not be exactly accurate, and there is a tradeoff among states as to which state we make it more accurate, while other might be  less accurate. 
+
+The error in a state s is the squeare of the difference between the approximate value $\hat{v}$(s,w) and the true value v\textsubscript{$\pi$}(s). The objective function can be defined by weighting it over the statespace by $\mu$, the \textit{Mean Squared Value Error}, denoted $\overline{VE}$.
+
+\begin{equation}
+\overline{VE}(w) \doteq \sum_{s \in S} \mu (s) \big[ v\textsubscript{$\pi$}(s) - \hat{v}(s,w) \big]\textsuperscript{2}.
+\end{equation}
+\label{ve}
+
+\subsubsection{Stochastic gradient descent (SGD)}
+Stochastic gradient descent methods are commonly used to learn function approximation in value prediction, which works well for online reinforcement learning.
+TODO EXPLAIN ONLINE VS OFFLINE LEARNING
+
+\begin{equation}
+ w \doteq  \begin{pmatrix}  w\textsubscript{1}  \\ w\textsubscript{2} \\ \vdots \\ w\textsubscript{n}   \end{pmatrix}
+\end{equation}
+
+and $\hat{v}$(s,w) is a differentiable function of w for all s $\in$ S. 
+
+minimize the $\overline{VE}$ on the observed examples. \textit{Stochastic gradient-descent (SGD) } adjusts the weights vector by a fraction of alpha in the direction what will reduce the error on that example the most. Formally, it is defined as 
+
+\begin{equation}
+\begin{split}
+w\textsubscript{t+1} & \doteq w\textsubscript{t} -  \frac{1}{2} \alpha  \bigtriangledown \big[ v\textsubscript{$\pi$}(S\textsubscript{t}) - \hat{v}(S\textsubscript{t}, w\textsubscript{t}) \big]\textsuperscript{2}. \\
+& = w\textsubscript{t} -  \alpha  \big[ v\textsubscript{$\pi$}(S\textsubscript{t}) - \hat{v}(S\textsubscript{t}, w\textsubscript{t}) \big] \bigtriangledown \hat{v}(S\textsubscript{t}, w\textsubscript{t}).
+\end{split}
+\end{equation}
+
+where $\alpha$ is step-size, 
+
+The dradient of J(w) is defined as 
+
+\begin{equation}
+\bigtriangledown\textsubscript{w} J(w) =  \begin{pmatrix} \frac{\partial J(w)}{\partial w\textsubscript{1}}  \\ \vdots \\ \frac{\partial J(w)}{\partial w\textsubscript{n}}   \end{pmatrix}
+\end{equation}
+
+
+\begin{equation}
+w\textsubscript{t+1} \doteq w\textsubscript{t} + \alpha \big[ U\textsubscript{t} - \hat{v}(S\textsubscript{t}, w\textsubscript{t})\big] x(S\textsubscript{t})
+\end{equation}
+
+
+\subsubsection{Linear Value Function Approximation}
+
 
 Formally,
 \begin{equation}
@@ -626,6 +671,17 @@ Represent state by a \textit{feature vector}
 x(S) = \begin{pmatrix} x\textsubscript{1}(S) \\ \vdots \\ x\textsubscript{n}(S)  \end{pmatrix}
 \end{equation}
 
+
+
+Use SGD updates with linear function approximation. The gradient of the approximate value function with respect to w is 
+
+\textcolor{red}{Add proof here}
+
+\begin{equation}
+\bigtriangledown \hat{v}(s,w) = x(s)
+\end{equation}
+
+Thus the general SGD update defined in XX can be simplified to 
 
 Represent value function by a linear combination of features
 
@@ -640,37 +696,7 @@ $\hat{v}$(S,w) and the true value v(S,w).
 J(w) = \displaystyle \E \textsubscript{$\pi$} \big[ (v\textsubscript{$\pi$}(S) -  \hat{v}(S,w))\textsuperscript{2} \big]
 \end{equation}
 
-\subsubsection{Stochastic gradient descent (SGD)}
-Stochastic gradient descent methods are commonly used for most of function approximation methods.
-
-TODO EXPLAIN ONLINE VS OFFLINE LEARNING
-
-SGD adjusts the weights vector by a fraction of alpha in the direction what will reduce the error on that example the most. Formally, it is defined as 
-
-The dradient of J(w) is defined as 
-
-\begin{equation}
-\bigtriangledown\textsubscript{w} J(w) =  \begin{pmatrix} \frac{\partial J(w)}{\partial w\textsubscript{1}}  \\ \vdots \\ \frac{\partial J(w)}{\partial w\textsubscript{n}}   \end{pmatrix}
-\end{equation}
-
-Use SGD updates with linear function approximation. The gradient of the approximate value function with respect to w is 
-
-\textcolor{red}{Add proof here}
-
-\begin{equation}
-\bigtriangledown \hat{v}(s,w) = x(s)
-\end{equation}
-
-Thus the general SGD update defined in XX can be simplified to 
-
-\begin{equation}
-w\textsubscript{t+1} \doteq w\textsubscript{t} + \alpha \big[ U\textsubscript{t} - \hat{v}(S\textsubscript{t}, w\textsubscript{t})\big] x(S\textsubscript{t})
-\end{equation}
-
-
-
 Linear TD(0) is guaranteed to converge to clobal optimum
-
 
 \subsubsection{Tile Coding}
 For linear method, there are different ways to represents states as features, such as polynomials, fourier basis, or radial basis functions to name a few. Feature construction depends on a problem you are solving. In this report, we describe \textit{Tile Coding} which will be used for our benchmark. 
