@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  4 AUG 2018 13:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  4 AUG 2018 15:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1013,7 +1013,7 @@ Chapter 6.
 ]
 
 Package natbib Warning: Citation `Sridharan2017' on page 31 undefined on input 
-line 763.
+line 774.
 
 [31]
 Chapter 7.
@@ -1062,12 +1062,12 @@ Overfull \hbox (9.14763pt too wide) in alignment at lines 208--213
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 801.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 812.
 [37]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 801.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 812.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 801.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 801.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 812.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 812.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 19300B71B813FF1611105BC4F86BE10D;3229.
 Package rerunfilecheck Info: File `main.brf' has not changed.
@@ -1079,7 +1079,7 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 801.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 812.
  ) 
 Here is how much of TeX's memory you used:
  11666 strings out of 493029
@@ -1105,7 +1105,7 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/doublestroke/dsrom12.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (44 pages, 348309 bytes).
+Output written on main.pdf (44 pages, 348974 bytes).
 PDF statistics:
  691 PDF objects out of 1000 (max. 8388607)
  611 compressed objects within 7 object streams

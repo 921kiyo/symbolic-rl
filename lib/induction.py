@@ -110,18 +110,11 @@ def get_plan_exclusions(state_at_before, state_at_after, states):
 
     current_time,_,_ = abduction.get_T(state_at_before)
     exclusion_list = []
-    # print("state_at_before!!", state_at_before)
-    # print("state_at_after!!!!", state_at_after)
-    # print("states!!! ", states)
-    # print("current_time!! ", current_time)
     for s in states:
         if current_time+1 == int(s[0]) and state_at_after != s[1]:
             x_after, _, _ = abduction.get_X(s[1])
             y_after, _, _ = abduction.get_Y(s[1])
             state_after = py_asp.state_after(x_after, y_after)
-            # if state_after == "state_after((9,3))":
-            #     continue
-            # else:
             exclusion_list.append(state_after)
 
     print("exclusion_list ", exclusion_list)
@@ -143,14 +136,15 @@ def get_next_state(current_state, action):
         return x+1, y
     elif(action == "left"):
         return x-1, y
-    elif(action == "non"):
-        return x, y
+    else:
+        print("action is wrong")
+        exit(1)
 
 def get_link(previous_state, next_state, action):
     x,y = get_next_state(previous_state, action)
     next_x = int(next_state[0])
     next_y = int(next_state[1])
-    return "link(({},{}), ({},{})). ".format(x,y,next_x,next_y)
+    return "is_link(({},{})). is_link(({},{})). ".format(x,y,next_x,next_y)
 
 def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list, is_link=False):
     '''
@@ -172,7 +166,7 @@ def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list
     link = ""
     if is_link:
         if(x_before == 9 and y_before == 4 and action == "up"):
-            link = "link((9,3), (17,3))."
+            link = "is_link((9,3)). is_link((17,3))."
 
     if exclusions == "":
         return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."
@@ -215,7 +209,7 @@ def copy_las_base(lasfile, height, width, is_link=False):
     with open(lasfile, "w") as base:
         base.write(cell)
         if is_link == True:
-            link = "#modeb(1, link(var(cell), var(cell))).\n"
+            link = "#modeb(1, is_link(var(cell))).\n"
             base.write(link)
 
     with open("las_base.las") as f:
@@ -239,9 +233,9 @@ def run_ILASP(filename, cache_path=None):
         clingo5 = "clingo5 --opt-strat=usc,stratify"
         if cache_path:
             cache_path = "--cached-rel=" + cache_path
-            hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5, cache_path], universal_newlines=True)
+            hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5, cache_path, "--max-rule-length=8"], universal_newlines=True)
         else:
-            hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5], universal_newlines=True)
+            hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5, "--max-rule-length=8"], universal_newlines=True)
         
     except subprocess.CalledProcessError as e:
         print("Error...", e.output)

@@ -50,7 +50,7 @@ def make_lp(hypothesis, lasfile, backgroundfile, clingofile, start_state, goal_s
     # starting point
     start_state = "%AAA\n" + "state_at((" + str(int(start_state[0])) + ", " + str(int(start_state[1])) + "), 1).\n" + "%BBB\n"
     # action choice rule
-    actions = "1{action(down, T); action(up, T); action(right, T); action(left, T); action(non, T)}1 :- time(T), not finished(T).\n"
+    actions = "1{action(down, T); action(up, T); action(right, T); action(left, T)}1 :- time(T), not finished(T).\n"
     show = "#show state_at/2.\n #show action/2.\n"
 
     # TODO update goal specification
@@ -255,8 +255,6 @@ def get_predicted_state(current_state, action, states):
             return new_state
         else:
             return current_state
-    elif(action == "non"):
-        return current_state
 
 def update_time_range(agent_position, clingofile, time, time_range):
     '''

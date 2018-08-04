@@ -18,9 +18,12 @@ TIME_RANGE = 100
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
+ACTION_SPACE = 4 # env.action_space.n
+
 def make_epsilon_greedy_policy(Q, epsilon, nA):
     def policy_fn(observation, episodes):
-        new_epsilon = epsilon*(1/(episodes+1))
+        # new_epsilon = epsilon*(1/(episodes+1))
+        new_epsilon = epsilon
         A = np.ones(nA, dtype=float)* new_epsilon/nA
         best_action = np.argmax(Q[observation])
         A[best_action] += (1.0 - new_epsilon)
@@ -29,8 +32,8 @@ def make_epsilon_greedy_policy(Q, epsilon, nA):
 
 def run_experiment(env, state_int, Q, stats_test, i_episode, width, time_range):
     
-    policy = make_epsilon_greedy_policy(Q, 0, env.action_space.n)
-
+    policy = make_epsilon_greedy_policy(Q, 0, ACTION_SPACE)
+    
     # current_state = state_int
     current_state = env.reset()
     current_state_int = helper.convert_state(current_state[1], current_state[0], width)
@@ -65,8 +68,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
     """
     # height = env.unwrapped.game.height
     width = env.unwrapped.game.width
-    Q = defaultdict(lambda: np.zeros(env.action_space.n))
-
+    Q = defaultdict(lambda: np.zeros(ACTION_SPACE))
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes))
@@ -75,7 +77,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
         episode_lengths_test=np.zeros(num_episodes),
         episode_rewards_test=np.zeros(num_episodes))
 
-    policy = make_epsilon_greedy_policy(Q, epsilon, env.action_space.n)
+    policy = make_epsilon_greedy_policy(Q, epsilon, ACTION_SPACE)
     for i_episode in range(num_episodes):
         print("------------------------------")
         if(i_episode+1) % 100 == 0:
@@ -94,7 +96,8 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
 
             action = np.random.choice(np.arange(len(action_probs)), p=action_probs)
             # action = env.action_space.sample()
-
+            if(action == 4):
+                import ipdb; ipdb.set_trace()
             # print("---------------------------------")
             # 0: UP
             # 1: DOWN
@@ -139,7 +142,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
 
     return Q, stats, stats_test
 
-env = gym.make('vgdl_experiment1-v0')
+env = gym.make('vgdl_experiment3.5-v0')
 
 Q, stats, stats_test = q_learning(env, 100)
 

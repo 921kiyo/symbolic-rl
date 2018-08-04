@@ -14,8 +14,6 @@ def convert_action(action):
         return "left"
     elif(action == 3):
         return "right"
-    elif(action == 4):
-        return "non"
     else:
         print("this action does not exist...", str(action))
         return None
@@ -29,8 +27,6 @@ def get_action(action):
         return 2
     elif(action == "right"):
         return 3
-    elif(action == "non"):
-        return 4
     else:
         print("this action does not exist...", action)
         return -1

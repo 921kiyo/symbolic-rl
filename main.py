@@ -4,6 +4,8 @@ import os, time, random, subprocess
 from lib import plotting, py_asp, helper, induction, abduction
 import gym, gym_vgdl
 
+from random import randint
+
 LASFILE = "output.las"
 BACKGROUND = "background.lp"
 CLINGOFILE = "clingo.lp"
@@ -60,9 +62,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         print("==============NEW EPISODE======================")
         print("i_episode ", i_episode)
 
-        # Decaying epsilon greedy params
-        new_epsilon = epsilon*(1/(i_episode+1)**DECAY_PARAM)
-        print("new_epsilon ", new_epsilon)
         previous_state = env.reset()
         agent_position = env.unwrapped.observer.get_observation()["position"]
 
@@ -73,6 +72,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         time = 0
         # Once the agent reaches the goal, the algorithm kicks in
         if reached_goal:
+            # Decaying epsilon greedy params
+            new_epsilon = epsilon*(1/(i_episode+1)**DECAY_PARAM)
+            print("new_epsilon ", new_epsilon)
+
             while time < TIME_RANGE:
                 if first_abduction == False:
                     # Run ILASP to get H
@@ -108,7 +111,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     # Flip a coin. If threshold < epsilon, explore randomly
                     threshold = random.uniform(0,1)
                     if threshold < new_epsilon:
-                        action_int = env.action_space.sample()
+                        action_int = randint(0, 3)
                         if is_print:
                             print("Taking a pure random action...", helper.convert_action(action_int))
                     else:
@@ -170,13 +173,15 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 
                     if done:
                         break
+
+                    if threshold < new_epsilon:
+                        break
                 
                 if is_exclusion:
                     if is_print:
                         print("exclusion is there ", pos)                    
                     hypothesis = induction.run_ILASP(LASFILE, CACHE_DIR)
                     abduction.update_h(hypothesis, CLINGOFILE)
-
                     if record_prefix:
                         inputfile = os.path.join(BASE_DIR, LASFILE)
                         helper.log_las(inputfile, hypothesis, log_dir, i_episode, time-1)
@@ -190,7 +195,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 # time.sleep(0.1)
 
                 # Take a step
-                action = env.action_space.sample()
+                action = randint(0, 3)
                 next_state, reward, done, _ = env.step(action)
 
                 if done:
@@ -222,7 +227,8 @@ env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-stats = k_learning(env, 50, epsilon=0.2, record_prefix="experiment1", is_link=False)
+stats = k_learning(env, 50, epsilon=0.4, record_prefix=None, is_link=False)
+# stats = k_learning(env, 50, epsilon=0.2, record_prefix="experiment3.5", is_link=True)
 
-plotting.store_stats(stats, BASE_DIR, "experiment1_ILASP")
+plotting.store_stats(stats, BASE_DIR, "experiment1_v2_ILASP")
 plotting.plot_episode_stats_simple(stats)

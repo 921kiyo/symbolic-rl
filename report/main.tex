@@ -659,7 +659,6 @@ w\textsubscript{t+1} \doteq w\textsubscript{t} + \alpha \big[ U\textsubscript{t}
 
 \subsubsection{Linear Value Function Approximation}
 
-
 Formally,
 \begin{equation}
 \hat{q}(s,a) \approx q\textsubscript{$\pi$} (s,a)
@@ -670,8 +669,6 @@ Represent state by a \textit{feature vector}
 \begin{equation}
 x(S) = \begin{pmatrix} x\textsubscript{1}(S) \\ \vdots \\ x\textsubscript{n}(S)  \end{pmatrix}
 \end{equation}
-
-
 
 Use SGD updates with linear function approximation. The gradient of the approximate value function with respect to w is 
 
@@ -698,14 +695,31 @@ J(w) = \displaystyle \E \textsubscript{$\pi$} \big[ (v\textsubscript{$\pi$}(S) -
 
 Linear TD(0) is guaranteed to converge to clobal optimum
 
+One disadvantage of the linear method is that it cannot express any relationship between features. For example, it cannot represent that feature \textit{i} is useful only if feature \textit{j} is not present. 
+
+Nevertheless,  this approach is sufficient enough for our experiment, which will be described in Chapter XXX.
+
+There are different linear methods to represents states as features, such as polynomials, fourier basis, or radial basis functions to name a few. Feature construction depends on a problem you are solving. In the next section, we introduce \textit{Tile Coding} which will be used for our benchmark. 
+
 \subsubsection{Tile Coding}
-For linear method, there are different ways to represents states as features, such as polynomials, fourier basis, or radial basis functions to name a few. Feature construction depends on a problem you are solving. In this report, we describe \textit{Tile Coding} which will be used for our benchmark. 
+
+State set is represented as a continuous two-dimentionala space. If a state is within the space, then the value of the  corrensponding feature is set to be 1 to indicate that the feature is present. 
+Binary features
+
+Representing a state with feature overlap is \textit{coarse coding}. 
+
+\textcolor{red}{TODO REFERENCE}
+
+\textcolor{red}{TODO ILLUSTRATION}
 
 
-Coarse coding
+the change of the weight in that state will affect all other states within the intersection of the spaces. 
 
+The degree of overlap within a space will determined the degree of the generalisation. 
 
-Tile coding 
+The shape of the space also affect how it is generalised. 
+
+\textit{Tile coding} is a type of coarse coding.
 
 
 \subsubsection{Deep Neural Network}

@@ -1,0 +1,448 @@
+1{action(down, T); action(up, T); action(right, T); action(left, T); action(non, T)}1 :- time(T), not finished(T).
+#show state_at/2.
+ #show action/2.
+finished(T):- goal(T2), time(T), T >= T2.
+ goal(T):- state_at((17, 1), T), not finished(T-1).
+goalMet:- goal(T).
+:- not goalMet.
+
+cell((0..18, 0..7)).
+#minimize{1, X, T: action(X,T)}.
+adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).
+    adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).
+    adjacent(down, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).
+    adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
+
+wall((1, 7)).
+
+wall((0, 6)).
+
+wall((2, 5)).
+
+wall((0, 5)).
+
+wall((2, 7)).
+
+wall((2, 4)).
+
+wall((0, 4)).
+
+wall((3, 7)).
+
+wall((3, 5)).
+
+wall((4, 7)).
+
+wall((4, 5)).
+
+wall((5, 7)).
+
+wall((6, 7)).
+
+wall((6, 5)).
+
+wall((7, 7)).
+
+wall((6, 4)).
+
+wall((4, 4)).
+
+wall((6, 3)).
+
+wall((4, 3)).
+
+wall((8, 5)).
+
+wall((8, 7)).
+
+wall((9, 7)).
+
+wall((10, 5)).
+
+wall((10, 4)).
+
+wall((8, 4)).
+is_link((9,3)). is_link((17,3)). 
+
+wall((18, 3)).
+
+wall((17, 4)).
+
+wall((16, 3)).
+
+wall((18, 2)).
+
+wall((16, 2)).
+
+wall((2, 3)).
+
+wall((0, 3)).
+
+wall((2, 2)).
+
+wall((0, 2)).
+
+wall((0, 1)).
+
+wall((1, 0)).
+
+wall((2, 0)).
+
+wall((3, 2)).
+
+wall((3, 0)).
+
+wall((4, 2)).
+
+wall((4, 0)).
+
+wall((5, 0)).
+
+wall((6, 2)).
+
+wall((6, 0)).
+
+wall((7, 0)).
+
+wall((8, 2)).
+
+wall((8, 0)).
+
+wall((9, 2)).
+
+wall((9, 0)).
+
+wall((10, 2)).
+
+wall((10, 0)).
+
+wall((11, 2)).
+
+wall((11, 0)).
+
+wall((12, 2)).
+
+wall((12, 0)).
+
+wall((13, 2)).
+
+wall((13, 0)).
+
+wall((14, 2)).
+
+wall((14, 0)).
+
+wall((15, 2)).
+
+wall((15, 0)).
+
+wall((16, 0)).
+%START
+state_at(V0, T+1) :- time(T), state_at(V0, T), action(non, T).
+state_at(V0, T+1) :- time(T), is_link(V0), not adjacent(up, V0, V1), state_at(V1, T).
+state_at(V1, T+1) :- time(T), adjacent(left, V0, V1), state_at(V0, T), action(right, T), not wall(V1).
+state_at(V0, T+1) :- time(T), adjacent(left, V0, V1), state_at(V1, T), action(left, T), not wall(V0).
+state_at(V1, T+1) :- time(T), adjacent(up, V0, V1), state_at(V0, T), action(down, T), not wall(V1).
+state_at(V0, T+1) :- time(T), adjacent(left, V0, V1), state_at(V0, T), action(right, T), wall(V1).
+state_at(V1, T+1) :- time(T), adjacent(left, V0, V1), state_at(V1, T), action(left, T), wall(V0).
+state_at(V0, T+1) :- time(T), adjacent(up, V0, V1), state_at(V0, T), action(down, T), wall(V1).
+state_at(V1, T+1) :- time(T), adjacent(up, V0, V1), state_at(V1, T), action(up, T), wall(V0).
+state_at(V1, T+1) :- time(T), not is_link(V1), adjacent(down, V0, V1), state_at(V0, T), action(up, T), not wall(V1).
+
+%END
+%AAA
+state_at((2, 1), 12).
+%BBB
+%CCC
+time(12..150).
+%DDD
+%ANSWER SETS
+
+%state_at((2,1),12)
+%state_at((9,3),13)
+%state_at((17,3),13)
+%state_at((9,3),14)
+%state_at((17,3),14)
+%state_at((9,3),15)
+%state_at((17,3),15)
+%state_at((9,3),16)
+%state_at((17,3),16)
+%state_at((9,3),17)
+%state_at((17,3),17)
+%state_at((9,3),18)
+%state_at((17,3),18)
+%state_at((9,3),19)
+%state_at((17,3),19)
+%state_at((9,3),20)
+%state_at((17,3),20)
+%state_at((9,3),21)
+%state_at((17,3),21)
+%state_at((9,3),22)
+%state_at((17,3),22)
+%state_at((9,3),23)
+%state_at((17,3),23)
+%state_at((9,3),24)
+%state_at((17,3),24)
+%state_at((9,3),25)
+%state_at((17,3),25)
+%state_at((9,3),26)
+%state_at((17,3),26)
+%state_at((9,3),27)
+%state_at((17,3),27)
+%state_at((9,3),28)
+%state_at((17,3),28)
+%state_at((9,3),29)
+%state_at((17,3),29)
+%state_at((9,3),30)
+%state_at((17,3),30)
+%state_at((9,3),31)
+%state_at((17,3),31)
+%state_at((9,3),32)
+%state_at((17,3),32)
+%state_at((9,3),33)
+%state_at((17,3),33)
+%state_at((9,3),34)
+%state_at((17,3),34)
+%state_at((9,3),35)
+%state_at((17,3),35)
+%state_at((9,3),36)
+%state_at((17,3),36)
+%state_at((9,3),37)
+%state_at((17,3),37)
+%state_at((9,3),38)
+%state_at((17,3),38)
+%state_at((9,3),39)
+%state_at((17,3),39)
+%state_at((9,3),40)
+%state_at((17,3),40)
+%state_at((9,3),41)
+%state_at((17,3),41)
+%state_at((9,3),42)
+%state_at((17,3),42)
+%state_at((9,3),43)
+%state_at((17,3),43)
+%state_at((9,3),44)
+%state_at((17,3),44)
+%state_at((9,3),45)
+%state_at((17,3),45)
+%state_at((9,3),46)
+%state_at((17,3),46)
+%state_at((9,3),47)
+%state_at((17,3),47)
+%state_at((9,3),48)
+%state_at((17,3),48)
+%state_at((9,3),49)
+%state_at((17,3),49)
+%state_at((9,3),50)
+%state_at((17,3),50)
+%state_at((9,3),51)
+%state_at((17,3),51)
+%state_at((9,3),52)
+%state_at((17,3),52)
+%state_at((9,3),53)
+%state_at((17,3),53)
+%state_at((9,3),54)
+%state_at((17,3),54)
+%state_at((9,3),55)
+%state_at((17,3),55)
+%state_at((9,3),56)
+%state_at((17,3),56)
+%state_at((9,3),57)
+%state_at((17,3),57)
+%state_at((9,3),58)
+%state_at((17,3),58)
+%state_at((9,3),59)
+%state_at((17,3),59)
+%state_at((9,3),60)
+%state_at((17,3),60)
+%state_at((9,3),61)
+%state_at((17,3),61)
+%state_at((9,3),62)
+%state_at((17,3),62)
+%state_at((9,3),63)
+%state_at((17,3),63)
+%state_at((9,3),64)
+%state_at((17,3),64)
+%state_at((9,3),65)
+%state_at((17,3),65)
+%state_at((9,3),66)
+%state_at((17,3),66)
+%state_at((9,3),67)
+%state_at((17,3),67)
+%state_at((9,3),68)
+%state_at((17,3),68)
+%state_at((9,3),69)
+%state_at((17,3),69)
+%state_at((9,3),70)
+%state_at((17,3),70)
+%state_at((9,3),71)
+%state_at((17,3),71)
+%state_at((9,3),72)
+%state_at((17,3),72)
+%state_at((9,3),73)
+%state_at((17,3),73)
+%state_at((9,3),74)
+%state_at((17,3),74)
+%state_at((9,3),75)
+%state_at((17,3),75)
+%state_at((9,3),76)
+%state_at((17,3),76)
+%state_at((9,3),77)
+%state_at((17,3),77)
+%state_at((9,3),78)
+%state_at((17,3),78)
+%state_at((9,3),79)
+%state_at((17,3),79)
+%state_at((9,3),80)
+%state_at((17,3),80)
+%state_at((9,3),81)
+%state_at((17,3),81)
+%state_at((9,3),82)
+%state_at((17,3),82)
+%state_at((9,3),83)
+%state_at((17,3),83)
+%state_at((9,3),84)
+%state_at((17,3),84)
+%state_at((9,3),85)
+%state_at((17,3),85)
+%state_at((9,3),86)
+%state_at((17,3),86)
+%state_at((9,3),87)
+%state_at((17,3),87)
+%state_at((9,3),88)
+%state_at((17,3),88)
+%state_at((9,3),89)
+%state_at((17,3),89)
+%state_at((9,3),90)
+%state_at((17,3),90)
+%state_at((9,3),91)
+%state_at((17,3),91)
+%state_at((9,3),92)
+%state_at((17,3),92)
+%state_at((9,3),93)
+%state_at((17,3),93)
+%state_at((9,3),94)
+%state_at((17,3),94)
+%state_at((9,3),95)
+%state_at((17,3),95)
+%state_at((9,3),96)
+%state_at((17,3),96)
+%state_at((9,3),97)
+%state_at((17,3),97)
+%state_at((9,3),98)
+%state_at((17,3),98)
+%state_at((9,3),99)
+%state_at((17,3),99)
+%state_at((9,3),100)
+%state_at((17,3),100)
+%state_at((9,3),101)
+%state_at((17,3),101)
+%state_at((9,3),102)
+%state_at((17,3),102)
+%state_at((9,3),103)
+%state_at((17,3),103)
+%state_at((9,3),104)
+%state_at((17,3),104)
+%state_at((9,3),105)
+%state_at((17,3),105)
+%state_at((9,3),106)
+%state_at((17,3),106)
+%state_at((9,3),107)
+%state_at((17,3),107)
+%state_at((9,3),108)
+%state_at((17,3),108)
+%state_at((9,3),109)
+%state_at((17,3),109)
+%state_at((9,3),110)
+%state_at((17,3),110)
+%state_at((9,3),111)
+%state_at((17,3),111)
+%state_at((9,3),112)
+%state_at((17,3),112)
+%state_at((9,3),113)
+%state_at((17,3),113)
+%state_at((9,3),114)
+%state_at((17,3),114)
+%state_at((9,3),115)
+%state_at((17,3),115)
+%state_at((9,3),116)
+%state_at((17,3),116)
+%state_at((9,3),117)
+%state_at((17,3),117)
+%state_at((9,3),118)
+%state_at((17,3),118)
+%state_at((9,3),119)
+%state_at((17,3),119)
+%state_at((9,3),120)
+%state_at((17,3),120)
+%state_at((9,3),121)
+%state_at((17,3),121)
+%state_at((9,3),122)
+%state_at((17,3),122)
+%state_at((9,3),123)
+%state_at((17,3),123)
+%state_at((9,3),124)
+%state_at((17,3),124)
+%state_at((9,3),125)
+%state_at((17,3),125)
+%state_at((9,3),126)
+%state_at((17,3),126)
+%state_at((9,3),127)
+%state_at((17,3),127)
+%state_at((9,3),128)
+%state_at((17,3),128)
+%state_at((9,3),129)
+%state_at((17,3),129)
+%state_at((9,3),130)
+%state_at((17,3),130)
+%state_at((9,3),131)
+%state_at((17,3),131)
+%state_at((9,3),132)
+%state_at((17,3),132)
+%state_at((9,3),133)
+%state_at((17,3),133)
+%state_at((9,3),134)
+%state_at((17,3),134)
+%state_at((9,3),135)
+%state_at((17,3),135)
+%state_at((9,3),136)
+%state_at((17,3),136)
+%state_at((9,3),137)
+%state_at((17,3),137)
+%state_at((9,3),138)
+%state_at((17,3),138)
+%state_at((9,3),139)
+%state_at((17,3),139)
+%state_at((9,3),140)
+%state_at((17,3),140)
+%state_at((9,3),141)
+%state_at((17,3),141)
+%state_at((9,3),142)
+%state_at((17,3),142)
+%state_at((9,3),143)
+%state_at((17,3),143)
+%state_at((9,3),144)
+%state_at((17,3),144)
+%state_at((9,3),145)
+%state_at((17,3),145)
+%state_at((9,3),146)
+%state_at((17,3),146)
+%state_at((9,3),147)
+%state_at((17,3),147)
+%state_at((9,3),148)
+%state_at((17,3),148)
+%state_at((9,3),149)
+%state_at((17,3),149)
+%state_at((9,3),150)
+%state_at((17,3),150)
+%state_at((9,3),151)
+%state_at((17,3),151)
+%state_at((3,1),13)
+%action(right,12)
+%action(up,13)
+%state_at((3,1),14)
+%state_at((17,2),14)
+%action(up,14)
+%state_at((3,1),15)
+%state_at((17,2),15)
+%state_at((17,1),15)

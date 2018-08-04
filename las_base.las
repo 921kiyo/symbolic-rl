@@ -21,5 +21,4 @@ adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
 #constant(action, left).
 #constant(action, down).
 #constant(action, up).
-#constant(action, non).
 
