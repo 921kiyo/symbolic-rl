@@ -27,8 +27,8 @@
 \contentsline {subsubsection}{State transition experience}{19}{section*.19}
 \contentsline {subsubsection}{Environment experience}{21}{section*.20}
 \contentsline {subsection}{\numberline {3.1.2}Inductive Learning}{21}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}Generate a plan}{22}{subsection.3.1.3}
-\contentsline {subsection}{\numberline {3.1.4}Plan execution}{22}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.3}Generate a plan}{23}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Plan execution}{23}{subsection.3.1.4}
 \contentsline {subsection}{\numberline {3.1.5}Exploration}{24}{subsection.3.1.5}
 \contentsline {chapter}{\numberline {4}Evaluation}{25}{chapter.4}
 \contentsline {section}{\numberline {4.1}Learning Evaluation}{25}{section.4.1}
