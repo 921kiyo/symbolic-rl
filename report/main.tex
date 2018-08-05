@@ -550,11 +550,12 @@ where $\alpha$ is the learning rate, $\gamma$ is a discount rate between 0 and 1
 \State $\text{Repeat (for each episode)}$
 \State $\text{Choose a from s using policy derived from Q (e.g, epsilon-greedy)}$
 \State $\text{Take action a, observe r,  s$\prime$}$
+
+
 %\begin{equation}
 %Q(s,a) \leftarrow Q(s,a) +  \alpha(R\textsubscript{t+1} + \gamma  max (a+t) Q(s$\prime$, a$\prime$) - Q(s\textsubscript{t}, a\textsubscript{t}))
 %s \gets s$\prime$
 %\end{equation}
-
 
 %    \State $\textit{H (inductive solutions)} \gets \text{run ILASP(T)}$
 %    \State $\textit{plan(actions, states) answer sets} \gets \text{AS(B, H)}$
@@ -701,29 +702,45 @@ Nevertheless,  this approach is sufficient enough for our experiment, which will
 
 There are different linear methods to represents states as features, such as polynomials, fourier basis, or radial basis functions to name a few. Feature construction depends on a problem you are solving. In the next section, we introduce \textit{Tile Coding} which will be used for our benchmark. 
 
-\subsubsection{Tile Coding}
+\subsubsection{Tile Coding \textcolor{red}{TODO REFERENCE OF THIS METHOD}}
 
-State set is represented as a continuous two-dimentionala space. If a state is within the space, then the value of the  corrensponding feature is set to be 1 to indicate that the feature is present. 
-Binary features
+State set is represented as a continuous two-dimentionala space. If a state is within the space, then the value of the  corrensponding feature is set to be 1 to indicate that the feature is present, while 0 indicates that the feature is absent. This way of representing the feature is called \textit{binary feature}.  \textit{Coarse coding} represents a state with which binary features are present within the space. 
+One area is associated with one weight w, and training at a state will affect the weight of all the areas overlapping that state. the approximate value function will be updated within at all states within the union of the areas, and a point that has more overlap will be more affected, as illustrated in Figure XX.
 
-Representing a state with feature overlap is \textit{coarse coding}. 
-
-\textcolor{red}{TODO REFERENCE}
-
-\textcolor{red}{TODO ILLUSTRATION}
-
-
+The size and shape of the areas will determine the degree of the generalisation. Large areaas will have more generalisation
 the change of the weight in that state will affect all other states within the intersection of the spaces. 
 
 The degree of overlap within a space will determined the degree of the generalisation. 
 
 The shape of the space also affect how it is generalised. 
 
-\textit{Tile coding} is a type of coarse coding.
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=8cm, height=6cm]{./figures/coarse_coding}
+%\caption{Relationships among learning, planning and acting \cite{Montague1999}}
+\caption{Relationships among learning, planning and acting \textcolor{red}{Update this figure}}
+\label{dyna}
+\end{figure}
 
+\textit{Tile coding} is a type of coarse coding. \textit{Tiling} is a partition of state space, and each element of the partition is called a \textit{tile}. 
 
-\subsubsection{Deep Neural Network}
+In order to do coarse coding with tile coding, multiple tilings are required, each tiling is offset from one another by a fraction of a tile width. 
 
+As illustrated in Figure XXX, when a state occurs, several features with corresponding tiles become active, 
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=1.0\textwidth]{./figures/tile_coding}
+%\caption{Relationships among learning, planning and acting \cite{Montague1999}}
+\caption{Relationships among learning, planning and acting \textcolor{red}{Update this figure}}
+\label{dyna}
+\end{figure}
+
+Tile coding has computational advantage, since each component of tiling is binary value,  XXXX.
+
+a trained state will be generalised to other states if they are within any of the same tiles. 
+
+Similar to coarse coding, the size and shape of tiles will determine the degree of approximation. 
 
 \chapter{Implementation and Methodology}
 \label{methods}

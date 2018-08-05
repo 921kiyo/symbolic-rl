@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  4 AUG 2018 15:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  5 AUG 2018 11:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -535,6 +535,12 @@ Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
 (./main.aux
 
+LaTeX Warning: Label `dyna' multiply defined.
+
+
+LaTeX Warning: Label `dyna' multiply defined.
+
+
 LaTeX Warning: Label `euclid' multiply defined.
 
 
@@ -845,7 +851,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 381--382
 LaTeX Warning: Reference `model_generation_and_update' on page 11 undefined on 
 input line 410.
 
-<./figures/agent_env.png, id=406, 248.93pt x 228.855pt>
+<./figures/agent_env.png, id=410, 248.93pt x 228.855pt>
 File: ./figures/agent_env.png Graphic file (type png)
 
 <use ./figures/agent_env.png>
@@ -859,7 +865,7 @@ Package natbib Warning: Citation `Puterman1994' on page 11 undefined on input l
 ine 425.
 
 [11] [12 <./figures/agent_env.png>]
-<./figures/dyna.png, id=429, 243.91125pt x 175.65625pt>
+<./figures/dyna.png, id=433, 243.91125pt x 175.65625pt>
 File: ./figures/dyna.png Graphic file (type png)
 
 <use ./figures/dyna.png>
@@ -869,16 +875,29 @@ Package pdftex.def Info: ./figures/dyna.png used on input line 504.
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 545.
  [14 <./figures/dyna.png>]
-LaTeX Font Info:    Try loading font information for U+dsrom on input line 611.
+LaTeX Font Info:    Try loading font information for U+dsrom on input line 612.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/doublestroke/Udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
 ) [15] [16]
-[17]
+<./figures/coarse_coding.png, id=475, 401.5pt x 312.16624pt>
+File: ./figures/coarse_coding.png Graphic file (type png)
+
+<use ./figures/coarse_coding.png>
+Package pdftex.def Info: ./figures/coarse_coding.png used on input line 719.
+(pdftex.def)             Requested size: 227.62596pt x 170.72026pt.
+
+<./figures/tile_coding.png, id=476, 848.16875pt x 324.21124pt>
+File: ./figures/tile_coding.png Graphic file (type png)
+
+<use ./figures/tile_coding.png>
+Package pdftex.def Info: ./figures/tile_coding.png used on input line 733.
+(pdftex.def)             Requested size: 438.17227pt x 167.49257pt.
+ [17] [18 <./figures/coarse_coding.png> <./figures/tile_coding.png>]
 Chapter 3.
 (./chapters/implementation.tex
-<./figures/architecture.png, id=479, 361.35pt x 271.0125pt>
+<./figures/architecture.png, id=489, 361.35pt x 271.0125pt>
 File: ./figures/architecture.png Graphic file (type png)
 
 <use ./figures/architecture.png>
@@ -895,7 +914,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--39
 
  []
 
-[18
+[19
 
 ]
 Overfull \hbox (64.16423pt too wide) in paragraph at lines 57--58
@@ -903,7 +922,7 @@ Overfull \hbox (64.16423pt too wide) in paragraph at lines 57--58
 ,4)),state[]after((0,3)),state[]after((1,2)),
  []
 
-[19 <./figures/architecture.png>]
+[20 <./figures/architecture.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 96--104
 
  []
@@ -913,7 +932,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 105--110
 
  []
 
-[20]
+[21]
 Overfull \hbox (12.5234pt too wide) in paragraph at lines 140--144
 []\OT1/bch/m/n/12 state[]after(V0) :- ad-ja-cent(right, V0, V1), state[]before(
 V1), ac-tion(right), not wall(V0).
@@ -931,27 +950,27 @@ Overfull \hbox (1.67538pt too wide) in paragraph at lines 173--178
 n(right,2) state[]at((3,1),3) ac-
  []
 
-[21] [22]) [23]
+[22] [23]) [24]
 Chapter 4.
 (./chapters/evaluation.tex
 
-Package natbib Warning: Citation `Schaul2013' on page 24 undefined on input lin
+Package natbib Warning: Citation `Schaul2013' on page 25 undefined on input lin
 e 8.
 
-<./figures/experiment1.png, id=513, 458.71375pt x 194.7275pt>
+<./figures/experiment1.png, id=523, 458.71375pt x 194.7275pt>
 File: ./figures/experiment1.png Graphic file (type png)
 
 <use ./figures/experiment1.png>
 Package pdftex.def Info: ./figures/experiment1.png used on input line 27.
 (pdftex.def)             Requested size: 219.08614pt x 93.0046pt.
 
-<./figures/placeholder.png, id=514, 722.7pt x 361.35pt>
+<./figures/placeholder.png, id=524, 722.7pt x 361.35pt>
 File: ./figures/placeholder.png Graphic file (type png)
 
 <use ./figures/placeholder.png>
 Package pdftex.def Info: ./figures/placeholder.png used on input line 48.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
- [24
+ [25
 
 ]
 File: ./figures/placeholder.png Graphic file (type png)
@@ -964,7 +983,7 @@ File: ./figures/placeholder.png Graphic file (type png)
 Package pdftex.def Info: ./figures/placeholder.png used on input line 81.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 
-<./figures/experiment4_before.png, id=521, 457.71pt x 266.9975pt>
+<./figures/experiment4_before.png, id=530, 457.71pt x 266.9975pt>
 File: ./figures/experiment4_before.png Graphic file (type png)
 
 <use ./figures/experiment4_before.png>
@@ -972,7 +991,7 @@ Package pdftex.def Info: ./figures/experiment4_before.png used on input line 97
 .
 (pdftex.def)             Requested size: 219.08614pt x 127.79881pt.
 
-<./figures/experiment4_after.png, id=522, 459.7175pt x 265.99374pt>
+<./figures/experiment4_after.png, id=531, 459.7175pt x 265.99374pt>
 File: ./figures/experiment4_after.png Graphic file (type png)
 
 <use ./figures/experiment4_after.png>
@@ -982,44 +1001,44 @@ Package pdftex.def Info: ./figures/experiment4_after.png used on input line 97.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [25 <./figures/experiment1.png> <./figures/placeholder.png>]
+ [26 <./figures/experiment1.png> <./figures/placeholder.png>]
 File: ./figures/placeholder.png Graphic file (type png)
 
 <use ./figures/placeholder.png>
 Package pdftex.def Info: ./figures/placeholder.png used on input line 112.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
- [26]) [27 <./figures/experiment4_before.png> <./figures/experiment4_after.png>
+ [27]) [28 <./figures/experiment4_before.png> <./figures/experiment4_after.png>
 ]
 Chapter 5.
 (./chapters/related_work.tex
 
-Package natbib Warning: Citation `LeCunL1998' on page 28 undefined on input lin
+Package natbib Warning: Citation `LeCunL1998' on page 29 undefined on input lin
 e 3.
 
 
-Package natbib Warning: Citation `Apeldoorn2016' on page 28 undefined on input 
+Package natbib Warning: Citation `Apeldoorn2016' on page 29 undefined on input 
 line 18.
 
 
-Package natbib Warning: Citation `Apeldoorn' on page 28 undefined on input line
+Package natbib Warning: Citation `Apeldoorn' on page 29 undefined on input line
  18.
 
-[28
+[29
 
-]) [29]
+]) [30]
 Chapter 6.
-[30
+[31
 
 ]
 
-Package natbib Warning: Citation `Sridharan2017' on page 31 undefined on input 
-line 774.
+Package natbib Warning: Citation `Sridharan2017' on page 32 undefined on input 
+line 794.
 
-[31]
+[32]
 Chapter 7.
-(./chapters/ethics.tex) [32
+(./chapters/ethics.tex) [33
 
-] [33
+] [34
 
 
 
@@ -1052,26 +1071,26 @@ Overfull \hbox (9.14763pt too wide) in alignment at lines 208--213
  [] [] [] 
  []
 
-[34]) (./main.bbl (./main.brf)
+[35]) (./main.bbl (./main.brf)
 \tf@brf=\write7
 \openout7 = `main.brf'.
 
- [35] [36
+ [36] [37
 
 ])
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 812.
-[37]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 812.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 832.
+[38]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 832.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 812.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 812.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 832.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 832.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 19300B71B813FF1611105BC4F86BE10D;3229.
+(rerunfilecheck)             Checksum: 8644D1700AC76E74F915A3EC80C38D59;3229.
 Package rerunfilecheck Info: File `main.brf' has not changed.
-(rerunfilecheck)             Checksum: BAD12E8A562225D3CF5BA51A734DB82E;1257.
+(rerunfilecheck)             Checksum: 44D9117ECDD4AD9C01584B5117CF566E;1257.
 
 
 LaTeX Warning: There were undefined references.
@@ -1079,13 +1098,13 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 812.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 832.
  ) 
 Here is how much of TeX's memory you used:
- 11666 strings out of 493029
- 168788 string characters out of 6136234
- 303821 words of memory out of 5000000
- 14745 multiletter control sequences out of 15000+600000
+ 11678 strings out of 493029
+ 169096 string characters out of 6136234
+ 303848 words of memory out of 5000000
+ 14753 multiletter control sequences out of 15000+600000
  48630 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,20n,43p,928b,588s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1105,10 +1124,10 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/doublestroke/dsrom12.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (44 pages, 348974 bytes).
+Output written on main.pdf (45 pages, 396478 bytes).
 PDF statistics:
- 691 PDF objects out of 1000 (max. 8388607)
- 611 compressed objects within 7 object streams
- 192 named destinations out of 1000 (max. 500000)
- 393 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 701 PDF objects out of 1000 (max. 8388607)
+ 618 compressed objects within 7 object streams
+ 194 named destinations out of 1000 (max. 500000)
+ 403 words of extra memory for PDF output out of 10000 (max. 10000000)
 

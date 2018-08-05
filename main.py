@@ -20,7 +20,6 @@ CACHE_DIR = os.path.join(dir, LAS_CACHE)
 DECAY_PARAM = 1
 
 TIME_RANGE = 150
-# TIME_RANGE2 = 30
 
 is_print = True
 
