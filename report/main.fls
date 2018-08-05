@@ -302,6 +302,8 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/doublestroke/dsrom8.tfm
 INPUT ./figures/experiment1.png
 INPUT ./figures/experiment1.png
 INPUT ./figures/experiment1.png
+INPUT ./figures/experiment1.png
+INPUT ./figures/experiment1.png
 INPUT ./figures/placeholder.png
 INPUT ./figures/placeholder.png
 INPUT ./figures/placeholder.png

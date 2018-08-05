@@ -1,11 +1,27 @@
-\section{Learning Evaluation}
-\label{learning_evaluation}
 
+\subsection{Settings}
+Having implemented the algorithm, we now describe the experiment configuration and results in this chapter.
 The two main measurements for the performance of our new architecture are learning efficiency and transfer learning capability as stated in the Introduction.
+We conducted several different experiments to highlight each aspect of the algorithm.
 
-GVG-AI Framework was created for the General Video Gamea AI Competition \footnote{http://www.gvgai.net/}, 
+We use GVG-AI Framework for our experiments, which was created for the General Video Gamea AI Competition\footnote{http://www.gvgai.net/}, 
 a game environment for an agent that should be able to play a wide variety of games without knowing which games are to be played.
 The underlying language is the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
+The VGDL allows users to easily craft their own environments, which makes us possible to do various experiments without relying on the default environments.
+The base game is a maze implemented using VGDL game platform. 
+Example XX was created for the experimet 1 in this report, there are only 3 different types of cells: 
+a goal cell, walls and paths. The agent can take 4 different actions: up, down, right and left.  
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=12.5cm, height=6cm]{./figures/experiment1}
+\caption{VDGL game}
+\label{proposed_architecture}
+\end{figure}
+    
+No dynamic enemies,
+
+The agent receives -1 in any states except the goal state, where it gains a reward of 100. 
 
 \textcolor{red}{TODO OPENAI paper citation}
 
@@ -15,10 +31,18 @@ I conducted a number of experiments to highlight a different aspects of the algo
 
 To compare the performance of our algorithm, I ran Q-learning, the most commonly used RL algorithm, in the same senarios as a bench mark. 
 
-\subsection{Settings}
-The base game is a maze implemented using VGDL game platform. 
+\subsection{Benchmark}
 
-There is a agent a goal cell, walls and paths. The agent can take 5 different actions: up, down, right left, and "do not move".  
+We also compare the performance of our algorith with existing reinforcement learning techniques. 
+Q-learning is most widely used technique for reinforcement learning. However comparision with q-learning might not be fair 
+since our algorithm has one extra assumptions: the agent knows surrounding information (whether there are walls in adjacent cells), 
+which is not a common assumption for RL.
+In order to compare with 
+Another benchmark is tile coding, which is a type of linear function approximation techniques. 
+
+\section{Learning Evaluation}
+\label{learning_evaluation}
+
 
 \subsection{Experiment1}
 
