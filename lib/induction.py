@@ -159,7 +159,7 @@ def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list
     y_after, _, _ = abduction.get_Y(state_at_after)
     state_before = py_asp.state_before(x_before, y_before)
     state_after = py_asp.state_after(x_after, y_after)
-    # TODO is this correct way to do??
+    # TODO is this correct way to do?? exclusion even in random action.
     exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
     walls = add_surrounding_walls(x_before, y_before, wall_list)
     

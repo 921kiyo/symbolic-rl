@@ -30,11 +30,10 @@ def make_epsilon_greedy_policy(Q, epsilon, nA):
         return A
     return policy_fn
 
-def run_experiment(env, state_int, Q, stats_test, i_episode, width, time_range):
+def run_experiment(env, Q, stats_test, i_episode, width, time_range):
     
     policy = make_epsilon_greedy_policy(Q, 0, ACTION_SPACE)
     
-    # current_state = state_int
     current_state = env.reset()
     current_state_int = helper.convert_state(current_state[1], current_state[0], width)
     for t in range(time_range):
@@ -133,7 +132,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
             state_int = next_state_int
 
         # if(i_episode+1) % 10 == 0:
-        # run_experiment(env,state_int, Q, stats_test, i_episode, width, TIME_RANGE)
+        # run_experiment(env, Q, stats_test, i_episode, width, TIME_RANGE)
     # Display the final Q-Table
     # for key, value in enumerate(Q.items()):
     #     print(key)

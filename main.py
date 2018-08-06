@@ -19,9 +19,66 @@ CACHE_DIR = os.path.join(dir, LAS_CACHE)
 # Increase this to make the decay faster
 DECAY_PARAM = 1
 
-TIME_RANGE = 150
+TIME_RANGE = 200
 
 is_print = True
+
+def run_experiment(env, ILASP_ran, i_episode, stats_test, width, time_range):
+    current_state = env.reset()
+    current_state_int = helper.convert_state(current_state[1], current_state[0], width)
+    if ILASP_ran:
+        answer_sets = abduction.run_clingo(CLINGOFILE)
+        states_plan, actions_array = abduction.sort_planning(answer_sets)
+        print("ASP states ", states_plan)
+        print("ASP actions ", actions_array)
+
+        time = 0
+        while time < time_range:
+            print("testing phase....")
+            for action_index, action in enumerate(actions_array):      
+                action_int = helper.get_action(action[1])
+                action_string = helper.convert_action(action_int)
+                next_state, reward, done, _ = env.step(action_int)
+
+                current_state_int = helper.convert_state(next_state[1], next_state[0], width)
+    
+                if done:
+                    reward = reward + 100
+                else:
+                    reward = reward - 1
+
+                print("reward here is ", reward)
+                print("i_episode here is ", i_episode)
+                # Update stats
+                stats_test.episode_rewards_test[i_episode] += reward
+                stats_test.episode_lengths_test[i_episode] = time
+                time = time + 1
+
+            if done:
+                break
+            
+            # If clingo does not give you a right path, just accumulate -1 punishment
+            action_int = 4 
+            next_state, reward, done, _ = env.step(action_int)
+            if done:
+                reward = reward + 100
+            else:
+                reward = reward - 1
+            
+            stats_test.episode_rewards_test[i_episode] += reward
+            stats_test.episode_lengths_test[i_episode] = time
+            time = time + 1
+    else:
+        for t in range(time_range):
+            action_int = 4
+            next_state, reward, done, _ = env.step(action_int)
+            if done:
+                reward = reward + 100
+            else:
+                reward = reward - 1
+            stats_test.episode_rewards_test[i_episode] += reward
+            stats_test.episode_lengths_test[i_episode] = t
+
 
 def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=False):
     # Get cell range for the game
@@ -41,6 +98,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     # the first abduction needs lots of basic information
     first_abduction = False
 
+    ILASP_ran = False
     # Clean up all the files first
     helper.silentremove(BASE_DIR, LASFILE)
     helper.silentremove(BASE_DIR, BACKGROUND)
@@ -57,6 +115,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes))
 
+    stats_test = plotting.EpisodeStats_test(
+        episode_lengths_test=np.zeros(num_episodes),
+        episode_rewards_test=np.zeros(num_episodes))
+
     for i_episode in range(num_episodes):
         print("==============NEW EPISODE======================")
         print("i_episode ", i_episode)
@@ -71,6 +133,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         time = 0
         # Once the agent reaches the goal, the algorithm kicks in
         if reached_goal:
+            ILASP_ran = True
             # Decaying epsilon greedy params
             new_epsilon = epsilon*(1/(i_episode+1)**DECAY_PARAM)
             print("new_epsilon ", new_epsilon)
@@ -219,15 +282,17 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                 if done:
                     break
+        
+        run_experiment(env, ILASP_ran, i_episode, stats_test, width, TIME_RANGE)
 
-    return stats
+    return stats, stats_test
 
 env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-stats = k_learning(env, 50, epsilon=0.4, record_prefix=None, is_link=False)
-# stats = k_learning(env, 50, epsilon=0.2, record_prefix="experiment3.5", is_link=True)
-
-plotting.store_stats(stats, BASE_DIR, "experiment1_v2_ILASP")
+stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix=None, is_link=False)
+# stats, stats_test = k_learning(env, 80, epsilon=0.2, record_prefix="experiment3.5", is_link=True)
+plotting.store_stats(stats, BASE_DIR, "experiment1_ILASP")
+plotting.store_stats(stats_test, BASE_DIR, "experiment1_ILASP_test")
 plotting.plot_episode_stats_simple(stats)

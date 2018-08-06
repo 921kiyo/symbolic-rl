@@ -37,8 +37,10 @@ env = gym.make('vgdl_experiment4_after-v0')
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
 stats = plotting.load_stats(base_dir, "experiment1_ILASP")
-stats_test = plotting.load_stats(base_dir, "experiment1_q")
-# plotting.plot_episode_stats_test(stats, stats_test)
-plotting.plot_episode_stats_multiple(stats, stats_test)
+stats_test = plotting.load_stats(base_dir, "experiment1_ILASP_test")
+# import ipdb; ipdb.set_trace()
+plotting.plot_episode_stats_test(stats, stats_test)
+# plotting.plot_episode_stats_simple(stats)
 
-import ipdb; ipdb.set_trace()
+# plotting.plot_episode_stats_multiple(stats, stats_test)
+
