@@ -8,7 +8,7 @@ import os
 import subprocess
 
 from lib.helper import gen_log_dir
-from lib import plotting, helper
+from lib import plotting, helper, induction
 
 
 TIME_RANGE = 400
@@ -35,10 +35,11 @@ env = gym.make('vgdl_experiment4_after-v0')
 
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
+# print(induction.check_ILASP_cover(base_dir, "output2.las", ""))
 
 stats = plotting.load_stats(base_dir, "experiment1_ILASP")
 stats_test = plotting.load_stats(base_dir, "experiment1_ILASP_test")
-# import ipdb; ipdb.set_trace()
+# # import ipdb; ipdb.set_trace()
 plotting.plot_episode_stats_test(stats, stats_test)
 # plotting.plot_episode_stats_simple(stats)
 

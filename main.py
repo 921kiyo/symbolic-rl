@@ -109,6 +109,9 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     # Add mode bias and adjacent definition for ILASP
     induction.copy_las_base(LASFILE, height, width, is_link)
 
+    # record the current hypothesis
+    hypothesis = ""
+
     wall_list = induction.get_all_walls(env)
 
     stats = plotting.EpisodeStats(
@@ -142,7 +145,9 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 if first_abduction == False:
                     # Run ILASP to get H
                     hypothesis = induction.run_ILASP(LASFILE, CACHE_DIR)
-                    abduction.make_lp(hypothesis, LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE, cell_range)
+                    # Convert syntax of H for ASP solver
+                    hypothesis_asp = py_asp.convert_las_asp(hypothesis)
+                    abduction.make_lp(hypothesis_asp, LASFILE, BACKGROUND, CLINGOFILE, agent_position, goal_state, TIME_RANGE, cell_range)
                     first_abduction = True
                     # Logging set up and record ILASP
                     if record_prefix:
@@ -221,10 +226,14 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                         # if not, update H
                         if(predicted_state != observed_state):
                             print("H is probably not correct!")
-                            hypothesis = induction.run_ILASP(LASFILE, CACHE_DIR)
-                            if record_prefix:
-                                inputfile = os.path.join(BASE_DIR, LASFILE)
-                                helper.log_las(inputfile, hypothesis, log_dir, i_episode, time)
+                            if not induction.check_ILASP_cover(BASE_DIR, LASFILE, hypothesis):
+                                hypothesis = induction.run_ILASP(LASFILE, CACHE_DIR)
+                                # Convert syntax of H for ASP solver
+                                hypothesis_asp = py_asp.convert_las_asp(hypothesis)
+
+                                if record_prefix:
+                                    inputfile = os.path.join(BASE_DIR, LASFILE)
+                                    helper.log_las(inputfile, hypothesis, log_dir, i_episode, time)
 
                     previous_state = next_state
                     previous_state_at = observed_state
@@ -241,12 +250,16 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 
                 if is_exclusion:
                     if is_print:
-                        print("exclusion is there ", pos)                    
-                    hypothesis = induction.run_ILASP(LASFILE, CACHE_DIR)
-                    abduction.update_h(hypothesis, CLINGOFILE)
-                    if record_prefix:
-                        inputfile = os.path.join(BASE_DIR, LASFILE)
-                        helper.log_las(inputfile, hypothesis, log_dir, i_episode, time-1)
+                        print("exclusion is there ", pos) 
+                    if not induction.check_ILASP_cover(BASE_DIR, LASFILE, hypothesis):                 
+                        hypothesis = induction.run_ILASP(LASFILE, CACHE_DIR)
+                        # Convert syntax of H for ASP solver
+                        hypothesis_asp = py_asp.convert_las_asp(hypothesis)
+
+                        abduction.update_h(hypothesis_asp, CLINGOFILE)
+                        if record_prefix:
+                            inputfile = os.path.join(BASE_DIR, LASFILE)
+                            helper.log_las(inputfile, hypothesis, log_dir, i_episode, time-1)
                 
                 if done:
                     break
@@ -287,12 +300,12 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
     return stats, stats_test
 
-env = gym.make('vgdl_experiment1-v0')
+env = gym.make('vgdl_experiment3.5-v0')
 # env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix=None, is_link=False)
-# stats, stats_test = k_learning(env, 80, epsilon=0.2, record_prefix="experiment3.5", is_link=True)
-plotting.store_stats(stats, BASE_DIR, "experiment1_ILASP")
-plotting.store_stats(stats_test, BASE_DIR, "experiment1_ILASP_test")
+# stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix=None, is_link=False)
+stats, stats_test = k_learning(env, 50, epsilon=0.3, record_prefix="experiment3.5", is_link=True)
+plotting.store_stats(stats, BASE_DIR, "experiment3.5_ILASP")
+plotting.store_stats(stats_test, BASE_DIR, "experiment3.5_ILASP_test")
 plotting.plot_episode_stats_simple(stats)

@@ -240,10 +240,41 @@ def run_ILASP(filename, cache_path=None):
     except subprocess.CalledProcessError as e:
         print("Error...", e.output)
         hypothesis = e.output
-    # Convert syntax of H for ASP solver
-    hypothesis = py_asp.convert_las_asp(hypothesis)
     return hypothesis
 
+def check_ILASP_cover(base_dir, lasfile, hypothesis):
+    helper.silentremove(base_dir, "check_las.las")
+
+    input_las = os.path.join(base_dir, lasfile)
+    output_las = os.path.join(base_dir, "check_las.las")
+    helper.append_to_file(hypothesis, output_las)
+    helper.copy_file(input_las, output_las)
+    remove_mode(output_las)
+    hypothesis = run_ILASP(output_las)
+    if hypothesis == "":
+        return True
+    else:
+        return False
+    
+
+def remove_mode(output_file):
+    with open(output_file, "r") as out:
+        lines = out.readlines()
+    with open(output_file, "w") as out:
+        for line in lines:
+            if line.startswith("#modeh") or line.startswith("#modeb"):
+                continue
+            else:
+                out.write(line)
+
+        # with open(output_las2) as outfile:
+        #     for line in infile:
+        #         outfile.write(line.replace("#modeh", "%#modeh"))
+        #         outfile.write(line.replace("#modeb", "%#modeb"))
+
+        # for c in content:
+        #     if string.startswith("#modeh") or string.startswith("#modeb"):
+        #         c = 
 # Probably not needed
 # def execute_pseudo_action(current_state, action):
 #     current_state = abduction.update_T(current_state)
