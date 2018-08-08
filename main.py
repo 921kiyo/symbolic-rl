@@ -19,7 +19,7 @@ CACHE_DIR = os.path.join(dir, LAS_CACHE)
 # Increase this to make the decay faster
 DECAY_PARAM = 1
 
-TIME_RANGE = 200
+TIME_RANGE = 250
 
 is_print = True
 
@@ -34,6 +34,7 @@ def run_experiment(env, ILASP_ran, i_episode, stats_test, width, time_range):
 
         time = 0
         while time < time_range:
+            done = False
             print("testing phase....")
             for action_index, action in enumerate(actions_array):      
                 action_int = helper.get_action(action[1])
@@ -43,7 +44,7 @@ def run_experiment(env, ILASP_ran, i_episode, stats_test, width, time_range):
                 current_state_int = helper.convert_state(next_state[1], next_state[0], width)
     
                 if done:
-                    reward = reward + 100
+                    reward = reward + 10
                 else:
                     reward = reward - 1
 
@@ -54,26 +55,26 @@ def run_experiment(env, ILASP_ran, i_episode, stats_test, width, time_range):
                 stats_test.episode_lengths_test[i_episode] = time
                 time = time + 1
 
-            if done:
-                break
-            
-            # If clingo does not give you a right path, just accumulate -1 punishment
-            action_int = 4 
-            next_state, reward, done, _ = env.step(action_int)
-            if done:
-                reward = reward + 100
-            else:
-                reward = reward - 1
-            
-            stats_test.episode_rewards_test[i_episode] += reward
-            stats_test.episode_lengths_test[i_episode] = time
-            time = time + 1
+                if done:
+                    break
+            if not done:
+                # If clingo does not give you a right path, just accumulate -1 punishment
+                action_int = 4
+                next_state, reward, done2, _ = env.step(action_int)
+                if done2:
+                    reward = reward + 10
+                else:
+                    reward = reward - 1
+                
+                stats_test.episode_rewards_test[i_episode] += reward
+                stats_test.episode_lengths_test[i_episode] = time
+                time = time + 1
     else:
         for t in range(time_range):
             action_int = 4
             next_state, reward, done, _ = env.step(action_int)
             if done:
-                reward = reward + 100
+                reward = reward + 10
             else:
                 reward = reward - 1
             stats_test.episode_rewards_test[i_episode] += reward
@@ -190,7 +191,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     action_string = helper.convert_action(action_int)
                     next_state, reward, done, _ = env.step(action_int)
                     if done:
-                        reward = reward + 100
+                        reward = reward + 10
                     else:
                         reward = reward - 1
 
@@ -204,11 +205,16 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     
                     # Update B if any new walls are discovered
                     new_wall_added = abduction.add_new_walls(previous_state, wall_list, CLINGOFILE)
+
                     if new_wall_added:
                         print("new walls added!")
-
+                    if is_link:
+                        if("up" == helper.convert_action(action_int) and int(previous_state[0]) == 9 and int(previous_state[0]) == 4):
+                            link = "\nis_link((9,3)). is_link((17,3)).\n"
+                            helper.append_to_file(link, BACKGROUND)
                     # Add pos
                     walls = induction.get_seen_walls(CLINGOFILE)
+
                     walls = walls + wall_list
                     any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action_string, walls, is_link)
                     pos += "\n"
@@ -248,6 +254,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     if threshold < new_epsilon:
                         break
                 
+                if not actions_array:
+                    time = time + 1
                 if is_exclusion:
                     if is_print:
                         print("exclusion is there ", pos) 
@@ -274,7 +282,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 next_state, reward, done, _ = env.step(action)
 
                 if done:
-                    reward = reward + 100
+                    reward = reward + 10
                     goal_state = next_state
                     reached_goal = True
                 else:
@@ -286,6 +294,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 induction.send_state_transition_pos(previous_state, next_state, action_string, wall_list, LASFILE, BACKGROUND)
                 # Meanwhile, accumulate all background knowlege
                 abduction.add_new_walls(previous_state, wall_list, BACKGROUND)
+                if is_link:
+                        if("up" == helper.convert_action(action) and int(previous_state[0]) == 9 and int(previous_state[0]) == 4):
+                            link = "\nis_link((9,3)). is_link((17,3)).\n"
+                            helper.append_to_file(link, BACKGROUND)
                 # induction.add_surrounding_walls((previous_state, wall_list, BACKGROUND))
                 previous_state = next_state
 
@@ -300,12 +312,14 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
     return stats, stats_test
 
-env = gym.make('vgdl_experiment3.5-v0')
+# env = gym.make('vgdl_experiment3.5-v0')
+env = gym.make('vgdl_experiment1-v0')
+
 # env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-# stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix=None, is_link=False)
-stats, stats_test = k_learning(env, 50, epsilon=0.3, record_prefix="experiment3.5", is_link=True)
-plotting.store_stats(stats, BASE_DIR, "experiment3.5_ILASP")
-plotting.store_stats(stats_test, BASE_DIR, "experiment3.5_ILASP_test")
+stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix=None, is_link=False)
+# stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix="experiment3.5test", is_link=True)
+plotting.store_stats(stats, BASE_DIR, "experiment1_ILASP")
+plotting.store_stats(stats_test, BASE_DIR, "experiment1_ILASP_test")
 plotting.plot_episode_stats_simple(stats)

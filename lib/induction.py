@@ -180,9 +180,9 @@ def generate_explore_pos(next_state, previous_state, action, wall_list):
     Output: #pos({state_after((3,6))}, {state_after((4,6)), ...}, {state_before((3,6)). action(non). }).
     '''
     walls = add_surrounding_walls(int(previous_state[0]),int(previous_state[1]), wall_list)
-    is_link, exclusions = get_exclusions(previous_state, next_state)
+    link_detected, exclusions = get_exclusions(previous_state, next_state)
 
-    if is_link:
+    if link_detected:
         link = get_link(previous_state, next_state, action)
         return link, "#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + link + walls + "})."    
     else:
@@ -250,6 +250,7 @@ def check_ILASP_cover(base_dir, lasfile, hypothesis):
     helper.append_to_file(hypothesis, output_las)
     helper.copy_file(input_las, output_las)
     remove_mode(output_las)
+    print("checking ILASP necessity...")
     hypothesis = run_ILASP(output_las)
     if hypothesis == "":
         return True

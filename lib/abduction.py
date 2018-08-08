@@ -101,12 +101,14 @@ def run_clingo(clingofile):
         # When Clingo returns UNSATISFIABLE
         print("Clingo error...", planning_actions)
         # print(e.output)
-
     json_plan = json.loads(planning_actions)
-
     # Extract only the optimal answer set (last one)
+    is_success = json_plan["Result"]
+    if(is_success == "UNSATISFIABLE"):
+        return [""]   
     size_asp = len(json_plan["Call"][0]["Witnesses"])
     answer_sets = json_plan["Call"][0]["Witnesses"][size_asp-1]["Value"]
+    
     return answer_sets
 
 def sort_planning(answer_sets):
