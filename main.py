@@ -1,6 +1,7 @@
  # import ipdb; ipdb.set_trace()
 import numpy as np
-import os, time, random, subprocess
+import os, random, subprocess
+import time
 from lib import plotting, py_asp, helper, induction, abduction
 import gym, gym_vgdl
 
@@ -24,24 +25,22 @@ TIME_RANGE = 250
 is_print = True
 
 def run_experiment(env, ILASP_ran, i_episode, stats_test, width, time_range):
-    current_state = env.reset()
-    current_state_int = helper.convert_state(current_state[1], current_state[0], width)
+    _ = env.reset()
     if ILASP_ran:
         answer_sets = abduction.run_clingo(CLINGOFILE)
         states_plan, actions_array = abduction.sort_planning(answer_sets)
         print("ASP states ", states_plan)
         print("ASP actions ", actions_array)
 
-        time = 0
-        while time < time_range:
-            done = False
+        t = 0
+        while t < time_range:
+            is_done = False
             print("testing phase....")
-            for action_index, action in enumerate(actions_array):      
+            for _, action in enumerate(actions_array):
+                env.render()
+                # time.sleep(0.1)
                 action_int = helper.get_action(action[1])
-                action_string = helper.convert_action(action_int)
-                next_state, reward, done, _ = env.step(action_int)
-
-                current_state_int = helper.convert_state(next_state[1], next_state[0], width)
+                _, reward, done, _ = env.step(action_int)
     
                 if done:
                     reward = reward + 10
@@ -52,23 +51,28 @@ def run_experiment(env, ILASP_ran, i_episode, stats_test, width, time_range):
                 print("i_episode here is ", i_episode)
                 # Update stats
                 stats_test.episode_rewards_test[i_episode] += reward
-                stats_test.episode_lengths_test[i_episode] = time
-                time = time + 1
-
+                stats_test.episode_lengths_test[i_episode] = t
+                t = t + 1
+                print("done? ", done)
                 if done:
+                    is_done = True
                     break
-            if not done:
+            if is_done:
+                break
+            print("is_done? ", is_done)
+            if not is_done:
                 # If clingo does not give you a right path, just accumulate -1 punishment
                 action_int = 4
-                next_state, reward, done2, _ = env.step(action_int)
+                _, reward, done2, _ = env.step(action_int)
+                print("done2 ", done2)
                 if done2:
                     reward = reward + 10
                 else:
                     reward = reward - 1
                 
                 stats_test.episode_rewards_test[i_episode] += reward
-                stats_test.episode_lengths_test[i_episode] = time
-                time = time + 1
+                stats_test.episode_lengths_test[i_episode] = t
+                t = t + 1
     else:
         for t in range(time_range):
             action_int = 4

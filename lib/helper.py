@@ -18,6 +18,20 @@ def convert_action(action):
         print("this action does not exist...", str(action))
         return None
 
+def check_surrounding_walls(x, y, wall_list):
+    up_wall = down_wall = right_wall = left_wall = False
+    
+    if((x+1,y) in wall_list):
+        right_wall = True
+    if((x,y+1) in wall_list):
+        up_wall = True
+    if((x-1,y) in wall_list):
+        left_wall = True
+    if((x,y-1) in wall_list):
+        down_wall = True
+    
+    return up_wall, down_wall, right_wall, left_wall
+
 def get_action(action):
     if(action == "up"):
         return 0
