@@ -1,7 +1,7 @@
 import gym
 import gym_vgdl
 import numpy as np
-
+import math
 import time
 
 # Q-learning
@@ -35,13 +35,15 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
     """
     height = env.unwrapped.game.height
     width = env.unwrapped.game.width
+
+    wall_list = induction.get_all_walls(env)
     
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes))
     
-    # 4 actions + 2 for X and Y
-    weights = np.random.rand(6)
+    # 4 actions + 2 for X and Y + 4 surroundings
+    weights = np.random.rand(10)
 
     for i_episode in range(num_episodes):
         print("------------------------------")
@@ -55,13 +57,9 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
         last_reward = stats.episode_rewards[i_episode - 1]
         sys.stdout.flush()
         
-        # Reset the environment and pick the first action
-        state = env.reset()
-
         # Reset the env and pick the first action
         previous_state = env.reset()
-        state_int = helper.convert_state(previous_state[1], previous_state[0], width)
-
+        
         action_probs = np.ones(4, dtype=float)
         for t in range(TIME_RANGE):
             env.render()
@@ -69,13 +67,19 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
             # Take a step
             # action_probs = policy(state_int, i_episode)
             
+            up_wall, down_wall, right_wall, left_wall = helper.check_surrounding_walls(int(previous_state[0]), int(previous_state[1]), wall_list)
+
+            normalised_x = int(previous_state[0])/int(width)
+            normalised_y = int(previous_state[1])/int(height)
+
             for i in range(0,4):
-                action_probs[i] = weights[i] + int(previous_state[0])*weights[4] + int(previous_state[1])*weights[4] 
-            
+                action_probs[i] = weights[i] + normalised_x*weights[4] + normalised_y*weights[5] + \
+                                  int(up_wall)*weights[6] + int(down_wall)*weights[7] + int(right_wall)*weights[8] + int(left_wall)*weights[9]
+
+                # action_probs[i] = weights[i] + int(previous_state[0])*weights[4] + int(previous_state[1])*weights[5] + \
+                #                   int(up_wall)*weights[6] + int(down_wall)*weights[7] + int(right_wall)*weights[8] + int(left_wall)*weights[9] 
             action = np.argmax(action_probs)
-            
             print("action ", action)
-            # import ipdb; ipdb.set_trace()
             # action = np.random.choice(np.arange(len(action_probs)), p=action_probs)
             # action = env.action_space.sample()
 
@@ -89,34 +93,45 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
                 reward = 100
             else:
                 reward = reward - 1
-
-            previous_state = next_state
-            next_state_int = helper.convert_state(next_state[1], next_state[0], width)
             
             # Update stats
             stats.episode_rewards[i_episode] += reward
             stats.episode_lengths[i_episode] = t
-
+            
             # TD Update
-            alpha = 0.1
-            v_now = weights[action] + int(previous_state[0])*weights[4] + int(previous_state[1])*weights[5]
-            v_next = weights[action] + int(next_state[0])*weights[4] + int(next_state[1])*weights[5]
+            alpha = 0.01
+            v_now = weights[action] + normalised_x*weights[4] + normalised_y*weights[5] + \
+                                      int(up_wall)*weights[6] + int(down_wall)*weights[7] + int(right_wall)*weights[8] + int(left_wall)*weights[9] 
+            
+            normalised_next_x = int(next_state[0])/int(width)
+            normalised_next_y = int(next_state[1])/int(height)
+            up_wall_next, down_wall_next, right_wall_next, left_wall_next = helper.check_surrounding_walls(int(next_state[0]), int(next_state[1]), wall_list)
+            
+            v_next = weights[action] + normalised_next_x*weights[4] + normalised_next_y*weights[5] + \
+                                int(up_wall_next)*weights[6] + int(down_wall_next)*weights[7] + int(right_wall_next)*weights[8] + int(left_wall_next)*weights[9]
+            
+            # v_next = weights[action] + int(next_state[0])*weights[4] + int(next_state[1])*weights[5] + \
+            #                     int(up_wall_next)*weights[6] + int(down_wall_next)*weights[7] + int(right_wall_next)*weights[8] + int(left_wall_next)*weights[9] 
+            
             weights_delta = alpha*(reward + discount_factor*v_next - v_now)*weights
+            
             print("weights_delta", weights_delta)
             weights = weights - weights_delta
+            # weights = weights + weights_delta
             print("weights", weights)
-
+            if math.isnan(weights[0]):
+                import ipdb; ipdb.set_trace()
+            previous_state = next_state
+            
             if done:
                 break
-
-            previous_state = next_state
-            state_int = next_state_int
 
         # run_experiment(env,state_int, Q, stats_test, i_episode, width, TIME_RANGE)
 
     return Q, stats
 
-env = gym.make('vgdl_experiment1-v0')
+# env = gym.make('vgdl_experiment1-v0')
+env = gym.make('vgdl_aaa_small-v0')
 
 Q, stats = q_learning(env, 100)
 

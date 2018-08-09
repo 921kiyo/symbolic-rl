@@ -55,12 +55,9 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
         last_reward = stats.episode_rewards[i_episode - 1]
         sys.stdout.flush()
         
-        # Reset the environment and pick the first action
-        state = env.reset()
 
         # Reset the env and pick the first action
         previous_state = env.reset()
-        state_int = helper.convert_state(previous_state[1], previous_state[0], width)
 
         action_probs = np.ones(4, dtype=float)
         for t in range(TIME_RANGE):
@@ -68,9 +65,12 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
             # time.sleep(0.1)
             # Take a step
             # action_probs = policy(state_int, i_episode)
-            
+            normalised_x = int(previous_state[0])/int(width)
+            normalised_y = int(previous_state[1])/int(height)
+
             for i in range(0,4):
-                action_probs[i] = weights[i] + int(previous_state[0])*weights[4] + int(previous_state[1])*weights[4] 
+                action_probs[i] = weights[i] + normalised_x*weights[4] + normalised_y*weights[5] 
+                # action_probs[i] = weights[i] + int(previous_state[0])*weights[4] + int(previous_state[1])*weights[5] 
             
             action = np.argmax(action_probs)
             
@@ -89,28 +89,31 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
                 reward = 100
             else:
                 reward = reward - 1
-
-            previous_state = next_state
-            next_state_int = helper.convert_state(next_state[1], next_state[0], width)
             
             # Update stats
             stats.episode_rewards[i_episode] += reward
             stats.episode_lengths[i_episode] = t
 
             # TD Update
-            alpha = 0.1
-            v_now = weights[action] + int(previous_state[0])*weights[4] + int(previous_state[1])*weights[5]
-            v_next = weights[action] + int(next_state[0])*weights[4] + int(next_state[1])*weights[5]
+            alpha = 0.01
+            # v_now = weights[action] + int(previous_state[0])*weights[4] + int(previous_state[1])*weights[5]
+            v_now = weights[action] + normalised_x*weights[4] + normalised_y*weights[5]
+            
+            normalised_next_x = int(next_state[0])/int(width)
+            normalised_next_y = int(next_state[1])/int(height)
+
+            # v_next = weights[action] + int(next_state[0])*weights[4] + int(next_state[1])*weights[5]
+            v_next = weights[action] + normalised_next_x*weights[4] + normalised_next_y*weights[5]
             weights_delta = alpha*(reward + discount_factor*v_next - v_now)*weights
             print("weights_delta", weights_delta)
             weights = weights - weights_delta
             print("weights", weights)
 
+            previous_state = next_state
+
             if done:
                 break
 
-            previous_state = next_state
-            state_int = next_state_int
 
         # run_experiment(env,state_int, Q, stats_test, i_episode, width, TIME_RANGE)
 
