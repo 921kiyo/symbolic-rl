@@ -96,11 +96,11 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
         episode_rewards=np.zeros(num_episodes))
     
     # 4 actions
-    weights = np.random.rand(4)
-    tiles = np.random.rand(height,width)
+    # actions = np.random.rand(4)
+    # tiles = np.random.rand(height,width*4)
+    tiles = np.zeros((height,width*4),dtype=int)
 
-    policy = make_epsilon_greedy_policy(tiles, 0, ACTION_SPACE)
-
+    # policy = make_epsilon_greedy_policy(tiles, 0, ACTION_SPACE)
     for i_episode in range(num_episodes):
         print("------------------------------")
 
@@ -120,7 +120,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
             
             # valueFunction.value(previous_state_int)
             for i in range(0,4):
-                action_probs[i] = weights[i] + tiles[int(previous_state[0]),int(previous_state[1])]
+                action_probs[i] = tiles[int(previous_state[0]),int(previous_state[1])*(i+1)]
             print("action_probs ",action_probs)
             action = np.argmax(action_probs)
             print("action ", action)
@@ -134,8 +134,6 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
 
             next_state, reward, done, _ = env.step(action)
 
-            # next_state_int = helper.convert_state(next_state[1], next_state[0], width)
-
             if done:
                 reward = 100
             else:
@@ -148,16 +146,12 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
             # TD Update
             alpha = 0.01
 
-            v_now = weights[action] + tiles[int(previous_state[0]),int(previous_state[1])]
-            v_next = weights[action] + tiles[int(next_state[0]),int(next_state[1])]
+            v_now = tiles[int(previous_state[0]),int(previous_state[1])*(action+1)]
+            v_next = tiles[int(next_state[0]),int(next_state[1])*(action+1)]
             
             weights_delta = alpha*(reward + discount_factor*v_next - v_now)*tiles
-            weights_delta_action = alpha*(reward + discount_factor*v_next - v_now)*weights[action]
-
             print("weights_delta", weights_delta)
-            # import ipdb; ipdb.set_trace()
             tiles = tiles - weights_delta
-            weights[action] = weights[action] -  weights_delta_action           
             
             previous_state = next_state
             # previous_state_int = next_state_int
