@@ -105,7 +105,10 @@ def get_inc_exc(hypothesis, state_before, state_after, action, walls):
     helper.append_to_file(hypothesis, cf.GROUNDING_DIR)
     helper.append_to_file(state_before+"\n", cf.GROUNDING_DIR)
     helper.append_to_file(action+"\n", cf.GROUNDING_DIR)
-    helper.append_to_file(walls+"\n", cf.GROUNDING_DIR)
+    # TODO may be redundant
+    for wall in walls:
+        wall = "wall(" + str(wall) + ").\n"
+        helper.append_to_file(wall, cf.GROUNDING_DIR)
     answer_sets = abduction.run_clingo(cf.GROUNDING_DIR)
 
     # Extract only relevant asp, which is "state_after"
@@ -177,7 +180,7 @@ def get_link(previous_state, next_state, action):
     next_y = int(next_state[1])
     return "is_link(({},{})). is_link(({},{})). ".format(x,y,next_x,next_y)
 
-def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list, is_link=False):
+def generate_plan_pos(hypothesis, state_at_before, state_at_after, states, action, wall_list, is_link=False):
     '''
     Generate a positive example for ILASP from the plan
 
@@ -211,6 +214,16 @@ def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list
     #     return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."
     # else:
     #     return True, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."
+def generate_plan_pos2(hypothesis, state_at_before, state_at_after, states, action, wall_list, is_link=False):
+    x_before, _, _ = abduction.get_X(state_at_before)
+    y_before, _, _ = abduction.get_Y(state_at_before)
+    x_after, _, _ = abduction.get_X(state_at_after)
+    y_after, _, _ = abduction.get_Y(state_at_after)
+    state_before = py_asp.state_before(x_before, y_before)
+    state_after = py_asp.state_after(x_after, y_after)
+    # TODO is this correct way to do?? exclusion even in random action.
+    exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
+    return exclusions
 
 def generate_explore_pos(hypothesis, next_state, previous_state, action, wall_list):
     '''
@@ -218,15 +231,19 @@ def generate_explore_pos(hypothesis, next_state, previous_state, action, wall_li
 
     Output: #pos({state_after((3,6))}, {state_after((4,6)), ...}, {state_before((3,6)). action(non). }).
     '''
+
     walls = add_surrounding_walls(int(previous_state[0]),int(previous_state[1]), wall_list)
 
     state_after_str = "state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))"
     state_before_str = "state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ "))."
     action_str = "action(" + action + ")."
 
+    # TODO This does not need to be here
+    all_walls = get_seen_walls(cf.CLINGOFILE)
+
     sub_exclusion = ""
     inclusion = ""
-    inclusion, sub_exclusion = get_inc_exc(hypothesis, state_before_str, state_after_str, action_str, walls)
+    inclusion, sub_exclusion = get_inc_exc(hypothesis, state_before_str, state_after_str, action_str, all_walls)
 
     link_detected, exclusions = get_exclusions(previous_state, next_state)
 
@@ -247,7 +264,7 @@ def send_state_transition_pos(hypothesis, previous_state, next_state, action, wa
 
     if link != "":
         link += "\n"
-        helper.append_to_file(link, cf.BACKGROUND)
+        helper.append_to_file(link, cf.CLINGOFILE)
 
 def copy_las_base(height, width, is_link=False):
     '''

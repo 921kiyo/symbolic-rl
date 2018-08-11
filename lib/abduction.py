@@ -43,21 +43,33 @@ def add_new_walls(previous_state, wall_list, file):
         is_new_b = True
     return is_new_b
 
-def make_lp(hypothesis, start_state, goal_state, cell_range):
-    '''
-    Collect all info necessary to run clingo and send them to "cf.CLINGOFILE"
-    '''
+def add_start_state(start_state):
     # starting point
     start_state = "%AAA\n" + "state_at((" + str(int(start_state[0])) + ", " + str(int(start_state[1])) + "), 1).\n" + "%BBB\n"
-    # action choice rule
-    actions = "1{action(down, T); action(up, T); action(right, T); action(left, T)}1 :- time(T), not finished(T).\n"
-    show = "#show state_at/2.\n #show action/2.\n"
+    helper.append_to_file(start_state, cf.CLINGOFILE)
 
+def add_hypothesis(hypothesis_asp):
+    # Send H to cf.CLINGOFILE
+    helper.append_to_file("%START\n", cf.CLINGOFILE)
+    helper.append_to_file(hypothesis, cf.CLINGOFILE)
+    helper.append_to_file("%END\n", cf.CLINGOFILE)
+
+def add_goal_state(goal_state):
     # TODO update goal specification
     # goal specification
     goal_state = "state_at((" + str(int(goal_state[0])) + ", " + str(int(goal_state[1])) + "), T),"
     goal = "finished(T):- goal(T2), time(T), T >= T2.\n goal(T):- " + goal_state + " not finished(T-1).\n" + \
     "goalMet:- goal(T).\n:- not goalMet.\n"
+    helper.append_to_file(goal, cf.CLINGOFILE)
+
+def make_lp_base(cell_range):
+    '''
+    Collect all info necessary to run clingo and send them to "cf.CLINGOFILE"
+    '''
+    # action choice rule
+    actions = "1{action(down, T); action(up, T); action(right, T); action(left, T)}1 :- time(T), not finished(T).\n"
+    show = "#show state_at/2.\n #show action/2.\n"
+
     # time range
     time = "%CCC\n" +"time(0.." + str(cf.TIME_RANGE) + ").\n" + "%DDD\n"
 
@@ -69,21 +81,8 @@ def make_lp(hypothesis, start_state, goal_state, cell_range):
     adjacent(down, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).\n\
     adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).\n"
 
-    kb = start_state + actions + show + goal + time + cell_range + minimize + adjacent
-    # Send BK to cf.CLINGOFILE
+    kb = actions + show  + time + cell_range + minimize + adjacent
     helper.append_to_file(kb, cf.CLINGOFILE)
-    # Send H to cf.CLINGOFILE
-    helper.append_to_file("%START\n", cf.CLINGOFILE)
-    helper.append_to_file(hypothesis, cf.CLINGOFILE)
-    helper.append_to_file("%END\n", cf.CLINGOFILE)
-    # Send wall background to cf.CLINGOFILE
-    send_background_to_clingo(cf.BACKGROUND, cf.CLINGOFILE)
-
-def send_background_to_clingo(input, output):
-    with open(input) as f:
-        with open(output, "a") as out:
-            for line in f:
-                out.write(line)
 
 def run_clingo(clingofile):
     '''

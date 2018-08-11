@@ -8,66 +8,53 @@ from random import randint
 
 import config as cf
 
-def run_experiment(env, ILASP_ran, i_episode, stats_test, width, time_range):
+def run_experiment(env, i_episode, stats_test, width, time_range):
     _ = env.reset()
-    if ILASP_ran:
-        answer_sets = abduction.run_clingo(cf.CLINGOFILE)
-        states_plan, actions_array = abduction.sort_planning(answer_sets)
-        print("ASP states ", states_plan)
-        print("ASP actions ", actions_array)
+    answer_sets = abduction.run_clingo(cf.CLINGOFILE)
+    states_plan, actions_array = abduction.sort_planning(answer_sets)
+    print("ASP states ", states_plan)
+    print("ASP actions ", actions_array)
+    t = 0
+    while t < time_range:
+        is_done = False
+        print("testing phase....")
+        for _, action in enumerate(actions_array):
+            env.render()
+            # time.sleep(0.1)
+            action_int = helper.get_action(action[1])
+            _, reward, done, _ = env.step(action_int)
 
-        t = 0
-        while t < time_range:
-            is_done = False
-            print("testing phase....")
-            for _, action in enumerate(actions_array):
-                env.render()
-                # time.sleep(0.1)
-                action_int = helper.get_action(action[1])
-                _, reward, done, _ = env.step(action_int)
-
-                if done:
-                    reward = reward + 10
-                else:
-                    reward = reward - 1
-
-                print("reward here is ", reward)
-                print("i_episode here is ", i_episode)
-                # Update stats
-                stats_test.episode_rewards_test[i_episode] += reward
-                stats_test.episode_lengths_test[i_episode] = t
-                t = t + 1
-                print("done? ", done)
-                if done:
-                    is_done = True
-                    break
-            if is_done:
-                break
-            print("is_done? ", is_done)
-            if not is_done:
-                # If clingo does not give you a right path, just accumulate -1 punishment
-                action_int = 4
-                _, reward, done2, _ = env.step(action_int)
-                print("done2 ", done2)
-                if done2:
-                    reward = reward + 10
-                else:
-                    reward = reward - 1
-
-                stats_test.episode_rewards_test[i_episode] += reward
-                stats_test.episode_lengths_test[i_episode] = t
-                t = t + 1
-    else:
-        for t in range(time_range):
-            action_int = 4
-            next_state, reward, done, _ = env.step(action_int)
             if done:
                 reward = reward + 10
             else:
                 reward = reward - 1
+
+            print("reward here is ", reward)
+            print("i_episode here is ", i_episode)
+            # Update stats
             stats_test.episode_rewards_test[i_episode] += reward
             stats_test.episode_lengths_test[i_episode] = t
+            t = t + 1
+            print("done? ", done)
+            if done:
+                is_done = True
+                break
+        if is_done:
+            break
+        print("is_done? ", is_done)
+        if not is_done:
+            # If clingo does not give you a right path, just accumulate -1 punishment
+            action_int = 4
+            _, reward, done2, _ = env.step(action_int)
+            print("done2 ", done2)
+            if done2:
+                reward = reward + 10
+            else:
+                reward = reward - 1
 
+            stats_test.episode_rewards_test[i_episode] += reward
+            stats_test.episode_lengths_test[i_episode] = t
+            t = t + 1
 
 def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=False):
     # Get cell range for the game
@@ -87,11 +74,9 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     # the first abduction needs lots of basic information
     first_abduction = False
 
-    ILASP_ran = False
     # Clean up all the files first
     helper.silentremove(cf.BASE_DIR, cf.GROUNDING)
     helper.silentremove(cf.BASE_DIR, cf.LASFILE)
-    helper.silentremove(cf.BASE_DIR, cf.BACKGROUND)
     helper.silentremove(cf.BASE_DIR, cf.CLINGOFILE)
     helper.silentremove(cf.BASE_DIR, cf.LAS_CACHE, cf.LAS_CACHE_PATH)
     helper.create_file(cf.BASE_DIR, cf.LAS_CACHE, cf.LAS_CACHE_PATH)
@@ -101,6 +86,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
     # record the current hypothesis
     hypothesis = ""
+    abduction.make_lp_base(cell_range)
 
     wall_list = induction.get_all_walls(env)
 
@@ -126,23 +112,18 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         t = 0
         # Once the agent reaches the goal, the algorithm kicks in
         if reached_goal:
-            ILASP_ran = True
             # Decaying epsilon greedy params
             new_epsilon = epsilon*(1/(i_episode+1)**cf.DECAY_PARAM)
             print("new_epsilon ", new_epsilon)
 
             while t < cf.TIME_RANGE:
                 if first_abduction == False:
-                    # Run ILASP to get H
-                    hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
                     # Convert syntax of H for ASP solver
                     hypothesis_asp = py_asp.convert_las_asp(hypothesis)
-                    abduction.make_lp(hypothesis_asp, agent_position, goal_state, cell_range)
+                    abduction.add_hypothesis(hypothesis_asp)
+                    abduction.add_start_state(agent_position)
+                    abduction.add_goal_state(goal_state)
                     first_abduction = True
-                    # Logging set up and record ILASP
-                    if record_prefix:
-                        inputfile = os.path.join(cf.BASE_DIR, cf.LASFILE)
-                        helper.log_las(inputfile, hypothesis, log_dir, i_episode, t)
 
                 # Update the starting position for Clingo
                 agent_position = env.unwrapped.observer.get_observation()["position"]
@@ -176,7 +157,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                         action_int = helper.get_action(action[1])
                         if cf.IS_PRINT:
                             print("Following the plan...", helper.convert_action(action_int))
-
                     action_string = helper.convert_action(action_int)
                     next_state, reward, done, _ = env.step(action_int)
                     if done:
@@ -200,35 +180,40 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     if is_link:
                         if("up" == helper.convert_action(action_int) and int(previous_state[0]) == 9 and int(previous_state[0]) == 4):
                             link = "\nis_link((9,3)). is_link((17,3)).\n"
-                            helper.append_to_file(link, cf.BACKGROUND)
+                            helper.append_to_file(link, cf.CLINGOFILE)
                     # Add pos
                     walls = induction.get_seen_walls(cf.CLINGOFILE)
 
+                    # TODO Fix this, I think this is not necessary
                     walls = walls + wall_list
-                    any_exclusion, pos = induction.generate_plan_pos(previous_state_at, observed_state, states_plan, action_string, walls, is_link)
-                    pos += "\n"
-                    helper.append_to_file(pos, cf.LASFILE)
 
-                    if any_exclusion:
-                        is_exclusion = True
+                    # Make ASP syntax of state transition
+                    induction.send_state_transition_pos(hypothesis, previous_state, next_state, action_string, wall_list)
 
+                    # any_exclusion, pos = induction.generate_plan_pos(hypothesis, previous_state_at, observed_state, states_plan, action_string, walls, is_link)
+                    # pos += "\n"
+                    # helper.append_to_file(pos, cf.LASFILE)
+                    #
+                    # if any_exclusion:
+                    #     is_exclusion = True
+                    is_exclusion = False
                     # when followed the plan (not random action)
-                    if threshold >= new_epsilon:
-                        # Check if the prediction is the same as observed state
-                        predicted_state = abduction.get_predicted_state(previous_state_at, action[1], states_plan)
-                        if cf.IS_PRINT:
-                            print("predicted_state ", predicted_state)
-                        # if not, update H
-                        if(predicted_state != observed_state):
-                            print("H is probably not correct!")
-                            if not induction.check_ILASP_cover(hypothesis):
-                                hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
-                                # Convert syntax of H for ASP solver
-                                hypothesis_asp = py_asp.convert_las_asp(hypothesis)
-
-                                if record_prefix:
-                                    inputfile = os.path.join(cf.BASE_DIR, cf.LASFILE)
-                                    helper.log_las(inputfile, hypothesis, log_dir, i_episode, t)
+                    # if threshold >= new_epsilon:
+                    #     # Check if the prediction is the same as observed state
+                    #     predicted_state = abduction.get_predicted_state(previous_state_at, action[1], states_plan)
+                    #     if cf.IS_PRINT:
+                    #         print("predicted_state ", predicted_state)
+                    #     # if not, update H
+                    #     if(predicted_state != observed_state):
+                    #         print("H is probably not correct!")
+                    #         if not induction.check_ILASP_cover(hypothesis):
+                    #             hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
+                    #             # Convert syntax of H for ASP solver
+                    #             hypothesis_asp = py_asp.convert_las_asp(hypothesis)
+                    #
+                    #             if record_prefix:
+                    #                 inputfile = os.path.join(cf.BASE_DIR, cf.LASFILE)
+                    #                 helper.log_las(inputfile, hypothesis, log_dir, i_episode, t)
 
                     previous_state = next_state
                     previous_state_at = observed_state
@@ -284,16 +269,16 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                         inputfile = os.path.join(cf.BASE_DIR, cf.LASFILE)
                         helper.log_las(inputfile, hypothesis, log_dir, i_episode, t)
 
+                # Meanwhile, accumulate all background knowlege
+                abduction.add_new_walls(previous_state, wall_list, cf.CLINGOFILE)
+
                 # Make ASP syntax of state transition
                 induction.send_state_transition_pos(hypothesis, previous_state, next_state, action_string, wall_list)
 
-                # Meanwhile, accumulate all background knowlege
-                abduction.add_new_walls(previous_state, wall_list, cf.BACKGROUND)
                 if is_link:
                         if("up" == helper.convert_action(action) and int(previous_state[0]) == 9 and int(previous_state[0]) == 4):
                             link = "\nis_link((9,3)). is_link((17,3)).\n"
-                            helper.append_to_file(link, cf.BACKGROUND)
-                # induction.add_surrounding_walls((previous_state, wall_list, cf.BACKGROUND))
+                            helper.append_to_file(link, cf.CLINGOFILE)
                 previous_state = next_state
 
                 # Update stats
@@ -303,7 +288,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 if done:
                     break
 
-        run_experiment(env, ILASP_ran, i_episode, stats_test, width, cf.TIME_RANGE)
+        run_experiment(env, i_episode, stats_test, width, cf.TIME_RANGE)
 
     return stats, stats_test
 

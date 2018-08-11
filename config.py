@@ -3,7 +3,6 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 LASFILE = "output.las"
-BACKGROUND = "background.lp"
 CLINGOFILE = "clingo.lp"
 LAS_CACHE = "cache.las"
 LAS_CACHE_PATH = "log"
