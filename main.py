@@ -96,7 +96,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     helper.create_file(cf.BASE_DIR, cf.LAS_CACHE, cf.LAS_CACHE_PATH)
 
     # Add mode bias and adjacent definition for ILASP
-    induction.copy_las_base(cf.LASFILE, height, width, is_link)
+    induction.copy_las_base(height, width, is_link)
 
     # record the current hypothesis
     hypothesis = ""
@@ -136,7 +136,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
                     # Convert syntax of H for ASP solver
                     hypothesis_asp = py_asp.convert_las_asp(hypothesis)
-                    abduction.make_lp(hypothesis_asp, cf.LASFILE, cf.BACKGROUND, cf.CLINGOFILE, agent_position, goal_state, cf.TIME_RANGE, cell_range)
+                    abduction.make_lp(hypothesis_asp, agent_position, goal_state, cell_range)
                     first_abduction = True
                     # Logging set up and record ILASP
                     if record_prefix:
@@ -145,8 +145,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                 # Update the starting position for Clingo
                 agent_position = env.unwrapped.observer.get_observation()["position"]
-                abduction.update_agent_position(agent_position, cf.CLINGOFILE, t)
-                abduction.update_time_range(agent_position, cf.CLINGOFILE, t, cf.TIME_RANGE)
+                abduction.update_agent_position(agent_position, t)
+                abduction.update_time_range(agent_position, t)
 
                 # Run clingo to get a plan
                 answer_sets = abduction.run_clingo(cf.CLINGOFILE)
@@ -220,7 +220,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                         # if not, update H
                         if(predicted_state != observed_state):
                             print("H is probably not correct!")
-                            if not induction.check_ILASP_cover(cf.BASE_DIR, cf.LASFILE, hypothesis):
+                            if not induction.check_ILASP_cover(hypothesis):
                                 hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
                                 # Convert syntax of H for ASP solver
                                 hypothesis_asp = py_asp.convert_las_asp(hypothesis)
@@ -247,12 +247,12 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 if is_exclusion:
                     if cf.IS_PRINT:
                         print("exclusion is there ", pos)
-                    if not induction.check_ILASP_cover(cf.BASE_DIR, cf.LASFILE, hypothesis):
+                    if not induction.check_ILASP_cover(hypothesis):
                         hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
                         # Convert syntax of H for ASP solver
                         hypothesis_asp = py_asp.convert_las_asp(hypothesis)
 
-                        abduction.update_h(hypothesis_asp, cf.CLINGOFILE)
+                        abduction.update_h(hypothesis_asp)
                         if record_prefix:
                             inputfile = os.path.join(cf.BASE_DIR, cf.LASFILE)
                             helper.log_las(inputfile, hypothesis, log_dir, i_episode, t-1)
@@ -278,14 +278,14 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                 action_string = helper.convert_action(action)
                 hypothesis = ""
-                if not induction.check_ILASP_cover(cf.BASE_DIR, cf.LASFILE, hypothesis) or hypothesis == "":
+                if not induction.check_ILASP_cover(hypothesis) or hypothesis == "":
                     hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
                     if record_prefix:
                         inputfile = os.path.join(cf.BASE_DIR, cf.LASFILE)
                         helper.log_las(inputfile, hypothesis, log_dir, i_episode, t)
 
                 # Make ASP syntax of state transition
-                induction.send_state_transition_pos(hypothesis, previous_state, next_state, action_string, wall_list, cf.LASFILE, cf.BACKGROUND)
+                induction.send_state_transition_pos(hypothesis, previous_state, next_state, action_string, wall_list)
 
                 # Meanwhile, accumulate all background knowlege
                 abduction.add_new_walls(previous_state, wall_list, cf.BACKGROUND)
