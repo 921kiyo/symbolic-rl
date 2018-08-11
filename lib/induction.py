@@ -100,7 +100,7 @@ def get_exclusions(previous_state, next_state):
                 ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + \
                 ")),state_after((" + str(exc5_x) + "," + str(exc5_y) + "))"
 
-def get_exclusions_from_h(hypothesis, state_before, state_after, action, walls):
+def get_inc_exc(hypothesis, state_before, state_after, action, walls):
     helper.silentremove(cf.BASE_DIR, cf.GROUNDING)
     helper.append_to_file(hypothesis, cf.GROUNDING_DIR)
     helper.append_to_file(state_before+"\n", cf.GROUNDING_DIR)
@@ -109,20 +109,27 @@ def get_exclusions_from_h(hypothesis, state_before, state_after, action, walls):
     answer_sets = abduction.run_clingo(cf.GROUNDING_DIR)
 
     # Extract only relevant asp, which is "state_after"
-    state_afters = []
+    state_afters_predict = []
     for asp in answer_sets:
         if(asp.startswith("state_after")):
-            state_afters.append(asp)
-    # the current hypothesis predict the agent is there other than state_after,
-    # then we need to exclude them
+            state_afters_predict.append(asp)
+    # The current hypothesis DOES predict the agent is there other than state_after,
+    # then they are exclusions
     exclusions = ""
-    for sa in state_afters:
-        if(sa != state_after):
+    for sa in state_afters_predict:
+        if(state_after != sa):
             exclusions = exclusions + sa + ","
+
+    # The current hypothesis DOES NOT predict the agent is there other than state_after,
+    # then it is inclusion
+    inclusion = ""
+    if(state_after not in state_afters_predict):
+        inclusion = inclusion + state_after
+
     if exclusions != "":
-        return exclusions[0:-1]
+        return inclusion, exclusions[0:-1]
     else:
-        return exclusions
+        return inclusion, exclusions
 
 def get_plan_exclusions(state_at_before, state_at_after, states):
     '''
@@ -218,8 +225,8 @@ def generate_explore_pos(hypothesis, next_state, previous_state, action, wall_li
     action_str = "action(" + action + ")."
 
     sub_exclusion = ""
-    if hypothesis != "":
-        sub_exclusion = get_exclusions_from_h(hypothesis, state_before_str, state_after_str, action_str, walls)
+    inclusion = ""
+    inclusion, sub_exclusion = get_inc_exc(hypothesis, state_before_str, state_after_str, action_str, walls)
 
     link_detected, exclusions = get_exclusions(previous_state, next_state)
 
@@ -228,7 +235,7 @@ def generate_explore_pos(hypothesis, next_state, previous_state, action, wall_li
     # link = "is_link((9,3)). is_link((17,3))."
     # return link, "#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + link + walls + "})."
     # else:
-    return "","#pos({"+ state_after_str +"}, {" + exclusions + sub_exclusion + "}, {" + state_before_str + action_str + walls + "})."
+    return "","#pos({"+ inclusion +"}, {" + exclusions + sub_exclusion + "}, {" + state_before_str + action_str + walls + "})."
 
 def send_state_transition_pos(hypothesis, previous_state, next_state, action, wall_list):
     '''
@@ -285,10 +292,10 @@ def run_ILASP(filename, cache_path=None):
     return hypothesis
 
 def check_ILASP_cover(hypothesis):
-    helper.silentremove(cf.BASE_DIR, "check_las.las")
+    helper.silentremove(cf.BASE_DIR, cf.CHECK_LAS)
 
     input_las = os.path.join(cf.BASE_DIR, cf.LASFILE)
-    output_las = os.path.join(cf.BASE_DIR, "check_las.las")
+    output_las = os.path.join(cf.BASE_DIR, cf.CHECK_LAS)
     helper.append_to_file(hypothesis, output_las)
     helper.copy_file(input_las, output_las)
     remove_mode(output_las)

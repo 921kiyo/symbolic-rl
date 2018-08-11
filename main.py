@@ -278,7 +278,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     reward =reward - 1
 
                 action_string = helper.convert_action(action)
-                if not induction.check_ILASP_cover(hypothesis) or hypothesis == "":
+                if not induction.check_ILASP_cover(hypothesis) or hypothesis == '':
                     hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
                     if record_prefix:
                         inputfile = os.path.join(cf.BASE_DIR, cf.LASFILE)

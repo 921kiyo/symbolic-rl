@@ -9,6 +9,8 @@ LAS_CACHE = "cache.las"
 LAS_CACHE_PATH = "log"
 GROUNDING = "ground.lp"
 
+CHECK_LAS = "check_las.las"
+
 dir = os.path.join(BASE_DIR, LAS_CACHE_PATH)
 CACHE_DIR = os.path.join(dir, LAS_CACHE)
 
