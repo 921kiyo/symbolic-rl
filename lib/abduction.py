@@ -1,22 +1,22 @@
 from lib import plotting, py_asp, helper, induction
-
+import config as cf
 import subprocess, json, os
 
-def is_wall_in_background(wall, backgroundfile):
+def is_wall_in_background(wall, file):
     '''
     Input: wall tuple and background file (fullpath)
 
     Output: Boolean to tell whether the wall is already in the background
     '''
     wall = "wall({})".format(str(wall))
-    with open(backgroundfile, "r") as searchfile:
+    with open(file, "r") as searchfile:
         for line in searchfile:
             if(wall in line):
                 searchfile.close()
                 return True
     return False
 
-def add_new_walls(previous_state, wall_list, backgroundfile):
+def add_new_walls(previous_state, wall_list, file):
     '''
     Check the surrounding and see if there is any new walls
 
@@ -25,27 +25,27 @@ def add_new_walls(previous_state, wall_list, backgroundfile):
     x = int(previous_state[0])
     y = int(previous_state[1])
     is_new_b = False
-    if(((x+1,y) in wall_list) and (is_wall_in_background((x+1,y), backgroundfile) == False)):
+    if(((x+1,y) in wall_list) and (is_wall_in_background((x+1,y), file) == False)):
         wall = "\nwall({}).\n".format((x+1,y))
-        helper.append_to_file(wall, backgroundfile)
+        helper.append_to_file(wall, file)
         is_new_b = True
-    if(((x,y+1) in wall_list) and (is_wall_in_background((x,y+1), backgroundfile) == False)):
+    if(((x,y+1) in wall_list) and (is_wall_in_background((x,y+1), file) == False)):
         wall = "\nwall({}).\n".format((x,y+1))
-        helper.append_to_file(wall, backgroundfile)
+        helper.append_to_file(wall, file)
         is_new_b = True
-    if(((x-1,y) in wall_list) and (is_wall_in_background((x-1,y), backgroundfile) == False)):
+    if(((x-1,y) in wall_list) and (is_wall_in_background((x-1,y), file) == False)):
         wall = "\nwall({}).\n".format((x-1,y))
-        helper.append_to_file(wall, backgroundfile)
+        helper.append_to_file(wall, file)
         is_new_b = True
-    if(((x,y-1) in wall_list) and (is_wall_in_background((x,y-1), backgroundfile) == False)):
+    if(((x,y-1) in wall_list) and (is_wall_in_background((x,y-1), file) == False)):
         wall = "\nwall({}).\n".format((x,y-1))
-        helper.append_to_file(wall, backgroundfile)
+        helper.append_to_file(wall, file)
         is_new_b = True
     return is_new_b
 
-def make_lp(hypothesis, lasfile, backgroundfile, clingofile, start_state, goal_state, time_range, cell_range):
+def make_lp(hypothesis, start_state, goal_state, cell_range):
     '''
-    Collect all info necessary to run clingo and send them to "clingofile"
+    Collect all info necessary to run clingo and send them to "cf.CLINGOFILE"
     '''
     # starting point
     start_state = "%AAA\n" + "state_at((" + str(int(start_state[0])) + ", " + str(int(start_state[1])) + "), 1).\n" + "%BBB\n"
@@ -59,8 +59,8 @@ def make_lp(hypothesis, lasfile, backgroundfile, clingofile, start_state, goal_s
     goal = "finished(T):- goal(T2), time(T), T >= T2.\n goal(T):- " + goal_state + " not finished(T-1).\n" + \
     "goalMet:- goal(T).\n:- not goalMet.\n"
     # time range
-    time = "%CCC\n" +"time(0.." + str(time_range) + ").\n" + "%DDD\n"
-    
+    time = "%CCC\n" +"time(0.." + str(cf.TIME_RANGE) + ").\n" + "%DDD\n"
+
     # optimisation statement
     minimize = "#minimize{1, X, T: action(X,T)}.\n"
     # adjacent definitions
@@ -70,14 +70,14 @@ def make_lp(hypothesis, lasfile, backgroundfile, clingofile, start_state, goal_s
     adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).\n"
 
     kb = start_state + actions + show + goal + time + cell_range + minimize + adjacent
-    # Send BK to clingofile
-    helper.append_to_file(kb, clingofile)
-    # Send H to clingofile
-    helper.append_to_file("%START\n", clingofile)
-    helper.append_to_file(hypothesis, clingofile)
-    helper.append_to_file("%END\n", clingofile)
-    # Send wall background to clingofile
-    send_background_to_clingo(backgroundfile, clingofile)
+    # Send BK to cf.CLINGOFILE
+    helper.append_to_file(kb, cf.CLINGOFILE)
+    # Send H to cf.CLINGOFILE
+    helper.append_to_file("%START\n", cf.CLINGOFILE)
+    helper.append_to_file(hypothesis, cf.CLINGOFILE)
+    helper.append_to_file("%END\n", cf.CLINGOFILE)
+    # Send wall background to cf.CLINGOFILE
+    send_background_to_clingo(cf.BACKGROUND, cf.CLINGOFILE)
 
 def send_background_to_clingo(input, output):
     with open(input) as f:
@@ -88,7 +88,7 @@ def send_background_to_clingo(input, output):
 def run_clingo(clingofile):
     '''
     Run clingo to get a sequnce of action plan
-    
+
     Output: sorted action and state arrays
     '''
     print("clingo running...")
@@ -105,10 +105,10 @@ def run_clingo(clingofile):
     # Extract only the optimal answer set (last one)
     is_success = json_plan["Result"]
     if(is_success == "UNSATISFIABLE"):
-        return [""]   
+        return [""]
     size_asp = len(json_plan["Call"][0]["Witnesses"])
     answer_sets = json_plan["Call"][0]["Witnesses"][size_asp-1]["Value"]
-    
+
     return answer_sets
 
 def sort_planning(answer_sets):
@@ -146,7 +146,7 @@ def sort_planning(answer_sets):
 def update_T(state):
     '''
     Increment T by 1
-    
+
     Output: string "state_at"
     '''
     size = len(state)
@@ -204,7 +204,7 @@ def get_Y(state):
 def extract_action(action):
     '''
     Input:  e.g action(right,13)
-    Output: e.g right    
+    Output: e.g right
     '''
 
     start_index = len("action(")
@@ -218,7 +218,7 @@ def extract_action(action):
 def is_state_in_states(state, states):
     '''
     check if state is in states answer sets
-    
+
     states: [(1, 'state_at((4,6),1)'), (2, 'state_at((5,6),2)'), (3, 'state_at((6,6),3)')]
     state:  'state_at((4,6),1)'
     '''
@@ -258,14 +258,14 @@ def get_predicted_state(current_state, action, states):
         else:
             return current_state
 
-def update_time_range(agent_position, clingofile, time, time_range):
+def update_time_range(agent_position, t):
     '''
     Update planning starting point based on the location of the agent
     '''
     # Replace everything between "CCC" and "DDD" in clingo file with a new agent position
-    time = "%CCC\n" +"time("+ str(time) +".." + str(time_range) + ").\n" + "%DDD\n"
+    t = "%CCC\n" +"time("+ str(t) +".." + str(cf.TIME_RANGE) + ").\n" + "%DDD\n"
     flag = False
-    with open(clingofile) as f:
+    with open(cf.CLINGOFILE) as f:
         for line in f:
             if line == "%CCC\n":
                 flag = True
@@ -274,18 +274,18 @@ def update_time_range(agent_position, clingofile, time, time_range):
                     newfile.write(line)
             if line == "%DDD\n":
                 flag = False
-    os.rename("temp.lp", clingofile)
+    os.rename("temp.lp", cf.CLINGOFILE)
 
-    helper.append_to_file(time, clingofile)
+    helper.append_to_file(t, cf.CLINGOFILE)
 
-def update_agent_position(agent_position, clingofile, time):
+def update_agent_position(agent_position, t):
     '''
     Update planning starting point based on the location of the agent
     '''
     # Replace everything between "AAA" and "BBB" in clingo file with a new agent position
-    start_state = "%AAA\n" + "state_at((" + str(int(agent_position[0])) + ", " + str(int(agent_position[1])) + "), " + str(time) + ").\n" + "%BBB\n"
+    start_state = "%AAA\n" + "state_at((" + str(int(agent_position[0])) + ", " + str(int(agent_position[1])) + "), " + str(t) + ").\n" + "%BBB\n"
     flag = False
-    with open(clingofile) as f:
+    with open(cf.CLINGOFILE) as f:
         for line in f:
             if line == "%AAA\n":
                 flag = True
@@ -294,19 +294,19 @@ def update_agent_position(agent_position, clingofile, time):
                     newfile.write(line)
             if line == "%BBB\n":
                 flag = False
-    os.rename("temp.lp", clingofile)
+    os.rename("temp.lp", cf.CLINGOFILE)
 
-    helper.append_to_file(start_state, clingofile)
+    helper.append_to_file(start_state, cf.CLINGOFILE)
 
-
-def update_h(hypothesis, clingofile):
+# TODO update arguments
+def update_h(hypothesis):
     '''
     Update planning starting point based on the location of the agent
     '''
 
     # Replace everything between "START" and "END" in clingo file with a new H
     flag = False
-    with open(clingofile) as f:
+    with open(cf.CLINGOFILE) as f:
         for line in f:
             if line == "%START\n":
                 flag = True
@@ -315,8 +315,8 @@ def update_h(hypothesis, clingofile):
                     newfile.write(line)
             if line == "%END\n":
                 flag = False
-    os.rename("temp.lp", clingofile)
+    os.rename("temp.lp", cf.CLINGOFILE)
 
-    helper.append_to_file("%START\n", clingofile)
-    helper.append_to_file(hypothesis, clingofile)
-    helper.append_to_file("%END\n", clingofile)
+    helper.append_to_file("%START\n", cf.CLINGOFILE)
+    helper.append_to_file(hypothesis, cf.CLINGOFILE)
+    helper.append_to_file("%END\n", cf.CLINGOFILE)

@@ -1,6 +1,6 @@
 import os, subprocess
 from lib import plotting, py_asp, helper, abduction
-
+import config as cf
 def get_all_walls(env):
     '''
     Output: wall array. e.g [(X1,Y1), (X2,Y2)...]
@@ -46,7 +46,7 @@ def get_exclusions(previous_state, next_state):
     '''
     Get all state_after that did not happen while exploring
 
-    Output: "state_after((X1,Y1)), state_after((X2,Y2)), ... 
+    Output: "state_after((X1,Y1)), state_after((X2,Y2)), ...
     '''
     previous_x = int(previous_state[0])
     previous_y = int(previous_state[1])
@@ -105,7 +105,7 @@ def get_plan_exclusions(state_at_before, state_at_after, states):
     Go through the states plan at time T, and get all state_after that did not happen,
     and return them as exclusions (since they are not useful state plan)
 
-    Output: "state_after((X1,Y1)), state_after((X2,Y2)), ... 
+    Output: "state_after((X1,Y1)), state_after((X2,Y2)), ...
     '''
 
     current_time,_,_ = abduction.get_T(state_at_before)
@@ -162,58 +162,73 @@ def generate_plan_pos(state_at_before, state_at_after, states, action, wall_list
     # TODO is this correct way to do?? exclusion even in random action.
     exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
     walls = add_surrounding_walls(x_before, y_before, wall_list)
-    
-    link = ""
-    if is_link:
-        if(x_before == 9 and y_before == 4 and action == "up"):
-            link = "is_link((9,3)). is_link((17,3))."
+
+    # link = ""
+    # if is_link:
+    #     if(x_before == 9 and y_before == 4 and action == "up"):
+    #         link = "is_link((9,3)). is_link((17,3))."
+    # if is_link:
+    #     if(x_before == 9 and y_before == 4 and action == "up"):
+    #         link = "is_link((9,3)). is_link((17,3))."
 
     if exclusions == "":
-        return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."
+        return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."
     else:
-        return True, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."    
+        return True, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."
 
-def generate_explore_pos(next_state, previous_state, action, wall_list):
+    # if exclusions == "":
+    #     return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."
+    # else:
+    #     return True, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."
+
+def generate_explore_pos(hypothesis, next_state, previous_state, action, wall_list):
     '''
     Generate a pos in the exploration phase
 
     Output: #pos({state_after((3,6))}, {state_after((4,6)), ...}, {state_before((3,6)). action(non). }).
     '''
     walls = add_surrounding_walls(int(previous_state[0]),int(previous_state[1]), wall_list)
+
+    sub_exclusion = ""
+    # if hypothesis != "":
+    #     import ipdb; ipdb.set_trace()
+    #     sub_exclusion = get_exclusions_h(hypothesis)
+
     link_detected, exclusions = get_exclusions(previous_state, next_state)
 
-    if link_detected:
-        link = get_link(previous_state, next_state, action)
-        return link, "#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + link + walls + "})."    
-    else:
-        return "","#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + walls + "})."
+    # if link_detected:
+    #     link = get_link(previous_state, next_state, action)
+    link = "is_link((9,3)). is_link((17,3))."
+    # return link, "#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + link + walls + "})."
+    # else:
+    return "","#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + walls + "})."
 
-def send_state_transition_pos(previous_state, next_state, action, wall_list, lasfile, background):
+def send_state_transition_pos(hypothesis, previous_state, next_state, action, wall_list):
     '''
     Generate a pos and add it to lasfile
     '''
-    link, pos = generate_explore_pos(next_state,previous_state, action, wall_list)
+    link, pos = generate_explore_pos(hypothesis, next_state,previous_state, action, wall_list)
     pos += "\n"
-    helper.append_to_file(pos, lasfile)
+    helper.append_to_file(pos, cf.LASFILE)
 
     if link != "":
         link += "\n"
-        helper.append_to_file(link, background)
+        helper.append_to_file(link, cf.BACKGROUND)
 
-def copy_las_base(lasfile, height, width, is_link=False):
+def copy_las_base(height, width, is_link=False):
     '''
     make a lasfile for ILASP
     '''
 
     cell = "cell((0..{}, 0..{})).\n".format(width, height)
-    with open(lasfile, "w") as base:
+    with open(cf.LASFILE, "w") as base:
         base.write(cell)
         if is_link == True:
             link = "#modeb(1, is_link(var(cell))).\n"
             base.write(link)
 
     with open("las_base.las") as f:
-        with open(lasfile, "a") as out:
+        with open(cf.LASFILE, "a") as out:
             for line in f:
                 out.write(line)
 
@@ -227,26 +242,26 @@ def run_ILASP(filename, cache_path=None):
     # Hardcoded best H
     hypothesis = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\nstate_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\nstate_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\nstate_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0)."
 
-    # try:
-    #     # ILASP --version=2i output.las -ml=10 -nc --clingo5 --clingo "clingo5 --opt-strat=usc,stratify"
-    #     # Clingo 5
-    #     clingo5 = "clingo5 --opt-strat=usc,stratify"
-    #     if cache_path:
-    #         cache_path = "--cached-rel=" + cache_path
-    #         hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5, cache_path, "--max-rule-length=8"], universal_newlines=True)
-    #     else:
-    #         hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5, "--max-rule-length=8"], universal_newlines=True)
-        
-    # except subprocess.CalledProcessError as e:
-    #     print("Error...", e.output)
-    #     hypothesis = e.output
+    try:
+        # ILASP --version=2i output.las -ml=10 -nc --clingo5 --clingo "clingo5 --opt-strat=usc,stratify"
+        # Clingo 5
+        clingo5 = "clingo5 --opt-strat=usc,stratify"
+        if cache_path:
+            cache_path = "--cached-rel=" + cache_path
+            hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5, cache_path, "--max-rule-length=8"], universal_newlines=True)
+        else:
+            hypothesis = subprocess.check_output(["ILASP", "--version=2i", filename, "-ml=10", "-q", "-nc", "--clingo5", "--clingo", clingo5, "--max-rule-length=8"], universal_newlines=True)
+
+    except subprocess.CalledProcessError as e:
+        print("Error...", e.output)
+        hypothesis = e.output
     return hypothesis
 
-def check_ILASP_cover(base_dir, lasfile, hypothesis):
-    helper.silentremove(base_dir, "check_las.las")
+def check_ILASP_cover(hypothesis):
+    helper.silentremove(cf.BASE_DIR, "check_las.las")
 
-    input_las = os.path.join(base_dir, lasfile)
-    output_las = os.path.join(base_dir, "check_las.las")
+    input_las = os.path.join(cf.BASE_DIR, cf.LASFILE)
+    output_las = os.path.join(cf.BASE_DIR, "check_las.las")
     helper.append_to_file(hypothesis, output_las)
     helper.copy_file(input_las, output_las)
     remove_mode(output_las)
@@ -256,7 +271,6 @@ def check_ILASP_cover(base_dir, lasfile, hypothesis):
         return True
     else:
         return False
-    
 
 def remove_mode(output_file):
     with open(output_file, "r") as out:
@@ -275,17 +289,4 @@ def remove_mode(output_file):
 
         # for c in content:
         #     if string.startswith("#modeh") or string.startswith("#modeb"):
-        #         c = 
-# Probably not needed
-# def execute_pseudo_action(current_state, action):
-#     current_state = abduction.update_T(current_state)
-#     if(action == "up"):
-#         return abduction.update_Y(current_state, -1)
-#     elif(action == "down"):
-#         return abduction.update_Y(current_state, 1)
-#     elif(action == "right"):
-#         return abduction.update_X(current_state, 1)
-#     elif(action == "left"):
-#         return abduction.update_X(current_state, -1)
-#     elif(action == "non"):
-#         return current_state
+        #         c =
