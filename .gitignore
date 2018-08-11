@@ -7,3 +7,5 @@ output.txt
 output.las
 .vscode
 log/cache.las
+ground.lp
+check_las.las

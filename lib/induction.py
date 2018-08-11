@@ -100,6 +100,30 @@ def get_exclusions(previous_state, next_state):
                 ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + \
                 ")),state_after((" + str(exc5_x) + "," + str(exc5_y) + "))"
 
+def get_exclusions_from_h(hypothesis, state_before, state_after, action, walls):
+    helper.silentremove(cf.BASE_DIR, cf.GROUNDING)
+    helper.append_to_file(hypothesis, cf.GROUNDING_DIR)
+    helper.append_to_file(state_before+"\n", cf.GROUNDING_DIR)
+    helper.append_to_file(action+"\n", cf.GROUNDING_DIR)
+    helper.append_to_file(walls+"\n", cf.GROUNDING_DIR)
+    answer_sets = abduction.run_clingo(cf.GROUNDING_DIR)
+
+    # Extract only relevant asp, which is "state_after"
+    state_afters = []
+    for asp in answer_sets:
+        if(asp.startswith("state_after")):
+            state_afters.append(asp)
+    # the current hypothesis predict the agent is there other than state_after,
+    # then we need to exclude them
+    exclusions = ""
+    for sa in state_afters:
+        if(sa != state_after):
+            exclusions = exclusions + sa + ","
+    if exclusions != "":
+        return exclusions[0:-1]
+    else:
+        return exclusions
+
 def get_plan_exclusions(state_at_before, state_at_after, states):
     '''
     Go through the states plan at time T, and get all state_after that did not happen,
@@ -189,19 +213,22 @@ def generate_explore_pos(hypothesis, next_state, previous_state, action, wall_li
     '''
     walls = add_surrounding_walls(int(previous_state[0]),int(previous_state[1]), wall_list)
 
+    state_after_str = "state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))"
+    state_before_str = "state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ "))."
+    action_str = "action(" + action + ")."
+
     sub_exclusion = ""
-    # if hypothesis != "":
-    #     import ipdb; ipdb.set_trace()
-    #     sub_exclusion = get_exclusions_h(hypothesis)
+    if hypothesis != "":
+        sub_exclusion = get_exclusions_from_h(hypothesis, state_before_str, state_after_str, action_str, walls)
 
     link_detected, exclusions = get_exclusions(previous_state, next_state)
 
     # if link_detected:
     #     link = get_link(previous_state, next_state, action)
-    link = "is_link((9,3)). is_link((17,3))."
+    # link = "is_link((9,3)). is_link((17,3))."
     # return link, "#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + link + walls + "})."
     # else:
-    return "","#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + walls + "})."
+    return "","#pos({"+ state_after_str +"}, {" + exclusions + sub_exclusion + "}, {" + state_before_str + action_str + walls + "})."
 
 def send_state_transition_pos(hypothesis, previous_state, next_state, action, wall_list):
     '''

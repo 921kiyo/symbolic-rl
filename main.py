@@ -89,6 +89,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
     ILASP_ran = False
     # Clean up all the files first
+    helper.silentremove(cf.BASE_DIR, cf.GROUNDING)
     helper.silentremove(cf.BASE_DIR, cf.LASFILE)
     helper.silentremove(cf.BASE_DIR, cf.BACKGROUND)
     helper.silentremove(cf.BASE_DIR, cf.CLINGOFILE)
@@ -277,7 +278,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     reward =reward - 1
 
                 action_string = helper.convert_action(action)
-                hypothesis = ""
                 if not induction.check_ILASP_cover(hypothesis) or hypothesis == "":
                     hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
                     if record_prefix:
