@@ -190,7 +190,7 @@ def get_link(previous_state, next_state, action):
     next_y = int(next_state[1])
     return "is_link(({},{})). is_link(({},{})). ".format(x,y,next_x,next_y)
 
-def generate_plan_pos2(state_at_before, state_at_after, states):
+def generate_extra_exclusions(state_at_before, state_at_after, states):
     x_before, _, _ = abduction.get_X(state_at_before)
     y_before, _, _ = abduction.get_Y(state_at_before)
     x_after, _, _ = abduction.get_X(state_at_after)
@@ -201,7 +201,7 @@ def generate_plan_pos2(state_at_before, state_at_after, states):
     exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
     return exclusions
 
-def generate_explore_pos(hypothesis, previous_state, next_state, action, wall_list, cell_range, extra_exclusions=None):
+def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell_range, extra_exclusions=None):
     '''
     Generate a pos in the exploration phase
 
@@ -304,7 +304,7 @@ def remove_mode(output_file):
             else:
                 out.write(line)
 
-# def generate_plan_pos(hypothesis, state_at_before, state_at_after, states, action, wall_list, is_link=False):
+# def generate_extra_exclusions(hypothesis, state_at_before, state_at_after, states, action, wall_list, is_link=False):
 #     '''
 #     Generate a positive example for ILASP from the plan
 #

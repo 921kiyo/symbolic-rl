@@ -103,8 +103,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         agent_position = env.unwrapped.observer.get_observation()["position"]
 
         previous_state_at = py_asp.state_at(previous_state[0], previous_state[1], 0)
-        any_exclusion = False
-        is_exclusion = False
 
         t = 0
         # Once the agent reaches the goal, the algorithm kicks in
@@ -156,18 +154,12 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                             print("Following the plan...", helper.convert_action(action_int))
                     action_string = helper.convert_action(action_int)
                     next_state, reward, done, _ = env.step(action_int)
+                    next_state_at = py_asp.state_at(next_state[0], next_state[1], t+1)
+
                     if done:
                         reward = reward + 10
                     else:
                         reward = reward - 1
-
-                    next_state_at = py_asp.state_at(next_state[0], next_state[1], t+1)
-                    if cf.IS_PRINT:
-                        print("next_state_at ",next_state_at)
-
-                    # Update stats
-                    stats.episode_rewards[i_episode] += reward
-                    stats.episode_lengths[i_episode] = action_index
 
                     # Update B if any new walls are discovered
                     new_wall_added = abduction.add_new_walls(previous_state, wall_list, cf.CLINGOFILE)
@@ -180,8 +172,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                             helper.append_to_file(link, cf.CLINGOFILE)
 
                     # Make ASP syntax of state transition
-                    extra_exclusion = induction.generate_plan_pos2(previous_state_at, next_state_at, states_plan)
-                    link_check, pos = induction.generate_explore_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range, extra_exclusion)
+                    extra_exclusion = induction.generate_extra_exclusion(previous_state_at, next_state_at, states_plan)
+                    link_check, pos = induction.generate_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range, extra_exclusion)
                     helper.append_to_file(pos+"\n", cf.LASFILE)
                     if link_check != "":
                         helper.append_to_file(link+"\n", cf.CLINGOFILE)
@@ -197,6 +189,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                     previous_state = next_state
                     previous_state_at = next_state_at
+
+                    # Update stats
+                    stats.episode_rewards[i_episode] += reward
+                    stats.episode_lengths[i_episode] = action_index
 
                     env.render()
                     # time.sleep(0.1)
@@ -222,6 +218,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 # Take a step
                 action = randint(0, 3)
                 next_state, reward, done, _ = env.step(action)
+                action_string = helper.convert_action(action)
 
                 if done:
                     reward = reward + 10
@@ -230,7 +227,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 else:
                     reward =reward - 1
 
-                action_string = helper.convert_action(action)
+                # Check if I should run ILASP
                 if not induction.check_ILASP_cover(hypothesis) or hypothesis == '':
                     hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
                     if record_prefix:
@@ -241,13 +238,13 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 abduction.add_new_walls(previous_state, wall_list, cf.CLINGOFILE)
 
                 # Make ASP syntax of state transition and send it to LASFILE
-                link_check, pos = induction.generate_explore_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range)
+                link_check, pos = induction.generate_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range)
                 helper.append_to_file(pos+"\n", cf.LASFILE)
                 if link_check != "":
                     helper.append_to_file(link+"\n", cf.CLINGOFILE)
 
                 if is_link:
-                        if("up" == helper.convert_action(action) and int(previous_state[0]) == 9 and int(previous_state[0]) == 4):
+                        if("up" == action_string and int(previous_state[0]) == 9 and int(previous_state[0]) == 4):
                             link = "\nis_link((9,3)). is_link((17,3)).\n"
                             helper.append_to_file(link, cf.CLINGOFILE)
                 previous_state = next_state
@@ -265,7 +262,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
 # env = gym.make('vgdl_experiment3.5-v0')
 env = gym.make('vgdl_experiment1-v0')
-
 # env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
