@@ -24,24 +24,18 @@ def add_new_walls(previous_state, wall_list, file):
     '''
     x = int(previous_state[0])
     y = int(previous_state[1])
-    is_new_b = False
     if(((x+1,y) in wall_list) and (is_wall_in_background((x+1,y), file) == False)):
         wall = "\nwall({}).\n".format((x+1,y))
         helper.append_to_file(wall, file)
-        is_new_b = True
     if(((x,y+1) in wall_list) and (is_wall_in_background((x,y+1), file) == False)):
         wall = "\nwall({}).\n".format((x,y+1))
         helper.append_to_file(wall, file)
-        is_new_b = True
     if(((x-1,y) in wall_list) and (is_wall_in_background((x-1,y), file) == False)):
         wall = "\nwall({}).\n".format((x-1,y))
         helper.append_to_file(wall, file)
-        is_new_b = True
     if(((x,y-1) in wall_list) and (is_wall_in_background((x,y-1), file) == False)):
         wall = "\nwall({}).\n".format((x,y-1))
         helper.append_to_file(wall, file)
-        is_new_b = True
-    return is_new_b
 
 def add_start_state(start_state):
     start_state = "%AAA\n" + "state_at((" + str(int(start_state[0])) + ", " + str(int(start_state[1])) + "), 1).\n" + "%BBB\n"

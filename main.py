@@ -161,10 +161,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     else:
                         reward = reward - 1
 
-                    # Update B if any new walls are discovered
-                    new_wall_added = abduction.add_new_walls(previous_state, wall_list, cf.CLINGOFILE)
-                    if new_wall_added:
-                        print("new walls added!")
+                    # Meanwhile, accumulate all background knowlege
+                    abduction.add_new_walls(previous_state, wall_list, cf.CLINGOFILE)
 
                     if is_link:
                         if("up" == helper.convert_action(action_int) and int(previous_state[0]) == 9 and int(previous_state[0]) == 4):
@@ -178,6 +176,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     if link_check != "":
                         helper.append_to_file(link+"\n", cf.CLINGOFILE)
 
+                    # Update H if necessary
                     if not induction.check_ILASP_cover(hypothesis):
                         hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
                         # Convert syntax of H for ASP solver
@@ -198,10 +197,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     # time.sleep(0.1)
                     t = t + 1
 
-                    if done:
-                        break
-
-                    if threshold < new_epsilon:
+                    if done or (threshold < new_epsilon):
                         break
 
                 if not actions_array:
@@ -227,13 +223,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 else:
                     reward =reward - 1
 
-                # Check if I should run ILASP
-                if not induction.check_ILASP_cover(hypothesis) or hypothesis == '':
-                    hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
-                    if record_prefix:
-                        inputfile = os.path.join(cf.BASE_DIR, cf.LASFILE)
-                        helper.log_las(inputfile, hypothesis, log_dir, i_episode, t)
-
                 # Meanwhile, accumulate all background knowlege
                 abduction.add_new_walls(previous_state, wall_list, cf.CLINGOFILE)
 
@@ -242,11 +231,18 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 helper.append_to_file(pos+"\n", cf.LASFILE)
                 if link_check != "":
                     helper.append_to_file(link+"\n", cf.CLINGOFILE)
-
                 if is_link:
                         if("up" == action_string and int(previous_state[0]) == 9 and int(previous_state[0]) == 4):
                             link = "\nis_link((9,3)). is_link((17,3)).\n"
                             helper.append_to_file(link, cf.CLINGOFILE)
+
+                # Update H if necessary
+                if not induction.check_ILASP_cover(hypothesis) or hypothesis == '':
+                    hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
+                    if record_prefix:
+                        inputfile = os.path.join(cf.BASE_DIR, cf.LASFILE)
+                        helper.log_las(inputfile, hypothesis, log_dir, i_episode, t)
+
                 previous_state = next_state
 
                 # Update stats
