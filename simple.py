@@ -37,9 +37,12 @@ env = gym.make('vgdl_experiment4_after-v0')
 base_dir = os.path.dirname(os.path.abspath(__file__))
 # print(induction.check_ILASP_cover(base_dir, "output2.las", ""))
 
-stats = plotting.load_stats(base_dir, "experiment1_ILASP")
-stats_test = plotting.load_stats(base_dir, "experiment1_ILASP_test")
+stats = plotting.load_stats(base_dir, "vgdl_experiment3.5")
+stats_test = plotting.load_stats(base_dir, "vgdl_experiment3.5_test")
 # # import ipdb; ipdb.set_trace()
+# stats = plotting.load_stats(base_dir, "teleport")
+# stats_test = plotting.load_stats(base_dir, "teleport_test")
+
 plotting.plot_episode_stats_test(stats, stats_test)
 # plotting.plot_episode_stats_simple(stats)
 
