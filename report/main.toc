@@ -53,5 +53,6 @@
 \contentsline {subsection}{\numberline {6.2.4}generalisation of the current approach}{33}{subsection.6.2.4}
 \contentsline {section}{\numberline {6.3}Conclusion}{33}{section.6.3}
 \contentsline {chapter}{Appendices}{34}{section*.29}
-\contentsline {section}{\numberline {.1}Learning tasks}{35}{section.1..1}
-\contentsline {section}{\numberline {.2}Ethics checklist}{35}{section.1..2}
+\contentsline {section}{\numberline {.1}Ethics}{35}{section.1..1}
+\contentsline {section}{\numberline {.2}Learning tasks}{37}{section.1..2}
+\contentsline {section}{\numberline {.3}Abduction tasks}{37}{section.1..3}

@@ -1,0 +1,35 @@
+\section{Learning tasks}
+\label{appendix:learning_tasks}
+
+This is the full learning task for ILASP in the experiment 1. 
+
+% cell((0..7, 0..6)).
+% adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).
+% adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).
+% adjacent(down, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).
+
+% adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
+
+% \#modeh(state\_after(var(cell))).
+
+% \#modeb(1, adjacent(const(action), var(cell), var(cell))).
+% \#modeb(1, state\_before(var(cell)), (positive)).
+% \#modeb(1, action(const(action)),(positive)).
+% \#modeb(1, wall(var(cell))).
+
+% \#max\_penalty(100).
+
+% \#constant(action, right).
+% \#constant(action, left).
+% \#constant(action, down).
+% \#constant(action, up).
+% \#constant(action, non).
+
+% \#pos({state\_after((1,4))}, {state\_after((2,4)),state\_after((1,5)),state\_after((0,4)),state\_after((1,3))}, {state\_before((1,4)). action(non). wall((1, 5)). wall((0, 4)). }).
+% \#pos({state\_after((1,3))}, {state\_after((2,4)),state\_after((1,5)),state\_after((0,4)),state\_after((1,4))}, {state\_before((1,4)). action(up). wall((1, 5)). wall((0, 4)). }).
+% \#pos({state\_after((1,3))}, {state\_after((2,3)),state\_after((1,4)),state\_after((0,3)),state\_after((1,2))}, {state\_before((1,3)). action(right). wall((2, 3)). wall((0, 3)). }).
+% \#pos({state\_after((1,3))}, {state\_after((2,3)),state\_after((1,4)),state\_after((0,3)),state\_after((1,2))}, {state\_before((1,3)). action(right). wall((2, 3)). wall((0, 3)). }).
+% \#pos({state\_after((1,3))}, {state\_after((2,3)),state\_after((1,4)),state\_after((0,3)),state\_after((1,2))}, {state\_before((1,3)). action(right). wall((2, 3)). wall((0, 3)). }).
+% \#pos({state\_after((1,4))}, {state\_after((2,3)),state\_after((0,3)),state\_after((1,2)),state\_after((1,3))}, {state\_before((1,3)). action(down). wall((2, 3)). wall((0, 3)). }).
+% \#pos({state\_after((2,4))}, {state\_after((1,5)),state\_after((0,4)),state\_after((1,3)),state\_after((1,4))}, {state\_before((1,4)). action(right). wall((1, 5)). wall((0, 4)). }).
+% \#pos({state\_after((1,4))}, {state\_after((3,4)),state\_after((2,5)),state\_after((2,3)),state\_after((2,4))}, {state\_before((2,4)). action(left). wall((2, 5)). wall((2, 3)). }).

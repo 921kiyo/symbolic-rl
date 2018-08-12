@@ -321,10 +321,12 @@ INPUT ./figures/placeholder.png
 INPUT ./figures/placeholder.png
 INPUT chapters/related_work.tex
 INPUT chapters/related_work.tex
-INPUT chapters/ethics.tex
-INPUT chapters/ethics.tex
-INPUT chapters/appendix.tex
-INPUT chapters/appendix.tex
+INPUT chapters/appendix_ethics.tex
+INPUT chapters/appendix_ethics.tex
+INPUT chapters/appendix_learning_task.tex
+INPUT chapters/appendix_learning_task.tex
+INPUT chapters/appendix_asp.tex
+INPUT chapters/appendix_asp.tex
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out
