@@ -35,18 +35,15 @@ def run_experiment(env, i_episode, stats_test, width, time_range):
             stats_test.episode_rewards_test[i_episode] += reward
             stats_test.episode_lengths_test[i_episode] = t
             t = t + 1
-            print("done? ", done)
             if done:
                 is_done = True
                 break
         if is_done:
             break
-        print("is_done? ", is_done)
         if not is_done:
             # If clingo does not give you a right path, just accumulate -1 punishment
             action_int = 4
             _, reward, done2, _ = env.step(action_int)
-            print("done2 ", done2)
             if done2:
                 reward = reward + 10
             else:
@@ -164,9 +161,9 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     else:
                         reward = reward - 1
 
-                    observed_state = py_asp.state_at(next_state[0], next_state[1], t+1)
+                    next_state_at = py_asp.state_at(next_state[0], next_state[1], t+1)
                     if cf.IS_PRINT:
-                        print("observed_state ",observed_state)
+                        print("next_state_at ",next_state_at)
 
                     # Update stats
                     stats.episode_rewards[i_episode] += reward
@@ -174,49 +171,32 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                     # Update B if any new walls are discovered
                     new_wall_added = abduction.add_new_walls(previous_state, wall_list, cf.CLINGOFILE)
-
                     if new_wall_added:
                         print("new walls added!")
+
                     if is_link:
                         if("up" == helper.convert_action(action_int) and int(previous_state[0]) == 9 and int(previous_state[0]) == 4):
                             link = "\nis_link((9,3)). is_link((17,3)).\n"
                             helper.append_to_file(link, cf.CLINGOFILE)
-                    # Add pos
-                    walls = induction.get_seen_walls(cf.CLINGOFILE)
-
-                    # TODO Fix this, I think this is not necessary
-                    walls = walls + wall_list
 
                     # Make ASP syntax of state transition
-                    induction.send_state_transition_pos(hypothesis, previous_state, next_state, action_string, wall_list)
+                    extra_exclusion = induction.generate_plan_pos2(previous_state_at, next_state_at, states_plan)
+                    link_check, pos = induction.generate_explore_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range, extra_exclusion)
+                    helper.append_to_file(pos+"\n", cf.LASFILE)
+                    if link_check != "":
+                        helper.append_to_file(link+"\n", cf.CLINGOFILE)
 
-                    # any_exclusion, pos = induction.generate_plan_pos(hypothesis, previous_state_at, observed_state, states_plan, action_string, walls, is_link)
-                    # pos += "\n"
-                    # helper.append_to_file(pos, cf.LASFILE)
-                    #
-                    # if any_exclusion:
-                    #     is_exclusion = True
-                    is_exclusion = False
-                    # when followed the plan (not random action)
-                    # if threshold >= new_epsilon:
-                    #     # Check if the prediction is the same as observed state
-                    #     predicted_state = abduction.get_predicted_state(previous_state_at, action[1], states_plan)
-                    #     if cf.IS_PRINT:
-                    #         print("predicted_state ", predicted_state)
-                    #     # if not, update H
-                    #     if(predicted_state != observed_state):
-                    #         print("H is probably not correct!")
-                    #         if not induction.check_ILASP_cover(hypothesis):
-                    #             hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
-                    #             # Convert syntax of H for ASP solver
-                    #             hypothesis_asp = py_asp.convert_las_asp(hypothesis)
-                    #
-                    #             if record_prefix:
-                    #                 inputfile = os.path.join(cf.BASE_DIR, cf.LASFILE)
-                    #                 helper.log_las(inputfile, hypothesis, log_dir, i_episode, t)
+                    if not induction.check_ILASP_cover(hypothesis):
+                        hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
+                        # Convert syntax of H for ASP solver
+                        hypothesis_asp = py_asp.convert_las_asp(hypothesis)
+                        abduction.update_h(hypothesis_asp)
+                        if record_prefix:
+                            inputfile = os.path.join(cf.BASE_DIR, cf.LASFILE)
+                            helper.log_las(inputfile, hypothesis, log_dir, i_episode, t)
 
                     previous_state = next_state
-                    previous_state_at = observed_state
+                    previous_state_at = next_state_at
 
                     env.render()
                     # time.sleep(0.1)
@@ -230,18 +210,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                 if not actions_array:
                     t = t + 1
-                if is_exclusion:
-                    if cf.IS_PRINT:
-                        print("exclusion is there ", pos)
-                    if not induction.check_ILASP_cover(hypothesis):
-                        hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
-                        # Convert syntax of H for ASP solver
-                        hypothesis_asp = py_asp.convert_las_asp(hypothesis)
-
-                        abduction.update_h(hypothesis_asp)
-                        if record_prefix:
-                            inputfile = os.path.join(cf.BASE_DIR, cf.LASFILE)
-                            helper.log_las(inputfile, hypothesis, log_dir, i_episode, t-1)
 
                 if done:
                     break
@@ -272,8 +240,11 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 # Meanwhile, accumulate all background knowlege
                 abduction.add_new_walls(previous_state, wall_list, cf.CLINGOFILE)
 
-                # Make ASP syntax of state transition
-                induction.send_state_transition_pos(hypothesis, previous_state, next_state, action_string, wall_list)
+                # Make ASP syntax of state transition and send it to LASFILE
+                link_check, pos = induction.generate_explore_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range)
+                helper.append_to_file(pos+"\n", cf.LASFILE)
+                if link_check != "":
+                    helper.append_to_file(link+"\n", cf.CLINGOFILE)
 
                 if is_link:
                         if("up" == helper.convert_action(action) and int(previous_state[0]) == 9 and int(previous_state[0]) == 4):
@@ -298,8 +269,8 @@ env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix=None, is_link=False)
+stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix="med", is_link=False)
 # stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix="experiment3.5test", is_link=True)
-plotting.store_stats(stats, cf.BASE_DIR, "experiment1_ILASP")
-plotting.store_stats(stats_test, cf.BASE_DIR, "experiment1_ILASP_test")
+# plotting.store_stats(stats, cf.BASE_DIR, "experiment1_ILASP")
+# plotting.store_stats(stats_test, cf.BASE_DIR, "experiment1_ILASP_test")
 plotting.plot_episode_stats_simple(stats)

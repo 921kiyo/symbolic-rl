@@ -44,14 +44,12 @@ def add_new_walls(previous_state, wall_list, file):
     return is_new_b
 
 def add_start_state(start_state):
-    # starting point
     start_state = "%AAA\n" + "state_at((" + str(int(start_state[0])) + ", " + str(int(start_state[1])) + "), 1).\n" + "%BBB\n"
     helper.append_to_file(start_state, cf.CLINGOFILE)
 
 def add_hypothesis(hypothesis_asp):
-    # Send H to cf.CLINGOFILE
     helper.append_to_file("%START\n", cf.CLINGOFILE)
-    helper.append_to_file(hypothesis, cf.CLINGOFILE)
+    helper.append_to_file(hypothesis_asp, cf.CLINGOFILE)
     helper.append_to_file("%END\n", cf.CLINGOFILE)
 
 def add_goal_state(goal_state):
@@ -66,22 +64,12 @@ def make_lp_base(cell_range):
     '''
     Collect all info necessary to run clingo and send them to "cf.CLINGOFILE"
     '''
-    # action choice rule
     actions = "1{action(down, T); action(up, T); action(right, T); action(left, T)}1 :- time(T), not finished(T).\n"
     show = "#show state_at/2.\n #show action/2.\n"
-
-    # time range
     time = "%CCC\n" +"time(0.." + str(cf.TIME_RANGE) + ").\n" + "%DDD\n"
-
-    # optimisation statement
     minimize = "#minimize{1, X, T: action(X,T)}.\n"
-    # adjacent definitions
-    adjacent = "adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).\n\
-    adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).\n\
-    adjacent(down, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).\n\
-    adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).\n"
 
-    kb = actions + show  + time + cell_range + minimize + adjacent
+    kb = actions + show  + time + cell_range + minimize + cf.ADJACENT
     helper.append_to_file(kb, cf.CLINGOFILE)
 
 def run_clingo(clingofile):
@@ -226,36 +214,6 @@ def is_state_in_states(state, states):
         if(state == s[1]):
             return True
     return False
-
-def get_predicted_state(current_state, action, states):
-    '''
-    check if state is in states answer sets
-    '''
-    current_state = update_T(current_state)
-    if(action == "up"):
-        new_state = update_Y(current_state, -1)
-        if is_state_in_states(new_state, states):
-            return new_state
-        else:
-            return current_state
-    elif(action == "down"):
-        new_state = update_Y(current_state, 1)
-        if is_state_in_states(new_state, states):
-            return new_state
-        else:
-            return current_state
-    elif(action == "right"):
-        new_state = update_X(current_state, 1)
-        if is_state_in_states(new_state, states):
-            return new_state
-        else:
-            return current_state
-    elif(action == "left"):
-        new_state = update_X(current_state, -1)
-        if is_state_in_states(new_state, states):
-            return new_state
-        else:
-            return current_state
 
 def update_time_range(agent_position, t):
     '''

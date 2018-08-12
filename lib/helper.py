@@ -20,7 +20,7 @@ def convert_action(action):
 
 def check_surrounding_walls(x, y, wall_list):
     up_wall = down_wall = right_wall = left_wall = False
-    
+
     if((x+1,y) in wall_list):
         right_wall = True
     if((x,y+1) in wall_list):
@@ -29,7 +29,7 @@ def check_surrounding_walls(x, y, wall_list):
         left_wall = True
     if((x,y-1) in wall_list):
         down_wall = True
-    
+
     return up_wall, down_wall, right_wall, left_wall
 
 def get_action(action):
@@ -66,11 +66,10 @@ def silentremove(base_dir, filename, extra_path=None):
     dir = base_dir
     if extra_path:
         dir = os.path.join(base_dir, extra_path)
-    
+
     file =os.path.join(dir, filename)
 
-    remove_file(file)    
-    
+    remove_file(file)
     # After deleting the old file, replace it with a new empty one
     with open(filename, "a") as myfile:
         myfile.close()
@@ -105,7 +104,7 @@ def log_las(inputfile, hypothesis, base_dir, episode, time):
     with open(unique_file, "a") as out:
         out.write("%ILASP\n\n")
         out.write(new_h)
-    
+
     copy_file(inputfile, unique_file)
 
 def comment_h(hypothesis):
