@@ -10,8 +10,8 @@ adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
 
 #modeh(state_after(var(cell))).
 
-#modeb(1, adjacent(const(action), var(cell), var(cell))).
-#modeb(2, state_before(var(cell)), (positive)).
+#modeb(1, adjacent(const(action), var(cell), var(cell)), (positive)).
+#modeb(1, state_before(var(cell)), (positive)).
 #modeb(1, action(const(action)), (positive)).
 #modeb(1, wall(var(cell))).
 
@@ -21,7 +21,3 @@ adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
 #constant(action, left).
 #constant(action, down).
 #constant(action, up).
-
-is_link((9,3)). 
-%is_link((17,3)).
-

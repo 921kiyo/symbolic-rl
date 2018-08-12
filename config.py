@@ -21,6 +21,8 @@ TIME_RANGE = 250
 
 IS_PRINT = True
 
+ALREADY_LINK = False
+
 ADJACENT = "adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).\n\
 adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).\n\
 adjacent(down, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).\n\

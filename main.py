@@ -164,18 +164,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     # Meanwhile, accumulate all background knowlege
                     abduction.add_new_walls(previous_state, wall_list, cf.CLINGOFILE)
 
-                    if is_link:
-                        if("up" == helper.convert_action(action_int) and int(previous_state[0]) == 9 and int(previous_state[0]) == 4):
-                            link = "\nis_link((9,3)). is_link((17,3)).\n"
-                            helper.append_to_file(link, cf.CLINGOFILE)
-
                     # Make ASP syntax of state transition
-                    extra_exclusion = induction.generate_extra_exclusion(previous_state_at, next_state_at, states_plan)
-                    link_check, pos = induction.generate_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range, extra_exclusion)
-                    helper.append_to_file(pos+"\n", cf.LASFILE)
-                    if link_check != "":
-                        helper.append_to_file(link+"\n", cf.CLINGOFILE)
-
+                    extra_exclusion = induction.generate_extra_exclusions(previous_state_at, next_state_at, states_plan)
+                    induction.generate_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range, extra_exclusion)
+                    
                     # Update H if necessary
                     if not induction.check_ILASP_cover(hypothesis):
                         hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
@@ -227,15 +219,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 abduction.add_new_walls(previous_state, wall_list, cf.CLINGOFILE)
 
                 # Make ASP syntax of state transition and send it to LASFILE
-                link_check, pos = induction.generate_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range)
-                helper.append_to_file(pos+"\n", cf.LASFILE)
-                if link_check != "":
-                    helper.append_to_file(link+"\n", cf.CLINGOFILE)
-                if is_link:
-                        if("up" == action_string and int(previous_state[0]) == 9 and int(previous_state[0]) == 4):
-                            link = "\nis_link((9,3)). is_link((17,3)).\n"
-                            helper.append_to_file(link, cf.CLINGOFILE)
-
+                induction.generate_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range)
+                
                 # Update H if necessary
                 if not induction.check_ILASP_cover(hypothesis) or hypothesis == '':
                     hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
@@ -256,13 +241,13 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
     return stats, stats_test
 
-# env = gym.make('vgdl_experiment3.5-v0')
-env = gym.make('vgdl_experiment1-v0')
+env = gym.make('vgdl_experiment3.5-v0')
+# env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix="med", is_link=False)
-# stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix="experiment3.5test", is_link=True)
-# plotting.store_stats(stats, cf.BASE_DIR, "experiment1_ILASP")
-# plotting.store_stats(stats_test, cf.BASE_DIR, "experiment1_ILASP_test")
+# stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix="med", is_link=False)
+stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix="experiment3.5", is_link=True)
+plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment3.5")
+plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment3.5_test")
 plotting.plot_episode_stats_simple(stats)

@@ -117,7 +117,7 @@ def get_inc_exc(hypothesis, state_before, state_after, action, walls, cell_range
         helper.append_to_file(wall, cf.GROUNDING_DIR)
     # TODO Check if all answer sets/only the optimal should be collected here
     answer_sets = abduction.run_clingo(cf.GROUNDING_DIR)
-
+    # TODO I think this is not necessary, as we use "show" now
     # Extract only relevant asp, which is "state_after"
     state_afters_predict = []
     for asp in answer_sets:
@@ -188,7 +188,7 @@ def get_link(previous_state, next_state, action):
     x,y = get_next_state(previous_state, action)
     next_x = int(next_state[0])
     next_y = int(next_state[1])
-    return "is_link(({},{})). is_link(({},{})). ".format(x,y,next_x,next_y)
+    return x,y,"link_start(({},{})). link_dest(({},{})). ".format(x,y,next_x,next_y)
 
 def generate_extra_exclusions(state_at_before, state_at_after, states):
     x_before, _, _ = abduction.get_X(state_at_before)
@@ -221,21 +221,30 @@ def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell
     inclusion = ""
     inclusion, sub_exclusion = get_inc_exc(hypothesis, state_before_str, state_after_str, action_str, all_walls, cell_range)
 
+    # If the agent moved to a cell other than adjacent, there must be a link
     link_detected, exclusions = get_exclusions(previous_state, next_state)
-    
-    # if link_detected:
-    #     link = get_link(previous_state, next_state, action)
-    # link = "is_link((9,3)). is_link((17,3))."
-    # return link, "#pos({state_after((" + str(int(next_state[0])) + "," + str(int(next_state[1])) + "))}, {" + exclusions + "}, {state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ ")). action(" + action + "). " + link + walls + "})."
-    # else:
+    if link_detected:
+        predict_x, predict_y, link = get_link(previous_state, next_state, action)
+        if not cf.ALREADY_LINK:
+            helper.append_to_file(link+"\n", cf.CLINGOFILE)
+            helper.append_to_file(link+"\n", cf.LASFILE)
+            cf.ALREADY_LINK = True
+
+        # TODO double-check if the exclusions for pos1 is fine
+        pos1 = "#pos({"+ "state_after(({},{}))".format(predict_x,predict_y) +"}, {""}, {" + state_before_str + action_str + walls + "})."
+        pos2 = "#pos({"+ inclusion +"}, {" + exclusions + "}, {" + "state_before(({},{})).".format(predict_x,predict_y) + action_str + walls + "})."
+        helper.append_to_file(pos1+"\n", cf.LASFILE)
+        helper.append_to_file(pos2+"\n", cf.LASFILE)
+        return
+
     all_exclusions = exclusions
-    # import ipdb; ipdb.set_trace()
     if sub_exclusion != "":
         all_exclusions = all_exclusions + "," + sub_exclusion
     if extra_exclusions is not None:
         all_exclusions = all_exclusions + "," + extra_exclusions 
-    
-    return "","#pos({"+ inclusion +"}, {" + all_exclusions + "}, {" + state_before_str + action_str + walls + "})."
+
+    pos = "#pos({"+ inclusion +"}, {" + all_exclusions + "}, {" + state_before_str + action_str + walls + "})."
+    helper.append_to_file(pos+"\n", cf.LASFILE)
 
 def copy_las_base(height, width, is_link=False):
     '''
@@ -246,8 +255,10 @@ def copy_las_base(height, width, is_link=False):
     with open(cf.LASFILE, "w") as base:
         base.write(cell)
         if is_link == True:
-            link = "#modeb(1, is_link(var(cell))).\n"
-            base.write(link)
+            link_start = "#modeb(1, link_start(var(cell)), (positive)).\n"
+            link_dest = "#modeb(1, link_dest(var(cell)), (positive)).\n"
+            base.write(link_start)
+            base.write(link_dest)
 
     with open("las_base.las") as f:
         with open(cf.LASFILE, "a") as out:
@@ -304,37 +315,37 @@ def remove_mode(output_file):
             else:
                 out.write(line)
 
-# def generate_extra_exclusions(hypothesis, state_at_before, state_at_after, states, action, wall_list, is_link=False):
-#     '''
-#     Generate a positive example for ILASP from the plan
-#
-#     Output: #pos({state_after((3,6))}, {state_after((4,6)), ...}, {state_before((3,6)). action(non). }).
-#     '''
-#
-#     x_before, _, _ = abduction.get_X(state_at_before)
-#     y_before, _, _ = abduction.get_Y(state_at_before)
-#     x_after, _, _ = abduction.get_X(state_at_after)
-#     y_after, _, _ = abduction.get_Y(state_at_after)
-#     state_before = py_asp.state_before(x_before, y_before)
-#     state_after = py_asp.state_after(x_after, y_after)
-#     # TODO is this correct way to do?? exclusion even in random action.
-#     exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
-#     walls = add_surrounding_walls(x_before, y_before, wall_list)
-#
-#     # link = ""
-#     # if is_link:
-#     #     if(x_before == 9 and y_before == 4 and action == "up"):
-#     #         link = "is_link((9,3)). is_link((17,3))."
-#     # if is_link:
-#     #     if(x_before == 9 and y_before == 4 and action == "up"):
-#     #         link = "is_link((9,3)). is_link((17,3))."
-#
-#     if exclusions == "":
-#         return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."
-#     else:
-#         return True, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."
-#
-#     # if exclusions == "":
-#     #     return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."
-#     # else:
-#     #     return True, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."
+def generate_extra_exclusions2(hypothesis, state_at_before, state_at_after, states, action, wall_list, is_link=False):
+    '''
+    Generate a positive example for ILASP from the plan
+
+    Output: #pos({state_after((3,6))}, {state_after((4,6)), ...}, {state_before((3,6)). action(non). }).
+    '''
+
+    x_before, _, _ = abduction.get_X(state_at_before)
+    y_before, _, _ = abduction.get_Y(state_at_before)
+    x_after, _, _ = abduction.get_X(state_at_after)
+    y_after, _, _ = abduction.get_Y(state_at_after)
+    state_before = py_asp.state_before(x_before, y_before)
+    state_after = py_asp.state_after(x_after, y_after)
+    # TODO is this correct way to do?? exclusion even in random action.
+    exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
+    walls = add_surrounding_walls(x_before, y_before, wall_list)
+
+    # link = ""
+    # if is_link:
+    #     if(x_before == 9 and y_before == 4 and action == "up"):
+    #         link = "is_link((9,3)). is_link((17,3))."
+    # if is_link:
+    #     if(x_before == 9 and y_before == 4 and action == "up"):
+    #         link = "is_link((9,3)). is_link((17,3))."
+
+    if exclusions == "":
+        return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."
+    else:
+        return True, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."
+
+    # if exclusions == "":
+    #     return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."
+    # else:
+    #     return True, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."
