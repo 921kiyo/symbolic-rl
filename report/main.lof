@@ -6,14 +6,14 @@
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Relationships among learning, planning and acting \leavevmode {\color {red}Update this figure}\relax }}{18}{figure.caption.16}
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Relationships among learning, planning and acting \leavevmode {\color {red}Update this figure}\relax }}{18}{figure.caption.17}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Proposed reinforcement learning architecture. ILASP learns to generate a model and updates based on the interaction with the environment, which is used to hypothesis. \relax }}{20}{figure.caption.18}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Reinforcement learning pipeline using ILASP. ILASP learns to generate a modelof the environment, or hypothesis, and updates it based on the interaction with the environment. \relax }}{19}{figure.caption.18}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces VDGL game\relax }}{26}{figure.caption.21}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces GAME \relax }}{26}{figure.caption.22}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces PLACEHOLDER\relax }}{27}{figure.caption.23}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces PLACEHOLDER\relax }}{27}{figure.caption.24}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces PLACEHOLDER\relax }}{28}{figure.caption.25}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Before (left) and after (right) transfer learning\relax }}{28}{figure.caption.26}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces PLACEHOLDER\relax }}{29}{figure.caption.27}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces VDGL game\relax }}{27}{figure.caption.22}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces GAME \relax }}{27}{figure.caption.23}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces PLACEHOLDER\relax }}{28}{figure.caption.24}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces PLACEHOLDER\relax }}{28}{figure.caption.25}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces PLACEHOLDER\relax }}{29}{figure.caption.26}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Before (left) and after (right) transfer learning\relax }}{29}{figure.caption.27}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces PLACEHOLDER\relax }}{30}{figure.caption.28}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

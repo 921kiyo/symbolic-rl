@@ -15,7 +15,7 @@ adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
 #modeb(1, action(const(action)), (positive)).
 #modeb(1, wall(var(cell))).
 
-#max_penalty(100).
+#max_penalty(50).
 
 #constant(action, right).
 #constant(action, left).

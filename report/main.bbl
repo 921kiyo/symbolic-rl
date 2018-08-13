@@ -75,11 +75,6 @@ R.~S. Sutton, ``{Integrated Architectures for Learning, Planning, and Reacting
 \bibitem{Watkins}
 Watkins, ``{Learning from Delayed Reward}.''
 
-\bibitem{Ferreira2017}
-L.~A. Ferreira, R.~A.~C. Bianchi, P.~E. Santos, and R.~L. de~Mantaras,
-  ``{Answer Set Programming for Non-Stationary Markov Decision Processes},''
-  may 2017.
-
 \bibitem{Su2017}
 J.~Su, D.~V. Vargas, and S.~Kouichi, ``{One pixel attack for fooling deep
   neural networks},'' oct 2017.
@@ -99,5 +94,10 @@ D.~Apeldoorn and K.-I. Gabriele, ``{An Agent-Based Learning Approach for
   Finding and Exploiting Heuristics in Unknown Environments},'' {\em
   Proceedings of the Thirteenth International Symposium on Commonsense
   Reasoning}, pp.~1--8, 2017.
+
+\bibitem{Ferreira2017}
+L.~A. Ferreira, R.~A.~C. Bianchi, P.~E. Santos, and R.~L. de~Mantaras,
+  ``{Answer Set Programming for Non-Stationary Markov Decision Processes},''
+  may 2017.
 
 \end{thebibliography}
