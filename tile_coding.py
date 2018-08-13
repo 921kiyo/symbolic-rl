@@ -102,7 +102,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
         episode_rewards=np.zeros(num_episodes))
     
     # 4 actions
-    tiles = np.random.rand(height,width*4)
+    tiles = np.random.rand(width,height*4)
 
     policy = make_epsilon_greedy_policy(tiles, epsilon, ACTION_SPACE)
     for i_episode in range(num_episodes):
@@ -110,7 +110,6 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
                 
         # Reset the env and pick the first action
         previous_state = env.reset()
-        # previous_state_int = helper.convert_state(previous_state[1], previous_state[0], width)
 
         action_probs_next = np.ones(4, dtype=float)
         for t in range(TIME_RANGE):
@@ -147,7 +146,6 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
             action_next = np.argmax(action_probs_next)
             
             if done:
-                print("GOOOOOOOOOLLLLLLL")
                 reward = 100
             else:
                 reward = reward - 1
@@ -164,13 +162,34 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
             if math.isnan(v_now):
                 import ipdb; ipdb.set_trace()
             weights_delta = alpha*(reward + discount_factor*v_next - v_now)*actions_at_state
-            actions_at_state =  actions_at_state - weights_delta
-            for i in range(0,4):
-                tiles[int(previous_state[0]),int(previous_state[1])*(i+1)] = actions_at_state[i] 
+            # actions_at_state =  actions_at_state - weights_delta
+
+            for i in range(-1,2):
+                for j in range(-1,2):
+                    temp = [0,0,0,0]
+                    for a in range(0,4):
+                        temp_x = int(previous_state[0])+i
+                        temp_y = int(previous_state[1])+j
+                        print("temp_x ", temp_x)
+                        print("temp_y ", temp_y)
+                        print("width ", width)
+                        print("height ", height)
+                        if temp_x < width or temp_y < height:
+                            temp[a] = tiles[temp_x, temp_y*(a+1)]
+                            temp[a] = temp[a] - weights_delta[a]
+                            tiles[(int(previous_state[0])+i), (int(previous_state[1])+j)*(a+1)] = temp[a]
+
+                    # temp = temp - weights_delta
+
+            # actions_at_state, action_probs = policy(int(previous_state[0]),int(previous_state[1]), i_episode)
+
+            # for i in range(0,4):
+            #     tiles[int(previous_state[0]),int(previous_state[1])*(i+1)] = actions_at_state[i] 
 
             previous_state = next_state
             # previous_state_int = next_state_int
             if done:
+                print("GOOOOOOAAAAALLLLL")
                 break
 
         # run_experiment(env,state_int, Q, stats_test, i_episode, width, TIME_RANGE)
