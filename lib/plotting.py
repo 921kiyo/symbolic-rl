@@ -102,10 +102,32 @@ def plot_episode_stats_multiple(stats, stats2, smoothing_window=10, noshow=False
     rewards_smoothed = pd.Series(stats.episode_rewards).rolling(smoothing_window, min_periods=smoothing_window).mean()
     rewards_smoothed2 = pd.Series(stats2.episode_rewards).rolling(smoothing_window, min_periods=smoothing_window).mean()
 
-    plt.plot(rewards_smoothed, "r--", rewards_smoothed2, "b")
+    plot_training, = plt.plot(rewards_smoothed, "r--",label="My algorithm")
+    plot_test, = plt.plot(rewards_smoothed2, "b", label="Q learning")
     plt.xlabel("Episode")
     plt.ylabel("Episode Reward (Smoothed)")
     plt.title("Episode Reward over Time (Smoothed over window size {})".format(smoothing_window))
+    plt.legend(handles=[plot_training, plot_test], loc=4)
+    if noshow:
+        plt.close(fig2)
+    else:
+        plt.show(fig2)
+
+    return fig2
+
+def plot_episode_stats_multiple_test(stats, stats2, smoothing_window=10, noshow=False):
+
+    # Plot the episode reward over time
+    fig2 = plt.figure(figsize=(10,5))
+    rewards_smoothed_mine = pd.Series(stats.episode_rewards_test).rolling(smoothing_window, min_periods=smoothing_window).mean()
+    rewards_smoothed_q = pd.Series(stats2.episode_rewards_test).rolling(smoothing_window, min_periods=smoothing_window).mean()
+
+    plot_training, = plt.plot(rewards_smoothed_mine, "r--", label="My algorithm")
+    plot_test, =plt.plot(rewards_smoothed_q, "b", label="Q learning")
+    plt.xlabel("Episode")
+    plt.ylabel("Episode Reward (Smoothed)")
+    plt.title("Episode Reward over Time (Smoothed over window size {})".format(smoothing_window))
+    plt.legend(handles=[plot_training, plot_test], loc=4)
     if noshow:
         plt.close(fig2)
     else:

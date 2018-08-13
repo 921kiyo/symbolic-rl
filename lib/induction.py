@@ -201,7 +201,7 @@ def generate_extra_exclusions(state_at_before, state_at_after, states):
     exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
     return exclusions
 
-def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell_range, extra_exclusions=None):
+def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell_range, extra_exclusions=""):
     '''
     Generate a pos in the exploration phase
 
@@ -240,8 +240,7 @@ def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell
     all_exclusions = exclusions
     if sub_exclusion != "":
         all_exclusions = all_exclusions + "," + sub_exclusion
-    if extra_exclusions is not None:
-        # import ipdb; ipdb.set_trace()
+    if extra_exclusions != "":
         all_exclusions = all_exclusions + "," + extra_exclusions 
 
     pos = "#pos({"+ inclusion +"}, {" + all_exclusions + "}, {" + state_before_str + action_str + walls + "})."
