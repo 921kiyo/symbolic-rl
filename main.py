@@ -10,11 +10,16 @@ import config as cf
 
 def run_experiment(env, i_episode, stats_test, width, time_range):
     _ = env.reset()
+    t = 0
+    agent_position = env.unwrapped.observer.get_observation()["position"]
+    abduction.update_agent_position(agent_position, t)
+    abduction.update_time_range(agent_position, t)
+    
     answer_sets = abduction.run_clingo(cf.CLINGOFILE)
     states_plan, actions_array = abduction.sort_planning(answer_sets)
     print("ASP states ", states_plan)
     print("ASP actions ", actions_array)
-    t = 0
+
     while t < time_range:
         is_done = False
         print("testing phase....")
@@ -241,13 +246,13 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
     return stats, stats_test
 
-# env = gym.make('vgdl_experiment3.5-v0')
-env = gym.make('vgdl_experiment1-v0')
+env = gym.make('vgdl_experiment3.5-v0')
+# env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix="experiment1", is_link=False)
-# stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix="experiment3.5", is_link=True)
-plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment1")
-plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment1_test")
+# stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix="experiment1", is_link=False)
+stats, stats_test = k_learning(env, 50, epsilon=0.4, record_prefix="experiment3.5", is_link=True)
+plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment3.5")
+plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment3.5_test")
 plotting.plot_episode_stats_simple(stats)

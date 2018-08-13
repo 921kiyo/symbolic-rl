@@ -241,6 +241,7 @@ def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell
     if sub_exclusion != "":
         all_exclusions = all_exclusions + "," + sub_exclusion
     if extra_exclusions is not None:
+        # import ipdb; ipdb.set_trace()
         all_exclusions = all_exclusions + "," + extra_exclusions 
 
     pos = "#pos({"+ inclusion +"}, {" + all_exclusions + "}, {" + state_before_str + action_str + walls + "})."
