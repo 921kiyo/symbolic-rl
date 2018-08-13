@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1534104917 "main.aux" "main.bbl" "main" 1534104917
+["bibtex main"] 1534157500 "main.aux" "main.bbl" "main" 1534157500
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/ieeetr.bst" 1292289607 18361 1a00e58565e7f19bf2b3e1bfb82254ae ""
-  "main.aux" 1534104917 14963 89a06bfeaf8241774a31d1a2065b2536 ""
+  "main.aux" 1534157499 14764 4c587725cb343e7e711a4f4b61ae8f4b ""
   "main.bcf" 0 -1 0 ""
   "references.bib" 1532958821 89534 62e972b5569133c059a369f165bf2409 ""
   (generated)
   "main.bbl"
-["pdflatex"] 1534104916 "/home/kiyo/Desktop/Individual_project/report/main.tex" "main.pdf" "main" 1534104916
+["pdflatex"] 1534157497 "/home/kiyo/Desktop/Individual_project/report/main.tex" "main.pdf" "main" 1534157497
   "/etc/texmf/web2c/texmf.cnf" 1532697533 1101 af7716885e081ab43982cab7b4672c1a ""
   "/home/kiyo/Desktop/Individual_project/report/main.tex" 1534088433 47405 494ca8574731228f4b6f9213c35a7d55 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -152,7 +152,7 @@
   "chapters/appendix_ethics.tex" 1534091943 5751 c4b885c6891018e75c1e3e59a0b563ae ""
   "chapters/appendix_learning_task.tex" 1534102530 2236 1e1911b76479b60a5501ec50893c278f ""
   "chapters/evaluation.tex" 1533485814 5495 325b29afad1f19993658db23fa4e2a3a ""
-  "chapters/implementation.tex" 1534104916 17067 0d23e88bf343a7ba4483c9840d8472a0 ""
+  "chapters/implementation.tex" 1534157493 17044 eb9af09cc897f87500fc371aa74a85e2 ""
   "chapters/introduction.tex" 1533137493 3075 6084023421a05ddf3b3cdaf61ff4422e ""
   "chapters/related_work.tex" 1528968270 4591 110660bc7b0a41382b8370e17c5f97ee ""
   "figures/agent_env.png" 1527707744 8876 70d56925069c74e7a7bf25077cd34dbe ""
@@ -166,16 +166,16 @@
   "figures/placeholder.png" 1532641853 34397 02cf530cc17595a09f90bdee994ceec3 ""
   "figures/tile_coding.png" 1533464800 39540 8303ac6bda0985f9b66a2173ff1bce02 ""
   "includes.tex" 1528479218 3009 27f428f26b30ba8d8d7d5c68b1a20cee ""
-  "main.aux" 1534104916 8 a94a2480d3289e625eea47cd1b285758 ""
+  "main.aux" 1534157497 8 a94a2480d3289e625eea47cd1b285758 ""
   "main.bbl" 0 -1 0 "bibtex main"
   "main.tex" 1534088433 47405 494ca8574731228f4b6f9213c35a7d55 ""
   "notation.tex" 1526573725 362 dde8d17bdd645c497ea48e05d51963bd ""
   "titlepage.tex" 1526573725 1995 b33c89e3a284110d3cc1b5b405785394 ""
   (generated)
-  "main.aux"
   "main.out"
-  "main.toc"
   "main.log"
-  "main.lot"
   "main.lof"
+  "main.aux"
   "main.pdf"
+  "main.toc"
+  "main.lot"

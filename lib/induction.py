@@ -235,7 +235,7 @@ def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell
         pos2 = "#pos({"+ inclusion +"}, {" + exclusions + "}, {" + "state_before(({},{})).".format(predict_x,predict_y) + action_str + walls + "})."
         helper.append_to_file(pos1+"\n", cf.LASFILE)
         helper.append_to_file(pos2+"\n", cf.LASFILE)
-        return
+        return pos1, pos2
 
     all_exclusions = exclusions
     if sub_exclusion != "":
@@ -245,14 +245,15 @@ def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell
 
     pos = "#pos({"+ inclusion +"}, {" + all_exclusions + "}, {" + state_before_str + action_str + walls + "})."
     helper.append_to_file(pos+"\n", cf.LASFILE)
+    return pos, None
 
-def copy_las_base(height, width, is_link=False):
+def copy_las_base(height, width, lasfile, is_link=False):
     '''
     make a lasfile for ILASP
     '''
 
     cell = "cell((0..{}, 0..{})).\n".format(width, height)
-    with open(cf.LASFILE, "w") as base:
+    with open(lasfile, "a") as base:
         base.write(cell)
         if is_link == True:
             link_start = "#modeb(1, link_start(var(cell)), (positive)).\n"
@@ -261,7 +262,7 @@ def copy_las_base(height, width, is_link=False):
             base.write(link_dest)
 
     with open("las_base.las") as f:
-        with open(cf.LASFILE, "a") as out:
+        with open(lasfile, "a") as out:
             for line in f:
                 out.write(line)
 
@@ -290,13 +291,18 @@ def run_ILASP(filename, cache_path=None):
         hypothesis = e.output
     return hypothesis
 
-def check_ILASP_cover(hypothesis):
+def check_ILASP_cover(hypothesis, pos, height, width):
+    if pos == None:
+        return True
+
     helper.silentremove(cf.BASE_DIR, cf.CHECK_LAS)
 
-    input_las = os.path.join(cf.BASE_DIR, cf.LASFILE)
     output_las = os.path.join(cf.BASE_DIR, cf.CHECK_LAS)
+    
     helper.append_to_file(hypothesis, output_las)
-    helper.copy_file(input_las, output_las)
+    helper.append_to_file(pos, output_las)
+    copy_las_base(height, width, output_las)
+
     remove_mode(output_las)
     print("checking ILASP necessity...")
     hypothesis = run_ILASP(output_las)
@@ -314,38 +320,3 @@ def remove_mode(output_file):
                 continue
             else:
                 out.write(line)
-
-def generate_extra_exclusions2(hypothesis, state_at_before, state_at_after, states, action, wall_list, is_link=False):
-    '''
-    Generate a positive example for ILASP from the plan
-
-    Output: #pos({state_after((3,6))}, {state_after((4,6)), ...}, {state_before((3,6)). action(non). }).
-    '''
-
-    x_before, _, _ = abduction.get_X(state_at_before)
-    y_before, _, _ = abduction.get_Y(state_at_before)
-    x_after, _, _ = abduction.get_X(state_at_after)
-    y_after, _, _ = abduction.get_Y(state_at_after)
-    state_before = py_asp.state_before(x_before, y_before)
-    state_after = py_asp.state_after(x_after, y_after)
-    # TODO is this correct way to do?? exclusion even in random action.
-    exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
-    walls = add_surrounding_walls(x_before, y_before, wall_list)
-
-    # link = ""
-    # if is_link:
-    #     if(x_before == 9 and y_before == 4 and action == "up"):
-    #         link = "is_link((9,3)). is_link((17,3))."
-    # if is_link:
-    #     if(x_before == 9 and y_before == 4 and action == "up"):
-    #         link = "is_link((9,3)). is_link((17,3))."
-
-    if exclusions == "":
-        return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."
-    else:
-        return True, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + walls + "})."
-
-    # if exclusions == "":
-    #     return False, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."
-    # else:
-    #     return True, "#pos({"+ state_after + "}, {" + exclusions + "}, {" + state_before + " action({}). ".format(action) + link + walls + "})."

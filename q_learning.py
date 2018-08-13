@@ -132,7 +132,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
             state_int = next_state_int
 
         # if(i_episode+1) % 10 == 0:
-        # run_experiment(env, Q, stats_test, i_episode, width, TIME_RANGE)
+        run_experiment(env, Q, stats_test, i_episode, width, TIME_RANGE)
     # Display the final Q-Table
     # for key, value in enumerate(Q.items()):
     #     print(key)
@@ -141,7 +141,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
 
     return Q, stats, stats_test
 
-env = gym.make('vgdl_experiment3.5-v0')
+env = gym.make('vgdl_experiment1-v0')
 
 Q, stats, stats_test = q_learning(env, 100)
 
