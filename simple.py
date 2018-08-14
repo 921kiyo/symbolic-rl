@@ -36,14 +36,14 @@ env = gym.make('vgdl_experiment3.5-v0')
 base_dir = os.path.dirname(os.path.abspath(__file__))
 # print(induction.check_ILASP_cover(base_dir, "output2.las", ""))
 
-stats = plotting.load_stats(base_dir, "vgdl_experiment3.5_ver2")
-stats_test = plotting.load_stats(base_dir, "vgdl_experiment3.5_test_ver2")
+stats = plotting.load_stats(base_dir, "vgdl_experiment4_after")
+stats_test = plotting.load_stats(base_dir, "vgdl_experiment4_after_test")
 
-stats2 = plotting.load_stats(base_dir, "vgdl_experiment3.5_q_ver2")
-stats2_test = plotting.load_stats(base_dir, "vgdl_experiment3.5_q_test_ver2")
+stats2 = plotting.load_stats(base_dir, "vgdl_experiment4_after_q")
+stats2_test = plotting.load_stats(base_dir, "vgdl_experiment4_after_q_test")
 
-# stats2 = plotting.load_stats(base_dir, "vgdl_experiment3.5_q")
-# stats2_test = plotting.load_stats(base_dir, "vgdl_experiment3.5_q_test")
+# stats2 = plotting.load_stats(base_dir, "vgdl_experiment4_after_q")
+# stats2_test = plotting.load_stats(base_dir, "vgdl_experiment4_after_q_test")
 
 
 # stats_test = plotting.load_stats(base_dir, "vgdl_experiment1_q_test")

@@ -140,13 +140,14 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
 
     return Q, stats, stats_test
 
-env = gym.make('vgdl_experiment3.5-v0')
+# env = gym.make('vgdl_experiment3.5-v0')
 # env = gym.make('vgdl_aaa_small-v0')
+env = gym.make('vgdl_experiment4_after-v0')
 
 Q, stats, stats_test = q_learning(env, 100)
 
-plotting.store_stats(stats, base_dir, "vgdl_experiment3.5_q_v2")
-plotting.store_stats(stats_test, base_dir, "vgdl_experiment3.5_q_test_v2")
+plotting.store_stats(stats, base_dir, "vgdl_experiment4_after_q")
+plotting.store_stats(stats_test, base_dir, "vgdl_experiment4_after_q_test")
 # import ipdb; ipdb.set_trace()
 plotting.plot_episode_stats_test(stats, stats_test)
 

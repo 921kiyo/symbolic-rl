@@ -246,13 +246,14 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
     return stats, stats_test
 
-env = gym.make('vgdl_experiment3.5-v0')
+# env = gym.make('vgdl_experiment3.5-v0')
 # env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
+env = gym.make('vgdl_experiment4_before-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-# stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="experiment1", is_link=False)
-stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="experiment3.5_ver3", is_link=True)
-plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment3.5_ver3")
-plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment3.5_test_ver3")
+stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="experiment4_before", is_link=False)
+# stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="experiment3.5_ver3", is_link=True)
+plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment4_before")
+plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment4_before_test")
 plotting.plot_episode_stats_simple(stats)

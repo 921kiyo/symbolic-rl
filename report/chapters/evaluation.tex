@@ -101,8 +101,8 @@ TODO Comparison with Tile Coding
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.5\textwidth]{./figures/experiment3_v2}
-\caption{Enviroment for experiment 1}
-\label{experiment1}
+\caption{Enviroment for experiment 3}
+\label{experiment3}
 \end{figure}
 
 This experiment is conducted to see if the agent find a optimal path of using a teleport. 
@@ -111,14 +111,14 @@ This experiment is conducted to see if the agent find a optimal path of using a 
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment3_training}
 \caption{Comparison of training performance between my algorithm and Q-learning}
-\label{experiment1_training}
+\label{experiment3_training}
 \end{figure}
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment3_test}
 \caption{Comparison of test performance between my algorithm and Q-learning}
-\label{experiment1_test}
+\label{experiment3_test}
 \end{figure}
        
 Learnt hypotheses are as follow:
@@ -142,8 +142,8 @@ Learnt hypotheses are as follow:
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.5\textwidth]{./figures/experiment3_v3}
-\caption{Enviroment for experiment 1}
-\label{experiment1}
+\caption{Enviroment for experiment 3 (fail)}
+\label{experiment3}
 \end{figure}
 
 The algorithm took an suboptimal path (highest rewards are lower than that of Q-learning).
@@ -154,14 +154,14 @@ The problem is the first hypothesis, which states that whenever link\_dest(V0) e
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment3_training_fail}
 \caption{Comparison of training performance between my algorithm and Q-learning}
-\label{experiment1_training}
+\label{experiment3_training}
 \end{figure}
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment3_test_fail}
 \caption{Comparison of test performance between my algorithm and Q-learning}
-\label{experiment1_test}
+\label{experiment3_test}
 \end{figure}
 
 Learnt hypotheses are as follow:
@@ -197,22 +197,66 @@ Learnt hypotheses are as follow:
 
 Finally, we investigated the potentials of transfer learning betweeen similar environments. 
 
-The goal position is the same as in the first game, but the routes to the goal is different. 
+The goal position is the same as in the first game, but the routes to the goal are different. 
 
-Experiment 4 Transfer learning 
-    1 update B
-    2 update H
+% Experiment 4 Transfer learning 
+%     1 update B
+%     2 update H
 
 % \textsf{\#modeb(1, link(var(cell), var(cell)), (positive)).}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=1.0\textwidth]{./figures/experiment4_before_training}
+\caption{Comparison of training performance between my algorithm and Q-learning (before transfer)}
+\label{experiment3_training}
+\end{figure}
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=1.0\textwidth]{./figures/placeholder}
-% \includegraphics[width=10cm, height=9cm]{./figures/architecture}
-\caption{PLACEHOLDER}
-\label{proposed_architecture}
+\includegraphics[width=1.0\textwidth]{./figures/experiment4_before_test}
+\caption{Comparison of test performance between my algorithm and Q-learning (before transfer)}
+\label{experiment3_test}
 \end{figure}
 
+These are the hypotheses we are transferring to a new environment. 
+\begin{equation*}
+\begin{split}
+ &\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V1), action(right), not wall(V0).}\\
+ &\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
+ &\textsf{state\_after(V1) :- adjacent(down, V0, V1), state\_before(V0), action(up), not wall(V1).}\\
+ &\textsf{state\_after(V0) :- adjacent(down, V0, V1), state\_before(V1), action(down), not wall(V0).}\\
+ &\textsf{state\_after(V1) :- adjacent(right, V0, V1), state\_before(V1), action(right), wall(V0).}\\
+ &\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V1), action(left), wall(V0).}\\
+ &\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V0), action(down), wall(V1).}\\
+ &\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}
+\end{split}
+\end{equation*}
+
+\subsubsection{Transfer learning}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=1.0\textwidth]{./figures/experiment4_after_training}
+\caption{Comparison of training performance between my algorithm and Q-learning (after transfer)}
+\label{experiment3_training}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=1.0\textwidth]{./figures/experiment4_after_test}
+\caption{Comparison of test performance between my algorithm and Q-learning (after transfer)}
+\label{experiment3_test}
+\end{figure}
+
+These are the hypotheses we are transferring to a new environment. 
+\begin{equation*}
+\begin{split}
+\end{split}
+\end{equation*}
+
+\newpage
+\subsection{Experiment5}
+
+TODO Transfer learning for new H
 
 % \subsection{Results}
 
