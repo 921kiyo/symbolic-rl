@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  13 AUG 2018 21:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  14 AUG 2018 01:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1030,7 +1030,7 @@ Package pdftex.def Info: ./figures/experiment1.png used on input line 20.
 File: ./figures/experiment1.png Graphic file (type png)
 
 <use ./figures/experiment1.png>
-Package pdftex.def Info: ./figures/experiment1.png used on input line 46.
+Package pdftex.def Info: ./figures/experiment1.png used on input line 47.
 (pdftex.def)             Requested size: 219.08614pt x 93.0046pt.
 
 <./figures/experiment1_training.png, id=281, 722.7pt x 361.35pt>
@@ -1038,117 +1038,150 @@ File: ./figures/experiment1_training.png Graphic file (type png)
 
 <use ./figures/experiment1_training.png>
 Package pdftex.def Info: ./figures/experiment1_training.png used on input line 
-54.
+55.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 
 <./figures/experiment1_test.png, id=282, 722.7pt x 361.35pt>
 File: ./figures/experiment1_test.png Graphic file (type png)
 
 <use ./figures/experiment1_test.png>
-Package pdftex.def Info: ./figures/experiment1_test.png used on input line 62.
+Package pdftex.def Info: ./figures/experiment1_test.png used on input line 63.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
  [28 <./figures/experiment1_training.png>]
 [29 <./figures/experiment1_test.png>]
-File: ./figures/experiment1.png Graphic file (type png)
- <use ./figures/experiment1.png>
-Package pdftex.def Info: ./figures/experiment1.png used on input line 108.
-(pdftex.def)             Requested size: 219.08614pt x 93.0046pt.
+<./figures/experiment3_v2.png, id=300, 292.09125pt x 194.7275pt>
+File: ./figures/experiment3_v2.png Graphic file (type png)
 
-<./figures/experiment3_training.png, id=300, 722.7pt x 361.35pt>
+<use ./figures/experiment3_v2.png>
+Package pdftex.def Info: ./figures/experiment3_v2.png used on input line 103.
+(pdftex.def)             Requested size: 219.08614pt x 146.06308pt.
+
+<./figures/experiment3_training.png, id=301, 722.7pt x 361.35pt>
 File: ./figures/experiment3_training.png Graphic file (type png)
 
 <use ./figures/experiment3_training.png>
 Package pdftex.def Info: ./figures/experiment3_training.png used on input line 
-116.
+112.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 
-<./figures/experiment3_test.png, id=301, 722.7pt x 361.35pt>
+<./figures/experiment3_test.png, id=302, 722.7pt x 361.35pt>
 File: ./figures/experiment3_test.png Graphic file (type png)
 
 <use ./figures/experiment3_test.png>
-Package pdftex.def Info: ./figures/experiment3_test.png used on input line 123.
+Package pdftex.def Info: ./figures/experiment3_test.png used on input line 119.
 
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
- [30 <./figures/experiment3_training.png>]
-<./figures/experiment4_before.png, id=311, 457.71pt x 266.9975pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [30 <./figures/experiment3_v2.png> <./figures/experiment3_training.png>] [31 <
+./figures/experiment3_test.png>]
+<./figures/experiment3_v3.png, id=318, 290.08376pt x 192.72pt>
+File: ./figures/experiment3_v3.png Graphic file (type png)
+
+<use ./figures/experiment3_v3.png>
+Package pdftex.def Info: ./figures/experiment3_v3.png used on input line 144.
+(pdftex.def)             Requested size: 219.08614pt x 145.55415pt.
+
+<./figures/experiment3_training_fail.png, id=319, 722.7pt x 361.35pt>
+File: ./figures/experiment3_training_fail.png Graphic file (type png)
+
+<use ./figures/experiment3_training_fail.png>
+Package pdftex.def Info: ./figures/experiment3_training_fail.png used on input 
+line 155.
+(pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
+
+<./figures/experiment3_test_fail.png, id=320, 722.7pt x 361.35pt>
+File: ./figures/experiment3_test_fail.png Graphic file (type png)
+
+<use ./figures/experiment3_test_fail.png>
+Package pdftex.def Info: ./figures/experiment3_test_fail.png used on input line
+ 162.
+(pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [32 <./figures/experiment3_v3.png> <./figures/experiment3_training_fail.png>] 
+[33 <./figures/experiment3_test_fail.png>]
+<./figures/experiment4_before.png, id=335, 457.71pt x 266.9975pt>
 File: ./figures/experiment4_before.png Graphic file (type png)
 
 <use ./figures/experiment4_before.png>
-Package pdftex.def Info: ./figures/experiment4_before.png used on input line 13
-9.
+Package pdftex.def Info: ./figures/experiment4_before.png used on input line 19
+3.
 (pdftex.def)             Requested size: 219.08614pt x 127.79881pt.
 
-<./figures/experiment4_after.png, id=312, 459.7175pt x 265.99374pt>
+<./figures/experiment4_after.png, id=336, 459.7175pt x 265.99374pt>
 File: ./figures/experiment4_after.png Graphic file (type png)
 
 <use ./figures/experiment4_after.png>
-Package pdftex.def Info: ./figures/experiment4_after.png used on input line 139
+Package pdftex.def Info: ./figures/experiment4_after.png used on input line 193
 .
 (pdftex.def)             Requested size: 219.08614pt x 126.76639pt.
 
-<./figures/placeholder.png, id=313, 722.7pt x 361.35pt>
+<./figures/placeholder.png, id=337, 722.7pt x 361.35pt>
 File: ./figures/placeholder.png Graphic file (type png)
 
 <use ./figures/placeholder.png>
-Package pdftex.def Info: ./figures/placeholder.png used on input line 156.
+Package pdftex.def Info: ./figures/placeholder.png used on input line 210.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
-) [31 <./figures/experiment3_test.png> <./figures/experiment4_before.png> <./fi
-gures/experiment4_after.png>] [32 <./figures/placeholder.png>]
+) [34 <./figures/experiment4_before.png> <./figures/experiment4_after.png> <./f
+igures/placeholder.png>]
 Chapter 5.
 (./chapters/related_work.tex
 
-Package natbib Warning: Citation `Garnelo2016' on page 33 undefined on input li
+Package natbib Warning: Citation `Garnelo2016' on page 35 undefined on input li
 ne 3.
 
 
-Package natbib Warning: Citation `LeCunL1998' on page 33 undefined on input lin
+Package natbib Warning: Citation `LeCunL1998' on page 35 undefined on input lin
 e 3.
 
 
-Package natbib Warning: Citation `Su2017' on page 33 undefined on input line 4.
+Package natbib Warning: Citation `Su2017' on page 35 undefined on input line 4.
 
 
 
-Package natbib Warning: Citation `Garcez2018' on page 33 undefined on input lin
+Package natbib Warning: Citation `Garcez2018' on page 35 undefined on input lin
 e 6.
 
 
-Package natbib Warning: Citation `Zambaldi2018' on page 33 undefined on input l
+Package natbib Warning: Citation `Zambaldi2018' on page 35 undefined on input l
 ine 8.
 
 
-Package natbib Warning: Citation `Garnelo2016' on page 33 undefined on input li
+Package natbib Warning: Citation `Garnelo2016' on page 35 undefined on input li
 ne 8.
 
 
-Package natbib Warning: Citation `Apeldoorn2017' on page 33 undefined on input 
+Package natbib Warning: Citation `Apeldoorn2017' on page 35 undefined on input 
 line 18.
 
 
-Package natbib Warning: Citation `Apeldoorn2016' on page 33 undefined on input 
+Package natbib Warning: Citation `Apeldoorn2016' on page 35 undefined on input 
 line 18.
 
 
-Package natbib Warning: Citation `Apeldoorn' on page 33 undefined on input line
+Package natbib Warning: Citation `Apeldoorn' on page 35 undefined on input line
  18.
 
-[33
-
-]
-
-Package natbib Warning: Citation `Ferreira2017' on page 34 undefined on input l
-ine 20.
-
-) [34]
-Chapter 6.
 [35
 
 ]
 
-Package natbib Warning: Citation `Sridharan2017' on page 36 undefined on input 
+Package natbib Warning: Citation `Ferreira2017' on page 36 undefined on input l
+ine 20.
+
+) [36]
+Chapter 6.
+[37
+
+]
+
+Package natbib Warning: Citation `Sridharan2017' on page 38 undefined on input 
 line 793.
 
-[36] [37
+[38] [39
 
 
 
@@ -1181,14 +1214,14 @@ Overfull \hbox (9.14763pt too wide) in alignment at lines 139--146
  [] [] [] 
  []
 
-[38] [39]) (./chapters/appendix_learning_task.tex) (./chapters/appendix_asp.tex
+[40] [41]) (./chapters/appendix_learning_task.tex) (./chapters/appendix_asp.tex
 )
 No file main.bbl.
 
 Package natbib Warning: There were undefined citations.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 828.
-[40]
+[42]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 828.
  (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 828.
@@ -1201,7 +1234,7 @@ Package rerunfilecheck Warning: File `main.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `main.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  B2F70F1479D87864A5855ED97613B13A;3263.
+(rerunfilecheck)             After:  208DE7413B4D098306384A1B18627DA9;3185.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1214,10 +1247,10 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 828.
  ) 
 Here is how much of TeX's memory you used:
- 11542 strings out of 493029
- 167471 string characters out of 6136234
+ 11566 strings out of 493029
+ 168203 string characters out of 6136234
  302055 words of memory out of 5000000
- 14632 multiletter control sequences out of 15000+600000
+ 14647 multiletter control sequences out of 15000+600000
  51161 words of font info for 99 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,20n,49p,973b,587s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1237,10 +1270,10 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/doublestroke/dsrom12.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (47 pages, 561674 bytes).
+Output written on main.pdf (49 pages, 623594 bytes).
 PDF statistics:
- 471 PDF objects out of 1000 (max. 8388607)
- 381 compressed objects within 4 object streams
- 181 named destinations out of 1000 (max. 500000)
- 71 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 489 PDF objects out of 1000 (max. 8388607)
+ 391 compressed objects within 4 object streams
+ 186 named destinations out of 1000 (max. 500000)
+ 91 words of extra memory for PDF output out of 10000 (max. 10000000)
 

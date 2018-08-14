@@ -13,8 +13,8 @@ from lib import plotting, helper, induction
 
 TIME_RANGE = 400
 # env = gym.make('vgdl_experiment1-v0')
-# env = gym.make('vgdl_experiment3.5-v0')
-env = gym.make('vgdl_experiment4_after-v0')
+env = gym.make('vgdl_experiment3.5-v0')
+# env = gym.make('vgdl_experiment4_after-v0')
 # env = gym.make('vgdl_experiment5-v0')
 
 
@@ -28,19 +28,23 @@ env = gym.make('vgdl_experiment4_after-v0')
 #         time.sleep(0.1)
 #         # Take a step
 #         action = env.action_space.sample()
-#         next_state, reward, done, _ = env.step(action)
+#         next_state, reward, done, _ = env.step(4)
 
 #         if done:
 #             break
-
+# exit(1)
 base_dir = os.path.dirname(os.path.abspath(__file__))
 # print(induction.check_ILASP_cover(base_dir, "output2.las", ""))
 
-stats = plotting.load_stats(base_dir, "vgdl_experiment3.5")
-stats_test = plotting.load_stats(base_dir, "vgdl_experiment3.5_test")
+stats = plotting.load_stats(base_dir, "vgdl_experiment3.5_ver2")
+stats_test = plotting.load_stats(base_dir, "vgdl_experiment3.5_test_ver2")
 
-stats2 = plotting.load_stats(base_dir, "vgdl_experiment3.5_q")
-stats2_test = plotting.load_stats(base_dir, "vgdl_experiment3.5_q_test")
+stats2 = plotting.load_stats(base_dir, "vgdl_experiment3.5_q_ver2")
+stats2_test = plotting.load_stats(base_dir, "vgdl_experiment3.5_q_test_ver2")
+
+# stats2 = plotting.load_stats(base_dir, "vgdl_experiment3.5_q")
+# stats2_test = plotting.load_stats(base_dir, "vgdl_experiment3.5_q_test")
+
 
 # stats_test = plotting.load_stats(base_dir, "vgdl_experiment1_q_test")
 # import ipdb; ipdb.set_trace()
@@ -48,6 +52,8 @@ stats2_test = plotting.load_stats(base_dir, "vgdl_experiment3.5_q_test")
 # stats_test = plotting.load_stats(base_dir, "teleport_test")
 
 # plotting.plot_episode_stats_test(stats, stats_test)
+# plotting.plot_episode_stats_test(stats2, stats2_test, smoothing_window=1)
+
 # plotting.plot_episode_stats_simple(stats)
 
 plotting.plot_episode_stats_multiple(stats, stats2, smoothing_window=1)

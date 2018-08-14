@@ -145,8 +145,8 @@ env = gym.make('vgdl_experiment3.5-v0')
 
 Q, stats, stats_test = q_learning(env, 100)
 
-plotting.store_stats(stats, base_dir, "vgdl_experiment3.5_q")
-plotting.store_stats(stats_test, base_dir, "vgdl_experiment3.5_q_test")
+plotting.store_stats(stats, base_dir, "vgdl_experiment3.5_q_v2")
+plotting.store_stats(stats_test, base_dir, "vgdl_experiment3.5_q_test_v2")
 # import ipdb; ipdb.set_trace()
 plotting.plot_episode_stats_test(stats, stats_test)
 

@@ -235,7 +235,7 @@ def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell
         pos2 = "#pos({"+ inclusion +"}, {" + exclusions + "}, {" + "state_before(({},{})).".format(predict_x,predict_y) + action_str + walls + "})."
         helper.append_to_file(pos1+"\n", cf.LASFILE)
         helper.append_to_file(pos2+"\n", cf.LASFILE)
-        return pos1, pos2
+        return pos1, pos2, link
 
     all_exclusions = exclusions
     if sub_exclusion != "":
@@ -245,7 +245,7 @@ def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell
 
     pos = "#pos({"+ inclusion +"}, {" + all_exclusions + "}, {" + state_before_str + action_str + walls + "})."
     helper.append_to_file(pos+"\n", cf.LASFILE)
-    return pos, None
+    return pos, None, None
 
 def copy_las_base(height, width, lasfile, is_link=False):
     '''
@@ -291,13 +291,15 @@ def run_ILASP(filename, cache_path=None):
         hypothesis = e.output
     return hypothesis
 
-def check_ILASP_cover(hypothesis, pos, height, width):
+def check_ILASP_cover(hypothesis, pos, height, width, link):
     if pos == None:
         return True
 
     helper.silentremove(cf.BASE_DIR, cf.CHECK_LAS)
 
     output_las = os.path.join(cf.BASE_DIR, cf.CHECK_LAS)
+    if link:
+        helper.append_to_file(link, output_las)
     
     helper.append_to_file(hypothesis, output_las)
     helper.append_to_file(pos, output_las)

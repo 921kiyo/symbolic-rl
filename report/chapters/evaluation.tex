@@ -40,6 +40,7 @@ Another benchmark is tile coding, which is a type of linear function approximati
 \label{learning_evaluation}
 
 \subsection{Experiment1}
+The purpose of the first experiment is how the algorithm learns the model of the environment, or hypothesis in ILASP.
 
 \begin{figure}[!htb]
 \centering
@@ -63,22 +64,22 @@ Another benchmark is tile coding, which is a type of linear function approximati
 \caption{Comparison of test performance between my algorithm and Q-learning}
 \label{experiment1_test}
 \end{figure}
-    
 
-Experiment 1 update H
+Learnt hypotheses are as follow:
+\begin{equation*}
+\begin{split}
+&\textsf{state\_after(V1) :- adjacent(right, V0, V1), state\_before(V1), action(right), wall(V0).}\\
+&\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V0), action(left), wall(V1).}\\
+&\textsf{state\_after(V1) :- adjacent(down, V0, V1), state\_before(V1), action(down), wall(V0).}\\
+&\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}\\
+&\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V1), action(right), not wall(V0).}\\
+&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
+&\textsf{state\_after(V0) :- adjacent(down, V0, V1), state\_before(V1), action(down), not wall(V0).}\\
+&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}
+\end{split}
+\end{equation*}
 
-First H
-
-TODO Insert Hypothesis here
-
-Last H after XX iterations. 
-
-TODO Insert Hypothesis here
-
-% \subsection{Evaluation Methods}
-
-Converge to optimal policy faster than Q-learning.
-
+% Converge to optimal policy faster than Q-learning.
 
 \subsection{Experiment2}
 
@@ -94,22 +95,17 @@ TODO Comparison with Tile Coding
 % \label{proposed_architecture}
 % \end{figure}
 \newpage
-
 \subsection{Experiment3}
-Experiment 3 Optimal path learning
-This experiment is conducted to see if the agent does not get stuck on a suboptimal path. 
-
-The game is designed such that 
-
-Teleport. 
+% The game is designed such that 
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=0.5\textwidth]{./figures/experiment1}
+\includegraphics[width=0.5\textwidth]{./figures/experiment3_v2}
 \caption{Enviroment for experiment 1}
 \label{experiment1}
 \end{figure}
-    
+
+This experiment is conducted to see if the agent find a optimal path of using a teleport. 
 
 \begin{figure}[!htb]
 \centering
@@ -124,11 +120,69 @@ Teleport.
 \caption{Comparison of test performance between my algorithm and Q-learning}
 \label{experiment1_test}
 \end{figure}
-        
-    
+       
+Learnt hypotheses are as follow:
+\begin{equation*}
+\begin{split}
+&\textsf{state\_after(V1) :- link\_start(V0), link\_dest(V1), state\_before(V0).}\\
+&\textsf{state\_after(V0) :- link\_dest(V0), state\_before(V0), action(right).}\\
+&\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V0), action(right), not wall(V1).}\\
+&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
+&\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V0), action(down), not wall(V1).}\\
+&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}\\
+&\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V1), action(left), wall(V0).}\\
+&\textsf{state\_after(V1) :- adjacent(down, V0, V1), state\_before(V1), action(down), wall(V0).}\\
+&\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}
+\end{split}
+\end{equation*}
+
 \newpage
-\section{Transfer Learning Evaluation}
-\label{transfer_learning}
+\subsubsection{Failed Case}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.5\textwidth]{./figures/experiment3_v3}
+\caption{Enviroment for experiment 1}
+\label{experiment1}
+\end{figure}
+
+The algorithm took an suboptimal path (highest rewards are lower than that of Q-learning).
+
+The problem is the first hypothesis, which states that whenever link\_dest(V0) exists, there is state\_after(V0).
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=1.0\textwidth]{./figures/experiment3_training_fail}
+\caption{Comparison of training performance between my algorithm and Q-learning}
+\label{experiment1_training}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=1.0\textwidth]{./figures/experiment3_test_fail}
+\caption{Comparison of test performance between my algorithm and Q-learning}
+\label{experiment1_test}
+\end{figure}
+
+Learnt hypotheses are as follow:
+\begin{equation*}
+\begin{split}
+&\textsf{state\_after(V0) :- link\_dest(V0).}\\
+&\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V0), action(right), not wall(V1).}\\
+&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
+&\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V0), action(down), not wall(V1).}\\
+&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}\\
+&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V0), action(right), wall(V1).}\\
+&\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V1), action(left), wall(V0).}\\
+&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V0), action(down), wall(V1).}\\
+&\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}
+\end{split}
+\end{equation*}
+
+
+\newpage
+% \section{Transfer Learning Evaluation}
+% \label{transfer_learning}
 
 \subsection{Experiment4}
 
