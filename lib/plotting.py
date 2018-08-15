@@ -134,3 +134,6 @@ def plot_episode_stats_multiple_test(stats, stats2, smoothing_window=10, noshow=
         plt.show(fig2)
 
     return fig2
+
+def average_plot():
+    pass

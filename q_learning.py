@@ -66,10 +66,12 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
     """
     # height = env.unwrapped.game.height
     width = env.unwrapped.game.width
-    Q = defaultdict(lambda: np.zeros(ACTION_SPACE))
+    # Q = defaultdict(lambda: np.zeros(ACTION_SPACE))
+    Q = defaultdict(lambda: np.random.rand(ACTION_SPACE))
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
-        episode_rewards=np.zeros(num_episodes))
+        episode_rewards=np.zeros(num_episodes),
+        episode_ILASP=np.zeros(num_episodes))
     
     stats_test = plotting.EpisodeStats_test(
         episode_lengths_test=np.zeros(num_episodes),
@@ -142,14 +144,16 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
 
 # env = gym.make('vgdl_experiment3.5-v0')
 # env = gym.make('vgdl_aaa_small-v0')
-env = gym.make('vgdl_experiment4_after-v0')
+env = gym.make('vgdl_experiment1-v0')
 
-Q, stats, stats_test = q_learning(env, 100)
+temp_dir = os.path.join(base_dir, "temp")
 
-plotting.store_stats(stats, base_dir, "vgdl_experiment4_after_q")
-plotting.store_stats(stats_test, base_dir, "vgdl_experiment4_after_q_test")
+for i in range(10):
+    Q, stats, stats_test = q_learning(env, 70)
+    plotting.store_stats(stats, temp_dir, "temp_v{}".format(i))
+    plotting.store_stats(stats_test, temp_dir, "temp_v{}_test".format(i))
 # import ipdb; ipdb.set_trace()
-plotting.plot_episode_stats_test(stats, stats_test)
+# plotting.plot_episode_stats_test(stats, stats_test)
 
 # plotting.plot_episode_stats(stats)
 # plotting.plot_episode_stats_simple(stats)
