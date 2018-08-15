@@ -1,8 +1,9 @@
-
-\section{Settings (To Be Updated)}
-% Having implemented the algorithm, we now describe the experiment configuration and results in this chapter.
+\section{Evaluation Metrics}
 The two main measurements for the performance of our new architecture are learning efficiency and transfer learning capability.
-We conducted several different experiments to highlight each aspect of the algorithm.
+The learning efficiencies are measured in two different ways. First, the algorithm performance is compared with exisitng RL algorithms in terms of 
+convergence rate, which is measured in terms of number of episodes that the agent needs to get to an optimal policy.
+Second, ILASP learning is measured in each episodes and time steps to see how the new algorithm refines its internal hypothesis. 
+Other common measurements in RL are XXX, XXX, but our primary goal of this research is data-efficient learning.
 
 We use GVG-AI Framework for our experiments, which was created for the General Video Gamea AI Competition\footnote{http://www.gvgai.net/}, 
 a game environment for an agent that should be able to play a wide variety of games without knowing which games are to be played.
@@ -15,6 +16,8 @@ a goal cell, walls and paths. The agent can take 4 different actions: up, down, 
 The environment is not known to the agent in advance, and it attempts to find the goal by exploring the environment.
 The agent receives -1 in any states except the goal state, where it gains a reward of 10. 
 
+We conducted several different experiments to highlight each aspect of the algorithm.
+
 \begin{figure}[!ht!b]
 \centering
 \includegraphics[width=0.5\textwidth]{./figures/experiment1}
@@ -22,13 +25,13 @@ The agent receives -1 in any states except the goal state, where it gains a rewa
 \label{VGDL_sample}
 \end{figure}
   
-% No dynamic enemies,
-% \textcolor{red}{TODO OPENAI paper citation}
-% The game is formalised as MDP as follows:
-% I conducted a number of experiments to highlight a different aspects of the algorithms. 
-% To compare the performance of our algorithm, I ran Q-learning, the most commonly used RL algorithm, in the same senarios as a bench mark. 
+No dynamic enemies,
+\textcolor{red}{TODO OPENAI paper citation}
+The game is formalised as MDP as follows:
+I conducted a number of experiments to highlight a different aspects of the algorithms. 
+To compare the performance of our algorithm, I ran Q-learning, the most commonly used RL algorithm, in the same senarios as a bench mark. 
 
-\section{Benchmark (To Be Updated)}
+\section{Benchmark}
 
 We compare the performance of our algorithm with existing reinforcement learning techniques. 
 Q-learning is most widely used technique for reinforcement learning. However comparision with q-learning might not be fair 
@@ -36,7 +39,7 @@ since our algorithm has one extra assumptions: the agent knows surrounding infor
 which is not a common assumption for RL.
 Another benchmark is tile coding, which is a type of linear function approximation techniques described in Chapter XX. 
 
-\section{Experiment Results (To Be Updated)}
+\section{Experiment Results}
 \label{learning_evaluation}
 
 \subsection{Experiment1}
@@ -64,6 +67,14 @@ The purpose of the first experiment is how the algorithm learns the model of the
 \caption{Comparison of test performance between my algorithm and Q-learning}
 \label{experiment1_test}
 \end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=1.0\textwidth]{./figures/experiment1_test}
+\caption{PLACEHOLDER FOR ILASP}
+\label{experiment1_test}
+\end{figure}
+    
 
 Learnt hypotheses are as follow:
 \begin{equation*}
@@ -120,7 +131,14 @@ This experiment is conducted to see if the agent find a optimal path of using a 
 \caption{Comparison of test performance between my algorithm and Q-learning}
 \label{experiment3_test}
 \end{figure}
-       
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=1.0\textwidth]{./figures/experiment1_test}
+\caption{PLACEHOLDER FOR ILASP}
+\label{experiment1_test}
+\end{figure}
+    
 Learnt hypotheses are as follow:
 \begin{equation*}
 \begin{split}
@@ -135,50 +153,6 @@ Learnt hypotheses are as follow:
 &\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}
 \end{split}
 \end{equation*}
-
-\newpage
-\subsubsection{Failed Case}
-
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=0.5\textwidth]{./figures/experiment3_v3}
-\caption{Enviroment for experiment 3 (fail)}
-\label{experiment3}
-\end{figure}
-
-The algorithm took an suboptimal path (highest rewards are lower than that of Q-learning).
-
-The problem is the first hypothesis, which states that whenever link\_dest(V0) exists, there is state\_after(V0).
-
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment3_training_fail}
-\caption{Comparison of training performance between my algorithm and Q-learning}
-\label{experiment3_training}
-\end{figure}
-
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment3_test_fail}
-\caption{Comparison of test performance between my algorithm and Q-learning}
-\label{experiment3_test}
-\end{figure}
-
-Learnt hypotheses are as follow:
-\begin{equation*}
-\begin{split}
-&\textsf{state\_after(V0) :- link\_dest(V0).}\\
-&\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V0), action(right), not wall(V1).}\\
-&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
-&\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V0), action(down), not wall(V1).}\\
-&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V0), action(right), wall(V1).}\\
-&\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V1), action(left), wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V0), action(down), wall(V1).}\\
-&\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}
-\end{split}
-\end{equation*}
-
 
 \newpage
 % \section{Transfer Learning Evaluation}
@@ -217,6 +191,14 @@ The goal position is the same as in the first game, but the routes to the goal a
 \caption{Comparison of test performance between my algorithm and Q-learning (before transfer)}
 \label{experiment3_test}
 \end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=1.0\textwidth]{./figures/experiment1_test}
+\caption{PLACEHOLDER FOR ILASP}
+\label{experiment1_test}
+\end{figure}
+    
 
 These are the hypotheses we are transferring to a new environment. 
 \begin{equation*}

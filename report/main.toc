@@ -32,15 +32,14 @@
 \contentsline {section}{\numberline {3.4}Plan execution}{25}{section.3.4}
 \contentsline {section}{\numberline {3.5}Exploration}{26}{section.3.5}
 \contentsline {chapter}{\numberline {4}Evaluation}{27}{chapter.4}
-\contentsline {section}{\numberline {4.1}Settings (To Be Updated)}{27}{section.4.1}
-\contentsline {section}{\numberline {4.2}Benchmark (To Be Updated)}{28}{section.4.2}
-\contentsline {section}{\numberline {4.3}Experiment Results (To Be Updated)}{28}{section.4.3}
+\contentsline {section}{\numberline {4.1}Evaluation Metrics}{27}{section.4.1}
+\contentsline {section}{\numberline {4.2}Benchmark}{28}{section.4.2}
+\contentsline {section}{\numberline {4.3}Experiment Results}{28}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}Experiment1}{28}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Experiment2}{29}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}Experiment3}{30}{subsection.4.3.3}
-\contentsline {subsubsection}{Failed Case}{32}{section*.26}
-\contentsline {subsection}{\numberline {4.3.4}Experiment4}{34}{subsection.4.3.4}
-\contentsline {subsubsection}{Transfer learning}{35}{section*.33}
+\contentsline {subsection}{\numberline {4.3.2}Experiment2}{30}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Experiment3}{31}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}Experiment4}{33}{subsection.4.3.4}
+\contentsline {subsubsection}{Transfer learning}{35}{section*.32}
 \contentsline {subsection}{\numberline {4.3.5}Experiment5}{36}{subsection.4.3.5}
 \contentsline {chapter}{\numberline {5}Related Work}{37}{chapter.5}
 \contentsline {chapter}{\numberline {6}Conclusion and Further Research}{39}{chapter.6}
@@ -51,7 +50,7 @@
 \contentsline {subsection}{\numberline {6.2.3}probabilistic inductive logic programming}{40}{subsection.6.2.3}
 \contentsline {subsection}{\numberline {6.2.4}generalisation of the current approach}{40}{subsection.6.2.4}
 \contentsline {section}{\numberline {6.3}Conclusion}{40}{section.6.3}
-\contentsline {chapter}{Appendices}{41}{section*.36}
+\contentsline {chapter}{Appendices}{41}{section*.35}
 \contentsline {section}{\numberline {.1}Ethics}{42}{section.1..1}
 \contentsline {section}{\numberline {.2}Learning tasks}{44}{section.1..2}
 \contentsline {section}{\numberline {.3}Abduction tasks}{44}{section.1..3}
