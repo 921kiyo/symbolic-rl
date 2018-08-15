@@ -585,8 +585,6 @@ where $\alpha$ is the learning rate, $\gamma$ is a discount rate between 0 and 1
 \end{algorithmic}
 \end{algorithm}
 
-
-
 \begin{equation}
 Q(s\textsubscript{t},a\textsubscript{t}) = E [R\textsubscript{t+1} + \gamma R\textsubscript{t+2} + \gamma^2 R\textsubscript{t+3} + ... \vert s\textsubscript{t},a\textsubscript{t} ]
 \end{equation}
@@ -651,7 +649,6 @@ The dradient of J(w) is defined as
 \begin{equation}
 \bigtriangledown\textsubscript{w} J(w) =  \begin{pmatrix} \frac{\partial J(w)}{\partial w\textsubscript{1}}  \\ \vdots \\ \frac{\partial J(w)}{\partial w\textsubscript{n}}   \end{pmatrix}
 \end{equation}
-
 
 \begin{equation}
 w\textsubscript{t+1} \doteq w\textsubscript{t} + \alpha \big[ U\textsubscript{t} - \hat{v}(S\textsubscript{t}, w\textsubscript{t})\big] x(S\textsubscript{t})
@@ -741,13 +738,65 @@ a trained state will be generalised to other states if they are within any of th
 
 Similar to coarse coding, the size and shape of tiles will determine the degree of approximation. 
 
+\subsection{Transfer Learning}
+\label{transfer_learning}
+
+Transfer learning is a method that knowledge learnt in one or more tasks can be used to learn a new task better than if without the knowlege in the first task. 
+
+Transfer learning is an active research areas in machine learning, but not many have been done in RL. 
+Since training tend to be time consuming and computational expensive, transfer learning allow the trained model to be applied in a different setting. 
+
+Transfer learning in RL is particularly important since most of the RL research have been done in a simulation or game scenarios, and training RL models in a real physical environment is more expensive to conduct. 
+
+Even in a virtual environments like games,  the transfer learning between different tasks will greatly will have a big impact on potential applications. 
+
+This will also speed up learning 
+
+Transfer learning in ILP domain have been proved to be successful in many fields, 
+
+Since this project is combining ILP into RL senarios, this has a potential for extending this particular research. 
+
+We conducted experiements on transfer learning capabilities, which we describe in XXX. 
+
+One of the  purposes of transfer learning is so that the agent requires less time to learn a new task with the help of what was learn in previous tasks.  
+
+
+Another goal would be to measure how effectively the agent reuses its knoledge in a new task. 
+In this case the performan of learningon the first task is usally not measured. 
+
+There are many different matrices used to measure the performance of the transfer learning.
+Five common matrics are defined in XX as follow.
+
+
+TODO ource task selection
+
+%Compare with human play, which is used in DeepMind Atari paper. 
+
+
+\begin{itemize}
+\item Jumpstart
+\item Asymptotic Performance
+\end{itemize}
+
+Since each matric measures different aspect of transfer learning, using multiple metrics would provide more comprehensive views of the performance of an RL algorithm.
+
+\begin{equation}
+\begin{split}
+r = \frac{Area under curve with transfer - area under curve without transfer}{area under curve without transfer}
+\end{split}
+\end{equation}
+REFERENCE
+
+
+\chapter{Framework}
+\label{framework}
+\input{chapters/framework}
+
 \chapter{Evaluation}
 \label{evaluation}
 \input{chapters/evaluation}
 
-\chapter{Implementation and Methodology}
-\label{methods}
-\input{chapters/implementation}
+
 
 \chapter{Related Work}
 \label{related_work}
