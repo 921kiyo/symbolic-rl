@@ -81,39 +81,100 @@ def make_epsilon_greedy_policy(tiles, epsilon, nA):
         return actions, A
     return policy_fn
 
+# def compute_xy_features(height, width, x,y):
+#     feature_vectors = np.zeros((width,height), dtype=float)
+#     feature_vectors[x][y] = 1
+#     return feature_vectors
+
+# def compute_wall_features(x,y):
+#     return 1
+
+def compute_tile_features(height, width, x,y):
+    feature_vectors = np.zeros((width,height), dtype=float)
+    feature_vectors[x][y] = 1
+    return feature_vectors
+
+def compute_features(height, width, x, y):    
+    '''
+     Output:
+        x(s)
+    '''
+    tile_features = compute_tile_features(height, width, x,y) # |height*width|
+    # walls_features = compute_wall_features(x,y)
+    # xy_features = compute_xy_features(height, width, x,y) # only |2|, x and y
+    features = np.stack([tile_features])
+    return features
+
+def compute_A(height, width,x,y,action):
+    '''
+     Output:
+        |A|
+    '''
+    actions = np.zeros((height, width*4), dtype=float)
+    start = width*(action+1)
+    end = width*(action+1)
+    actions[:,start:end] = 1
+    return actions
+
+def compute_state_action_feature(height, width,x,y, action):
+    '''
+     Output:
+        x(s, a)
+    '''
+    state_feature = compute_features(height, width,x,y) # x(s)
+    
+    offsetter = np.tile(np.zeros((height, width)), 4)
+    start = width*action
+    end = width*action + (width)
+    offsetter[:,start:end] = 1
+    # state features are replicated for each action
+    state_action_features = np.tile(state_feature, 4) # x(s,a) = |x(s)|*|A| 
+    return state_action_features*offsetter
+
+def get_weights(x,y,action):
+    # tiles = np.random.rand(width,height*4)
+    weights = 1
+    return weights
+
+def compute_value(height, width, x,y,action, weights):
+    '''
+     Output:
+        v(s, a)
+    '''
+    features = compute_state_action_feature(height, width, x,y,action) # x(s,a)
+    return features * weights # v(s,a) = w*x(s,a)
+
 def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, epsilon_decay=1.0):
     height = env.unwrapped.game.height
     width = env.unwrapped.game.width
 
-    # numOfTilings = 1
-    # tileWidth = 2
-    # tilingOffset = 2
-    # n_states = height * width
-    # valueFunction = TilingsValueFunction(numOfTilings, tileWidth, tilingOffset, n_states)    
     # wall_list = induction.get_all_walls(env)
 
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
-        episode_rewards=np.zeros(num_episodes))
+        episode_rewards=np.zeros(num_episodes),
+        episode_ILASP=np.zeros(num_episodes))
     
     # Weights for 4 actions * height * width
-    tiles = np.random.rand(width,height*4)
+    # tiles = np.random.rand(width,height*4)
+    weights = np.tile(np.random.rand(height, width), 4)
 
-    policy = make_epsilon_greedy_policy(tiles, epsilon, ACTION_SPACE)
+    policy = make_epsilon_greedy_policy(weights, epsilon, ACTION_SPACE)
     for i_episode in range(num_episodes):
         print("------------------------------")
-                
+
         # Reset the env and pick the first action
         previous_state = env.reset()
 
         for t in range(TIME_RANGE):
             env.render()
             time.sleep(0.01)
-            # Take a step
+        #     # Take a step
             actions_at_state, action_probs = policy(int(previous_state[0]),int(previous_state[1]), i_episode)
             action = np.random.choice(np.arange(len(action_probs)), p=action_probs)
             print("action_probs ", action_probs)
             print("action ", action)
+
             # action = env.action_space.sample()
 
             # 0: UP
@@ -125,8 +186,8 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
 
             action_probs_next = np.ones(4, dtype=float)
             for i in range(0,4):
-                action_probs_next[i] = tiles[int(next_state[0]),int(next_state[1])*(i+1)]
-            # print("action_probs_next ",action_probs_next)
+                action_probs_next[i] = weights[int(next_state[0]),int(next_state[1])*(i+1)]
+            print("action_probs_next ",action_probs_next)
             action_next = np.argmax(action_probs_next)
             
             if done:
@@ -139,26 +200,25 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
             stats.episode_lengths[i_episode] = t
             
             alpha = alpha/(t+1)
-            v_now = tiles[int(previous_state[0]),int(previous_state[1])*(action+1)]
-            v_next = tiles[int(next_state[0]),int(next_state[1])*(action_next+1)]
+            v_now = weights[int(previous_state[0]),int(previous_state[1])*(action+1)]
+            v_next = weights[int(next_state[0]),int(next_state[1])*(action_next+1)]
             print("v_now ", v_now)
-            # print("v_nex ", v_next)
-            import ipdb; ipdb.set_trace()
+            
             if math.isnan(v_now):
                 import ipdb; ipdb.set_trace()
             weights_delta = alpha*(reward + discount_factor*v_next - v_now)*actions_at_state
             # actions_at_state =  actions_at_state - weights_delta
 
-            for i in range(-1,2):
-                for j in range(-1,2):
-                    temp = np.zeros(4)
-                    for a in range(0,4):
-                        temp_x = int(previous_state[0])+i
-                        temp_y = int(previous_state[1])+j
-                        if temp_x < width or temp_y < height:
-                            temp[a] = tiles[temp_x, temp_y*(a+1)]
-                            temp[a] = temp[a] - weights_delta[a]
-                            tiles[(int(previous_state[0])+i), (int(previous_state[1])+j)*(a+1)] = temp[a]
+            # for i in range(-1,2):
+            #     for j in range(-1,2):
+            #         temp = np.zeros(4)
+            #         for a in range(0,4):
+            #             temp_x = int(previous_state[0])+i
+            #             temp_y = int(previous_state[1])+j
+            #             if temp_x < width or temp_y < height:
+            #                 temp[a] = weights[temp_x, temp_y*(a+1)]
+            #                 temp[a] = temp[a] - weights_delta[a]
+            #                 weights[(int(previous_state[0])+i), (int(previous_state[1])+j)*(a+1)] = temp[a]
 
             previous_state = next_state
             if done:
