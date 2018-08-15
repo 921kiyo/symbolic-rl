@@ -223,6 +223,13 @@ def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell
 
     # If the agent moved to a cell other than adjacent, there must be a link
     link_detected, exclusions = get_exclusions(previous_state, next_state)
+
+    all_exclusions = exclusions
+    if sub_exclusion != "":
+        all_exclusions = all_exclusions + "," + sub_exclusion
+    if extra_exclusions != "":
+        all_exclusions = all_exclusions + "," + extra_exclusions 
+
     if link_detected:
         predict_x, predict_y, link = get_link(previous_state, next_state, action)
         if not cf.ALREADY_LINK:
@@ -232,16 +239,10 @@ def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell
 
         # TODO double-check if the exclusions for pos1 is fine
         pos1 = "#pos({"+ "state_after(({},{}))".format(predict_x,predict_y) +"}, {""}, {" + state_before_str + action_str + walls + "})."
-        pos2 = "#pos({"+ inclusion +"}, {" + exclusions + "}, {" + "state_before(({},{})).".format(predict_x,predict_y) + action_str + walls + "})."
+        pos2 = "#pos({"+ inclusion +"}, {" + all_exclusions + "}, {" + "state_before(({},{})).".format(predict_x,predict_y) + action_str + walls + "})."
         helper.append_to_file(pos1+"\n", cf.LASFILE)
         helper.append_to_file(pos2+"\n", cf.LASFILE)
         return pos1, pos2, link
-
-    all_exclusions = exclusions
-    if sub_exclusion != "":
-        all_exclusions = all_exclusions + "," + sub_exclusion
-    if extra_exclusions != "":
-        all_exclusions = all_exclusions + "," + extra_exclusions 
 
     pos = "#pos({"+ inclusion +"}, {" + all_exclusions + "}, {" + state_before_str + action_str + walls + "})."
     helper.append_to_file(pos+"\n", cf.LASFILE)

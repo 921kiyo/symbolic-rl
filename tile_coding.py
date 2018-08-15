@@ -19,50 +19,50 @@ TIME_RANGE = 100
 base_dir = os.path.dirname(os.path.abspath(__file__))
 ACTION_SPACE = 4 # env.action_space.n
 
-class TilingsValueFunction:
-    # @numOfTilings: # of tilings
-    # @tileWidth: each tiling has several tiles, this parameter specifies the width of each tile
-    # @tilingOffset: specifies how tilings are put together
-    def __init__(self, numOfTilings, tileWidth, tilingOffset, n_states):
-        self.numOfTilings = numOfTilings
-        self.tileWidth = tileWidth
-        self.tilingOffset = tilingOffset
+# class TilingsValueFunction:
+#     # @numOfTilings: # of tilings
+#     # @tileWidth: each tiling has several tiles, this parameter specifies the width of each tile
+#     # @tilingOffset: specifies how tilings are put together
+#     def __init__(self, numOfTilings, tileWidth, tilingOffset, n_states):
+#         self.numOfTilings = numOfTilings
+#         self.tileWidth = tileWidth
+#         self.tilingOffset = tilingOffset
 
-        # To make sure that each sate is covered by same number of tiles,
-        # we need one more tile for each tiling
-        self.tilingSize = n_states // tileWidth + 1
+#         # To make sure that each sate is covered by same number of tiles,
+#         # we need one more tile for each tiling
+#         self.tilingSize = n_states // tileWidth + 1
 
-        # weight for each tile
-        self.params = np.zeros((self.numOfTilings, self.tilingSize))
+#         # weight for each tile
+#         self.params = np.zeros((self.numOfTilings, self.tilingSize))
 
-        # For performance, only track the starting position for each tiling
-        # As we have one more tile for each tiling, the starting position will be negative
-        self.tilings = np.arange(-tileWidth + 1, 0, tilingOffset)
+#         # For performance, only track the starting position for each tiling
+#         # As we have one more tile for each tiling, the starting position will be negative
+#         self.tilings = np.arange(-tileWidth + 1, 0, tilingOffset)
 
-    # get the value of @state
-    def value(self, state):
-        stateValue = 0.0
-        # go through all the tilings
-        for tilingIndex in range(0, len(self.tilings)):
-            # find the active tile in current tiling
-            tileIndex = (state - self.tilings[tilingIndex]) // self.tileWidth
-            stateValue += self.params[tilingIndex, tileIndex]
-        return stateValue
+#     # get the value of @state
+#     def value(self, state):
+#         stateValue = 0.0
+#         # go through all the tilings
+#         for tilingIndex in range(0, len(self.tilings)):
+#             # find the active tile in current tiling
+#             tileIndex = (state - self.tilings[tilingIndex]) // self.tileWidth
+#             stateValue += self.params[tilingIndex, tileIndex]
+#         return stateValue
 
-    # update parameters
-    # @delta: step size * (target - old estimation)
-    # @state: state of current sample
-    def update(self, delta, state):
+#     # update parameters
+#     # @delta: step size * (target - old estimation)
+#     # @state: state of current sample
+#     def update(self, delta, state):
 
-        # each state is covered by same number of tilings
-        # so the delta should be divided equally into each tiling (tile)
-        delta /= self.numOfTilings
+#         # each state is covered by same number of tilings
+#         # so the delta should be divided equally into each tiling (tile)
+#         delta /= self.numOfTilings
 
-        # go through all the tilings
-        for tilingIndex in range(0, len(self.tilings)):
-            # find the active tile in current tiling
-            tileIndex = (state - self.tilings[tilingIndex]) // self.tileWidth
-            self.params[tilingIndex, tileIndex] += delta
+#         # go through all the tilings
+#         for tilingIndex in range(0, len(self.tilings)):
+#             # find the active tile in current tiling
+#             tileIndex = (state - self.tilings[tilingIndex]) // self.tileWidth
+#             self.params[tilingIndex, tileIndex] += delta
 
 def make_epsilon_greedy_policy(tiles, epsilon, nA):
     def policy_fn(x,y, episode):
@@ -82,10 +82,6 @@ def make_epsilon_greedy_policy(tiles, epsilon, nA):
     return policy_fn
 
 def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, epsilon_decay=1.0):
-    """
-    Args:
-        alpha: Tile Coding
-    """
     height = env.unwrapped.game.height
     width = env.unwrapped.game.width
 
@@ -93,15 +89,14 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
     # tileWidth = 2
     # tilingOffset = 2
     # n_states = height * width
-
     # valueFunction = TilingsValueFunction(numOfTilings, tileWidth, tilingOffset, n_states)    
-    
     # wall_list = induction.get_all_walls(env)
+
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes))
     
-    # 4 actions
+    # Weights for 4 actions * height * width
     tiles = np.random.rand(width,height*4)
 
     policy = make_epsilon_greedy_policy(tiles, epsilon, ACTION_SPACE)
@@ -111,25 +106,14 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
         # Reset the env and pick the first action
         previous_state = env.reset()
 
-        action_probs_next = np.ones(4, dtype=float)
         for t in range(TIME_RANGE):
             env.render()
             time.sleep(0.01)
             # Take a step
             actions_at_state, action_probs = policy(int(previous_state[0]),int(previous_state[1]), i_episode)
-            # print("action_probs ", action_probs)
             action = np.random.choice(np.arange(len(action_probs)), p=action_probs)
+            print("action_probs ", action_probs)
             print("action ", action)
-            # import ipdb; ipdb.set_trace()
-
-            # valueFunction.value(previous_state_int)
-
-            # for i in range(0,4):
-            #     action_probs[i] = tiles[int(previous_state[0]),int(previous_state[1])*(i+1)]
-            # print("action_probs ",action_probs)
-            # action = np.argmax(action_probs)
-            
-            # action = np.random.choice(np.arange(len(action_probs)), p=action_probs)
             # action = env.action_space.sample()
 
             # 0: UP
@@ -139,7 +123,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
 
             next_state, reward, done, _ = env.step(action)
 
-            # valueFunction.value(previous_state_int)
+            action_probs_next = np.ones(4, dtype=float)
             for i in range(0,4):
                 action_probs_next[i] = tiles[int(next_state[0]),int(next_state[1])*(i+1)]
             # print("action_probs_next ",action_probs_next)
@@ -157,8 +141,9 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
             alpha = alpha/(t+1)
             v_now = tiles[int(previous_state[0]),int(previous_state[1])*(action+1)]
             v_next = tiles[int(next_state[0]),int(next_state[1])*(action_next+1)]
-            # print("v_now ", v_now)
+            print("v_now ", v_now)
             # print("v_nex ", v_next)
+            import ipdb; ipdb.set_trace()
             if math.isnan(v_now):
                 import ipdb; ipdb.set_trace()
             weights_delta = alpha*(reward + discount_factor*v_next - v_now)*actions_at_state
@@ -166,40 +151,33 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
 
             for i in range(-1,2):
                 for j in range(-1,2):
-                    temp = [0,0,0,0]
+                    temp = np.zeros(4)
                     for a in range(0,4):
                         temp_x = int(previous_state[0])+i
                         temp_y = int(previous_state[1])+j
-                        print("temp_x ", temp_x)
-                        print("temp_y ", temp_y)
-                        print("width ", width)
-                        print("height ", height)
                         if temp_x < width or temp_y < height:
                             temp[a] = tiles[temp_x, temp_y*(a+1)]
                             temp[a] = temp[a] - weights_delta[a]
                             tiles[(int(previous_state[0])+i), (int(previous_state[1])+j)*(a+1)] = temp[a]
 
-                    # temp = temp - weights_delta
-
-            # actions_at_state, action_probs = policy(int(previous_state[0]),int(previous_state[1]), i_episode)
-
-            # for i in range(0,4):
-            #     tiles[int(previous_state[0]),int(previous_state[1])*(i+1)] = actions_at_state[i] 
-
             previous_state = next_state
-            # previous_state_int = next_state_int
             if done:
-                print("GOOOOOOAAAAALLLLL")
+                print("GOAL")
                 break
 
         # run_experiment(env,state_int, Q, stats_test, i_episode, width, TIME_RANGE)
 
     return tiles, stats
 
+# env = gym.make('vgdl_experiment3.5-v0')
+# env = gym.make('vgdl_experiment1-v0')
+# env = gym.make('vgdl_aaa_small-v0')
+# env = gym.make('vgdl_experiment4_after-v0')
+
 # env = gym.make('vgdl_experiment1-v0')
 env = gym.make('vgdl_aaa_small-v0')
 
-Q, stats = q_learning(env, 100, alpha=0.01)
+tiles, stats = q_learning(env, 100, alpha=0.01)
 
 # import ipdb; ipdb.set_trace()
 # plotting.plot_episode_stats_test(stats, stats_test)

@@ -1,7 +1,6 @@
  # import ipdb; ipdb.set_trace()
 import numpy as np
-import os, random, subprocess
-import time
+import os, random, subprocess, time
 from lib import plotting, py_asp, helper, induction, abduction
 import gym, gym_vgdl
 from random import randint
@@ -76,6 +75,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     # the first abduction needs lots of basic information
     first_abduction = False
 
+    keep_link = None
+
     # Clean up all the files first
     helper.silentremove(cf.BASE_DIR, cf.GROUNDING)
     helper.silentremove(cf.BASE_DIR, cf.LASFILE)
@@ -94,7 +95,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
-        episode_rewards=np.zeros(num_episodes))
+        episode_rewards=np.zeros(num_episodes),
+        episode_ILASP=np.zeros(num_episodes))
 
     stats_test = plotting.EpisodeStats_test(
         episode_lengths_test=np.zeros(num_episodes),
@@ -173,8 +175,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     extra_exclusion = induction.generate_extra_exclusions(previous_state_at, next_state_at, states_plan)
                     pos1, pos2,link = induction.generate_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range, extra_exclusion)
                     
+                    if link is not None:
+                        keep_link = link
                     # Update H if necessary
-                    if (not induction.check_ILASP_cover(hypothesis, pos1, height, width, link)) or (not induction.check_ILASP_cover(hypothesis, pos2, height, width, link)):
+                    if (not induction.check_ILASP_cover(hypothesis, pos1, height, width, keep_link)) or (not induction.check_ILASP_cover(hypothesis, pos2, height, width, keep_link)):
                         hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
                         # Convert syntax of H for ASP solver
                         hypothesis_asp = py_asp.convert_las_asp(hypothesis)
@@ -225,9 +229,11 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                 # Make ASP syntax of state transition and send it to LASFILE
                 pos1, pos2,link = induction.generate_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range)
-                
+                if link is not None:
+                    keep_link = link
+
                 # Update H if necessary
-                if(not induction.check_ILASP_cover(hypothesis, pos1, height, width, link) or not induction.check_ILASP_cover(hypothesis, pos2, height, width, link) or hypothesis == ''):
+                if(not induction.check_ILASP_cover(hypothesis, pos1, height, width, keep_link) or not induction.check_ILASP_cover(hypothesis, pos2, height, width, keep_link) or hypothesis == ''):
                     hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
                     if record_prefix:
                         inputfile = os.path.join(cf.BASE_DIR, cf.LASFILE)
@@ -246,14 +252,14 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
     return stats, stats_test
 
-# env = gym.make('vgdl_experiment3.5-v0')
+env = gym.make('vgdl_experiment3.5-v0')
 # env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
-env = gym.make('vgdl_experiment4_before-v0')
+# env = gym.make('vgdl_experiment4_before-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="experiment4_before", is_link=False)
+stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="experiment_check", is_link=True)
 # stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="experiment3.5_ver3", is_link=True)
-plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment4_before")
-plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment4_before_test")
+plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment_check")
+plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment_check_test")
 plotting.plot_episode_stats_simple(stats)
