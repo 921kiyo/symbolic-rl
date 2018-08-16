@@ -90,10 +90,10 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
 
         for t in range(cf.TIME_RANGE):
             env.render()
-            # time.sleep(0.1)
+            time.sleep(0.03)
             # Take a step
             action_probs = policy(state_int, i_episode)
-
+            print("action_probs ", action_probs)
             action = np.random.choice(np.arange(len(action_probs)), p=action_probs)
             # action = env.action_space.sample()
             if(action == 4):
@@ -132,8 +132,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
             previous_state = next_state
             state_int = next_state_int
 
-        # if(i_episode+1) % 10 == 0:
-        run_experiment(env, Q, stats_test, i_episode, width, cf.TIME_RANGE)
+        # run_experiment(env, Q, stats_test, i_episode, width, cf.TIME_RANGE)
     # Display the final Q-Table
     # for key, value in enumerate(Q.items()):
     #     print(key)
