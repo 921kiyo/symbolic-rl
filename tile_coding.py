@@ -66,19 +66,20 @@ ACTION_SPACE = 4 # env.action_space.n
 
 def make_epsilon_greedy_policy(weights, epsilon, nA):
     def policy_fn(height, width, x,y, episode):
-        # new_epsilon = epsilon*(1/(episode+1))
-        new_epsilon = epsilon
+        new_epsilon = epsilon*(1/(episode+1))
+        # new_epsilon = epsilon
         A = np.ones(nA, dtype=float)* new_epsilon/nA
         
         actions = np.ones(4, dtype=float)
         for i in range(0,4):
            v = compute_value(height, width, x, y, i, weights)
            actions[i] = v[y,x+(width*i)]
-        print("actions ", actions)
+
         best_action = np.argmax(actions)
         A[best_action] += (1.0 - new_epsilon)
-        # import ipdb; ipdb.set_trace()
+
         return actions, A
+        
     return policy_fn
 
 # def compute_xy_features(height, width, x,y):
@@ -134,11 +135,6 @@ def compute_state_action_feature(height, width,x,y, action):
     state_action_features = np.tile(state_feature, 4) # x(s,a) = |x(s)|*|A| 
     return state_action_features*offsetter
 
-def get_weights(x,y,action):
-    # tiles = np.random.rand(width,height*4)
-    weights = 1
-    return weights
-
 def compute_value(height, width, x,y,action, weights):
     '''
      Output:
@@ -161,8 +157,6 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.2, eps
     # Weights for 4 actions * height * width
     # weights = np.random.rand(width,height*4)
     
-    # weight = np.random.rand(height, width)
-    
     weights = np.random.rand(height, width*4)
     # weights = np.tile(np.zeros((height, width), dtype=float), 4)
     policy = make_epsilon_greedy_policy(weights, epsilon, ACTION_SPACE)
@@ -173,13 +167,14 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.2, eps
         previous_state = env.reset()
 
         for t in range(TIME_RANGE):
+            print("------------------------------")
             env.render()
-            time.sleep(0.01)
+            # time.sleep(0.1)
             # Take a step
             _, action_probs = policy(height, width, int(previous_state[0]),int(previous_state[1]), i_episode)
             action = np.random.choice(np.arange(len(action_probs)), p=action_probs)
-            print("action_probs ", action_probs)
-            print("action ", action)
+            print("x:{}, y:{}".format(previous_state[0],previous_state[1]))
+            print("action_probs is ", action_probs, " and action {} is chosen".format(action))
 
             # action = env.action_space.sample()
 
@@ -193,7 +188,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.2, eps
             # No epsilon, follow the greedy policy
             actions_next, _ = policy(height, width, int(next_state[0]),int(next_state[1]), i_episode)
             action_next = np.argmax(actions_next)
-            
+            print("action_next is ", action_next)
             if done:
                 reward = 100
             else:
@@ -203,16 +198,13 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.2, eps
             stats.episode_rewards[i_episode] += reward
             stats.episode_lengths[i_episode] = t
 
-            # alpha = alpha/(t+1)
-
             # get x(s,a)
             state_action_features = compute_state_action_feature(height, width, int(previous_state[0]),int(previous_state[1]),action)
             v_now = compute_value(height, width, int(previous_state[0]),int(previous_state[1]),action, weights)
             v_next = compute_value(height, width, int(next_state[0]),int(next_state[1]),action_next, weights)
-            
+
             weights_delta = alpha*(reward + discount_factor*v_next - v_now)*state_action_features
-            weights = weights - weights_delta
-        
+            weights += weights_delta
             # for i in range(-1,2):
             #     for j in range(-1,2):
             #         temp = np.zeros(4)
@@ -231,17 +223,17 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.2, eps
 
         # run_experiment(env,state_int, Q, stats_test, i_episode, width, TIME_RANGE)
 
-    return tiles, stats
+    return stats
 
 # env = gym.make('vgdl_experiment3.5-v0')
 # env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_experiment4_after-v0')
 
-env = gym.make('vgdl_experiment1-v0')
-# env = gym.make('vgdl_aaa_small-v0')
+# env = gym.make('vgdl_experiment1-v0')
+env = gym.make('vgdl_aaa_small-v0')
 
-tiles, stats = q_learning(env, 100, alpha=0.01)
+stats = q_learning(env, 100, alpha=0.1)
 
 # import ipdb; ipdb.set_trace()
 # plotting.plot_episode_stats_test(stats, stats_test)
