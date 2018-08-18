@@ -264,7 +264,7 @@ env = gym.make('vgdl_experiment3-v0')
 # plotting.plot_episode_stats_simple(stats)
 
 temp_dir = os.path.join(cf.BASE_DIR, "experiment3")
-for i in range(30):
-    stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp3_mult", is_link=False)
+for i in range(1,30):
+    stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp3_mult", is_link=True)
     plotting.store_stats(stats, temp_dir, "exp3_v{}".format(i))
     plotting.store_stats(stats_test, temp_dir, "exp3_test_v{}".format(i))
