@@ -148,7 +148,7 @@ env = gym.make('vgdl_experiment1-v0')
 temp_dir = os.path.join(base_dir, "temp")
 
 for i in range(10):
-    Q, stats, stats_test = q_learning(env, 70)
+    Q, stats, stats_test = q_learning(env, 100)
     plotting.store_stats(stats, temp_dir, "temp_v{}".format(i))
     plotting.store_stats(stats_test, temp_dir, "temp_v{}_test".format(i))
 # import ipdb; ipdb.set_trace()

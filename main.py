@@ -16,8 +16,6 @@ def run_experiment(env, i_episode, stats_test, width, time_range):
     
     answer_sets = abduction.run_clingo(cf.CLINGOFILE)
     states_plan, actions_array = abduction.sort_planning(answer_sets)
-    print("ASP states ", states_plan)
-    print("ASP actions ", actions_array)
 
     while t < time_range:
         is_done = False
@@ -36,8 +34,8 @@ def run_experiment(env, i_episode, stats_test, width, time_range):
             print("reward here is ", reward)
             print("i_episode here is ", i_episode)
             # Update stats
-            stats_test.episode_rewards_test[i_episode] += reward
-            stats_test.episode_lengths_test[i_episode] = t
+            stats_test.episode_rewards[i_episode] += reward
+            stats_test.episode_lengths[i_episode] = t
             t = t + 1
             if done:
                 is_done = True
@@ -53,8 +51,8 @@ def run_experiment(env, i_episode, stats_test, width, time_range):
             else:
                 reward = reward - 1
 
-            stats_test.episode_rewards_test[i_episode] += reward
-            stats_test.episode_lengths_test[i_episode] = t
+            stats_test.episode_rewards[i_episode] += reward
+            stats_test.episode_lengths[i_episode] = t
             t = t + 1
 
 def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=False):
@@ -99,8 +97,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         episode_ILASP=np.zeros(num_episodes))
 
     stats_test = plotting.EpisodeStats_test(
-        episode_lengths_test=np.zeros(num_episodes),
-        episode_rewards_test=np.zeros(num_episodes))
+        episode_lengths=np.zeros(num_episodes),
+        episode_rewards=np.zeros(num_episodes))
 
     for i_episode in range(num_episodes):
         print("==============NEW EPISODE======================")
@@ -252,14 +250,20 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
     return stats, stats_test
 
-env = gym.make('vgdl_experiment3.5-v0')
-# env = gym.make('vgdl_experiment1-v0')
+# env = gym.make('vgdl_experiment3.5-v0')
+env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_experiment4_before-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="experiment_check", is_link=True)
+# stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix=None, is_link=False)
 # stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="experiment3.5_ver3", is_link=True)
-plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment_check")
-plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment_check_test")
-plotting.plot_episode_stats_simple(stats)
+# plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment_check")
+# plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment_check_test")
+# plotting.plot_episode_stats_simple(stats)
+
+temp_dir = os.path.join(cf.BASE_DIR, "experiment1")
+for i in range(20):
+    stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp1_mult", is_link=False)
+    plotting.store_stats(stats, temp_dir, "exp1_v{}".format(i))
+    plotting.store_stats(stats_test, temp_dir, "exp1_test_v{}".format(i))

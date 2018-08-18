@@ -110,30 +110,23 @@ def get_inc_exc(hypothesis, state_before, state_after, action, walls, cell_range
     helper.append_to_file(cell_range, cf.GROUNDING_DIR)
     show = "#show state_after/1.\n"
     helper.append_to_file(show, cf.GROUNDING_DIR)
-    # import ipdb; ipdb.set_trace()
-    # TODO may be redundant
+
     for wall in walls:
         wall = "wall(" + str(wall) + ").\n"
         helper.append_to_file(wall, cf.GROUNDING_DIR)
-    # TODO Check if all answer sets/only the optimal should be collected here
     answer_sets = abduction.run_clingo(cf.GROUNDING_DIR)
-    # TODO I think this is not necessary, as we use "show" now
-    # Extract only relevant asp, which is "state_after"
-    state_afters_predict = []
-    for asp in answer_sets:
-        if(asp.startswith("state_after")):
-            state_afters_predict.append(asp)
+
     # The current hypothesis DOES predict the agent is there other than state_after,
     # then they are exclusions
     exclusions = ""
-    for sa in state_afters_predict:
+    for sa in answer_sets:
         if(state_after != sa):
             exclusions = exclusions + sa + ","
 
     # The current hypothesis DOES NOT predict the agent is there other than state_after,
     # then it is inclusion
     inclusion = ""
-    if(state_after not in state_afters_predict):
+    if(state_after not in answer_sets):
         inclusion = inclusion + state_after
 
     if exclusions != "":
@@ -158,7 +151,6 @@ def get_plan_exclusions(state_at_before, state_at_after, states):
             state_after = py_asp.state_after(x_after, y_after)
             exclusion_list.append(state_after)
 
-    print("exclusion_list ", exclusion_list)
     # Take each element in exclcusion_list and concatinate them in string
     exclusions = ""
     for exclusion in exclusion_list:
@@ -214,7 +206,6 @@ def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell
     state_before_str = "state_before((" + str(int(previous_state[0])) + "," + str(int(previous_state[1]))+ "))."
     action_str = "action(" + action + ")."
 
-    # TODO This does not need to be here
     all_walls = get_seen_walls(cf.CLINGOFILE)
 
     sub_exclusion = ""

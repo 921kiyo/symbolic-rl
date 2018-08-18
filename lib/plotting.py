@@ -6,7 +6,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import pickle
 
 EpisodeStats = namedtuple("EpisodeStats",["episode_lengths", "episode_rewards", "episode_ILASP"])
-EpisodeStats_test = namedtuple("EpisodeStats_test",["episode_lengths_test", "episode_rewards_test"])
+EpisodeStats_test = namedtuple("EpisodeStats",["episode_lengths", "episode_rewards"])
 
 def store_stats(stats, base_dir, filename):
     filename = "/" + filename + ".pkl"
@@ -37,7 +37,7 @@ def average_score(base_dir, pkl_dir, prefix, num_episodes, num_pkl):
     for i_episode in range(num_episodes):
         stats.episode_rewards[i_episode] = stats.episode_rewards[i_episode]/num_pkl
 
-    plot_episode_stats_simple(stats=stats, noshow=False, color="green")
+    store_stats(stats, pkl_dir, prefix+"_average")
 
 def plot_episode_stats(stats, smoothing_window=10, noshow=False):
     # Plot the episode length over time
