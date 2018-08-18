@@ -32,7 +32,7 @@ We compare the performance of our algorithm with these two methods.
 
 \subsection{Parameters}
 In all experiments, the agent receives -1 in any states except the goal state, where it gains a reward of 10.
-All the matrices used in the experiments are summarised in Table \ref{param}. 
+All the matrices that are used in the experiments are summarised in Table \ref{param}. 
 
 \begin{table}[!ht!b]
 \centering
@@ -54,11 +54,17 @@ Epsilon for our algorithm should be higher, since the agent follows the generate
 whereas benchmark algorithms update value function with the degree of alpha. 
 We conducted several experiments using different environments to highlight each aspect of the algorithm.
 
+Since the performance of the agent is affected by the randomness of the exploration, 
+and our algorithm is highly dependent on how quickly the agent finds the goal, 
+each experiment is conducted 30 times and the perform is averaged across the experiments.
+At each episode, we also measure the performance without exploration to see the pure optimal policy.
+
 \section{Experiment Results}
 \label{learning_evaluation}
 
 \subsection{Experiment1}
 The purpose of the first experiment is how the algorithm learns the model of the environment, or hypothesis in ILASP.
+The environment are defined as a simple maze where the goal is located the right uppper corner as shown in Figure \ref{experiment1}.
 
 \begin{figure}[!htb]
 \centering
@@ -74,6 +80,13 @@ The purpose of the first experiment is how the algorithm learns the model of the
 \label{experiment1_training}
 \end{figure}
 
+Figure \ref{experiment1_training} shows the traning performance between our algorithm and Q-learning.
+The convergence rate of our algorithm is faster than Q-learnig. This is because unlike Q-learning where the value function is updated with the rate of alpha, 
+ILASP gradually build the model of the environment and use the background knowledge to accurately plan. 
+The same trend is also shown in Figure \ref{experiment1_test}, where we measure only the performance of the policy without random exploration.
+
+Overall this results shows that our algorithm converges to the optimal policy faster than transitional RL algorithm in a simple scenarios, achieving more data-efficient learning.
+
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment1_test}
@@ -88,8 +101,14 @@ The purpose of the first experiment is how the algorithm learns the model of the
 \label{experiment1_test}
 \end{figure}
 
-Learnt hypotheses are as follow:
-\begin{equation*}
+The second improvement of our algorithm is transparency. 
+Learnt hypotheses are shown in \ref{experiment1_hypothesis}, 
+which is the rule of the game and easy to understand for human users. Since the learnt hypothesis is a general concept, which can be used in a different environmet. 
+This transfer learning capability is also described in Experiement XX. 
+
+ILASP learns the final hypothesis at time XX in episode 0.
+
+\begin{equation}
 \begin{split}
 &\textsf{state\_after(V1) :- adjacent(right, V0, V1), state\_before(V1), action(right), wall(V0).}\\
 &\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V0), action(left), wall(V1).}\\
@@ -100,16 +119,16 @@ Learnt hypotheses are as follow:
 &\textsf{state\_after(V0) :- adjacent(down, V0, V1), state\_before(V1), action(down), not wall(V0).}\\
 &\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}
 \end{split}
-\end{equation*}
-
-% Converge to optimal policy faster than Q-learning.
+\end{equation}
+\label{experiment1_hypothesis}
 
 \subsection{Experiment2}
 
-TODO Comparison with Tile Coding
-% The first experiment might not be a fair comparision between our algorithm and Q-learning, since our algorithm has extra information about the surrounding information.
-% In order to have the same assumptions, we use function approximation for Q-learning.
-% Linear function approximation.
+The first experiment might not be a fair comparision between our algorithm and Q-learning, since our algorithm has extra information about the surrounding information.
+In order to have the same assumptions, we use function approximation for Q-learning.
+Linear function approximation.
+
+In this experiment, the performance of our algorithm remains the same as Experiment 1, but we use a different benchmark. 
 % \begin{figure}[!htb]
 % \centering
 % \includegraphics[width=1.0\textwidth]{./figures/placeholder}
@@ -129,6 +148,29 @@ TODO Comparison with Tile Coding
 \end{figure}
 
 This experiment is conducted to see if the agent find a optimal path of using a teleport.
+There are two ways to reach the goal: using a normal path or using a telport. 
+The environment is designed such that using a teleport is a shorter path and therefore gives higher total reward. 
+
+Compared to the first experiment, additional search space and concept are supplied as follow:
+\begin{equation*}
+\begin{split}
+&\textsf{\#modeb(1, link\_start(var(cell)), (positive)).}\\
+&\textsf{\#modeb(1, link\_dest(var(cell)), (positive)).}
+\end{split}
+\end{equation*}
+
+Where an one way teleport link is added to the environment: link\_start takes the agent to link\_dest, but link\_dest does not take the agent back to link\_start.
+The allows ILASP to learn additional hypothesis.
+The full learning task for this experiment is in Appendix XX.
+
+Once the agent steps onto a state where link\_start is located, it gets two positive experiences. 
+In this game environment, the agent moves two cells in one time step instead of one cell per time step.
+
+
+Also link\_start and link\_dest need to be stored in background knowledge rather than contex, 
+because ILASP needs to learn different hypothesis for link and non-link case. 
+link locations need to be available for all positive examples so that ILASP correctly learn non-link, which is shown in Figure XX below.
+
 
 \begin{figure}[!htb]
 \centering
@@ -136,6 +178,8 @@ This experiment is conducted to see if the agent find a optimal path of using a 
 \caption{Comparison of training performance between my algorithm and Q-learning}
 \label{experiment3_training}
 \end{figure}
+
+The training performance shown in XX, which converges faster than XX. 
 
 \begin{figure}[!htb]
 \centering
@@ -151,6 +195,27 @@ This experiment is conducted to see if the agent find a optimal path of using a 
 \label{experiment1_test}
 \end{figure}
 
+ILASP learns the final hypothesis at time XX in episode 0.
+To highlight the learning the new concept of teleport link, Figure XX is an intermediate incomplete hypothesis learnt by ILASP.
+\begin{equation*}
+\begin{split}
+&\textsf{state\_after(V1) :- link\_dest(V1).}\\
+&\textsf{state\_after(V0) :- link\_dest(V0), state\_before(V0), action(right).}\\
+&\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V0), action(right), not wall(V1).}\\
+&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
+&\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V0), action(down), not wall(V1).}\\
+&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}\\
+&\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V1), action(left), wall(V0).}\\
+&\textsf{state\_after(V1) :- adjacent(down, V0, V1), state\_before(V1), action(down), wall(V0).}\\
+&\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}
+\end{split}
+\end{equation*}
+These hypotheses are generated just after the agent steps onto the link. However, the first hypothesis says
+whenever link\_dest is available state\_after is true. Since link\_dest is available in background knowledge rather than context, 
+when solving for answer sets to generate a plan, it generates incorrect state\_after at every time step. 
+However, as shown in Algorithms XX, these generated state\_after are all incorrect and therefore will be added to exclusions of the next positive examples. 
+These exclusions will later refines hypotheses and results in Figure XX, the final complete hypotheses.
+
 Learnt hypotheses are as follow:
 \begin{equation*}
 \begin{split}
@@ -165,6 +230,10 @@ Learnt hypotheses are as follow:
 &\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}
 \end{split}
 \end{equation*}
+
+Compared the Experiment 1, there are two new hypotheses due to the presence of the telport links. 
+These learnt hypotheses are also applicables to an environment where there is not link, such as a game in experiment 1.
+In this case, the first two hypotheses in Figure XX are never be used since the body predicates are never be true. 
 
 \newpage
 % \section{Transfer Learning Evaluation}
