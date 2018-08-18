@@ -14,7 +14,7 @@ from collections import defaultdict
 
 from lib import plotting, py_asp, helper, induction, abduction
 
-TIME_RANGE = 100
+TIME_RANGE = 250
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 ACTION_SPACE = 4 # env.action_space.n
@@ -230,10 +230,10 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.2, eps
 # env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_experiment4_after-v0')
 
-# env = gym.make('vgdl_experiment1-v0')
-env = gym.make('vgdl_aaa_small-v0')
+env = gym.make('vgdl_experiment1-v0')
+# env = gym.make('vgdl_aaa_small-v0')
 
-stats = q_learning(env, 100, alpha=0.1)
+stats = q_learning(env, 300, alpha=0.03)
 
 # import ipdb; ipdb.set_trace()
 # plotting.plot_episode_stats_test(stats, stats_test)

@@ -21,6 +21,24 @@ def load_stats(base_dir, filename):
     stats = pickle.load(open(picklepath, "rb"))
     return stats
 
+def average_score(base_dir, pkl_dir, prefix, num_episodes, num_pkl):
+    stats = EpisodeStats(
+        episode_lengths=np.zeros(num_episodes),
+        episode_rewards=np.zeros(num_episodes),
+        episode_ILASP=np.zeros(num_episodes))
+    
+    for pkl in range(num_pkl):
+        filename = prefix + str(pkl)
+        stats2 = load_stats(pkl_dir, filename) 
+        for i_episode in range(num_episodes):
+            stats.episode_rewards[i_episode] += stats2.episode_rewards[i_episode]
+
+    # Average: Divide the total by num of pkl
+    for i_episode in range(num_episodes):
+        stats.episode_rewards[i_episode] = stats.episode_rewards[i_episode]/num_pkl
+
+    plot_episode_stats_simple(stats=stats, noshow=False, color="green")
+
 def plot_episode_stats(stats, smoothing_window=10, noshow=False):
     # Plot the episode length over time
     fig1 = plt.figure(figsize=(10,5))
