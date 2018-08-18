@@ -343,6 +343,8 @@ INPUT ./figures/experiment4_after_test.png
 INPUT ./figures/experiment4_after_test.png
 INPUT chapters/related_work.tex
 INPUT chapters/related_work.tex
+INPUT chapters/discussion.tex
+INPUT chapters/discussion.tex
 INPUT chapters/appendix_ethics.tex
 INPUT chapters/appendix_ethics.tex
 INPUT chapters/appendix_learning_task.tex

@@ -231,13 +231,11 @@ Learnt hypotheses are as follow:
 \end{split}
 \end{equation*}
 
-Compared the Experiment 1, there are two new hypotheses due to the presence of the telport links. 
+Compared the Experiment 1, there are two new hypotheses due to the presence of the teleport links. 
 These learnt hypotheses are also applicables to an environment where there is not link, such as a game in experiment 1.
 In this case, the first two hypotheses in Figure XX are never be used since the body predicates are never be true. 
 
 \newpage
-% \section{Transfer Learning Evaluation}
-% \label{transfer_learning}
 
 \subsection{Experiment4}
 
@@ -251,14 +249,18 @@ In this case, the first two hypotheses in Figure XX are never be used since the 
 \end{figure}
 
 Finally, we investigated the potentials of transfer learning betweeen similar environments.
-
+We trained the agent using the environment on the left in Figure XX, and transfer the learnt hypothesis as well as positive examples to a new environment.
+Background knowledge are not transferred since they are different in a new environment. The agent starts with an empty background knowledge and gradually collects them
+as it explore the environment. 
 The goal position is the same as in the first game, but the routes to the goal are different.
+While this is a limited transfer learning since the goal position is known in advance, this is still a useful transfer in cases where the rest of the environment changes,
+such as XXX.
 
-% Experiment 4 Transfer learning
-%     1 update B
-%     2 update H
+In this experiment, we compare the two learning performance: one with transfer learning and one without it. 
+The result is shown in Figure XX.
 
-% \textsf{\#modeb(1, link(var(cell), var(cell)), (positive)).}
+Since the complete hypothesis is already known to the agent, it only needs to do planning. 
+
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment4_before_training}
@@ -280,7 +282,6 @@ The goal position is the same as in the first game, but the routes to the goal a
 \label{experiment1_test}
 \end{figure}
 
-
 These are the hypotheses we are transferring to a new environment.
 \begin{equation*}
 \begin{split}
@@ -296,6 +297,7 @@ These are the hypotheses we are transferring to a new environment.
 \end{equation*}
 
 \subsubsection{Transfer learning}
+
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment4_after_training}
@@ -318,24 +320,5 @@ These are the hypotheses we are transferring to a new environment.
 
 \newpage
 \subsection{Experiment5}
-
-TODO Transfer learning for new H
-
-% \subsection{Results}
-
-% \subsection{Discussion}
-% \subsubsection{Strengths}
-
-% \subsection{Limitations}
-
-% You have to define the search space for H
-
-% Learning ILASP is known to be less scalable.
-
-% ILASP learning is quite slow
-
-% Another limitation is training time. Unlike existing reinforcement learning,
-% out algorithm refines hypothesis at every time steps within the same episode.
-% Thus even though the efficiency in terms of the number of iteration is higher,
-% training time within each iteration tends to be lower.
-% As stated in XXX
+Finally the hypothesis is transferred to a new environment where there is a new concept that did not exist in the first environment
+and therefore the agent needs to learn it after the hypothesis is transferred.

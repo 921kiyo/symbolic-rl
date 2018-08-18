@@ -1,0 +1,78 @@
+
+\section{Limitations}
+
+Although this is the first time and inductive logic programming is applied into reinforcement leaning, 
+there are two major limitations with the current framework.
+
+\subsection{Scalability}
+The first limitation is scalability. As pointed in XXX or XXX,
+ILP framework is known to be less scalable. The current framework is tested in a relatively simple environments, 
+and proven to be work better than RL algorithsm in terms of the number of episodes that is needed to converge to an optimal policy.
+However, learning in each episode is relatively slower than that of RL. 
+This is shown in XXX, which shows average learnint time for ILASP. 
+
+This limitation is theoretically discussed in XXX, where the complexity of deciding satisfiability is 
+$\sum_{2}^{P}$-complete. Since there is no negative examples used in our current framework, the complexity is NP-complete.
+
+Whereas Q-learning update value function in the same way whether there is a new concept such as teleport links.
+
+Figure XXX shows traning times for Experiment 1 and 2.
+
+ILASP learning time for Experiment 1 and 2. 
+
+Unlike existing reinforcement learning,
+out algorithm refines hypothesis at every time steps within the same episode.
+Thus even though the efficiency in terms of the number of iteration is higher,
+training time within each iteration tends to be lower.
+
+\subsection{Flexibility}
+You have to define the search space for H
+
+Surrounding information is assumed to be known to the agent. While this assumption may be reasonable in many cases, 
+this is not common in traditional reinforcement learnig setting.
+
+Also RL works in more complex environments such as 3D or real environment,
+because the experiences of the agent need to be expressed as ASP syntax, these extension is challenging.
+
+\section{Further Research}
+\label{further_research}
+
+This is a proof of concept, a new type of model-based reinforcement learning using inductive logic programming. 
+
+
+More complicated environment
+
+Dynamic environment 
+
+Like moving enermy etc.
+
+Non-stationality possible to be handled??
+
+our approach is similar to experience replay ??
+
+
+\subsection{Value iteration approach}
+
+The proposed architecture is not finalised and will be reviewed regularly as we do more research.
+More research needs to be devoted to finalising the overall architecture, and the following issues in particular need to be considered.
+
+\subsection{Weak Constraint}
+
+\begin{itemize}
+
+\item Further investigation of whether ILASP can learn the concept of adjacent, which is crucial concept to know in any environment.
+\item How to generalise the agent's model when the environment changes. The new environment could be very similar to the previous one, or could be a completely different environment thus the agent should create a new internal model rather than generalising the existing model.
+\item The current proposed architecture is based on Dyna with simulated experiences. However, this might not be the best overall architecture, and the feasibility of using simulated experience with the learnt model with ILASP needs to be further investigated.
+
+\item Possibility of using other representational concepts such as \textit{Predictive Representations of State} or \textit{Affordance} \cite{Sridharan2017} for the agent's learning task. These concept have not been considered at the moment, but could help better transfer learning.
+
+\item Preparation for a backup plan in case ILASP approach does not work, so that the researchs feasible within 3 months of the researcheriod.
+
+\end{itemize}
+
+\subsection{probabilistic inductive logic programming}
+instead of ASP
+
+\subsection{generalisation of the current approach}
+
+Learning the concept of being adjacent
