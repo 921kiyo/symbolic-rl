@@ -96,9 +96,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         episode_rewards=np.zeros(num_episodes),
         episode_ILASP=np.zeros(num_episodes))
 
-    stats_test = plotting.EpisodeStats_test(
+    stats_test = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
-        episode_rewards=np.zeros(num_episodes))
+        episode_rewards=np.zeros(num_episodes),
+        episode_ILASP=np.zeros(num_episodes))
 
     for i_episode in range(num_episodes):
         print("==============NEW EPISODE======================")
@@ -263,7 +264,7 @@ env = gym.make('vgdl_experiment1-v0')
 # plotting.plot_episode_stats_simple(stats)
 
 temp_dir = os.path.join(cf.BASE_DIR, "experiment1")
-for i in range(20):
+for i in range(30):
     stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp1_mult", is_link=False)
     plotting.store_stats(stats, temp_dir, "exp1_v{}".format(i))
     plotting.store_stats(stats_test, temp_dir, "exp1_test_v{}".format(i))

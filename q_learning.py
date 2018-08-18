@@ -53,8 +53,8 @@ def run_experiment(env, Q, stats_test, i_episode, width, time_range):
         print("i_episode here is ", i_episode)
         # Update stats
         # for i in range(i_episode-9, i_episode+1):
-        stats_test.episode_rewards_test[i_episode] += reward
-        stats_test.episode_lengths_test[i_episode] = t
+        stats_test.episode_rewards[i_episode] += reward
+        stats_test.episode_lengths[i_episode] = t
         
         if done:
             break
@@ -73,9 +73,10 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
         episode_rewards=np.zeros(num_episodes),
         episode_ILASP=np.zeros(num_episodes))
     
-    stats_test = plotting.EpisodeStats_test(
-        episode_lengths_test=np.zeros(num_episodes),
-        episode_rewards_test=np.zeros(num_episodes))
+    stats_test = plotting.EpisodeStats(
+        episode_lengths=np.zeros(num_episodes),
+        episode_rewards=np.zeros(num_episodes),
+        episode_ILASP=np.zeros(num_episodes))
 
     policy = make_epsilon_greedy_policy(Q, epsilon, ACTION_SPACE)
     for i_episode in range(num_episodes):
@@ -90,10 +91,9 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
 
         for t in range(cf.TIME_RANGE):
             env.render()
-            time.sleep(0.03)
+            # time.sleep(0.03)
             # Take a step
             action_probs = policy(state_int, i_episode)
-            print("action_probs ", action_probs)
             action = np.random.choice(np.arange(len(action_probs)), p=action_probs)
             # action = env.action_space.sample()
             if(action == 4):
@@ -132,7 +132,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
             previous_state = next_state
             state_int = next_state_int
 
-        # run_experiment(env, Q, stats_test, i_episode, width, cf.TIME_RANGE)
+        run_experiment(env, Q, stats_test, i_episode, width, cf.TIME_RANGE)
     # Display the final Q-Table
     # for key, value in enumerate(Q.items()):
     #     print(key)
@@ -144,13 +144,11 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
 # env = gym.make('vgdl_experiment3.5-v0')
 # env = gym.make('vgdl_aaa_small-v0')
 env = gym.make('vgdl_experiment1-v0')
-
-temp_dir = os.path.join(base_dir, "temp")
-
-for i in range(10):
+temp_dir = os.path.join(base_dir, "experiment1_q")
+for i in range(30):
     Q, stats, stats_test = q_learning(env, 100)
     plotting.store_stats(stats, temp_dir, "temp_v{}".format(i))
-    plotting.store_stats(stats_test, temp_dir, "temp_v{}_test".format(i))
+    plotting.store_stats(stats_test, temp_dir, "temp_test_v{}".format(i))
 # import ipdb; ipdb.set_trace()
 # plotting.plot_episode_stats_test(stats, stats_test)
 

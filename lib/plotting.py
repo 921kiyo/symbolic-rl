@@ -6,7 +6,6 @@ from mpl_toolkits.mplot3d import Axes3D
 import pickle
 
 EpisodeStats = namedtuple("EpisodeStats",["episode_lengths", "episode_rewards", "episode_ILASP"])
-EpisodeStats_test = namedtuple("EpisodeStats",["episode_lengths", "episode_rewards"])
 
 def store_stats(stats, base_dir, filename):
     filename = "/" + filename + ".pkl"

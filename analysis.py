@@ -20,6 +20,10 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 
 # # plotting.plot_episode_stats_multiple(stats, stats2)
 
-pkl_dir = os.path.join(base_dir, "temp")
+# pkl_dir = os.path.join(base_dir, "experiment1_q")
+pkl_dir = os.path.join(base_dir, "experiment1")
 
-plotting.average_score(base_dir, pkl_dir, "temp_v", 70, 10)
+plotting.average_score(base_dir, pkl_dir, "exp1_v", 100, 30)
+
+stats = plotting.load_stats(pkl_dir, "exp1_v_average")
+plotting.plot_episode_stats_simple(stats, smoothing_window=1)
