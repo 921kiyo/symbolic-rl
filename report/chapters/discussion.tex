@@ -1,3 +1,9 @@
+\section{Contribution}
+\label{contribution}
+
+To my knowledge, this is the first attemp that inductive logic programming is incorporated into a reinforcement learning senario to facilitate learning process.
+In simple environments, we show that the agent learns rule of the game faster than existing RL algorithms, learnt concepts is easy to understand for human users.
+We also show that the learnt hypothesis is general concept and can be applied to other environment to mitigate learnig process.
 
 \section{Limitations}
 
@@ -26,30 +32,36 @@ Thus even though the efficiency in terms of the number of iteration is higher,
 training time within each iteration tends to be lower.
 
 \subsection{Flexibility}
-You have to define the search space for H
+While most of existing reinforcement learning works in different kinds of environment without pre-configuration, our algorithm
+needs to define search space for learning hypothesis. As explained in the experiment 3, it was necessary to add two extra modeb before training.
+Thus the algorithm may not be feasible in cases where these learning concepts were unknown or difficult to define. 
+In addition, not only it needs search space, surrounding information is assumed to be known to the agent. 
+While this assumption may be reasonable in many cases, this is not common in traditional reinforcement learnig setting.
 
-Surrounding information is assumed to be known to the agent. While this assumption may be reasonable in many cases, 
-this is not common in traditional reinforcement learnig setting.
+The current framework does not make use of rewards the agent collects and mainly uses the location of the goal for planning.
+In some senarios, there may not be a termination state (goal) and instead there may be a different purpose to gain these rewards. 
+Since the current implementation is dependent on finding the goal for planning rather than maximing total rewards, which is the common objective for most of RL algorithms,
+the application of the current framework may be limited to particular types of problems.
 
-Also RL works in more complex environments such as 3D or real environment,
-because the experiences of the agent need to be expressed as ASP syntax, these extension is challenging.
+Another question remains to how to extend the framework to more realistic senarios. RL works in more complex environments such as 3D or real physical environment, 
+whereas the experiences of the agent in the current framework need to be expressed as ASP syntax, thus expressing continuous states rather than discrete states is challenging.
 
 \section{Further Research}
 \label{further_research}
 
-This is a proof of concept, a new type of model-based reinforcement learning using inductive logic programming. 
+Having stated the limitations of the current framework, we discuss some of the possible improments and further research in this section.
 
+This is a proof of concept, a new type of model-based reinforcement learning using inductive logic programming. 
 
 More complicated environment
 
-Dynamic environment 
-
-Like moving enermy etc.
+Dynamic environment like moving enermy etc.
 
 Non-stationality possible to be handled??
 
-our approach is similar to experience replay ??
+Our approach is similar to experience replay ??
 
+More promissing approach is to combine RL algorithm and using ILP approach to complement each other, rather than replacing the bellman equation altogether. 
 
 \subsection{Value iteration approach}
 
