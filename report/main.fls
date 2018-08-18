@@ -297,8 +297,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchri7t.tfm
 INPUT chapters/evaluation.tex
 INPUT chapters/evaluation.tex
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/doublestroke/dsrom10.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/doublestroke/dsrom8.tfm
 INPUT ./figures/experiment1.png
 INPUT ./figures/experiment1.png
 INPUT ./figures/experiment1.png

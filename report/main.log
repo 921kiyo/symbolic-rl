@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  15 AUG 2018 15:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  18 AUG 2018 15:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1013,23 +1013,30 @@ Chapter 4.
 (./chapters/evaluation.tex
 
 Package natbib Warning: Citation `Schaul2013' on page 27 undefined on input lin
-e 10.
+e 12.
+
+
+Package natbib Warning: Citation `Brockman2016' on page 27 undefined on input l
+ine 13.
 
 
 LaTeX Warning: Reference `VGDL_sample' on page 27 undefined on input line 14.
 
-<./figures/experiment1.png, id=274, 458.71375pt x 194.7275pt>
+<./figures/experiment1.png, id=273, 458.71375pt x 194.7275pt>
 File: ./figures/experiment1.png Graphic file (type png)
 
 <use ./figures/experiment1.png>
-Package pdftex.def Info: ./figures/experiment1.png used on input line 23.
+Package pdftex.def Info: ./figures/experiment1.png used on input line 20.
 (pdftex.def)             Requested size: 219.08614pt x 93.0046pt.
  [27
 
-]
+ <./figures/experiment1.png>]
+
+LaTeX Warning: Reference `param' on page 28 undefined on input line 35.
+
 File: ./figures/experiment1.png Graphic file (type png)
- <use ./figures/experiment1.png>
-Package pdftex.def Info: ./figures/experiment1.png used on input line 50.
+<use ./figures/experiment1.png>
+Package pdftex.def Info: ./figures/experiment1.png used on input line 65.
 (pdftex.def)             Requested size: 219.08614pt x 93.0046pt.
 
 <./figures/experiment1_training.png, id=282, 722.7pt x 361.35pt>
@@ -1037,49 +1044,52 @@ File: ./figures/experiment1_training.png Graphic file (type png)
 
 <use ./figures/experiment1_training.png>
 Package pdftex.def Info: ./figures/experiment1_training.png used on input line 
-58.
+72.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 
 <./figures/experiment1_test.png, id=283, 722.7pt x 361.35pt>
 File: ./figures/experiment1_test.png Graphic file (type png)
 
 <use ./figures/experiment1_test.png>
-Package pdftex.def Info: ./figures/experiment1_test.png used on input line 66.
+Package pdftex.def Info: ./figures/experiment1_test.png used on input line 79.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 File: ./figures/experiment1_test.png Graphic file (type png)
  <use ./figures/experiment1_test.png>
-Package pdftex.def Info: ./figures/experiment1_test.png used on input line 73.
+Package pdftex.def Info: ./figures/experiment1_test.png used on input line 86.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 2343) has occurred while \output is active []
 
- [28 <./figures/experiment1.png>] [29 <./figures/experiment1_training.png> <./f
-igures/experiment1_test.png>] [30]
-<./figures/experiment3_v2.png, id=308, 292.09125pt x 194.7275pt>
+ [28]
+
+LaTeX Warning: Text page 29 contains only floats.
+
+[29 <./figures/experiment1_training.png> <./figures/experiment1_test.png>]
+[30] <./figures/experiment3_v2.png, id=309, 292.09125pt x 194.7275pt>
 File: ./figures/experiment3_v2.png Graphic file (type png)
 
 <use ./figures/experiment3_v2.png>
-Package pdftex.def Info: ./figures/experiment3_v2.png used on input line 114.
+Package pdftex.def Info: ./figures/experiment3_v2.png used on input line 126.
 (pdftex.def)             Requested size: 219.08614pt x 146.06308pt.
 
-<./figures/experiment3_training.png, id=309, 722.7pt x 361.35pt>
+<./figures/experiment3_training.png, id=310, 722.7pt x 361.35pt>
 File: ./figures/experiment3_training.png Graphic file (type png)
 
 <use ./figures/experiment3_training.png>
 Package pdftex.def Info: ./figures/experiment3_training.png used on input line 
-123.
+135.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 
-<./figures/experiment3_test.png, id=310, 722.7pt x 361.35pt>
+<./figures/experiment3_test.png, id=311, 722.7pt x 361.35pt>
 File: ./figures/experiment3_test.png Graphic file (type png)
 
 <use ./figures/experiment3_test.png>
-Package pdftex.def Info: ./figures/experiment3_test.png used on input line 130.
+Package pdftex.def Info: ./figures/experiment3_test.png used on input line 142.
 
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 File: ./figures/experiment1_test.png Graphic file (type png)
  <use ./figures/experiment1_test.png>
-Package pdftex.def Info: ./figures/experiment1_test.png used on input line 137.
+Package pdftex.def Info: ./figures/experiment1_test.png used on input line 149.
 
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 
@@ -1090,41 +1100,41 @@ Overfull \vbox (14.26382pt too high) has occurred while \output is active []
 
 
 [32 <./figures/experiment3_test.png>]
-<./figures/experiment4_before.png, id=326, 457.71pt x 266.9975pt>
+<./figures/experiment4_before.png, id=327, 457.71pt x 266.9975pt>
 File: ./figures/experiment4_before.png Graphic file (type png)
 
 <use ./figures/experiment4_before.png>
-Package pdftex.def Info: ./figures/experiment4_before.png used on input line 16
-7.
+Package pdftex.def Info: ./figures/experiment4_before.png used on input line 17
+9.
 (pdftex.def)             Requested size: 219.08614pt x 127.79881pt.
 
-<./figures/experiment4_after.png, id=327, 459.7175pt x 265.99374pt>
+<./figures/experiment4_after.png, id=328, 459.7175pt x 265.99374pt>
 File: ./figures/experiment4_after.png Graphic file (type png)
 
 <use ./figures/experiment4_after.png>
-Package pdftex.def Info: ./figures/experiment4_after.png used on input line 167
+Package pdftex.def Info: ./figures/experiment4_after.png used on input line 179
 .
 (pdftex.def)             Requested size: 219.08614pt x 126.76639pt.
 
-<./figures/experiment4_before_training.png, id=328, 722.7pt x 361.35pt>
+<./figures/experiment4_before_training.png, id=329, 722.7pt x 361.35pt>
 File: ./figures/experiment4_before_training.png Graphic file (type png)
 
 <use ./figures/experiment4_before_training.png>
 Package pdftex.def Info: ./figures/experiment4_before_training.png used on inpu
-t line 183.
+t line 195.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 
-<./figures/experiment4_before_test.png, id=329, 722.7pt x 361.35pt>
+<./figures/experiment4_before_test.png, id=330, 722.7pt x 361.35pt>
 File: ./figures/experiment4_before_test.png Graphic file (type png)
 
 <use ./figures/experiment4_before_test.png>
 Package pdftex.def Info: ./figures/experiment4_before_test.png used on input li
-ne 190.
+ne 202.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 File: ./figures/experiment1_test.png Graphic file (type png)
 
 <use ./figures/experiment1_test.png>
-Package pdftex.def Info: ./figures/experiment1_test.png used on input line 197.
+Package pdftex.def Info: ./figures/experiment1_test.png used on input line 209.
 
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 
@@ -1136,20 +1146,20 @@ Overfull \vbox (10.36383pt too high) has occurred while \output is active []
 
 
 [34 <./figures/experiment4_before_test.png>]
-<./figures/experiment4_after_training.png, id=345, 722.7pt x 361.35pt>
+<./figures/experiment4_after_training.png, id=346, 722.7pt x 361.35pt>
 File: ./figures/experiment4_after_training.png Graphic file (type png)
 
 <use ./figures/experiment4_after_training.png>
 Package pdftex.def Info: ./figures/experiment4_after_training.png used on input
- line 220.
+ line 232.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 
-<./figures/experiment4_after_test.png, id=346, 722.7pt x 361.35pt>
+<./figures/experiment4_after_test.png, id=347, 722.7pt x 361.35pt>
 File: ./figures/experiment4_after_test.png Graphic file (type png)
 
 <use ./figures/experiment4_after_test.png>
 Package pdftex.def Info: ./figures/experiment4_after_test.png used on input lin
-e 227.
+e 239.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
  [35 <./figures/experiment4_after_training.png> <./figures/experiment4_after_te
 st.png>]) [36]
@@ -1260,7 +1270,7 @@ Package rerunfilecheck Warning: File `main.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `main.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  33D6406970DC83CB2F44598B626DB725;3266.
+(rerunfilecheck)             After:  4C991C3C1ABE1B43745FE292F5461480;3422.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1273,11 +1283,11 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 876.
  ) 
 Here is how much of TeX's memory you used:
- 11577 strings out of 493029
- 168486 string characters out of 6136234
+ 11578 strings out of 493029
+ 168515 string characters out of 6136234
  302055 words of memory out of 5000000
  14650 multiletter control sequences out of 15000+600000
- 51161 words of font info for 99 fonts, out of 8000000 for 9000
+ 50969 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,20n,49p,973b,587s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
@@ -1296,10 +1306,10 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/doublestroke/dsrom12.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (51 pages, 698015 bytes).
+Output written on main.pdf (51 pages, 710574 bytes).
 PDF statistics:
- 507 PDF objects out of 1000 (max. 8388607)
- 405 compressed objects within 5 object streams
- 194 named destinations out of 1000 (max. 500000)
+ 508 PDF objects out of 1000 (max. 8388607)
+ 406 compressed objects within 5 object streams
+ 196 named destinations out of 1000 (max. 500000)
  91 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -31,6 +31,10 @@ S.~Muggleton, ``{Inductive logic programming},'' {\em New Generation
 L.~{De Raedt}, ``{Logical settings for concept-learning},'' {\em Artificial
   Intelligence}, vol.~95, no.~1, pp.~187--201, 1997.
 
+\bibitem{Muggleton1993}
+S.~Muggleton, ``{Inductive Logic Programming: derivations, successes and
+  shortcomings},'' {\em SIGART Bulletin}, vol.~5, pp.~1--5, 1993.
+
 \bibitem{Gelfond1988}
 M.~Gelfond and V.~Lifschitz, ``{The stable model semantics for logic
   programming},'' {\em 5th International Conf. of Symp. on Logic Programming},
@@ -75,6 +79,10 @@ R.~S. Sutton, ``{Integrated Architectures for Learning, Planning, and Reacting
 \bibitem{Watkins}
 Watkins, ``{Learning from Delayed Reward}.''
 
+\bibitem{Brockman2016}
+G.~Brockman, V.~Cheung, L.~Pettersson, J.~Schneider, J.~Schulman, J.~Tang, and
+  W.~Zaremba, ``{OpenAI Gym},'' jun 2016.
+
 \bibitem{Su2017}
 J.~Su, D.~V. Vargas, and S.~Kouichi, ``{One pixel attack for fooling deep
   neural networks},'' oct 2017.
@@ -95,9 +103,24 @@ D.~Apeldoorn and K.-I. Gabriele, ``{An Agent-Based Learning Approach for
   Proceedings of the Thirteenth International Symposium on Commonsense
   Reasoning}, pp.~1--8, 2017.
 
+\bibitem{Apeldoorn2016}
+D.~Apeldoorn and G.~Kern-isberner, ``{When Should Learning Agents Switch to
+  Explicit Knowledge ?},'' vol.~41, pp.~174--186, 2016.
+
+\bibitem{Apeldoorn}
+D.~Apeldoorn and G.~Kern-isberner, ``{Towards an Understanding of What Is
+  Learned : Extracting Multi-Abstraction-Level Knowledge from Learning
+  Agents},'' pp.~764--767.
+
 \bibitem{Ferreira2017}
 L.~A. Ferreira, R.~A.~C. Bianchi, P.~E. Santos, and R.~L. de~Mantaras,
   ``{Answer Set Programming for Non-Stationary Markov Decision Processes},''
   may 2017.
+
+\bibitem{Sridharan2017}
+M.~Sridharan, B.~Meadows, and R.~Gomez, ``{What can I not do? Towards an
+  Architecture for Reasoning about and Learning Affordances},'' {\em
+  International Conference on Automated Planning and Scheduling}, no.~Icaps,
+  pp.~461--469, 2017.
 
 \end{thebibliography}

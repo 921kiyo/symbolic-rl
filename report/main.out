@@ -23,23 +23,25 @@
 \BOOKMARK [1][]{section.3.5}{3.5 Exploration}{chapter.3}% 23
 \BOOKMARK [0][]{chapter.4}{4 Evaluation}{}% 24
 \BOOKMARK [1][]{section.4.1}{4.1 Evaluation Metrics}{chapter.4}% 25
-\BOOKMARK [1][]{section.4.2}{4.2 Benchmark}{chapter.4}% 26
-\BOOKMARK [1][]{section.4.3}{4.3 Experiment Results}{chapter.4}% 27
-\BOOKMARK [2][]{subsection.4.3.1}{4.3.1 Experiment1}{section.4.3}% 28
-\BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Experiment2}{section.4.3}% 29
-\BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Experiment3}{section.4.3}% 30
-\BOOKMARK [2][]{subsection.4.3.4}{4.3.4 Experiment4}{section.4.3}% 31
-\BOOKMARK [2][]{subsection.4.3.5}{4.3.5 Experiment5}{section.4.3}% 32
-\BOOKMARK [0][]{chapter.5}{5 Related Work}{}% 33
-\BOOKMARK [0][]{chapter.6}{6 Conclusion and Further Research}{}% 34
-\BOOKMARK [1][]{section.6.1}{6.1 Contribution}{chapter.6}% 35
-\BOOKMARK [1][]{section.6.2}{6.2 Further Research}{chapter.6}% 36
-\BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Value iteration approach}{section.6.2}% 37
-\BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Weak Constraint}{section.6.2}% 38
-\BOOKMARK [2][]{subsection.6.2.3}{6.2.3 probabilistic inductive logic programming}{section.6.2}% 39
-\BOOKMARK [2][]{subsection.6.2.4}{6.2.4 generalisation of the current approach}{section.6.2}% 40
-\BOOKMARK [1][]{section.6.3}{6.3 Conclusion}{chapter.6}% 41
-\BOOKMARK [0][]{section*.35}{Appendices}{}% 42
-\BOOKMARK [1][]{section.1..1}{.1 Ethics}{section*.35}% 43
-\BOOKMARK [1][]{section.1..2}{.2 Learning tasks}{section*.35}% 44
-\BOOKMARK [1][]{section.1..3}{.3 Abduction tasks}{section*.35}% 45
+\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 Experiment Platform}{section.4.1}% 26
+\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Benchmark}{section.4.1}% 27
+\BOOKMARK [2][]{subsection.4.1.3}{4.1.3 Parameters}{section.4.1}% 28
+\BOOKMARK [1][]{section.4.2}{4.2 Experiment Results}{chapter.4}% 29
+\BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Experiment1}{section.4.2}% 30
+\BOOKMARK [2][]{subsection.4.2.2}{4.2.2 Experiment2}{section.4.2}% 31
+\BOOKMARK [2][]{subsection.4.2.3}{4.2.3 Experiment3}{section.4.2}% 32
+\BOOKMARK [2][]{subsection.4.2.4}{4.2.4 Experiment4}{section.4.2}% 33
+\BOOKMARK [2][]{subsection.4.2.5}{4.2.5 Experiment5}{section.4.2}% 34
+\BOOKMARK [0][]{chapter.5}{5 Related Work}{}% 35
+\BOOKMARK [0][]{chapter.6}{6 Conclusion and Further Research}{}% 36
+\BOOKMARK [1][]{section.6.1}{6.1 Contribution}{chapter.6}% 37
+\BOOKMARK [1][]{section.6.2}{6.2 Further Research}{chapter.6}% 38
+\BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Value iteration approach}{section.6.2}% 39
+\BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Weak Constraint}{section.6.2}% 40
+\BOOKMARK [2][]{subsection.6.2.3}{6.2.3 probabilistic inductive logic programming}{section.6.2}% 41
+\BOOKMARK [2][]{subsection.6.2.4}{6.2.4 generalisation of the current approach}{section.6.2}% 42
+\BOOKMARK [1][]{section.6.3}{6.3 Conclusion}{chapter.6}% 43
+\BOOKMARK [0][]{section*.36}{Appendices}{}% 44
+\BOOKMARK [1][]{section.1..1}{.1 Ethics}{section*.36}% 45
+\BOOKMARK [1][]{section.1..2}{.2 Learning tasks}{section*.36}% 46
+\BOOKMARK [1][]{section.1..3}{.3 Abduction tasks}{section*.36}% 47

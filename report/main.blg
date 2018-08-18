@@ -3,63 +3,63 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
 The style file: ieeetr.bst
 Database file #1: references.bib
-Repeated entry---line 61 of file references.bib
+Repeated entry---line 118 of file references.bib
  : @article{Zambaldi2018
  :                      ,
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "Muggleton1993"
 Warning--I didn't find a database entry for "Puterman1994"
 Warning--I didn't find a database entry for "Schaul2013"
 Warning--I didn't find a database entry for "LeCunL1998"
-Warning--I didn't find a database entry for "Apeldoorn2016"
-Warning--I didn't find a database entry for "Apeldoorn"
-Warning--I didn't find a database entry for "Sridharan2017"
 Warning--empty journal in Levine2015
 Warning--empty journal in Garnelo2016
 Warning--empty journal in Law2016
+Warning--empty journal in Brockman2016
 Warning--empty journal in Su2017
 Warning--empty journal in Garcez2018
 Warning--empty journal in Zambaldi2018
+Warning--empty journal in Apeldoorn2016
+Warning--empty journal in Apeldoorn
+Warning--empty year in Apeldoorn
 Warning--empty journal in Ferreira2017
-You've used 21 entries,
+You've used 26 entries,
             1876 wiz_defined-function locations,
-            621 strings with 7716 characters,
-and the built_in function-call counts, 5830 in all, are:
-= -- 518
-> -- 340
+            641 strings with 8441 characters,
+and the built_in function-call counts, 7261 in all, are:
+= -- 662
+> -- 394
 < -- 0
-+ -- 122
-- -- 101
-* -- 477
-:= -- 896
-add.period$ -- 20
-call.type$ -- 21
-change.case$ -- 21
++ -- 142
+- -- 116
+* -- 580
+:= -- 1093
+add.period$ -- 25
+call.type$ -- 26
+change.case$ -- 26
 chr.to.int$ -- 0
-cite$ -- 28
-duplicate$ -- 263
-empty$ -- 487
-format.name$ -- 101
-if$ -- 1342
+cite$ -- 37
+duplicate$ -- 335
+empty$ -- 616
+format.name$ -- 116
+if$ -- 1686
 int.to.chr$ -- 0
-int.to.str$ -- 21
-missing$ -- 20
-newline$ -- 66
-num.names$ -- 21
-pop$ -- 63
+int.to.str$ -- 26
+missing$ -- 25
+newline$ -- 81
+num.names$ -- 26
+pop$ -- 82
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 178
+skip$ -- 232
 stack$ -- 0
-substring$ -- 347
-swap$ -- 99
+substring$ -- 459
+swap$ -- 129
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 7
-while$ -- 57
-width$ -- 23
-write$ -- 190
+warning$ -- 11
+while$ -- 74
+width$ -- 28
+write$ -- 233
 (There was 1 error message)
