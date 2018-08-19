@@ -37,8 +37,8 @@ def run_experiment(env, i_episode, stats_test, width, time_range):
             print("reward here is ", reward)
             print("i_episode here is ", i_episode)
             # Update stats
-            stats_test.episode_rewards_test[i_episode] += reward
-            stats_test.episode_lengths_test[i_episode] = t
+            stats_test.episode_rewards[i_episode] += reward
+            stats_test.episode_lengths[i_episode] = t
             t = t + 1
             if done:
                 is_done = True
@@ -54,8 +54,8 @@ def run_experiment(env, i_episode, stats_test, width, time_range):
             else:
                 reward = reward - 1
 
-            stats_test.episode_rewards_test[i_episode] += reward
-            stats_test.episode_lengths_test[i_episode] = t
+            stats_test.episode_rewards[i_episode] += reward
+            stats_test.episode_lengths[i_episode] = t
             t = t + 1
 
 def k_learning(env, num_episodes, h, goal, epsilon=0.65, record_prefix=None, is_link=False):
@@ -80,6 +80,9 @@ def k_learning(env, num_episodes, h, goal, epsilon=0.65, record_prefix=None, is_
     helper.silentremove(cf.BASE_DIR, cf.LAS_CACHE, cf.LAS_CACHE_PATH)
     helper.create_file(cf.BASE_DIR, cf.LAS_CACHE, cf.LAS_CACHE_PATH)
 
+    # Copy pos examples that used in TL before
+    tl_file = os.path.join(cf.BASE_DIR, "tl_pos.las")
+    helper.copy_file(tl_file, cf.LASFILE)
     # Add mode bias and adjacent definition for ILASP
     induction.copy_las_base(height, width, cf.LASFILE, is_link)
 
@@ -91,11 +94,13 @@ def k_learning(env, num_episodes, h, goal, epsilon=0.65, record_prefix=None, is_
 
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
-        episode_rewards=np.zeros(num_episodes))
+        episode_rewards=np.zeros(num_episodes),
+        episode_ILASP=np.zeros(num_episodes))
 
-    stats_test = plotting.EpisodeStats_test(
-        episode_lengths_test=np.zeros(num_episodes),
-        episode_rewards_test=np.zeros(num_episodes))
+    stats_test = plotting.EpisodeStats(
+        episode_lengths=np.zeros(num_episodes),
+        episode_rewards=np.zeros(num_episodes),
+        episode_ILASP=np.zeros(num_episodes))
 
     for i_episode in range(num_episodes):
         print("==============NEW EPISODE======================")
@@ -209,19 +214,26 @@ def k_learning(env, num_episodes, h, goal, epsilon=0.65, record_prefix=None, is_
 env = gym.make('vgdl_experiment4_after-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-h = "state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\
-state_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).\
+
+h = "state_after(V1) :- adjacent(right, V0, V1), state_before(V0), action(left), not wall(V1).\
+state_after(V0) :- adjacent(right, V0, V1), state_before(V1), action(right), not wall(V0).\
 state_after(V1) :- adjacent(down, V0, V1), state_before(V0), action(up), not wall(V1).\
 state_after(V0) :- adjacent(down, V0, V1), state_before(V1), action(down), not wall(V0).\
+state_after(V0) :- adjacent(right, V0, V1), state_before(V0), action(left), wall(V1).\
 state_after(V1) :- adjacent(right, V0, V1), state_before(V1), action(right), wall(V0).\
-state_after(V1) :- adjacent(left, V0, V1), state_before(V1), action(left), wall(V0).\
 state_after(V0) :- adjacent(up, V0, V1), state_before(V0), action(down), wall(V1).\
 state_after(V1) :- adjacent(up, V0, V1), state_before(V1), action(up), wall(V0)."
 
-goal = (17,1)
+goal = (16,1)
 
-stats, stats_test = k_learning(env, 100, h, goal, epsilon=0.4, record_prefix="experiment4_after", is_link=False)
-# stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="experiment3.5_ver3", is_link=True)
-plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment4_after")
-plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment4_after_test")
-plotting.plot_episode_stats_simple(stats)
+temp_dir = os.path.join(cf.BASE_DIR, "experiment4_after_TL")
+
+for i in range(30):
+    stats, stats_test = k_learning(env, 100, h, goal, epsilon=0.4, record_prefix="experiment4_after_TL", is_link=False)
+    plotting.store_stats(stats, temp_dir, "exp4_after_TL_v{}".format(str(i)))
+    plotting.store_stats(stats_test, temp_dir, "exp4_test_after_TL_v{}".format(str(i)))
+
+    # stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="experiment3.5_ver3", is_link=True)
+    plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment4_after")
+    plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment4_after_test")
+    plotting.plot_episode_stats_simple(stats)
