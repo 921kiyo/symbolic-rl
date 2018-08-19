@@ -116,8 +116,11 @@ def plot_episode_stats_multiple(stats, stats2, smoothing_window=1, noshow=False)
     rewards_smoothed = pd.Series(stats.episode_rewards).rolling(smoothing_window, min_periods=smoothing_window).mean()
     rewards_smoothed2 = pd.Series(stats2.episode_rewards).rolling(smoothing_window, min_periods=smoothing_window).mean()
 
-    plot_training, = plt.plot(rewards_smoothed, "k", label="My algorithm")
-    plot_test, = plt.plot(rewards_smoothed2, c="gray", ls="--", label="Q learning")
+    plot_training, = plt.plot(rewards_smoothed, "k", label="TL")
+    plot_test, = plt.plot(rewards_smoothed2, c="gray", ls="--", label="No TL")
+
+    # plot_training, = plt.plot(rewards_smoothed, "k", label="My algorithm")
+    # plot_test, = plt.plot(rewards_smoothed2, c="gray", ls="--", label="Q learning")
     plt.xlabel("Episode")
     plt.ylabel("Episode Reward")
     plt.title("Episode Reward over Time")

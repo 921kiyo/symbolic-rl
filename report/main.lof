@@ -18,11 +18,8 @@
 \contentsline {figure}{\numberline {4.8}{\ignorespaces Comparison of test performance between my algorithm and Q-learning\relax }}{33}{figure.caption.27}
 \contentsline {figure}{\numberline {4.9}{\ignorespaces PLACEHOLDER FOR ILASP\relax }}{34}{figure.caption.28}
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Before (left) and after (right) transfer learning\relax }}{35}{figure.caption.29}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Comparison of training performance between my algorithm and Q-learning (before transfer)\relax }}{35}{figure.caption.30}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Comparison of test performance between my algorithm and Q-learning (before transfer)\relax }}{36}{figure.caption.31}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces PLACEHOLDER FOR ILASP\relax }}{36}{figure.caption.32}
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Comparison of training performance between my algorithm and Q-learning (after transfer)\relax }}{37}{figure.caption.34}
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Comparison of test performance between my algorithm and Q-learning (after transfer)\relax }}{37}{figure.caption.35}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Comparison of training performance between ILP(RL) with and without transfer learning\relax }}{36}{figure.caption.31}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Comparison of test performance between ILP(RL) with and without transfer learning\relax }}{36}{figure.caption.32}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

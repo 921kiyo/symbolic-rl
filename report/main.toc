@@ -41,21 +41,21 @@
 \contentsline {subsection}{\numberline {4.2.2}Experiment2}{31}{subsection.4.2.2}
 \contentsline {subsection}{\numberline {4.2.3}Experiment3}{32}{subsection.4.2.3}
 \contentsline {subsection}{\numberline {4.2.4}Experiment4}{35}{subsection.4.2.4}
-\contentsline {subsubsection}{Transfer learning}{37}{section*.33}
-\contentsline {subsection}{\numberline {4.2.5}Experiment5}{38}{subsection.4.2.5}
-\contentsline {chapter}{\numberline {5}Related Work}{39}{chapter.5}
-\contentsline {chapter}{\numberline {6}Discussion}{41}{chapter.6}
-\contentsline {section}{\numberline {6.1}Contribution}{41}{section.6.1}
-\contentsline {section}{\numberline {6.2}Limitations}{41}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Scalability}{41}{subsection.6.2.1}
-\contentsline {subsection}{\numberline {6.2.2}Flexibility}{42}{subsection.6.2.2}
-\contentsline {section}{\numberline {6.3}Further Research}{42}{section.6.3}
-\contentsline {subsection}{\numberline {6.3.1}Value iteration approach}{42}{subsection.6.3.1}
-\contentsline {subsection}{\numberline {6.3.2}Weak Constraint}{43}{subsection.6.3.2}
-\contentsline {subsection}{\numberline {6.3.3}probabilistic inductive logic programming}{43}{subsection.6.3.3}
-\contentsline {subsection}{\numberline {6.3.4}generalisation of the current approach}{43}{subsection.6.3.4}
-\contentsline {chapter}{\numberline {7}Conclusion}{44}{chapter.7}
-\contentsline {chapter}{Appendices}{45}{section*.36}
-\contentsline {section}{\numberline {.1}Ethics}{46}{section.1..1}
-\contentsline {section}{\numberline {.2}Learning tasks}{48}{section.1..2}
-\contentsline {section}{\numberline {.3}Abduction tasks}{48}{section.1..3}
+\contentsline {subsubsection}{Transfer learning}{35}{section*.30}
+\contentsline {subsection}{\numberline {4.2.5}Experiment5}{36}{subsection.4.2.5}
+\contentsline {chapter}{\numberline {5}Related Work}{37}{chapter.5}
+\contentsline {chapter}{\numberline {6}Discussion}{39}{chapter.6}
+\contentsline {section}{\numberline {6.1}Contribution}{39}{section.6.1}
+\contentsline {section}{\numberline {6.2}Limitations}{39}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Scalability}{39}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}Flexibility}{40}{subsection.6.2.2}
+\contentsline {section}{\numberline {6.3}Further Research}{40}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Value iteration approach}{40}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {6.3.2}Weak Constraint}{41}{subsection.6.3.2}
+\contentsline {subsection}{\numberline {6.3.3}probabilistic inductive logic programming}{41}{subsection.6.3.3}
+\contentsline {subsection}{\numberline {6.3.4}generalisation of the current approach}{41}{subsection.6.3.4}
+\contentsline {chapter}{\numberline {7}Conclusion}{42}{chapter.7}
+\contentsline {chapter}{Appendices}{43}{section*.33}
+\contentsline {section}{\numberline {.1}Ethics}{44}{section.1..1}
+\contentsline {section}{\numberline {.2}Learning tasks}{46}{section.1..2}
+\contentsline {section}{\numberline {.3}Abduction tasks}{46}{section.1..3}

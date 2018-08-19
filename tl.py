@@ -234,6 +234,6 @@ for i in range(30):
     plotting.store_stats(stats_test, temp_dir, "exp4_test_after_TL_v{}".format(str(i)))
 
     # stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="experiment3.5_ver3", is_link=True)
-    plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment4_after")
-    plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment4_after_test")
-    plotting.plot_episode_stats_simple(stats)
+    # plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment4_after")
+    # plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment4_after_test")
+    # plotting.plot_episode_stats_simple(stats)

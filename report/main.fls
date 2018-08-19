@@ -327,14 +327,6 @@ INPUT ./figures/experiment4_before.png
 INPUT ./figures/experiment4_after.png
 INPUT ./figures/experiment4_after.png
 INPUT ./figures/experiment4_after.png
-INPUT ./figures/experiment4_before_training.png
-INPUT ./figures/experiment4_before_training.png
-INPUT ./figures/experiment4_before_training.png
-INPUT ./figures/experiment4_before_test.png
-INPUT ./figures/experiment4_before_test.png
-INPUT ./figures/experiment4_before_test.png
-INPUT ./figures/experiment1_test.png
-INPUT ./figures/experiment1_test.png
 INPUT ./figures/experiment4_after_training.png
 INPUT ./figures/experiment4_after_training.png
 INPUT ./figures/experiment4_after_training.png
