@@ -81,7 +81,7 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     helper.silentremove(cf.BASE_DIR, cf.CLINGOFILE)
     helper.silentremove(cf.BASE_DIR, cf.LAS_CACHE, cf.LAS_CACHE_PATH)
     helper.create_file(cf.BASE_DIR, cf.LAS_CACHE, cf.LAS_CACHE_PATH)
-
+    cf.ALREADY_LINK = False
     # Add mode bias and adjacent definition for ILASP
     induction.copy_las_base(height, width, cf.LASFILE, is_link)
 
@@ -179,6 +179,9 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                     # Update H if necessary
                     if (not induction.check_ILASP_cover(hypothesis, pos1, height, width, keep_link)) or (not induction.check_ILASP_cover(hypothesis, pos2, height, width, keep_link)):
                         hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
+                        if hypothesis == "UNSATISFIABLE\n":
+                            import ipdb; ipdb.set_trace()
+
                         # Convert syntax of H for ASP solver
                         hypothesis_asp = py_asp.convert_las_asp(hypothesis)
                         abduction.update_h(hypothesis_asp)
@@ -234,6 +237,8 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 # Update H if necessary
                 if(not induction.check_ILASP_cover(hypothesis, pos1, height, width, keep_link) or not induction.check_ILASP_cover(hypothesis, pos2, height, width, keep_link) or hypothesis == ''):
                     hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
+                    if hypothesis == "UNSATISFIABLE\n":
+                            import ipdb; ipdb.set_trace()
                     if record_prefix:
                         inputfile = os.path.join(cf.BASE_DIR, cf.LASFILE)
                         helper.log_las(inputfile, hypothesis, log_dir, i_episode, t)
@@ -251,20 +256,23 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
     return stats, stats_test
 
-env = gym.make('vgdl_experiment3-v0')
+env = gym.make('vgdl_experiment4_before-v0')
 # env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_experiment4_before-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-# stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix=None, is_link=False)
+temp_dir = os.path.join(cf.BASE_DIR, "experiment4")
+stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp4_before", is_link=False)
+plotting.store_stats(stats, temp_dir, "exp4_before")
+plotting.store_stats(stats_test, temp_dir, "exp4_before")
 # stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp3", is_link=True)
 # plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment_check")
 # plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment_check_test")
 # plotting.plot_episode_stats_simple(stats)
 
-temp_dir = os.path.join(cf.BASE_DIR, "experiment3")
-for i in range(1,30):
-    stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp3_mult", is_link=True)
-    plotting.store_stats(stats, temp_dir, "exp3_v{}".format(i))
-    plotting.store_stats(stats_test, temp_dir, "exp3_test_v{}".format(i))
+# temp_dir = os.path.join(cf.BASE_DIR, "experiment3")
+# for i in range(28,30):
+#     stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp3_mult", is_link=True)
+#     plotting.store_stats(stats, temp_dir, "exp3_v{}".format(i))
+#     plotting.store_stats(stats_test, temp_dir, "exp3_test_v{}".format(i))

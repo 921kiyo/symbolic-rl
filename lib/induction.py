@@ -281,6 +281,7 @@ def run_ILASP(filename, cache_path=None):
     except subprocess.CalledProcessError as e:
         print("Error...", e.output)
         hypothesis = e.output
+
     return hypothesis
 
 def check_ILASP_cover(hypothesis, pos, height, width, link):

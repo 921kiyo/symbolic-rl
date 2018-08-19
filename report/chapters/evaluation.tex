@@ -32,6 +32,7 @@ We compare the performance of our algorithm with these two methods.
 
 \subsection{Parameters}
 In all experiments, the agent receives -1 in any states except the goal state, where it gains a reward of 10.
+Once the agent reaches the goal, or termination state, that episode is finished and the agent start the next episode from the starting point.
 All the matrices that are used in the experiments are summarised in Table \ref{param}. 
 
 \begin{table}[!ht!b]
@@ -145,7 +146,7 @@ In this experiment, the performance of our algorithm remains the same as Experim
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=0.5\textwidth]{./figures/experiment3_v2}
+\includegraphics[width=0.5\textwidth]{./figures/experiment3}
 \caption{Enviroment for experiment 3}
 \label{experiment3}
 \end{figure}

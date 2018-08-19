@@ -20,14 +20,26 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 
 # # plotting.plot_episode_stats_multiple(stats, stats2)
 
-pkl_dir = os.path.join(base_dir, "experiment1")
-pkl_dir_q = os.path.join(base_dir, "experiment1_q")
+# pkl_dir = os.path.join(base_dir, "experiment1")
+# pkl_dir_q = os.path.join(base_dir, "experiment1_q")
+pkl_dir = os.path.join(base_dir, "experiment3")
+pkl_dir_q = os.path.join(base_dir, "experiment3_q")
 
-plotting.average_score(base_dir, pkl_dir, "exp1_test_v", 100, 30)
-plotting.average_score(base_dir, pkl_dir_q, "temp_test_v", 100, 30)
+# plotting.average_score(base_dir, pkl_dir, "exp1_test_v", 100, 30)
+# plotting.average_score(base_dir, pkl_dir_q, "temp_test_v", 100, 30)
+# plotting.average_score(base_dir, pkl_dir, "exp3_test_v", 100, 30)
+# plotting.average_score(base_dir, pkl_dir_q, "exp3_test_v", 100, 30)
 
-stats = plotting.load_stats(pkl_dir, "exp1_test_v_average")
-stats_q = plotting.load_stats(pkl_dir_q, "temp_test_v_average")
+# stats = plotting.load_stats(pkl_dir, "exp1_test_v_average")
+# stats_q = plotting.load_stats(pkl_dir_q, "temp_test_v_average")
+stats = plotting.load_stats(pkl_dir, "exp3_test_v_average")
+stats_q = plotting.load_stats(pkl_dir_q, "exp3_test_v_average")
+
+# for i in range(12):
+#     print("-----------------------")
+#     print("No.", i)
+#     stats = plotting.load_stats(pkl_dir, "exp3_test_v{}".format(str(i)))
+#     print(stats)
 
 # plotting.plot_episode_stats_simple(stats, smoothing_window=1)
 plotting.plot_episode_stats_multiple(stats, stats_q)

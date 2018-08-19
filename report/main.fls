@@ -310,9 +310,9 @@ INPUT ./figures/experiment1_test.png
 INPUT ./figures/experiment1_test.png
 INPUT ./figures/experiment1_test.png
 INPUT ./figures/experiment1_test.png
-INPUT ./figures/experiment3_v2.png
-INPUT ./figures/experiment3_v2.png
-INPUT ./figures/experiment3_v2.png
+INPUT ./figures/experiment3.png
+INPUT ./figures/experiment3.png
+INPUT ./figures/experiment3.png
 INPUT ./figures/experiment3_training.png
 INPUT ./figures/experiment3_training.png
 INPUT ./figures/experiment3_training.png
