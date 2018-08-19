@@ -13,8 +13,8 @@ from lib import plotting, helper, induction
 
 TIME_RANGE = 400
 # env = gym.make('vgdl_experiment1-v0')
-env = gym.make('vgdl_experiment3-v0')
-# env = gym.make('vgdl_experiment4_after-v0')
+# env = gym.make('vgdl_experiment3-v0')
+env = gym.make('vgdl_experiment4_after-v0')
 # env = gym.make('vgdl_experiment5-v0')
 
 

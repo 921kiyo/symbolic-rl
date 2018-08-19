@@ -256,23 +256,24 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
     return stats, stats_test
 
-env = gym.make('vgdl_experiment4_before-v0')
+env = gym.make('vgdl_experiment4_after-v0')
 # env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
-# env = gym.make('vgdl_experiment4_before-v0')
+# env = gym.make('vgdl_experiment4_after_noTL-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
-temp_dir = os.path.join(cf.BASE_DIR, "experiment4")
-stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp4_before", is_link=False)
-plotting.store_stats(stats, temp_dir, "exp4_before")
-plotting.store_stats(stats_test, temp_dir, "exp4_before")
+temp_dir = os.path.join(cf.BASE_DIR, "experiment4_after_noTL")
 # stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp3", is_link=True)
 # plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment_check")
 # plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment_check_test")
 # plotting.plot_episode_stats_simple(stats)
 
 # temp_dir = os.path.join(cf.BASE_DIR, "experiment3")
-# for i in range(28,30):
-#     stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp3_mult", is_link=True)
-#     plotting.store_stats(stats, temp_dir, "exp3_v{}".format(i))
-#     plotting.store_stats(stats_test, temp_dir, "exp3_test_v{}".format(i))
+for i in range(2,30):
+    stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp4_after_noTL", is_link=False)
+    plotting.store_stats(stats, temp_dir, "exp4_after_noTL_v{}".format(str(i)))
+    plotting.store_stats(stats_test, temp_dir, "exp4_test_after_noTL_v{}".format(str(i)))
+
+    # stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp3_mult", is_link=True)
+    # plotting.store_stats(stats, temp_dir, "exp3_v{}".format(i))
+    # plotting.store_stats(stats_test, temp_dir, "exp3_test_v{}".format(i))
