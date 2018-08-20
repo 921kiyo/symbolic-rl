@@ -73,6 +73,8 @@ def k_learning(env, num_episodes, h, goal, epsilon=0.65, record_prefix=None, is_
     # the first abduction needs lots of basic information
     first_abduction = False
 
+    keep_link = None
+
     # Clean up all the files first
     helper.silentremove(cf.BASE_DIR, cf.GROUNDING)
     helper.silentremove(cf.BASE_DIR, cf.LASFILE)
@@ -174,8 +176,10 @@ def k_learning(env, num_episodes, h, goal, epsilon=0.65, record_prefix=None, is_
                 extra_exclusion = induction.generate_extra_exclusions(previous_state_at, next_state_at, states_plan)
                 pos1, pos2,link = induction.generate_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range, extra_exclusion)
                 
+                if link is not None:
+                        keep_link = link
                 # Update H if necessary
-                if (not induction.check_ILASP_cover(hypothesis, pos1, height, width, link)) or (not induction.check_ILASP_cover(hypothesis, pos2, height, width, link)):
+                if (not induction.check_ILASP_cover(hypothesis, pos1, height, width, keep_link)) or (not induction.check_ILASP_cover(hypothesis, pos2, height, width, keep_link)):
                     hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
                     # Convert syntax of H for ASP solver
                     hypothesis_asp = py_asp.convert_las_asp(hypothesis)
@@ -211,7 +215,7 @@ def k_learning(env, num_episodes, h, goal, epsilon=0.65, record_prefix=None, is_
 # env = gym.make('vgdl_experiment3.5-v0')
 # env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
-env = gym.make('vgdl_experiment4_after-v0')
+env = gym.make('vgdl_experiment5-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
 
@@ -226,12 +230,12 @@ state_after(V1) :- adjacent(up, V0, V1), state_before(V1), action(up), wall(V0).
 
 goal = (16,1)
 
-temp_dir = os.path.join(cf.BASE_DIR, "experiment4_after_TL")
+temp_dir = os.path.join(cf.BASE_DIR, "experiment5_TL")
 
-for i in range(30):
-    stats, stats_test = k_learning(env, 100, h, goal, epsilon=0.4, record_prefix="experiment4_after_TL", is_link=False)
-    plotting.store_stats(stats, temp_dir, "exp4_after_TL_v{}".format(str(i)))
-    plotting.store_stats(stats_test, temp_dir, "exp4_test_after_TL_v{}".format(str(i)))
+# for i in range(30):
+stats, stats_test = k_learning(env, 100, h, goal, epsilon=0.4, record_prefix="experiment5_TL", is_link=True)
+    # plotting.store_stats(stats, temp_dir, "exp5_TL_v{}".format(str(i)))
+    # plotting.store_stats(stats_test, temp_dir, "exp5_test_TL_v{}".format(str(i)))
 
     # stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="experiment3.5_ver3", is_link=True)
     # plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment4_after")
