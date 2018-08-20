@@ -13,7 +13,7 @@ from lib import plotting, helper, induction
 TIME_RANGE = 400
 # env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_experiment3-v0')
-env = gym.make('vgdl_experiment4_after-v0')
+env = gym.make('vgdl_experiment5-v0')
 # env = gym.make('vgdl_experiment5-v0')
 
 for i_episode in range(TIME_RANGE):
@@ -32,7 +32,6 @@ for i_episode in range(TIME_RANGE):
             break
 exit(1)
 base_dir = os.path.dirname(os.path.abspath(__file__))
-# print(induction.check_ILASP_cover(base_dir, "output2.las", ""))
 
 # stats = plotting.load_stats(base_dir, "vgdl_experiment4_after")
 # stats_test = plotting.load_stats(base_dir, "vgdl_experiment4_after_test")
@@ -46,8 +45,6 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 
 # stats_test = plotting.load_stats(base_dir, "vgdl_experiment1_q_test")
 # import ipdb; ipdb.set_trace()
-# stats = plotting.load_stats(base_dir, "teleport")
-# stats_test = plotting.load_stats(base_dir, "teleport_test")
 
 # plotting.plot_episode_stats_test(stats, stats_test)
 # plotting.plot_episode_stats_test(stats2, stats2_test, smoothing_window=1)

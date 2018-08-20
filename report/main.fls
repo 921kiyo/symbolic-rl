@@ -281,9 +281,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/doublestroke/dsrom8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/doublestroke/dsrom8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchrc7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchr8r.tfm
-INPUT ./figures/coarse_coding.png
-INPUT ./figures/coarse_coding.png
-INPUT ./figures/coarse_coding.png
 INPUT ./figures/tile_coding.png
 INPUT ./figures/tile_coding.png
 INPUT ./figures/tile_coding.png
@@ -331,6 +328,15 @@ INPUT ./figures/experiment4_after_training.png
 INPUT ./figures/experiment4_after_training.png
 INPUT ./figures/experiment4_after_training.png
 INPUT ./figures/experiment4_after_test.png
+INPUT ./figures/experiment4_after_test.png
+INPUT ./figures/experiment4_after_test.png
+INPUT ./figures/experiment4_before.png
+INPUT ./figures/experiment4_before.png
+INPUT ./figures/experiment5_after.png
+INPUT ./figures/experiment5_after.png
+INPUT ./figures/experiment5_after.png
+INPUT ./figures/experiment4_after_training.png
+INPUT ./figures/experiment4_after_training.png
 INPUT ./figures/experiment4_after_test.png
 INPUT ./figures/experiment4_after_test.png
 INPUT chapters/related_work.tex

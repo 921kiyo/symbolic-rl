@@ -81,7 +81,7 @@ def k_learning(env, num_episodes, h, goal, epsilon=0.65, record_prefix=None, is_
     helper.silentremove(cf.BASE_DIR, cf.CLINGOFILE)
     helper.silentremove(cf.BASE_DIR, cf.LAS_CACHE, cf.LAS_CACHE_PATH)
     helper.create_file(cf.BASE_DIR, cf.LAS_CACHE, cf.LAS_CACHE_PATH)
-
+    cf.ALREADY_LINK = False
     # Copy pos examples that used in TL before
     tl_file = os.path.join(cf.BASE_DIR, "tl_pos.las")
     helper.copy_file(tl_file, cf.LASFILE)
@@ -232,10 +232,10 @@ goal = (16,1)
 
 temp_dir = os.path.join(cf.BASE_DIR, "experiment5_TL")
 
-# for i in range(30):
-stats, stats_test = k_learning(env, 100, h, goal, epsilon=0.4, record_prefix="experiment5_TL", is_link=True)
-    # plotting.store_stats(stats, temp_dir, "exp5_TL_v{}".format(str(i)))
-    # plotting.store_stats(stats_test, temp_dir, "exp5_test_TL_v{}".format(str(i)))
+for i in range(1,30):
+    stats, stats_test = k_learning(env, 100, h, goal, epsilon=0.4, record_prefix="experiment5_TL", is_link=True)
+    plotting.store_stats(stats, temp_dir, "exp5_TL_v{}".format(str(i)))
+    plotting.store_stats(stats_test, temp_dir, "exp5_test_TL_v{}".format(str(i)))
 
     # stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="experiment3.5_ver3", is_link=True)
     # plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment4_after")
