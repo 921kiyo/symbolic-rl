@@ -11,6 +11,7 @@ import os.path
 import pickle
 
 from collections import defaultdict
+from tiles import IHT,tiles,tileswrap,hashcoords,TilingsValueFunction
 
 from lib import plotting, py_asp, helper, induction, abduction
 
@@ -18,51 +19,6 @@ TIME_RANGE = 250
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 ACTION_SPACE = 4 # env.action_space.n
-
-# class TilingsValueFunction:
-#     # @numOfTilings: # of tilings
-#     # @tileWidth: each tiling has several tiles, this parameter specifies the width of each tile
-#     # @tilingOffset: specifies how tilings are put together
-#     def __init__(self, numOfTilings, tileWidth, tilingOffset, n_states):
-#         self.numOfTilings = numOfTilings
-#         self.tileWidth = tileWidth
-#         self.tilingOffset = tilingOffset
-
-#         # To make sure that each sate is covered by same number of tiles,
-#         # we need one more tile for each tiling
-#         self.tilingSize = n_states // tileWidth + 1
-
-#         # weight for each tile
-#         self.params = np.zeros((self.numOfTilings, self.tilingSize))
-
-#         # For performance, only track the starting position for each tiling
-#         # As we have one more tile for each tiling, the starting position will be negative
-#         self.tilings = np.arange(-tileWidth + 1, 0, tilingOffset)
-
-#     # get the value of @state
-#     def value(self, state):
-#         stateValue = 0.0
-#         # go through all the tilings
-#         for tilingIndex in range(0, len(self.tilings)):
-#             # find the active tile in current tiling
-#             tileIndex = (state - self.tilings[tilingIndex]) // self.tileWidth
-#             stateValue += self.params[tilingIndex, tileIndex]
-#         return stateValue
-
-#     # update parameters
-#     # @delta: step size * (target - old estimation)
-#     # @state: state of current sample
-#     def update(self, delta, state):
-
-#         # each state is covered by same number of tilings
-#         # so the delta should be divided equally into each tiling (tile)
-#         delta /= self.numOfTilings
-
-#         # go through all the tilings
-#         for tilingIndex in range(0, len(self.tilings)):
-#             # find the active tile in current tiling
-#             tileIndex = (state - self.tilings[tilingIndex]) // self.tileWidth
-#             self.params[tilingIndex, tileIndex] += delta
 
 def make_epsilon_greedy_policy(weights, epsilon, nA):
     def policy_fn(height, width, x,y, episode):
@@ -101,7 +57,6 @@ def make_epsilon_greedy_policy(weights, epsilon, nA):
 #     actions[:,start:end] = 1
 #     return actions
 
-
 def compute_tile_features(height, width, x,y):
     feature_vectors = np.zeros((height,width), dtype=float)
     feature_vectors[y][x] = 1
@@ -113,6 +68,7 @@ def compute_features(height, width, x, y):
         x(s)
     '''
     tile_features = compute_tile_features(height, width, x,y) # |height*width|
+
     # walls_features = compute_wall_features(x,y)
     # xy_features = compute_xy_features(height, width, x,y) # only |2|, x and y
     # features = np.stack([tile_features])
@@ -146,7 +102,18 @@ def compute_value(height, width, x,y,action, weights):
 def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.2, epsilon_decay=1.0):
     height = env.unwrapped.game.height
     width = env.unwrapped.game.width
-
+    
+    # num_of_tilings = 10
+    # tile_width = 3
+    # tile_offset = 1
+    # n_states = height*width
+    
+    # value_functions_up = TilingsValueFunction(num_of_tilings, tile_width, tile_offset, n_states)
+    # value_functions_down = TilingsValueFunction(num_of_tilings, tile_width, tile_offset, n_states)
+    # value_functions_right = TilingsValueFunction(num_of_tilings, tile_width, tile_offset, n_states)
+    # value_functions_left = TilingsValueFunction(num_of_tilings, tile_width, tile_offset, n_states)
+    
+    # import ipdb; ipdb.set_trace()
     # wall_list = induction.get_all_walls(env)
 
     stats = plotting.EpisodeStats(
@@ -202,8 +169,9 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.2, eps
             state_action_features = compute_state_action_feature(height, width, int(previous_state[0]),int(previous_state[1]),action)
             v_now = compute_value(height, width, int(previous_state[0]),int(previous_state[1]),action, weights)
             v_next = compute_value(height, width, int(next_state[0]),int(next_state[1]),action_next, weights)
-
+            
             weights_delta = alpha*(reward + discount_factor*v_next - v_now)*state_action_features
+            import ipdb; ipdb.set_trace()
             weights += weights_delta
             # for i in range(-1,2):
             #     for j in range(-1,2):

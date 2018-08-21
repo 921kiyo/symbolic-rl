@@ -269,11 +269,7 @@ temp_dir = os.path.join(cf.BASE_DIR, "experiment5_noTL")
 # plotting.plot_episode_stats_simple(stats)
 
 # temp_dir = os.path.join(cf.BASE_DIR, "experiment3")
-# for i in range(30):
-stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp5_TL_test", is_link=True)
-# plotting.store_stats(stats, temp_dir, "exp5_noTL_v{}".format(str(i)))
-# plotting.store_stats(stats_test, temp_dir, "exp4_test_after_noTL_v{}".format(str(i)))
-
-    # stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp3_mult", is_link=True)
-    # plotting.store_stats(stats, temp_dir, "exp3_v{}".format(i))
-    # plotting.store_stats(stats_test, temp_dir, "exp3_test_v{}".format(i))
+for i in range(22,30):
+    stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp5_TL_test", is_link=True)
+    plotting.store_stats(stats, temp_dir, "exp5_noTL_v{}".format(str(i)))
+    plotting.store_stats(stats_test, temp_dir, "exp4_test_noTL_v{}".format(str(i)))

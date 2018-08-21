@@ -335,10 +335,12 @@ INPUT ./figures/experiment4_before.png
 INPUT ./figures/experiment5_after.png
 INPUT ./figures/experiment5_after.png
 INPUT ./figures/experiment5_after.png
-INPUT ./figures/experiment4_after_training.png
-INPUT ./figures/experiment4_after_training.png
-INPUT ./figures/experiment4_after_test.png
-INPUT ./figures/experiment4_after_test.png
+INPUT ./figures/experiment5_training.png
+INPUT ./figures/experiment5_training.png
+INPUT ./figures/experiment5_training.png
+INPUT ./figures/experiment5_test.png
+INPUT ./figures/experiment5_test.png
+INPUT ./figures/experiment5_test.png
 INPUT chapters/related_work.tex
 INPUT chapters/related_work.tex
 INPUT chapters/discussion.tex
