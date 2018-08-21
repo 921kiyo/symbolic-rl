@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  21 AUG 2018 14:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  21 AUG 2018 18:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -651,7 +651,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hypcap package is loaded.
 Package caption Info: End \AtBeginDocument code.
 Package backref Info: ** backref set up for natbib ** on input line 49.
-(./titlepage.tex <./figures/imperial.pdf, id=205, 362.35374pt x 95.35625pt>
+(./titlepage.tex <./figures/imperial.pdf, id=196, 362.35374pt x 95.35625pt>
 File: ./figures/imperial.pdf Graphic file (type pdf)
 
 <use ./figures/imperial.pdf>
@@ -925,7 +925,7 @@ Package natbib Warning: Citation `Law2016' on page 10 undefined on input line 3
 LaTeX Warning: Reference `model_generation_and_update' on page 11 undefined on 
 input line 416.
 
-<./figures/agent_env.png, id=436, 248.93pt x 228.855pt>
+<./figures/agent_env.png, id=424, 248.93pt x 228.855pt>
 File: ./figures/agent_env.png Graphic file (type png)
 
 <use ./figures/agent_env.png>
@@ -943,7 +943,7 @@ ine 431.
 Package natbib Warning: Citation `Sutton1990' on page 13 undefined on input lin
 e 506.
 
-<./figures/dyna.png, id=458, 243.91125pt x 175.65625pt>
+<./figures/dyna.png, id=445, 243.91125pt x 175.65625pt>
 File: ./figures/dyna.png Graphic file (type png)
 
 <use ./figures/dyna.png>
@@ -963,7 +963,7 @@ LaTeX Font Info:    Try loading font information for U+dsrom on input line 616.
 (/usr/share/texlive/texmf-dist/tex/latex/doublestroke/Udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
 ) [15] [16]
-<./figures/tile_coding.png, id=496, 571.13374pt x 347.2975pt>
+<./figures/tile_coding.png, id=484, 571.13374pt x 347.2975pt>
 File: ./figures/tile_coding.png Graphic file (type png)
 
 <use ./figures/tile_coding.png>
@@ -972,7 +972,7 @@ Package pdftex.def Info: ./figures/tile_coding.png used on input line 729.
  [17] [18 <./figures/tile_coding.png>] [19]
 Chapter 3.
 (./chapters/framework.tex
-<./figures/architecture.png, id=515, 803.0pt x 602.25pt>
+<./figures/architecture.png, id=503, 803.0pt x 602.25pt>
 File: ./figures/architecture.png Graphic file (type png)
 
 <use ./figures/architecture.png>
@@ -1004,78 +1004,77 @@ Chapter 4.
 (./chapters/evaluation.tex
 
 Package natbib Warning: Citation `Schaul2013' on page 27 undefined on input lin
-e 12.
+e 15.
 
 
 Package natbib Warning: Citation `Brockman2016' on page 27 undefined on input l
-ine 13.
+ine 16.
 
-<./figures/experiment1.png, id=556, 458.71375pt x 194.7275pt>
+<./figures/experiment1.png, id=544, 458.71375pt x 194.7275pt>
 File: ./figures/experiment1.png Graphic file (type png)
 
 <use ./figures/experiment1.png>
-Package pdftex.def Info: ./figures/experiment1.png used on input line 20.
+Package pdftex.def Info: ./figures/experiment1.png used on input line 23.
 (pdftex.def)             Requested size: 219.08614pt x 93.0046pt.
  [27
 
- <./figures/experiment1.png>] [28]
+] [28 <./figures/experiment1.png>]
 File: ./figures/experiment1.png Graphic file (type png)
 
 <use ./figures/experiment1.png>
-Package pdftex.def Info: ./figures/experiment1.png used on input line 74.
+Package pdftex.def Info: ./figures/experiment1.png used on input line 84.
 (pdftex.def)             Requested size: 219.08614pt x 93.0046pt.
 
-<./figures/experiment1_training.png, id=568, 722.7pt x 361.35pt>
+<./figures/experiment1_training.png, id=558, 722.7pt x 361.35pt>
 File: ./figures/experiment1_training.png Graphic file (type png)
 
 <use ./figures/experiment1_training.png>
 Package pdftex.def Info: ./figures/experiment1_training.png used on input line 
-81.
+91.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
-
-<./figures/experiment1_test.png, id=571, 722.7pt x 361.35pt>
+ [29 <./figures/experiment1_training.png>] <./figures/experiment1_test.png, id=
+566, 722.7pt x 361.35pt>
 File: ./figures/experiment1_test.png Graphic file (type png)
 
 <use ./figures/experiment1_test.png>
-Package pdftex.def Info: ./figures/experiment1_test.png used on input line 95.
-(pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
-File: ./figures/experiment1_test.png Graphic file (type png)
- <use ./figures/experiment1_test.png>
-Package pdftex.def Info: ./figures/experiment1_test.png used on input line 102.
+Package pdftex.def Info: ./figures/experiment1_test.png used on input line 105.
 
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 
-[29 <./figures/experiment1_training.png>]
-Overfull \vbox (24.14182pt too high) has occurred while \output is active []
+<./figures/experiment1_ilasp.png, id=567, 722.7pt x 361.35pt>
+File: ./figures/experiment1_ilasp.png Graphic file (type png)
 
-
-[30 <./figures/experiment1_test.png>] [31]
-<./figures/experiment3.png, id=589, 456.70625pt x 193.72375pt>
+<use ./figures/experiment1_ilasp.png>
+Package pdftex.def Info: ./figures/experiment1_ilasp.png used on input line 112
+.
+(pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
+ [30 <./figures/experiment1_test.png> <./figures/experiment1_ilasp.png>] [31]
+<./figures/experiment3.png, id=581, 456.70625pt x 193.72375pt>
 File: ./figures/experiment3.png Graphic file (type png)
 
 <use ./figures/experiment3.png>
-Package pdftex.def Info: ./figures/experiment3.png used on input line 148.
+Package pdftex.def Info: ./figures/experiment3.png used on input line 144.
 (pdftex.def)             Requested size: 219.08614pt x 92.93018pt.
 
-<./figures/experiment3_training.png, id=590, 722.7pt x 361.35pt>
+<./figures/experiment3_training.png, id=582, 722.7pt x 361.35pt>
 File: ./figures/experiment3_training.png Graphic file (type png)
 
 <use ./figures/experiment3_training.png>
 Package pdftex.def Info: ./figures/experiment3_training.png used on input line 
-180.
+175.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 
-<./figures/experiment3_test.png, id=591, 722.7pt x 361.35pt>
+<./figures/experiment3_test.png, id=583, 722.7pt x 361.35pt>
 File: ./figures/experiment3_test.png Graphic file (type png)
 
 <use ./figures/experiment3_test.png>
-Package pdftex.def Info: ./figures/experiment3_test.png used on input line 189.
+Package pdftex.def Info: ./figures/experiment3_test.png used on input line 184.
 
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
-File: ./figures/experiment1_test.png Graphic file (type png)
- <use ./figures/experiment1_test.png>
-Package pdftex.def Info: ./figures/experiment1_test.png used on input line 196.
-
+File: ./figures/experiment1_ilasp.png Graphic file (type png)
+ <use ./figures/experiment1_ilasp.png>
+Package pdftex.def Info: ./figures/experiment1_ilasp.png used on input line 191
+.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 
 [32 <./figures/experiment3.png>]
@@ -1083,65 +1082,65 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [33 <./figures/experiment3_training.png> <./figures/experiment3_test.png>] [34
 ]
-<./figures/experiment4_before.png, id=606, 457.71pt x 266.9975pt>
+<./figures/experiment4_before.png, id=598, 457.71pt x 266.9975pt>
 File: ./figures/experiment4_before.png Graphic file (type png)
 
 <use ./figures/experiment4_before.png>
 Package pdftex.def Info: ./figures/experiment4_before.png used on input line 24
-9.
+4.
 (pdftex.def)             Requested size: 219.08614pt x 127.79881pt.
 
-<./figures/experiment4_after.png, id=607, 459.7175pt x 265.99374pt>
+<./figures/experiment4_after.png, id=599, 459.7175pt x 265.99374pt>
 File: ./figures/experiment4_after.png Graphic file (type png)
 
 <use ./figures/experiment4_after.png>
-Package pdftex.def Info: ./figures/experiment4_after.png used on input line 249
+Package pdftex.def Info: ./figures/experiment4_after.png used on input line 244
 .
 (pdftex.def)             Requested size: 219.08614pt x 126.76639pt.
 
-<./figures/experiment4_after_training.png, id=608, 722.7pt x 361.35pt>
+<./figures/experiment4_after_training.png, id=600, 722.7pt x 361.35pt>
 File: ./figures/experiment4_after_training.png Graphic file (type png)
 
 <use ./figures/experiment4_after_training.png>
 Package pdftex.def Info: ./figures/experiment4_after_training.png used on input
- line 285.
+ line 280.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 
-<./figures/experiment4_after_test.png, id=609, 722.7pt x 361.35pt>
+<./figures/experiment4_after_test.png, id=601, 722.7pt x 361.35pt>
 File: ./figures/experiment4_after_test.png Graphic file (type png)
 
 <use ./figures/experiment4_after_test.png>
 Package pdftex.def Info: ./figures/experiment4_after_test.png used on input lin
-e 292.
+e 287.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
  [35 <./figures/experiment4_before.png> <./figures/experiment4_after.png>]
 File: ./figures/experiment4_before.png Graphic file (type png)
  <use ./figures/experiment4_before.png>
-Package pdftex.def Info: ./figures/experiment4_before.png used on input line 31
-0.
+Package pdftex.def Info: ./figures/experiment4_before.png used on input line 30
+5.
 (pdftex.def)             Requested size: 219.08614pt x 127.79881pt.
 
-<./figures/experiment5_after.png, id=615, 435.6275pt x 218.8175pt>
+<./figures/experiment5_after.png, id=607, 435.6275pt x 218.8175pt>
 File: ./figures/experiment5_after.png Graphic file (type png)
 
 <use ./figures/experiment5_after.png>
-Package pdftex.def Info: ./figures/experiment5_after.png used on input line 310
+Package pdftex.def Info: ./figures/experiment5_after.png used on input line 305
 .
 (pdftex.def)             Requested size: 219.08614pt x 110.0462pt.
 
-<./figures/experiment5_training.png, id=616, 722.7pt x 361.35pt>
+<./figures/experiment5_training.png, id=608, 722.7pt x 361.35pt>
 File: ./figures/experiment5_training.png Graphic file (type png)
 
 <use ./figures/experiment5_training.png>
 Package pdftex.def Info: ./figures/experiment5_training.png used on input line 
-317.
+312.
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 
-<./figures/experiment5_test.png, id=617, 722.7pt x 361.35pt>
+<./figures/experiment5_test.png, id=609, 722.7pt x 361.35pt>
 File: ./figures/experiment5_test.png Graphic file (type png)
 
 <use ./figures/experiment5_test.png>
-Package pdftex.def Info: ./figures/experiment5_test.png used on input line 324.
+Package pdftex.def Info: ./figures/experiment5_test.png used on input line 319.
 
 (pdftex.def)             Requested size: 438.17227pt x 219.08885pt.
 ) [36 <./figures/experiment4_after_training.png> <./figures/experiment4_after_t
@@ -1249,19 +1248,19 @@ Overfull \hbox (9.14763pt too wide) in alignment at lines 139--146
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 830.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 829.
 [51]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 830.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 829.
  (./main.aux
 
 Package natbib Warning: Citation(s) may have changed.
 (natbib)                Rerun to get citations correct.
 
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 830.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 830.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 829.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 829.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B668481C40142742AE2524B84093A02D;3589.
+(rerunfilecheck)             Checksum: 7A8A014A8D888D04F52997A41069C5AE;3419.
 Package rerunfilecheck Info: File `main.brf' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
@@ -1274,13 +1273,13 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 830.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 829.
  ) 
 Here is how much of TeX's memory you used:
- 11816 strings out of 493029
- 172018 string characters out of 6136234
- 306310 words of memory out of 5000000
- 14834 multiletter control sequences out of 15000+600000
+ 11819 strings out of 493029
+ 172136 string characters out of 6136234
+ 306273 words of memory out of 5000000
+ 14836 multiletter control sequences out of 15000+600000
  50969 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,20n,49p,928b,586s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1300,10 +1299,10 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/doublestroke/dsrom12.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (58 pages, 630699 bytes).
+Output written on main.pdf (58 pages, 647805 bytes).
 PDF statistics:
- 825 PDF objects out of 1000 (max. 8388607)
- 712 compressed objects within 8 object streams
+ 817 PDF objects out of 1000 (max. 8388607)
+ 702 compressed objects within 8 object streams
  233 named destinations out of 1000 (max. 500000)
- 491 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 480 words of extra memory for PDF output out of 10000 (max. 10000000)
 

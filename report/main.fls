@@ -305,8 +305,9 @@ INPUT ./figures/experiment1_training.png
 INPUT ./figures/experiment1_test.png
 INPUT ./figures/experiment1_test.png
 INPUT ./figures/experiment1_test.png
-INPUT ./figures/experiment1_test.png
-INPUT ./figures/experiment1_test.png
+INPUT ./figures/experiment1_ilasp.png
+INPUT ./figures/experiment1_ilasp.png
+INPUT ./figures/experiment1_ilasp.png
 INPUT ./figures/experiment3.png
 INPUT ./figures/experiment3.png
 INPUT ./figures/experiment3.png
@@ -316,8 +317,8 @@ INPUT ./figures/experiment3_training.png
 INPUT ./figures/experiment3_test.png
 INPUT ./figures/experiment3_test.png
 INPUT ./figures/experiment3_test.png
-INPUT ./figures/experiment1_test.png
-INPUT ./figures/experiment1_test.png
+INPUT ./figures/experiment1_ilasp.png
+INPUT ./figures/experiment1_ilasp.png
 INPUT ./figures/experiment4_before.png
 INPUT ./figures/experiment4_before.png
 INPUT ./figures/experiment4_before.png
