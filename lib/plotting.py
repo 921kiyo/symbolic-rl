@@ -35,6 +35,41 @@ def average_score(base_dir, pkl_dir, prefix, num_episodes, num_pkl):
 
     store_stats(stats, pkl_dir, prefix+"_average")
 
+def average_ILASP(base_dir, pkl_dir, prefix, num_episodes, time_range, num_pkl):
+    stats = EpisodeStats(
+        episode_lengths=np.zeros(num_episodes),
+        episode_rewards=np.zeros(num_episodes),
+        episode_ILASP=np.zeros(time_range))
+    
+    for pkl in range(num_pkl):
+        filename = prefix + str(pkl)
+        stats2 = load_stats(pkl_dir, filename)
+        # Get the total number of ILASP calls
+        total = 0
+        for s in stats2.episode_ILASP:
+            total += s
+        
+        # Incremental normalisation
+        count = 0
+        for index, elm in enumerate(stats2.episode_ILASP):
+            if(elm > 0):
+                # if elm > 1:
+                #     import ipdb; ipdb.set_trace()
+                count += 1
+            stats2.episode_ILASP[index] = count/total            
+
+        for t in range(time_range):
+            stats.episode_ILASP[t] += (stats2.episode_ILASP[t]/num_pkl)
+
+    # for pkl in range(num_pkl):
+    #     filename = prefix + str(pkl)
+    #     stats2 = load_stats(pkl_dir, filename) 
+    #     for i_episode in range(num_episodes):
+    #         stats.episode_rewards[i_episode] += (stats2.episode_rewards[i_episode]/num_pkl)
+    #         stats.episode_ILASP[i_episode] += (stats2.episode_ILASP[i_episode]/num_pkl)
+
+    store_stats(stats, pkl_dir, prefix+"_average")
+
 def plot_episode_stats(stats, smoothing_window=1, noshow=False):
     # Plot the episode length over time
     fig1 = plt.figure(figsize=(10,5))
@@ -71,6 +106,28 @@ def plot_episode_stats(stats, smoothing_window=1, noshow=False):
         plt.show(fig3)
 
     return fig1, fig2, fig3
+
+def plot_ILASP_progress(stats,smoothing_window=1, noshow=False):
+    # total = 0
+    # for s in stats.episode_ILASP:
+    #     total += s
+
+    # count = 0
+    # for index, elm in enumerate(stats.episode_ILASP):
+    #     if(elm > 0):
+    #         count +=1
+    #     stats.episode_ILASP[index] = count/total
+  
+    fig2 = plt.figure(figsize=(10,5))
+    ilasp_smoothed = pd.Series(stats.episode_ILASP).rolling(smoothing_window, min_periods=smoothing_window).mean()
+    plt.plot(ilasp_smoothed, color="k")
+    plt.xlabel("Time steps at episode 0")
+    plt.ylabel("The number of hypothesis improvement")
+    plt.title("Normalised learning conversion of hypothesis improvement")
+    if noshow:
+        plt.close(fig2)
+    else:
+        plt.show(fig2)
 
 def plot_episode_stats_simple(stats, smoothing_window=1, noshow=False, color="green"):
 

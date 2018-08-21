@@ -298,7 +298,7 @@ class TileCoding:
 
 env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
-agent = TileCoding(env, 100, 2, 1)
+agent = TileCoding(env, 100, 50, 2)
 stats = agent.q_learning(100)
 # stats = q_learning(env, 300, alpha=0.03)
 

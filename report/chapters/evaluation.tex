@@ -1,7 +1,7 @@
 \section{Evaluation Metrics}
 
 The two main measurements for the performance of our new architecture are learning efficiency and transfer learning capability.
-The learning efficiencies are measured in two different ways. First, the algorithm performance is compared with exisitng RL algorithms in terms of
+The learning efficiencies are measured in two different ways. First, the performance ILP(RL) is compared with exisitng RL algorithms in terms of
 convergence rate, which is measured in terms of number of episodes that the agent needs to get to an optimal policy.
 Second, the convergence of learning by ILASP is measured in terms of the number of hypothesis improvement devided by the total number of hypothesis improvement at episode 0.
 The reason we are measuring it at only episode 0 is that empirically the agent learns the target hypothesis at episode 0 and there is no hypothesis refinement after episode 0. 
@@ -25,20 +25,14 @@ The environment is not known to the agent in advance, and it attempts to find th
     \label{VGDL_sample}
     \end{figure}    
 \subsection{Benchmark}
-\subsubsection{Q-learning}
-We use two existing reinforcement learning methods as benchmarks: Q-learning and tile-coding. 
-Q-learning is most widely used technique for reinforcement learning. Given our environment is deterministic and discrete, this method works well in our environment.
+We use two existing RL methods as benchmarks: Q-learning and tile-coding. 
+Q-learning is widely used RL technique, and given the environments used for the experiments are discrete and deterministic, this method is sufficient enought for our experiment.
+
 Another benchmark is tile coding, which is a type of linear function approximation techniques described in Chapter XX.
-The reason for using another extra benchmark is that the comparision with q-learning might not be a fair comparision,
-since ILP(RL) has one extra assumptions: the agent knows surrounding information (whether there are walls in adjacent cells),
+The reason for using an extra benchmark is that the comparision with q-learning might not be a fair comparision,
+since ILP(RL) has one extra assumption: the agent knows surrounding information (whether there are walls in adjacent cells),
 which is not a common assumption for Q-learning. Thus we incorporate the same surrounding information as features, and update the weights of each feature as a learning.
 We compare the performance of ILP(RL) with these two methods.
-
-\subsubsection{Tile Coding}
-Using Q-learning as a benchmark might not be a fair comparision, since ILP(RL) has extra information about the surrounding information.
-In order to have the same assumptions, we use function approximation for Q-learning.
-Linear function approximation.
-In this experiment, the performance of ILP(RL) remains the same as Experiment 1, but we use a different benchmark. 
 
 \subsection{Parameters}
 In all experiments, the agent receives -1 in any states except the goal state, where it gains a reward of 10.

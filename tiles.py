@@ -27,7 +27,7 @@ class TilingsValueFunction:
             # find the active tile in current tiling
             tileIndex = (state - self.tilings[tilingIndex]) // self.tileWidth
             print("tileIndex ", tileIndex)
-            # if(tileIndex == 4):
+            # if(tileIndex == 20):
             #     import ipdb; ipdb.set_trace()
             print("self.params.shape ", self.params.shape)
             stateValue += self.params[tilingIndex, tileIndex]
