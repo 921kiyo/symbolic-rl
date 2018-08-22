@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.28)  22 AUG 2018 21:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  23 AUG 2018 00:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **main.tex
 (./main.tex
 LaTeX2e <2016/02/01>
-Babel <3.9q> and hyphenation patterns for 17 language(s) loaded.
+Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
@@ -1163,14 +1163,9 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 824.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 824.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 05BC2AC7D6133CA5C4F4B38254EFF9A4;3618.
+Package rerunfilecheck Info: File `main.brf' has not changed.
+(rerunfilecheck)             Checksum: 0496DC1AD60E93A4098F0002CEA35819;1459.
 
-
-Package rerunfilecheck Warning: File `main.brf' has changed.
-(rerunfilecheck)                Rerun to get bibliographical references right.
-
-Package rerunfilecheck Info: Checksums for `main.brf':
-(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
-(rerunfilecheck)             After:  0496DC1AD60E93A4098F0002CEA35819;1459.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1183,12 +1178,12 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 824.
  ) 
 Here is how much of TeX's memory you used:
- 11901 strings out of 494353
- 173565 string characters out of 6170044
- 303781 words of memory out of 5000000
- 14684 multiletter control sequences out of 15000+600000
+ 11901 strings out of 493029
+ 173565 string characters out of 6136234
+ 307360 words of memory out of 5000000
+ 14903 multiletter control sequences out of 15000+600000
  51451 words of font info for 98 fonts, out of 8000000 for 9000
- 452 hyphenation exceptions out of 8191
+ 1141 hyphenation exceptions out of 8191
  41i,20n,49p,928b,586s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/share/texlive/texmf-
@@ -1206,7 +1201,7 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/doublestroke/dsrom10.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (55 pages, 644223 bytes).
+Output written on main.pdf (55 pages, 678118 bytes).
 PDF statistics:
  873 PDF objects out of 1000 (max. 8388607)
  757 compressed objects within 8 object streams
