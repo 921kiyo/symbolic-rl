@@ -1,18 +1,7 @@
 # Individual_project
 Imperial College London MSc Individual Project
 
-## ToDo
-- Update Background report
-- Check References
-- Make a benchmarks (Q-learning and DRL)
-- Berkeley DRL
-- Math for ML
-
-
-##
-
-
-Requirements 
+## Requirements
 
 Clingo5
 
@@ -36,4 +25,4 @@ the manual can be found in here
 
 - Is every rule you wish to learn in the hypothesis space? This is the first thing to check. If the hypothesis is not contained in the space, then you need to fix the node declarations. Otherwise, the problem is in either the background knowledge or the examples.
 
-- In the second case, the first thing to try is to add the intended hypothesis to the background, and run ILASP version 2i with debug node on. The first example that it adds is not covered by the intended hypothesis. At this point you have enough information to debug this outside of ILASP (in clingo). You can copy the context of the example, the background knowledge and the intended hypothesis to a new ASP program. If you have inclusions and exclusions then these can be written as constraints. You then need to work out why the program is unsatisfiable (or satisfiable in the case of a negative example). 
+- In the second case, the first thing to try is to add the intended hypothesis to the background, and run ILASP version 2i with debug node on. The first example that it adds is not covered by the intended hypothesis. At this point you have enough information to debug this outside of ILASP (in clingo). You can copy the context of the example, the background knowledge and the intended hypothesis to a new ASP program. If you have inclusions and exclusions then these can be written as constraints. You then need to work out why the program is unsatisfiable (or satisfiable in the case of a negative example).

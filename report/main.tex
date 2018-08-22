@@ -10,6 +10,7 @@
 \usepackage{subdepth}
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
+\usepackage{wrapfig}
 
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[chapter] % Reset theorem numbering  for each chapter
@@ -40,11 +41,11 @@
 % load some macros
 \input{notation}
 
-\date{June 2018}
+\date{September 2018}
 
 
 % \newtheoremstyle{definition}[section]
-\newtheorem{examp}{example}[section]
+\newtheorem{examp}{Example}[section]
 
 \begin{document}
 
@@ -60,10 +61,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  \begin{abstract}
 
-Reinforcement Learning (RL) is a field of machine learning techniques that has been applied and proven to be successful in many domains. One of the recent research has been focused around incorporating symbolic representation into RL to achieve data efficient and more transparent learning. Inductive logic programming (ILP) is another field of machine learning that is based on logic programming, and recent advance on ILP research have shown potential in many more applications. 
-This paper examines a proof of concept called ILP(RL), which attempts to apply one of the ILP frameworks called Learning from Answer Sets, into RL senarios to complement some of the shortcoming of RL. We created a new pipeline using ILASP and proposed a new way of learning the model of the environment. The new pipeline was examined in a various simple maze games, and show that an agent learns faster than existing RL techniques. We also show that transfer learning successfully improve learning on a new but similar environment in a limited senarios. 
+Reinforcement Learning (RL) is a field of machine learning techniques that has been applied and proven to be successful in many domains. One of the recent research has been focused around incorporating symbolic representation into RL to achieve data efficient and more transparent learning. Inductive logic programming (ILP) is another field of machine learning that is based on logic programming, and recent advance on ILP research have shown potential in many more applications.
+This paper examines a proof of concept called ILP(RL), which attempts to apply one of the ILP frameworks called Learning from Answer Sets, into RL senarios to complement some of the shortcoming of RL. We created a new pipeline using ILASP and proposed a new way of learning the model of the environment. The new pipeline was examined in a various simple maze games, and show that an agent learns faster than existing RL techniques. We also show that transfer learning successfully improve learning on a new but similar environment in a limited senarios.
 
-This proof of concept showpotentials for this new way of learning using ILP. 
+This proof of concept showpotentials for this new way of learning using ILP.
 
  \end{abstract}
 %
@@ -71,7 +72,7 @@ This proof of concept showpotentials for this new way of learning using ILP.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Acknowledgments}
 
-I would like to thank Prof. Alessandra Russo for accepting to supervise my project, her enthusiasm for my work and invaluable guidance throughout. 
+I would like to thank Prof. Alessandra Russo for accepting to supervise my project, her enthusiasm for my work and invaluable guidance throughout.
 
 I would also like to thank Mark Law for his expertise on inductive logic programming and fruitful discussions, and for Ruben Verrecken for his expertise on reinforcement learning and for providng me with advice and assistance for technical implementation.
 
@@ -175,12 +176,12 @@ Given above,  there are four Herbrand Interpretations = $\langle$ \{q(a)\}, \{p(
 \textit{Normal Logic Program} is a set of normal rules, and a normal rule is of the form \textit{h} $\leftarrow$ a\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{not b}\textsubscript{1}, ..., \textit{not  b}\textsubscript{n} where \textit{h} is the head of the rule,
  and \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{b}\textsubscript{1}, ..., \textit{b}\textsubscript{n} are the body of the rule (both the head and body are all atoms).
 
-To solve a normal logic program \textit{Th}, the program P needs to be grounded. The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the Herbrand Domain. 
+To solve a normal logic program \textit{Th}, the program P needs to be grounded. The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the Herbrand Domain.
 \begin{defn}
 The algorithm of grounding starts with an empty program Q = \{  \} and the relevant grounding is constructed by adding to each rule R to Q such that
 \begin{itemize}
 \item R is a ground instance of a rule in P.
-\item Their positive body literals already occurs in the in the of rules in Q. 
+\item Their positive body literals already occurs in the in the of rules in Q.
 \end{itemize}
 The algorithm terminates when no more rules can be added to Q.
 
@@ -202,11 +203,11 @@ ground(P) in this example is \{p(a), q(a)\}.
 %TODO Explain grounding in ASP context.
 %The grounding of a normal logic program P can be obtained by replacing each rule in P with a ground instance of the rule, such that for each atom A in body\textsuperscript{+} (R) (TODO EXPLAIN WHAT THIS IS), already occurs in the head of another ground rule.
 Not only the entire program needs to be grounded in order for an ASP solver to work, but also each rule must be \textit{safe}. A rule \textit{R} is safe if every variable that occurs in the head of the rule occurs at least once in body\textsuperscript{+}(R) .
-Since there is no unique least Herbrand Model for a normal logic program, Stable Model of a normal logic program was defined in \cite{Gelfond1988}. In order to obtain the Stable Model of a program P, P needs to be converted using \textit{Reduct} with respect to an interpretation X. 
+Since there is no unique least Herbrand Model for a normal logic program, Stable Model of a normal logic program was defined in \cite{Gelfond1988}. In order to obtain the Stable Model of a program P, P needs to be converted using \textit{Reduct} with respect to an interpretation X.
 \begin{defn}
 \begin{itemize}
 The \textit{reduct} of P with respect to X can be constructed such that
-\item If the body of any rule in P contains an atom which is not in X, those rules need to be removed. 
+\item If the body of any rule in P contains an atom which is not in X, those rules need to be removed.
 \item All default negation atoms in the remaining rules in P need to be removed.
 \end{itemize}
 \end{defn}
@@ -219,7 +220,7 @@ P = $\begin{cases}
   	q (X) \leftarrow not\ p(X). \\
       \end{cases}$,  X = \{p(a), q(b)\}
 
-Where X is a set of atoms. ground(P) is 
+Where X is a set of atoms. ground(P) is
 
 p(a)  $\leftarrow$ not\ q(a). \\
 p(b)  $\leftarrow$ not\ q(b). \\
@@ -570,17 +571,17 @@ where $\alpha$ is the learning rate, $\gamma$ is a discount rate between 0 and 1
 %        \If {$ \textit{observed state} \neq \textit{predicted state} $}
 %            \State $\textit{H} \gets \text{run ILASP(T)}$
 %            \EndIf
-        % \If {$ \textit{observed state not equal \textit{predicted state $} 
+        % \If {$ \textit{observed state not equal \textit{predicted state $}
         % \EndIf
 %    \EndWhile
     % \If {$ new \ background \ encountered $}
     %     % \State $\textit{H} \gets \text{run ILASP(T)}$
     % \EndIf
-    % \For{i from 0 to N} 
+    % \For{i from 0 to N}
     %     \If {$ A[i]\ is \ in \ T$}
     %         \State \Return $FALSE$
-    %     \Else 
-    %         \State Add A[i] to T   
+    %     \Else
+    %         \State Add A[i] to T
     %     \EndIf
     % \EndFor
 % \State \Return $TRUE$
@@ -609,18 +610,18 @@ Q-learning learns the value of its deterministic greedy policy from the experien
 
 \subsection{Function Approximation}
 \label{function_approximation}
-Q-learning with tarbular method works when every state has Q(s,a). In case of very large MDPs, however, 
+Q-learning with tarbular method works when every state has Q(s,a). In case of very large MDPs, however,
 it may not be possible to represent all states with a lookup table.
-For example,  robot arms has a continuous states in 3D dimentional space. 
+For example,  robot arms has a continuous states in 3D dimentional space.
 
 These problems motivate the use of function approximation, which estimates value function with function approximation.  Not only it is  represented in tabular form, but also in the form of a parameterized function with weight vector w $\in \R\textsuperscript{d}$ where $\R\textsuperscript{d}$ is XXX
 
-Unlike Q-table, changing one weight updates the estimated value of not only one state, but many states, and this generalisation makes it more flexible to apply different scenarios that tabular approach could not be applied. 
+Unlike Q-table, changing one weight updates the estimated value of not only one state, but many states, and this generalisation makes it more flexible to apply different scenarios that tabular approach could not be applied.
 
-The reason we are introduing this function approximation is not because we will use it in our new algorithm, but for the benchmark that we compare our algorithm with. 
+The reason we are introduing this function approximation is not because we will use it in our new algorithm, but for the benchmark that we compare our algorithm with.
 
 \subsubsection{The Prediction Objective ($\overline{VE}$)}
-With function approximation, an update at one state changes many other states, and therefore the values of all states will not be exactly accurate, and there is a tradeoff among states as to which state we make it more accurate, while other might be  less accurate. 
+With function approximation, an update at one state changes many other states, and therefore the values of all states will not be exactly accurate, and there is a tradeoff among states as to which state we make it more accurate, while other might be  less accurate.
 
 The error in a state s is the squeare of the difference between the approximate value $\hat{v}$(s,w) and the true value v\textsubscript{$\pi$}(s). The objective function can be defined by weighting it over the statespace by $\mu$, the \textit{Mean Squared Value Error}, denoted $\overline{VE}$.
 
@@ -637,9 +638,9 @@ TODO EXPLAIN ONLINE VS OFFLINE LEARNING
  w \doteq  \begin{pmatrix}  w\textsubscript{1}  \\ w\textsubscript{2} \\ \vdots \\ w\textsubscript{n}   \end{pmatrix}
 \end{equation}
 
-and $\hat{v}$(s,w) is a differentiable function of w for all s $\in$ S. 
+and $\hat{v}$(s,w) is a differentiable function of w for all s $\in$ S.
 
-minimize the $\overline{VE}$ on the observed examples. \textit{Stochastic gradient-descent (SGD) } adjusts the weights vector by a fraction of alpha in the direction what will reduce the error on that example the most. Formally, it is defined as 
+minimize the $\overline{VE}$ on the observed examples. \textit{Stochastic gradient-descent (SGD) } adjusts the weights vector by a fraction of alpha in the direction what will reduce the error on that example the most. Formally, it is defined as
 
 \begin{equation}
 \begin{split}
@@ -648,9 +649,9 @@ w\textsubscript{t+1} & \doteq w\textsubscript{t} -  \frac{1}{2} \alpha  \bigtria
 \end{split}
 \end{equation}
 
-where $\alpha$ is step-size, 
+where $\alpha$ is step-size,
 
-The dradient of J(w) is defined as 
+The dradient of J(w) is defined as
 
 \begin{equation}
 \bigtriangledown\textsubscript{w} J(w) =  \begin{pmatrix} \frac{\partial J(w)}{\partial w\textsubscript{1}}  \\ \vdots \\ \frac{\partial J(w)}{\partial w\textsubscript{n}}   \end{pmatrix}
@@ -673,7 +674,7 @@ Represent state by a \textit{feature vector}
 x(S) = \begin{pmatrix} x\textsubscript{1}(S) \\ \vdots \\ x\textsubscript{n}(S)  \end{pmatrix}
 \end{equation}
 
-Use SGD updates with linear function approximation. The gradient of the approximate value function with respect to w is 
+Use SGD updates with linear function approximation. The gradient of the approximate value function with respect to w is
 
 \textcolor{red}{Add proof here}
 
@@ -681,7 +682,7 @@ Use SGD updates with linear function approximation. The gradient of the approxim
 \bigtriangledown \hat{v}(s,w) = x(s)
 \end{equation}
 
-Thus the general SGD update defined in XX can be simplified to 
+Thus the general SGD update defined in XX can be simplified to
 
 Represent value function by a linear combination of features
 
@@ -689,40 +690,40 @@ Represent value function by a linear combination of features
 \hat{v}(S,w) = x(S)\textsuperscript{T}w = \sum_{j=1}^{n} x\textsubscript{j} (S) w\textsubscript{j}
 \end{equation}
 
-Objective function is 
-The error in a state s is the square of the difference between the approximate value 
-$\hat{v}$(S,w) and the true value v(S,w). 
+Objective function is
+The error in a state s is the square of the difference between the approximate value
+$\hat{v}$(S,w) and the true value v(S,w).
 \begin{equation}
 J(w) = \displaystyle \E \textsubscript{$\pi$} \big[ (v\textsubscript{$\pi$}(S) -  \hat{v}(S,w))\textsuperscript{2} \big]
 \end{equation}
 
 Linear TD(0) is guaranteed to converge to clobal optimum
 
-One disadvantage of the linear method is that it cannot express any relationship between features. For example, it cannot represent that feature \textit{i} is useful only if feature \textit{j} is not present. 
+One disadvantage of the linear method is that it cannot express any relationship between features. For example, it cannot represent that feature \textit{i} is useful only if feature \textit{j} is not present.
 
 Nevertheless,  this approach is sufficient enough for our experiment, which will be described in Chapter XXX.
 
-There are different linear methods to represents states as features, such as polynomials, fourier basis, or radial basis functions to name a few. Feature construction depends on a problem you are solving. In the next section, we introduce \textit{Tile Coding} which will be used for our benchmark. 
+There are different linear methods to represents states as features, such as polynomials, fourier basis, or radial basis functions to name a few. Feature construction depends on a problem you are solving. In the next section, we introduce \textit{Tile Coding} which will be used for our benchmark.
 
 \subsubsection{Tile Coding \textcolor{red}{TODO REFERENCE OF THIS METHOD}}
 
-State set is represented as a continuous two-dimentionala space. If a state is within the space, then the value of the  corrensponding feature is set to be 1 to indicate that the feature is present, while 0 indicates that the feature is absent. This way of representing the feature is called \textit{binary feature}.  \textit{Coarse coding} represents a state with which binary features are present within the space. 
+State set is represented as a continuous two-dimentionala space. If a state is within the space, then the value of the  corrensponding feature is set to be 1 to indicate that the feature is present, while 0 indicates that the feature is absent. This way of representing the feature is called \textit{binary feature}.  \textit{Coarse coding} represents a state with which binary features are present within the space.
 One area is associated with one weight w, and training at a state will affect the weight of all the areas overlapping that state. the approximate value function will be updated within at all states within the union of the areas, and a point that has more overlap will be more affected, as illustrated in Figure XX.
 
 The size and shape of the areas will determine the degree of the generalisation. Large areaas will have more generalisation
-the change of the weight in that state will affect all other states within the intersection of the spaces. 
+the change of the weight in that state will affect all other states within the intersection of the spaces.
 
-The degree of overlap within a space will determined the degree of the generalisation. 
+The degree of overlap within a space will determined the degree of the generalisation.
 
-The shape of the space also affect how it is generalised. 
+The shape of the space also affect how it is generalised.
 
-\textit{Tile coding} is a type of coarse coding. \textit{Tiling} is a partition of state space, and each element of the partition is called a \textit{tile}. 
+\textit{Tile coding} is a type of coarse coding. \textit{Tiling} is a partition of state space, and each element of the partition is called a \textit{tile}.
 
-The state stpace is partitioned into multiple tiles with multiple tilings. Each tile in each tiling is associated with 
+The state stpace is partitioned into multiple tiles with multiple tilings. Each tile in each tiling is associated with
 
-In order to do coarse coding with tile coding, multiple tilings are required, each tiling is offset from one another by a fraction of a tile width. 
+In order to do coarse coding with tile coding, multiple tilings are required, each tiling is offset from one another by a fraction of a tile width.
 
-As illustrated in Figure XXX, when a state occurs, several features with corresponding tiles become active, 
+As illustrated in Figure XXX, when a state occurs, several features with corresponding tiles become active,
 
 \begin{figure}[!htb]
 \centering
@@ -733,42 +734,42 @@ As illustrated in Figure XXX, when a state occurs, several features with corresp
 
 Tile coding has computational advantage, since each component of tiling is binary value,  XXXX.
 
-a trained state will be generalised to other states if they are within any of the same tiles. 
+a trained state will be generalised to other states if they are within any of the same tiles.
 
-Similar to coarse coding, the size and shape of tiles will determine the degree of approximation. 
+Similar to coarse coding, the size and shape of tiles will determine the degree of approximation.
 
 \subsection{Transfer Learning}
 \label{transfer_learning}
 
-Transfer learning is a method that knowledge learnt in one or more tasks can be used to learn a new task better than if without the knowlege in the first task. 
+Transfer learning is a method that knowledge learnt in one or more tasks can be used to learn a new task better than if without the knowlege in the first task.
 
-Transfer learning is an active research areas in machine learning, but not many have been done in RL. 
-Since training tend to be time consuming and computational expensive, transfer learning allow the trained model to be applied in a different setting. 
+Transfer learning is an active research areas in machine learning, but not many have been done in RL.
+Since training tend to be time consuming and computational expensive, transfer learning allow the trained model to be applied in a different setting.
 
-Transfer learning in RL is particularly important since most of the RL research have been done in a simulation or game scenarios, and training RL models in a real physical environment is more expensive to conduct. 
+Transfer learning in RL is particularly important since most of the RL research have been done in a simulation or game scenarios, and training RL models in a real physical environment is more expensive to conduct.
 
-Even in a virtual environments like games,  the transfer learning between different tasks will greatly will have a big impact on potential applications. 
+Even in a virtual environments like games,  the transfer learning between different tasks will greatly will have a big impact on potential applications.
 
-This will also speed up learning 
+This will also speed up learning
 
-Transfer learning in ILP domain have been proved to be successful in many fields, 
+Transfer learning in ILP domain have been proved to be successful in many fields,
 
-Since this project is combining ILP into RL senarios, this has a potential for extending this particular research. 
+Since this project is combining ILP into RL senarios, this has a potential for extending this particular research.
 
-We conducted experiements on transfer learning capabilities, which we describe in XXX. 
+We conducted experiements on transfer learning capabilities, which we describe in XXX.
 
-One of the  purposes of transfer learning is so that the agent requires less time to learn a new task with the help of what was learn in previous tasks.  
+One of the  purposes of transfer learning is so that the agent requires less time to learn a new task with the help of what was learn in previous tasks.
 
 
-Another goal would be to measure how effectively the agent reuses its knoledge in a new task. 
-In this case the performan of learningon the first task is usally not measured. 
+Another goal would be to measure how effectively the agent reuses its knoledge in a new task.
+In this case the performan of learningon the first task is usally not measured.
 
 There are many different matrices used to measure the performance of the transfer learning.
 Five common matrics are defined in XX as follow.
 
 TODO source task selection
 
-%Compare with human play, which is used in DeepMind Atari paper. 
+%Compare with human play, which is used in DeepMind Atari paper.
 
 \begin{itemize}
 \item Jumpstart

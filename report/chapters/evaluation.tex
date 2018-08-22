@@ -6,11 +6,11 @@ The two main measurements for the performance of our new architecture are learni
 The learning efficiencies are measured in two different ways. First, the performance ILP(RL) is compared with exisitng RL algorithms in terms of
 convergence rate, which is measured in terms of number of episodes that the agent needs to get to an optimal policy.
 Second, the convergence of learning by ILASP is measured in terms of the number of hypothesis improvement devided by the total number of hypothesis improvement at episode 0.
-The reason we are measuring it at only episode 0 is that empirically the agent learns the target hypothesis at episode 0 and there is no hypothesis refinement after episode 0. 
+The reason we are measuring it at only episode 0 is that empirically the agent learns the target hypothesis at episode 0 and there is no hypothesis refinement after episode 0.
 This gives a normalised convergence rate of ILASP learning with the maximum 1.
 
 \subsection{Benchmark}
-We use two existing RL methods as benchmarks: Q-learning and tile-coding. 
+We use two existing RL methods as benchmarks: Q-learning and tile-coding.
 Q-learning is widely used RL technique, and given the environments used for the experiments are discrete and deterministic, this method is sufficient enought for our experiment.
 
 Another benchmark is tile coding, which is a type of linear function approximation techniques described in Chapter XX.
@@ -36,13 +36,13 @@ Epsilon              & 0.4        & 0.1        \\
 \label{param}
 \end{table}
 
-All the matrices used in the experiments are summarised in Table \ref{param}. 
-Epsilon for ILP(RL) should be higher, since the agent follows the generated plan, 
-whereas benchmark algorithms update value function with the degree of alpha. 
+All the matrices used in the experiments are summarised in Table \ref{param}.
+Epsilon for ILP(RL) should be higher, since the agent follows the generated plan,
+whereas benchmark algorithms update value function with the degree of alpha.
 We conducted several experiments using different environments to highlight each aspect of the algorithm.
 
-Since the performance of the agent is affected by the randomness of the exploration, 
-and ILP(RL) is highly dependent on how quickly the agent finds the goal, 
+Since the performance of the agent is affected by the randomness of the exploration,
+and ILP(RL) is highly dependent on how quickly the agent finds the goal,
 each experiment is conducted 30 times and the perform is averaged across the experiments.
 At each episode, we also measure the performance without exploration to see the pure optimal policy.
 
@@ -56,11 +56,11 @@ At each episode, we also measure the performance without exploration to see the 
 \caption{Enviroment for experiment 1}
 \label{experiment1}
 \end{figure}
-    
+
 The purpose of the first experiment is how the algorithm learns the model of the environment, or hypothesis in ILASP.
 The environment are defined as a simple maze where the goal is located the right uppper corner as shown in Figure \ref{experiment1}.
 
-The shortest path is taking the lower path instead of the upper one. 
+The shortest path is taking the lower path instead of the upper one.
 
 \begin{figure}[!htb]
 \centering
@@ -76,18 +76,18 @@ The shortest path is taking the lower path instead of the upper one.
 \end{figure}
 
 Figure \ref{experiment1_training} shows the traning performance between ILP(RL) and Q-learning.
-The convergence rate of ILP(RL) is faster than Q-learnig: ILP(RL) reaches the maximum reward between 40 and 50 episodes, whereas Q-learning reaches the same level at between 60 and 70 episodes. 
-This is because unlike Q-learning where the value function is updated with the rate of alpha, whereas ILP(RL) gradually builds the model of the environment and use the background knowledge to accurately plan. 
+The convergence rate of ILP(RL) is faster than Q-learnig: ILP(RL) reaches the maximum reward between 40 and 50 episodes, whereas Q-learning reaches the same level at between 60 and 70 episodes.
+This is because unlike Q-learning where the value function is updated with the rate of alpha, whereas ILP(RL) gradually builds the model of the environment and use the background knowledge to accurately plan.
 This result is also consistent with the general notion that model-based learnig (ILP(RL)) is more data-efficient than model-free learning (Q-learning).
 The same trend is also shown in Figure \ref{experiment1_test}, where we measure only the performance of the policy without random exploration.
 
 Overall this results shows that ILP(RL) converges to the optimal policy faster than benchmarks in a simple scenarios, achieving more data-efficient learning.
 
 
-In addition to the data-efficient learning, what the agent has learnt with ILP(RL) is expressive. 
-Learnt hypotheses are shown in \ref{experiment1_hypothesis}, which is the rule of the game and easy to understand for human users. 
-Since the learnt hypothesis is a general concept, which can be used in a different environmet. 
-This transfer learning capability is also described in Experiement 3 and 4. 
+In addition to the data-efficient learning, what the agent has learnt with ILP(RL) is expressive.
+Learnt hypotheses are shown in \ref{experiment1_hypothesis}, which is the rule of the game and easy to understand for human users.
+Since the learnt hypothesis is a general concept, which can be used in a different environmet.
+This transfer learning capability is also described in Experiement 3 and 4.
 
 \begin{equation}
 \begin{split}
@@ -104,8 +104,8 @@ This transfer learning capability is also described in Experiement 3 and 4.
 \label{experiment1_hypothesis}
 
 In addition, we plot the learning convergence for ILASP at episode 0 in Figure \ref{experiment1_ilasp}, measured in terms of the number of hypothesis refinement to reach the final hypothesis as shown in \ref{experiment1_hypothesis}.
-This shows that the agent quickly learns the hypothesis at the episode 0. The reason that the agent reaches the maximum reward at between 40 and 50 episodes, is mostly dependent on how quickly the agent finds the goal location, 
-which enables it to plan. Since our exploration strategy is expilon random choice, there is a promissing that a better exploration strategy further accelerates the learning process. 
+This shows that the agent quickly learns the hypothesis at the episode 0. The reason that the agent reaches the maximum reward at between 40 and 50 episodes, is mostly dependent on how quickly the agent finds the goal location,
+which enables it to plan. Since our exploration strategy is expilon random choice, there is a promissing that a better exploration strategy further accelerates the learning process.
 
 \begin{figure}[!htb]
 \centering
@@ -126,8 +126,8 @@ which enables it to plan. Since our exploration strategy is expilon random choic
 \end{figure}
 
 Experiment 2 was conducted to see if the agent find a optimal path of using a teleport. In the environment shown in Figure \ref{experiment3},
-there are two ways to reach the goal: using a normal path to get the goal located on the top right corner, or using a telport. 
-The environment is designed such that using a teleport is a shorter path and therefore gives higher total reward. 
+there are two ways to reach the goal: using a normal path to get the goal located on the top right corner, or using a telport.
+The environment is designed such that using a teleport is a shorter path and therefore gives higher total reward.
 Compared to Experiment 1, two extra search spaces and concepts are added as follow:
 \begin{equation*}
 \begin{split}
@@ -140,11 +140,11 @@ Where teleport links are added to the environment. The teleport link is one-way:
 The allows ILASP to learn additional hypothesis.
 The full learning task for this experiment is in Appendix XX.
 
-Once the agent steps onto a state where link\_start is located, it gets two positive experiences. 
+Once the agent steps onto a state where link\_start is located, it gets two positive experiences.
 In this game environment, the agent moves two cells in one time step instead of one cell per time step.
 
-Also link\_start and link\_dest need to be stored in background knowledge rather than as contex examples, 
-because ILASP needs to learn different hypothesis for link and non-link case. 
+Also link\_start and link\_dest need to be stored in background knowledge rather than as contex examples,
+because ILASP needs to learn different hypothesis for link and non-link case.
 link locations need to be available for all positive examples so that ILASP correctly learn non-link, which is shown in Figure XX below.
 
 \begin{figure}[!htb]
@@ -154,7 +154,7 @@ link locations need to be available for all positive examples so that ILASP corr
 \label{experiment3_training}
 \end{figure}
 
-The training performance shown in XX, which converges faster than XX. 
+The training performance shown in XX, which converges faster than XX.
 
 \begin{figure}[!htb]
 \centering
@@ -180,9 +180,9 @@ The training performance shown in XX, which converges faster than XX.
 
 To highlight the learning the new concept of teleport link, Figure \ref{experiment2_ilasp_imcomplete} is an intermediate incomplete hypothesis learnt by ILASP.
 These hypotheses are generated just after the agent steps onto the link. However, the first hypothesis says
-when link\_dest is available state\_after is true. Since link\_dest is available in background knowledge rather than context, 
+when link\_dest is available state\_after is true. Since link\_dest is available in background knowledge rather than context,
 when solving for answer sets to generate a plan, it generates incorrect state\_after at every time step.
-However, as shown in Algorithms XX, these generated state\_after are all incorrect and therefore will be added to exclusions of the next positive examples. 
+However, as shown in Algorithms XX, these generated state\_after are all incorrect and therefore will be added to exclusions of the next positive examples.
 These exclusions will later refines hypotheses and results in Figure \ref{experiment2_ilasp_complete}, the final complete hypotheses.
 
 Learnt hypotheses are as follow:
@@ -201,7 +201,7 @@ Learnt hypotheses are as follow:
 \label{experiment2_ilasp_complete}
 \end{equation}
 
-Compared the Experiment 1, there are two new hypotheses due to the presence of the teleport links. 
+Compared the Experiment 1, there are two new hypotheses due to the presence of the teleport links.
 These learnt hypotheses are also applicables to an environment where there is no link, such as a game in experiment 1.
 In this case, the first two hypotheses in Figure XX are never be used since the body predicates relating to link\_start(V0), link\_dest(V1) are never be satisfied.
 
@@ -227,17 +227,17 @@ In this case, the first two hypotheses in Figure XX are never be used since the 
 
 In Experiment 3, we investigated the potentials of transfer learning betweeen similar environments.
 We trained the agent using the environment on the left in Figure \ref{experiment4}, and transfer the learnt hypothesis as well as positive examples to a new environment.
-The learnt hypothesis is valid move of the game and a general concept that is applicable to any similar games. Positive examples are also transferred since 
-if there is a new concept that the agent needs to learn in a new environment, the agent needs to refine the hypothesis by running ILASP, thus the all the positice examples 
-are also transferred as well as hypotheses. Background knowledge are not transferred since these information are different in a new environment. 
+The learnt hypothesis is valid move of the game and a general concept that is applicable to any similar games. Positive examples are also transferred since
+if there is a new concept that the agent needs to learn in a new environment, the agent needs to refine the hypothesis by running ILASP, thus the all the positice examples
+are also transferred as well as hypotheses. Background knowledge are not transferred since these information are different in a new environment.
 The agent starts with an empty background knowledge in the new environment and gradually collects them
 as it explore the environment. The goal position is the same as in the first game and we assume that the transferred agent already knows the goal location, but the routes to the goal may be different.
 While this is a limited transfer learning since the goal position is known in advance, this is still a useful transfer in cases where the rest of the environment changes.
-In this experiment, we compare the two learning performance: one with transfer learning and one without it. 
+In this experiment, we compare the two learning performance: one with transfer learning and one without it.
 The result is shown in Figure \ref{experiment3_training} and \ref{experiment3_test}.
 
-These are the hypotheses we are transferring to a new environment. 
-Since the complete hypothesis is already known to the agent, it can do planning from the beginning. 
+These are the hypotheses we are transferring to a new environment.
+Since the complete hypothesis is already known to the agent, it can do planning from the beginning.
 
 \begin{equation}
 \begin{split}
