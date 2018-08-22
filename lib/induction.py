@@ -182,7 +182,7 @@ def get_link(previous_state, next_state, action):
     next_y = int(next_state[1])
     return x,y,"link_start(({},{})). link_dest(({},{})). ".format(x,y,next_x,next_y)
 
-def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell_range, extra_exclusions=""):
+def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell_range):
     '''
     Generate a pos in the exploration phase
 
@@ -207,12 +207,6 @@ def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell
     all_exclusions = exclusions
     if sub_exclusion != "":
         all_exclusions = all_exclusions + "," + sub_exclusion
-<<<<<<< HEAD
-=======
-    if extra_exclusions != "":
-        all_exclusions = all_exclusions + "," + extra_exclusions
->>>>>>> 753e0752ae406c0361ccbe73f7f329fb3af28dbc
-
     if link_detected:
         predict_x, predict_y, link = get_link(previous_state, next_state, action)
         if not cf.ALREADY_LINK:
