@@ -182,17 +182,6 @@ def get_link(previous_state, next_state, action):
     next_y = int(next_state[1])
     return x,y,"link_start(({},{})). link_dest(({},{})). ".format(x,y,next_x,next_y)
 
-def generate_extra_exclusions(state_at_before, state_at_after, states):
-    x_before, _, _ = abduction.get_X(state_at_before)
-    y_before, _, _ = abduction.get_Y(state_at_before)
-    x_after, _, _ = abduction.get_X(state_at_after)
-    y_after, _, _ = abduction.get_Y(state_at_after)
-    state_before = py_asp.state_before(x_before, y_before)
-    state_after = py_asp.state_after(x_after, y_after)
-    # TODO is this correct way to do?? exclusion even in random action.
-    exclusions = get_plan_exclusions(state_at_before, state_at_after, states)
-    return exclusions
-
 def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell_range, extra_exclusions=""):
     '''
     Generate a pos in the exploration phase
@@ -218,8 +207,6 @@ def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell
     all_exclusions = exclusions
     if sub_exclusion != "":
         all_exclusions = all_exclusions + "," + sub_exclusion
-    if extra_exclusions != "":
-        all_exclusions = all_exclusions + "," + extra_exclusions 
 
     if link_detected:
         predict_x, predict_y, link = get_link(previous_state, next_state, action)

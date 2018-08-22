@@ -171,8 +171,7 @@ def k_learning(env, num_episodes, epsilon=0.1, record_prefix=None, is_link=False
                     abduction.add_new_walls(previous_state, wall_list, cf.CLINGOFILE)
 
                     # Make ASP syntax of state transition
-                    extra_exclusion = induction.generate_extra_exclusions(previous_state_at, next_state_at, states_plan)
-                    pos1, pos2,link = induction.generate_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range, extra_exclusion)
+                    pos1, pos2,link = induction.generate_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range)
                     
                     if link is not None:
                         keep_link = link
