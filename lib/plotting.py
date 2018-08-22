@@ -5,7 +5,8 @@ from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import pickle
 
-EpisodeStats = namedtuple("EpisodeStats",["episode_lengths", "episode_rewards", "episode_ILASP"])
+EpisodeStats = namedtuple("EpisodeStats",["episode_lengths", "episode_rewards", "episode_runtime"])
+TimeStats = namedtuple("TimeStats",["ILASP_runtime"])
 
 def store_stats(stats, base_dir, filename):
     filename = "/" + filename + ".pkl"
@@ -31,7 +32,6 @@ def average_score(base_dir, pkl_dir, prefix, num_episodes, num_pkl):
         stats2 = load_stats(pkl_dir, filename) 
         for i_episode in range(num_episodes):
             stats.episode_rewards[i_episode] += (stats2.episode_rewards[i_episode]/num_pkl)
-            stats.episode_ILASP[i_episode] += (stats2.episode_ILASP[i_episode]/num_pkl)
 
     store_stats(stats, pkl_dir, prefix+"_average")
 

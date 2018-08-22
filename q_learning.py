@@ -71,19 +71,17 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes),
-        episode_ILASP=np.zeros(num_episodes))
+        episode_runtime=np.zeros(num_episodes))
     
     stats_test = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes),
-        episode_ILASP=np.zeros(num_episodes))
+        episode_runtime=np.zeros(num_episodes))
 
     policy = make_epsilon_greedy_policy(Q, epsilon, ACTION_SPACE)
     for i_episode in range(num_episodes):
         print("------------------------------")
-        if(i_episode+1) % 100 == 0:
-            print("\rEpisode {}/{}.".format(i_episode+1, num_episodes), end="")
-            sys.stdout.flush()
+        start_total_runtime = time.time()
 
         # Reset the env and pick the first action
         previous_state = env.reset()
@@ -132,24 +130,20 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
             previous_state = next_state
             state_int = next_state_int
 
+        stats.episode_runtime[i_episode] += (time.time()-start_total_runtime)
         run_experiment(env, Q, stats_test, i_episode, width, cf.TIME_RANGE)
-    # Display the final Q-Table
-    # for key, value in enumerate(Q.items()):
-    #     print(key)
-    #     print(value)
-    #     print("\n")
-
     return Q, stats, stats_test
 
-# env = gym.make('vgdl_experiment3.5-v0')
-# env = gym.make('vgdl_aaa_small-v0')
 env = gym.make('vgdl_experiment3-v0')
 # Q, stats, stats_test = q_learning(env, 100)
 temp_dir = os.path.join(base_dir, "experiment3_q")
-for i in range(30):
-    Q, stats, stats_test = q_learning(env, 100)
-    plotting.store_stats(stats, temp_dir, "exp3_v{}".format(i))
-    plotting.store_stats(stats_test, temp_dir, "exp3_test_v{}".format(i))
+
+Q, stats, stats_test = q_learning(env, 100)
+import ipdb; ipdb.set_trace()
+# for i in range(30):
+#     Q, stats, stats_test = q_learning(env, 100)
+#     plotting.store_stats(stats, temp_dir, "exp3_v{}".format(i))
+#     plotting.store_stats(stats_test, temp_dir, "exp3_test_v{}".format(i))
 # import ipdb; ipdb.set_trace()
 # plotting.plot_episode_stats_test(stats, stats_test)
 

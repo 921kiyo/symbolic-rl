@@ -94,16 +94,18 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes),
-        episode_ILASP=np.zeros(cf.TIME_RANGE))
-
+        episode_runtime=np.zeros(num_episodes))
+    stats_ilasp = plotting.TimeStats(
+        ILASP_runtime=np.zeros((num_episodes,cf.TIME_RANGE)))
     stats_test = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes),
-        episode_ILASP=np.zeros(cf.TIME_RANGE))
+        episode_runtime=np.zeros(num_episodes))
 
     for i_episode in range(num_episodes):
         print("==============NEW EPISODE======================")
         print("i_episode ", i_episode)
+        start_total_runtime = time.time()
 
         previous_state = env.reset()
         agent_position = env.unwrapped.observer.get_observation()["position"]
@@ -114,8 +116,9 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
         # Once the agent reaches the goal, the algorithm kicks in
         if reached_goal:
             # Decaying epsilon greedy params
-            new_epsilon = epsilon*(1/(i_episode+1)**cf.DECAY_PARAM)
-            print("new_epsilon ", new_epsilon)
+            new_epsilon = epsilon
+            # new_epsilon = epsilon*(1/(i_episode+1)**cf.DECAY_PARAM)
+            # print("new_epsilon ", new_epsilon)
 
             while t < cf.TIME_RANGE:
                 if first_abduction == False:
@@ -134,9 +137,6 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                 # Run clingo to get a plan
                 answer_sets = abduction.run_clingo(cf.CLINGOFILE)
                 states_plan, actions_array = abduction.sort_planning(answer_sets)
-                if cf.IS_PRINT:
-                    print("ASP states ", states_plan)
-                    print("ASP actions ", actions_array)
 
                 # Record clingo
                 if record_prefix:
@@ -178,8 +178,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
                         keep_link = link
                     # Update H if necessary
                     if (not induction.check_ILASP_cover(hypothesis, pos1, height, width, keep_link)) or (not induction.check_ILASP_cover(hypothesis, pos2, height, width, keep_link)):
+                        start_time = time.time()
                         hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
-                        stats.episode_ILASP[t] += 1
+                        ilasp_runtime = (time.time()-start_time)
+                        stats_ilasp.ILASP_runtime[i_episode,t] += ilasp_runtime 
                         if hypothesis == "UNSATISFIABLE\n":
                             import ipdb; ipdb.set_trace()
 
@@ -237,8 +239,10 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                 # Update H if necessary
                 if(not induction.check_ILASP_cover(hypothesis, pos1, height, width, keep_link) or not induction.check_ILASP_cover(hypothesis, pos2, height, width, keep_link) or hypothesis == ''):
+                    start_time = time.time()
                     hypothesis = induction.run_ILASP(cf.LASFILE, cf.CACHE_DIR)
-                    stats.episode_ILASP[t] += 1 
+                    ilasp_runtime = (time.time()-start_time)
+                    stats_ilasp.ILASP_runtime[i_episode,t] += ilasp_runtime 
                     if hypothesis == "UNSATISFIABLE\n":
                             import ipdb; ipdb.set_trace()
                     if record_prefix:
@@ -253,27 +257,28 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
 
                 if done:
                     break
-
+        
+        stats.episode_runtime[i_episode] += (time.time()-start_total_runtime)
         run_experiment(env, i_episode, stats_test, width, cf.TIME_RANGE)
 
-    return stats, stats_test
+    return stats, stats_test,stats_ilasp
 
-env = gym.make('vgdl_experiment3-v0')
+env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_experiment5_noTL-v0')
 
 # temp_dir = os.path.join(cf.BASE_DIR, "experiment5_noTL")
 temp_dir = os.path.join(cf.BASE_DIR, "exp2_ILASP")
-# stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="exp3", is_link=True)
+stats, stats_test,stats_ilasp = k_learning(env, 100, epsilon=0.4, record_prefix=None, is_link=None)
 # plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment_check")
 # plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment_check_test")
 # plotting.plot_episode_stats_simple(stats)
 
 # temp_dir = os.path.join(cf.BASE_DIR, "experiment3")
-for i in range(30):
-    stats, stats_test = k_learning(env, 2, epsilon=0.4, record_prefix="exp2_ILASP", is_link=True)
-    plotting.store_stats(stats, temp_dir, "exp2_v{}".format(str(i)))
-    plotting.store_stats(stats_test, temp_dir, "exp2_test_v{}".format(str(i)))
+# for i in range(30):
+#     stats, stats_test = k_learning(env, 2, epsilon=0.4, record_prefix="exp2_ILASP", is_link=True)
+#     plotting.store_stats(stats, temp_dir, "exp2_v{}".format(str(i)))
+#     plotting.store_stats(stats_test, temp_dir, "exp2_test_v{}".format(str(i)))
 
 # stats, stats_test = k_learning(env, 2, epsilon=0.4, record_prefix="exp1_temp", is_link=False)
 # plotting.store_stats(stats, temp_dir, "exp1_v31")

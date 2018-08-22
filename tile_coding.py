@@ -58,11 +58,21 @@ def make_epsilon_greedy_policy(weights, epsilon, nA):
 #     return actions
 
 def compute_tile_features(height, width, x,y):
+
     feature_vectors = np.zeros((height,width), dtype=float)
     feature_vectors[y][x] = 1
     return feature_vectors
 
-def compute_features(height, width, x, y):    
+def compute_features(height, width, x, y):
+    offset_x = 1
+    offset_y = 1    
+    width_tile = 3
+    height_tile = 3
+    size_x = np.ceil((width-offset_x)/width_tile)
+    size_y = np.ceil((height-offset_y)/height_tile)
+    # size_x * size_y is the number of tiles in tiling
+    # tile_features = np.zeros((size_x,size_y))
+    # tile_features[x,y] = 1
     '''
      Output:
         x(s)
