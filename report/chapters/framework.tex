@@ -1,17 +1,17 @@
 % \section{Learning Pipeline}
 % \label{learning_pipeline_section}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=1.0\textwidth]{./figures/architecture}
+\caption{Reinforcement learning pipeline using ILASP. ILASP learns to generate a modelof the environment, or hypothesis, and updates it based on the interaction with the environment. }
+\label{fig:pipeline}
+\end{figure}
+    
 TODO 3*3 EXAMPLE TO HIGHLIGHT HOW EACH STEP WORKS
 
 The overall pipeline is shown in Figure \ref{fig:pipeline}. By interacting with the environment, an agent accumulates state transition experiences as positive examples, which is used by ILASP to learn and improve hypothesis.
 The agent also records surrounding information it has seen as background knowledge, which is used to make a plan together with the hypothesis that ILASP learns by solving an answer set program. 
 Mechanisms of each step is explain in details in the following sections. 
-
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=0.8\textwidth]{./figures/architecture}
-\caption{Reinforcement learning pipeline using ILASP. ILASP learns to generate a modelof the environment, or hypothesis, and updates it based on the interaction with the environment. }
-\label{fig:pipeline}
-\end{figure}
 
 \section{Experience Accumulation}
 \label{experience_accumulation}
@@ -137,7 +137,6 @@ In order to execute ILASP, a \textit{search space} of possible hypotheses is req
 \end{equation}
 Without these in the form of mode bias, the search space for ILASP will be empty. 
 
-
 \begin{equation}
 \begin{split}
 &\textsf{cell((0..7, 0..6)).}\\
@@ -149,7 +148,6 @@ Without these in the form of mode bias, the search space for ILASP will be empty
 \end{equation}
 
 where \textit{var(t)} and \textit{const(t)} are a placeholder for variable and constant terms of type t respectively.
-
 
 \textit{const(t)} must be specified as \#constant(t,c), where t is a type and c is a constant term. 
 In our environment, action is specified as constant since ILASP should learn different hypothesis for each action.
@@ -238,7 +236,7 @@ T is the time step at which the agent takes each action, unless \textit{finished
 &\textsf{:- not goalMet.}
 \end{split}
 \end{equation}
-    
+
 \section{Plan Execution}
 \label{Plan execution}
 
@@ -355,3 +353,35 @@ When the agent takes an random action and move into a new state, the agents crea
 This exploration point will be highlighted in Experiment XXX.
 
 Epsilon needs to be larger than Q-learnig because
+
+The reason for using random exploration is that it can be used for both benchmark and ILP(RL) and thus enables us to do a fair comparision between them.
+
+\section{Implementation}
+\label{Implementation}
+
+% We use GVG-AI Framework for our experiments, which was created for the General Video Gamea AI Competition\footnote{http://www.gvgai.net/},
+% a game environment for an agent that should be able to play a wide variety of games without knowing which games are to be played.
+\subsection{Experiment Platform}
+
+\begin{figure}[!ht!b]
+\centering
+\includegraphics[width=0.5\textwidth]{./figures/experiment1}
+\caption{VGDL game example}
+\label{VGDL_sample}
+\end{figure}    
+
+We use the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
+The VGDL allows users to easily craft their own environments, which makes us possible to do various experiments without relying on a default environment. The VGDL platform provides an interface with OpenAI Gym (\cite{Brockman2016}), which is a commonly used benchmark platform. 
+The base game is a simple maze as shown in Figure \ref{VGDL_sample}.
+There are 3 different types of cells: a goal cell, walls and paths. The agent can take 4 different actions: up, down, right and left.
+The environment is not known to the agent in advance, and it attempts to find the goal by exploring the environment.
+In all experiments, the agent receives -1 in any states except the goal state, where it gains a reward of 10.
+Once the agent reaches the goal, or termination state, that episode is finished and the agent start the next episode from the starting point.
+
+\subsection{Technology}
+
+Clingo 5
+ILASP cache.
+Python 3
+The code is available in XXX
+

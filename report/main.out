@@ -21,28 +21,31 @@
 \BOOKMARK [1][]{section.3.3}{3.3 Plan Genreation}{chapter.3}% 21
 \BOOKMARK [1][]{section.3.4}{3.4 Plan Execution}{chapter.3}% 22
 \BOOKMARK [1][]{section.3.5}{3.5 Exploration}{chapter.3}% 23
-\BOOKMARK [0][]{chapter.4}{4 Evaluation}{}% 24
-\BOOKMARK [1][]{section.4.1}{4.1 Evaluation Metrics}{chapter.4}% 25
-\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 Experiment Platform}{section.4.1}% 26
-\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Benchmark}{section.4.1}% 27
-\BOOKMARK [2][]{subsection.4.1.3}{4.1.3 Parameters}{section.4.1}% 28
-\BOOKMARK [1][]{section.4.2}{4.2 Experiment Results}{chapter.4}% 29
-\BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Experiment1}{section.4.2}% 30
-\BOOKMARK [2][]{subsection.4.2.2}{4.2.2 Experiment2}{section.4.2}% 31
-\BOOKMARK [2][]{subsection.4.2.3}{4.2.3 Experiment3}{section.4.2}% 32
-\BOOKMARK [2][]{subsection.4.2.4}{4.2.4 Experiment4}{section.4.2}% 33
-\BOOKMARK [0][]{chapter.5}{5 Related Work}{}% 34
-\BOOKMARK [0][]{chapter.6}{6 Discussion}{}% 35
-\BOOKMARK [1][]{section.6.1}{6.1 Contribution}{chapter.6}% 36
-\BOOKMARK [1][]{section.6.2}{6.2 Limitations}{chapter.6}% 37
-\BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Scalability}{section.6.2}% 38
-\BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Flexibility}{section.6.2}% 39
-\BOOKMARK [1][]{section.6.3}{6.3 Further Research}{chapter.6}% 40
-\BOOKMARK [2][]{subsection.6.3.1}{6.3.1 Value Iteration Approach}{section.6.3}% 41
-\BOOKMARK [2][]{subsection.6.3.2}{6.3.2 Weak Constraint}{section.6.3}% 42
-\BOOKMARK [2][]{subsection.6.3.3}{6.3.3 Generalisation of the Current Approach}{section.6.3}% 43
-\BOOKMARK [0][]{chapter.7}{7 Conclusion}{}% 44
-\BOOKMARK [0][]{section*.35}{Appendices}{}% 45
-\BOOKMARK [1][]{section.1..1}{.1 Ethics}{section*.35}% 46
-\BOOKMARK [1][]{section.1..2}{.2 Learning tasks}{section*.35}% 47
-\BOOKMARK [1][]{section.1..3}{.3 Abduction tasks}{section*.35}% 48
+\BOOKMARK [1][]{section.3.6}{3.6 Implementation}{chapter.3}% 24
+\BOOKMARK [2][]{subsection.3.6.1}{3.6.1 Experiment Platform}{section.3.6}% 25
+\BOOKMARK [2][]{subsection.3.6.2}{3.6.2 Technology}{section.3.6}% 26
+\BOOKMARK [0][]{chapter.4}{4 Evaluation}{}% 27
+\BOOKMARK [1][]{section.4.1}{4.1 Setting}{chapter.4}% 28
+\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 Evaluation Metrics}{section.4.1}% 29
+\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Benchmark}{section.4.1}% 30
+\BOOKMARK [2][]{subsection.4.1.3}{4.1.3 Parameters}{section.4.1}% 31
+\BOOKMARK [1][]{section.4.2}{4.2 Experiment Results}{chapter.4}% 32
+\BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Experiment1}{section.4.2}% 33
+\BOOKMARK [2][]{subsection.4.2.2}{4.2.2 Experiment2}{section.4.2}% 34
+\BOOKMARK [2][]{subsection.4.2.3}{4.2.3 Experiment3}{section.4.2}% 35
+\BOOKMARK [2][]{subsection.4.2.4}{4.2.4 Experiment4}{section.4.2}% 36
+\BOOKMARK [0][]{chapter.5}{5 Related Work}{}% 37
+\BOOKMARK [0][]{chapter.6}{6 Discussion}{}% 38
+\BOOKMARK [1][]{section.6.1}{6.1 Contribution}{chapter.6}% 39
+\BOOKMARK [1][]{section.6.2}{6.2 Limitations}{chapter.6}% 40
+\BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Scalability}{section.6.2}% 41
+\BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Flexibility}{section.6.2}% 42
+\BOOKMARK [1][]{section.6.3}{6.3 Further Research}{chapter.6}% 43
+\BOOKMARK [2][]{subsection.6.3.1}{6.3.1 Value Iteration Approach}{section.6.3}% 44
+\BOOKMARK [2][]{subsection.6.3.2}{6.3.2 Weak Constraint}{section.6.3}% 45
+\BOOKMARK [2][]{subsection.6.3.3}{6.3.3 Generalisation of the Current Approach}{section.6.3}% 46
+\BOOKMARK [0][]{chapter.7}{7 Conclusion}{}% 47
+\BOOKMARK [0][]{section*.34}{Appendices}{}% 48
+\BOOKMARK [1][]{section.1..1}{.1 Ethics}{section*.34}% 49
+\BOOKMARK [1][]{section.1..2}{.2 Learning tasks}{section*.34}% 50
+\BOOKMARK [1][]{section.1..3}{.3 Abduction tasks}{section*.34}% 51

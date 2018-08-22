@@ -59,39 +59,39 @@ def make_epsilon_greedy_policy(weights, epsilon, nA):
 #     actions[:,start:end] = 1
 #     return actions
 
-def compute_tile_features(height, width, x,y):
-    feature_vectors = np.zeros((height,width), dtype=float)
-    feature_vectors[y][x] = 1
-    return feature_vectors
+# def compute_tile_features(height, width, x,y):
+#     feature_vectors = np.zeros((height,width), dtype=float)
+#     feature_vectors[y][x] = 1
+#     return feature_vectors
 
-def compute_features(height, width, x, y):    
-    '''
-     Output:
-        x(s)
-    '''
-    tile_features = compute_tile_features(height, width, x,y) # |height*width|
+# def compute_features(height, width, x, y):    
+#     '''
+#      Output:
+#         x(s)
+#     '''
+#     tile_features = compute_tile_features(height, width, x,y) # |height*width|
 
-    # walls_features = compute_wall_features(x,y)
-    # xy_features = compute_xy_features(height, width, x,y) # only |2|, x and y
-    # features = np.stack([tile_features])
-    return tile_features
-    # return features
+#     # walls_features = compute_wall_features(x,y)
+#     # xy_features = compute_xy_features(height, width, x,y) # only |2|, x and y
+#     # features = np.stack([tile_features])
+#     return tile_features
+#     # return features
 
-def compute_state_action_feature(height, width,x,y, action):
-    '''
-     Output:
-        x(s, a)
-    '''
+# def compute_state_action_feature(height, width,x,y, action):
+#     '''
+#      Output:
+#         x(s, a)
+#     '''
     
-    # Make only the relevant action column 1, and the rest be 0
-    offsetter = np.tile(np.zeros((height, width)), 4)
-    start = width*action
-    end = width*action + (width)
-    offsetter[:,start:end] = 1
-    # state features are replicated for each action
-    state_feature = compute_features(height, width,x,y) # x(s)
-    state_action_features = np.tile(state_feature, 4) # x(s,a) = |x(s)|*|A| 
-    return state_action_features*offsetter
+#     # Make only the relevant action column 1, and the rest be 0
+#     offsetter = np.tile(np.zeros((height, width)), 4)
+#     start = width*action
+#     end = width*action + (width)
+#     offsetter[:,start:end] = 1
+#     # state features are replicated for each action
+#     state_feature = compute_features(height, width,x,y) # x(s)
+#     state_action_features = np.tile(state_feature, 4) # x(s,a) = |x(s)|*|A| 
+#     return state_action_features*offsetter
 
 def compute_value(height, width, x,y,action, weights):
     '''
@@ -298,7 +298,7 @@ class TileCoding:
 
 env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
-agent = TileCoding(env, 100, 50, 2)
+agent = TileCoding(env, 100, 4, 2)
 stats = agent.q_learning(100)
 # stats = q_learning(env, 300, alpha=0.03)
 

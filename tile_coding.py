@@ -171,7 +171,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.2, eps
             v_next = compute_value(height, width, int(next_state[0]),int(next_state[1]),action_next, weights)
             
             weights_delta = alpha*(reward + discount_factor*v_next - v_now)*state_action_features
-            import ipdb; ipdb.set_trace()
+            # import ipdb; ipdb.set_trace()
             weights += weights_delta
             # for i in range(-1,2):
             #     for j in range(-1,2):

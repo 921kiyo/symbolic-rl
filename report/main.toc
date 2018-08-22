@@ -31,16 +31,18 @@
 \contentsline {section}{\numberline {3.3}Plan Genreation}{24}{section.3.3}
 \contentsline {section}{\numberline {3.4}Plan Execution}{25}{section.3.4}
 \contentsline {section}{\numberline {3.5}Exploration}{26}{section.3.5}
-\contentsline {chapter}{\numberline {4}Evaluation}{27}{chapter.4}
-\contentsline {section}{\numberline {4.1}Evaluation Metrics}{27}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Experiment Platform}{27}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Benchmark}{27}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Parameters}{28}{subsection.4.1.3}
+\contentsline {section}{\numberline {3.6}Implementation}{27}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Experiment Platform}{27}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Technology}{27}{subsection.3.6.2}
+\contentsline {chapter}{\numberline {4}Evaluation}{28}{chapter.4}
+\contentsline {section}{\numberline {4.1}Setting}{28}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Evaluation Metrics}{28}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Benchmark}{28}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Parameters}{29}{subsection.4.1.3}
 \contentsline {section}{\numberline {4.2}Experiment Results}{29}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Experiment1}{29}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Experiment2}{32}{subsection.4.2.2}
 \contentsline {subsection}{\numberline {4.2.3}Experiment3}{35}{subsection.4.2.3}
-\contentsline {subsubsection}{Transfer learning}{35}{section*.29}
 \contentsline {subsection}{\numberline {4.2.4}Experiment4}{36}{subsection.4.2.4}
 \contentsline {chapter}{\numberline {5}Related Work}{39}{chapter.5}
 \contentsline {chapter}{\numberline {6}Discussion}{41}{chapter.6}
@@ -53,7 +55,7 @@
 \contentsline {subsection}{\numberline {6.3.2}Weak Constraint}{43}{subsection.6.3.2}
 \contentsline {subsection}{\numberline {6.3.3}Generalisation of the Current Approach}{43}{subsection.6.3.3}
 \contentsline {chapter}{\numberline {7}Conclusion}{44}{chapter.7}
-\contentsline {chapter}{Appendices}{45}{section*.35}
+\contentsline {chapter}{Appendices}{45}{section*.34}
 \contentsline {section}{\numberline {.1}Ethics}{46}{section.1..1}
 \contentsline {section}{\numberline {.2}Learning tasks}{48}{section.1..2}
 \contentsline {section}{\numberline {.3}Abduction tasks}{48}{section.1..3}

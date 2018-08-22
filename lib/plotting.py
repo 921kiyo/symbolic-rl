@@ -48,7 +48,7 @@ def average_ILASP(base_dir, pkl_dir, prefix, num_episodes, time_range, num_pkl):
         total = 0
         for s in stats2.episode_ILASP:
             total += s
-        
+        total += 3
         # Incremental normalisation
         count = 0
         for index, elm in enumerate(stats2.episode_ILASP):
@@ -108,16 +108,7 @@ def plot_episode_stats(stats, smoothing_window=1, noshow=False):
     return fig1, fig2, fig3
 
 def plot_ILASP_progress(stats,smoothing_window=1, noshow=False):
-    # total = 0
-    # for s in stats.episode_ILASP:
-    #     total += s
 
-    # count = 0
-    # for index, elm in enumerate(stats.episode_ILASP):
-    #     if(elm > 0):
-    #         count +=1
-    #     stats.episode_ILASP[index] = count/total
-  
     fig2 = plt.figure(figsize=(10,5))
     ilasp_smoothed = pd.Series(stats.episode_ILASP).rolling(smoothing_window, min_periods=smoothing_window).mean()
     plt.plot(ilasp_smoothed, color="k")

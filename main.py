@@ -270,7 +270,7 @@ temp_dir = os.path.join(cf.BASE_DIR, "exp2_ILASP")
 # plotting.plot_episode_stats_simple(stats)
 
 # temp_dir = os.path.join(cf.BASE_DIR, "experiment3")
-for i in range(0,30):
+for i in range(30):
     stats, stats_test = k_learning(env, 2, epsilon=0.4, record_prefix="exp2_ILASP", is_link=True)
     plotting.store_stats(stats, temp_dir, "exp2_v{}".format(str(i)))
     plotting.store_stats(stats_test, temp_dir, "exp2_test_v{}".format(str(i)))
