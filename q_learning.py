@@ -25,6 +25,8 @@ def make_epsilon_greedy_policy(Q, epsilon, nA):
         new_epsilon = epsilon
         A = np.ones(nA, dtype=float)* new_epsilon/nA
         best_action = np.argmax(Q[observation])
+        print("action_probs ", A[0])
+        print("best_action ", best_action)
         A[best_action] += (1.0 - new_epsilon)
         return A
     return policy_fn
@@ -37,9 +39,9 @@ def run_experiment(env, Q, stats_test, i_episode, width, time_range):
     current_state_int = helper.convert_state(current_state[1], current_state[0], width)
     for t in range(time_range):
         env.render()
-        # time.sleep(0.1)
+        time.sleep(0.1)
         print("running test.....", current_state_int)
-        action_probs = policy(current_state_int, 0)
+        action_probs = policy(current_state_int, 1)
         action = np.argmax(action_probs)
         next_state, reward, done, _ = env.step(action)
 
@@ -67,7 +69,9 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
     # height = env.unwrapped.game.height
     width = env.unwrapped.game.width
     # Q = defaultdict(lambda: np.zeros(ACTION_SPACE))
-    Q = defaultdict(lambda: np.random.rand(ACTION_SPACE))
+    # Q = defaultdict(lambda: np.random.rand(ACTION_SPACE))
+    Q = defaultdict(lambda: np.ones(ACTION_SPACE))
+    
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes),
@@ -134,18 +138,19 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
         run_experiment(env, Q, stats_test, i_episode, width, cf.TIME_RANGE)
     return Q, stats, stats_test
 
-env = gym.make('vgdl_experiment3-v0')
+env = gym.make('vgdl_experiment1-v0')
+temp_dir = os.path.join(base_dir, "result_pkl/experiment1_q")
+# import ipdb; ipdb.set_trace()
 # Q, stats, stats_test = q_learning(env, 100)
-temp_dir = os.path.join(base_dir, "experiment3_q")
 
-Q, stats, stats_test = q_learning(env, 100)
-import ipdb; ipdb.set_trace()
 # for i in range(30):
-#     Q, stats, stats_test = q_learning(env, 100)
-#     plotting.store_stats(stats, temp_dir, "exp3_v{}".format(i))
-#     plotting.store_stats(stats_test, temp_dir, "exp3_test_v{}".format(i))
+Q, stats, stats_test = q_learning(env, 100)
+# plotting.store_stats(stats, temp_dir, "exp1_v{}".format(i))
+# plotting.store_stats(stats_test, temp_dir, "exp1_test_v{}".format(i))
+
 # import ipdb; ipdb.set_trace()
 # plotting.plot_episode_stats_test(stats, stats_test)
 
 # plotting.plot_episode_stats(stats)
-# plotting.plot_episode_stats_simple(stats)
+plotting.plot_episode_stats_simple(stats)
+plotting.plot_episode_stats_simple(stats_test)

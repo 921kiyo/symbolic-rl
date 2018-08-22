@@ -55,7 +55,7 @@ def run_experiment(env, i_episode, stats_test, width, time_range):
             stats_test.episode_lengths[i_episode] = t
             t = t + 1
 
-def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=False):
+def k_learning(env, num_episodes, epsilon=0.1, record_prefix=None, is_link=False):
     # Get cell range for the game
     height = env.unwrapped.game.height
     width = env.unwrapped.game.width
@@ -264,22 +264,15 @@ def k_learning(env, num_episodes, epsilon=0.65, record_prefix=None, is_link=Fals
     return stats, stats_test,stats_ilasp
 
 env = gym.make('vgdl_experiment1-v0')
-# env = gym.make('vgdl_experiment1-v0')
-# env = gym.make('vgdl_experiment5_noTL-v0')
 
-# temp_dir = os.path.join(cf.BASE_DIR, "experiment5_noTL")
-temp_dir = os.path.join(cf.BASE_DIR, "exp2_ILASP")
-stats, stats_test,stats_ilasp = k_learning(env, 100, epsilon=0.4, record_prefix=None, is_link=None)
-# plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment_check")
-# plotting.store_stats(stats_test, cf.BASE_DIR, "vgdl_experiment_check_test")
-# plotting.plot_episode_stats_simple(stats)
+temp_dir = os.path.join(cf.BASE_DIR, "result_pkl/experiment1")
 
-# temp_dir = os.path.join(cf.BASE_DIR, "experiment3")
-# for i in range(30):
-#     stats, stats_test = k_learning(env, 2, epsilon=0.4, record_prefix="exp2_ILASP", is_link=True)
-#     plotting.store_stats(stats, temp_dir, "exp2_v{}".format(str(i)))
-#     plotting.store_stats(stats_test, temp_dir, "exp2_test_v{}".format(str(i)))
+# for i in range(26,30):
+stats, stats_test,stats_ilasp = k_learning(env, 100, epsilon=0.1, record_prefix="test", is_link=False)
+# plotting.store_stats(stats, temp_dir, "exp1_v{}".format(str(i)))
+# plotting.store_stats(stats_test, temp_dir, "exp1_test_v{}".format(str(i)))
+# plotting.store_stats(stats_ilasp, temp_dir, "exp1_ilasp_v{}".format(str(i)))
 
-# stats, stats_test = k_learning(env, 2, epsilon=0.4, record_prefix="exp1_temp", is_link=False)
-# plotting.store_stats(stats, temp_dir, "exp1_v31")
-# plotting.store_stats(stats_test, temp_dir, "exp1_test_v31")
+# stats, stats_test,stats_ilasp = k_learning(env, 100, epsilon=0.1, record_prefix=None, is_link=None)
+plotting.plot_episode_stats_simple(stats, smoothing_window=1)
+plotting.plot_episode_stats_simple(stats_test, smoothing_window=1)

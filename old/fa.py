@@ -114,7 +114,6 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1, eps
             if done:
                 break
 
-
         # run_experiment(env,state_int, Q, stats_test, i_episode, width, TIME_RANGE)
 
     return Q, stats

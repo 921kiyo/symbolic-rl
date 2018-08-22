@@ -58,7 +58,7 @@ def run_experiment(env, i_episode, stats_test, width, time_range):
             stats_test.episode_lengths[i_episode] = t
             t = t + 1
 
-def k_learning(env, num_episodes, h, goal, epsilon=0.65, record_prefix=None, is_link=False):
+def k_learning(env, num_episodes, h, goal, epsilon=0.1, record_prefix=None, is_link=False):
     # Get cell range for the game
     height = env.unwrapped.game.height
     width = env.unwrapped.game.width
