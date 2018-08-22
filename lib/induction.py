@@ -102,7 +102,7 @@ def get_exclusions(previous_state, next_state):
 
 def get_inc_exc(hypothesis, state_before, state_after, action, walls, cell_range):
     helper.silentremove(cf.BASE_DIR, cf.GROUNDING)
-    
+
     helper.append_to_file(hypothesis, cf.GROUNDING_DIR)
     helper.append_to_file(state_before+"\n", cf.GROUNDING_DIR)
     helper.append_to_file(action+"\n", cf.GROUNDING_DIR)
@@ -219,7 +219,7 @@ def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell
     if sub_exclusion != "":
         all_exclusions = all_exclusions + "," + sub_exclusion
     if extra_exclusions != "":
-        all_exclusions = all_exclusions + "," + extra_exclusions 
+        all_exclusions = all_exclusions + "," + extra_exclusions
 
     if link_detected:
         predict_x, predict_y, link = get_link(previous_state, next_state, action)
@@ -293,7 +293,7 @@ def check_ILASP_cover(hypothesis, pos, height, width, link):
     output_las = os.path.join(cf.BASE_DIR, cf.CHECK_LAS)
     if link:
         helper.append_to_file(link, output_las)
-    
+
     helper.append_to_file(hypothesis, output_las)
     helper.append_to_file(pos, output_las)
     copy_las_base(height, width, output_las)

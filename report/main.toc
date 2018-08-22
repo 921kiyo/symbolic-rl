@@ -26,13 +26,13 @@
 \contentsline {section}{\numberline {3.1}Experience Accumulation}{19}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}State Transition Experience}{19}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}Environment Experience}{20}{subsection.3.1.2}
-\contentsline {section}{\numberline {3.2}Inductive Learning}{20}{section.3.2}
+\contentsline {section}{\numberline {3.2}Inductive Learning}{21}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Search Space}{21}{subsection.3.2.1}
 \contentsline {section}{\numberline {3.3}Plan Genreation}{22}{section.3.3}
 \contentsline {section}{\numberline {3.4}Plan Execution}{23}{section.3.4}
 \contentsline {section}{\numberline {3.5}Exploration}{24}{section.3.5}
-\contentsline {section}{\numberline {3.6}Implementation}{24}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Experiment Platform}{24}{subsection.3.6.1}
+\contentsline {section}{\numberline {3.6}Implementation}{25}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Experiment Platform}{25}{subsection.3.6.1}
 \contentsline {subsection}{\numberline {3.6.2}Technology}{25}{subsection.3.6.2}
 \contentsline {chapter}{\numberline {4}Evaluation}{26}{chapter.4}
 \contentsline {section}{\numberline {4.1}Setting}{26}{section.4.1}
@@ -55,7 +55,7 @@
 \contentsline {subsection}{\numberline {5.3.3}Generalisation of the Current Approach}{39}{subsection.5.3.3}
 \contentsline {chapter}{\numberline {6}Related Work}{40}{chapter.6}
 \contentsline {chapter}{\numberline {7}Conclusion}{42}{chapter.7}
-\contentsline {chapter}{Appendices}{43}{section*.34}
+\contentsline {chapter}{Appendices}{43}{section*.35}
 \contentsline {section}{\numberline {.1}Ethics}{44}{section.1..1}
 \contentsline {section}{\numberline {.2}Learning tasks}{45}{section.1..2}
 \contentsline {section}{\numberline {.3}Abduction tasks}{46}{section.1..3}

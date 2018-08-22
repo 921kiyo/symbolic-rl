@@ -3,131 +3,161 @@
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/architecture}
-\caption{Reinforcement learning pipeline using ILASP. ILASP learns to generate a modelof the environment, or hypothesis, and updates it based on the interaction with the environment. }
+\caption{ILP(RL) pipeline. ILASP learns to generate a model of the environment, or hypothesis, and updates it based on the interaction with the environment. }
 \label{fig:pipeline}
 \end{figure}
-    
-TODO 3*3 EXAMPLE TO HIGHLIGHT HOW EACH STEP WORKS
 
 The overall pipeline is shown in Figure \ref{fig:pipeline}. By interacting with the environment, an agent accumulates state transition experiences as positive examples, which is used by ILASP to learn and improve hypothesis.
-The agent also records surrounding information it has seen as background knowledge, which is used to make a plan together with the hypothesis that ILASP learns by solving an answer set program. 
-Mechanisms of each step is explain in details in the following sections. 
+The agent also records surrounding information it has seen as background knowledge, which is used to make a plan together with the hypothesis that ILASP learns by solving an answer set program.
+Mechanisms of each step is explain in details in the following sections.
 
 \section{Experience Accumulation}
 \label{experience_accumulation}
 \textcolor{red}{Draw an illustration of the difference between exploration and las part}\\
 \textcolor{red}{Related these with Definition of ILASP}\\
-The first step is to accumulate experience by interacting with the environment. Similar to tranditional RL agent, an agent explores an environment randomly until it reaches the goal once. 
-Every time the agent takes an action during the exploration phase, these experiences need to be recorded in two different forms: \textit{state transition experience} and \textit{environment experience}.
+
+The first step is to accumulate experience by interacting with the environment. Similar to an existing RL, an agent explores an environment following an exploration strategy
+Every time the agent takes an action, these experiences are recorded in two different forms: \textit{state transition experience} as a positive example and \textit{environment experience} as background knowledge.
 
 \subsection{State Transition Experience}
-\textit{State transition experience} contain information about how the state transition at each time step.
- It is the same as E\textsuperscript{+} in ILASP, especially positive examples for ILASP in ASP syntax, which is of the form:
+\textit{State transition experience} contains information about how the state transitions at each time step: the current state of the agent,
+an action taken, the next state after the agent takes the action and surrounding information of the current state.
 
+MDP
+It is used as a positive example for inductive learning (E\textsuperscript{+} in ILASP), which is of the form:
+
+% \begin{equation}
+% \begin{split}
+% \textsf{\#pos(} & \textsf{\{state\_after((X2,Y2))\}},\\
+% & \{\textsf{all other state\_after that did not happen}\}, \\
+% & \{\textsf{state\_before((X1,Y1)). action(A). surrounding information}\}).
+% \end{split}
+% \end{equation}
 \begin{equation}
 \begin{split}
-\textsf{\#pos(} & \textsf{\{state\_after((X2,Y2))\}},\\
-& \{\textsf{all other state\_after that did not happen}\}, \\
+\textsf{\#pos(} & \textsf{\{INC\}},\\
+& \{\textsf{EXC}\}, \\
 & \{\textsf{state\_before((X1,Y1)). action(A). surrounding information}\}).
 \end{split}
 \end{equation}
-where,
-\begin{itemize}
-    \item inclusions contain one state\_after((X2,Y2)), which represents the position of the agent in x and y axis after an action is taken 
-    \item exclusions contain all other state\_after((X,Y)) that did not occur
-    \item context example include state\_before((X1,Y1)), which represents the position of the agent in x and y axis before an action is taken,
-    action(A) is the action the agent has taken, and surrounding information, such as walls, if any. 
-\end{itemize}
 
-These experience need to be expressed in ASP form in order to execute the inductive learning in ILASP. The input used in ILASP is state transitions, 
-rewards and an action of the agent, 
-% which can be directly converted using a simple mapping table or an action language (such as BC\textsuperscript{+} as used in \cite{Ferreira2017}). 
+Where INC and EXC are inclusions and exclusions respectively. ASP is Answer Set Program P and H is the current hypothesis.
 
-\textcolor{red}{exclusions are determined by the state that did not happen.}
-The inclusions and exclusions are determined by the following algorithms
-\begin{equation*}
+\begin{equation}
 \begin{split}
     &\forall s \in \textsf{State, agent is at s, ASP of H does not contains s as state\_after, add s} \rightarrow \textsf{INC.} \\
-    & \forall s \in \textsf{State, agent is not at s, ASP of H contains s as state\_after, add s} \rightarrow \textsf{EXC.} 
+    & \forall s \in \textsf{State, agent is not at s, ASP of H contains s as state\_after, add s} \rightarrow \textsf{EXC.}
 \end{split}
-\end{equation*}
+\end{equation}
+EXC is determined in two ways. First, they are determined by all other possible states that the agent did not take.
+For example, if the agent takes an action "up" to move from (1,1) to (1,2), all other states that the agent could have taken but did not are exclusions ((1,0), (1,1), (0,1) and (2,1) in this case).
 
-Where INC and EXC are inclusions and exclusions respectively. ASP is Answer Set Program P and H is the current hypothesis. 
+\begin{itemize}
+    \item inclusions contain one state\_after((X2,Y2)), which represents the position of the agent in x and y axis after an action is taken
+    \item exclusions contain all other state\_after((X,Y)) that did not occur
+    \item context examples include state\_before((X1,Y1)), which represents the position of the agent in x and y axis before an action is taken,
+    action(A) is the action the agent has taken, and surrounding information, such as surrounding walls.
+\end{itemize}
+
+Rewards are not used.
+(Discussed in details in Chapter XX).
+
+
+The inclusions and exclusions are determined by the following algorithms
+
 context example are
 \begin{itemize}
     \item the state that the agent was before taking action (represented as \textit{state\_before(x,y)})
     \item an action that the agent takes (representend as \textit{action(a)})
-    \item surrounding information of \textit{state\_before(x,y)}, such as walls. 
+    \item surrounding information of \textit{state\_before(x,y)}, such as walls.
 \end{itemize}
 
 % \textcolor{red}{There is no negative example as XXXX.}
 
-Using these positive examples, the agent is able to learn and improve hypothesis as it explore the environment and encounters new scenarios. 
+Using these positive examples, the agent is able to learn and improve hypothesis as it explore the environment and encounters new scenarios.
 
-\begin{examp} \normalfont (Positive examples). 
+\begin{examp} \normalfont (Positive examples).
 
-Suppose an agent takes an action "up" to move from (1,3) to (1,4) cell. All other alternative states that the agent could have ended up by taking different actions 
-(down, right, and left) are in the exclusions. Finally surrounding walls information are in the context.
+% \begin{wrapfigure}{r}{0.5\textwidth}
+%   \begin{center}
+%     \includegraphics[width=0.48\textwidth]{./figures/pipeline_example1}
+%   \end{center}
+%   \caption{A gull}
+% \end{wrapfigure}
 
-\begin{equation*}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.7\textwidth]{./figures/pipeline_example1}
+\caption{Illustration of generating positive example of state transition}
+\label{example_pos_example}
+\end{figure}
+
+We use a simple 5x5 gridworld environment to hilight each steps of the pipeline. To illustrate how an agent gains a positive example, suppose the agent takes an action "right" to move from (2,4) to (3,4) cell, as shown on Figure \ref{example_pos_example} on the right.
+All other alternative states that the agent could have ended up by taking different actions
+(down, up, and left) are in the exclusions.
+Context examples are the state that the agent is before taking an action and surrounding walls information. The following positive example is generated.
+
+\begin{equation}
 \begin{split}
-    \textsf{\#pos(} & \textsf{\{state\_after((1,3))\},}\\
+    \textsf{\#pos(} & \textsf{\{state\_after((3,4))\},}\\
                     & \textsf{\{state\_after((2,4)),state\_after((1,5)),state\_after((0,4)),state\_after((1,4))\},} \\
-    & \textsf{\{state\_before((1,4)). action(up). wall((1, 5)). wall((0, 4)).\})}
+    & \textsf{\{state\_before((2,4)). action(right). wall((1, 4)). wall((4, 2)).\})}
 \end{split}
-\end{equation*}
+\end{equation}
 
 This example will be used to learn how to move up as one of the agent's hypotheses.
 
-Another example is 
+Similarly, the agent is at (4,4) and tries to move right, as shown on the left on Figure \ref{example_pos_example}. In this case, however, there is a wall at (5,4) and therefore the agent ends up in the same state. From this example, the following positive example is generated:
 
-\begin{equation*}
+\begin{equation}
 \begin{split}
-\textsf{\#pos(} & \textsf{\{state\_after((1,3))}, \\ 
-                & \textsf{\{state\_after((2,3)),state\_after((1,4)),state\_after((0,3)),state\_after((1,2))\}} \\       
-                & \textsf{\{state\_before((1,3)). action(up). wall((2,3)). wall((0,3)). wall((1,2)).\}).}
+\textsf{\#pos(} & \textsf{\{state\_after((4,4))}, \\
+                & \textsf{\{state\_after((4,3)),state\_after((3,4)),state\_after((5,4)),state\_after((4,5))\}} \\
+                & \textsf{\{state\_before((4,4)). action(right). wall((5,4)). wall((4,5)).\}).}
 \end{split}
-\end{equation*}
-
-where the agent tried to move up, from (1,3) to (1,2), but ended up in the same cell at (1,3). This is because there is a wall at (1,2), and the agent learns in order to move an above cell,
-there must not be a wall in the above cell. 
+\end{equation}
 
 \end{examp}
 \label{state_transition_example}
 
 \subsection{Environment Experience}
 
-While the agent explores in the environment, it also remembers all the surrounding information as background knowledge, 
+While the agent explores the environment, it also keeps all the surrounding information as background knowledge,
 which will be stored in different repository, and are later used to generate a sequence of actions plan using H.
 
-These experience correspond to B in ILASP definition. 
+These background knowledge corresponds to B in ILASP definition.
 
 This does not include state transition experience, as these state\_before and action takens are different at every timestep.
-Backgroud knowledge will be 
+In static environment (e.g no moving enermy), environment information remain the same across time, and thus it will be beneficial to remember.
 
-In static environment (e.g no moving enermy), environment information remain the same across time, and thus it will be beneficial to remember. 
-This principle is different from most RL methods, as they are model-free learning. 
-As described in XX,, model-based learning converge to optimal policy more efficiently. 
+% This principle is different from most RL methods, as they are model-free learning.
+% As described in XX,, model-based learning converge to optimal policy more efficiently.
 
-In a simple maze, these could be all wall position that the agent has seen so far, which can be 
-wall((1, 5)). which represents the location of the wall. 
-Another example could be a location of a teleportation if the agent sees it. 
+In a simple maze, these could be all wall position that the agent has seen so far, which can be
+wall((1, 5)). which represents the location of the wall.
+Another example could be a location of a teleportation if the agent sees it.
 
-These environment experiences are part of context examples in the positive examples. 
+These environment experiences are part of context examples in the positive examples.
+
+\begin{examp} \normalfont (Background Knowledge).
+
+Using the same example as in Figure \ref{example_pos_example},
+The first postive examples contain two walls, wall((1,4)) and wall((4,2)), and they will be stored as background knoledge. These information are useful for the plan generation.
+\end{examp}
 
 \section{Inductive Learning}
 \label{induction}
-Throughout the learning process, the agent accumulates positive examples and learn hypothesis H. 
+Throughout the learning process, the agent accumulates positive examples and learn hypothesis H.
 
 Our learning task is XXX.
 
 In order to execute ILASP, the following definitions are supplied as well as the positive examples,
 
 \subsection{Search Space}
-In order to execute ILASP, a \textit{search space} of possible hypotheses is required, which is defined using a \textit{language bias}. 
+In order to execute ILASP, a \textit{search space} of possible hypotheses is required, which is defined using a \textit{language bias}.
 
 \begin{equation}
-\begin{split}    
+\begin{split}
 &\textsf{\#modeh(state\_after(var(cell))).}\\
 &\textsf{\#modeb(1, adjacent(const(action), var(cell), var(cell))).} \\
 &\textsf{\#modeb(1, state\_before(var(cell)), (positive)).} \\
@@ -135,7 +165,7 @@ In order to execute ILASP, a \textit{search space} of possible hypotheses is req
 &\textsf{\#modeb(1, wall(var(cell))).} \\
 \end{split}
 \end{equation}
-Without these in the form of mode bias, the search space for ILASP will be empty. 
+Without these in the form of mode bias, the search space for ILASP will be empty.
 
 \begin{equation}
 \begin{split}
@@ -149,7 +179,7 @@ Without these in the form of mode bias, the search space for ILASP will be empty
 
 where \textit{var(t)} and \textit{const(t)} are a placeholder for variable and constant terms of type t respectively.
 
-\textit{const(t)} must be specified as \#constant(t,c), where t is a type and c is a constant term. 
+\textit{const(t)} must be specified as \#constant(t,c), where t is a type and c is a constant term.
 In our environment, action is specified as constant since ILASP should learn different hypothesis for each action.
 
 \begin{equation}
@@ -162,20 +192,20 @@ In our environment, action is specified as constant since ILASP should learn dif
 \end{equation}
 
 As we describe in XXX, the search space increases in propotion to the complexity of learning tasks, which slows down the learning process.
-For example, the search space in this particular setting is in XX. 
+For example, the search space in this particular setting is in XX.
 
-\#max\_penalty defines the maximum size of the hypothesis, by default it is 15. 
+\#max\_penalty defines the maximum size of the hypothesis, by default it is 15.
 Increasing \#max\_penalty allows ILASP to learn longer hypothesis in expense of longer computation.
 \#max\_penalty(50).
 
-Together with the above defition as well as accumulated positive examples, ILASP is able to learn an hypothesis. The quality of H depends on the experiences for the agent. 
-For example, In the early phase of learning, the agent does not have many examples, and learns an hypothesis that may not be insightfull. 
-For example, if the agent has only one positive example, 
+Together with the above defition as well as accumulated positive examples, ILASP is able to learn an hypothesis. The quality of H depends on the experiences for the agent.
+For example, In the early phase of learning, the agent does not have many examples, and learns an hypothesis that may not be insightfull.
+For example, if the agent has only one positive example,
 
 Next, the scope of \textit{cell} are defined, as cell((0..X, 0..Y)), where X and Y are size of width and height respectively.
 
 Finally, since our learning task is the rule of the game, which involve state transition, it needs to know how it means to be "being next to XX",
-Therefore the following assumptions are provided as background knowledge. 
+Therefore the following assumptions are provided as background knowledge.
 \begin{equation}
 \begin{split}
 &\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V1), action(right), not wall(V0).}\\
@@ -185,35 +215,35 @@ Therefore the following assumptions are provided as background knowledge.
 \end{split}
 \end{equation}
 
-This definition itself could be learnt by setting another learning tasks, and it is a potential learning problem. 
-% TODO state represetation 
-However, we focus on learning task of the rule of the game in this paper. 
+This definition itself could be learnt by setting another learning tasks, and it is a potential learning problem.
+% TODO state represetation
+However, we focus on learning task of the rule of the game in this paper.
 
 The full details for ILASP learning tasks is described in Appendix XXX.
 Positive excludes the possibility of negation as a failure in order to reduce the search space.
 
-Future research will relax these assumptions and attemp to learn more general hypothesis, 
-e.g learning adjacent defintion. 
+Future research will relax these assumptions and attemp to learn more general hypothesis,
+e.g learning adjacent defintion.
 
-These learnt H will be used to generate a plan in the abduction phase. 
+These learnt H will be used to generate a plan in the abduction phase.
 
-After executing the plan, the agent will have more positive examples, which will be used to improve the quality of H. 
+After executing the plan, the agent will have more positive examples, which will be used to improve the quality of H.
 
 The learnt hypothesis is XXX
 
-This hypothesis, for example, does not explain how to move "down". In order to learn how to move "down", it needs an positive example of moving up. 
+This hypothesis, for example, does not explain how to move "down". In order to learn how to move "down", it needs an positive example of moving up.
 
 later on H improving as we collect more examples as well as background knowledge.
 
 \section{Plan Genreation}
 \label{Plan_genreation}
 
-Once the agent find the goal once, we can generate a plan using the current hypothesis by solving Answer Set Program. 
+Once the agent find the goal once, we can generate a plan using the current hypothesis by solving Answer Set Program.
 
-If the hypotheses were not accurate, clingo might not generate all the actions leading to the goals. 
+If the hypotheses were not accurate, clingo might not generate all the actions leading to the goals.
 
 The syntax of ASP is different from ILASP phase, because we need to include time sequence when solving ASP.
-In ILASP, it is only state\_before and staet\_after, but in plan generation, there will be more than one state transition. 
+In ILASP, it is only state\_before and staet\_after, but in plan generation, there will be more than one state transition.
 % These conversion are done
 
 \begin{equation}
@@ -223,8 +253,8 @@ In ILASP, it is only state\_before and staet\_after, but in plan generation, the
 \end{split}
 \end{equation}
 
-This choice rule states that action must be one of four actions (defined maximum and minimum numbers in 1), 
-T is the time step at which the agent takes each action, unless \textit{finished(T)} is grounded. 
+This choice rule states that action must be one of four actions (defined maximum and minimum numbers in 1),
+T is the time step at which the agent takes each action, unless \textit{finished(T)} is grounded.
 
 \textit{finished(T)} is associated with goal definition, and it is defined as:
 
@@ -240,19 +270,19 @@ T is the time step at which the agent takes each action, unless \textit{finished
 \section{Plan Execution}
 \label{Plan execution}
 
-the plan generated by clingo is a set of states and actions. 
+the plan generated by clingo is a set of states and actions.
 
-states are of the form state\_at((X,Y),T), where X and Y represent x-axi and y-axi in a maze respectively, T represents a time that the agent is at 
-this particular X,Y cell. 
+states are of the form state\_at((X,Y),T), where X and Y represent x-axi and y-axi in a maze respectively, T represents a time that the agent is at
+this particular X,Y cell.
 
-action(A,T) tells which action the agent should take at each time. By following the actions, the agent should collect both predicted state that the 
+action(A,T) tells which action the agent should take at each time. By following the actions, the agent should collect both predicted state that the
 agent will end up, and the observed state that the agent actually end up. If there is a difference between these two, either B or H do not correctly represent
-the model of the true environment, so needs to be improved. 
+the model of the true environment, so needs to be improved.
 
-When the agent encounters a new environment (e.g a new wall), this new information will be added to its background, which will be used to improved the hypothesis 
-next time ILASP gets executed. 
+When the agent encounters a new environment (e.g a new wall), this new information will be added to its background, which will be used to improved the hypothesis
+next time ILASP gets executed.
 
-For example, 
+For example,
 \begin{equation*}
 \begin{split}
 &\textsf{state\_at((1,1),1), action(right,1)}\\
@@ -263,27 +293,27 @@ For example,
 \end{split}
 \end{equation*}
 
-At the start of the learning, H is usually not correct or too general, using this H will generate lots of answer sets that are not useful for the planning. 
-These examples will be collected and included as exclusions of a new positive example. 
+At the start of the learning, H is usually not correct or too general, using this H will generate lots of answer sets that are not useful for the planning.
+These examples will be collected and included as exclusions of a new positive example.
 
-% For example, 
+% For example,
 % XXX
 
-To avoid the agent from being stuck in a sub-optimal plan, the agent deliberately discards the plan and takes an random action with a probability of 
-epsilon (which is less than 1) TODO define this mathematically. 
+To avoid the agent from being stuck in a sub-optimal plan, the agent deliberately discards the plan and takes an random action with a probability of
+epsilon (which is less than 1) TODO define this mathematically.
 When the agent deviates from the planning, it often discovers new information, which will be added to B.
-Exploration is necessary to make sure that the agent might discovers a shorter path than the current plan, which will be demonstrated in the experiment. 
+Exploration is necessary to make sure that the agent might discovers a shorter path than the current plan, which will be demonstrated in the experiment.
 
 Define them here
 
-ILP(RL) works by 
+ILP(RL) works by
 
-It buids the model of the environment by improving two internal concepts: hypothesis H and background knowledge B. 
-% First, an agent explores an environment by taking random actions until it reaches the goal. 
+It buids the model of the environment by improving two internal concepts: hypothesis H and background knowledge B.
+% First, an agent explores an environment by taking random actions until it reaches the goal.
 
-In the further research, we could experiment with a more sophisticated exploration strategy, such as XXX and YYY. 
+In the further research, we could experiment with a more sophisticated exploration strategy, such as XXX and YYY.
 
-This is formally defined in Algorithm. 
+This is formally defined in Algorithm.
 
 \begin{algorithm}
 \caption{ILP(RL)}\label{euclid}
@@ -299,17 +329,17 @@ This is formally defined in Algorithm.
         \If {$ \textit{observed state} \neq \textit{predicted state} $}
             \State $\textit{H} \gets \text{run ILASP(T)}$
             \EndIf
-        % \If {$ \textit{observed state not equal \textit{predicted state $} 
+        % \If {$ \textit{observed state not equal \textit{predicted state $}
         % \EndIf
     \EndWhile
     % \If {$ new \ background \ encountered $}
     %     % \State $\textit{H} \gets \text{run ILASP(T)}$
     % \EndIf
-    % \For{i from 0 to N} 
+    % \For{i from 0 to N}
     %     \If {$ A[i]\ is \ in \ T$}
     %         \State \Return $FALSE$
-    %     \Else 
-    %         \State Add A[i] to T   
+    %     \Else
+    %         \State Add A[i] to T
     %     \EndIf
     % \EndFor
 % \State \Return $TRUE$
@@ -320,34 +350,27 @@ This is formally defined in Algorithm.
 \end{algorithmic}
 \end{algorithm}
 
-Everytime the agent executes an action by following the plan, it checks whether the observed state is that is expected. 
+Everytime the agent executes an action by following the plan, it checks whether the observed state is that is expected.
 
 If there is a difference between the two, either
 
 B is incorrect
 
-H is not sophisticated enough, 
+H is not sophisticated enough,
 
-If that is the case, the agent runs ILASP again using more positive examples it collected during the plan execution. 
-
-% \begin{itemize}
-% \item States: XXX
-% \item Actions: The agent can move up, down, right or left
-% \item Rewards: XXX
-% \item Transitions: XXX
-% \end{itemize}
+If that is the case, the agent runs ILASP again using more positive examples it collected during the plan execution.
 
 \section{Exploration}
 \label{exploration}
 
 ILP(RL) kicks in once the agent reaches a goal once. However it is likely that the agent has not seen all the environment
-and therefore is likely to be in a sub-optimal plan. Therefore, similar to RL algorithm, the agent also has to explore a new state. 
-There are a number of exploration strategy in RL (such as Boltzman approach, Count-based and Optimistic Initial value TODO REFERENCE). 
-One of the most commonly used strategy is $\epsilon$-greedy strategy. As described in Chapter XXX, the agent takes an random action 
+and therefore is likely to be in a sub-optimal plan. Therefore, similar to RL algorithm, the agent also has to explore a new state.
+There are a number of exploration strategy in RL (such as Boltzman approach, Count-based and Optimistic Initial value TODO REFERENCE).
+One of the most commonly used strategy is $\epsilon$-greedy strategy. As described in Chapter XXX, the agent takes an random action
 
 This strategy may not be appropriate in cases there safety is a priority (since it is random action.)
-It is simple to implement. 
-In the case of ILP(RL), the agent discard the plan from the abduction with a probably of epsilon and takes a random action in order to avoid getting stuck in a sub-optimal path. 
+It is simple to implement.
+In the case of ILP(RL), the agent discard the plan from the abduction with a probably of epsilon and takes a random action in order to avoid getting stuck in a sub-optimal path.
 When the agent takes an random action and move into a new state, the agents creates a new plan from the new state and continue to move forward.
 
 This exploration point will be highlighted in Experiment XXX.
@@ -368,10 +391,10 @@ The reason for using random exploration is that it can be used for both benchmar
 \includegraphics[width=0.5\textwidth]{./figures/experiment1}
 \caption{VGDL game example}
 \label{VGDL_sample}
-\end{figure}    
+\end{figure}
 
 We use the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
-The VGDL allows users to easily craft their own environments, which makes us possible to do various experiments without relying on a default environment. The VGDL platform provides an interface with OpenAI Gym (\cite{Brockman2016}), which is a commonly used benchmark platform. 
+The VGDL allows users to easily craft their own environments, which makes us possible to do various experiments without relying on a default environment. The VGDL platform provides an interface with OpenAI Gym (\cite{Brockman2016}), which is a commonly used benchmark platform.
 The base game is a simple maze as shown in Figure \ref{VGDL_sample}.
 There are 3 different types of cells: a goal cell, walls and paths. The agent can take 4 different actions: up, down, right and left.
 The environment is not known to the agent in advance, and it attempts to find the goal by exploring the environment.
@@ -380,9 +403,13 @@ Once the agent reaches the goal, or termination state, that episode is finished 
 
 \subsection{Technology}
 
-All of the codes are written in Python 3 and ILASP 2i \footnote{https://sourceforge.net/projects/spikeimperial/files/ILASP/}
+All of the codes are written in Python 3 for the whole pipeline described in \ref{fig:pipeline}, where ILASP 2i\footnote{https://sourceforge.net/projects/spikeimperial/files/ILASP/} is used for inductive learning and clingo 5 is used for solving answer sets for a plan.
 
-Clingo 5
-ILASP cache.
-The code is available in https://github.com/921kiyo/ILPRL. 
+ILASP version 2i, which is designed to scale with the numbers of examples.
 
+ILASP cache caches relevant sets of examples, so everytime ILASP runs the same task except extra examples each time, ILASP runs from where it finished the learning last time and start from there rather than going through all the examples again.
+The code is available in https://github.com/921kiyo/ILPRL.
+
+The bottleneck for the learning in terms of learning time is hypothesis improvement. In order to optimise it,
+
+ILASP 2i

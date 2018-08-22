@@ -83,6 +83,12 @@ Watkins, ``{Learning from Delayed Reward}.''
 G.~Brockman, V.~Cheung, L.~Pettersson, J.~Schneider, J.~Schulman, J.~Tang, and
   W.~Zaremba, ``{OpenAI Gym},'' jun 2016.
 
+\bibitem{Sridharan2017}
+M.~Sridharan, B.~Meadows, and R.~Gomez, ``{What can I not do? Towards an
+  Architecture for Reasoning about and Learning Affordances},'' {\em
+  International Conference on Automated Planning and Scheduling}, no.~Icaps,
+  pp.~461--469, 2017.
+
 \bibitem{Su2017}
 J.~Su, D.~V. Vargas, and S.~Kouichi, ``{One pixel attack for fooling deep
   neural networks},'' oct 2017.
@@ -116,11 +122,5 @@ D.~Apeldoorn and G.~Kern-isberner, ``{Towards an Understanding of What Is
 L.~A. Ferreira, R.~A.~C. Bianchi, P.~E. Santos, and R.~L. de~Mantaras,
   ``{Answer Set Programming for Non-Stationary Markov Decision Processes},''
   may 2017.
-
-\bibitem{Sridharan2017}
-M.~Sridharan, B.~Meadows, and R.~Gomez, ``{What can I not do? Towards an
-  Architecture for Reasoning about and Learning Affordances},'' {\em
-  International Conference on Automated Planning and Scheduling}, no.~Icaps,
-  pp.~461--469, 2017.
 
 \end{thebibliography}
