@@ -161,7 +161,7 @@ In order to execute ILASP, a \textit{search space} of possible hypotheses is req
 \begin{equation}
 \begin{split}
 &\textsf{\#modeh(state\_after(var(cell))).}\\
-&\textsf{\#modeb(1, adjacent(const(action), var(cell), var(cell))).} \\
+&\textsf{\#modeb(1, adjacent(const(action), var(cell), var(cell)), (positive)).} \\
 &\textsf{\#modeb(1, state\_before(var(cell)), (positive)).} \\
 &\textsf{\#modeb(1, action(const(action)),(positive)).} \\
 &\textsf{\#modeb(1, wall(var(cell))).} \\
@@ -169,12 +169,11 @@ In order to execute ILASP, a \textit{search space} of possible hypotheses is req
 \end{equation}
 Without these in the form of mode bias, the search space for ILASP will be empty.
 
-(positive) states that the predicates only appears as positive predicates and not negation as failure. In this case, wall(var(cell)) could appears as "not wall". 
+(positive) states that the predicates only appears as positive predicates and not negation as failure, therefore reducing the seach space. In this case, wall(var(cell)) could appears as "not wall". 
 var is variables of type cell. 
 action is constant, means it has to be grounded as a particular action, because we want to learn different hypothesis for different action. 
 
 where \textit{var(t)} and \textit{const(t)} are a placeholder for variable and constant terms of type t respectively.
-
 
 \textit{const(t)} must be specified as \#constant(t,c), where t is a type and c is a constant term.
 In our environment, action is specified as constant since ILASP should learn different hypothesis for each action.
@@ -194,8 +193,8 @@ For example, the search space in this particular setting is in XX.
 
 \subsection{Background Knowledge}
 
-In addition to the above search space, the following definition is given. This is an additional assumption, 
-that the agent is assumed to be able to see surrounding cells 
+In addition to the above search space, the following background knowledge is given. This is an additional assumption, 
+that the agent is assumed to be able to see surrounding cells. This definition of adjacent is required in order to learn the state transition.
 In normal RL senarios, the agent is only able to perceive MDP of a state that the agent is currently at. 
 
 \begin{equation}
@@ -206,8 +205,6 @@ In normal RL senarios, the agent is only able to perceive MDP of a state that th
 &\textsf{adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).} \\
 \end{split}
 \end{equation}
-
-
 
 \#max\_penalty defines the maximum size of the hypothesis, by default it is 15.
 Increasing \#max\_penalty allows ILASP to learn longer hypothesis in expense of longer computation.
@@ -229,6 +226,14 @@ Therefore the following assumptions are provided as background knowledge.
 &\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}
 \end{split}
 \end{equation}
+
+Learnt hypotheses are improved when a new positive example is added and the current hypothesis does not cover the new positive example.
+It it does cover it, there is no need to rerun ILASP again. 
+
+\begin{examp} \normalfont (Inductive Learning).
+Using the same example as
+XXX
+\end{examp}
 
 This definition itself could be learnt by setting another learning tasks, and it is a potential learning problem.
 % TODO state represetation
@@ -253,13 +258,15 @@ later on H improving as we collect more examples as well as background knowledge
 \section{Plan Genreation}
 \label{Plan_genreation}
 
+The plan generation is executed only after the agent finds the goal. Untile the goal is found, the agent keeps exploraing randomly.
+In RL algorithm, the agent also needs the positive reward by reaching a termination state. 
 Once the agent find the goal once, we can generate a plan using the current hypothesis by solving Answer Set Program.
 
 If the hypotheses were not accurate, clingo might not generate all the actions leading to the goals.
 
 The syntax of ASP is different from ILASP phase, because we need to include time sequence when solving ASP.
-In ILASP, it is only state\_before and staet\_after, but in plan generation, there will be more than one state transition.
-% These conversion are done
+In ILASP, it is only state\_before and state\_after, but in plan generation, there will be more than one state transition.
+These syntax conversion needs to be done for learnt hypothesis
 
 \begin{equation}
 \begin{split}
@@ -282,19 +289,42 @@ T is the time step at which the agent takes each action, unless \textit{finished
 \end{split}
 \end{equation}
 
+\begin{examp} \normalfont (Plan Generation).
+As shown in example XX, the learnt example will be converted by adding time sequence for ASP plan generation.
+
+Together with hypothesis, the background knowledge will used to solve for answer sets program. 
+
+However, since hypothesis is not complete, there is more than one answer set at each time step. Since one of the answer sets state\_at is correct, the rest will be in the exclusions in the answer set, 
+which further improve the hypothesis.
+
+
+In this example, the following is the answer set program
+
+The answer set using the hypothesis XXX is 
+
+XXX. 
+
+The answer set using the improved hypothesis is XXX, 
+
+Which correctly returns a sequence of actions and predicted states. 
+
+\end{examp}
+
 \section{Plan Execution}
 \label{Plan execution}
 
-the plan generated by clingo is a set of states and actions.
+The answer sets returned by clingo is a set of states and actions, which is the plan of the agent at each time step.
 
-states are of the form state\_at((X,Y),T), where X and Y represent x-axi and y-axi in a maze respectively, T represents a time that the agent is at
+The set of states is of the form state\_at((X,Y),T), where X and Y represent x-axi and y-axi in a maze respectively, T represents a time that the agent is at
 this particular X,Y cell.
 
 action(A,T) tells which action the agent should take at each time. By following the actions, the agent should collect both predicted state that the
 agent will end up, and the observed state that the agent actually end up. If there is a difference between these two, either B or H do not correctly represent
-the model of the true environment, so needs to be improved.
+the model of the environment, so needs to be improved.
 
-When the agent encounters a new environment (e.g a new wall), this new information will be added to its background, which will be used to improved the hypothesis
+When the agent encounters a new environment (e.g a new wall), this new information will be added to its background, which will be used to improved the hypothesis. 
+Similarly, after executing an action by following the generated plan, the agent receives a new positive example. If the new positive example is not covered by the current hypotheses, 
+ILASP reruns using the new example to improve the hypotheses. 
 next time ILASP gets executed.
 
 For example,
@@ -310,9 +340,6 @@ For example,
 
 At the start of the learning, H is usually not correct or too general, using this H will generate lots of answer sets that are not useful for the planning.
 These examples will be collected and included as exclusions of a new positive example.
-
-% For example,
-% XXX
 
 To avoid the agent from being stuck in a sub-optimal plan, the agent deliberately discards the plan and takes an random action with a probability of
 epsilon (which is less than 1) TODO define this mathematically.
@@ -336,7 +363,6 @@ This is formally defined in Algorithm.
 \Procedure{ILP(RL) (B and E)}{}
 
 \While {True}
-
     \State $\textit{H (inductive solutions)} \gets \text{run ILASP(T)}$
     \State $\textit{plan(actions, states) answer sets} \gets \text{AS(B, H)}$
     \While {actions in P}
@@ -378,21 +404,59 @@ If that is the case, the agent runs ILASP again using more positive examples it 
 \section{Exploration}
 \label{exploration}
 
+In RL, there is a tradeoff between exploration and exploitation. While the agent exploit what is already experienced and knows the best action selection so far, 
+it also needs to explore by taking a new action to discover a new state, which might make the agent discover an even shorter path and therefore higher total rewards in the future or in the long term. 
+This exploration-exploitation issues has been an active reseach area in RL. 
+In our case, if the goal is found and the model is correct, it is likely that following the plan will maximize the total rewards, 
+
 ILP(RL) kicks in once the agent reaches a goal once. However it is likely that the agent has not seen all the environment
 and therefore is likely to be in a sub-optimal plan. Therefore, similar to RL algorithm, the agent also has to explore a new state.
 There are a number of exploration strategy in RL (such as Boltzman approach, Count-based and Optimistic Initial value TODO REFERENCE).
 One of the most commonly used strategy is $\epsilon$-greedy strategy. As described in Chapter XXX, the agent takes an random action
+
+Another common way is to decay the $\epsilon$ by the number of episodes, since at the beginning it is more likely that the agent has not fully explored the environment and therefore higher epsilon.
+
+
+
+While statistical RL algorithms, such as Q-learning or Tile-coding explained in XX, update Q-value by a facter of alpha, 
+ILP(RL) tends to strictly follow the plan the generated. Also it is known that model-based RL tends to get stuck in a sub-optimal if the model is incorrect, ILP(RL) also needs a exploration
+And since the agent does not know when the perfect hypothesis in a particular environment is fully realised, it needs to keep exploring the environment even though
+
+
 
 This strategy may not be appropriate in cases there safety is a priority (since it is random action.)
 It is simple to implement.
 In the case of ILP(RL), the agent discard the plan from the abduction with a probably of epsilon and takes a random action in order to avoid getting stuck in a sub-optimal path.
 When the agent takes an random action and move into a new state, the agents creates a new plan from the new state and continue to move forward.
 
+
+
 This exploration point will be highlighted in Experiment XXX.
 
 Epsilon needs to be larger than Q-learnig because
 
 The reason for using random exploration is that it can be used for both benchmark and ILP(RL) and thus enables us to do a fair comparision between them.
+
+\begin{examp} \normalfont (Plan Generation).
+Suppose the plan of the agent is the following. 
+
+In our implementation, exploration strategy is epsilon, so with the probablity of XX, the agent discards the plan and randomly selects an actions. 
+
+Suppose the agent decides to take an random action and moves "up", which may help it discover a new state. 
+From the new state, the agent again plan to the goal from the current state. In this case, the new plan is 
+
+XXX. 
+
+After taking an random action, the agent again has a probably of epsilon for taking an random action. 
+Throughout following the new plan, there is a small probalbility of chance that the agent takes an random action.
+
+\end{examp}
+    
+The current pipeline simply uses a simple random exploration, therefore even if the agent takes an random action and goes to a different state other than the planed one, 
+the agent does the replan from the new state and quickly correct to the original plan path. This means it is likely that the agent of ILP(RL) only explores the adjacent cells and if there is a shorter path or new state
+
+far from the current state, the agent is unlikely be able to find the new state unless epsilon value is very high. 
+
 
 \section{Implementation}
 \label{Implementation}

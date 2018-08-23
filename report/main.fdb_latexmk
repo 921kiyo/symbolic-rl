@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1535046500 "main.aux" "main.bbl" "main" 1535046500
+["bibtex main"] 1535054523 "main.aux" "main.bbl" "main" 1535054523
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/ieeetr.bst" 1292289607 18361 1a00e58565e7f19bf2b3e1bfb82254ae ""
-  "main.aux" 1535046500 18345 c5d6d7184c8e0078f3364f1a24503cd7 ""
+  "main.aux" 1535054523 18345 43b64bdaa79ce328d59b0c335c90f4db ""
   "main.bcf" 0 -1 0 ""
   "references.bib" 1534598131 95836 599fd9180998a37dcc7bc675c28ead2c ""
   (generated)
   "main.bbl"
-["pdflatex"] 1535046498 "/home/kiyo/Desktop/Individual_project/report/main.tex" "main.pdf" "main" 1535046498
+["pdflatex"] 1535054522 "/home/kiyo/Desktop/Individual_project/report/main.tex" "main.pdf" "main" 1535054522
   "/etc/texmf/web2c/texmf.cnf" 1532697533 1101 af7716885e081ab43982cab7b4672c1a ""
   "/home/kiyo/Desktop/Individual_project/report/main.tex" 1535043726 48656 300c0088f0ad9e680923d0bf08b04864 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -158,7 +158,7 @@
   "chapters/conclusion.tex" 1535043919 210 e6ebc77e4385ef7f01f3720970fe7c97 ""
   "chapters/discussion.tex" 1534869768 5597 e6536fa97e0881007367441215faf177 ""
   "chapters/evaluation.tex" 1534980396 17689 107fea8188760d998eb1fddc0db843ec ""
-  "chapters/framework.tex" 1535046496 21579 4e6be2a41c7e44a094d832edf59ef2a5 ""
+  "chapters/framework.tex" 1535054522 25758 10ba5197e4e71c8daf9c43d3f46e6b09 ""
   "chapters/introduction.tex" 1533137493 3075 6084023421a05ddf3b3cdaf61ff4422e ""
   "chapters/related_work.tex" 1528968270 4591 110660bc7b0a41382b8370e17c5f97ee ""
   "figures/agent_env.png" 1527707744 8876 70d56925069c74e7a7bf25077cd34dbe ""
@@ -184,16 +184,16 @@
   "figures/pipeline_example1.png" 1534980396 10752 0bc8aacf21eaee08cb2e4486538909d2 ""
   "figures/tile_coding.png" 1534774957 21948 268751f20df1164f66f571a1b94bbe39 ""
   "includes.tex" 1528479218 3009 27f428f26b30ba8d8d7d5c68b1a20cee ""
-  "main.aux" 1535046498 8 a94a2480d3289e625eea47cd1b285758 ""
+  "main.aux" 1535054522 8 a94a2480d3289e625eea47cd1b285758 ""
   "main.bbl" 0 -1 0 "bibtex main"
   "main.tex" 1535043726 48656 300c0088f0ad9e680923d0bf08b04864 ""
   "notation.tex" 1526573725 362 dde8d17bdd645c497ea48e05d51963bd ""
   "titlepage.tex" 1526573725 1995 b33c89e3a284110d3cc1b5b405785394 ""
   (generated)
-  "main.pdf"
-  "main.out"
-  "main.lot"
   "main.aux"
-  "main.log"
-  "main.toc"
+  "main.out"
   "main.lof"
+  "main.log"
+  "main.lot"
+  "main.toc"
+  "main.pdf"
