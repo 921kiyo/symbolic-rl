@@ -21,7 +21,7 @@ TIME_RANGE = 250
 base_dir = os.path.dirname(os.path.abspath(__file__))
 ACTION_SPACE = 4 # env.action_space.n
 
-def make_epsilon_greedy_policy(tiles, epsilon, nA):
+def make_epsilon_greedy_policy(tiles, xy, epsilon, nA):
     def policy_fn(height, width, x,y, episode):
         new_epsilon = epsilon*(1/(episode+1))
         # new_epsilon = epsilon
@@ -29,7 +29,7 @@ def make_epsilon_greedy_policy(tiles, epsilon, nA):
         
         actions = np.ones(4, dtype=float)
         for i in range(0,4):
-           actions[i] = tiles.value(x, y, i)
+            actions[i] = compute_value(tiles, xy, x,y,i)
 
         best_action = np.argmax(actions)
         A[best_action] += (1.0 - new_epsilon)
@@ -71,7 +71,7 @@ class TileCoding:
         self.weights = np.random.rand(self.size_y, self.size_x*4)
     
     def state_action_features(self,x,y,action):   
-        return self.action_features(action)*self.compute_tile_features(x,y)
+        return self.action_features(action)*self.state_features(x,y)
 
     def action_features(self, action):
         action_features = np.zeros((self.size_y,self.size_x*4))
@@ -80,7 +80,7 @@ class TileCoding:
         action_features[:,start:end] = 1
         return action_features
 
-    def compute_tile_features(self, x,y):
+    def state_features(self, x,y):
         # size_x * size_y is the number of tiles in tiling        
         tile_features = np.zeros((self.size_y,self.size_x*4))
         x_tile = int(x // self.width_tile)
@@ -98,27 +98,19 @@ class TileCoding:
             for j in range(len(one_weight[i])):
                 total += one_weight[i][j]
         return total
-    def update(self, w_delta):
-        self.weights += w_delta
-# def compute_tile_features(height, width, x,y):
+    def update(self, w_delta,x, y, action):
+        state_action_features = self.state_action_features(x,y, action)
+        one_weight = state_action_features*self.weights
+        weights_delta = one_weight*w_delta
+        # import ipdb; ipdb.set_trace()
+        self.weights -= weights_delta
+
+# def tile_features(height, width, x,y):
 
 #     feature_vectors = np.zeros((height,width), dtype=float)
 #     feature_vectors[y][x] = 1
 #     return feature_vectors
 
-# def compute_features(height, width, x, y):
-
-#     '''
-#      Output:
-#         x(s)
-#     '''
-#     tile_features = compute_tile_features(height, width, x,y) # |height*width|
-
-#     # walls_features = compute_wall_features(x,y)
-#     # xy_features = compute_xy_features(height, width, x,y) # only |2|, x and y
-#     # features = np.stack([tile_features])
-#     return tile_features
-#     # return features
 
 # def compute_state_action_feature(height, width,x,y, action):
 #     '''
@@ -144,11 +136,76 @@ class TileCoding:
 #     state_action_features = compute_state_action_feature(height, width, x,y,action) # x(s,a)
 #     return state_action_features * weights # v(s,a) = w*x(s,a)
 
-def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.2, epsilon_decay=1.0):
+class XYFeature:
+    def __init__(self, width, height):
+        self.x_weights = np.random.rand(4)
+        self.y_weights = np.random.rand(4)
+        self.width = width
+        self.height = height
+
+    def state_features(self,x,y):
+        normalised_x = int(x)/int(self.width)
+        normalised_y = int(y)/int(self.height)
+        return [normalised_x, normalised_y]
+
+    def action_features(self,action_index):
+        actions = np.zeros(4)
+        actions[action_index] = 1
+        return actions
+
+    def state_action_features(self,x,y,action):
+        state_features = self.state_features(x,y)
+        return [state_features[0]*self.action_features(action), state_features[1]*self.action_features(action)]
+
+    def value(self,x,y,action):
+        state_action_features = self.state_action_features(x,y,action)
+        x_value = self.x_weights*state_action_features[0] 
+        y_value = self.y_weights*state_action_features[1]
+        total = 0
+        for i in range(4):
+            total += x_value[i]
+            total += y_value[i]
+        return total
+
+    def update_x(self, w_delta,x, y, action):
+        state_action_features = self.state_action_features(x,y,action)
+        # import ipdb; ipdb.set_trace()
+        weights_x = state_action_features[0]*w_delta
+        self.x_weights -= weights_x
+    
+    def update_y(self, w_delta,x, y, action):
+        state_action_features = self.state_action_features(x,y,action)
+        # import ipdb; ipdb.set_trace()
+        weights_y = state_action_features[1]*w_delta
+        self.y_weights -= weights_y
+
+
+def compute_features(tiles, xy, x, y):
+    '''
+     Output:
+        x(s)
+    '''
+    tile_features = tiles.state_features(x,y)
+    xy_features = xy.state_features(x,y)
+
+    return tile_features,xy_features
+
+def compute_value(tiles, xy, x,y,action):
+    tile_value = tiles.value(x,y,action)
+    xy_value = xy.value(x,y,action)
+    return tile_value + xy_value
+
+def compute_update(delta, tiles, xy, x, y, action):
+    tiles.update(delta, x, y, action)
+    xy.update(delta, x, y, action)
+
+def q_learning(env, num_episodes, discount_factor=0.9, alpha=0.5, epsilon=0.2, epsilon_decay=1.0):
     height = env.unwrapped.game.height
     width = env.unwrapped.game.width
 
     tiles = TileCoding(int(width), int(height), width_tile=2, height_tile=2, offset_x=0, offset_y=0, no_tiles=1)
+    xy = XYFeature(int(width), int(height))
+
     # wall_list = induction.get_all_walls(env)
 
     stats = plotting.EpisodeStats(
@@ -160,7 +217,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.2, eps
     # weights = np.random.rand(height, width*4)
     # weights = np.tile(np.zeros((height, width), dtype=float), 4)
 
-    policy = make_epsilon_greedy_policy(tiles, epsilon, ACTION_SPACE)
+    policy = make_epsilon_greedy_policy(tiles, xy, epsilon, ACTION_SPACE)
     for i_episode in range(num_episodes):
         print("------------------------------")
 
@@ -202,9 +259,10 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.2, eps
             # get x(s,a)
             # state_action_features = compute_state_action_feature(height, width, int(previous_state[0]),int(previous_state[1]),action)
             state_action_features = tiles.state_action_features(int(previous_state[0]),int(previous_state[1]),action)
+            state_action_features2 = xy.state_action_features(int(previous_state[0]),int(previous_state[1]),action)
 
-            v_now = tiles.value(int(previous_state[0]),int(previous_state[1]), action)
-            v_next = tiles.value(int(next_state[0]),int(next_state[1]), best_action)
+            v_now = compute_value(tiles, xy, int(previous_state[0]),int(previous_state[1]), action)
+            v_next = compute_value(tiles, xy, int(next_state[0]),int(next_state[1]), best_action)
 
             # state_action_features = compute_state_action_feature(height, width, int(previous_state[0]),int(previous_state[1]),action)
             # v_now = compute_value(height, width, int(previous_state[0]),int(previous_state[1]),action, weights)
@@ -215,7 +273,13 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.2, eps
             # v_next = compute_value(height, width, int(next_state[0]),int(next_state[1]),action_next, weights)
             
             weights_delta = alpha*(reward + discount_factor*v_next - v_now)*state_action_features
-            tiles.update(weights_delta)
+            tiles.update(weights_delta, int(previous_state[0]),int(previous_state[1]), action)
+            weights_delta_x = alpha*(reward + discount_factor*v_next - v_now)*state_action_features2[0]
+            weights_delta_y = alpha*(reward + discount_factor*v_next - v_now)*state_action_features2[0]            
+            xy.update_x(weights_delta_x, int(previous_state[0]),int(previous_state[1]), action)
+            xy.update_y(weights_delta_y, int(previous_state[0]),int(previous_state[1]), action)
+
+            # compute_update(weights_delta, tiles, xy, int(previous_state[0]),int(previous_state[1]), action)
 
             previous_state = next_state
             if done:
@@ -231,7 +295,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.2, eps
 # env = gym.make('vgdl_aaa_small-v0')
 # env = gym.make('vgdl_experiment4_after-v0')
 
-env = gym.make('vgdl_experiment1-v0')
+env = gym.make('vgdl_experiment2-v0')
 # env = gym.make('vgdl_aaa_small-v0')
 
 stats = q_learning(env, 100, alpha=0.03)
