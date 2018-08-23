@@ -25,7 +25,7 @@ def average_score(base_dir, pkl_dir, prefix, num_episodes, num_pkl):
     stats = EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes),
-        episode_ILASP=np.zeros(num_episodes))
+        episode_runtime=np.zeros(num_episodes))
     
     for pkl in range(num_pkl):
         filename = prefix + str(pkl)
@@ -39,7 +39,7 @@ def average_ILASP(base_dir, pkl_dir, prefix, num_episodes, time_range, num_pkl):
     stats = EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes),
-        episode_ILASP=np.zeros(time_range))
+        episode_runtime=np.zeros(num_episodes))
     
     for pkl in range(num_pkl):
         filename = prefix + str(pkl)
