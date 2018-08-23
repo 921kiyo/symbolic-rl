@@ -149,11 +149,13 @@ The first postive examples contain two walls, wall((1,4)) and wall((4,2)), and t
 \label{induction}
 Throughout the learning process, the agent accumulates positive examples and learn hypothesis H.
 
-Our learning task is XXX.
+Our learning task is to find a hypothesis H < SM such that B U H has at least one answer set that extends at least one postiive example and none of the negative example.
 
-In order to execute ILASP, the following definitions are supplied as well as the positive examples,
+In order to execute inductive learning using ILASP, the following definitions are supplied as well as the positive examples,
 
 \subsection{Search Space}
+
+Hypotheses are a subset of a search space Sm using a language bias. In our case, the seach space should contain any conditions that defines a state after the transition.
 In order to execute ILASP, a \textit{search space} of possible hypotheses is required, which is defined using a \textit{language bias}.
 
 \begin{equation}
@@ -167,17 +169,12 @@ In order to execute ILASP, a \textit{search space} of possible hypotheses is req
 \end{equation}
 Without these in the form of mode bias, the search space for ILASP will be empty.
 
-\begin{equation}
-\begin{split}
-&\textsf{cell((0..7, 0..6)).}\\
-&\textsf{adjacent(right, (X+1,Y),(X,Y)) :- cell((X,Y)), cell((X+1,Y)).} \\
-&\textsf{adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).} \\
-&\textsf{adjacent(down, (X,Y+1),(X,Y)) :- cell((X,Y)), cell((X,Y+1)).} \\
-&\textsf{adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).} \\
-\end{split}
-\end{equation}
+(positive) states that the predicates only appears as positive predicates and not negation as failure. In this case, wall(var(cell)) could appears as "not wall". 
+var is variables of type cell. 
+action is constant, means it has to be grounded as a particular action, because we want to learn different hypothesis for different action. 
 
 where \textit{var(t)} and \textit{const(t)} are a placeholder for variable and constant terms of type t respectively.
+
 
 \textit{const(t)} must be specified as \#constant(t,c), where t is a type and c is a constant term.
 In our environment, action is specified as constant since ILASP should learn different hypothesis for each action.
@@ -188,11 +185,29 @@ In our environment, action is specified as constant since ILASP should learn dif
 &\textsf{\#constant(action, left).}\\
 &\textsf{\#constant(action, down).}\\
 &\textsf{\#constant(action, up).}\\
+&\textsf{cell((0..7, 0..6)).}
 \end{split}
 \end{equation}
 
 As we describe in XXX, the search space increases in propotion to the complexity of learning tasks, which slows down the learning process.
 For example, the search space in this particular setting is in XX.
+
+\subsection{Background Knowledge}
+
+In addition to the above search space, the following definition is given. This is an additional assumption, 
+that the agent is assumed to be able to see surrounding cells 
+In normal RL senarios, the agent is only able to perceive MDP of a state that the agent is currently at. 
+
+\begin{equation}
+\begin{split}
+&\textsf{adjacent(right, (X+1,Y),(X,Y)) :- cell((X,Y)), cell((X+1,Y)).} \\
+&\textsf{adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).} \\
+&\textsf{adjacent(down, (X,Y+1),(X,Y)) :- cell((X,Y)), cell((X,Y+1)).} \\
+&\textsf{adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).} \\
+\end{split}
+\end{equation}
+
+
 
 \#max\_penalty defines the maximum size of the hypothesis, by default it is 15.
 Increasing \#max\_penalty allows ILASP to learn longer hypothesis in expense of longer computation.
@@ -388,7 +403,7 @@ The reason for using random exploration is that it can be used for both benchmar
 
 \begin{figure}[!ht!b]
 \centering
-\includegraphics[width=0.5\textwidth]{./figures/experiment1}
+\includegraphics[width=0.5\textwidth]{./figures/env_sample}
 \caption{VGDL game example}
 \label{VGDL_sample}
 \end{figure}

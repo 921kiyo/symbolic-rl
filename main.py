@@ -266,7 +266,7 @@ env = gym.make('vgdl_experiment1-v0')
 
 temp_dir = os.path.join(cf.BASE_DIR, "result_pkl/experiment1")
 
-for i in range(30):
+for i in range(10,30):
     stats, stats_test,stats_ilasp = k_learning(env, 100, epsilon=0.1, record_prefix="exp1", is_link=False)
     plotting.store_stats(stats, temp_dir, "exp1_v{}".format(str(i)))
     plotting.store_stats(stats_test, temp_dir, "exp1_test_v{}".format(str(i)))
