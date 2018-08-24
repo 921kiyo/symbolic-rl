@@ -100,7 +100,7 @@ def get_exclusions(previous_state, next_state):
                 ")),state_after((" + str(exc4_x) + "," + str(exc4_y) + \
                 ")),state_after((" + str(exc5_x) + "," + str(exc5_y) + "))"
 
-def get_inc_exc(hypothesis, state_before, state_after, action, walls, cell_range):
+def get_inc_exc(hypothesis, state_before, state_after, action, walls, cell_range, link=None):
     helper.silentremove(cf.BASE_DIR, cf.GROUNDING)
 
     helper.append_to_file(hypothesis, cf.GROUNDING_DIR)
@@ -110,6 +110,8 @@ def get_inc_exc(hypothesis, state_before, state_after, action, walls, cell_range
     helper.append_to_file(cell_range, cf.GROUNDING_DIR)
     show = "#show state_after/1.\n"
     helper.append_to_file(show, cf.GROUNDING_DIR)
+    if link:
+        helper.append_to_file(link, cf.GROUNDING_DIR)
 
     for wall in walls:
         wall = "wall(" + str(wall) + ").\n"
@@ -197,23 +199,27 @@ def generate_pos(hypothesis, previous_state, next_state, action, wall_list, cell
 
     all_walls = get_seen_walls(cf.CLINGOFILE)
 
-    sub_exclusion = ""
-    inclusion = ""
-    inclusion, sub_exclusion = get_inc_exc(hypothesis, state_before_str, state_after_str, action_str, all_walls, cell_range)
-
     # If the agent moved to a cell other than adjacent, there must be a link
     link_detected, exclusions = get_exclusions(previous_state, next_state)
 
     all_exclusions = exclusions
-    if sub_exclusion != "":
-        all_exclusions = all_exclusions + "," + sub_exclusion
+
+    sub_exclusion = ""
+    inclusion = ""
     if link_detected:
         predict_x, predict_y, link = get_link(previous_state, next_state, action)
-        if not cf.ALREADY_LINK:
-            helper.append_to_file(link+"\n", cf.CLINGOFILE)
-            helper.append_to_file(link+"\n", cf.LASFILE)
-            cf.ALREADY_LINK = True
 
+    if link_detected and (not cf.ALREADY_LINK):
+        helper.append_to_file(link+"\n", cf.CLINGOFILE)
+        helper.append_to_file(link+"\n", cf.LASFILE)
+        cf.ALREADY_LINK = link
+    
+    inclusion, sub_exclusion = get_inc_exc(hypothesis, state_before_str, state_after_str, action_str, all_walls, cell_range, cf.ALREADY_LINK)
+
+    if sub_exclusion != "":
+        all_exclusions = all_exclusions + "," + sub_exclusion
+
+    if link_detected:    
         # TODO double-check if the exclusions for pos1 is fine
         pos1 = "#pos({"+ "state_after(({},{}))".format(predict_x,predict_y) +"}, {""}, {" + state_before_str + action_str + walls + "})."
         pos2 = "#pos({"+ inclusion +"}, {" + all_exclusions + "}, {" + "state_before(({},{})).".format(predict_x,predict_y) + action_str + walls + "})."

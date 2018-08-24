@@ -24,7 +24,7 @@ pkl_dir = os.path.join(base_dir, "result_pkl/experiment1")
 # pkl_dir_q = os.path.join(base_dir, "result_pkl/experiment1_q")
 
 # plotting.average_score(base_dir, pkl_dir, "exp4_after_TL_v", 100, 30)
-plotting.average_score(base_dir, pkl_dir, "exp1_test_v", 100, 30)
+plotting.average_score(base_dir, pkl_dir, "exp1_v", 100, 30)
 # plotting.average_score(base_dir, pkl_dir, "exp3_test_v", 100, 30)
 # plotting.average_score(base_dir, pkl_dir_q, "exp3_test_v", 100, 30)
 
@@ -33,7 +33,7 @@ plotting.average_score(base_dir, pkl_dir, "exp1_test_v", 100, 30)
 
 # plotting.average_ILASP(base_dir, pkl_dir, "exp2_v", 2, 250, 30)
 
-stats = plotting.load_stats(pkl_dir, "exp1_test_v_average")
+stats = plotting.load_stats(pkl_dir, "exp1_v_average")
 # stats_q = plotting.load_stats(pkl_dir_q, "temp_test_v_average")
 # stats = plotting.load_stats(pkl_dir, "exp1_test_v_average")
 

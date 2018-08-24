@@ -262,15 +262,15 @@ def k_learning(env, num_episodes, epsilon=0.1, record_prefix=None, is_link=False
 
     return stats, stats_test,stats_ilasp
 
-env = gym.make('vgdl_experiment1-v0')
+env = gym.make('vgdl_experiment3_after-v0')
 
-temp_dir = os.path.join(cf.BASE_DIR, "result_pkl/experiment1")
+temp_dir = os.path.join(cf.BASE_DIR, "result_pkl/experiment3_after_noTL_noGoal")
 
-for i in range(10,30):
-    stats, stats_test,stats_ilasp = k_learning(env, 100, epsilon=0.1, record_prefix="exp1", is_link=False)
-    plotting.store_stats(stats, temp_dir, "exp1_v{}".format(str(i)))
-    plotting.store_stats(stats_test, temp_dir, "exp1_test_v{}".format(str(i)))
-    plotting.store_stats(stats_ilasp, temp_dir, "exp1_ilasp_v{}".format(str(i)))
+for i in range(17,30):
+    stats, stats_test,stats_ilasp = k_learning(env, 100, epsilon=0.1, record_prefix="exp3_noTL_noGoal", is_link=True)
+    plotting.store_stats(stats, temp_dir, "exp3_v{}".format(str(i)))
+    plotting.store_stats(stats_test, temp_dir, "exp3_test_v{}".format(str(i)))
+    plotting.store_stats(stats_ilasp, temp_dir, "exp3_ilasp_v{}".format(str(i)))
 
 # stats, stats_test,stats_ilasp = k_learning(env, 100, epsilon=0.1, record_prefix=None, is_link=None)
 # plotting.plot_episode_stats_simple(stats, smoothing_window=1)
