@@ -1,4 +1,4 @@
-\documentclass[11pt,twoside]{report}
+\documentclass[12pt,twoside]{report}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{amsmath, amssymb}
@@ -18,6 +18,12 @@
 \theoremstyle{definition}
 \newtheorem{defn}[thm]{Definition} % Definition numbers are dependent on theorem numbers
 \newtheorem{exmp}[thm]{Example} % same for example numbers
+
+% This is for chapter outline
+\newtheorem{innercustomthm}{Chapter}
+\newenvironment{customthm}[1]
+ {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+ {\endinnercustomthm}
 
 % Ctrl + Alt + B to compile in Atom
 

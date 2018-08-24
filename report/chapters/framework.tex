@@ -463,6 +463,29 @@ far from the current state, the agent is unlikely be able to find the new state 
 
 % We use GVG-AI Framework for our experiments, which was created for the General Video Gamea AI Competition\footnote{http://www.gvgai.net/},
 % a game environment for an agent that should be able to play a wide variety of games without knowing which games are to be played.
+
+\subsection{Technology}
+The framework of ILP(RL) have been implemented using Python 3
+
+Python was selected as the programming language to impelement the framework, which is based on the fact that it is one of the commonly used language among reinforcement learning reseach, 
+and it works in the experimental platform. 
+
+The benchmark to be compared with my framework is also implemented using Python.
+
+for the whole pipeline described in \ref{fig:pipeline}, where ILASP 2i\footnote{https://sourceforge.net/projects/spikeimperial/files/ILASP/} is used for inductive learning and clingo 5 is used for solving answer sets for a plan.
+
+ILASP version 2i, which is designed to scale with the numbers of examples.
+
+ILASP cache caches relevant sets of examples, so everytime ILASP runs the same task except extra examples each time, ILASP runs from where it finished the learning last time and start from there rather than going through all the examples again.
+The code is available in https://github.com/921kiyo/ILPRL.
+
+The bottleneck for the learning in terms of learning time is hypothesis improvement. In order to optimise it,
+
+ILASP 2i
+
+matplotlib is a plotting libray that provides charts of our experiments.
+
+
 \subsection{Experiment Platform}
 
 \begin{figure}[!ht!b]
@@ -480,15 +503,3 @@ The environment is not known to the agent in advance, and it attempts to find th
 In all experiments, the agent receives -1 in any states except the goal state, where it gains a reward of 10.
 Once the agent reaches the goal, or termination state, that episode is finished and the agent start the next episode from the starting point.
 
-\subsection{Technology}
-
-All of the codes are written in Python 3 for the whole pipeline described in \ref{fig:pipeline}, where ILASP 2i\footnote{https://sourceforge.net/projects/spikeimperial/files/ILASP/} is used for inductive learning and clingo 5 is used for solving answer sets for a plan.
-
-ILASP version 2i, which is designed to scale with the numbers of examples.
-
-ILASP cache caches relevant sets of examples, so everytime ILASP runs the same task except extra examples each time, ILASP runs from where it finished the learning last time and start from there rather than going through all the examples again.
-The code is available in https://github.com/921kiyo/ILPRL.
-
-The bottleneck for the learning in terms of learning time is hypothesis improvement. In order to optimise it,
-
-ILASP 2i

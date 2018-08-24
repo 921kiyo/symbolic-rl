@@ -1,52 +1,56 @@
 \BOOKMARK [0][]{chapter.1}{1 Introduction}{}% 1
-\BOOKMARK [0][]{chapter.2}{2 Background}{}% 2
-\BOOKMARK [1][]{section.2.1}{2.1 Inductive Logic Programming \(ILP\)}{chapter.2}% 3
-\BOOKMARK [2][]{subsection.2.1.1}{2.1.1 Stable Model Semantics}{section.2.1}% 4
-\BOOKMARK [2][]{subsection.2.1.2}{2.1.2 Anwer Set Programming \(ASP\) Syntax}{section.2.1}% 5
-\BOOKMARK [2][]{subsection.2.1.3}{2.1.3 ILP under Answer Set Semantics}{section.2.1}% 6
-\BOOKMARK [2][]{subsection.2.1.4}{2.1.4 Inductive Learning of Answer Set Programs \(ILASP\)}{section.2.1}% 7
-\BOOKMARK [1][]{section.2.2}{2.2 Reinforcement Learning \(RL\)}{chapter.2}% 8
-\BOOKMARK [2][]{subsection.2.2.1}{2.2.1 Markov Decision Process \(MDP\)}{section.2.2}% 9
-\BOOKMARK [2][]{subsection.2.2.2}{2.2.2 Policies and Value Functions}{section.2.2}% 10
-\BOOKMARK [2][]{subsection.2.2.3}{2.2.3 Model-based and Model-free Reinforcement Learning}{section.2.2}% 11
-\BOOKMARK [2][]{subsection.2.2.4}{2.2.4 Temporal-Difference \(TD\) Learning}{section.2.2}% 12
-\BOOKMARK [2][]{subsection.2.2.5}{2.2.5 Function Approximation}{section.2.2}% 13
-\BOOKMARK [2][]{subsection.2.2.6}{2.2.6 Transfer Learning}{section.2.2}% 14
-\BOOKMARK [0][]{chapter.3}{3 Framework}{}% 15
-\BOOKMARK [1][]{section.3.1}{3.1 Experience Accumulation}{chapter.3}% 16
-\BOOKMARK [2][]{subsection.3.1.1}{3.1.1 State Transition Experience}{section.3.1}% 17
-\BOOKMARK [2][]{subsection.3.1.2}{3.1.2 Environment Experience}{section.3.1}% 18
-\BOOKMARK [1][]{section.3.2}{3.2 Inductive Learning}{chapter.3}% 19
-\BOOKMARK [2][]{subsection.3.2.1}{3.2.1 Search Space}{section.3.2}% 20
-\BOOKMARK [2][]{subsection.3.2.2}{3.2.2 Background Knowledge}{section.3.2}% 21
-\BOOKMARK [1][]{section.3.3}{3.3 Plan Genreation}{chapter.3}% 22
-\BOOKMARK [1][]{section.3.4}{3.4 Plan Execution}{chapter.3}% 23
-\BOOKMARK [1][]{section.3.5}{3.5 Exploration}{chapter.3}% 24
-\BOOKMARK [1][]{section.3.6}{3.6 Implementation}{chapter.3}% 25
-\BOOKMARK [2][]{subsection.3.6.1}{3.6.1 Experiment Platform}{section.3.6}% 26
-\BOOKMARK [2][]{subsection.3.6.2}{3.6.2 Technology}{section.3.6}% 27
-\BOOKMARK [0][]{chapter.4}{4 Evaluation}{}% 28
-\BOOKMARK [1][]{section.4.1}{4.1 Setting}{chapter.4}% 29
-\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 Evaluation Metrics}{section.4.1}% 30
-\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Benchmark}{section.4.1}% 31
-\BOOKMARK [2][]{subsection.4.1.3}{4.1.3 Parameters}{section.4.1}% 32
-\BOOKMARK [1][]{section.4.2}{4.2 Experiment Results}{chapter.4}% 33
-\BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Experiment1}{section.4.2}% 34
-\BOOKMARK [2][]{subsection.4.2.2}{4.2.2 Experiment2}{section.4.2}% 35
-\BOOKMARK [2][]{subsection.4.2.3}{4.2.3 Experiment3}{section.4.2}% 36
-\BOOKMARK [2][]{subsection.4.2.4}{4.2.4 Experiment4}{section.4.2}% 37
-\BOOKMARK [0][]{chapter.5}{5 Discussion}{}% 38
-\BOOKMARK [1][]{section.5.1}{5.1 Contribution}{chapter.5}% 39
-\BOOKMARK [1][]{section.5.2}{5.2 Limitations}{chapter.5}% 40
-\BOOKMARK [2][]{subsection.5.2.1}{5.2.1 Scalability}{section.5.2}% 41
-\BOOKMARK [2][]{subsection.5.2.2}{5.2.2 Flexibility}{section.5.2}% 42
-\BOOKMARK [1][]{section.5.3}{5.3 Further Research}{chapter.5}% 43
-\BOOKMARK [2][]{subsection.5.3.1}{5.3.1 Value Iteration Approach}{section.5.3}% 44
-\BOOKMARK [2][]{subsection.5.3.2}{5.3.2 Weak Constraint}{section.5.3}% 45
-\BOOKMARK [2][]{subsection.5.3.3}{5.3.3 Generalisation of the Current Approach}{section.5.3}% 46
-\BOOKMARK [0][]{chapter.6}{6 Related Work}{}% 47
-\BOOKMARK [0][]{chapter.7}{7 Conclusion}{}% 48
-\BOOKMARK [0][]{section*.35}{Appendices}{}% 49
-\BOOKMARK [1][]{section.1..1}{.1 Ethics}{section*.35}% 50
-\BOOKMARK [1][]{section.1..2}{.2 Learning tasks}{section*.35}% 51
-\BOOKMARK [1][]{section.1..3}{.3 Abduction tasks}{section*.35}% 52
+\BOOKMARK [1][]{section.1.1}{1.1 Motivation}{chapter.1}% 2
+\BOOKMARK [1][]{section.1.2}{1.2 Objectives}{chapter.1}% 3
+\BOOKMARK [1][]{section.1.3}{1.3 Contribution}{chapter.1}% 4
+\BOOKMARK [1][]{section.1.4}{1.4 Report Outline}{chapter.1}% 5
+\BOOKMARK [0][]{chapter.2}{2 Background}{}% 6
+\BOOKMARK [1][]{section.2.1}{2.1 Inductive Logic Programming \(ILP\)}{chapter.2}% 7
+\BOOKMARK [2][]{subsection.2.1.1}{2.1.1 Stable Model Semantics}{section.2.1}% 8
+\BOOKMARK [2][]{subsection.2.1.2}{2.1.2 Anwer Set Programming \(ASP\) Syntax}{section.2.1}% 9
+\BOOKMARK [2][]{subsection.2.1.3}{2.1.3 ILP under Answer Set Semantics}{section.2.1}% 10
+\BOOKMARK [2][]{subsection.2.1.4}{2.1.4 Inductive Learning of Answer Set Programs \(ILASP\)}{section.2.1}% 11
+\BOOKMARK [1][]{section.2.2}{2.2 Reinforcement Learning \(RL\)}{chapter.2}% 12
+\BOOKMARK [2][]{subsection.2.2.1}{2.2.1 Markov Decision Process \(MDP\)}{section.2.2}% 13
+\BOOKMARK [2][]{subsection.2.2.2}{2.2.2 Policies and Value Functions}{section.2.2}% 14
+\BOOKMARK [2][]{subsection.2.2.3}{2.2.3 Model-based and Model-free Reinforcement Learning}{section.2.2}% 15
+\BOOKMARK [2][]{subsection.2.2.4}{2.2.4 Temporal-Difference \(TD\) Learning}{section.2.2}% 16
+\BOOKMARK [2][]{subsection.2.2.5}{2.2.5 Function Approximation}{section.2.2}% 17
+\BOOKMARK [2][]{subsection.2.2.6}{2.2.6 Transfer Learning}{section.2.2}% 18
+\BOOKMARK [0][]{chapter.3}{3 Framework}{}% 19
+\BOOKMARK [1][]{section.3.1}{3.1 Experience Accumulation}{chapter.3}% 20
+\BOOKMARK [2][]{subsection.3.1.1}{3.1.1 State Transition Experience}{section.3.1}% 21
+\BOOKMARK [2][]{subsection.3.1.2}{3.1.2 Environment Experience}{section.3.1}% 22
+\BOOKMARK [1][]{section.3.2}{3.2 Inductive Learning}{chapter.3}% 23
+\BOOKMARK [2][]{subsection.3.2.1}{3.2.1 Search Space}{section.3.2}% 24
+\BOOKMARK [2][]{subsection.3.2.2}{3.2.2 Background Knowledge}{section.3.2}% 25
+\BOOKMARK [1][]{section.3.3}{3.3 Plan Genreation}{chapter.3}% 26
+\BOOKMARK [1][]{section.3.4}{3.4 Plan Execution}{chapter.3}% 27
+\BOOKMARK [1][]{section.3.5}{3.5 Exploration}{chapter.3}% 28
+\BOOKMARK [1][]{section.3.6}{3.6 Implementation}{chapter.3}% 29
+\BOOKMARK [2][]{subsection.3.6.1}{3.6.1 Technology}{section.3.6}% 30
+\BOOKMARK [2][]{subsection.3.6.2}{3.6.2 Experiment Platform}{section.3.6}% 31
+\BOOKMARK [0][]{chapter.4}{4 Evaluation}{}% 32
+\BOOKMARK [1][]{section.4.1}{4.1 Setting}{chapter.4}% 33
+\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 Evaluation Metrics}{section.4.1}% 34
+\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Benchmark}{section.4.1}% 35
+\BOOKMARK [2][]{subsection.4.1.3}{4.1.3 Parameters}{section.4.1}% 36
+\BOOKMARK [1][]{section.4.2}{4.2 Experiment Results}{chapter.4}% 37
+\BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Experiment1}{section.4.2}% 38
+\BOOKMARK [2][]{subsection.4.2.2}{4.2.2 Experiment2}{section.4.2}% 39
+\BOOKMARK [2][]{subsection.4.2.3}{4.2.3 Experiment3}{section.4.2}% 40
+\BOOKMARK [2][]{subsection.4.2.4}{4.2.4 Experiment4}{section.4.2}% 41
+\BOOKMARK [0][]{chapter.5}{5 Discussion}{}% 42
+\BOOKMARK [1][]{section.5.1}{5.1 Strengths}{chapter.5}% 43
+\BOOKMARK [1][]{section.5.2}{5.2 Limitations}{chapter.5}% 44
+\BOOKMARK [2][]{subsection.5.2.1}{5.2.1 Scalability}{section.5.2}% 45
+\BOOKMARK [2][]{subsection.5.2.2}{5.2.2 Flexibility}{section.5.2}% 46
+\BOOKMARK [1][]{section.5.3}{5.3 Further Research}{chapter.5}% 47
+\BOOKMARK [2][]{subsection.5.3.1}{5.3.1 Value Iteration Approach}{section.5.3}% 48
+\BOOKMARK [2][]{subsection.5.3.2}{5.3.2 Weak Constraint}{section.5.3}% 49
+\BOOKMARK [2][]{subsection.5.3.3}{5.3.3 Generalisation of the Current Approach}{section.5.3}% 50
+\BOOKMARK [0][]{chapter.6}{6 Related Work}{}% 51
+\BOOKMARK [0][]{chapter.7}{7 Conclusion}{}% 52
+\BOOKMARK [0][]{section*.35}{Appendices}{}% 53
+\BOOKMARK [1][]{section.1..1}{.1 Ethics}{section*.35}% 54
+\BOOKMARK [1][]{section.1..2}{.2 Learning tasks}{section*.35}% 55
+\BOOKMARK [1][]{section.1..3}{.3 Abduction tasks}{section*.35}% 56

@@ -1,21 +1,94 @@
-There have been successful applications of deep reinforcement learning (DRL) in a number of domains, such as video games \cite{Mnih2015}, the game of Go \cite{Silver2016} and robotics \cite{Levine2015}. However, there are still a number of issues to overcome with this method.
+\section{Motivation}
+
+There have been successful applications of deep reinforcement learning (DRL) in a number of domains, 
+such as video games \cite{Mnih2015}, the game of Go \cite{Silver2016} and robotics \cite{Levine2015}. 
+However, there are still a number of issues to overcome with this method.
 First, it requires large dataset for training the model, and the learning is very slow and requires significant amount of computation.
-Second, it is considered to be a black-box, meaning that the decision making process is unknown to the human user and therefore lacks explanation of the decision making. Third, there is no thought process to the decision making, such as understanding relational representations or planning. To tackle these problems, researchers have explored several different approaches.
+Second, it is considered to be a black-box, meaning that the decision making process is unknown to the human user and therefore lacks explanation of the decision making. 
+Third, there is no thought process to the decision making, such as understanding relational representations or planning. To tackle these problems, researchers have explored several different approaches.
 One of the methods is to incorporate symbolic representations into the system \cite{Garnelo2016}. This approach is promising and shows a potential.
 
-In this paper, we extend this symbolic representation approach and explore the potential of symbolic machine learning to solve the above issues. There are several advantages of symbolic machine learning. First of all, the decision making mechanism is understandable by humans rather than being black-box.
-Second, it resembles how humans reason. Similar to reinforcement learning, there are some aspects of trial-and-error in human learning, but humans exploit reasonings to efficiently learn about their surrounding or situations. They also effectively use previous experience (e.g background knowledge) when encountering similar situations.
+TODO ROUGHTLY 1 page
+
+\section{Objectives}
+
+In this paper, we extend this symbolic representation approach and explore the potential of symbolic machine learning to solve the above issues. 
+There are several advantages of symbolic machine learning. First of all, the decision making mechanism is understandable by humans rather than being black-box.
+Second, it resembles how humans reason. Similar to reinforcement learning, there are some aspects of trial-and-error in human learning, but humans exploit reasonings to efficiently learn about their surrounding or situations. 
+They also effectively use previous experience (e.g background knowledge) when encountering similar situations.
 Finally, the recent advance of Inductive Logic Programming (ILP) research has enabled us to apply ILP in more complex situations and there are a number of new algorithms based on Answer Set Programmings (ASPs) that work well in non-monotonic scenarios.
 
-Particularly since \cite{Garnelo2016}, there have been several researches that further explored the incorporation of symbolic reasoning into RL, but the combining of ILP and RL has not been explored. Because of the recent advancement of ILP and RL, it is natual to consider that a combination of both approaches would be the next field to explore.
+Particularly since \cite{Garnelo2016}, there have been several researches that further explored the incorporation of symbolic reasoning into RL, but the combining of ILP and RL has not been explored. 
+Because of the recent advancement of ILP and RL, it is natual to consider that a combination of both approaches would be the next field to explore.
+
+This initial proof of concept showed promissing preliminary results and as well as limitation of the current framework. 
+Nevertheless, there is avenues for potential improvement, which could be explored in further research.
 
 In this paper, our objective is to  explore the incorporation of ILP into RL using Inductive Learning of Answer Set Programs (ILASP), which is a state-of-art ILP method that can be applied to incomplete and more complex environments.
 
-\textcolor{red}{TODO Update this}
+We did various experiments in grid mazes to highlight property of the learning process and the learning performance is compared with existing reinforcement learning algorithms.
+We show that the learning convergence of ILP(RL) is faster than existing RL. 
 
-This background report will be part of the final report and is organised as follows: 
-In Chapter \ref{background}, the background of inductive logic programming and reinforcement learning necessary for this paper are described. 
-Chapter \ref{related_work} discusses previous research on relevant approach. 
-Chapter \ref{project_overview} shows the tentative architecture of our new approach, using ILASP to generate a model of the environment. 
-We also discuss some of the issues we currently face with the architecture and plan the implementation. 
-Finally the ethics checklist is provided in Chapter \ref{ethics_checklist}.
+The objectives of this paper and important aspects of are summarized as follows:
+
+
+\begin{itemize}
+    \item XXX
+    \item Building a framework that will learn the model of the environment, which is an agnet's valid move in an environment, using ILASP and Answer set programs. 
+    \item Examine the potentials of application in a simple environment and compare it with the existing RL algorithms 
+\end{itemize}
+
+To test the capability of ILP(RL), we measured the learning process and capability of transfer
+
+Discrete and deterministic environment. 
+This paper is a proof of concept for the new way of reinforcement learning and therefore there is a limit to extend the new framework can be applied.
+More advanced environment such as continuous states or schocastic environment are not considered in this paper. Possibilities of applying these more complex environment are discussed in Chapter XX.
+
+TODO: what is not being proposed.
+
+The contribution of this paper is to develop a new way of reinforcement algorithm by applying a latest ILP framework called Learning from Answer Sets, 
+and the algorithm learns hypotheses, which is the valid move of the game, which is a very general concept and therefore can be easily applied to a different senarios.
+
+\section{Contribution}
+\label{contribution}
+
+To my knowledge, this is the first attemp that inductive logic programming is incorporated into a reinforcement learning senario to facilitate learning process.
+In simple environments, we show that the agent learns rule of the game faster than existing RL algorithms, learnt concepts is easy to understand for human users.
+We also show that the learnt hypothesis is a general concept and can be applied to other environment to mitigate learnig process.
+
+The full hypotheses were learnt in the very early phase of learning and exploration phase. Thus with sufficient exploration, the model of the environment is correct
+and therefore it is able to find the optimal policy/path. 
+
+We show that ILP(RL) is able to solve a reduced MDP where the rewards are assumed to be associated with a sequence of actions planned as answer sets.
+Although this is a limitated solution, there is a potential to expand it to solve full MDP as discussed in Further Research. 
+
+TODO more details on the strength of the algorithm. 
+Validity
+
+
+\section{Report Outline}
+\begin{customthm}{2}
+The background of inductive logic programming and reinforcement learning necessary for this paper are described.
+\end{customthm}
+
+\begin{customthm}{3}
+The descriptions of the new framework, ILP(RL), is explained in details, and highlight each aspect of learnign steps. We also compare it with Q-learning, one of the common RL algorithms to highlight the differences between them. 
+\end{customthm}
+
+\begin{customthm}{4}
+The performance of ILP(RL) is measured in a simple game environment and compared against two existing RL algorithms. In addition, the capability of the transfer learning is experimented.
+\end{customthm}
+
+\begin{customthm}{5}
+The overall discussion of ILP(RL), especially the contribution of the paper, limitations and further research is discussed in this chapter.
+We also discuss some of the issues we currently face with the architecture. 
+\end{customthm}
+
+\begin{customthm}{6}
+We reviewed previous research on relevant approach. Since there is no research that attemps to apply ILP to RL, we discuss two different groups of reseach: 
+RL reseach using answer set programming. The second group is the symbolic representations in RL.  
+\end{customthm}
+
+\begin{customthm}{7}
+Conclusion
+\end{customthm}

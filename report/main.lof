@@ -1,28 +1,28 @@
 \select@language {english}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Agent and Environment\relax }}{11}{figure.caption.10}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Relationships among learning, planning and acting\relax }}{13}{figure.caption.11}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Tiling illustration\relax }}{17}{figure.caption.16}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Agent and Environment\relax }}{13}{figure.caption.10}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Relationships among learning, planning and acting\relax }}{15}{figure.caption.11}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Tiling illustration\relax }}{19}{figure.caption.16}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces ILP(RL) pipeline. ILASP learns to generate a model of the environment, or hypothesis, and updates it based on the interaction with the environment. \relax }}{18}{figure.caption.17}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Illustration of generating positive example of state transition\relax }}{20}{figure.caption.18}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces VGDL game example\relax }}{26}{figure.caption.19}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces ILP(RL) pipeline. ILASP learns to generate a model of the environment, or hypothesis, and updates it based on the interaction with the environment. \relax }}{21}{figure.caption.17}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Illustration of generating positive example of state transition\relax }}{23}{figure.caption.18}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces VGDL game example\relax }}{30}{figure.caption.19}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Enviroment for experiment 1\relax }}{29}{figure.caption.21}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Experiment 1 results of training performance\relax }}{30}{figure.caption.22}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Experiment 1 results of test performance\relax }}{30}{figure.caption.23}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Learning convergence of hypothesis improvement by ILP(RL) (normalised)\relax }}{31}{figure.caption.24}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Enviroment for experiment 2\relax }}{32}{figure.caption.25}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Experiment 2 results of training performance\relax }}{33}{figure.caption.26}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Experiment 2 results of test performance\relax }}{33}{figure.caption.27}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Learning convergence of hypothesis improvement by ILP(RL) (normalised)\relax }}{34}{figure.caption.28}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Environment used before (left) and after (right) transfer learning\relax }}{35}{figure.caption.29}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Experiment 3 results of training performance with and without transfer learning\relax }}{36}{figure.caption.30}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Experiment 3 results of test performance with and without transfer learning\relax }}{36}{figure.caption.31}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Environment used before (left) and after (right) transfer learning\relax }}{37}{figure.caption.32}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Comparison of training performance between ILP(RL) with and without transfer learning\relax }}{37}{figure.caption.33}
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Comparison of test performance between ILP(RL) with and without transfer learning\relax }}{38}{figure.caption.34}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Enviroment for experiment 1\relax }}{33}{figure.caption.21}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Experiment 1 results of training performance\relax }}{34}{figure.caption.22}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Experiment 1 results of test performance\relax }}{34}{figure.caption.23}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Learning convergence of hypothesis improvement by ILP(RL) (normalised)\relax }}{35}{figure.caption.24}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Enviroment for experiment 2\relax }}{36}{figure.caption.25}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Experiment 2 results of training performance\relax }}{37}{figure.caption.26}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Experiment 2 results of test performance\relax }}{37}{figure.caption.27}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Learning convergence of hypothesis improvement by ILP(RL) (normalised)\relax }}{38}{figure.caption.28}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Environment used before (left) and after (right) transfer learning\relax }}{39}{figure.caption.29}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Experiment 3 results of training performance with and without transfer learning\relax }}{40}{figure.caption.30}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Experiment 3 results of test performance with and without transfer learning\relax }}{40}{figure.caption.31}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Environment used before (left) and after (right) transfer learning\relax }}{41}{figure.caption.32}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Comparison of training performance between ILP(RL) with and without transfer learning\relax }}{41}{figure.caption.33}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Comparison of test performance between ILP(RL) with and without transfer learning\relax }}{42}{figure.caption.34}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
