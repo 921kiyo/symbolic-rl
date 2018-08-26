@@ -11,6 +11,7 @@
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
 \usepackage{wrapfig}
+\usepackage{enumitem}
 
 %\usepackage[utf8]{inputenc}
 %\usepackage[acronym]{glossaries} 
@@ -140,25 +141,10 @@ I would also like to thank Mark Law for his expertise on inductive logic program
 \chapter{Background}
 \label{background}
 
-This chapter introduces necessary background of Inductive Logic Programming (ILP) and Reinforcement Learning (RL), which provide the foundations of our research.
+This chapter introduces necessary background of Answer Set Programming (ASP), Inductive Logic Programming (ILP) and Reinforcement Learning (RL), which provide the foundations of our research.
 
-\section{Inductive Logic Programming (ILP)}
-\label{ilp}
-
-\textit{Inductive Logic Programming (ILP)} is a subfield of machine learning research area aimed at supervised inductive concept learning. 
-This is the intersection between machine learning and logic programming \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and none of negative examples, given a hypothesis language for search space and cover relation \cite{DeRaedt1997}. ILP is based on learning from entailment, as shown in Equation \ref{ilp_equation}.
-
-\begin{equation}
-B \wedge H \models E
-\end{equation}
-\label{ilp_equation}
-
-where E contains all of the positive examples (E\textsuperscript{+}) and none of the negative examples (E\textsuperscript{-}).
-
-On the one hand, an advantage of ILP over statistical machine learning is that the hypothesis that an agent learnt can be easily understood by a human, as it is expressed in first-order logic, making the learning process more transparent.
-On the other hand, a limitation of ILP is learning efficiency and scalability. There are usually thousands or more examples in many real-world examples. Scaling ILP task to cope with large examples is a challenging task \cite{Muggleton1993}.
-
-In this section, we briefly introduce foundation of Answer Set Programming (ASP) and several ILP frameworks under ASP.
+\section{Answer Set Programming (ASP)}
+\label{sec:asp}
 
 \subsection{Stable Model Semantics}
 
@@ -300,6 +286,24 @@ l\{h\textsubscript{1},...,h\textsubscript{m}\}u $\leftarrow$ a\textsubscript{1},
 %An answer set of ASP program is interpretations that make all the ruls true.
 %Non-monotonicity.
 %TODO ASP has true, false and unknown
+
+\section{Inductive Logic Programming (ILP)}
+\label{sec:ilp}
+
+\textit{Inductive Logic Programming (ILP)} is a subfield of machine learning research area aimed at supervised inductive concept learning. 
+This is the intersection between machine learning and logic programming \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and none of negative examples, given a hypothesis language for search space and cover relation \cite{DeRaedt1997}. ILP is based on learning from entailment, as shown in Equation \ref{ilp_equation}.
+
+\begin{equation}
+B \wedge H \models E
+\end{equation}
+\label{ilp_equation}
+
+where E contains all of the positive examples (E\textsuperscript{+}) and none of the negative examples (E\textsuperscript{-}).
+
+On the one hand, an advantage of ILP over statistical machine learning is that the hypothesis that an agent learnt can be easily understood by a human, as it is expressed in first-order logic, making the learning process more transparent.
+On the other hand, a limitation of ILP is learning efficiency and scalability. There are usually thousands or more examples in many real-world examples. Scaling ILP task to cope with large examples is a challenging task \cite{Muggleton1993}.
+
+In this section, we briefly introduce foundation of Answer Set Programming (ASP) and several ILP frameworks under ASP.
 
 \subsection{ILP under Answer Set Semantics}
 There are several ILP non-monotonic learning frameworks under the answer set semantics . We first introduce two of them: \textit{Cautious Induction} and \textit{Brave Induction} (\cite{Sakama2009}), which are foundations of \textit{Learning from Answer Sets} discussed in Section \ref{section_lasp}, a state-of-art ILP framework that we will use for our new framework.  (for other non-monotonic ILP frameworks, see \cite{Otero2001}, \cite{Inoue2014}, \cite{Corapi2012} and \cite{DeRaedt1997}).
@@ -480,7 +484,7 @@ XXX
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=6cm, height=6cm]{./figures/agent_env}
-\caption{The relationship between an agent and an environment}
+\caption{The interaction between an agent and an environment}
 \label{agent_env}
 \end{figure}
 

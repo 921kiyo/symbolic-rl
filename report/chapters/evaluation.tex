@@ -1,6 +1,8 @@
 \section{Setting}
+\label{sec:setting}
 
 \subsection{Evaluation Metrics}
+\label{subsec:evaluation_metrics}
 
 The two main measurements for the performance of our new architecture are learning efficiency and transfer learning capability.
 The learning efficiencies are measured in two different ways. First, the performance ILP(RL) is compared with exisitng RL algorithms in terms of
@@ -9,7 +11,9 @@ Second, the convergence of learning by ILASP is measured in terms of the number 
 The reason we are measuring it at only episode 0 is that empirically the agent learns the target hypothesis at episode 0 and there is no hypothesis refinement after episode 0.
 This gives a normalised convergence rate of ILASP learning with the maximum 1.
 
-\subsection{Benchmark}
+\subsection{Benchmarks}
+\label{subsec:benchmarks}
+
 We use two existing RL methods as benchmarks: Q-learning and tile-coding.
 Q-learning is widely used RL technique, and given the environments used for the experiments are discrete and deterministic, this method is sufficient enought for our experiment.
 
@@ -32,7 +36,7 @@ The number of experiments& 30       & 30       \\
 Alpha                & N/A       & 0.5       \\
 Epsilon              & 0.1        & 0.1        \\
 \end{tabular}
-\caption{Parameters used in the experiments}
+\caption{List of parameters used in the experiments}
 \label{param}
 \end{table}
 
@@ -46,14 +50,16 @@ and ILP(RL) is highly dependent on how quickly the agent finds the goal,
 each experiment is conducted 30 times and the perform is averaged across the experiments.
 At each episode, we also measure the performance without exploration to see the pure optimal policy.
 
-\section{Experiment Results}
-\label{learning_evaluation}
+\section{Learning Evaluation}
+\label{sec:learning_evaluation}
 
-\subsection{Experiment1}
+\subsection{Experiment Result 1}
+\label{subsec:experiment_result_2}
+
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.5\textwidth]{./figures/experiment1}
-\caption{Enviroment for experiment 1}
+\caption{Game enviroment for experiment 1}
 \label{experiment1}
 \end{figure}
 
@@ -65,13 +71,13 @@ The shortest path is taking the lower path instead of the upper one.
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment1_training}
-\caption{Experiment 1 results of training performance}
+\caption{Result of experiment 1 (learnig curve)}
 \label{experiment1_training}
 \end{figure}
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment1_test}
-\caption{Experiment 1 results of test performance}
+\caption{Result of experiment 1 (performance)}
 \label{experiment1_test}
 \end{figure}
 
@@ -82,7 +88,6 @@ This result is also consistent with the general notion that model-based learnig 
 The same trend is also shown in Figure \ref{experiment1_test}, where we measure only the performance of the policy without random exploration.
 
 Overall this results shows that ILP(RL) converges to the optimal policy faster than benchmarks in a simple scenarios, achieving more data-efficient learning.
-
 
 In addition to the data-efficient learning, what the agent has learnt with ILP(RL) is expressive.
 Learnt hypotheses are shown in \ref{experiment1_hypothesis}, which is the rule of the game and easy to understand for human users.
@@ -110,18 +115,19 @@ which enables it to plan. Since our exploration strategy is expilon random choic
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment1_ilasp}
-\caption{Learning convergence of hypothesis improvement by ILP(RL) (normalised)}
+\caption{Normalised learning convergence by ILASP for experiment 1}
 \label{experiment1_ilasp}
 \end{figure}
 
 \newpage
-\subsection{Experiment2}
+\subsection{Experiment Result 2}
+\label{subsec:experiment_result_2}
 % The game is designed such that
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.5\textwidth]{./figures/experiment3}
-\caption{Enviroment for experiment 2}
+\caption{Game enviroment for experiment 1}
 \label{experiment3}
 \end{figure}
 
@@ -150,7 +156,7 @@ link locations need to be available for all positive examples so that ILASP corr
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment3_training}
-\caption{Experiment 2 results of training performance}
+\caption{Result of experiment 2 (learnig curve)}
 \label{experiment3_training}
 \end{figure}
 
@@ -159,7 +165,7 @@ The training performance shown in XX, which converges faster than XX.
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment3_test}
-\caption{Experiment 2 results of test performance}
+\caption{Result of experiment 2 (performance)}
 \label{experiment3_test}
 \end{figure}
 
@@ -208,20 +214,21 @@ In this case, the first two hypotheses in Figure XX are never be used since the 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment2_ilasp}
-\caption{Learning convergence of hypothesis improvement by ILP(RL) (normalised)}
+\caption{Normalised learning convergence by ILASP for experiment 2}
 \label{experiment1_test}
 \end{figure}
 
 \newpage
-
-\subsection{Experiment3}
+\section{Transfer Learning Evaluation}
+\label{sec:transfer_learning_evaluation}
+\subsection{Experiment Result 3}
 
 \begin{figure}[!htb]
 \centerline{
 \includegraphics[width=0.5\textwidth]{./figures/experiment4_before}
 \includegraphics[width=0.5\textwidth]{./figures/experiment4_after}
 }
-\caption{Environment used before (left) and after (right) transfer learning}
+\caption{Game environment for experiment 3: before (left) and after (right) transfer learning}
 \label{experiment3}
 \end{figure}
 
@@ -255,24 +262,25 @@ Since the complete hypothesis is already known to the agent, it can do planning 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment4_after_training}
-\caption{Experiment 3 results of training performance with and without transfer learning}
+\caption{Result of experiment 3 (learnig curve)}
 \label{experiment3_training}
 \end{figure}
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment4_after_test}
-\caption{Experiment 3 results of test performance with and without transfer learning}
+\caption{Result of experiment 3 (performance)}
 \label{experiment3_test}
 \end{figure}
 
-\subsection{Experiment4}
+\subsection{Experiment Result 4}
+\label{subsec:experiment_result_4}
 
 \begin{figure}[!htb]
 \centerline{
 \includegraphics[width=0.5\textwidth]{./figures/experiment4_before}
 \includegraphics[width=0.5\textwidth]{./figures/experiment5_after}}
-\caption{Environment used before (left) and after (right) transfer learning}
+\caption{Game environment for experiment 4: before (left) and after (right) transfer learning}
 \label{experiment5}
 \end{figure}
 
@@ -282,14 +290,14 @@ and therefore the agent needs to learn it after the hypothesis is transferred.
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment5_training}
-\caption{Comparison of training performance between ILP(RL) with and without transfer learning}
+\caption{Result of experiment 4 (learnig curve)}
 \label{experiment5_training}
 \end{figure}
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment5_test}
-\caption{Comparison of test performance between ILP(RL) with and without transfer learning}
+\caption{Result of experiment 4 (performance)}
 \label{experiment5_test}
 \end{figure}
 
