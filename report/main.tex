@@ -25,8 +25,6 @@
  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
  {\endinnercustomthm}
 
-% Ctrl + Alt + B to compile in Atom
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Definitions for the title page
@@ -36,7 +34,7 @@
 
 \newcommand{\reporttitle}{Symbolic Reinforcement Learning using Inductive Logic Programming}
 \newcommand{\reportauthor}{Kiyohito Kunii}
-\newcommand{\supervisor}{Prof. Alessandra Russo \\ Mark Law \\  Ruben L Vereecken}
+\newcommand{\supervisor}{Prof. Alessandra Russo \\ Mark Law \\  Ruben Vereecken}
 \newcommand{\degreetype}{MSc in Computing Science}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -49,9 +47,16 @@
 
 \date{September 2018}
 
-
-% \newtheoremstyle{definition}[section]
 \newtheorem{examp}{Example}[section]
+
+% Combine list of figures and tables
+\makeatletter
+\renewcommand*{\ext@figure}{lot}
+\let\c@figure\c@table
+\let\ftype@figure\ftype@table
+\let\listoftableandfigures\listoftables
+\renewcommand*\listtablename{List of Tables and Figures}
+\makeatother
 
 \begin{document}
 
@@ -68,7 +73,6 @@
  \begin{abstract}
 \input{chapters/abstract}
  \end{abstract}
-%
 \cleardoublepage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Acknowledgments}
@@ -84,16 +88,17 @@ I would also like to thank Mark Law for his expertise on inductive logic program
 \fancyhead[RE,LO]{\sffamily {Table of Contents}}
 \tableofcontents
 
-% ADD BLANK PAGE
+% Add blank page
 \clearpage{\pagestyle{empty}\cleardoublepage}
 \pagenumbering{arabic}
 \setcounter{page}{1}
 \fancyhead[LE,RO]{\slshape \rightmark}
 \fancyhead[LO,RE]{\slshape \leftmark}
 
-%\fancyhead[RE,LO]{\sffamily {Table of Contents}}
-\listoffigures
-\listoftables
+% List of Figures and Tables
+\renewcommand\listtablename{List of Figures and Tables}
+\listoftableandfigures
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % IMPERIAL LOGO
 % \begin{figure}[tb]
