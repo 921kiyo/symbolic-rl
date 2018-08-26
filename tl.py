@@ -236,10 +236,10 @@ state_after(V1) :- adjacent(up, V0, V1), state_before(V1), action(up), wall(V0).
 
 goal = (16,1)
 
-temp_dir = os.path.join(cf.BASE_DIR, "experiment5_TL")
+temp_dir = os.path.join(cf.BASE_DIR, "result_pkl/experiment3_after_TL")
 
-for i in range(1,30):
-    stats, stats_test,stats_ilasp = k_learning(env, 100, h, goal, epsilon=0.4, record_prefix="experiment5_TL", is_link=True)
+for i in range(30):
+    stats, stats_test,stats_ilasp = k_learning(env, 100, h, goal, epsilon=0.1, record_prefix="experiment5_TL", is_link=True)
     plotting.store_stats(stats, temp_dir, "exp5_TL_v{}".format(str(i)))
     plotting.store_stats(stats_test, temp_dir, "exp5_test_TL_v{}".format(str(i)))
 

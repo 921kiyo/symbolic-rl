@@ -93,7 +93,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
 
         for t in range(cf.TIME_RANGE):
             env.render()
-            # time.sleep(0.03)
+            # time.sleep(0.1)
             # Take a step
             action_probs = policy(state_int, i_episode)
             action = np.random.choice(np.arange(len(action_probs)), p=action_probs)
@@ -135,7 +135,7 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
             state_int = next_state_int
 
         stats.episode_runtime[i_episode] += (time.time()-start_total_runtime)
-        run_experiment(env, Q, stats_test, i_episode, width, cf.TIME_RANGE)
+        # run_experiment(env, Q, stats_test, i_episode, width, cf.TIME_RANGE)
     return Q, stats, stats_test
 
 env = gym.make('vgdl_experiment2-v0')
@@ -143,10 +143,10 @@ temp_dir = os.path.join(base_dir, "result_pkl/experiment2_q")
 # import ipdb; ipdb.set_trace()
 # Q, stats, stats_test = q_learning(env, 100)
 
-for i in range(30):
-    Q, stats, stats_test = q_learning(env, 100)
-    plotting.store_stats(stats, temp_dir, "exp2_v{}".format(i))
-    plotting.store_stats(stats_test, temp_dir, "exp2_test_v{}".format(i))
+# for i in range(30):
+Q, stats, stats_test = q_learning(env, 100)
+    # plotting.store_stats(stats, temp_dir, "exp2_v{}".format(i))
+    # plotting.store_stats(stats_test, temp_dir, "exp2_test_v{}".format(i))
 
 # import ipdb; ipdb.set_trace()
 # plotting.plot_episode_stats_test(stats, stats_test)
