@@ -1,2 +1,49 @@
+\section{Summary of Work}
+\label{sec:summary_of_work}
+
 In this paper, we developed a new RL algorithm by applying ILP to develop a new learning process.
 We used a latest ILP algorithm called ILASP, Learning from Answer Set Program to iteratively improve hypotheses.
+
+\section{Further Research}
+\label{sec:further_research}
+
+Having stated the limitations of the current framework, we discuss some of the possible improments and further research in this section.
+
+This is a proof of concept, a new type of model-based reinforcement learning using inductive logic programming. 
+
+More complicated environment
+
+More general transfer learning.
+
+Only empirically correct, no theoreticaly guarantee
+
+Dynamic environment like moving enermy etc.
+
+Non-stationality possible to be handled??
+
+Our approach is similar to experience replay ??
+
+More promissing approach is to combine RL algorithm and using ILP approach to complement each other, rather than replacing the bellman equation altogether. 
+
+\subsection{Value Iteration Approach}
+
+The proposed architecture is not finalised and will be reviewed regularly as we do more research.
+More research needs to be devoted to finalising the overall architecture, and the following issues in particular need to be considered.
+
+\subsection{Weak Constraint}
+
+\begin{itemize}
+
+\item Further investigation of whether ILASP can learn the concept of adjacent, which is crucial concept to know in any environment.
+\item How to generalise the agent's model when the environment changes. The new environment could be very similar to the previous one, or could be a completely different environment thus the agent should create a new internal model rather than generalising the existing model.
+\item The current proposed architecture is based on Dyna with simulated experiences. However, this might not be the best overall architecture, and the feasibility of using simulated experience with the learnt model with ILASP needs to be further investigated.
+
+\item Possibility of using other representational concepts such as \textit{Predictive Representations of State} or \textit{Affordance} \cite{Sridharan2017} for the agent's learning task. These concept have not been considered at the moment, but could help better transfer learning.
+
+\item Preparation for a backup plan in case ILASP approach does not work, so that the researchs feasible within 3 months of the researcheriod.
+
+\end{itemize}
+
+\subsection{Generalisation of the Current Approach}
+
+Learning the concept of being adjacent

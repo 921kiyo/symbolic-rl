@@ -224,7 +224,7 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchb7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchb7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchb8r.tfm
 OUTPUT main.toc
-OUTPUT main.lof
+OUTPUT main.lot
 INPUT chapters/introduction.tex
 INPUT chapters/introduction.tex
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omsbch.fd
@@ -352,8 +352,6 @@ INPUT ./figures/experiment5_training.png
 INPUT ./figures/experiment5_test.png
 INPUT ./figures/experiment5_test.png
 INPUT ./figures/experiment5_test.png
-INPUT chapters/discussion.tex
-INPUT chapters/discussion.tex
 INPUT chapters/related_work.tex
 INPUT chapters/related_work.tex
 INPUT chapters/conclusion.tex

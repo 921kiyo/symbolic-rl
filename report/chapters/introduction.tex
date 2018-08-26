@@ -1,5 +1,5 @@
 \section{Motivation}
-
+\label{sec:motivation}
 Reinforcement learning (RL) is a subfield of machine learning concerning where an agent learns how to behave in an environment by interacticing with the environment.
 
 There have been successful applications of deep reinforcement learning (DRL) in a number of domains, 
@@ -31,22 +31,8 @@ Most of the ILP frameworks are also tested in cases where all the environment is
 
 My motivation is to also test the algorithm where the agent does not know the environment in advance, which is the typical case for RL research.
 
-
-% \begin{center}
-% \begin{tabular}{ | m{5em} | m{1cm}| m{1cm} | }
-% \hline
-% cell1 dummy text dummy text dummy text& cell2 & cell3 \\ 
-% \hline
-% cell1 dummy text dummy text dummy text & cell5 & cell6 \\ 
-% \hline
-% cell7 & cell8 & cell9 \\ 
-% \hline
-% \end{tabular}
-% \end{center}
-
-
-
 \section{Objectives}
+\label{sec:objectives}
 
 In this paper, we extend this symbolic representation approach and explore the potential of symbolic machine learning to solve the above issues. 
 There are several advantages of symbolic machine learning. First of all, the decision making mechanism is understandable by humans rather than being black-box.
@@ -85,8 +71,8 @@ TODO: what is not being proposed.
 The contribution of this paper is to develop a new way of reinforcement algorithm by applying a latest ILP framework called Learning from Answer Sets, 
 and the algorithm learns hypotheses, which is the valid move of the game, which is a very general concept and therefore can be easily applied to a different senarios.
 
-\section{Contribution}
-\label{contribution}
+\section{Contributions}
+\label{contributions}
 
 To my knowledge, this is the first attemp that inductive logic programming is incorporated into a reinforcement learning senario to facilitate learning process.
 In simple environments, we show that the agent learns rule of the game faster than existing RL algorithms, learnt concepts is easy to understand for human users.
@@ -113,18 +99,14 @@ The descriptions of the new framework, ILP(RL), is explained in details, and hig
 
 \begin{customthm}{4}
 The performance of ILP(RL) is measured in a simple game environment and compared against two existing RL algorithms. In addition, the capability of the transfer learning is experimented.
+We also discuss some of the issues we currently face with the architecture.
 \end{customthm}
 
 \begin{customthm}{5}
-The overall discussion of ILP(RL), especially the contribution of the paper, limitations and further research is discussed in this chapter.
-We also discuss some of the issues we currently face with the architecture. 
-\end{customthm}
-
-\begin{customthm}{6}
 We reviewed previous research on relevant approach. Since there is no research that attemps to apply ILP to RL, we discuss two different groups of reseach: 
 RL reseach using answer set programming. The second group is the symbolic representations in RL.  
 \end{customthm}
 
-\begin{customthm}{7}
-Conclusion
+\begin{customthm}{6}
+We summarise the framework and experiments of ILP(RL) and discuss the potentials of further research. 
 \end{customthm}

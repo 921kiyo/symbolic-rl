@@ -12,6 +12,23 @@
 \usepackage[noend]{algpseudocode}
 \usepackage{wrapfig}
 
+%\usepackage[utf8]{inputenc}
+%\usepackage[acronym]{glossaries} 
+%\makeglossaries
+%
+%\newacronym{gcd}{GCD}{Greatest Common Divisor}
+% 
+%\newacronym{lcm}{LCM}{Least Common Multiple}
+%\usepackage{nomencl}
+%\makenomenclature
+%\renewcommand{\nomname}{Time Zones}
+
+%\usepackage[acronym,nomain,nonumberlist]{glossaries}
+%\makeglossaries
+%\newacronym{ny}{NY}{New York}
+%\newacronym{la}{LA}{Los Angeles}
+%\newacronym{un}{UN}{United Nations}
+
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[chapter] % Reset theorem numbering  for each chapter
 
@@ -79,7 +96,7 @@
 
 I would like to thank Prof. Alessandra Russo for accepting to supervise my project, her enthusiasm for my work and invaluable guidance throughout.
 
-I would also like to thank Mark Law for his expertise on inductive logic programming and fruitful discussions, and for Ruben Verrecken for his expertise on reinforcement learning and for providng me with advice and assistance for technical implementation.
+I would also like to thank Mark Law for his expertise on inductive logic programming and answer set programming,  and fruitful discussions, and  Ruben Verrecken for his expertise on reinforcement learning and for providng me with advice and assistance for technical implementation.
 
 \clearpage{\pagestyle{empty}\cleardoublepage}
 
@@ -98,6 +115,13 @@ I would also like to thank Mark Law for his expertise on inductive logic program
 % List of Figures and Tables
 \renewcommand\listtablename{List of Figures and Tables}
 \listoftableandfigures
+
+%\clearpage{\pagestyle{empty}\clearpage}
+%\glsaddall
+%\printglossary[type=\acronymtype,title=Acronyms]
+%\printglossary[type=\acronymtype]
+ 
+%\printglossary
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % IMPERIAL LOGO
@@ -830,7 +854,6 @@ r = \frac{Area under curve with transfer - area under curve without transfer}{ar
 \end{equation}
 REFERENCE
 
-
 \chapter{Framework}
 \label{framework}
 \input{chapters/framework}
@@ -838,10 +861,6 @@ REFERENCE
 \chapter{Evaluation}
 \label{evaluation}
 \input{chapters/evaluation}
-
-\chapter{Discussion}
-\label{discussion}
-\input{chapters/discussion}
 
 \chapter{Related Work}
 \label{related_work}

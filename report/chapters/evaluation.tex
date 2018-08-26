@@ -307,3 +307,60 @@ and therefore the agent needs to learn it after the hypothesis is transferred.
 \end{split}
 \label{experiment4_ilasp}
 \end{equation}
+
+\section{Strengths}
+\label{strengths}
+
+To my knowledge, this is the first attemp that inductive logic programming is incorporated into a reinforcement learning senario to facilitate learning process.
+In simple environments, we show that the agent learns rule of the game faster than existing RL algorithms, learnt concepts is easy to understand for human users.
+We also show that the learnt hypothesis is a general concept and can be applied to other environment to mitigate learnig process.
+
+The full hypotheses were learnt in the very early phase of learning and exploration phase. Thus with sufficient exploration, the model of the environment is correct
+and therefore it is able to find the optimal policy/path. 
+
+We show that ILP(RL) is able to solve a reduced MDP where the rewards are assumed to be associated with a sequence of actions planned as answer sets.
+Although this is a limitated solution, there is a potential to expand it to solve full MDP as discussed in Further Research. 
+
+TODO more details on the strength of the algorithm. 
+Validity
+
+\section{Limitations}
+
+Although this is the first time and inductive logic programming is applied into reinforcement leaning and there are new interesting property for ILP(RL),
+there are two major limitations with the current framework.
+
+\subsection{Scalability}
+The first limitation is scalability. As pointed in XXX or XXX,
+ILP framework is known to be less scalable. The current framework is tested in a relatively simple environments, 
+and proven to be work better than RL algorithsm in terms of the number of episodes that is needed to converge to an optimal policy.
+However, learning in each episode is relatively slower than that of RL. 
+This is shown in XXX, which shows average learnint time for ILASP. 
+
+This limitation is theoretically discussed in XXX, where the complexity of deciding satisfiability is 
+$\sum_{2}^{P}$-complete. Since there is no negative examples used in our current framework, the complexity is NP-complete.
+
+Whereas Q-learning update value function in the same way whether there is a new concept such as teleport links.
+
+Figure XXX shows traning times for Experiment 1 and 2.
+
+ILASP learning time for Experiment 1 and 2. 
+
+Unlike existing reinforcement learning,
+out algorithm refines hypothesis at every time steps within the same episode.
+Thus even though the efficiency in terms of the number of iteration is higher,
+training time within each iteration tends to be lower.
+
+\subsection{Flexibility}
+While most of existing reinforcement learning works in different kinds of environment without pre-configuration, our algorithm
+needs to define search space for learning hypothesis. As explained in the experiment 3, it was necessary to add two extra modeb before training.
+Thus the algorithm may not be feasible in cases where these learning concepts were unknown or difficult to define. 
+In addition, not only it needs search space, surrounding information is assumed to be known to the agent. 
+While this assumption may be reasonable in many cases, this is not common in traditional reinforcement learnig setting.
+
+The current framework does not make use of rewards the agent collects and mainly uses the location of the goal for planning.
+In some senarios, there may not be a termination state (goal) and instead there may be a different purpose to gain these rewards. 
+Since the current implementation is dependent on finding the goal for planning rather than maximing total rewards, which is the common objective for most of RL algorithms,
+the application of the current framework may be limited to particular types of problems.
+
+Another question remains to how to extend the framework to more realistic senarios. RL works in more complex environments such as 3D or real physical environment, 
+whereas the experiences of the agent in the current framework need to be expressed as ASP syntax, thus expressing continuous states rather than discrete states is challenging.

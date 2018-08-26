@@ -1,19 +1,14 @@
-Reinforcement Learning (RL) is a field of machine learning techniques that has been applied and proven to be successful in many domains.
-
-One of the recent research has been focused around incorporating symbolic representation into RL to achieve data efficient and more transparent learning. 
-Inductive logic programming (ILP) is another field of machine learning that is based on logic programming, and recent advance on ILP research have shown potential in many more applications.
+Reinforcement Learning (RL) is has been applied and proven to be successful in many domains.
+However, most of current RL models face limitations, namely, low learnig efficiency and and inability of tranfer learning to a similar environment.
+In order to tackle these shortcoming, this paper introduces a new approach for RL called ILP(RL), 
+which applies Answer Set Programming (ASP), a declarative logic programming suitable for complex search problems, 
+and Inductive Learning of Answer Set Programs (ILASP), a learning framework of non-monotonic Inductive Logic Programming (ILP).
+ILP is another field of machine learning that is based on logic programming, and recent advance on ILP research have shown potential in many more applications.
+ILP(RL) learns a general concept of a valid move in an environment, called a hypothesis, using ILASP, and generate a sequence of actions to the destination using ASP.
+The learnt hypotheses is highly expressive and transferrable to a similar environment. 
 While there are a number of past papers that attempt to incorporate symbolic representation to RL problems in order to achieve efficient learning, 
-there has not been any attempt of applying symbolic learning into RL problem.
-
-This paper examines a proof of concept called ILP(RL), which attempts to apply one of the ILP frameworks called Learning from Answer Sets, into RL senarios to complement some of the shortcoming of RL. 
-We developed a new framework using ILASP and proposed a new way of learning the model of the environment.
-The hypotheses learnt using ILASP is a general concept of valid move in an environment, which is highly expressive and transferrable to a different environment.
-The new pipeline was examined in a various simple maze games, and show that an agent learns faster than existing RL techniques.
-
+there has not been any attempt of applying symbolic learning into a RL problem.
+ILP(RL) was examined in a various simple maze games, and show that an agent learns faster than existing RL techniques.
 We also show that transfer learning successfully improve learning on a new but similar environment in a limited senarios.
-
 This proof of concept showpotentials for this new way of learning using ILP.
-
 Although the experiments were conducted in a simple environment, the results of the experiments show promissing, and there is an avenue for potential improvement.
-
-% The structure of Introduction and Abstract should be the same
