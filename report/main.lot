@@ -1,28 +1,31 @@
 \select@language {english}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces The interaction between an agent and an environment\relax }}{13}{figure.caption.9}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Tiling coding illustration\relax }}{19}{figure.caption.14}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces The interaction between an agent and an environment\relax }}{14}{figure.caption.9}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Tiling coding illustration\relax }}{20}{figure.caption.14}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces ILP(RL) overview\relax }}{21}{figure.caption.15}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces 5$\times $5 grid world example\relax }}{23}{figure.caption.16}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces The VGDL (Video Game Definition Language) environment example\relax }}{31}{figure.caption.17}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces ILP(RL) overview\relax }}{22}{figure.caption.15}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces 5$\times $5 grid world example\relax }}{24}{figure.caption.16}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces The VGDL (Video Game Definition Language) environment example\relax }}{32}{figure.caption.17}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces List of parameters used in the experiments\relax }}{33}{table.caption.18}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Game enviroment for experiment 1\relax }}{33}{figure.caption.19}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Result of experiment 1 (learnig curve)\relax }}{34}{figure.caption.20}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Result of experiment 1 (performance)\relax }}{34}{figure.caption.21}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Normalised learning convergence by ILASP for experiment 1\relax }}{35}{figure.caption.22}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Game enviroment for experiment 1\relax }}{36}{figure.caption.23}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Result of experiment 2 (learnig curve)\relax }}{37}{figure.caption.24}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Result of experiment 2 (performance)\relax }}{37}{figure.caption.25}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Normalised learning convergence by ILASP for experiment 2\relax }}{38}{figure.caption.26}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Game environment for experiment 3: before (left) and after (right) transfer learning\relax }}{39}{figure.caption.27}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Result of experiment 3 (learnig curve)\relax }}{40}{figure.caption.28}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Result of experiment 3 (performance)\relax }}{41}{figure.caption.29}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Game environment for experiment 4: before (left) and after (right) transfer learning\relax }}{41}{figure.caption.30}
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Result of experiment 4 (learnig curve)\relax }}{42}{figure.caption.31}
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Result of experiment 4 (performance)\relax }}{42}{figure.caption.32}
+\contentsline {table}{\numberline {4.1}{\ignorespaces List of parameters used in the experiments\relax }}{34}{table.caption.18}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Game enviroment for experiment 1\relax }}{34}{figure.caption.19}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Result of experiment 1 (learnig curve)\relax }}{35}{figure.caption.20}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Result of experiment 1 (performance)\relax }}{35}{figure.caption.21}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Normalised learning convergence by ILASP for experiment 1\relax }}{36}{figure.caption.22}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Game enviroment for experiment 1\relax }}{37}{figure.caption.23}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Result of experiment 2 (learnig curve)\relax }}{38}{figure.caption.24}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Result of experiment 2 (performance)\relax }}{38}{figure.caption.25}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Normalised learning convergence by ILASP for experiment 2\relax }}{39}{figure.caption.26}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Game environment for experiment 3: before (left) and after (right) transfer learning\relax }}{40}{figure.caption.27}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Result of experiment 3 (learnig curve)\relax }}{41}{figure.caption.28}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Result of experiment 3 (performance)\relax }}{42}{figure.caption.29}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Game environment for experiment 4: before (left) and after (right) transfer learning\relax }}{42}{figure.caption.30}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Result of experiment 4 (learnig curve)\relax }}{43}{figure.caption.31}
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Result of experiment 4 (performance)\relax }}{43}{figure.caption.32}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {1}{\ignorespaces Ethics Checklist\relax }}{52}{table.1..1}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {A.1}{\ignorespaces Ethics Checklist\relax }}{55}{table.A.1}
+\addvspace {10\p@ }
+\addvspace {10\p@ }

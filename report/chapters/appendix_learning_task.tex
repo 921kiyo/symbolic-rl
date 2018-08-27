@@ -1,28 +1,25 @@
-\section{Learning tasks}
-\label{appendix:learning_tasks}
 
 This is the full learning task for ILASP in the experiment 1. 
 
-% cell((0..7, 0..6)).
-% adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).
-% adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).
-% adjacent(down, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).
-
-% adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
-
-% \#modeh(state\_after(var(cell))).
-
-% \#modeb(1, adjacent(const(action), var(cell), var(cell))).
-% \#modeb(1, state\_before(var(cell)), (positive)).
-% \#modeb(1, action(const(action)),(positive)).
-% \#modeb(1, wall(var(cell))).
-
-% \#max\_penalty(100).
-
-% \#constant(action, right).
-% \#constant(action, left).
-% \#constant(action, down).
-% \#constant(action, up).
+\begin{flalign*}
+    &\textsf{state\_after(V1) :- link\_dest(V1).}&\\
+    &\textsf{cell((0..7, 0..6)).}&\\
+    &\textsf{adjacent(right, (X+1,Y),(X,Y)):- cell((X,Y)), cell((X+1,Y)).}&\\
+    &\textsf{adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).}&\\
+    &\textsf{adjacent(down, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).}&\\
+    &\textsf{adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).}&\\
+    &\textsf{\#modeh(state\_after(var(cell))).}&\\
+    &\textsf{\#modeb(1, adjacent(const(action), var(cell), var(cell))).}&\\
+    &\textsf{\#modeb(1, state\_before(var(cell)), (positive)).}&\\
+    &\textsf{\#modeb(1, action(const(action)),(positive)).}&\\
+    &\textsf{\#modeb(1, wall(var(cell))).}&\\
+    &\textsf{\#max\_penalty(50).}&\\
+    &\textsf{\#constant(action, right).}&\\
+    &\textsf{\#constant(action, left).}&\\
+    &\textsf{\#constant(action, down).}&\\
+    &\textsf{\#constant(action, up).}&
+\end{flalign*}
+\label{appendix:learning_task}
 
 % \#pos({state\_after((1,4))}, {state\_after((2,4)),state\_after((1,5)),state\_after((0,4)),state\_after((1,3))}, {state\_before((1,4)). action(non). wall((1, 5)). wall((0, 4)). }).
 % \#pos({state\_after((1,3))}, {state\_after((2,4)),state\_after((1,5)),state\_after((0,4)),state\_after((1,4))}, {state\_before((1,4)). action(up). wall((1, 5)). wall((0, 4)). }).

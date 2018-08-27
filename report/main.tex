@@ -145,7 +145,7 @@ This chapter introduces necessary background of Answer Set Programming (ASP), In
 
 \section{Answer Set Programming (ASP)}
 \label{sec:asp}
-Answer Set Programming (ASP) is a form of declarative programming aimed at knowledge-intensive applications such as search problems \cite{Lifschitz2008}. We first introduce stable model on which ASP is based on, and describe ASP syntax. 
+Answer Set Programming (ASP) is a form of declarative programming aimed at knowledge-intensive applications such as difficult search problems \cite{Lifschitz2008}. We first introduce stable model on which ASP is based on, and describe ASP syntax. 
 
 % Non-monotonic reasoning
 \subsection{Stable Model Semantics}
@@ -179,8 +179,8 @@ For normal logic programs, there may not be any least Herbrand Model.
 \begin{examp} \normalfont (Herbrand Interpretation, Herbrand Model and M(P)) \\
 
 P = $\begin{cases}
-	p(X)  \leftarrow q(X) \\
-	q (a).
+	\textit{p(X)}  \leftarrow \textit{q(X).} \\
+	\textit{q (a).}
       \end{cases}$
 HD(P) = \{ a \} , HB(P) = \{ q(a), p(a) \}  \\
 
@@ -208,8 +208,8 @@ The algorithm terminates when no more rules can be added to Q.
 
 P = $\begin{cases}
 %	p(X)  \leftarrow not \ q(X). \\
-	q(X)  \leftarrow p(X). \\
-	p(a).
+	\textit{q(X)}  \leftarrow \textit{p(X).} \\
+	\textit{p(a).}
       \end{cases}$ \\
 
 ground(P) in this example is \{p(a), q(a)\}.
@@ -233,9 +233,9 @@ The \textit{reduct} of P with respect to X can be constructed such that
 \begin{examp} \normalfont (Reduct) \\
 
 P = $\begin{cases}
-	p(X)  \leftarrow not\ q(X). \\
-  	q (X) \leftarrow not\ p(X). \\
-      \end{cases}$,  X = \{p(a), q(b)\}
+	\textit{p(X)}  \leftarrow \textit{not q(X).} \\
+  	\textit{q(X)} \leftarrow \textit{not p(X).} \\
+      \end{cases}$  X = \{p(a), q(b)\}
 
 Where X is a set of atoms. ground(P) is
 
@@ -262,29 +262,53 @@ A \textit{Stable Model} of P, denoted SM(P)??, is an interpretaiton X if and onl
 \subsection{Answer Set Programming (ASP) Syntax}
 
 \begin{defn}
-Answer set of normal logic program P is a Stable Model defined by a set of \textit{rules}, and Answer Set Programming (ASP) is a normal logic program with extensions: constraints, choice rules and optimisation statements. 
-ASP program consists of a set of rules, where each rule consists of an atom and literals.
+Answer set of normal logic program P is a Stable Model defined by a set of rules, where each rule consists of literals, which is made up with an atom \textit{p} or its default negation \textit{not p} (\textit{negation as failure}). Answer Set Programming (ASP) is a normal logic program with extensions: constraints, choice rules and optimisation statements.
 \end{defn}
 
+A \textit{defnite rule} is: 
+\begin{equation}
+\begin{split}
+\underbrace{h}_\text{head} \leftarrow\underbrace{ a\textsubscript{1}, a\textsubscript{2}, ..., a\textsubscript{n}}_\text{body}
+\end{split}
+\label{asp_definite_rule}
+\end{equation}
+
+A \textit{normal rule} is: 
 \begin{equation}
 \begin{split}
 \underbrace{h}_\text{head} \leftarrow\underbrace{ a\textsubscript{1}, a\textsubscript{2}, ..., a\textsubscript{n}, not \ b\textsubscript{n+1}, ....not \ b\textsubscript{n+k}}_\text{body}
 \end{split}
-\label{asp_normal_program}
+\label{asp_normal_rule}
+\end{equation}
+where h, a\textsubscript{1}, ... b\textsubscript{n+k} are all atoms.
+A rule with empty body is a \textit{fact}, and a rule with empty head is a  \textit{constraint}.
+%TODO positive rule and definite clause
+%A \textit{constraint} of the program P is of the form $\leftarrow$ \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{not b}\textsubscript{1}, ..., \textit{not b}\textsubscript{n}, where the rule has an empty head. 
+The constraint filters any irrelevant answer sets. When computing ground(P)\textsubscript{x}, the empty head becomes $\perp$, which cannot be in the answer sets.
+%There are two types of constraints: \textit{hard constraints} and \textit{soft constraints}. Hard constraints are strictly satisfied, whereas soft constraints may not be satisfied but the sum of the violations should be minimised when solving ASP.
+
+A \textit{choice rule} can express possible outcomes given an action choice, which is of the form:
+\begin{equation}
+\begin{split}
+\underbrace{l\{h\textsubscript{1},...,h\textsubscript{m}\}u}_\text{head} \leftarrow \underbrace{a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n}}_\text{body}
+\end{split}
+\label{asp_choice_rule}
 \end{equation}
 
-A rule with empty body is a \textit{fact}. 
-TODO positive rule and definite clause
-A \textit{constraint} of the program P is of the form $\leftarrow$ \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{not b}\textsubscript{1}, ..., \textit{not b}\textsubscript{n}, where the rule has an empty head. The constraint filters any irrelevant answer sets. When computing ground(P)\textsubscript{x}, the empty head becomes $\perp$, which cannot be in the answer sets.
-There are two types of constraints: \textit{hard constraints} and \textit{soft constraints}. Hard constraints are strictly satisfied, whereas soft constraints may not be satisfied but the sum of the violations should be minimised when solving ASP.
+where  l and u are integers and h\textsubscript{i} for 1 $\leq$ i $\leq$ m are atoms. The head is called \textit{aggregates}.
 
-A \textit{choice rule} can express possible outcomes given an action choice, which is of the form
-l\{h\textsubscript{1},...,h\textsubscript{m}\}u $\leftarrow$ a\textsubscript{1}, ..., a\textsubscript{n}, not b\textsubscript{1}, ..., not b\textsubscript{n} where  l and u are integers and h\textsubscript{i} for 1 $\leq$ i $\leq$ m are atoms. The head is called \textit{aggregates}.
+\textit{Optimisation statement} is useful to sort the answer sets in terms of preference, which is of the form:
+\begin{equation}
+\begin{split}
+&\textit{\#minimize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}]} \ \textit{or} \\
+&\textit{\#maximize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}]} \\
+\end{split}
+\label{asp_optimisation_statement}
+\end{equation}
 
-\textit{Optimisation statement} is useful to sort the answer sets in terms of preference, which is of the form
-\textit{\#minimize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}]} or \textit{\#maximize[a\textsubscript{1}=w\textsubscript{1},...a\textsubscript{n}=w\textsubscript{n}]} where \textit{w\textsubscript{1},..., w\textsubscript{n}} is integer weights and \textit{a\textsubscript{1},...,a\textsubscript{n}} is ground atoms.  ASP solvers compute the scores of the weighted sum of the sets of ground atoms based on the true answer sets, and find optimal answer sets which either maximise or minimise the score.
+where \textit{w\textsubscript{1},..., w\textsubscript{n}} is integer weights and \textit{a\textsubscript{1},...,a\textsubscript{n}} is ground atoms.  ASP solvers compute the scores of the weighted sum of the sets of ground atoms based on the true answer sets, and find optimal answer sets which either maximise or minimise the score.
 
-\textit{Clingo} is one of the modern ASP solvers that executes the ASP program and returns answer sets of the program (\cite{Gebser2011}), and we will use \textit{Clingo} for the implementation of this research.
+\textit{Clingo} is one of the modern ASP solvers that executes the ASP program and returns answer sets of the program (\cite{Gebser2011}), and we will use \textit{Clingo 5} for the implementation of our new framework.
 
 %An answer set of ASP program is interpretations that make all the ruls true.
 %Non-monotonicity.
@@ -293,8 +317,7 @@ l\{h\textsubscript{1},...,h\textsubscript{m}\}u $\leftarrow$ a\textsubscript{1},
 \section{Inductive Logic Programming (ILP)}
 \label{sec:ilp}
 
-\textit{Inductive Logic Programming (ILP)} is a subfield of machine learning research area aimed at supervised inductive concept learning. 
-This is the intersection between machine learning and logic programming \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and none of negative examples, given a hypothesis language for search space and cover relation \cite{DeRaedt1997}. ILP is based on learning from entailment, as shown in Equation \ref{ilp_equation}.
+\textit{Inductive Logic Programming (ILP)} is a subfield of machine learning research area aimed at supervised inductive concept learning, and is the intersection between machine learning and logic programming \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and none of negative examples, given a hypothesis language for search space and cover relation \cite{DeRaedt1997}. ILP is based on learning from entailment, as shown in Equation \ref{ilp_equation}.
 
 \begin{equation}
 B \wedge H \models E
@@ -303,10 +326,8 @@ B \wedge H \models E
 
 where E contains all of the positive examples (E\textsuperscript{+}) and none of the negative examples (E\textsuperscript{-}).
 
-On the one hand, an advantage of ILP over statistical machine learning is that the hypothesis that an agent learnt can be easily understood by a human, as it is expressed in first-order logic, making the learning process more transparent.
-On the other hand, a limitation of ILP is learning efficiency and scalability. There are usually thousands or more examples in many real-world examples. Scaling ILP task to cope with large examples is a challenging task \cite{Muggleton1993}.
-
-In this section, we briefly introduce foundation of Answer Set Programming (ASP) and several ILP frameworks under ASP.
+An advantage of ILP over statistical machine learning is that the hypothesis that an agent learnt can be easily understood by a human, as it is expressed in first-order logic, making the learning process more transparent.
+By contrast, a limitation of ILP is learning scalability. There are usually thousands or more examples in many real-world examples. Scaling ILP task to cope with large examples is a challenging task \cite{Muggleton1993}.
 
 \subsection{ILP under Answer Set Semantics}
 There are several ILP non-monotonic learning frameworks under the answer set semantics . We first introduce two of them: \textit{Cautious Induction} and \textit{Brave Induction} (\cite{Sakama2009}), which are foundations of \textit{Learning from Answer Sets} discussed in Section \ref{section_lasp}, a state-of-art ILP framework that we will use for our new framework.  (for other non-monotonic ILP frameworks, see \cite{Otero2001}, \cite{Inoue2014}, \cite{Corapi2012} and \cite{DeRaedt1997}).
@@ -325,8 +346,8 @@ There are several ILP non-monotonic learning frameworks under the answer set sem
 \begin{examp} \normalfont (Cautious Induction) \\
 
 B = $\begin{cases}
-	exercises  \leftarrow not \ eat\_out. \\
-	eat\_out \leftarrow exercises. \\
+	\textit{exercises}  \leftarrow \textit{not \ eat\_out.} \\
+	\textit{eat\_out} \leftarrow \textit{exercises.} \\
       \end{cases}$
 E\textsuperscript{+} = \{tennis\},      E\textsuperscript{-} = \{eat\_out \} \\
 
@@ -339,8 +360,8 @@ The limitation of Cautious Induction is that positive examples must be true for 
 \begin{examp} \normalfont (Limitation of Cautious Induction) \\
 
 B = $\begin{cases}
-	1\{situation(P, awake), situation(P, sleep)\}1 \leftarrow person(P). \\
-	person(john).
+	\textit{1\{situation(P, awake), situation(P, sleep)\}1} \leftarrow \textit{person(P).} \\
+	\textit{person(john).}
       \end{cases}$ \\
 
 Neither of \textit{situation(john, awake)} nor \textit{situation(john, sleep)} is false in all answer sets. In this example, it only returns person(john). Thus no examples could be given to learn the choice rule.
@@ -361,8 +382,8 @@ Neither of \textit{situation(john, awake)} nor \textit{situation(john, sleep)} i
 \begin{examp} \normalfont (Brave Induction) \\
 
 B = $\begin{cases}
-	exercises  \leftarrow not \ eat\_out. \\
-	tennis \leftarrow holiday \\
+	\textit{exercises}  \leftarrow \textit{not \ eat\_out.} \\
+	\textit{tennis} \leftarrow \textit{holiday} \\
       \end{cases}$
 E\textsuperscript{+} = \{tennis\},   E\textsuperscript{-} = \{eat\_out \} \\
 
@@ -375,9 +396,9 @@ The limitation of Brave Induction that it cannot learn constraints, since the ab
 \begin{examp} \normalfont (Limitation of Brave Induction) \\
 
 B = $\begin{cases}
-	1\{situation(P, awake), situation(P, sleep)\}1 \leftarrow person(P). \\
-	person(C) \leftarrow super\_person(C). \\
-	super\_person(john).
+	\textit{1\{situation(P, awake), situation(P, sleep)\}1} \leftarrow \textit{person(P).} \\
+	\textit{person(C)} \leftarrow \textit{super\_person(C).} \\
+	\textit{super\_person(john).}
 	\end{cases}$ \\
 
 In order to learn the  constraint hypothesis H = \{ $\leftarrow$ not situation(P, awake), super\_person(P)\}, it is not possible to find an optimal solution.
@@ -389,16 +410,34 @@ In order to learn the  constraint hypothesis H = \{ $\leftarrow$ not situation(P
 
 \subsubsection{Learning from Answer Sets (LAS)}
 \textit{Learning from Answer Sets (LAS)} was developed in \cite{Law2014} to faciliate more complex learning tasks that neither Cautious Induction nor Brave Induction could learn.
-Examples used in LAS are \textit{Partial Interpretations}, which are of the form $\langle$ e\textsuperscript{inc}, e\textsuperscript{exc}$\rangle$. (called \textit{inclusions} and \textit{exclusions} of \textit{e} respectively).  A Herbrand Interpretation extends a partial interpretation if it includes all of e\textsuperscript{inc} and none of e\textsuperscript{exc}.
-LAS is of the form $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is background knowledge, S\textsubscript{M} is hypothesis space, and E\textsuperscript{+} and E\textsuperscript{-} are examples of positive and negative partial interpretations. S\textsubscript{M} consists of a set of normal rules, choice rules and constraints. S\textsubscript{M} is specified by \textit{language bias} of the learning task using \textit{mode declaration}. Mode declaration specifies what can occur in a hypothesis by specifying the predicates, and consists of two parts: \textit{modeh} and \textit{modeb}.  \textit{modeh} and \textit{modeb} are the predicates that can occur in the head of the rule and body of the rule respectively. Language bias is the specification of the language in the hypothesis in order to reduce the search space for the hypothesis.
+Examples used in LAS area tuple of pair of atoms called \textit{Partial Interpretations}, which are of the form:
+\begin{equation}
+\begin{split}
+%\underbrace{h}_\text{head} \leftarrow\underbrace{ a\textsubscript{1}, a\textsubscript{2}, ..., a\textsubscript{n}}_\text{body}
+E = \langle E\textsuperscript{inc}, E\textsuperscript{exc} \rangle. 
+\end{split}
+\label{partial_interpretations}
+\end{equation}
+
+(called \textit{inclusions} and \textit{exclusions} of \textit{E} respectively).  A Herbrand Interpretation extends a partial interpretation if it includes all of E\textsuperscript{inc} and none of E\textsuperscript{exc}.
+
+A \textit{Learning from Answer Sets} task is of the form:
+\begin{equation}
+\begin{split}
+T = \langle B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} \rangle
+\end{split}
+\label{las}
+\end{equation}
+where B is background knowledge, S\textsubscript{M} is hypothesis space, and E\textsuperscript{+} and E\textsuperscript{-} are examples of positive and negative partial interpretations. S\textsubscript{M} consists of a set of normal rules, choice rules and constraints. 
+S\textsubscript{M} is specified by \textit{language bias} of the learning task using \textit{mode declaration}. Mode declaration specifies what can occur in a hypothesis by specifying the predicates, and consists of two parts: \textit{modeh} and \textit{modeb}.  \textit{modeh} and \textit{modeb} are the predicates that can occur in the head of the rule and body of the rule respectively. Language bias is the specification of the language in the hypothesis in order to reduce the search space for the hypothesis.
 
 \begin{defn}{Learning from Answer Sets (LAS)}
 
-Given a learning task T, the set of all possible inductive solutions of T is denoted as ILP\textsubscript{LAS}(T), and a hypothesis H is an inductive solution of ILP\textsubscript{LAS}(T) $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ such that:
+Given a learning task T, the set of all possible inductive solutions of T, denoted ILP\textsubscript{LAS}(T), and a hypothesis H is an inductive solution of ILP\textsubscript{LAS}(T) $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ such that:
 \begin{enumerate}
 \item H $\subseteq$ S\textsubscript{M}
-\item $\forall$ e $\in$ E\textsuperscript{+} : $\exists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e
-\item $\forall$ e $\in$ E\textsuperscript{-} : $\nexists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e
+\item $\forall$ e\textsuperscript{+} $\in$ E\textsuperscript{+} : $\exists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e\textsuperscript{+}
+\item $\forall$ e\textsuperscript{-} $\in$ E\textsuperscript{-} : $\nexists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e\textsuperscript{-}
 \end{enumerate}
 
 \end{defn}
@@ -444,10 +483,19 @@ XXX
 \end{examp}
 
 \subsubsection{A Context-dependent Learning from Answer Sets }
-\textit{Context-dependent learning from answer sets ($ILP_{LAS}^{context}$)} is a further generalisation of ILP\textsubscript{LAS} with \textit{context-dependent examples}\cite{Law2016}\footnote{The original paper is developed on top of \textit{learning from ordered answer sets ($ILP_{LOAS}^{context}$)}. In this paper, we do not use ordered answer sets and therefore simplified it. }.
+\textit{Context-dependent learning from answer sets ($ILP_{LAS}^{context}$)} is a further generalisation of ILP\textsubscript{LAS} with \textit{context-dependent examples}\cite{Law2016}\footnote{The original paper is developed on top of \textit{learning from ordered answer sets ($ILP_{LOAS}^{context}$)}. In this paper, we do not use ordered answer sets and therefore simplified to $ILP_{LAS}^{context}$. }.
 \textit{Context-dependent examples} are examples that each unique background knowledge (context) only applies to specific examples. This way the background knowledge is more structured rather than one fixed background knowledge that are applied to all examples.
 
-Formally, partial interpretation is of the form $\langle$ e, C $\rangle$ (called \textit{context-dependent partial interpretation (CDPI)}), where \textit{e} is a partial interpretation and C is called \textit{context}, or an ASP program without weak constraints.
+Formally, partial interpretation is called \textit{context-dependent partial interpretation (CDPI)}, which is of the form:
+\begin{equation}
+\begin{split}
+\langle e, C \rangle
+\end{split}
+\end{equation}
+
+ where \textit{e} is a partial interpretation and C is a \textit{context}, or an ASP program without weak constraints.
+
+TODO weak delete.
 %A \textit{context-dependent ordering example (CDOE)} is of the form $\langle$ $\langle$e\textsubscript{1}, C\textsubscript{1} $\rangle$, $\langle$ e\textsubscript{2}, C\textsubscript{2} $\rangle$$\rangle$, which is a pair of CDPI. 
 %An APS program P \textit{bravely respects o} if and only if
 %\begin{enumerate}
@@ -458,20 +506,20 @@ Formally, partial interpretation is of the form $\langle$ e, C $\rangle$ (called
 %\begin{enumerate}
 % \item $\forall$ $\langle$ A\textsubscript{1}, A\textsubscript{2} $\rangle$ such that A\textsubscript{1} $\in$ Answer Sets(P $\cup$ C\textsubscript{1}),  A\textsubscript{2}, $\in$ Answer Sets(P $\cup$ C\textsubscript{2}), A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2} and A\textsubscript{1} $\prec$\textsubscript{P} A\textsubscript{2}
 %\end{enumerate}
-
-$ILP_{LAS}^{context}$ task is of the form T = $\langle$ B, S\textsubscript{M}, E\textsubscript{+}, E\textsubscript{-}.
+\begin{defn}
+$ILP_{LAS}^{context}$ task is of the form T = $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-}$\rangle$ B.
 A hypothesis H is an inductive solution of T if and only if
 \begin{enumerate}
 \item H $\subseteq$ S\textsubscript{M} in $ILP_{LAS}^{context}$
-\item $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{+}, $\exists$A $\exists$ A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
-\item $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{-}, $\nexists$A $\exists$ A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
+\item $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{+}, $\exists$A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
+\item $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{-}, $\nexists$A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
 %\item $\forall$o $\in$ O\textsuperscript{b} B $\cup$ H bravely respects o
 %\item $\forall$o $\in$ O\textsuperscript{c} B $\cup$ H cautiously respects o
 \end{enumerate}
+\end{defn}
+One of the main advantages of adding contex dependent examples is that when a hypothesis is computed, only the relevant set of examples are used for search rather than using all examples at once. Relevant examples are counterexamples for the previously computed hypothesis in the previous iterations. This iterative approach significantly increases the efficiency of solving learning tasks, and enables more expressive structure of the background knowlege to particular examples. 
 
-The two main advantages of adding contex dependent examples are that it increases the efficiency of learning tasks, and more expressive structure of the background knowlege to particular examples. 
-
-\textcolor{red}{TODO explain more}
+$ILP_{LAS}^{context}$ is used in ILASP2i, which we use for our new framework.
 
 %These features will be useful when a game agent is in two different environmets as discussed in Section \ref{model_generation_and_update}.
 
@@ -482,7 +530,7 @@ XXX
 
 \section{Reinforcement Learning (RL)}
 \label{rl}
-\textit{Reinforcement learning (RL)} is a subfield of machine learning regarding how an agent behaves in an environment in order to maximise its total reward. As shown in Figure \ref{agent_env}, the agent interacts with an environment, and at each time step the agent takes an action and receives observation, which affects the environment state and the reward (or penalty) it receives as the action outcome. In this section, we briefly introduce the background in RL necessary for our research.
+\textit{Reinforcement learning (RL)} is a subfield of machine learning regarding how an agent behaves in an environment in order to maximise its total reward. As shown in Figure \ref{agent_env}, the agent interacts with an environment, and at each time step the agent takes an action and receives observation, which affects the environment state and the reward (or penalty) it receives as the action outcome. In this section, we briefly introduce the background in RL necessary for our new framework as well as benchmark of experiments discussed in Chapter \ref{evaluation}.
 
 \begin{figure}[!htb]
 \centering
@@ -493,7 +541,19 @@ XXX
 
 \subsection{Markov Decision Process (MDP)}
 \label{mdp_subsection}
-An agent interacts with an environment at a sequence of discrete time step, which is part of the sequential history of observations, actions and rewards. The sequential history is formalised as H\textsubscript{t} = O\textsubscript{1}, R\textsubscript{1}, A\textsubscript{1}, ..., A\textsubscript{t-1}, O\textsubscript{t}, R\textsubscript{t}.  A \textit{state} is a function of the history S\textsubscript{t} = f(H\textsubscript{t}), which determines the next environment.  A state S\textsubscript{t} is said to have \textit{Markov property} if and only if P[S\textsubscript{t+1} $\vert$ S\textsubscript{t}] = P[S\textsubscript{t+1} $\vert$ S\textsubscript{1}, ..., S\textsubscript{t}]. In other words, the probability of reaching S\textsubscript{t+1} depends only on S\textsubscript{t}, which captures all the relevant information from the earilier history (\cite{Puterman1994}).
+An agent interacts with an environment at a sequence of discrete time step, which is part of the sequential history of observations, actions and rewards. The sequential history is formalised as 
+\begin{equation}
+\begin{split}
+H\textsubscript{t} = S\textsubscript{1}, R\textsubscript{1}, A\textsubscript{1}, ..., A\textsubscript{t-1}, S\textsubscript{t}, R\textsubscript{t}.  
+\end{split}
+\end{equation}
+where S is \textit{states}, R is \textit{rewards} and A is \textit{actions}. A state S\textsubscript{t} determines the next environment and has a \textit{Markov property} if and only if 
+\begin{equation}
+\begin{split}
+P[S\textsubscript{t+1} \vert S\textsubscript{t}] = P[S\textsubscript{t+1} \vert S\textsubscript{1}, ..., S\textsubscript{t}].
+\end{split}
+\end{equation}
+In other words, the probability of reaching S\textsubscript{t+1} depends only on S\textsubscript{t}, which captures all the relevant information from the earilier history (\cite{Puterman1994}).
 When an agent must make a sequence of decision, the sequential decision problem can be formalised using \textit{Markov decision process (MDP)}. MDP formaly represents a fully observable environment of an agent for 
 RL.
 \begin{defn}{Markov Decision Process (MDP)}
@@ -502,17 +562,27 @@ RL.
 \begin{itemize}
 \item S is the set of finite states that is observable in the environment.
 \item A is the set of finite actions taken by the agent.
-\item T is \textit{a state transition function}: S $\times$ A $\times$ S $\rightarrow$ [0,1], which is a probability of reaching a future state s$^\prime$ $\in$ S by taking an action a $\in$ A in the current state  s$\in$ S
+\item T is \textit{a state transition function}: S $\times$ A $\times$ S $\rightarrow$ [0,1], which is a probability of reaching a future state s$^\prime$ $\in$ S by taking an action a $\in$ A in the current state  s$\in$ S.
 %\item T\textsubscript{a}(s, s$^\prime$) is a state transition in the form of probability matrix Pr(S\textsubscript{t+1} = s$^\prime$ $\vert$ s\textsubscript{t} = s, a\textsubscript{t} = a), which is the probablity that action \textit{a} in state \textit{s} at time \textit{t} will result in state \textit{s$^\prime$} at time \textit{t+1}.
 \item R is a reward function R\textsubscript{a}(s, s$^\prime$) = $\displaystyle \E[R\textsubscript{t+1} $ $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a], the expected immediate reward that action \textit{a} in state \textit{s} at time \textit{t} will return.
 \end{itemize}
 \end{defn}
 %$\displaystyle \E[R\textsubscript{t+1} \vert$ S\textsubscript{t} = s]
 
-The objective of an agent is to solve an MDP by taking a sequence of actions to maximise the reward function R. 
+The objective of an agent is to solve an MDP by taking a sequence of actions to maximise the total cumulative reward it receives. 
 An method to find the optimal solution of an MDP is Reinforcement Learning (RL). 
+Formally, the objective of a RL agent is to maximise \textit{expected discounted return},which is defined as:
+\begin{equation}
+\begin{split}
+G\textsubscript{t} = R\textsubscript{t+1} + \gamma R \textsubscript{t+2} + ...  = \sum_{k=0}^{\infty} R\textsubscript{t+k+1} 
+\end{split}
+\end{equation}
 
-For RL program, it is not necessary for the agnet to konw T and R in advance, but they are present in the environment and can be realised each time the agent takes an action. 
+where $\gamma$ is a discount rate $\gamma$ $\in$ [0,1], a parameter,  which represents the preference of the agent for the present reward over future rewards. If $\gamma$ is low, the agent is more interested in maximising immediate rewards. 
+
+TODO explain what k is 
+
+For RL programs, it is not necessary for the agent to know T and R in advance, but they are present in the environment and can be realised each time the agent takes an action. 
 
 \subsection{Policies and Value Functions}
 \label{policy_value_functions_subsection}
@@ -522,10 +592,6 @@ For RL program, it is not necessary for the agnet to konw T and R in advance, bu
 \begin{equation}
 v\textsubscript{$\pi$}(s) = \displaystyle \E [R\textsubscript{t+1} +\gamma R \textsubscript{t+2} + ... \gamma \textsuperscript{T-1} R\textsubscript{T} \vert S\textsubscript{t} = s]
 \end{equation}
-
-%or the total discounted reward from \textit{t}.
-where $\gamma$ is a discount factor $\gamma$ $\in$ [0,1], which represents the preference of the agent for the present reward over future rewards.
-
 
 The optimal state-value function v\textsuperscript{*}(s) maximises the value function over all policies in the MDP, which is of the form:
 
@@ -877,20 +943,22 @@ REFERENCE
 \label{conclusion}
 \input{chapters/conclusion}
 
-\clearpage
-\appendix
-\pagebreak
-\begin{appendices}
-
-\input{chapters/appendix_ethics}
-\input{chapters/appendix_learning_task}
-\input{chapters/appendix_asp}
-
-\end{appendices}
-
-
-%% bibliography
+\newpage
 \bibliography{references}
 \bibliographystyle{ieeetr}
+
+\newpage
+\appendix
+\chapter{Ethics}
+
+\input{chapters/appendix_ethics}
+
+\newpage
+\chapter{Learning tasks}
+\input{chapters/appendix_learning_task}
+
+\newpage
+\chapter{Solving for ASP}
+\input{chapters/appendix_asp}
 
 \end{document}

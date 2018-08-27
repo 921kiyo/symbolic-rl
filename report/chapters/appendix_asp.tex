@@ -1,28 +1,27 @@
-
-
-\section{Abduction tasks}
-\label{abduction}
-
 This is the full learning task for ILASP in the experiment 1. 
 The syntax and time are added for planning purpose. 
 
-% 1{action(down,T); action(up,T); action(right,T); action(left,T); action(non, T)}1 :- time(T), not finished(T).
-% % \#show state_at/2.
-% % \#show action/2.
+TODO put comment on the code
 
-% finished(T):- goal(T2), time(T), T >= T2.
-% %  goal(T):- state_at((5, 1), T), not finished(T-1).
-% goalMet:- goal(T).
-% :- not goalMet.
-% time(0..30).
-
-% cell((0..6, 0..5)).
-% % #minimize{1, X, T: action(X,T)}.
-% adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).
-% adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).
-% adjacent(down, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).
-% adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).
-
+\begin{flalign*}
+    &\textsf{1\{action(down,T); action(up,T); action(right,T); action(left,T); action(non,T)\}1 :- }&\\
+    &\textsf{time(T), not finished(T).}&\\
+    &\textsf{\#show state\_at/2.}&\\
+    &\textsf{\#show action/2.}&\\
+    &\textsf{finished(T):- goal(T2), time(T), T >= T2.}&\\
+    &\textsf{goal(T):- state\_at((5, 1), T), not finished(T-1).}&\\
+    &\textsf{goalMet:- goal(T).}&\\
+    &\textsf{:- not goalMet.}&\\
+    &\textsf{time(0..30).}&\\
+    &\textsf{cell((0..6, 0..5)).}&\\
+    &\textsf{\#minimize{1, X, T: action(X,T)}.}&\\
+    &\textsf{adjacent(right, (X+1,Y),(X,Y))   :- cell((X,Y)), cell((X+1,Y)).}&\\
+    &\textsf{adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).}&\\
+    &\textsf{adjacent(down, (X,Y+1),(X,Y))   :- cell((X,Y)), cell((X,Y+1)).}&\\
+    &\textsf{adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).}&\\
+    &\textsf{state\_at((1, 4), 3).}&
+\end{flalign*}
+\label{appendix:asp}
 % wall((1, 5)).
 % wall((0, 4)).
 % wall((2, 3)).
@@ -41,7 +40,6 @@ The syntax and time are added for planning purpose.
 % wall((6, 3)).
 % wall((5, 2)).
 % wall((4, 0)).
-% state_at((1, 4), 3).
 
 
 
