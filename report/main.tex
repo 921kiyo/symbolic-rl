@@ -145,25 +145,27 @@ This chapter introduces necessary background of Answer Set Programming (ASP), In
 
 \section{Answer Set Programming (ASP)}
 \label{sec:asp}
+Answer Set Programming (ASP) is a form of declarative programming aimed at knowledge-intensive applications such as search problems \cite{Lifschitz2008}. We first introduce stable model on which ASP is based on, and describe ASP syntax. 
 
+% Non-monotonic reasoning
 \subsection{Stable Model Semantics}
 
-Having defined the syntax of clausal logic, we now introduce its semantics under the context of Stable Model. The semantics of the logic is based on the notion of interpretation, which is defined under a \textit{domain}. A domain contains all the objects that exist. In logic, it is convention to use a special interpretations called \textit{Herbrand interpretations} rather than general interpretations.
+The semantics of the logic is based on the notion of interpretation, which is defined under a \textit{domain}. A domain contains all the objects that exist. In logic, it is convention to use a special interpretations called \textit{Herbrand interpretations} rather than general interpretations.
 
 \begin{defn}
-\textit{Herbrand Domain} (a.k.a \textit{Herbrand Universe}) of clause sets \textit{Th} is the set of all ground terms that are constants and function symbols appeared in \textit{Th}.
+\textit{Herbrand Domain} (a.k.a \textit{Herbrand Universe}) of a normal logic program \textit{P}, denoted HD(P), is the set of all ground terms that are constants and function symbols appeared in \textit{P}.
 \end{defn}
 
 \begin{defn}
-\textit{Herbrand Base} of \textit{Th} is the set of all ground predicates that are formed by predicate symbols in \textit{Th} and terms in the Herbrand Domain.
+\textit{Herbrand Base} of a normal logic program \textit{P}, denoted HB(P) is the set of all ground predicates that are formed by predicate symbols in \textit{P} and terms in HD\textsubscript{P}.
 \end{defn}
 
 \begin{defn}
-\textit{Herbrand Interpretation} of a set of definite clauses \textit{Th} is a subset of the Herbrand base of \textit{Th}, which is a set of ground atoms that are true in terms of interpretation.
+\textit{Herbrand Interpretation} of a set of a program \textit{P}, denoted HI(P) is a subset of the HB\textsubscript{P}, and is a set of ground atoms that are true in terms of interpretation.
 \end{defn}
 
 \begin{defn}
-\textit{Herbrand Model} is a Herbrand interpretation if and only if a set \textit{Th} of clauses is satisfiable. In other words, the set of clauses \textit{Th} is unsatisfiable if no Herbrand model was found.
+\textit{Herbrand Model} of a normal logic program  \textit{P} is a HI(P) if and only if a set \textit{P} of clauses is satisfiable. In other words, the set of clauses \textit{P} is unsatisfiable if no Herbrand model was found.
 \end{defn}
 
 \begin{defn}
@@ -180,10 +182,9 @@ P = $\begin{cases}
 	p(X)  \leftarrow q(X) \\
 	q (a).
       \end{cases}$
-HD = \{ a \} , HB = \{ q(a), p(a) \}  \\
+HD(P) = \{ a \} , HB(P) = \{ q(a), p(a) \}  \\
 
-where HD is Herbrand Domain and HB is Herbrand Base.
-Given above,  there are four Herbrand Interpretations = $\langle$ \{q(a)\}, \{p(a)\}, \{q(a), p(a)\}, \{\} $\rangle$, and one Herbrand Model (as well as M(P)) = \{q(a), p(a)\}
+Given above,  there are four Herbrand Interpretations HI(P) = $\langle$ \{q(a)\}, \{p(a)\}, \{q(a), p(a)\}, \{\} $\rangle$, and one Herbrand Model (as well as M(P)) = \{q(a), p(a)\}
 
 \end{examp}
 % TODO: Use the same or similar examples for all of them.
@@ -254,9 +255,11 @@ Thus reduct P\textsuperscript{x} is (ground(P))\textsuperscript{x} =  \{p(a), q(
 \label{reduct}
 
 %Any stable model is a minimal Herbrand model, and stable sets is stable models. The stable models can be found by constructing the result of the program with respect to sets of atoms X (P\textsuperscript{x} in the following 2 steps
-A Stable Model of P is an interpretaiton X if and only if X is the unique least Herbrand Model of ground(P)\textsuperscript{x} in the logic program.
+\begin{defn}
+A \textit{Stable Model} of P, denoted SM(P)??, is an interpretaiton X if and only if X is the unique least Herbrand Model of ground(P)\textsuperscript{x} in the logic program.
+\end{defn}
 
-\subsection{Anwer Set Programming (ASP) Syntax}
+\subsection{Answer Set Programming (ASP) Syntax}
 
 \begin{defn}
 Answer set of normal logic program P is a Stable Model defined by a set of \textit{rules}, and Answer Set Programming (ASP) is a normal logic program with extensions: constraints, choice rules and optimisation statements. 

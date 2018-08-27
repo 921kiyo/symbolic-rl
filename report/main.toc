@@ -7,14 +7,14 @@
 \contentsline {chapter}{\numberline {2}Background}{6}{chapter.2}
 \contentsline {section}{\numberline {2.1}Answer Set Programming (ASP)}{6}{section.2.1}
 \contentsline {subsection}{\numberline {2.1.1}Stable Model Semantics}{6}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}Anwer Set Programming (ASP) Syntax}{8}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.2}Answer Set Programming (ASP) Syntax}{8}{subsection.2.1.2}
 \contentsline {section}{\numberline {2.2}Inductive Logic Programming (ILP)}{9}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}ILP under Answer Set Semantics}{9}{subsection.2.2.1}
 \contentsline {subsubsection}{Cautious Induction }{9}{section*.4}
 \contentsline {subsubsection}{Brave Induction}{10}{section*.5}
 \contentsline {subsection}{\numberline {2.2.2}Inductive Learning of Answer Set Programs (ILASP)}{11}{subsection.2.2.2}
 \contentsline {subsubsection}{Learning from Answer Sets (LAS)}{11}{section*.6}
-\contentsline {subsubsection}{Inductive Learning of Answer Set Programs (ILASP)}{11}{section*.7}
+\contentsline {subsubsection}{Inductive Learning of Answer Set Programs (ILASP)}{12}{section*.7}
 \contentsline {subsubsection}{A Context-dependent Learning from Answer Sets }{12}{section*.8}
 \contentsline {section}{\numberline {2.3}Reinforcement Learning (RL)}{13}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}Markov Decision Process (MDP)}{13}{subsection.2.3.1}
