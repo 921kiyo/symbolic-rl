@@ -554,11 +554,11 @@ P[S\textsubscript{t+1} \vert S\textsubscript{t}] = P[S\textsubscript{t+1} \vert 
 \end{split}
 \end{equation}
 In other words, the probability of reaching S\textsubscript{t+1} depends only on S\textsubscript{t}, which captures all the relevant information from the earilier history (\cite{Puterman1994}).
-When an agent must make a sequence of decision, the sequential decision problem can be formalised using \textit{Markov decision process (MDP)}. MDP formaly represents a fully observable environment of an agent for 
+When an agent must make a sequence of decision, the sequential decision problem can be formalised using \textit{Markov decision process (MDP)}. MDP formally represents a fully observable environment of an agent for 
 RL.
 \begin{defn}{Markov Decision Process (MDP)}
 
-\textit{Markov decision process (MDP)} is defined in the form of a tuple $\langle$ S, A, T, R$\rangle$ where:
+\textit{Markov decision process (MDP)} is defined in the form of a tuple $\langle$S, A, T, R$\rangle$ where:
 \begin{itemize}
 \item S is the set of finite states that is observable in the environment.
 \item A is the set of finite actions taken by the agent.
@@ -574,7 +574,7 @@ An method to find the optimal solution of an MDP is Reinforcement Learning (RL).
 Formally, the objective of a RL agent is to maximise \textit{expected discounted return},which is defined as:
 \begin{equation}
 \begin{split}
-G\textsubscript{t} = R\textsubscript{t+1} + \gamma R \textsubscript{t+2} + ...  = \sum_{k=0}^{\infty} R\textsubscript{t+k+1} 
+G\textsubscript{t} = R\textsubscript{t+1} + \gamma R \textsubscript{t+2} + ...  = \sum_{k=0}^{\infty} \gamma\textsuperscript{k} R\textsubscript{t+k+1} 
 \end{split}
 \end{equation}
 
@@ -586,11 +586,11 @@ For RL programs, it is not necessary for the agent to know T and R in advance, b
 
 \subsection{Policies and Value Functions}
 \label{policy_value_functions_subsection}
-
-\textit{Value functions} estimate the expected return, or expected future rewarded,  for a given action in a given state. The expected reward for an agent is dependent on the agent's action.  The state value function v\textsubscript{$\pi$}(s) of an MDP under a policy $\pi$ is the expected return starting from state \textit{s}, which is of the form:
+Most of RL algorithms are concerned with estimating \textit{Value functions}.
+Value functions estimate the expected return, or expected future reward,  for a given action in a given state. The expected reward for an agent is dependent on the agent's action.  Value functions are defined by \textit{policies}, which maps from staets to probabilities of choosing each action. The state value function v\textsubscript{$\pi$}(s) of an MDP under a policy $\pi$ is the expected return starting from state \textit{s}, which is of the form:
 
 \begin{equation}
-v\textsubscript{$\pi$}(s) = \displaystyle \E [R\textsubscript{t+1} +\gamma R \textsubscript{t+2} + ... \gamma \textsuperscript{T-1} R\textsubscript{T} \vert S\textsubscript{t} = s]
+v\textsubscript{$\pi$}(s) = \displaystyle \E [G\textsubscript{t} \vert S\textsubscript{t} = s] \ \textsf{for all}\ s \in \mathcal{S}
 \end{equation}
 
 The optimal state-value function v\textsuperscript{*}(s) maximises the value function over all policies in the MDP, which is of the form:
@@ -604,6 +604,10 @@ v\textsuperscript{*}(s) = \underset{\pi}{\max} \ v\textsubscript{$\pi$}(s)
 XXX
 \end{examp}
 
+Similar to the state value function v\textsubscript{$\pi$},  we define a \textit{action-value function} under a policy $\pi$, which represents the value of taking action a in state s following a policy $\pi$. 
+\begin{equation}
+q\textsubscript{$\pi$}(s, a) = \displaystyle \E [G\textsubscript{t} \vert S\textsubscript{t} = s, A\textsubscript{t} = a] \ \textsf{for all}\ s \in \mathcal{S}
+\end{equation}
 
 The optimal state-action-value function q\textsuperscript{*}(s,a) maximises the action-value function over all policies in the MDP, which is of the form:
 
@@ -613,14 +617,13 @@ q\textsuperscript{*}(s, a) = \underset{\pi}{\max} \ q\textsubscript{$\pi$}(s, a)
 
 A solution to the sequential decision problem is called a \textit{policy $\pi$}, a sequence of actions that leads to a solution. An optimal policy achieves the optimal value function (or action-value function), and it can be computed by maximising over the optimal value function (or action-value function).
 
-\begin{examp} \normalfont (Value Functions).
+\begin{examp} \normalfont (Action-value Functions).
 
 XXX
 \end{examp}
 
-TODO Explain what policy is
+%TODO BELLMAN OPTIMALITY EQUATION
 
-\textcolor{red}{TODO BELLMAN OPTIMALITY EQUATION}
 %A policy $\pi$ is optimal if it maximises the action-value function q()
 %The transition and reward functions are not necessary to be known to compute $\pi$.
 %Among all possible value functions, an \textit{optimal policy $\pi^*$} is the one that maximise the total rewards in the environment.
@@ -646,24 +649,25 @@ TODO Explain what policy is
 
 \subsection{Model-based and Model-free Reinforcement Learning}
 \label{model_base_model_free_subsection}
+A \textit{model} is a representation of an environment that an agent can use to understand how the environment should look like. There are two different types of RL methods: \textit{model-based} and \textit{model-free} RL methods. 
+ Model-based learning is that, given the model of the environment is known, the agent use the model to plan for a series of actions to achieve the agent's goal. 
+The model itself can be learnt by interacting with the environment by taking actions, which returns states and rewards, and the parameters of the action models can be estimated by maximum likelihood methods \cite{Ray2010}.
+Using a model, an agent can do planning to generate or improve a policy for the modeled environment. 
+Most of the RL methods are model-free learning, where the model is unknown and the agent learns to achieve the goal by solely iteracting with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
+When the model of the environmnet is correct, unlike model-free learning, the agent does not need trial and erros interactions with the environment and therefore more efficient to reach an optimal policy. 
+However, when the model is not a representation of the environment, or the true MDP, the planning algorithms will not lead to the optimal policy, but a suboptimal policy.
 
-\textcolor{red}{TODO delte dyna and focus more on model-based approach}
-
-A model M is a representation of an environment that an agent can used to understand how the environment should look like . Model-based learning is that the agent learns the model and plan a solution using the learnt model. Once the agent learns the model, the problem to be solved becomes a planning problem for a series of actions to achieve the agent's goal.
-Most of the reinforcement learning problems are model-free learning, where M is unknown and the agent learns to achieve the goal by solely interacting with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
-
-The performance of model-based RL is limited to optimal policy given the model M. In other words, when the model is not a representation of the true MDP, the planning algorithms will not lead to the optimal policy, but a suboptimal policy.
-
-One algorithm which combine both aspects of model-based and model-free learning to solve the issue of sub-optimality is called Dyna (\cite{Sutton1990}), which is shown in Figure \ref{dyna}.
-
+One algorithm which combine both aspects of model-based and model-free learning to solve the issue of sub-optimality is called Dyna \cite{Sutton1990}.
 Dyna learns a model from real experience and use the model to generate simulated experience to update the evaluation functions.
 This approach is more effective because the simulated experience is relatively easy to generate compared building up real experience, thus less iterations are required.
+
+This idea of building an internal model of the environment is a foundation of our new framework. 
 
 \subsection{Temporal-Difference (TD) Learning}
 \label{td_learning_section}
 
-To solve a MDP, one of the approaches is called \textit{Temporal-Difference (TD) Learning}.
-TD is an online model-free learning and learns directly from episodes of imcomplete experiences without a model of the environment.
+One of the RL approaches for solving a MDP is called \textit{Temporal-Difference (TD) Learning}.
+TD learning is an online model-free learning and learns directly from episodes of imcomplete experiences without a model of the environment.
 TD updates the estimate by using the estimates of value function by bootstrap, which is formalised as
 
 \begin{equation}
@@ -699,7 +703,6 @@ where $\alpha$ is the learning rate, $\gamma$ is a discount rate between 0 and 1
 \State $\text{Repeat (for each episode)}$
 \State $\text{Choose a from s using policy derived from Q (e.g, epsilon-greedy)}$
 \State $\text{Take action a, observe r,  s$\prime$}$
-
 
 %\begin{equation}
 %Q(s,a) \leftarrow Q(s,a) +  \alpha(R\textsubscript{t+1} + \gamma  max (a+t) Q(s$\prime$, a$\prime$) - Q(s\textsubscript{t}, a\textsubscript{t}))
@@ -737,7 +740,6 @@ where $\alpha$ is the learning rate, $\gamma$ is a discount rate between 0 and 1
 \begin{equation}
 Q(s\textsubscript{t},a\textsubscript{t}) = E [R\textsubscript{t+1} + \gamma R\textsubscript{t+2} + \gamma^2 R\textsubscript{t+3} + ... \vert s\textsubscript{t},a\textsubscript{t} ]
 \end{equation}
-
 
 Q-learning is guaranteed to converge to a optimal policy in a fininte tabulara representation.
 \textcolor{red}{Paper Jaakkola et al. 1993}

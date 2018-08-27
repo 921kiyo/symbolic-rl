@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  27 AUG 2018 15:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  27 AUG 2018 17:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -861,21 +861,25 @@ LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10.95> not available
 Package natbib Warning: Citation `Puterman1994' on page 13 undefined on input l
 ine 556.
 
-[13] [14 <./figures/agent_env.png>] [15]
+[13] [14 <./figures/agent_env.png>]
+
+Package natbib Warning: Citation `Ray2010' on page 15 undefined on input line 6
+54.
+
+[15]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 694.
+put line 698.
  [16]
-LaTeX Font Info:    Try loading font information for U+dsrom on input line 759.
+LaTeX Font Info:    Try loading font information for U+dsrom on input line 761.
 
-
-(/usr/share/texlive/texmf-dist/tex/latex/doublestroke/Udsrom.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/doublestroke/Udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
-) [17] [18]
-<./figures/tile_coding.png, id=602, 571.13374pt x 347.2975pt>
+)
+[17] [18] <./figures/tile_coding.png, id=600, 571.13374pt x 347.2975pt>
 File: ./figures/tile_coding.png Graphic file (type png)
 
 <use ./figures/tile_coding.png>
-Package pdftex.def Info: ./figures/tile_coding.png used on input line 872.
+Package pdftex.def Info: ./figures/tile_coding.png used on input line 874.
 (pdftex.def)             Requested size: 438.17227pt x 266.44482pt.
  [19] [20 <./figures/tile_coding.png>] [21]
 Chapter 3.
@@ -1147,18 +1151,18 @@ Appendix C.
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 964.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 966.
 [57
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 964.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 966.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 964.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 964.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 966.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 966.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 8F017D8A166E961152A4EB5595568164;4116.
 Package rerunfilecheck Info: File `main.brf' has not changed.
-(rerunfilecheck)             Checksum: 6929A335FB40AAA67E7E4AFCD55FECA8;1538.
+(rerunfilecheck)             Checksum: 1F4CDCE493B9454437ABEC48778A2A2E;1538.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1169,13 +1173,13 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 964.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 966.
  ) 
 Here is how much of TeX's memory you used:
- 12275 strings out of 493029
- 179692 string characters out of 6136234
+ 12277 strings out of 493029
+ 179716 string characters out of 6136234
  313329 words of memory out of 5000000
- 15234 multiletter control sequences out of 15000+600000
+ 15235 multiletter control sequences out of 15000+600000
  53436 words of font info for 108 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,25n,49p,928b,585s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1197,10 +1201,10 @@ nts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/public/doublestroke/dsrom12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
 blic/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (64 pages, 729141 bytes).
+Output written on main.pdf (64 pages, 729735 bytes).
 PDF statistics:
  984 PDF objects out of 1000 (max. 8388607)
  855 compressed objects within 9 object streams
- 281 named destinations out of 1000 (max. 500000)
+ 282 named destinations out of 1000 (max. 500000)
  570 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -23,10 +23,10 @@
 \contentsline {subsection}{\numberline {2.3.4}Temporal-Difference (TD) Learning}{16}{subsection.2.3.4}
 \contentsline {subsection}{\numberline {2.3.5}Function Approximation}{17}{subsection.2.3.5}
 \contentsline {subsubsection}{The Prediction Objective ($\overline {VE}$)}{17}{section*.10}
-\contentsline {subsubsection}{Stochastic gradient descent (SGD)}{17}{section*.11}
+\contentsline {subsubsection}{Stochastic gradient descent (SGD)}{18}{section*.11}
 \contentsline {subsubsection}{Linear Value Function Approximation}{18}{section*.12}
 \contentsline {subsubsection}{Tile Coding \leavevmode {\color {red}TODO REFERENCE OF THIS METHOD}}{19}{section*.13}
-\contentsline {subsection}{\numberline {2.3.6}Transfer Learning}{19}{subsection.2.3.6}
+\contentsline {subsection}{\numberline {2.3.6}Transfer Learning}{20}{subsection.2.3.6}
 \contentsline {chapter}{\numberline {3}Framework}{22}{chapter.3}
 \contentsline {section}{\numberline {3.1}Overview}{22}{section.3.1}
 \contentsline {section}{\numberline {3.2}Experience Accumulation}{23}{section.3.2}
