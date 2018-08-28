@@ -37,7 +37,7 @@ Each of the components in CDPI is defined as follows:
 e\textsuperscript{inc} of CDPI for ILP(RL) is the next state of an agent $\forall$ s\textsubscript{t+1} $\in$ S such that answer sets of B $\cup$ H does not cover.
 \end{defn}
 
-\begin{defn}
+\begin{defn} \label{def:ILPRL_context}
 e\textsuperscript{exc} of CDPI for ILP(RL) is the next state of an agent $\forall$ s\textsubscript{t+1} $\not\in$ S such that answer sets of B $\cup$ H covers,
 as well as $\forall$ s$^\prime$\textsubscript{t+1} $\in$ S\textsubscript{neighbor} such that s\textsubscript{t+1} $\neq$ s$^\prime$\textsubscript{t+1}.
 \end{defn}
@@ -114,7 +114,7 @@ Having defined the positive examples, we now define necessary background knowled
 In order to learn valid move for each direction in the form of state transition, it needs to know how it means to be "being next to XX".
 The definition of \textsf{adjacent} is given as follows:
 
-\begin{equation}
+\begin{equation} \label{eq:adjacent}
 \begin{split}
 &\textsf{adjacent(right, (X+1,Y),(X,Y)) :- cell((X,Y)), cell((X+1,Y)).} \\
 &\textsf{adjacent(left,(X,Y),  (X+1,Y)) :- cell((X,Y)), cell((X+1,Y)).} \\
@@ -211,7 +211,6 @@ In the early phase of learning, the agent does not have many positive examples, 
 Therefore it is important to iteratively improve hypotheses. Inductive learning algorithm is executed by the following rule.
 \begin{defn}
 ILP(RL) runs $ILP_{LAS}^{context}$ to relearn H\textsubscript{new} if and only if $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{+}, $\exists$A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
-\label{def:context}
 \end{defn}
 where H is the current hypothesis that the agent has learnt so far. 
 Learnt hypotheses are improved when a new positive example is added and the current hypothesis does not cover the new positive example.
@@ -220,61 +219,144 @@ It it does cover it, there is no need to rerun ILASP again.
 The learnt hypothesis will be used to generate a plan, which we describe in the next section.
 
 \begin{examp} \normalfont (Hypothesis).
-% \begin{equation}
-% \begin{split}
-% &\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V1), action(right), not wall(V0).}\\
-% &\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
-% &\textsf{state\_after(V0) :- adjacent(down, V0, V1), state\_before(V1), action(down), not wall(V0).}\\
-% &\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}
-% \end{split}
-% \end{equation}
 
 For example, if the agent has only one positive example,
 
 XXX
 This hypothesis, for example, does not explain how to move "down". In order to learn how to move "down", it needs an positive example of moving up.
 \end{examp}
-    
 
 \section{Planning with Answer Set Programming}
 \label{sec:planning}
 
+Having learnt hypothesis using $ILP_{LAS}^{context}$, we can use the learnt hypotheses to generate a sequence of actions in the form of answer sets that the agent should follow.
+In the following subsections, we explain how to create a answer set program and use the answer sets to make a plan in a maze.
 \subsection{Constructin of Answer Set Program}
 \label{subsec:construction_asp}
+The ASP should be constructed such that answer sets of ASP are a sequence of actions and the next state by taking each action.
 
-\subsection{Plan Generation}
-\label{Plan_generation}
+First, we use the learnt hypotheses by $ILP_{LAS}^{context}$ as rules for solving ASP.
+In the  $ILP_{LAS}^{context}$, we only need to differenciate between s\textsubscript{t} and s\textsubscript{t+1} as \textsf{state\_before(T)} and \textsf{state\_after(T+1)} respectively.
+However, for ASP planning, the answer sets contains a sequence of actions and states at each time steps. In order to capture the notion of time sequences, we modify the ASP syntax slightly by 
+introducing T. Specifically, the following mapping is required 
+\begin{equation}
+\begin{split}
+&\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V1), action(right), not wall(V0).}\\
+&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
+&\textsf{state\_after(V0) :- adjacent(down, V0, V1), state\_before(V1), action(down), not wall(V0).}\\
+&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}
+\end{split}
+\end{equation}
+% The syntax of ASP is different from ILASP phase, because we need to include time sequence when solving ASP.
+% In ILASP, it is only state\_before and state\_after, but in plan generation, there will be more than one state transition.
+% These syntax conversion needs to be done for learnt hypothesis    
+
+\begin{examp} \normalfont (Mapping of ASP syntax between $ILP_{LAS}^{context}$ and ASP).
+
+XXX
+\end{examp}
+
+Second, we define a rule for action, which is of the form:
+\begin{equation}\label{eq:choice_rule}
+\begin{split}
+&\textsf{1\{action(down,T); action(up,T); action(right,T); action(left,T)\}1} \\
+&\textsf{ :- time(T), not finished(T).}\\
+\end{split}
+\end{equation}
+
+Action is given as a choice rule, and this choice rule states that action must be one of four actions: \textsf{down},\textsf{up},\textsf{right}, or \textsf{left}.
+at each time step T, as defined maximum and minimum numbers in 1.
+One of four actions must be selected unless \textsf{not finished(T)} or \textsf{time(T)} are satisfied, as defined in the body of the rule.
+In RL scenarios, this means there is always action to be taken until the agent reaches a goal, thus \textsf{finished(T)} is satisfied, or time step T exceeds a maximum time step.
+\begin{equation}
+\begin{split}
+&\textsf{time(T\textsubscript{t}..T\textsubscript{max})}
+\end{split}
+\end{equation}
+where T\textsubscript{t} is the current time step and T\textsubscript{max} is the maximum time steps.
+For example, if an agent is at time step 0, and can take actions 100 times to find a goal time is defined as \textsf{time(0..100)}.
+
+\textsf{finished(T)} determines whether the agent reaches the goal, which is defined in the following ASP form:
+
+\begin{equation}
+\begin{split}
+&\textsf{finished(T):- goal(T2), time(T), T} \geq \textsf{T2.}\\
+&\textsf{goal(T):- state\_at((X\textsubscript{goal}, Y\textsubscript{goal}), T), not finished(T-1).}\\
+&\textsf{goalMet:- goal(T).}\\
+&\textsf{:- not goalMet.}
+\end{split}
+\end{equation}
+
+\textsf{state\_at((X\textsubscript{goal}, Y\textsubscript{goal}))} is the location of the goal, which is unknown to the agent in the beginning of the training.
+The agent explores the environment until it finds the goal location.
+In the other word, the agent cannot generate a plan to the goal untile the goal is found. 
+Once the agent reaches the goal and \textsf{finished(T)} is satisfied, 
+there will not be any actions at time T+1 since the body of the action choice rule defined in \ref{eq:choice_rule} is not satisfied.
+
+Next, facts of walls information is provided as follows:
+\begin{equation}
+\begin{split}
+&\textsf{wall((X,Y))}\\
+\end{split}
+\end{equation}
+
+As defined in Definition \ref{def:ILPRL_context}, the agent is assumed to be able to see ajacent walls and used it as a context in positive examples in $ILP_{LAS}^{context}$. 
+For ASP planning part, these wall information is accumulated as background knowledge as a separate repository, and used it for solving ASP. 
+
+Next, the starting state for the planning provided as part of ASP. It is simply the current location of the agent where the actions plan is a starting point.
+\begin{equation}
+\begin{split}
+\textsf{state\_at((X\textsubscript{start}, Y\textsubscript{start}), T)}
+\end{split}
+\end{equation}
+
+In addition, the definition of ajacent and cell type are also provided, which are the same as what was defined as background knoweldge of $ILP_{LAS}^{context}$ (Equation \ref{eq:adjacent} and \ref{eq:cell})
+ajacents.
+
+Next, we need to incorporate a nortion of rewards in each state. Instead of maximising the total rewards, which is the objectives of most RL methods, 
+we use optimisation statements as follow. 
+\begin{equation}
+\begin{split}
+&\textsf{\#minimize\{1, X, T: action(X,T)\}}.
+\end{split}
+\end{equation}
+
+The use of optimisation staetment is based on the assumption that the total rewards can be maximised by searching for optimal answer sets. 
+While this works only subset of MDP, our preliminary research focuses on solving this particular MDP problem. 
+    
+Finally, we are only interested in a sequecne of actions and corresponding state as answer sets. 
+Clingo can selectively include the atoms of certain predicates in the output and hide unselected ones. 
+This is defined as follows:
+
+\begin{equation}
+\begin{split}
+&\textsf{\#show state\_at/2.} \\
+&\textsf{\#show action/2.}
+\end{split}
+\end{equation}
+
+\begin{examp} \normalfont (Constructin of Answer Set Program).
+
+\begin{equation}
+\begin{split}
+&\textsf{state\_at((X\textsubscript{start}, Y\textsubscript{start}), T)}\\
+&\textsf{\#minimize\{1, X, T: action(X,T)\}}.\\
+&\textsf{\#show state\_at/2.} \\
+&\textsf{\#show action/2.}\\
+&\textsf{wall((X,Y))}
+\end{split}
+\end{equation}
+\end{examp}
+
+\subsection{Plan Execution}
+\label{subsec:plan_execution}
+Having defined ASP, we explain the answer sets generated by the ASP and how to use it to follow the planning.
 
 The plan generation is executed only after the agent finds the goal. Untile the goal is found, the agent keeps exploraing randomly.
 In RL algorithm, the agent also needs the positive reward by reaching a termination state. 
 Once the agent find the goal once, we can generate a plan using the current hypothesis by solving Answer Set Program.
 
 If the hypotheses were not accurate, clingo might not generate all the actions leading to the goals.
-
-The syntax of ASP is different from ILASP phase, because we need to include time sequence when solving ASP.
-In ILASP, it is only state\_before and state\_after, but in plan generation, there will be more than one state transition.
-These syntax conversion needs to be done for learnt hypothesis
-
-\begin{equation}
-\begin{split}
-&\textsf{1\{action(down,T); action(up,T); action(right,T); action(left,T); action(non,T)\}1} \\
-&\textsf{ :- time(T), not finished(T).}\\
-\end{split}
-\end{equation}
-
-This choice rule states that action must be one of four actions (defined maximum and minimum numbers in 1),
-T is the time step at which the agent takes each action, unless \textit{finished(T)} is grounded.
-
-\textit{finished(T)} is associated with goal definition, and it is defined as:
-
-\begin{equation}
-\begin{split}
-&\textsf{finished(T):- goal(T2), time(T), T} \geq \textsf{T2.}\\
-&\textsf{goal(T):- state\_at((5, 1), T), not finished(T-1).}\\
-&\textsf{goalMet:- goal(T).}\\
-&\textsf{:- not goalMet.}
-\end{split}
-\end{equation}
 
 \begin{examp} \normalfont (Plan Generation).
 As shown in example XX, the learnt example will be converted by adding time sequence for ASP plan generation.
@@ -296,8 +378,6 @@ Which correctly returns a sequence of actions and predicted states.
 
 \end{examp}
 
-\subsection{Plan Execution}
-\label{subsec:plan_execution}
 
 The answer sets returned by clingo is a set of states and actions, which is the plan of the agent at each time step.
 
@@ -397,20 +477,14 @@ One of the most commonly used strategy is $\epsilon$-greedy strategy. As describ
 
 Another common way is to decay the $\epsilon$ by the number of episodes, since at the beginning it is more likely that the agent has not fully explored the environment and therefore higher epsilon.
 
-
-
 While statistical RL algorithms, such as Q-learning or Tile-coding explained in XX, update Q-value by a facter of alpha, 
 ILP(RL) tends to strictly follow the plan the generated. Also it is known that model-based RL tends to get stuck in a sub-optimal if the model is incorrect, ILP(RL) also needs a exploration
 And since the agent does not know when the perfect hypothesis in a particular environment is fully realised, it needs to keep exploring the environment even though
-
-
 
 This strategy may not be appropriate in cases there safety is a priority (since it is random action.)
 It is simple to implement.
 In the case of ILP(RL), the agent discard the plan from the abduction with a probably of epsilon and takes a random action in order to avoid getting stuck in a sub-optimal path.
 When the agent takes an random action and move into a new state, the agents creates a new plan from the new state and continue to move forward.
-
-
 
 This exploration point will be highlighted in Experiment XXX.
 
