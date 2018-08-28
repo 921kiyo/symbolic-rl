@@ -280,14 +280,8 @@ INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchb7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchb8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchr7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchr8r.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchrc7t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchr8r.tfm
-INPUT /usr/share/texlive/texmf-dist/tex/latex/doublestroke/Udsrom.fd
-INPUT /usr/share/texlive/texmf-dist/tex/latex/doublestroke/Udsrom.fd
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/doublestroke/dsrom12.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/doublestroke/dsrom8.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/doublestroke/dsrom8.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/doublestroke/dsrom8.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT ./figures/tile_coding.png
 INPUT ./figures/tile_coding.png
 INPUT ./figures/tile_coding.png
@@ -296,8 +290,6 @@ INPUT chapters/framework.tex
 INPUT ./figures/architecture.png
 INPUT ./figures/architecture.png
 INPUT ./figures/architecture.png
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT ./figures/pipeline_example1.png
 INPUT ./figures/pipeline_example1.png
 INPUT ./figures/pipeline_example1.png
@@ -307,10 +299,7 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/doublestroke/dsrom10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/latex-fonts/lasy10.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/doublestroke/dsrom10.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/doublestroke/dsrom8.tfm
 INPUT ./figures/env_sample.png
 INPUT ./figures/env_sample.png
 INPUT ./figures/env_sample.png
@@ -392,6 +381,5 @@ INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
-INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/doublestroke/dsrom12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb

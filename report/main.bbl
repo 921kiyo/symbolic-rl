@@ -75,6 +75,10 @@ M.~Law, A.~Russo, and K.~Broda, ``{Inductive Learning of Answer Set
 M.~Law, A.~Russo, and K.~Broda, ``{Iterative Learning of Answer Set Programs
   from Context Dependent Examples},'' aug 2016.
 
+\bibitem{Ray2010}
+S.~Ray and P.~Tadepalli, ``{Model-Based Reinforcement Learning},'' {\em
+  Encyclopedia of Machine Learning}, pp.~690--693, 2010.
+
 \bibitem{Sutton1990}
 R.~S. Sutton, ``{Integrated Architectures for Learning, Planning, and Reacting
   Based on Approximating Dynamic Programming},'' {\em Machine Learning
