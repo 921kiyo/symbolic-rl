@@ -82,6 +82,7 @@
 \@writefile{toc}{\contentsline {subsubsection}{Inductive Learning of Answer Set Programs (ILASP)}{12}{section*.7}}
 \@writefile{toc}{\contentsline {subsubsection}{A Context-dependent Learning from Answer Sets }{12}{section*.8}}
 \newlabel{eq:cdpi}{{2.8}{12}{A Context-dependent Learning from Answer Sets}{equation.2.2.8}{}}
+\newlabel{def:las_context}{{2.13}{13}{}{thm.2.13}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.3}Reinforcement Learning (RL)}{13}{section.2.3}}
 \newlabel{rl}{{2.3}{13}{Reinforcement Learning (RL)}{section.2.3}{}}
 \@writefile{lot}{\contentsline {figure}{\numberline {2.1}{\ignorespaces The interaction between an agent and an environment\relax }}{13}{figure.caption.9}}
@@ -120,37 +121,41 @@
 \newlabel{sec:overview}{{3.1}{21}{Overview}{section.3.1}{}}
 \@writefile{lot}{\contentsline {figure}{\numberline {3.1}{\ignorespaces ILP(RL) overview\relax }}{21}{figure.caption.15}}
 \newlabel{fig:ILPRL_overview}{{3.1}{21}{ILP(RL) overview\relax }{figure.caption.15}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Inductive Learning}{22}{section.3.2}}
-\newlabel{sec:inductive_learning}{{3.2}{22}{Inductive Learning}{section.3.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Learning Tasks}{22}{section.3.2}}
+\newlabel{sec:learning_tasks}{{3.2}{22}{Learning Tasks}{section.3.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Positive examples}{22}{subsection.3.2.1}}
+\newlabel{def:context}{{3.3}{22}{}{thm.3.3}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Positive examples in ASP syntax}{22}{section*.16}}
 \newlabel{subsubsec:positive_examples_asp_syntax}{{3.2.1}{22}{Positive examples in ASP syntax}{section*.16}{}}
 \@writefile{lot}{\contentsline {figure}{\numberline {3.2}{\ignorespaces 5$\times $5 grid world example\relax }}{23}{figure.caption.17}}
 \newlabel{example_pos_example}{{3.2}{23}{5$\times $5 grid world example\relax }{figure.caption.17}{}}
 \newlabel{state_transition_example}{{3.2.1}{23}{Positive examples in ASP syntax}{equation.3.2.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Background Knowledge}{24}{subsection.3.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Background Knowledge}{23}{subsection.3.2.2}}
+\newlabel{eq:cell}{{3.5}{24}{Background Knowledge}{equation.3.2.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Language Bias}{24}{subsection.3.2.3}}
 \newlabel{subsec:language_bias}{{3.2.3}{24}{Language Bias}{subsection.3.2.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}Learning Tasks}{25}{subsection.3.2.4}}
-\newlabel{sebsec:learning_tasks}{{3.2.4}{25}{Learning Tasks}{subsection.3.2.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Planning with Answer Set Programming}{26}{section.3.3}}
-\newlabel{sec:planning}{{3.3}{26}{Planning with Answer Set Programming}{section.3.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Constructin of Answer Set Program}{26}{subsection.3.3.1}}
-\newlabel{subsec:construction_asp}{{3.3.1}{26}{Constructin of Answer Set Program}{subsection.3.3.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Plan Generation}{26}{subsection.3.3.2}}
-\newlabel{Plan_generation}{{3.3.2}{26}{Plan Generation}{subsection.3.3.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Plan Execution}{27}{subsection.3.3.3}}
-\newlabel{subsec:plan_execution}{{3.3.3}{27}{Plan Execution}{subsection.3.3.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Exploration}{28}{section.3.4}}
-\newlabel{exploration}{{3.4}{28}{Exploration}{section.3.4}{}}
+\newlabel{eq:sm}{{3.6}{24}{Language Bias}{equation.3.2.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}Hypothesis}{25}{subsection.3.2.4}}
+\newlabel{sebsec:hypothesis}{{3.2.4}{25}{Hypothesis}{subsection.3.2.4}{}}
+\newlabel{def:context}{{3.4}{25}{}{thm.3.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Planning with Answer Set Programming}{25}{section.3.3}}
+\newlabel{sec:planning}{{3.3}{25}{Planning with Answer Set Programming}{section.3.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Constructin of Answer Set Program}{25}{subsection.3.3.1}}
+\newlabel{subsec:construction_asp}{{3.3.1}{25}{Constructin of Answer Set Program}{subsection.3.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Plan Generation}{25}{subsection.3.3.2}}
+\newlabel{Plan_generation}{{3.3.2}{25}{Plan Generation}{subsection.3.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Plan Execution}{26}{subsection.3.3.3}}
+\newlabel{subsec:plan_execution}{{3.3.3}{26}{Plan Execution}{subsection.3.3.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Exploration}{27}{section.3.4}}
+\newlabel{exploration}{{3.4}{27}{Exploration}{section.3.4}{}}
+\citation{Schaul2013}
+\citation{Brockman2016}
 \@writefile{toc}{\contentsline {section}{\numberline {3.5}Implementation}{29}{section.3.5}}
 \newlabel{Implementation}{{3.5}{29}{Implementation}{section.3.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Technology}{29}{subsection.3.5.1}}
-\citation{Schaul2013}
-\citation{Brockman2016}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.2}Experiment Platform}{30}{subsection.3.5.2}}
-\@writefile{lot}{\contentsline {figure}{\numberline {3.3}{\ignorespaces The VGDL (Video Game Definition Language) environment example\relax }}{30}{figure.caption.18}}
-\newlabel{VGDL_sample}{{3.3}{30}{The VGDL (Video Game Definition Language) environment example\relax }{figure.caption.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.2}Experiment Platform}{29}{subsection.3.5.2}}
+\@writefile{lot}{\contentsline {figure}{\numberline {3.3}{\ignorespaces The VGDL (Video Game Definition Language) environment example\relax }}{29}{figure.caption.18}}
+\newlabel{VGDL_sample}{{3.3}{29}{The VGDL (Video Game Definition Language) environment example\relax }{figure.caption.18}{}}
 \@writefile{toc}{\contentsline {chapter}{\numberline {4}Evaluation}{31}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -239,50 +244,21 @@
 \citation{Sridharan2017}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2.3}Generalisation of the Current Approach}{47}{subsection.6.2.3}}
 \bibdata{references}
-\bibcite{Mnih2015}{{1}{}{{}}{{}}}
-\bibcite{Silver2016}{{2}{}{{}}{{}}}
-\bibcite{Levine2015}{{3}{}{{}}{{}}}
-\bibcite{Garnelo2016}{{4}{}{{}}{{}}}
-\bibcite{Lifschitz2008}{{5}{}{{}}{{}}}
-\bibcite{Gelfond1988}{{6}{}{{}}{{}}}
-\bibcite{Gebser2011}{{7}{}{{}}{{}}}
-\bibcite{Muggleton1991}{{8}{}{{}}{{}}}
-\bibcite{DeRaedt1997}{{9}{}{{}}{{}}}
-\bibcite{Muggleton1993}{{10}{}{{}}{{}}}
-\bibcite{Sakama2009}{{11}{}{{}}{{}}}
-\bibcite{Otero2001}{{12}{}{{}}{{}}}
-\bibcite{Inoue2014}{{13}{}{{}}{{}}}
-\bibcite{Corapi2012}{{14}{}{{}}{{}}}
-\bibcite{Law2014}{{15}{}{{}}{{}}}
-\bibcite{Law2016}{{16}{}{{}}{{}}}
-\bibcite{Ray2010}{{17}{}{{}}{{}}}
-\bibcite{Sutton1990}{{18}{}{{}}{{}}}
-\bibcite{Watkins}{{19}{}{{}}{{}}}
-\bibcite{Brockman2016}{{20}{}{{}}{{}}}
-\bibcite{Su2017}{{21}{}{{}}{{}}}
-\bibcite{Garcez2018}{{22}{}{{}}{{}}}
-\bibcite{Zambaldi2018}{{23}{}{{}}{{}}}
-\bibcite{Apeldoorn2017}{{24}{}{{}}{{}}}
-\bibcite{Apeldoorn2016}{{25}{}{{}}{{}}}
-\bibcite{Apeldoorn}{{26}{}{{}}{{}}}
-\bibcite{Ferreira2017}{{27}{}{{}}{{}}}
-\bibcite{Sridharan2017}{{28}{}{{}}{{}}}
 \bibstyle{ieeetr}
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}Ethics}{51}{appendix.A}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Ethics}{48}{appendix.A}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \gdef \LT@i {\LT@entry 
     {1}{388.37627pt}\LT@entry 
     {1}{29.47182pt}\LT@entry 
     {1}{29.47182pt}}
-\@writefile{lot}{\contentsline {table}{\numberline {A.1}{\ignorespaces Ethics Checklist\relax }}{53}{table.A.1}}
-\newlabel{ethics_table}{{A.1}{53}{Ethics Checklist\relax }{table.A.1}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {B}Learning tasks}{54}{appendix.B}}
+\@writefile{lot}{\contentsline {table}{\numberline {A.1}{\ignorespaces Ethics Checklist\relax }}{50}{table.A.1}}
+\newlabel{ethics_table}{{A.1}{50}{Ethics Checklist\relax }{table.A.1}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {B}Learning tasks}{51}{appendix.B}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{appendix:learning_task}{{B}{54}{Learning tasks}{appendix.B}{}}
-\providecommand\NAT@force@numbers{}\NAT@force@numbers
-\@writefile{toc}{\contentsline {chapter}{\numberline {C}Solving for ASP}{55}{appendix.C}}
+\newlabel{appendix:learning_task}{{B}{51}{Learning tasks}{appendix.B}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {C}Solving for ASP}{52}{appendix.C}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{appendix:asp}{{C}{55}{Solving for ASP}{appendix.C}{}}
+\newlabel{appendix:asp}{{C}{52}{Solving for ASP}{appendix.C}{}}

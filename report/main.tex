@@ -508,11 +508,11 @@ Formally, partial interpretation is called \textit{context-dependent partial int
 %\begin{enumerate}
 % \item $\forall$ $\langle$ A\textsubscript{1}, A\textsubscript{2} $\rangle$ such that A\textsubscript{1} $\in$ Answer Sets(P $\cup$ C\textsubscript{1}),  A\textsubscript{2}, $\in$ Answer Sets(P $\cup$ C\textsubscript{2}), A\textsubscript{1} extends e\textsubscript{1}, A\textsubscript{2} extends e\textsubscript{2} and A\textsubscript{1} $\prec$\textsubscript{P} A\textsubscript{2}
 %\end{enumerate}
-\begin{defn}
+\begin{defn} \label{def:las_context}
 $ILP_{LAS}^{context}$ task is of the form T = $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-}$\rangle$ B.
 A hypothesis H is an inductive solution of T if and only if
 \begin{enumerate}
-\item H $\subseteq$ S\textsubscript{M} in $ILP_{LAS}^{context}$
+\item H $\subseteq$ S\textsubscript{M}
 \item $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{+}, $\exists$A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
 \item $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{-}, $\nexists$A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
 %\item $\forall$o $\in$ O\textsuperscript{b} B $\cup$ H bravely respects o

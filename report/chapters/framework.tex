@@ -13,8 +13,8 @@ By interacting with the environment, an agent receives state transition experien
 The agent also remembers surrounding information it has seen as background knowledge, which is used to make an action plan together using the learnt hypotheses by solving an answer set program.
 Mechanisms of each step is explained in details in the following sections.
 
-\section{Inductive Learning}
-\label{sec:inductive_learning}
+\section{Learning Tasks}
+\label{sec:learning_tasks}
 
 % \textcolor{red}{Draw an illustration of the difference between exploration and las part}\\
 % \textcolor{red}{Related these with Definition of ILASP}\\
@@ -25,6 +25,8 @@ Every time the agent takes an action, these experiences are recorded in two diff
 a positive example and background knowledge. 
 Positive examples and background knowledge are used by ILASP for inductive learning, and background knowledge is used by both ILASP and ASP for solving for answer sets.
 Thus it is necessary to convert them into ASP syntax.
+
+The full details for ILASP learning tasks is described in Appendix XXX.
 
 \subsection{Positive examples}
 \textit{Positive examples} contains information about how the state transitions between the current state and the next state.
@@ -42,7 +44,8 @@ as well as $\forall$ s$^\prime$\textsubscript{t+1} $\in$ S\textsubscript{neighbo
 where B is the current background knowledge, H is the current hypotheses learnt by previous inductive learning using ILASP, S is all the states in the environment, and S\textsubscript{neighbor} is all adjacent states of s\textsubscript{t} as well as s\textsubscript{t} itself.
 
 \begin{defn}
-Contex C of CDPI for ILP(RL) contains an action a\textsubscript{t}, a state s\textsubscript{t}, and adjacent walls of s\textsubscript{t}.
+Context C of CDPI for ILP(RL) contains an action a\textsubscript{t}, a state s\textsubscript{t}, and adjacent walls of s\textsubscript{t}.
+\label{def:context}
 \end{defn}
 
 In this paper, we assume that part of context contains only whether a wall exists or not, with the presence of a wall, the agent cannot move to the state where a wall exist.
@@ -78,7 +81,7 @@ For context C, a\textsubscript{t} is translated int \textit{action((a))}, s\text
 \label{example_pos_example}
 \end{figure}
 
-We use a simple 5x5 gridworld environment to hilight each steps of the framework. To illustrate how an agent gains a positive example, suppose the agent takes an action "right" to move from (2,4) to (3,4) cell, as shown on Figure \ref{example_pos_example} on the right.
+We use a simple 5x5 gridworld environment to hilight how an agent gains a positive example, suppose the agent takes an action "right" to move from (2,4) to (3,4) cell, as shown on Figure \ref{example_pos_example} on the right.
 All other alternative states that the agent could have ended up by taking different actions
 (down, up, and left) are in the exclusions.
 Context examples are the state that the agent is before taking an action and surrounding walls information. The following positive example is generated.
@@ -108,7 +111,8 @@ Similarly, the agent is at (4,4) and tries to move right, as shown on the left o
 
 \subsection{Background Knowledge}
 Having defined the positive examples, we now define necessary background knowledge for inductive learning.
-In order to learn valid move for each direction in the form of state transition, the definition of adjacent is given as follows:
+In order to learn valid move for each direction in the form of state transition, it needs to know how it means to be "being next to XX".
+The definition of \textsf{adjacent} is given as follows:
 
 \begin{equation}
 \begin{split}
@@ -118,17 +122,19 @@ In order to learn valid move for each direction in the form of state transition,
 &\textsf{adjacent(up,   (X,Y),  (X,Y+1)) :- cell((X,Y)), cell((X,Y+1)).} \\
 \end{split}
 \end{equation}
-    
+
+% Future research will relax these assumptions and attemp to learn more general hypothesis,
+% e.g learning adjacent defintion.
 In existing RL methods, the agent is only able to see the state where the agent is at, and this is an additional assumption that the agent is able to see surrounding states.
 These adjacent concepts themselves could be learnt using ILASP separately, but in this preliminary research we focus on learning valid move, and this extension will be discussed in Further Research in XX.
 In addition, \textit{cell((X,Y))} is defined as follows:
-\begin{equation}
+\begin{equation} \label{eq:cell}
 \begin{split}
     &\textsf{cell((0..X, 0..Y)).}
 \end{split}
 \end{equation}
 
-where, 0..X defines the range of X coodinates and X and Y are the maximum state integers in X and Y coodinates respectively. 
+where, 0..X defines the range of X coodinates and X and Y are the size of width and height of the environment respectively. 
 For 5x5 gridworld environment, for example, cell is defined as cell((0..5, 0..5)).
 
 % While the agent explores the environment, it also keeps all the surrounding information as background knowledge,
@@ -144,7 +150,6 @@ For 5x5 gridworld environment, for example, cell is defined as cell((0..5, 0..5)
 % wall((1, 5)). which represents the location of the wall.
 % Another example could be a location of a teleportation if the agent sees it.
 % These environment experiences are part of context examples in the positive examples.
-
 \begin{examp} \normalfont (Background Knowledge).
 
 XXX
@@ -154,11 +159,9 @@ XXX
 
 \subsection{Language Bias}
 \label{subsec:language_bias}
-
-Hypotheses have to be within a subset of a search space Sm using a language bias. In our case, the seach space should contain any conditions that defines a state after the transition.
-In order to execute ILASP, a \textit{search space} of possible hypotheses is required, which is defined using a \textit{language bias}.
-
-\begin{equation}
+Recall in \ref{def:las_context} that H $\subseteq$ S\textsubscript{M} for $ILP_{LAS}^{context}$, thus we define a search space using a language bias specified by \textit{mode declaration}.
+We define S\textsubscript{M} as follows:
+\begin{equation} \label{eq:sm}
 \begin{split}
 &\textsf{\#modeh(state\_after(var(cell))).}\\
 &\textsf{\#modeb(1, adjacent(const(action), var(cell), var(cell)), (positive)).} \\
@@ -167,88 +170,71 @@ In order to execute ILASP, a \textit{search space} of possible hypotheses is req
 &\textsf{\#modeb(1, wall(var(cell))).} \\
 \end{split}
 \end{equation}
-Without these in the form of mode bias, the search space for ILASP will be empty.
+% Without these in the form of mode bias, the search space for ILASP will be empty.
 
-(positive) states that the predicates only appears as positive predicates and not negation as failure, therefore reducing the seach space. In this case, wall(var(cell)) could appears as "not wall". 
-var is variables of type cell. 
-action is constant, means it has to be grounded as a particular action, because we want to learn different hypothesis for different action. 
+\textsf{\#modeh} and \textsf{\#modeb} are the \textit{normal head} declarations and the body declarations. 
+The first argument of each \textsf{\#modeb} specifies the maximum number of times that \textsf{\#modeb} can be used in each rule (also called \textit{recall}), which is 1 in our case.  
 
-where \textit{var(t)} and \textit{const(t)} are a placeholder for variable and constant terms of type t respectively.
-
-\textit{const(t)} must be specified as \#constant(t,c), where t is a type and c is a constant term.
-In our environment, action is specified as constant since ILASP should learn different hypothesis for each action.
+\textsf{var(t)} is a placeholder for variable of \textit{type} \textsf{t}. In \ref{eq:sm}, we use \textsf{cell} for a variable type, which is based on any cell defined in \ref{eq:cell}.
+\textsf{const(t)} is a placeholder for constant term of type \textsf{t}, and type \textsf{t} must be specified as \textsf{\#constant(t, c)},　where \textsf{c} is a constant term., 
+const(t) is defined as follow:
 
 \begin{equation}
 \begin{split}
 &\textsf{\#constant(action, right).}\\
 &\textsf{\#constant(action, left).}\\
 &\textsf{\#constant(action, down).}\\
-&\textsf{\#constant(action, up).}\\
-&\textsf{cell((0..7, 0..6)).}
+&\textsf{\#constant(action, up).}
 \end{split}
 \end{equation}
 
-As we describe in XXX, the search space increases in propotion to the complexity of learning tasks, which slows down the learning process.
-For example, the search space in this particular setting is in XX.
+\textsf{action} type is specified as constant since ILASP should learn different hypothesis for each action, and can be found in each context as specified in Definition \ref{def:context}.
 
-\subsection{Learning Tasks}
-\label{sebsec:learning_tasks}
-Throughout the learning process, the agent accumulates positive examples and learn hypothesis H.
+\textsf{(positive)} in \textsf{\#modeb} specifies that the predicates only appears as positive and not negation as failure, which reduces the seach space. 
+In this case, \textsf{\#modeb(1, wall(var(cell)))} could appears as \textsf{not wall}, and all other body declaration should be positive. 
+% Positive excludes the possibility of negation as a failure in order to reduce the search space.
 
-Our learning task is to find a hypothesis H < SM such that B U H has at least one answer set that extends at least one postiive example and none of the negative example.
-
-In order to execute inductive learning using ILASP, the following definitions are supplied as well as the positive examples,
-
-In addition to the above search space, 
-
-\#max\_penalty defines the maximum size of the hypothesis, by default it is 15.
+Finally, we define \textsf{\#max\_penalty} to specify the maximum size of the hypothesis. By default it is 15, and we increased to 50 as the maximum.
 Increasing \#max\_penalty allows ILASP to learn longer hypothesis in expense of longer computation.
-\#max\_penalty(50).
+% As we describe in XXX, the search space increases in propotion to the complexity of learning tasks, which slows down the learning process.
+% For example, the search space in this particular setting is in XX.
+\begin{examp} \normalfont (Language Bias).
 
-Together with the above defition as well as accumulated positive examples, ILASP is able to learn an hypothesis. The quality of H depends on the experiences for the agent.
-For example, In the early phase of learning, the agent does not have many examples, and learns an hypothesis that may not be insightfull.
-For example, if the agent has only one positive example,
-
-Next, the scope of \textit{cell} are defined, as cell((0..X, 0..Y)), where X and Y are size of width and height respectively.
-
-Finally, since our learning task is the rule of the game, which involve state transition, it needs to know how it means to be "being next to XX",
-Therefore the following assumptions are provided as background knowledge.
-\begin{equation}
-\begin{split}
-&\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V1), action(right), not wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(down, V0, V1), state\_before(V1), action(down), not wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}
-\end{split}
-\end{equation}
-
-Learnt hypotheses are improved when a new positive example is added and the current hypothesis does not cover the new positive example.
-It it does cover it, there is no need to rerun ILASP again. 
-
-\begin{examp} \normalfont (Inductive Learning).
-Using the same example as
 XXX
 \end{examp}
+    
+\subsection{Hypothesis}
+\label{sebsec:hypothesis}
+Having defined the $ILP_{LAS}^{context}$ task T, ILP(RL) is able to learn an hypothesis H. 
+Since B and S\textsubscript{M} are fixed, the learnt H varies depending on positive examples that the agent receives.
+In the early phase of learning, the agent does not have many positive examples, and learns an hypothesis that is part of the full hypothesis that the agent can run in the environment.
+Therefore it is important to iteratively improve hypotheses. Inductive learning algorithm is executed by the following rule.
+\begin{defn}
+ILP(RL) runs $ILP_{LAS}^{context}$ to relearn H\textsubscript{new} if and only if $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{+}, $\exists$A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
+\label{def:context}
+\end{defn}
+where H is the current hypothesis that the agent has learnt so far. 
+Learnt hypotheses are improved when a new positive example is added and the current hypothesis does not cover the new positive example.
+It it does cover it, there is no need to rerun ILASP again.
 
-This definition itself could be learnt by setting another learning tasks, and it is a potential learning problem.
-% TODO state represetation
-However, we focus on learning task of the rule of the game in this paper.
+The learnt hypothesis will be used to generate a plan, which we describe in the next section.
 
-The full details for ILASP learning tasks is described in Appendix XXX.
-Positive excludes the possibility of negation as a failure in order to reduce the search space.
+\begin{examp} \normalfont (Hypothesis).
+% \begin{equation}
+% \begin{split}
+% &\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V1), action(right), not wall(V0).}\\
+% &\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
+% &\textsf{state\_after(V0) :- adjacent(down, V0, V1), state\_before(V1), action(down), not wall(V0).}\\
+% &\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}
+% \end{split}
+% \end{equation}
 
-Future research will relax these assumptions and attemp to learn more general hypothesis,
-e.g learning adjacent defintion.
+For example, if the agent has only one positive example,
 
-These learnt H will be used to generate a plan in the abduction phase.
-
-After executing the plan, the agent will have more positive examples, which will be used to improve the quality of H.
-
-The learnt hypothesis is XXX
-
+XXX
 This hypothesis, for example, does not explain how to move "down". In order to learn how to move "down", it needs an positive example of moving up.
-
-later on H improving as we collect more examples as well as background knowledge.
+\end{examp}
+    
 
 \section{Planning with Answer Set Programming}
 \label{sec:planning}
@@ -297,7 +283,6 @@ Together with hypothesis, the background knowledge will used to solve for answer
 
 However, since hypothesis is not complete, there is more than one answer set at each time step. Since one of the answer sets state\_at is correct, the rest will be in the exclusions in the answer set, 
 which further improve the hypothesis.
-
 
 In this example, the following is the answer set program
 

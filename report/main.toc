@@ -29,20 +29,20 @@
 \contentsline {subsection}{\numberline {2.3.6}Transfer Learning \leavevmode {\color {red}(TBD)}}{20}{subsection.2.3.6}
 \contentsline {chapter}{\numberline {3}Framework}{21}{chapter.3}
 \contentsline {section}{\numberline {3.1}Overview}{21}{section.3.1}
-\contentsline {section}{\numberline {3.2}Inductive Learning}{22}{section.3.2}
+\contentsline {section}{\numberline {3.2}Learning Tasks}{22}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Positive examples}{22}{subsection.3.2.1}
 \contentsline {subsubsection}{Positive examples in ASP syntax}{22}{section*.16}
-\contentsline {subsection}{\numberline {3.2.2}Background Knowledge}{24}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.2}Background Knowledge}{23}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}Language Bias}{24}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Learning Tasks}{25}{subsection.3.2.4}
-\contentsline {section}{\numberline {3.3}Planning with Answer Set Programming}{26}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Constructin of Answer Set Program}{26}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Plan Generation}{26}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Plan Execution}{27}{subsection.3.3.3}
-\contentsline {section}{\numberline {3.4}Exploration}{28}{section.3.4}
+\contentsline {subsection}{\numberline {3.2.4}Hypothesis}{25}{subsection.3.2.4}
+\contentsline {section}{\numberline {3.3}Planning with Answer Set Programming}{25}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Constructin of Answer Set Program}{25}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Plan Generation}{25}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Plan Execution}{26}{subsection.3.3.3}
+\contentsline {section}{\numberline {3.4}Exploration}{27}{section.3.4}
 \contentsline {section}{\numberline {3.5}Implementation}{29}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Technology}{29}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Experiment Platform}{30}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.2}Experiment Platform}{29}{subsection.3.5.2}
 \contentsline {chapter}{\numberline {4}Evaluation}{31}{chapter.4}
 \contentsline {section}{\numberline {4.1}Setting}{31}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Evaluation Metrics}{31}{subsection.4.1.1}
@@ -65,6 +65,6 @@
 \contentsline {subsection}{\numberline {6.2.1}Value Iteration Approach}{46}{subsection.6.2.1}
 \contentsline {subsection}{\numberline {6.2.2}Weak Constraint}{46}{subsection.6.2.2}
 \contentsline {subsection}{\numberline {6.2.3}Generalisation of the Current Approach}{47}{subsection.6.2.3}
-\contentsline {chapter}{\numberline {A}Ethics}{51}{appendix.A}
-\contentsline {chapter}{\numberline {B}Learning tasks}{54}{appendix.B}
-\contentsline {chapter}{\numberline {C}Solving for ASP}{55}{appendix.C}
+\contentsline {chapter}{\numberline {A}Ethics}{48}{appendix.A}
+\contentsline {chapter}{\numberline {B}Learning tasks}{51}{appendix.B}
+\contentsline {chapter}{\numberline {C}Solving for ASP}{52}{appendix.C}
