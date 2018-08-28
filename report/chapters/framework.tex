@@ -13,8 +13,8 @@ By interacting with the environment, an agent receives state transition experien
 The agent also remembers surrounding information it has seen as background knowledge, which is used to make an action plan together using the learnt hypotheses by solving an answer set program.
 Mechanisms of each step is explained in details in the following sections.
 
-\section{Learning Tasks}
-\label{sec:learning_tasks}
+\section{Inductive Learning Tasks}
+\label{sec:inductive_learning_tasks}
 
 % \textcolor{red}{Draw an illustration of the difference between exploration and las part}\\
 % \textcolor{red}{Related these with Definition of ILASP}\\
@@ -28,9 +28,9 @@ Thus it is necessary to convert them into ASP syntax.
 
 The full details for ILASP learning tasks is described in Appendix XXX.
 
-\subsection{Positive examples}
-\textit{Positive examples} contains information about how the state transitions between the current state and the next state.
-Positive examples are equivalent to context-dependent partial interpretation (CDPI) in  $ILP_{LAS}^{context}$. 
+\subsection{Context Dependent Examples}
+Context dependent examples contain information about how the state transitions between the current state and the next state.
+They are equivalent to context-dependent partial interpretation (CDPI) in  $ILP_{LAS}^{context}$. 
 As defined in the equation \ref{eq:cdpi}, CDPI is of the form $\langle$ e, C $\rangle$ where e = $\langle$ e\textsuperscript{inc}, e\textsuperscript{exc} $\rangle$. 
 Each of the components in CDPI is defined as follows:
 \begin{defn}

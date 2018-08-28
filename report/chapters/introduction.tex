@@ -1,39 +1,40 @@
 \section{Motivation}
 \label{sec:motivation}
-Reinforcement learning (RL) is a subfield of machine learning concerning where an agent learns how to behave in an environment by interacticing with the environment in order to maximise the total rewards it receives.
+Reinforcement learning (RL) is a subfield of machine learning concerned with senarios where an agent learns how to behave in an environment by interacticing with the environment in order to maximise the total rewards it receives.
 The strength of RL is that it can be applied to many different domains where it is unknown to an agent how to perform a task. 
-RL has been proven to work well in a number of complex environment, such as dynamic, continuous environments and even a real physical environment, given sufficient training and learning.
+RL has been proven to work well in a number of complex environment, such as dynamic, real environments given sufficient learning time.
 Especially together with deep learning (DL), there have been many successful applications of RL in a number of domains,
 such as video games \cite{Mnih2015}, the game of Go \cite{Silver2016} and robotics \cite{Levine2015}. 
 
-Despite of these successful applications, however, there are still a number of issues for RL to overcome.
-First, most of RL algorithms requires large number of interactions and trials and errors, which is also computationally expense.
+Despite of these successful applications of RL, however, there are still a number of issues to overcome.
+First, most of RL algorithms requires large number of trial-end-error interactions with long time of training, which is also computationally expensive.
 Second, most of RL algorithms have no thought process to the decision making, and do not make use of high-level abstract reasoning, 
 such as understanding symbolic representations or causal reasoning.
-Third, the transfer learning (TL), where the experience that an agent gained to perform one task can be useful in a different task and environment, is limited and the agent performs poorly even on a new but very similar environment or task. 
+Third, the transfer learning (TL), where the experience that an agent gained to perform one task can be applied in a different task, is limited and the agent performs poorly even on a new but very similar task. 
 
-In order to overcome these limitations, we introduce a new approach by applying Inductive Logic Programming (ILP) into RL senarios. 
+In order to overcome these limitations of existing RL methods, we introduce a new RL approach by applying Inductive Logic Programming (ILP). 
 ILP is another subfield of machine learning based on logic programming and derives a hypothesis in the form of logic program that, together with background knowledge, entails all of positive examples and none of the negative exmaples. 
 % TODO An ILP symtem is a rule-based supervised concept learning over examples, and maps xXXXX
 ILP has several advantages compared to RL. 
-First, unlike most of statistical machine learning methods, ILP requires a small number of training data due to the presense of language bias which defines what the program can learn.
-Second, the learnt program by ILP is expressed with a symbolic representation and therefore is easy to be interpreted by human users.
-Third, since the learnt hypothesis is a abstract and general notion, it can be easily applied to a different learning task, thus transfer learning is possible. ILP therefore enables the use of what is previously learnt to similar situations.
-The disadvantages of ILP system are that the examples, or training data, have to be clearly defined and, unlike statistical machine learning, cannot be used with ambiguius noisy dataset.
-Another disadtantage is that ILP suffers from learning scalability. The search space for a hypothesis defined by the language bias increases with respect to the complexity for learning tasks and slows down learning process.
-Despite these shortocomings, there has been a number of progress in ILP, especially in ILP frameworks based on Answer Set Programming (ASP), a declarative logic programming which defines semantics based on Herbrand models (Gelfond and Lifschitz 1988).
+First, unlike most of statistical machine learning methods, ILP requires a small number of training data due to the presense of language bias which defines what the logic program can learn.
+Second, the learnt hypothesis by ILP is expressed with a symbolic representation and therefore is easy to interpret for human users.
+Third, since the learnt hypothesis is a abstract and general concept, it can be easily applied to a different learning task. 
+Transfer learning is therefore possible.
+The disadvantages of ILP system are that the examples, or training data, have to be clearly defined and, unlike statistical machine learning, ambiguous dataset, such as images, cannot be used for learning.
+Another disadvantage is that ILP suffers from learning scalability. The search space for a hypothesis defined by the language bias increases with respect to the complexity for learning tasks and slows down learning process.
+Despite these shortcomings, however, there has been a number of advance in ILP, especially ILP frameworks based on Answer Set Programming (ASP), a declarative logic programming which defines semantics based on Herbrand models (Gelfond and Lifschitz 1988).
 Due to the progress on both RL and ILP, we developed an new RL approach by incorporating a new ASP-based ILP framework called Learning from Answer Set (ILASP), which learns a valid move of an environment, 
 and uses the learnt hypothesis and background knowledge to generate a sequence of actions in the environment. 
 
 In recent RL research, there is a number of research of introducing symbolic representation into RL in order to achieve more data-efficient learning as well as transparent learning. 
 One of the methods is to incorporate symbolic representations into the system \cite{Garnelo2016}. This approach is promising and shows a potential.
 However, none of the papers attempt to apply inductive learnig in RL senarios. 
-but the combining of ILP and RL has not been explored
-Most of the ILP frameworks are also tested in cases where all the environment is known to the agent in advance. 
+but the combining of ILP and RL has not been explored.
+In addition, most of the ILP frameworks are also tested in senarios where the environment is known to the agent in advance.
 
-Since the recent ILP framworks enables to learn a complex hypothesis in a more realistic environments, 
+Since the recent ILP framworks enable us to learn a complex hypothesis in a more realistic environments, 
 Finally, the recent advance of Inductive Logic Programming (ILP) research has enabled us to apply ILP in more complex situations and there are a number of new algorithms based on Answer Set Programmings (ASPs) that work well in non-monotonic scenarios.
-Because of the recent advancement of ILP and RL, it is natual to consider that a combination of both approaches would be the next field to explore.
+Because of the recent advancement of ILP and RL, it is natural to consider that a combination of both approaches would be the next field to explore.
 Therefore my motivation is to combine these two different subfields of machine learnig and devise a new way of RL algorithm in order to overcome some of the RL problems.
 % This new approach is tested in a various
 % My motivation is to also test the algorithm where the agent does not know the environment in advance, which is the typical case for RL research.

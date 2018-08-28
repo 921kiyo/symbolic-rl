@@ -1,14 +1,14 @@
 Reinforcement Learning (RL) is has been applied and proven to be successful in many domains.
-However, most of current RL models face limitations, namely, low learnig efficiency, uncable of using abstract reasoning, and inability of tranfer learning to a similar environment.
-In order to tackle these shortcoming, this paper introduces a new approach for RL called ILP(RL), 
+However, most of current RL methods face limitations, namely, low learnig efficiency, lack of abstract reasoning, and inability of tranfer learning to a similar environment.
+In order to tackle these shortcomings, this paper introduces a new approach called ILP(RL), 
 which applies Answer Set Programming (ASP), a declarative logic programming suitable for complex search problems, 
 and Inductive Learning of Answer Set Programs (ILASP), a learning framework of non-monotonic Inductive Logic Programming (ILP).
-ILP is another field of machine learning that is based on logic programming, and recent advance on ILP research have shown potential in many more applications.
-ILP(RL) learns a general concept of a valid move in an environment, called a hypothesis, using ILASP, and generate a sequence of actions to the destination using ASP.
+ILP is another field of machine learning that is based on logic programming, and recent advance on ILP research have shown promissing potentials in many applications.
+ILP(RL) learns a general concept of a valid move in an environment, called a hypothesis, using ILASP, and generates a plan for a sequence of actions to the destination using ASP.
 The learnt hypotheses is highly expressive and transferrable to a similar environment. 
 While there are a number of past papers that attempt to incorporate symbolic representation to RL problems in order to achieve efficient learning, 
-there has not been any attempt of applying symbolic learning into a RL problem.
-ILP(RL) was examined in a various simple maze games, and show that an agent learns faster than existing RL techniques.
-We also show that transfer learning successfully improve learning on a new but similar environment in a limited senarios.
-This proof of concept showpotentials for this new way of learning using ILP.
+there has not been any attempt of applying ILP into a RL problem.
+ILP(RL) was examined in a various simple maze games, and show that an agent learns faster than existing RL methods.
+We also show that transfer learning of the learnt hypothesis successfully improves learning on a new but similar environment.
+This proof of concept approach shows potentials for this new way of learning using ILP.
 Although the experiments were conducted in a simple environment, the results of the experiments show promissing, and there is an avenue for potential improvement.

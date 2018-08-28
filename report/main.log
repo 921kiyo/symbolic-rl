@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  28 AUG 2018 18:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  28 AUG 2018 21:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -724,16 +724,16 @@ Package natbib Warning: Citation `Levine2015' on page 2 undefined on input line
 ]
 
 Package natbib Warning: Citation `Garnelo2016' on page 3 undefined on input lin
-e 29.
+e 30.
 
 
 Package natbib Warning: Citation `Garnelo2016' on page 3 undefined on input lin
-e 42.
+e 43.
 
 [3]
 
 LaTeX Warning: Reference `sec:further_research' on page 4 undefined on input li
-ne 77.
+ne 78.
 
 [4]) [5]
 Chapter 2.
@@ -992,12 +992,6 @@ e 11.
  <./figures/architecture.png>]
 
 LaTeX Warning: Reference `eq:cdpi' on page 22 undefined on input line 34.
-
-
-Overfull \hbox (9.31528pt too wide) in paragraph at lines 32--36
-\OT1/bch/m/n/12 cur-rent state and the next state. Pos-i-tive ex-am-ples are eq
-uiv-a-lent to context-dependent
- []
 
 LaTeX Font Info:    Try loading font information for OMS+cmss on input line 59.
 
@@ -1401,7 +1395,7 @@ Package rerunfilecheck Warning: File `main.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `main.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  B99997659936B6114245C6086FA4BFAF;4153.
+(rerunfilecheck)             After:  DA74F906ADD8866CF223F388FAB6394A;4155.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1415,7 +1409,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 936.
  ) 
 Here is how much of TeX's memory you used:
  12008 strings out of 493029
- 175526 string characters out of 6136234
+ 175536 string characters out of 6136234
  308409 words of memory out of 5000000
  15007 multiletter control sequences out of 15000+600000
  53858 words of font info for 103 fonts, out of 8000000 for 9000
@@ -1439,7 +1433,7 @@ ts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
 c/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (60 pages, 710901 bytes).
+Output written on main.pdf (60 pages, 710835 bytes).
 PDF statistics:
  634 PDF objects out of 1000 (max. 8388607)
  512 compressed objects within 6 object streams

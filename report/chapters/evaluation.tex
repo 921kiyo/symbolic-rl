@@ -59,7 +59,7 @@ At each episode, we also measure the performance without exploration to see the 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.5\textwidth]{./figures/experiment1}
-\caption{Game enviroment for experiment 1}
+\caption{Game environment for experiment 1}
 \label{experiment1}
 \end{figure}
 
@@ -71,7 +71,7 @@ The shortest path is taking the lower path instead of the upper one.
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment1_training}
-\caption{Result of experiment 1 (learnig curve)}
+\caption{Result of experiment 1 (learning curve)}
 \label{experiment1_training}
 \end{figure}
 \begin{figure}[!htb]
@@ -82,9 +82,9 @@ The shortest path is taking the lower path instead of the upper one.
 \end{figure}
 
 Figure \ref{experiment1_training} shows the traning performance between ILP(RL) and Q-learning.
-The convergence rate of ILP(RL) is faster than Q-learnig: ILP(RL) reaches the maximum reward between 40 and 50 episodes, whereas Q-learning reaches the same level at between 60 and 70 episodes.
+The convergence rate of ILP(RL) is faster than Q-learning: ILP(RL) reaches the maximum reward between 40 and 50 episodes, whereas Q-learning reaches the same level at between 60 and 70 episodes.
 This is because unlike Q-learning where the value function is updated with the rate of alpha, whereas ILP(RL) gradually builds the model of the environment and use the background knowledge to accurately plan.
-This result is also consistent with the general notion that model-based learnig (ILP(RL)) is more data-efficient than model-free learning (Q-learning).
+This result is also consistent with the general notion that model-based learning (ILP(RL)) is more data-efficient than model-free learning (Q-learning).
 The same trend is also shown in Figure \ref{experiment1_test}, where we measure only the performance of the policy without random exploration.
 
 Overall this results shows that ILP(RL) converges to the optimal policy faster than benchmarks in a simple scenarios, achieving more data-efficient learning.
@@ -127,7 +127,7 @@ which enables it to plan. Since our exploration strategy is expilon random choic
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.5\textwidth]{./figures/experiment3}
-\caption{Game enviroment for experiment 1}
+\caption{Game environment for experiment 2}
 \label{experiment3}
 \end{figure}
 
@@ -156,7 +156,7 @@ link locations need to be available for all positive examples so that ILASP corr
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment3_training}
-\caption{Result of experiment 2 (learnig curve)}
+\caption{Result of experiment 2 (learning curve)}
 \label{experiment3_training}
 \end{figure}
 
@@ -262,7 +262,7 @@ Since the complete hypothesis is already known to the agent, it can do planning 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment4_after_training}
-\caption{Result of experiment 3 (learnig curve)}
+\caption{Result of experiment 3 (learning curve)}
 \label{experiment3_training}
 \end{figure}
 
@@ -290,7 +290,7 @@ and therefore the agent needs to learn it after the hypothesis is transferred.
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=1.0\textwidth]{./figures/experiment5_training}
-\caption{Result of experiment 4 (learnig curve)}
+\caption{Result of experiment 4 (learning curve)}
 \label{experiment5_training}
 \end{figure}
 
@@ -321,7 +321,7 @@ and therefore the agent needs to learn it after the hypothesis is transferred.
 
 To my knowledge, this is the first attemp that inductive logic programming is incorporated into a reinforcement learning senario to facilitate learning process.
 In simple environments, we show that the agent learns rule of the game faster than existing RL algorithms, learnt concepts is easy to understand for human users.
-We also show that the learnt hypothesis is a general concept and can be applied to other environment to mitigate learnig process.
+We also show that the learnt hypothesis is a general concept and can be applied to other environment to mitigate learning process.
 
 The full hypotheses were learnt in the very early phase of learning and exploration phase. Thus with sufficient exploration, the model of the environment is correct
 and therefore it is able to find the optimal policy/path. 
@@ -363,7 +363,7 @@ While most of existing reinforcement learning works in different kinds of enviro
 needs to define search space for learning hypothesis. As explained in the experiment 3, it was necessary to add two extra modeb before training.
 Thus the algorithm may not be feasible in cases where these learning concepts were unknown or difficult to define. 
 In addition, not only it needs search space, surrounding information is assumed to be known to the agent. 
-While this assumption may be reasonable in many cases, this is not common in traditional reinforcement learnig setting.
+While this assumption may be reasonable in many cases, this is not common in traditional reinforcement learning setting.
 
 The current framework does not make use of rewards the agent collects and mainly uses the location of the goal for planning.
 In some senarios, there may not be a termination state (goal) and instead there may be a different purpose to gain these rewards. 
