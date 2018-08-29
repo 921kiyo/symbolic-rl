@@ -10,7 +10,7 @@ Despite of these successful applications of RL, however, there are still a numbe
 First, most of RL algorithms requires large number of trial-end-error interactions with long time of training, which is also computationally expensive.
 Second, most of RL algorithms have no thought process to the decision making, and do not make use of high-level abstract reasoning, 
 such as understanding symbolic representations or causal reasoning.
-Third, the transfer learning (TL), where the experience that an agent gained to perform one task can be applied in a different task, is limited and the agent performs poorly even on a new but very similar task. 
+Third, the transfer learning (TL), where the experience that an agent gained to perform one task can be applied in a different task, is limited and the agent performs poorly even on a new but similar task. 
 
 In order to overcome these limitations of existing RL methods, we introduce a new RL approach by applying Inductive Logic Programming (ILP). 
 ILP is another subfield of machine learning based on logic programming and derives a hypothesis in the form of logic program that, together with background knowledge, entails all of positive examples and none of the negative exmaples. 
@@ -45,25 +45,20 @@ Particularly since \cite{Garnelo2016}, there have been several researches that f
 \section{Objectives}
 \label{sec:objectives}
 
-The main objective of this project is to provide a proof-of-concept new RL framework using Inductive Logic Programming and to investigate the potentials of improving the learning efficiency and transfer learning capability that current RL algorithms suffer.
-This main goal is devided into the following high-level objectives:
-
+The main objective of this project is to provide a proof-of-concept of a new RL framework using ILP called ILP(RL) and to investigate the potentials of ILP(RL) for improving the learning efficiency and transfer learning capability that current RL methods suffer.
 % a ASP-based framework called Inductive Learning of Answer Set Programs (ILASP)
 % ILASP is a state-of-art ILP method that can be applied to incomplete and more complex environments.
 % This initial proof of concept showed promissing preliminary results and as well as limitation of the current framework. 
 % Nevertheless, there is avenues for potential improvement, which could be explored in further research.
 
-We did various experiments in grid mazes to highlight property of the learning process and the learning performance is compared with existing reinforcement learning algorithms.
-We show that the learning convergence of ILP(RL) is faster than existing RL. 
-
-The objectives of this paper and important aspects of are summarized as follows:
+The objective of this paper is devided into the following high-level objectives: 
 
 \newcommand\litem[1]{\item{\bfseries #1.\\}}
 \begin{enumerate}
 \litem{Translation of state transitions into ASP syntax} 
 In RL, an agent interacts with an environment by taking an action and observes a state and rewards (MDP). 
 Since ASP-based ILP algorithms require their inputs to be specified in ASP syntax, the conversion between MDP and ASP is required.
-\litem{Development of learning tasks} ILP frameworks is based on a search space specified by language bias for a learning task, and is needed to be specified by the user. 
+\litem{Development of learning tasks} ILP frameworks are based on a search space specified by language bias for a learning task, and is needed to be specified by the user. 
 Various hyper-parameters for the learning task are also considered.
 \litem{Using the learnt concept to execute actions} 
 Having learnt a hypothesis using a ILP algorithm, the agent needs to choose an action based on the learnt hypothesis.
@@ -74,20 +69,20 @@ insights of the potentials, especially how it improves the learning process and 
 \end{enumerate}
 
 % Discrete and deterministic environment. 
-This paper is a proof of concept for the new way of reinforcement learning using ILP and therefore there is a limit to extend the current framework can be applied.
-More advanced environment such as continuous states or schocastic environment are not considered in this paper. Possibilities of applying these more complex environment are discussed in Section \ref{sec:further_research}.
+This paper is a proof of concept for the new way of RL using ILP and therefore there is a limit to which the current framework can be applied to.
+More complex environments such as continuous states or schocastic environment are not considered in this paper. Possibilities of applying these more complex environment are discussed in Section \ref{sec:further_research}.
 
 \section{Contributions}
 \label{contributions}
 The main contribution of this paper is the development of a novel ILP based approach to reinforcement learning and contributes to an incorporation of ASP-based ILP learning frameworks and Reinforcement Learning by applying a latest ILP framework called Learning from Answer Sets. 
-To my knowledge, this is the first attemp that a ILP learning framework is incorporated into a reinforcement learning senario to facilitate learning process.
-% and the algorithm learns hypotheses, which is the valid move of the game, which is a very general concept and therefore can be easily applied to a different senarios.
+To my knowledge, this is the first attempt that a ASP-based ILP learning framework is incorporated into a RL senario.
+% and the algorithm learns hypotheses, which is the valid move of the game, which is a general concept and therefore can be easily applied to a different senarios.
 
-In simple environments, we show that the agent learns rule of the game and reaches an optimal policy faster than existing RL algorithms, learnt concepts is easy to understand for human users.
-We also show that the learnt hypothesis is a general concept and can be applied to other environment to mitigate learnig process.
+In simple environments, we show that an agent learns rules of the game and reaches an optimal policy faster than existing RL algorithms.
+We also show that the learnt hypothesis is easy to understand for human users, and can be applied to other environment to optimise its learnig process.
 
-The full hypotheses were learnt in the very early phase of learning and exploration phase. Thus with sufficient exploration, the model of the environment is correct
-and therefore it is able to find the optimal policy/path. 
+The full hypotheses were learnt in the early phase of learning and exploration phase. Thus with sufficient exploration, the model of the environment is correct
+and therefore it is able to find the optimal policy, or the shortest path. 
 
 We show that ILP(RL) is able to solve a reduced MDP where the rewards are assumed to be associated with a sequence of actions planned as answer sets.
 Although this is a limitated solution, there is a potential to expand it to solve full MDP as discussed in Further Research. 
@@ -105,15 +100,15 @@ The descriptions of the new framework, called ILP(RL), is explained in details, 
 \end{customthm}
 
 \begin{customthm}{4}
-The performance of ILP(RL) is measured in a simple game environment and compared against two existing RL algorithms. We measure learning efficiency and the capability of the transfer learning.
+The performance of ILP(RL) is measured in various maze game environments and compared it against two existing RL algorithms, in terms of learning efficiency and the capability of the transfer learning.
 We evaluate the outcomes and discuss some of the issues we currently face with the current framework.
 \end{customthm}
 
 \begin{customthm}{5}
-We review previous research on the related fields. Since there is no research that attemps to apply ILP to RL, we review  
-applications of ASP in RL and the symbolic representations in RL for relevant research.  
+We review previous research on the related fields. Since there is no research that attemps to apply ASP-based ILP to RL, we review  
+applications of ASP in RL and the symbolic representations in RL.  
 \end{customthm}
 
 \begin{customthm}{6}
-We summarise the framework and experiments of ILP(RL) and discuss the potentials of further research. 
+We summarise the framework and experiments of ILP(RL) and discuss the avenues of further research. 
 \end{customthm}

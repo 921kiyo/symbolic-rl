@@ -145,33 +145,41 @@ This chapter introduces necessary background of Answer Set Programming (ASP), In
 
 \section{Answer Set Programming (ASP)}
 \label{sec:asp}
-Answer Set Programming (ASP) is a form of declarative programming aimed at knowledge-intensive applications such as difficult search problems \cite{Lifschitz2008}. We first introduce stable model on which ASP is based on, and describe ASP syntax. 
+Answer Set Programming (ASP) is a form of declarative programming aimed at knowledge-intensive applications such as difficult search problems \cite{Lifschitz2008}. 
+We first introduce a stable model which is foundation of ASP, and describe ASP syntax. 
 
 % Non-monotonic reasoning
 \subsection{Stable Model Semantics}
 
-The semantics of the logic is based on the notion of interpretation, which is defined under a \textit{domain}. A domain contains all the objects that exist. In logic, it is convention to use a special interpretations called \textit{Herbrand interpretations} rather than general interpretations.
+The semantics of the logic is based on the notion of interpretation, which is defined under a \textit{domain}. A domain contains all the objects that exist. 
+In logic, it is convention to use a special interpretation called a \textit{Herbrand interpretation}.
 
 \begin{defn}
-\textit{Herbrand Domain} (a.k.a \textit{Herbrand Universe}) of a normal logic program \textit{P}, denoted HD(P), is the set of all ground terms that are constants and function symbols appeared in \textit{P}.
+\textit{Herbrand Domain}, or \textit{Herbrand Universe}, of a normal logic program \textit{P}, denoted \textit{HD(P)}, is the set of all ground terms that are constants and function symbols appeared in \textit{P}.
 \end{defn}
 
 \begin{defn}
-\textit{Herbrand Base} of a normal logic program \textit{P}, denoted HB(P) is the set of all ground predicates that are formed by predicate symbols in \textit{P} and terms in HD\textsubscript{P}.
+\textit{Herbrand Base} of a normal logic program \textit{P}, denoted \textit{HB(P)}, is the set of all ground predicates that are formed by predicate symbols in \textit{P} and terms in \textit{HD(P)}.
 \end{defn}
 
 \begin{defn}
-\textit{Herbrand Interpretation} of a set of a program \textit{P}, denoted HI(P) is a subset of the HB\textsubscript{P}, and is a set of ground atoms that are true in terms of interpretation.
+\textit{Herbrand Interpretation} of a set of a program \textit{P}, denoted \textit{HI(P)}, is a subset of the HB\textsubscript{P}, and is a set of ground atoms that are true in terms of interpretation.
+\end{defn}
+
+In order to define a stable model, we need to define a minimal Herbrand model of a normal logic program \textit{P}.
+
+\begin{defn}
+\textit{Herbrand Model} of a normal logic program \textit{P} is a \textit{HI(P)} if and only if a set \textit{P} of clauses is satisfiable. In other words, the set of clauses \textit{P} is unsatisfiable if no Herbrand model was found.
 \end{defn}
 
 \begin{defn}
-\textit{Herbrand Model} of a normal logic program  \textit{P} is a HI(P) if and only if a set \textit{P} of clauses is satisfiable. In other words, the set of clauses \textit{P} is unsatisfiable if no Herbrand model was found.
+\textit{Minimal Herbrand Model} of a normal logic program \textit{P} is an Herbrand model \textit{M} if none of the subset of \textit{M} is an Herbrand model of \textit{P}.
 \end{defn}
 
-\begin{defn}
-\textit{Least Herbrand Model} (denoted as \textit{M(P)}) is an unique minimal Herbrand model for definite logic programs.  The Herbrand Model is a minimum Herbrand model if and only if none of its subsets is an Herbrand model.
-\end{defn}
-For normal logic programs, there may not be any least Herbrand Model.
+% \begin{defn}
+% \textit{Least Herbrand Model} (denoted as \textit{M(P)}) is an unique minimal Herbrand model for definite logic programs.  The Herbrand Model is a minimum Herbrand model if and only if none of its subsets is an Herbrand model.
+% \end{defn}
+% For normal logic programs, there may not be any least Herbrand Model.
 
 %Interpretation evaluate it to true
 %Interpretation evaluate it to false
@@ -187,20 +195,19 @@ HD(P) = \{ a \} , HB(P) = \{ q(a), p(a) \}  \\
 Given above,  there are four Herbrand Interpretations HI(P) = $\langle$ \{q(a)\}, \{p(a)\}, \{q(a), p(a)\}, \{\} $\rangle$, and one Herbrand Model (as well as M(P)) = \{q(a), p(a)\}
 
 \end{examp}
-% TODO: Use the same or similar examples for all of them.
 
 \textit{Definite Logic Program} is a set of definite rules, and  a \textit{definite rule} is of the form \textit{h} $\leftarrow$ \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n}.  \textit{h} and  \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n} are all atoms. \textit{h} is the \textit{head} of the rule and \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n} are the \textit{body} of the rule.
 \textit{Normal Logic Program} is a set of normal rules, and a normal rule is of the form \textit{h} $\leftarrow$ a\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{not b}\textsubscript{1}, ..., \textit{not  b}\textsubscript{n} where \textit{h} is the head of the rule,
  and \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{b}\textsubscript{1}, ..., \textit{b}\textsubscript{n} are the body of the rule (both the head and body are all atoms).
 
-To solve a normal logic program \textit{Th}, the program P needs to be grounded. The \textit{grounding} of \textit{Th} is the set of all clauses that are c $\in$ \textit{Th} and variables are replaced by terms in the Herbrand Domain.
+To solve a normal logic program \textit{P}, the program \textit{P} needs to be grounded. The \textit{grounding} of \textit{P} is the set of all clauses that are c $\in$ \textit{P} and variables are replaced by terms in the Herbrand Domain.
 \begin{defn}
-The algorithm of grounding starts with an empty program Q = \{  \} and the relevant grounding is constructed by adding to each rule R to Q such that
+The algorithm of grounding starts with an empty program \textit{Q} = \{  \} and the relevant grounding is constructed by adding to each rule \textit{R} to \textit{Q} such that:
 \begin{itemize}
-\item R is a ground instance of a rule in P.
-\item Their positive body literals already occurs in the in the of rules in Q.
+\item \textit{R} is a ground instance of a rule in \textit{P}.
+\item Their positive body literals already occurs in the in the of rules in \textit{Q}.
 \end{itemize}
-The algorithm terminates when no more rules can be added to Q.
+The algorithm terminates when no more rules can be added to \textit{Q}.
 
 \end{defn}
 
@@ -212,7 +219,7 @@ P = $\begin{cases}
 	\textit{p(a).}
       \end{cases}$ \\
 
-ground(P) in this example is \{p(a), q(a)\}.
+ground(P) in this example is \{p(a), q(a)\}, as p(a) is already grounded and added to Q, and it is also a positive body literal for the first rule, resulting in q(a).
 
 \end{examp}
 \label{grounding}
@@ -220,10 +227,11 @@ ground(P) in this example is \{p(a), q(a)\}.
 %TODO Explain grounding in ASP context.
 %The grounding of a normal logic program P can be obtained by replacing each rule in P with a ground instance of the rule, such that for each atom A in body\textsuperscript{+} (R) (TODO EXPLAIN WHAT THIS IS), already occurs in the head of another ground rule.
 Not only the entire program needs to be grounded in order for an ASP solver to work, but also each rule must be \textit{safe}. A rule \textit{R} is safe if every variable that occurs in the head of the rule occurs at least once in body\textsuperscript{+}(R) .
-Since there is no unique least Herbrand Model for a normal logic program, Stable Model of a normal logic program was defined in \cite{Gelfond1988}. In order to obtain the Stable Model of a program P, P needs to be converted using \textit{Reduct} with respect to an interpretation X.
+Since there is no unique least Herbrand Model for a normal logic program, Stable Model of a normal logic program was defined in \cite{Gelfond1988}. 
+In order to obtain the Stable Model of a program P, P needs to be converted using \textit{Reduct} with respect to an interpretation X.
 
 \begin{defn}
-The \textit{reduct} of P with respect to X can be constructed such that
+The \textit{reduct} of P with respect to X can be constructed such that:
 \begin{itemize}
 \item If the body of any rule in P contains an atom which is not in X, those rules need to be removed.
 \item All default negation atoms in the remaining rules in P need to be removed.
@@ -256,7 +264,7 @@ Thus reduct P\textsuperscript{x} is (ground(P))\textsuperscript{x} =  \{p(a), q(
 
 %Any stable model is a minimal Herbrand model, and stable sets is stable models. The stable models can be found by constructing the result of the program with respect to sets of atoms X (P\textsuperscript{x} in the following 2 steps
 \begin{defn}
-A \textit{Stable Model} of P, denoted SM(P)??, is an interpretaiton X if and only if X is the unique least Herbrand Model of ground(P)\textsuperscript{x} in the logic program.
+A \textit{Stable Model} of P, denoted SM(P), is an interpretaiton X if and only if X is the unique least Herbrand Model of ground(P)\textsuperscript{x} in the logic program.
 \end{defn}
 
 \subsection{Answer Set Programming (ASP) Syntax}
@@ -265,7 +273,7 @@ A \textit{Stable Model} of P, denoted SM(P)??, is an interpretaiton X if and onl
 Answer set of normal logic program P is a Stable Model defined by a set of rules, where each rule consists of literals, which is made up with an atom \textit{p} or its default negation \textit{not p} (\textit{negation as failure}). Answer Set Programming (ASP) is a normal logic program with extensions: constraints, choice rules and optimisation statements.
 \end{defn}
 
-A \textit{defnite rule} is: 
+A \textit{definite rule} is: 
 \begin{equation}
 \begin{split}
 \underbrace{h}_\text{head} \leftarrow\underbrace{ a\textsubscript{1}, a\textsubscript{2}, ..., a\textsubscript{n}}_\text{body}
@@ -295,7 +303,7 @@ A \textit{choice rule} can express possible outcomes given an action choice, whi
 \label{asp_choice_rule}
 \end{equation}
 
-where  l and u are integers and h\textsubscript{i} for 1 $\leq$ i $\leq$ m are atoms. The head is called \textit{aggregates}.
+where \textit{l} and \textit{u} are integers and h\textsubscript{i} for 1 $\leq$ i $\leq$ m are atoms. The head in the choice rule is called \textit{aggregates}.
 
 \textit{Optimisation statement} is useful to sort the answer sets in terms of preference, which is of the form:
 \begin{equation}
@@ -308,7 +316,7 @@ where  l and u are integers and h\textsubscript{i} for 1 $\leq$ i $\leq$ m are a
 
 where \textit{w\textsubscript{1},..., w\textsubscript{n}} is integer weights and \textit{a\textsubscript{1},...,a\textsubscript{n}} is ground atoms.  ASP solvers compute the scores of the weighted sum of the sets of ground atoms based on the true answer sets, and find optimal answer sets which either maximise or minimise the score.
 
-\textit{Clingo} is one of the modern ASP solvers that executes the ASP program and returns answer sets of the program \cite{Gebser2011}, and we will use Clingo 5 for the implementation of our new framework.
+\textit{Clingo} is one of the modern ASP solvers that executes the ASP program and returns answer sets of the program \cite{Gebser2011}. We will use Clingo 5 for the implementation of our new framework.
 
 %An answer set of ASP program is interpretations that make all the ruls true.
 %Non-monotonicity.
@@ -317,16 +325,17 @@ where \textit{w\textsubscript{1},..., w\textsubscript{n}} is integer weights and
 \section{Inductive Logic Programming (ILP)}
 \label{sec:ilp}
 
-\textit{Inductive Logic Programming (ILP)} is a subfield of machine learning research area aimed at supervised inductive concept learning, and is the intersection between machine learning and logic programming \cite{Muggleton1991}. The purpose of ILP is to inductively derive a hypothesis H that is a solution of a learning task, which coveres all positive examples and none of negative examples, given a hypothesis language for search space and cover relation \cite{DeRaedt1997}. ILP is based on learning from entailment, as shown in Equation \ref{ilp_equation}.
+\textit{Inductive Logic Programming (ILP)} is a subfield of machine learning research area aimed at supervised inductive concept learning, and is the intersection between machine learning and logic programming \cite{Muggleton1991}. 
+The purpose of ILP is to inductively derive a hypothesis \textit{H} that is a solution of a learning task, which coveres all positive examples and none of negative examples, given a hypothesis language for search space and cover relation \cite{DeRaedt1997}. 
+ILP is based on learning from entailment, as shown in Equation \ref{ilp_equation}.
 
-\begin{equation}
+\begin{equation}\label{ilp_equation}
 B \wedge H \models E
 \end{equation}
-\label{ilp_equation}
 
-where E contains all of the positive examples (E\textsuperscript{+}) and none of the negative examples (E\textsuperscript{-}).
+where \textit{E} contains all of the positive examples, denoted \textit{E\textsuperscript{+}}, and none of the negative examples, denoted \textit{E\textsuperscript{-}}.
 
-An advantage of ILP over statistical machine learning is that the hypothesis that an agent learnt can be easily understood by a human, as it is expressed in first-order logic, making the learning process more transparent.
+An advantage of ILP over statistical machine learning is that the hypothesis that an agent learn can be easily understood by a human, as it is expressed in first-order logic, making the learning process explanable.
 By contrast, a limitation of ILP is learning scalability. There are usually thousands or more examples in many real-world examples. Scaling ILP task to cope with large examples is a challenging task \cite{Muggleton1993}.
 
 \subsection{ILP under Answer Set Semantics}
@@ -334,9 +343,8 @@ There are several ILP non-monotonic learning frameworks under the answer set sem
 \subsubsection{Cautious Induction }
 
 \begin{defn}
-\textit{Cautious Induction task} \footnote{This is more general definition of Cautious Induction than the one defined in \cite{Sakama2009}, as the concept of negative examples was not included in the original definition.} is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples.
-
- H $\in$ ILP\textsubscript{cautious} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if  there is at least one answer set A of B $\cup$ H (B $\cup$ H is satisfiable) such that for every answer set A of B $\cup$ H: \\
+\textit{Cautious Induction} task\footnote{This is more general definition of Cautious Induction than the one defined in \cite{Sakama2009}, as the concept of negative examples was not included in the original definition.} is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples.
+H $\in$ ILP\textsubscript{cautious} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if  there is at least one answer set A of B $\cup$ H (B $\cup$ H is satisfiable) such that for every answer set A of B $\cup$ H: \\
 \begin{itemize}
 \item $\forall$ e $\in$ E\textsuperscript{+} : e $\in$ A
 \item $\forall$ e $\in$ E\textsuperscript{-} : e $\notin$ A
@@ -364,14 +372,15 @@ B = $\begin{cases}
 	\textit{person(john).}
       \end{cases}$ \\
 
-Neither of \textit{situation(john, awake)} nor \textit{situation(john, sleep)} is false in all answer sets. In this example, it only returns person(john). Thus no examples could be given to learn the choice rule.
+Neither of \textit{situation(john, awake)} nor \textit{situation(john, sleep)} is false in all answer sets. 
+In this example, the hypothesis only contains person(john). Thus no examples could be given to learn the choice rule.
 \end{examp}
 
 \label{limitation_cautious}
 
 \subsubsection{Brave Induction}
-\begin{defn}
-\textit{Brave Induction task} is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ where, B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples.
+\begin{defn} \label{def:brave_induction}
+\textit{Brave Induction} task is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ where, B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples.
  H $\in$ ILP\textsubscript{brave} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if there is at least one answer set A of B $\cup$ H such that: \\
 \begin{itemize}
 \item $\forall$ e $\in$ E\textsuperscript{+} : e $\in$ A \\
@@ -391,7 +400,8 @@ One possible  H $\in$ ILP\textsubscript{brave} is \{tennis\}, which returns \{te
 \end{examp}
 \label{brave_induction_example}
 
-The limitation of Brave Induction that it cannot learn constraints, since the above conditions for the examples only apply to at least one answer set A, whereas constrains rules out all answer sets that meet  the conditions of the Brave Induction.
+The limitation of Brave Induction is that it is not possible to learn constraints, since the conditions of the Definition \ref{def:brave_induction} only apply to at least one answer set A, 
+whereas constrains must rule out all answer sets that meet  the conditions of the Brave Induction.
 
 \begin{examp} \normalfont (Limitation of Brave Induction) \\
 
@@ -410,7 +420,7 @@ In order to learn the  constraint hypothesis H = \{ $\leftarrow$ not situation(P
 
 \subsubsection{Learning from Answer Sets (LAS)}
 \textit{Learning from Answer Sets (LAS)} was developed in \cite{Law2014} to faciliate more complex learning tasks that neither Cautious Induction nor Brave Induction could learn.
-Examples used in LAS area tuple of pair of atoms called \textit{Partial Interpretations}, which are of the form:
+Examples used in LAS are a tuple of pair of atoms called \textit{Partial Interpretations}, which is of the form:
 \begin{equation}
 \begin{split}
 %\underbrace{h}_\text{head} \leftarrow\underbrace{ a\textsubscript{1}, a\textsubscript{2}, ..., a\textsubscript{n}}_\text{body}
@@ -483,7 +493,7 @@ XXX
 \end{examp}
 
 \subsubsection{A Context-dependent Learning from Answer Sets }
-\textit{Context-dependent learning from answer sets ($ILP_{LAS}^{context}$)} is a further generalisation of ILP\textsubscript{LAS} with \textit{context-dependent examples}\cite{Law2016}\footnote{The original paper is developed on top of \textit{learning from ordered answer sets ($ILP_{LOAS}^{context}$)}. In this paper, we do not use ordered answer sets and therefore simplified to $ILP_{LAS}^{context}$. }.
+\textit{Context-dependent learning from answer sets ($ILP_{LAS}^{context}$)} is a further generalisation of ILP\textsubscript{LAS} with \textit{context dependent examples}\cite{Law2016}\footnote{The original paper developed the framework called \textit{learning from ordered answer sets ($ILP_{LOAS}^{context}$)}. In this paper, we do not use ordered answer sets and therefore simplify it to $ILP_{LAS}^{context}$. }.
 \textit{Context-dependent examples} are examples that each unique background knowledge, or \textit{context}, only applies to specific examples. This way the background knowledge is more structured rather than one fixed background knowledge that are applied to all examples.
 
 Formally, partial interpretation is called \textit{context-dependent partial interpretation (CDPI)}, which is of the form:
@@ -510,7 +520,7 @@ Formally, partial interpretation is called \textit{context-dependent partial int
 %\end{enumerate}
 \begin{defn} \label{def:las_context}
 $ILP_{LAS}^{context}$ task is of the form T = $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-}$\rangle$ B.
-A hypothesis H is an inductive solution of T if and only if
+A hypothesis H is an inductive solution of T if and only if:
 \begin{enumerate}
 \item H $\subseteq$ S\textsubscript{M}
 \item $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{+}, $\exists$A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
@@ -519,7 +529,8 @@ A hypothesis H is an inductive solution of T if and only if
 %\item $\forall$o $\in$ O\textsuperscript{c} B $\cup$ H cautiously respects o
 \end{enumerate}
 \end{defn}
-One of the main advantages of adding contex dependent examples is that when a hypothesis is computed, only the relevant set of examples are used for search rather than using all examples at once. Relevant examples are counterexamples for the previously computed hypothesis in the previous iterations. This iterative approach significantly increases the efficiency of solving learning tasks, and enables more expressive structure of the background knowlege to particular examples. 
+One of the main advantages of using contex dependent examples is that when a hypothesis is computed, only the relevant set of examples are used for search rather than using all examples at once. 
+Relevant examples are counterexamples for the previously computed hypothesis in the previous iterations. This iterative approach increases the efficiency of solving learning tasks, and enables more expressive structure of the background knowlege to particular examples. 
 
 $ILP_{LAS}^{context}$ is used in ILASP2i, which we use for our new framework.
 
@@ -532,7 +543,9 @@ XXX
 
 \section{Reinforcement Learning (RL)}
 \label{rl}
-\textit{Reinforcement learning (RL)} is a subfield of machine learning regarding how an agent behaves in an environment in order to maximise its total reward. As shown in Figure \ref{agent_env}, the agent interacts with an environment, and at each time step the agent takes an action and receives observation, which affects the environment state and the reward (or penalty) it receives as the action outcome. In this section, we briefly introduce the background in RL necessary for our new framework as well as benchmark of experiments discussed in Chapter \ref{evaluation}.
+\textit{Reinforcement learning (RL)} is a subfield of machine learning regarding how an agent behaves in an environment in order to maximise its total reward. 
+As shown in Figure \ref{agent_env}, the agent interacts with an environment, and at each time step the agent takes an action and receives observation, which affects the environment state and the reward (or penalty) it receives as the action outcome. 
+In this section, we briefly introduce the background of RL necessary for our new framework as well as benchmarks of the experiments discussed in Chapter \ref{evaluation}.
 
 \begin{figure}[!htb]
 \centering
@@ -582,8 +595,7 @@ G\textsubscript{t} = R\textsubscript{t+1} + \gamma R \textsubscript{t+2} + ...  
 
 where $\gamma$ is a discount rate $\gamma$ $\in$ [0,1], a parameter,  which represents the preference of the agent for the present reward over future rewards. If $\gamma$ is low, the agent is more interested in maximising immediate rewards. 
 
-TODO explain what k is 
-
+% TODO explain what k is 
 For RL programs, it is not necessary for the agent to know T and R in advance, but they are present in the environment and can be realised each time the agent takes an action. 
 
 \subsection{Policies and Value Functions}
@@ -617,7 +629,7 @@ The optimal state-action-value function q\textsuperscript{*}(s,a) maximises the 
 q\textsuperscript{*}(s, a) = \underset{\pi}{\max} \ q\textsubscript{$\pi$}(s, a)
 \end{equation}
 
-A solution to the sequential decision problem is called a \textit{policy $\pi$}, a sequence of actions that leads to a solution. An optimal policy achieves the optimal value function (or action-value function), and it can be computed by maximising over the optimal value function (or action-value function).
+A solution to MDP is called a \textit{policy $\pi$}, a sequence of actions that leads to a solution. An optimal policy achieves the optimal value function (or action-value function), and it can be computed by maximising over the optimal value function (or action-value function).
 
 \begin{examp} \normalfont (Action-value Functions).
 
@@ -651,17 +663,19 @@ XXX
 
 \subsection{Model-based and Model-free RL}
 \label{model_base_model_free_subsection}
-A \textit{model} is a representation of an environment that an agent can use it to understand how the environment should look like. There are two different types of RL methods: \textit{model-based} and \textit{model-free} RL method. 
- Model-based learning is that, given the model of the environment is known, the agent use the model to plan for a series of actions to achieve the agent's goal. 
+A \textit{model} is a representation of an environment that an agent can use to understand how the environment should look like. 
+There are two different types of RL methods: \textit{model-based} and \textit{model-free} RL method. 
+Model-based RL is that, given a model of the environment is known, the agent uses the model to plan for a series of actions to achieve the agent's goal. 
 The model itself can be learnt by interacting with the environment by taking actions, which returns states and rewards, and the parameters of the action models can be estimated by maximum likelihood methods \cite{Ray2010}.
 Using a model, an agent can do planning to generate or improve a policy for the modeled environment. 
-Most of the RL methods are model-free learning, where the model is unknown and the agent learns to achieve the goal by solely iteracting with the environment. Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
-When the model of the environmnet is correct, unlike model-free learning, the agent does not need trial and erros interactions with the environment and therefore more efficient to reach an optimal policy. 
-However, when the model is not a representation of the environment, or the true MDP, the planning algorithms will not lead to the optimal policy, but a suboptimal policy.
+Most of the RL methods are model-free RL, where the model is unknown and the agent learns to achieve the goal by solely iteracting with the environment. 
+Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
+When the model of the environmnet is correct, unlike model-free RL, the agent does not require trial-and-error interactions with the environment and therefore model-based RL is faster to reach an optimal policy. 
+However, when the model is not a true representation of the environment, or the true MDP, the planning algorithms will not lead to the optimal policy, but a suboptimal policy.
 
 One algorithm which combine both aspects of model-based and model-free learning to solve the issue of sub-optimality is called Dyna \cite{Sutton1990}.
 Dyna learns a model from real experience and use the model to generate simulated experience to update the evaluation functions.
-This approach is more efficient because the simulated experience is relatively easy to generate compared gaining real experience, thus less iterations are required.
+This approach is more efficient because the simulated experiences are relatively easy to generate compared to real experiences, thus less iterations are required.
 
 This idea of learning a model of the environment and use it to execute planning is a core idea of our new framework. 
 
@@ -669,7 +683,7 @@ This idea of learning a model of the environment and use it to execute planning 
 \label{td_learning_section}
 
 One of the RL approaches for solving a MDP is called \textit{Temporal-Difference (TD) Learning}.
-TD learning is an online model-free learning and learns directly from episodes of imcomplete experiences without a model of the environment.
+TD learning is an online model-free RL and learns directly from episodes of imcomplete experiences without a model of the environment.
 TD updates the estimates of value function as follow:
 
 \begin{equation}
@@ -677,8 +691,8 @@ TD updates the estimates of value function as follow:
 V(S\textsubscript{t}) \leftarrow V(S\textsubscript{t}) + \alpha[R\textsubscript{t+1} + \gamma V(S\textsubscript{t+1}) - V(S\textsubscript{t})]
 \end{equation}
 
-where R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) is the target for TD update, which is biased estimated of v\textsubscript{$\pi$} (S\textsubscript{t}), and $\delta$ = R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) - V(S\textsubscript{t}) is called TD error, which is the error in V(S\textsubscript{t}) available at time t+1.
-Since TD methods only needs to know the estimate of one step ahead and does not need the final outcome of the episodes (also called TD(0)), it can learn online after every time step. TD also works without the terminal state, which is the goal for an agent.
+where R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) is the target for TD update, which is biased estimated of v\textsubscript{$\pi$} (S\textsubscript{t}), and $\delta$ = R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) - V(S\textsubscript{t}) is called \textit{TD error}, which is the error in V(S\textsubscript{t}) available at time t+1.
+Since TD method only needs to know the estimate of one step ahead and does not need the final outcome of the episodes (also called TD(0)), it can learn online after every time step. TD also works without the terminal state, which is the goal for an agent.
 TD(0) is proved to converge to v\textsubscript{$\pi$} in the table-based case (non-function approximation).
 %However, because bootstraping updates an estimate for an estimate, some bias are inevitable.
 %In addition, TD method is sensitive to initial value, (but low variance).
@@ -687,14 +701,16 @@ TD(0) is proved to converge to v\textsubscript{$\pi$} in the table-based case (n
 %\textbf{	V(S\textsubscript{t} \leftarrow V(S\textsubscript{t} + \alpha (R\textsubscript{t+1} + \gamma V(S\textsubscript{t+1}) - V(S\textsubscript{t}))
 %}\end{equation}
 
-\textit{Q-learning} is off-policy TD learning defined in \cite{Watkins}, where the agent only knows about the possible states and actionns. The transition states and reward probability functions are unknown to the agent.
-It is of the form:
+\textit{Q-learning} is off-policy TD learning defined in \cite{Watkins}, where the agent only knows about the possible states and actions. 
+The transition states and reward probability functions are unknown to the agent.
+The update rule for the state-action value function, called \textit{Q function}, is of the form:
 
-\begin{equation}
+\begin{equation}\label{eq:q_learning}
 Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\textsubscript{t}) +  \alpha(R\textsubscript{t+1} + \gamma  max (a+t) Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))
 \end{equation}
 
-where $\alpha$ is a constant step-size parameter, or learning rate, $\alpha$ between 0 and 1,  and $\gamma$ is a discount rate. The equation is used to update the state-action value function called \textit{Q function}. The function Q(S,A) predicts the best action A in state S to maximise the total cumulative rewards.
+where $\alpha$ is a constant step-size parameter, or learning rate, $\alpha$ between 0 and 1,  and $\gamma$ is a discount rate. 
+The function Q(S,A) predicts the best action A in state S to maximise the total cumulative rewards.
 
 %\begin{algorithm}
 %\caption{Q-learning (off-policy TD control)}\label{euclid}
@@ -734,17 +750,16 @@ Since Q-learning is one of the most widely used RL methods and our experiments a
 
 \subsection{Function Approximation}
 \label{function_approximation}
-Q-learning with tarbular method works when every state-action value can be represented. In case of very large MDPs, however, it may not be possible to represent all state-action values with a tarbular representation.
-For example,  robot arms has a continuous states in 3D dimentional space.
-This problem motivate the use of function approximation, which estimates value function with function approximation.  Not only is it represented in tabular form, but also in the form of a parameterized function with \textit{weight vector w}.
+Q-learning with a tarbular representation works when every state-action value can be represented. In case of very large MDPs, however, it may not be possible to represent all state-action values with a tarbular representation.
+For example, robot arms has a continuous states in 3D dimentional space.
+This problem motivates the use of \textit{function approximation}, which estimates value function with function approximation.  Not only is it represented in tabular form, but also in the form of a parameterized function with \textit{weight vector w}.
 %$\in \R\textsuperscript{d}$ where $\R\textsuperscript{d}$ is XXX
 Unlike Q-table, changing one weight updates the estimated value of not only one state, but many states, and this generalisation makes it more flexible to apply different scenarios that tabular approach could not be applied.
 
-The reason we are introduing the function approximation is that this will be used as a benchmark of our new framework.
+The reason we are introduing the function approximation is that it is used as another benchmark for our new framework.
 
 \subsubsection{The Prediction Objective ($\overline{VE}$)}
 With function approximation, an update at one state changes many other states, and therefore the values of all states will not be exactly accurate, and there is a tradeoff among states as to which state we make it more accurate, while other might be  less accurate.
-
 The error in a state s is the squeare of the difference between the approximate value $\hat{v}$(s,w) and the true value v\textsubscript{$\pi$}(s). The objective function can be defined by weighting it over the state space by $\mu$, the \textit{Mean Squared Value Error}, denoted $\overline{VE}$.
 
 \begin{equation}
@@ -762,7 +777,7 @@ The weight vector w in SGD is defined as:
 
 and $\hat{v}$(s,w) is a differentiable function of w for all s $\in$ S.
 %minimize the $\overline{VE}$ on the observed examples. 
-SGD adjusts the weights vector by a fraction of $\alpha$, a step-size parameter,  in the direction what will reduce the error on that example the most. Formally, it is defined as:
+SGD adjusts the weights vector by a fraction of $\alpha$, a step-size parameter,  in the direction what reduces the error on that example the most. Formally, it is defined as:
 
 \begin{equation}\label{eq:sgd}
 \begin{split}
@@ -816,7 +831,7 @@ w\textsubscript{t+1} & = w\textsubscript{t} +  \alpha  \big[ q\textsubscript{$\p
 %\end{equation}
 Unlike non-linear value function approximation, linear method is guaranteed to converge to a global optimum.
 One disadvantage of the linear method is that it cannot express any relationship between features. For example, it cannot represent that feature \textit{i} is useful only if feature \textit{j} is not present.
-Nevertheless,  this approach is sufficient enough for our experiments, which will be described in Chapter \ref{evaluation}.
+Nevertheless,  this approach is sufficient enough for our experiments, which is described in Chapter \ref{evaluation}.
 
 \subsubsection{Tile Coding \textcolor{red}{(TBD)}}
 There are different linear function approximation methods to represents states as features. Feature construction depends on a problem you are solving.  We introduce \textit{Tile Coding} which will be used for our benchmark.

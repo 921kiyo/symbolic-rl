@@ -31,7 +31,7 @@ The full details for ILASP learning tasks is described in Appendix XXX.
 \subsection{Context Dependent Examples}
 Context dependent examples contain information about how the state transitions between the current state and the next state.
 They are equivalent to context-dependent partial interpretation (CDPI) in  $ILP_{LAS}^{context}$. 
-As defined in the equation \ref{eq:cdpi}, CDPI is of the form $\langle$ e, C $\rangle$ where e = $\langle$ e\textsuperscript{inc}, e\textsuperscript{exc} $\rangle$. 
+As defined in the Equation \ref{eq:cdpi}, CDPI is of the form $\langle$ e, C $\rangle$ where e = $\langle$ e\textsuperscript{inc}, e\textsuperscript{exc} $\rangle$. 
 Each of the components in CDPI is defined as follows:
 \begin{defn}
 e\textsuperscript{inc} of CDPI for ILP(RL) is the next state of an agent $\forall$ s\textsubscript{t+1} $\in$ S such that answer sets of B $\cup$ H does not cover.
@@ -378,7 +378,6 @@ Which correctly returns a sequence of actions and predicted states.
 
 \end{examp}
 
-
 The answer sets returned by clingo is a set of states and actions, which is the plan of the agent at each time step.
 
 The set of states is of the form state\_at((X,Y),T), where X and Y represent x-axi and y-axi in a maze respectively, T represents a time that the agent is at
@@ -539,7 +538,6 @@ The bottleneck for the learning in terms of learning time is hypothesis improvem
 ILASP 2i
 
 matplotlib is a plotting libray that provides charts of our experiments.
-
 
 \subsection{Experiment Platform}
 
