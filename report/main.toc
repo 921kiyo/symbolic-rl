@@ -36,12 +36,12 @@
 \contentsline {subsection}{\numberline {3.2.3}Language Bias}{24}{subsection.3.2.3}
 \contentsline {subsection}{\numberline {3.2.4}Hypothesis}{25}{subsection.3.2.4}
 \contentsline {section}{\numberline {3.3}Planning with Answer Set Programming}{25}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Constructin of Answer Set Program}{26}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.1}Answer Set Program}{26}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}Plan Execution}{28}{subsection.3.3.2}
 \contentsline {section}{\numberline {3.4}Exploration}{29}{section.3.4}
 \contentsline {section}{\numberline {3.5}Implementation}{30}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Technology}{30}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Experiment Platform}{31}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.2}Experiment Platform}{30}{subsection.3.5.2}
 \contentsline {chapter}{\numberline {4}Evaluation}{32}{chapter.4}
 \contentsline {section}{\numberline {4.1}Setting}{32}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Evaluation Metrics}{32}{subsection.4.1.1}
