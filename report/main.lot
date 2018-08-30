@@ -12,17 +12,19 @@
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Game environment for experiment 1\relax }}{35}{figure.caption.20}
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Result of experiment 1 (learning curve)\relax }}{35}{figure.caption.21}
 \contentsline {figure}{\numberline {4.4}{\ignorespaces Result of experiment 1 (performance)\relax }}{36}{figure.caption.22}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Normalised learning convergence by ILASP for experiment 1\relax }}{37}{figure.caption.23}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Game environment for experiment 2\relax }}{38}{figure.caption.24}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Result of experiment 2 (learning curve)\relax }}{39}{figure.caption.25}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Result of experiment 2 (performance)\relax }}{39}{figure.caption.26}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Normalised learning convergence by ILASP for experiment 2\relax }}{40}{figure.caption.27}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Game environment for experiment 3: before (left) and after (right) transfer learning\relax }}{41}{figure.caption.28}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Result of experiment 3 (learning curve)\relax }}{42}{figure.caption.29}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Result of experiment 3 (performance)\relax }}{43}{figure.caption.30}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Game environment for experiment 4: before (left) and after (right) transfer learning\relax }}{43}{figure.caption.31}
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Result of experiment 4 (learning curve)\relax }}{44}{figure.caption.32}
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Result of experiment 4 (performance)\relax }}{44}{figure.caption.33}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Runtime comparision\relax }}{36}{figure.caption.23}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Normalised learning convergence by ILASP for experiment 1\relax }}{37}{figure.caption.24}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Game environment for experiment 2\relax }}{38}{figure.caption.25}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Result of experiment 2 (learning curve)\relax }}{39}{figure.caption.26}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Result of experiment 2 (performance)\relax }}{39}{figure.caption.27}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Runtime comparision\relax }}{40}{figure.caption.28}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Normalised learning convergence by ILASP for experiment 2\relax }}{41}{figure.caption.29}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Game environment for experiment 3: before (left) and after (right) transfer learning\relax }}{41}{figure.caption.30}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Result of experiment 3 (learning curve)\relax }}{42}{figure.caption.31}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Result of experiment 3 (performance)\relax }}{43}{figure.caption.32}
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Game environment for experiment 4: before (left) and after (right) transfer learning\relax }}{43}{figure.caption.33}
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Result of experiment 4 (learning curve)\relax }}{44}{figure.caption.34}
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Result of experiment 4 (performance)\relax }}{44}{figure.caption.35}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

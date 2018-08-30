@@ -26,7 +26,6 @@ The reason we are measuring it only at episode 0 is that empirically the agent l
 This gives a normalised convergence rate of ILASP learning with the maximum 1, and we plot it across each time steps. 
 If an indutive learning happens after episode 0, this included in the deniminator, and the maximum convergence plot is strictly less than 1.
 
-
 RUNTIME
 
 \subsection{Benchmarks}
@@ -124,6 +123,13 @@ Learnt hypotheses are shown in \ref{experiment1_hypothesis}, which is the rule o
 Since the learnt hypothesis is a general concept, which can be used in a different environmet.
 This transfer learning capability is also described in Experiement 3 and 4.
 
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=1.0\textwidth]{./figures/placeholder}
+\caption{Runtime comparision}
+\label{experiment1}
+\end{figure}
+
 \begin{equation}\label{experiment1_hypothesis}
 \begin{split}
 &\textsf{state\_after(V1) :- adjacent(right, V0, V1), state\_before(V1), action(right), wall(V0).}\\
@@ -197,6 +203,14 @@ The training performance shown in XX, which converges faster than XX.
 \caption{Result of experiment 2 (performance)}
 \label{experiment2_test}
 \end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=1.0\textwidth]{./figures/placeholder}
+\caption{Runtime comparision}
+\label{experiment1}
+\end{figure}
+    
 
 \begin{equation}
 \begin{split}
