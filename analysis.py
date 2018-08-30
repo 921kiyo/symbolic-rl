@@ -5,26 +5,40 @@ import os.path
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
-# import ipdb; ipdb.set_trace()   
-# env = gym.make('vgdl_aaa_L_shape-v0')
-# env = gym.make('vgdl_aaa_maze-v0')
-# env = gym.make('vgdl_experiment3.5-v0')
-# Q, stats = q_learning(env, 50)
+def experiment3():
+    pkl_dir = os.path.join(base_dir, "result_pkl/experiment3_after_noTL_noGoal")
+    pkl_dir2 = os.path.join(base_dir, "result_pkl/experiment3_after_noTL_goal")
+    pkl_dir3 = os.path.join(base_dir, "result_pkl/experiment3_after_TL")
+    # make average score
+    plotting.average_score(base_dir, pkl_dir, "exp3_test_v", 100, 30)
+    plotting.average_score(base_dir, pkl_dir2, "exp4_test_v", 100, 30)
+    # plotting.average_score(base_dir, pkl_dir3, "exp3_v", 100, 30)
+    # Load the pkl files
+    stats = plotting.load_stats(pkl_dir, "exp3_test_v_average")
+    stats2 = plotting.load_stats(pkl_dir2, "exp4_test_v_average")
+    stats3 = plotting.load_stats(pkl_dir3, "exp4_test_after_TL_v_average")
+    # import ipdb; ipdb.set_trace()
+    plotting.plot_episode_stats_multiple(stats, stats2, stats3)
 
-# plotting.store_stats(stats, base_dir, "test")
-# stats2 = plotting.load_stats(base_dir, "test")
+def experiment3_test():
+    pkl_dir = os.path.join(base_dir, "result_pkl/experiment3_after_noTL_noGoal")
+    pkl_dir2 = os.path.join(base_dir, "result_pkl/experiment3_after_noTL_goal")
+    pkl_dir3 = os.path.join(base_dir, "result_pkl/experiment3_after_TL")
+    # make average score
+    plotting.average_score(base_dir, pkl_dir, "exp3_test_v", 100, 30)
+    plotting.average_score(base_dir, pkl_dir2, "exp4_test_v", 100, 30)
+    # plotting.average_score(base_dir, pkl_dir3, "exp3_v", 100, 30)
+    # Load the pkl files
+    stats = plotting.load_stats(pkl_dir, "exp3_test_v_average")
+    stats2 = plotting.load_stats(pkl_dir2, "exp4_test_v_average")
+    stats3 = plotting.load_stats(pkl_dir3, "exp4_test_after_TL_v_average")
+    # import ipdb; ipdb.set_trace()
+    plotting.plot_episode_stats_multiple(stats, stats2, stats3)
 
-# # plotting.plot_episode_stats_simple(stats=stats, noshow=True, color="green")
-# stats2 = k_learning(env, 50, epsilon=0.3, record_prefix="experiment2", is_link=True)
-# plotting.plot_episode_stats_simple(stats2, color="blue")
-
-# # plotting.plot_episode_stats_multiple(stats, stats2)
-
-pkl_dir = os.path.join(base_dir, "result_pkl/experiment1")
-# pkl_dir_q = os.path.join(base_dir, "result_pkl/experiment1_q")
+experiment3()
 
 # plotting.average_score(base_dir, pkl_dir, "exp4_after_TL_v", 100, 30)
-plotting.average_score(base_dir, pkl_dir, "exp1_v", 100, 30)
+# plotting.average_score(base_dir, pkl_dir, "exp1_v", 100, 30)
 # plotting.average_score(base_dir, pkl_dir, "exp3_test_v", 100, 30)
 # plotting.average_score(base_dir, pkl_dir_q, "exp3_test_v", 100, 30)
 
@@ -33,7 +47,7 @@ plotting.average_score(base_dir, pkl_dir, "exp1_v", 100, 30)
 
 # plotting.average_ILASP(base_dir, pkl_dir, "exp2_v", 2, 250, 30)
 
-stats = plotting.load_stats(pkl_dir, "exp1_v_average")
+# stats = plotting.load_stats(pkl_dir, "exp1_v_average")
 # stats_q = plotting.load_stats(pkl_dir_q, "temp_test_v_average")
 # stats = plotting.load_stats(pkl_dir, "exp1_test_v_average")
 
@@ -51,6 +65,6 @@ stats = plotting.load_stats(pkl_dir, "exp1_v_average")
 #     stats = plotting.load_stats(pkl_dir, "exp3_test_v{}".format(str(i)))
 #     print(stats)
 
-plotting.plot_episode_stats_simple(stats, smoothing_window=1)
+# plotting.plot_episode_stats_simple(stats, smoothing_window=1)
 # plotting.plot_episode_stats_multiple(stats, stats_q)
 # plotting.plot_ILASP_progress(stats)

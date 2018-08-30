@@ -54,7 +54,7 @@ At each episode, we also measure the performance without exploration to see the 
 \label{sec:learning_evaluation}
 
 \subsection{Experiment Result 1}
-\label{subsec:experiment_result_2}
+\label{subsec:experiment_result_1}
 
 \begin{figure}[!htb]
 \centering
@@ -126,7 +126,7 @@ which enables it to plan. Since our exploration strategy is expilon random choic
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=0.5\textwidth]{./figures/experiment3}
+\includegraphics[width=0.5\textwidth]{./figures/experiment2}
 \caption{Game environment for experiment 2}
 \label{experiment3}
 \end{figure}
@@ -155,18 +155,18 @@ link locations need to be available for all positive examples so that ILASP corr
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment3_training}
+\includegraphics[width=1.0\textwidth]{./figures/experiment2_training}
 \caption{Result of experiment 2 (learning curve)}
-\label{experiment3_training}
+\label{experiment2_training}
 \end{figure}
 
 The training performance shown in XX, which converges faster than XX.
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment3_test}
+\includegraphics[width=1.0\textwidth]{./figures/experiment2_test}
 \caption{Result of experiment 2 (performance)}
-\label{experiment3_test}
+\label{experiment2_test}
 \end{figure}
 
 \begin{equation}
@@ -225,8 +225,8 @@ In this case, the first two hypotheses in Figure XX are never be used since the 
 
 \begin{figure}[!htb]
 \centerline{
-\includegraphics[width=0.5\textwidth]{./figures/experiment4_before}
-\includegraphics[width=0.5\textwidth]{./figures/experiment4_after}
+\includegraphics[width=0.5\textwidth]{./figures/experiment3_before}
+\includegraphics[width=0.5\textwidth]{./figures/experiment3_after}
 }
 \caption{Game environment for experiment 3: before (left) and after (right) transfer learning}
 \label{experiment3}
@@ -261,14 +261,14 @@ Since the complete hypothesis is already known to the agent, it can do planning 
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment4_after_training}
+\includegraphics[width=1.0\textwidth]{./figures/experiment3_after_training}
 \caption{Result of experiment 3 (learning curve)}
 \label{experiment3_training}
 \end{figure}
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment4_after_test}
+\includegraphics[width=1.0\textwidth]{./figures/experiment3_after_test}
 \caption{Result of experiment 3 (performance)}
 \label{experiment3_test}
 \end{figure}
@@ -279,7 +279,7 @@ Since the complete hypothesis is already known to the agent, it can do planning 
 \begin{figure}[!htb]
 \centerline{
 \includegraphics[width=0.5\textwidth]{./figures/experiment4_before}
-\includegraphics[width=0.5\textwidth]{./figures/experiment5_after}}
+\includegraphics[width=0.5\textwidth]{./figures/experiment4_after}}
 \caption{Game environment for experiment 4: before (left) and after (right) transfer learning}
 \label{experiment5}
 \end{figure}
@@ -289,14 +289,14 @@ and therefore the agent needs to learn it after the hypothesis is transferred.
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment5_training}
+\includegraphics[width=1.0\textwidth]{./figures/experiment4_training}
 \caption{Result of experiment 4 (learning curve)}
 \label{experiment5_training}
 \end{figure}
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment5_test}
+\includegraphics[width=1.0\textwidth]{./figures/experiment4_test}
 \caption{Result of experiment 4 (performance)}
 \label{experiment5_test}
 \end{figure}
@@ -316,23 +316,19 @@ and therefore the agent needs to learn it after the hypothesis is transferred.
 \label{experiment4_ilasp}
 \end{equation}
 
-\section{Strengths}
-\label{strengths}
+% In simple environments, we show that the agent learns rule of the game faster than existing RL algorithms, learnt concepts is easy to understand for human users.
+% We also show that the learnt hypothesis is a general concept and can be applied to other environment to mitigate learning process.
 
-To my knowledge, this is the first attemp that inductive logic programming is incorporated into a reinforcement learning senario to facilitate learning process.
-In simple environments, we show that the agent learns rule of the game faster than existing RL algorithms, learnt concepts is easy to understand for human users.
-We also show that the learnt hypothesis is a general concept and can be applied to other environment to mitigate learning process.
+% The full hypotheses were learnt in the very early phase of learning and exploration phase. Thus with sufficient exploration, the model of the environment is correct
+% and therefore it is able to find the optimal policy/path. 
 
-The full hypotheses were learnt in the very early phase of learning and exploration phase. Thus with sufficient exploration, the model of the environment is correct
-and therefore it is able to find the optimal policy/path. 
+% We show that ILP(RL) is able to solve a reduced MDP where the rewards are assumed to be associated with a sequence of actions planned as answer sets.
+% Although this is a limitated solution, there is a potential to expand it to solve full MDP as discussed in Further Research. 
 
-We show that ILP(RL) is able to solve a reduced MDP where the rewards are assumed to be associated with a sequence of actions planned as answer sets.
-Although this is a limitated solution, there is a potential to expand it to solve full MDP as discussed in Further Research. 
+% TODO more details on the strength of the algorithm. 
+% Validity
 
-TODO more details on the strength of the algorithm. 
-Validity
-
-\section{Limitations}
+\section{Discussion}
 
 Although this is the first time and inductive logic programming is applied into reinforcement leaning and there are new interesting property for ILP(RL),
 there are two major limitations with the current framework.

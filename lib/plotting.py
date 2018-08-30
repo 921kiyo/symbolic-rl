@@ -157,7 +157,7 @@ def plot_episode_stats_test(stats, stats_test, smoothing_window=1, noshow=False,
 
     return fig2
 
-def plot_episode_stats_multiple(stats, stats2, smoothing_window=1, noshow=False):
+def plot_episode_stats_two(stats, stats2, smoothing_window=1, noshow=False):
 
     # Plot the episode reward over time
     fig2 = plt.figure(figsize=(10,5))
@@ -174,6 +174,29 @@ def plot_episode_stats_multiple(stats, stats2, smoothing_window=1, noshow=False)
     plt.title("Episode Reward over Time")
     # plt.title("Episode Reward over Time (Smoothed over window size {})".format(smoothing_window))
     plt.legend(handles=[plot_training, plot_test], loc=4)
+    if noshow:
+        plt.close(fig2)
+    else:
+        plt.show(fig2)
+
+    return fig2
+
+def plot_episode_stats_multiple(stats, stats2, stats3, smoothing_window=1, noshow=False):
+
+    # Plot the episode reward over time
+    fig2 = plt.figure(figsize=(10,5))
+    rewards_smoothed = pd.Series(stats.episode_rewards).rolling(smoothing_window, min_periods=smoothing_window).mean()
+    rewards_smoothed2 = pd.Series(stats2.episode_rewards).rolling(smoothing_window, min_periods=smoothing_window).mean()
+    rewards_smoothed3 = pd.Series(stats3.episode_rewards).rolling(smoothing_window, min_periods=smoothing_window).mean()
+
+    plot, = plt.plot(rewards_smoothed, "k", label="No TL, no goal")
+    plot2, = plt.plot(rewards_smoothed2, c="gray", ls="--", label="No TL, goal")
+    plot3, = plt.plot(rewards_smoothed3, c="red", ls="--", label="TL")
+    plt.xlabel("Episode")
+    plt.ylabel("Episode Reward")
+    plt.title("Episode Reward over Time")
+    # plt.title("Episode Reward over Time (Smoothed over window size {})".format(smoothing_window))
+    plt.legend(handles=[plot, plot2, plot3], loc=4)
     if noshow:
         plt.close(fig2)
     else:

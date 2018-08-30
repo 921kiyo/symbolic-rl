@@ -11,10 +11,12 @@ from lib.helper import gen_log_dir
 from lib import plotting, helper, induction
 
 TIME_RANGE = 400
-# env = gym.make('vgdl_experiment1-v0')
-# env = gym.make('vgdl_experiment3-v0')
-env = gym.make('vgdl_experiment5-v0')
-# env = gym.make('vgdl_experiment5-v0')
+env = gym.make('vgdl_experiment1-v0')
+# env = gym.make('vgdl_experiment2-v0')
+# env = gym.make('vgdl_experiment3_before-v0')
+# env = gym.make('vgdl_experiment3_after-v0')
+# env = gym.make('vgdl_experiment4_before-v0')
+# env = gym.make('vgdl_experiment4_after-v0')
 
 for i_episode in range(TIME_RANGE):
 
