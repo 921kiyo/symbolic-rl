@@ -4,24 +4,48 @@
 \subsection{Evaluation Metrics}
 \label{subsec:evaluation_metrics}
 
-The two main measurements for the performance of our new architecture are learning efficiency and transfer learning capability.
-The learning efficiencies are measured in two different ways. First, the performance ILP(RL) is compared with exisitng RL algorithms in terms of
-convergence rate, which is measured in terms of number of episodes that the agent needs to get to an optimal policy.
-Second, the convergence of learning by ILASP is measured in terms of the number of hypothesis improvement devided by the total number of hypothesis improvement at episode 0.
-The reason we are measuring it at only episode 0 is that empirically the agent learns the target hypothesis at episode 0 and there is no hypothesis refinement after episode 0.
-This gives a normalised convergence rate of ILASP learning with the maximum 1.
+As introduced in \ref{sec:motivation}, our motivation is to improve the RL learning efficiency and capability of transfer learning.
+Therefore, these are the two main measurements for the performance of ILP(RL).
+
+The learning efficiencies are measured in two different ways. First, the performance of ILP(RL) is compared with benchmarks in terms of
+convergence rate, which is measured in terms of the number of episodes that the agent requires to get to an optimal policy.
+The optimal policy can be measured in terms of the total reward that the agent gains at each episodes. 
+Throughout the experiments, we designed the environment such that the agent receives reward of -1 for any state except the terminal state, and receives reward of + 10 for the terminal state, or the goal.
+For example, if the agent needs the shortest 10 actions to get to the terminal state, the maximum reward the agent could get per episode is 0 (-1 reward at each action + 10 for reaching the goal).
+We log the reward at each time step and calculate the total reward at each episode. 
+
+At each episode, we also measure the performance without exploration to see the pure optimal policy.
+
+Second, the convergence of learning by ILASP is measured to see the learning curve of ILP(RL), which is defined as follows:
+\begin{equation}
+\begin{split}
+\frac{\textsf{The cumulative number of inductive learning per time step at episode 0}}{\textsf{The total number of inductive learning at all episodes}}
+\end{split}
+\end{equation}
+The reason we are measuring it only at episode 0 is that empirically the agent learns most of the target hypotheses within episode 0 and there is no hypothesis refinement after episode 0.
+This gives a normalised convergence rate of ILASP learning with the maximum 1, and we plot it across each time steps. 
+If an indutive learning happens after episode 0, this included in the deniminator, and the maximum convergence plot is strictly less than 1.
+
+
+RUNTIME
 
 \subsection{Benchmarks}
 \label{subsec:benchmarks}
+We use different benchmarks for learning evaluation and transfer learning evaluation. 
 
-We use two existing RL methods as benchmarks: Q-learning and tile-coding.
-Q-learning is widely used RL technique, and given the environments used for the experiments are discrete and deterministic, this method is sufficient enought for our experiment.
+For learning evaluation, we use two existing RL methods as benchmarks: Q-learning and tile-coding.
+Q-learning is widely used RL technique, and given the environments used for the experiments are discrete and deterministic, this method is sufficient for our experiments.
+XX the Q-values are initialised as XX. (Optimistic and pessimistic initialisation.)
 
 Another benchmark is tile coding, which is a type of linear function approximation techniques described in Chapter XX.
-The reason for using an extra benchmark is that the comparision with q-learning might not be a fair comparision,
+The reason for using an extra benchmark is that the performance comparision of ILP(RL) with q-learning might not be a fair comparision,
 since ILP(RL) has one extra assumption: the agent knows surrounding information (whether there are walls in adjacent cells),
 which is not a common assumption for Q-learning. Thus we incorporate the same surrounding information as features, and update the weights of each feature as a learning.
 We compare the performance of ILP(RL) with these two methods.
+
+\textcolor{red}{TODO Details of tile-coding configuration}
+
+For transfer learnig evaluation, 
 
 \subsection{Parameters}
 \begin{table}[!ht!b]
@@ -41,14 +65,20 @@ Epsilon              & 0.1        & 0.1        \\
 \end{table}
 
 All the matrices used in the experiments are summarised in Table \ref{param}.
-Epsilon for ILP(RL) should be higher, since the agent follows the generated plan,
-whereas benchmark algorithms update value function with the degree of alpha.
+The number of episode is set such that both the benchmarks as well as ILP(RL) eventually eaches the optimal policy. 
+The number of time steps should be sufficient for the both algorithms to reach the terminal state by the random exploration, 
+which we set 250 time steps for all experiments. If the agent does not find the terminal state by 250 time steps, the agent receives the reward of -250 and 
+start the next episode from the starting point. If the agent reaches the terminal state within 250 time steps, it receives the reward of 10 and start the next episode with the same starting point. 
+
+
+Starting point is fixed every episode. 
+% Epsilon for ILP(RL) should be higher, since the agent follows the generated plan,
+% whereas benchmark algorithms update value function with the degree of alpha.
 We conducted several experiments using different environments to highlight each aspect of the algorithm.
 
-Since the performance of the agent is affected by the randomness of the exploration,
-and ILP(RL) is highly dependent on how quickly the agent finds the goal,
-each experiment is conducted 30 times and the perform is averaged across the experiments.
-At each episode, we also measure the performance without exploration to see the pure optimal policy.
+Each experiment is conducted 30 times and the perform is averaged across the experiments, 
+since the performance of the agent is affected by the randomness of the exploration,
+and ILP(RL) is highly dependent on how quickly the agent finds the goal.
 
 \section{Learning Evaluation}
 \label{sec:learning_evaluation}
@@ -63,10 +93,10 @@ At each episode, we also measure the performance without exploration to see the 
 \label{experiment1}
 \end{figure}
 
-The purpose of the first experiment is how the algorithm learns the model of the environment, or hypothesis in ILASP.
-The environment are defined as a simple maze where the goal is located the right uppper corner as shown in Figure \ref{experiment1}.
+The purpose of the first experiment is to highlight how ILP(RL) agent learns hypotheses in ILASP.
+The environment are designed as a simple maze where the goal is located the right uppper corner as shown in Figure \ref{experiment1}.
 
-The shortest path is taking the lower path instead of the upper one.
+The shortest path is 18 steps, thus the maximum total reward the agent could gain is -8.
 
 \begin{figure}[!htb]
 \centering
@@ -94,7 +124,7 @@ Learnt hypotheses are shown in \ref{experiment1_hypothesis}, which is the rule o
 Since the learnt hypothesis is a general concept, which can be used in a different environmet.
 This transfer learning capability is also described in Experiement 3 and 4.
 
-\begin{equation}
+\begin{equation}\label{experiment1_hypothesis}
 \begin{split}
 &\textsf{state\_after(V1) :- adjacent(right, V0, V1), state\_before(V1), action(right), wall(V0).}\\
 &\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V0), action(left), wall(V1).}\\
@@ -106,7 +136,6 @@ This transfer learning capability is also described in Experiement 3 and 4.
 &\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}
 \end{split}
 \end{equation}
-\label{experiment1_hypothesis}
 
 In addition, we plot the learning convergence for ILASP at episode 0 in Figure \ref{experiment1_ilasp}, measured in terms of the number of hypothesis refinement to reach the final hypothesis as shown in \ref{experiment1_hypothesis}.
 This shows that the agent quickly learns the hypothesis at the episode 0. The reason that the agent reaches the maximum reward at between 40 and 50 episodes, is mostly dependent on how quickly the agent finds the goal location,
