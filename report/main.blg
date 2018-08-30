@@ -3,7 +3,7 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
 The style file: ieeetr.bst
 Database file #1: references.bib
-Repeated entry---line 148 of file references.bib
+Repeated entry---line 162 of file references.bib
  : @article{Zambaldi2018
  :                      ,
 I'm skipping whatever remains of this entry
@@ -21,45 +21,45 @@ Warning--empty journal in Apeldoorn2016
 Warning--empty journal in Apeldoorn
 Warning--empty year in Apeldoorn
 Warning--empty journal in Ferreira2017
-You've used 28 entries,
+You've used 29 entries,
             1876 wiz_defined-function locations,
-            655 strings with 8665 characters,
-and the built_in function-call counts, 7930 in all, are:
-= -- 739
-> -- 406
+            663 strings with 8911 characters,
+and the built_in function-call counts, 8354 in all, are:
+= -- 778
+> -- 428
 < -- 0
-+ -- 147
-- -- 119
-* -- 620
-:= -- 1176
-add.period$ -- 27
-call.type$ -- 28
-change.case$ -- 28
++ -- 154
+- -- 125
+* -- 655
+:= -- 1235
+add.period$ -- 28
+call.type$ -- 29
+change.case$ -- 29
 chr.to.int$ -- 0
-cite$ -- 39
-duplicate$ -- 371
-empty$ -- 679
-format.name$ -- 119
-if$ -- 1855
+cite$ -- 40
+duplicate$ -- 392
+empty$ -- 717
+format.name$ -- 125
+if$ -- 1956
 int.to.chr$ -- 0
-int.to.str$ -- 28
-missing$ -- 27
-newline$ -- 87
-num.names$ -- 28
-pop$ -- 87
+int.to.str$ -- 29
+missing$ -- 28
+newline$ -- 90
+num.names$ -- 31
+pop$ -- 92
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 264
+skip$ -- 279
 stack$ -- 0
-substring$ -- 531
-swap$ -- 149
+substring$ -- 563
+swap$ -- 158
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 11
-while$ -- 82
-width$ -- 30
-write$ -- 252
+while$ -- 87
+width$ -- 31
+write$ -- 263
 (There was 1 error message)

@@ -87,6 +87,12 @@ R.~S. Sutton, ``{Integrated Architectures for Learning, Planning, and Reacting
 \bibitem{Watkins}
 Watkins, ``{Learning from Delayed Reward}.''
 
+\bibitem{gringo}
+M.~Gebser, R.~Kaminski, A.~K{\"{o}}nig, and T.~Schaub, ``{Advances in gringo
+  Series 3},'' in {\em Logic Programming and Nonmonotonic Reasoning} (J.~P.
+  Delgrande and W.~Faber, eds.), (Berlin, Heidelberg), pp.~345--351, Springer
+  Berlin Heidelberg, 2011.
+
 \bibitem{Brockman2016}
 G.~Brockman, V.~Cheung, L.~Pettersson, J.~Schneider, J.~Schulman, J.~Tang, and
   W.~Zaremba, ``{OpenAI Gym},'' jun 2016.

@@ -10,6 +10,20 @@ volume = {8},
 year = {2008}
 }
 
+@inproceedings{gringo,
+abstract = {We describe the major new features emerging from a significant redesign of the grounder gringo, building upon a grounding algorithm based on semi-naive database evaluation. Unlike previous versions, rules only need to be safe rather than domain-restricted.},
+address = {Berlin, Heidelberg},
+author = {Gebser, Martin and Kaminski, Roland and K{\"{o}}nig, Arne and Schaub, Torsten},
+booktitle = {Logic Programming and Nonmonotonic Reasoning},
+editor = {Delgrande, James P and Faber, Wolfgang},
+isbn = {978-3-642-20895-9},
+pages = {345--351},
+publisher = {Springer Berlin Heidelberg},
+title = {{Advances in gringo Series 3}},
+year = {2011}
+}
+
+
 @article{Ray2010,
 abstract = {Model-based Reinforcement Learning refers to learning optimal behavior indirectly by learning a model of the environment by taking actions and observing the outcomes that include the next state and the immediate reward. The models predict the outcomes of actions and are used in lieu of or in addition to interaction with the environment to learn optimal policies. 3 Motivation and Background Reinforcement Learning (RL) refers to learning to behave optimally in a stochastic environment by taking actions and receiving rewards [1]. The environment is assumed Markovian in that there is a fixed probability of the next state given the current state and the agent's action. The agent also receives an immediate reward based on the current state and the action. Models of the next-state distribution and the immediate rewards are referred to as " action models " and, in general, are not known to the learner. The agent's goal is to take actions, observe the outcomes including rewards and next states, and learn a policy or a mapping from states to actions that optimizes some performance measure. Typically the performance measure is the expected total reward in episodic domains, and the expected average reward per time step or expected discounted total reward in infinite-horizon domains. The theory of Markov Decision Processes (MDPs) implies that under fairly general conditions, there is a stationary policy, i.e., a time-invariant mapping from states to actions, that maximizes each of the above reward measures. Moreover, there are MDP solution algorithms, e.g., value iteration and policy iteration [2], which can be used to solve the MDP exactly given the action models. Assuming that the number of states is not exceedingly high, this suggests a straight-forward approach for model-based reinforcement learning. The models can be learned by interacting with the environment by taking actions, observing the resulting states and rewards, and estimating the parameters of the action models through maximum likelihood methods. Once the models are estimated to a desired accuracy, the MDP solution algorithms can be run to learn the optimal policy. One weakness of the above approach is that it seems to suggest that a fairly accurate model needs to be learned over the entire domain to learn a good policy. Intuitively it seems that we should be able to get by without learning highly accurate models for suboptimal actions. A related problem is that the method does not suggest how best to explore the domain, i.e., which states to visit and which actions to execute to quickly learn an optimal policy. A third issue is one of scaling these methods, including model learning, to very large state spaces with billions of states. The remaining sections outline some of the approaches explored in the literature to solve these problems.},
 archivePrefix = {arXiv},

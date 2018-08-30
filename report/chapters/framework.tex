@@ -209,7 +209,7 @@ Having defined the $ILP_{LAS}^{context}$ task T, ILP(RL) is able to learn an hyp
 Since B and S\textsubscript{M} are fixed, the learnt H varies depending on positive examples that the agent receives.
 In the early phase of learning, the agent does not have many positive examples, and learns an hypothesis that is part of the full hypothesis that the agent can run in the environment.
 Therefore it is important to iteratively improve hypotheses. Inductive learning algorithm is executed by the following rule.
-\begin{defn}
+\begin{defn}\label{def:ILASP_run}
 ILP(RL) runs $ILP_{LAS}^{context}$ to relearn H\textsubscript{new} if and only if $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{+}, $\exists$A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
 \end{defn}
 where H is the current hypothesis that the agent has learnt so far. 
@@ -518,48 +518,74 @@ In other words, if the shorter path is far from the current state, the agent is 
 
 % We use GVG-AI Framework for our experiments, which was created for the General Video Gamea AI Competition\footnote{http://www.gvgai.net/},
 % a game environment for an agent that should be able to play a wide variety of games without knowing which games are to be played.
+As shown in Figure \ref{fig:ILPRL_overview}, there are mainly three different components that need to be communicated: inductive learning with ILASP, planning with ASP and the external environment platform provided by VGDL with OpenAI interface.
+All of them are communicated through the main driver written in Python. 
+In the following section, part of low-level implementation of each part of the framework.
 
- 
-\subsection{External Dependencies}
-I describe a list of low-level impelementation of the framework as follows. \ref{fig:pipeline}. 
-There are mainly four different components that need to be communicated. 
+% \subsection{External Dependencies}
 
-TODO insert graph here. 
+\subsection{Inductive Learning with ILASP}
+We use ILASP2i, a inductive learning system developed in XX. 
+ILASP2i is an interative version of ILASP2, and is designed to scale with the numbers of examples. 
+ILASP2i also introduces the use of context dependent examples.
+The latest ILASP officially available at the time of writing is ILASP3, which is designed to work on a noisy examples. 
+Our positive examples do not contain noise, state transition positive examples, and ILASP2i was sufficient for our implemnetation.
+which is discussed in Section XX. 
+Alghough ILASP2i is designed to work with a large number of examples, inductive learning part is the bottleneck of our framework in terms of computational time. 
+We did a number of optimisation in order to mitigate this. 
 
-\begin{description}
+The first optimastion is the frequency of running ILASP. 
+As already described in Definition \ref{def:ILASP_run}, ILASP is ran only if the current hypothesis does not cover all the examples accumulated so far.
+Because of this, inductive learning takes place at the very early stage of learning, which is highlighted in the experiments in Chapter XX. 
 
-\item[Python]
-Python was selected as the main programming language to impelement the framework of ILP(RL), which is based on the fact that it is one of the commonly used language among RL reseach, 
-and it works in VGDL platform. The benchmarks to be compared with my framework is also implemented using Python.
-The overall implementation of the framework ILP(RL) is written in Python 3 in order to bridge among the game platform, Inductive Learnign and ASP Planning, 
-including the trainslation of ASP sytax.
-The visualisation of the experimental results is done using "matplotlib", a Python libraryis a plotting libray that provides charts of our experiments. 
+The next optimisation is through the command line. 
+ILASP2i has a number of options, and we explain each option using the actual command we use to run ILASP
 
-\item[ILASP\footnote{https://sourceforge.net/projects/spikeimperial/files/ILASP/}]
-ILASP version 2i, which is designed to scale with the numbers of examples.
-The latest ILASP at the time of writing is ILASP3, but ILASP3 works on a noisy data. Since our data is state transition positive examples, and ILASP2i was sufficient for our implemnetation.
+% \begin{minted}[]
+% ILASP --version=2i FILENAME.las -ml=8 -nc --clingo5 
+% \end{minted}
 
-ILASP cache caches relevant sets of examples, so everytime ILASP runs the same task except extra examples each time, ILASP runs from where it finished the learning last time and start from there rather than going through all the examples again.
-The code is available in https://github.com/921kiyo/ILPRL.
+\begin{lstlisting}[]
+    ILASP --version=2i FILENAME.las -ml=8 -nc --clingo5 
+    --clingo "clingo5 --opt-strat=usc,stratify" 
+    --cached-ref=PATH --max-rule-length=8
+\end{lstlisting}
 
-\item[Clingo]
-Clingo5
+where,
+\begin{itemize}
+\item \textsf{--version=2i} specifies that we use ILASP2i.
+\item \textsf{--ml=8} specified the maximum numbers of body that each rule can have. The default length is XX.
+\item \textsf{--nc} means no constrains, and omits constrains from the search space. Since our target hypothesis is not a constraint, this option recudes the search space.
+\item \textsf{--clingo5} generates clingo 5 programs, which is fater, instead of clingo 4.3.
+\item \textsf{--clingo "clingo5 --opt-strat=usc,stratify"} specifies clingo executable with the specified options. 
+\textsf{usc, stratify} is unsatisfiable-core base optimisation with stratification using Gringo \cite{gringo}, a core XXX introduced in gringo version 3. REFERENCE.
+\item \textsf{--cached-ref=PATH} enables the iterative mode, and keeps the output of the relevant example to a specified path, and start the learning from where it left before rather than going though all the examples.
+\item \textsf{--max-rule-length=8} The default maximum number is 5.
+\end{itemize}
 
-\item[OpenAI Gym]
-VGDL pygame
+Last optimisation is specifying search space.
 
-\end{description}
+Complexity. 
 
+TODO the number of search space XX. 
 
-The bottleneck for the learning in terms of learning time is hypothesis improvement. In order to optimise it,
+\subsection{Planning with ASP}
+Planning is computed using Clingo 5.
 
+\begin{lstlisting}[]
+    clingo5 --opt-strat=usc,stratify -n 0 FILENAME.lp
+    --opt-mode=opt --outf=2
+\end{lstlisting}
 
+\begin{itemize}
+\item \textsf{--clingo "clingo5 --opt-strat=usc,stratify"} specifies clingo executable with the specified options. 
+\textsf{usc, stratify} is unsatisfiable-core base optimisation with stratification using Gringo \cite{gringo}, a core XXX introduced in gringo version 3. REFERENCE.
+\item \textsf{-n 0} -n is an abbreviation of \textsf{models} to specify the maximum number of answer sets to be computed. \textsf{-n 0} means to compute all answer sets.
+\item \textsf{--opt-mode=opt} computes optimal answer sets
+\item \textsf{--outf=2} makes the output in JSON\footnote{http://json.org/} format
+\end{itemize}
 
-
-
-
-
-\subsection{Experiment Platform}
+\subsection{Environment Platform}
 
 \begin{figure}[!ht!b]
 \centering
