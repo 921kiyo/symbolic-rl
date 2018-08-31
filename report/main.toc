@@ -64,6 +64,6 @@
 \contentsline {subsection}{\numberline {6.2.1}Value Iteration Approach}{48}{subsection.6.2.1}
 \contentsline {subsection}{\numberline {6.2.2}Weak Constraint}{48}{subsection.6.2.2}
 \contentsline {subsection}{\numberline {6.2.3}Generalisation of the Current Approach}{49}{subsection.6.2.3}
-\contentsline {chapter}{\numberline {A}Ethics}{50}{appendix.A}
-\contentsline {chapter}{\numberline {B}Learning tasks}{53}{appendix.B}
-\contentsline {chapter}{\numberline {C}Answer Set Program}{54}{appendix.C}
+\contentsline {chapter}{\numberline {A}Ethics}{53}{appendix.A}
+\contentsline {chapter}{\numberline {B}Learning tasks}{56}{appendix.B}
+\contentsline {chapter}{\numberline {C}Answer Set Program}{57}{appendix.C}
