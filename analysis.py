@@ -5,6 +5,40 @@ import os.path
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
+def experiment1():
+    pkl_dir = os.path.join(base_dir, "result_pkl/experiment1")
+    # pkl_dir2 = os.path.join(base_dir, "result_pkl/experiment2_q")
+
+    # make average score
+    plotting.average_score(base_dir, pkl_dir, "exp1_v", 100, 30)
+    # plotting.average_score(base_dir, pkl_dir2, "exp4_test_v", 100, 30)
+    runtime = plotting.average_ILASP(base_dir, pkl_dir, "exp1_ilasp_v", 100, 250, 30)
+    # Load the pkl files
+    stats = plotting.load_stats(pkl_dir, "exp1_v_average")
+    stats2 = plotting.load_stats(pkl_dir, "exp1_ilasp_v_average")
+    
+    # import ipdb; ipdb.set_trace()
+
+    # stats2 = plotting.load_stats(pkl_dir2, "exp4_test_v_average")
+    # plotting.plot_episode_stats_two(stats, stats2)
+    # import ipdb; ipdb.set_trace()
+    # plotting.plot_episode_stats_simple(stats)
+    plotting.plot_episode_stats_runtime(stats)
+
+def experiment2():
+    pkl_dir = os.path.join(base_dir, "result_pkl/experiment2")
+    # pkl_dir2 = os.path.join(base_dir, "result_pkl/experiment2_q")
+    # make average score
+    plotting.average_score(base_dir, pkl_dir, "exp2_v", 100, 30)
+    # plotting.average_score(base_dir, pkl_dir2, "exp4_test_v", 100, 30)
+    # Load the pkl files
+    stats = plotting.load_stats(pkl_dir, "exp2_v_average")
+    # stats2 = plotting.load_stats(pkl_dir2, "exp4_test_v_average")
+    # plotting.plot_episode_stats_two(stats, stats2)
+    # import ipdb; ipdb.set_trace()
+    # plotting.plot_episode_stats_simple(stats)
+    plotting.plot_episode_stats_runtime(stats)
+
 def experiment3():
     pkl_dir = os.path.join(base_dir, "result_pkl/experiment3_after_noTL_noGoal")
     pkl_dir2 = os.path.join(base_dir, "result_pkl/experiment3_after_noTL_goal")
@@ -35,7 +69,7 @@ def experiment3_test():
     # import ipdb; ipdb.set_trace()
     plotting.plot_episode_stats_multiple(stats, stats2, stats3)
 
-experiment3()
+experiment1()
 
 # plotting.average_score(base_dir, pkl_dir, "exp4_after_TL_v", 100, 30)
 # plotting.average_score(base_dir, pkl_dir, "exp1_v", 100, 30)
