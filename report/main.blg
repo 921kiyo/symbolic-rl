@@ -21,45 +21,45 @@ Warning--empty journal in Apeldoorn2016
 Warning--empty journal in Apeldoorn
 Warning--empty year in Apeldoorn
 Warning--empty journal in Ferreira2017
-You've used 29 entries,
+You've used 28 entries,
             1876 wiz_defined-function locations,
-            663 strings with 8911 characters,
-and the built_in function-call counts, 8354 in all, are:
-= -- 778
-> -- 428
+            656 strings with 8672 characters,
+and the built_in function-call counts, 8014 in all, are:
+= -- 741
+> -- 417
 < -- 0
-+ -- 154
-- -- 125
-* -- 655
-:= -- 1235
-add.period$ -- 28
-call.type$ -- 29
-change.case$ -- 29
++ -- 150
+- -- 122
+* -- 631
+:= -- 1190
+add.period$ -- 27
+call.type$ -- 28
+change.case$ -- 28
 chr.to.int$ -- 0
-cite$ -- 40
-duplicate$ -- 392
-empty$ -- 717
-format.name$ -- 125
-if$ -- 1956
+cite$ -- 39
+duplicate$ -- 375
+empty$ -- 687
+format.name$ -- 122
+if$ -- 1872
 int.to.chr$ -- 0
-int.to.str$ -- 29
-missing$ -- 28
-newline$ -- 90
-num.names$ -- 31
-pop$ -- 92
+int.to.str$ -- 28
+missing$ -- 27
+newline$ -- 87
+num.names$ -- 30
+pop$ -- 90
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 279
+skip$ -- 265
 stack$ -- 0
-substring$ -- 563
-swap$ -- 158
+substring$ -- 531
+swap$ -- 149
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 11
-while$ -- 87
-width$ -- 31
-write$ -- 263
+while$ -- 83
+width$ -- 30
+write$ -- 253
 (There was 1 error message)

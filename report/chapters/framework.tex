@@ -9,7 +9,7 @@
 \end{figure}
 
 The overall architecture of the learning framework, called \textit{ILP(RL)}, is shown in Figure \ref{fig:ILPRL_overview}. 
-By interacting with the environment, an agent receives state transition experiences as positive examples, which is used by ILASP, together with pre-defined background knowledge and language bias, to learn and improve hypotheses.
+By interacting with the environment, an agent receives state transition experiences as positive examples, which is uP, together with pre-defined background knowledge and language bias, to learn and improve hypotheses.
 The agent also remembers surrounding information it has seen as background knowledge, which is used to make an action plan together using the learnt hypotheses by solving an answer set program.
 Mechanisms of each step is explained in details in the following sections.
 
@@ -503,7 +503,6 @@ When the agent takes an random action and move into a new state, the agents crea
 It is simple to implement.
 
 The reason for using random exploration is that it can be used for both benchmark and ILP(RL) and thus enables us to do a fair comparision between them.
-In the further research, we could experiment with a more sophisticated exploration strategy, such as Boltzman approach, Count-based and Optimistic Initial value TODO REFERENCE).
 
 After taking an random action, the agent again has a probably of epsilon for taking an random action. 
 Throughout following the new plan, there is a small probalbility of chance that the agent takes an random action.

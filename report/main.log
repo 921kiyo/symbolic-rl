@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  1 SEP 2018 19:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  1 SEP 2018 21:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1264,49 +1264,50 @@ LaTeX Warning: Reference `def:ILPRL_exc' on page 25 undefined on input line 401
 [25] [26]
 
 LaTeX Warning: Reference `fig:ILPRL_overview' on page 27 undefined on input lin
-e 521.
+e 520.
 
 
-LaTeX Warning: Reference `def:ILASP_run' on page 27 undefined on input line 538
+LaTeX Warning: Reference `def:ILASP_run' on page 27 undefined on input line 537
 .
 
 
 Package natbib Warning: Citation `gringo' on page 27 undefined on input line 56
-1.
+0.
 
 [27]
 
 Package natbib Warning: Citation `gringo' on page 28 undefined on input line 58
-2.
+1.
 
 <./figures/env_sample.png, id=336, 567.11874pt x 174.6525pt>
 File: ./figures/env_sample.png Graphic file (type png)
 
 <use ./figures/env_sample.png>
-Package pdftex.def Info: ./figures/env_sample.png used on input line 593.
+Package pdftex.def Info: ./figures/env_sample.png used on input line 592.
 (pdftex.def)             Requested size: 438.17227pt x 134.94653pt.
 
 
 Package natbib Warning: Citation `Schaul2013' on page 28 undefined on input lin
-e 598.
+e 597.
 
 
 Package natbib Warning: Citation `Brockman2016' on page 28 undefined on input l
-ine 599.
+ine 598.
 
+[28 <./figures/env_sample.png>]
 
-LaTeX Warning: Reference `VGDL_sample' on page 28 undefined on input line 601.
+LaTeX Warning: Reference `VGDL_sample' on page 29 undefined on input line 600.
 
-[28] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 621.
-
-(./openai.py
+nput line 620.
+ (./openai.py
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1.
-) [29 <./figures/env_sample.png>]) [30]
+)
+[29]) [30]
 Chapter 4.
 (./chapters/evaluation.tex
 
@@ -1610,16 +1611,7 @@ ine 20.
 Chapter 6.
 (./chapters/conclusion.tex [47
 
-]
-
-LaTeX Warning: Reference `sec:scalability' on page 48 undefined on input line 6
-0.
-
-
-Package natbib Warning: Citation `Sridharan2017' on page 48 undefined on input 
-line 68.
-
-) [48]
+]) [48]
 No file main.bbl.
 Appendix A.
 (./chapters/appendix_ethics.tex
@@ -1680,7 +1672,7 @@ Package rerunfilecheck Warning: File `main.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `main.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  402C8CDB4D79242846C4912119CA12EA;4610.
+(rerunfilecheck)             After:  533BD136667A3320E524063EAC7AD285;4356.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1693,10 +1685,10 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1001.
  ) 
 Here is how much of TeX's memory you used:
- 14094 strings out of 493029
- 206751 string characters out of 6136234
- 439080 words of memory out of 5000000
- 16912 multiletter control sequences out of 15000+600000
+ 14089 strings out of 493029
+ 206671 string characters out of 6136234
+ 439336 words of memory out of 5000000
+ 16910 multiletter control sequences out of 15000+600000
  56440 words of font info for 108 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,25n,49p,973b,1752s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1720,10 +1712,10 @@ lic/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msbm10.pfb>
-Output written on main.pdf (60 pages, 950782 bytes).
+Output written on main.pdf (60 pages, 951504 bytes).
 PDF statistics:
- 787 PDF objects out of 1000 (max. 8388607)
- 656 compressed objects within 7 object streams
- 374 named destinations out of 1000 (max. 500000)
+ 783 PDF objects out of 1000 (max. 8388607)
+ 652 compressed objects within 7 object streams
+ 371 named destinations out of 1000 (max. 500000)
  121 words of extra memory for PDF output out of 10000 (max. 10000000)
 
