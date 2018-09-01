@@ -124,6 +124,8 @@ INPUT experiment2_asp.pl
 OUTPUT experiment2_asp.pl
 INPUT experiment3_hypothesis.pl
 OUTPUT experiment3_hypothesis.pl
+INPUT experiment4_hypothesis.pl
+OUTPUT experiment4_hypothesis.pl
 INPUT includes.tex
 INPUT includes.tex
 INPUT /usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
@@ -410,6 +412,9 @@ INPUT ./figures/experiment4_training.png
 INPUT ./figures/experiment4_test.png
 INPUT ./figures/experiment4_test.png
 INPUT ./figures/experiment4_test.png
+INPUT experiment4_hypothesis.pl
+INPUT experiment4_hypothesis.pl
+INPUT experiment4_hypothesis.pl
 INPUT chapters/related_work.tex
 INPUT chapters/related_work.tex
 INPUT chapters/conclusion.tex

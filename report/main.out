@@ -45,17 +45,18 @@
 \BOOKMARK [1][]{section.4.3}{4.3 Transfer Learning Evaluation}{chapter.4}% 45
 \BOOKMARK [2][]{subsection.4.3.1}{4.3.1 Experiment 3: Setup}{section.4.3}% 46
 \BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Experiment Result 3}{section.4.3}% 47
-\BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Experiment Result 4}{section.4.3}% 48
-\BOOKMARK [1][]{section.4.4}{4.4 Discussion}{chapter.4}% 49
-\BOOKMARK [2][]{subsection.4.4.1}{4.4.1 Scalability}{section.4.4}% 50
-\BOOKMARK [2][]{subsection.4.4.2}{4.4.2 Flexibility}{section.4.4}% 51
-\BOOKMARK [0][]{chapter.5}{5 Related Work}{}% 52
-\BOOKMARK [0][]{chapter.6}{6 Conclusion}{}% 53
-\BOOKMARK [1][]{section.6.1}{6.1 Summary of Work}{chapter.6}% 54
-\BOOKMARK [1][]{section.6.2}{6.2 Further Research}{chapter.6}% 55
-\BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Value Iteration Approach}{section.6.2}% 56
-\BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Weak Constraint}{section.6.2}% 57
-\BOOKMARK [2][]{subsection.6.2.3}{6.2.3 Generalisation of the Current Approach}{section.6.2}% 58
-\BOOKMARK [0][]{appendix.A}{A Ethics}{}% 59
-\BOOKMARK [0][]{appendix.B}{B Learning tasks}{}% 60
-\BOOKMARK [0][]{appendix.C}{C Answer Set Program}{}% 61
+\BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Experiment 4: Setup}{section.4.3}% 48
+\BOOKMARK [2][]{subsection.4.3.4}{4.3.4 Experiment Result 4}{section.4.3}% 49
+\BOOKMARK [1][]{section.4.4}{4.4 Discussion}{chapter.4}% 50
+\BOOKMARK [2][]{subsection.4.4.1}{4.4.1 Scalability}{section.4.4}% 51
+\BOOKMARK [2][]{subsection.4.4.2}{4.4.2 Flexibility}{section.4.4}% 52
+\BOOKMARK [0][]{chapter.5}{5 Related Work}{}% 53
+\BOOKMARK [0][]{chapter.6}{6 Conclusion}{}% 54
+\BOOKMARK [1][]{section.6.1}{6.1 Summary of Work}{chapter.6}% 55
+\BOOKMARK [1][]{section.6.2}{6.2 Further Research}{chapter.6}% 56
+\BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Value Iteration Approach}{section.6.2}% 57
+\BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Weak Constraint}{section.6.2}% 58
+\BOOKMARK [2][]{subsection.6.2.3}{6.2.3 Generalisation of the Current Approach}{section.6.2}% 59
+\BOOKMARK [0][]{appendix.A}{A Ethics}{}% 60
+\BOOKMARK [0][]{appendix.B}{B Learning tasks}{}% 61
+\BOOKMARK [0][]{appendix.C}{C Answer Set Program}{}% 62

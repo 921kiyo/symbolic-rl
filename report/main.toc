@@ -56,17 +56,18 @@
 \contentsline {section}{\numberline {4.3}Transfer Learning Evaluation}{38}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}Experiment 3: Setup}{38}{subsection.4.3.1}
 \contentsline {subsection}{\numberline {4.3.2}Experiment Result 3}{39}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}Experiment Result 4}{39}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.3}Experiment 4: Setup}{39}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}Experiment Result 4}{40}{subsection.4.3.4}
 \contentsline {section}{\numberline {4.4}Discussion}{41}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Scalability}{41}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Flexibility}{41}{subsection.4.4.2}
-\contentsline {chapter}{\numberline {5}Related Work}{42}{chapter.5}
-\contentsline {chapter}{\numberline {6}Conclusion}{44}{chapter.6}
-\contentsline {section}{\numberline {6.1}Summary of Work}{44}{section.6.1}
-\contentsline {section}{\numberline {6.2}Further Research}{44}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Value Iteration Approach}{44}{subsection.6.2.1}
-\contentsline {subsection}{\numberline {6.2.2}Weak Constraint}{44}{subsection.6.2.2}
-\contentsline {subsection}{\numberline {6.2.3}Generalisation of the Current Approach}{45}{subsection.6.2.3}
-\contentsline {chapter}{\numberline {A}Ethics}{46}{appendix.A}
-\contentsline {chapter}{\numberline {B}Learning tasks}{49}{appendix.B}
-\contentsline {chapter}{\numberline {C}Answer Set Program}{50}{appendix.C}
+\contentsline {subsection}{\numberline {4.4.2}Flexibility}{42}{subsection.4.4.2}
+\contentsline {chapter}{\numberline {5}Related Work}{43}{chapter.5}
+\contentsline {chapter}{\numberline {6}Conclusion}{45}{chapter.6}
+\contentsline {section}{\numberline {6.1}Summary of Work}{45}{section.6.1}
+\contentsline {section}{\numberline {6.2}Further Research}{45}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Value Iteration Approach}{45}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}Weak Constraint}{45}{subsection.6.2.2}
+\contentsline {subsection}{\numberline {6.2.3}Generalisation of the Current Approach}{46}{subsection.6.2.3}
+\contentsline {chapter}{\numberline {A}Ethics}{47}{appendix.A}
+\contentsline {chapter}{\numberline {B}Learning tasks}{50}{appendix.B}
+\contentsline {chapter}{\numberline {C}Answer Set Program}{51}{appendix.C}

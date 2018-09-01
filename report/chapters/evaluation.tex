@@ -4,6 +4,7 @@
 \subsection{Evaluation Metrics}
 \label{subsec:evaluation_metrics}
 
+We investigate how the agent using ILP(RL) learns and reaches the optimal policy.
 As introduced in \ref{sec:motivation}, our motivation is to improve the RL learning efficiency and capability of transfer learning.
 Therefore, these are the two main measurements for the performance of ILP(RL).
 
@@ -71,7 +72,6 @@ The number of time steps should be sufficient for the both algorithms to reach t
 which we set 250 time steps for all experiments. If the agent does not find the terminal state by 250 time steps, the agent receives the reward of -250 and 
 start the next episode from the starting point. If the agent reaches the terminal state within 250 time steps, it receives the reward of 10 and start the next episode with the same starting point. 
 
-
 Starting point is fixed every episode. 
 % Epsilon for ILP(RL) should be higher, since the agent follows the generated plan,
 % whereas benchmark algorithms update value function with the degree of alpha.
@@ -129,7 +129,6 @@ Overall this results shows that ILP(RL) converges to the optimal policy faster t
 % %   language = Prolog,
 %   caption  = {Anser sets for experiment 1},
 % ]{experiment1_asp.pl}
-
 
 In addition to the data-efficient learning, what the agent has learnt with ILP(RL) is expressive.
 Learnt hypotheses are shown in \ref{experiment1_hypothesis}, which is the rule of the game and easy to understand for human users.
@@ -378,6 +377,8 @@ The difference in terms of the iterations is that Agent(noTL)\textsubscript{noGo
 This observation shows that there is a promissing potential for improving the exploration strategy to find the terminal state as soon as possible.
 We discuss this in XX.
 
+There was no ILASP calls in the new environments since the transferred hypotheses are already optimal and cover all the examples the agent encounters in the new environment.
+
 \begin{figure}[!htb]
 \centerline{
 \includegraphics[width=0.55\textwidth]{./figures/experiment3_after_training}
@@ -387,19 +388,30 @@ We discuss this in XX.
 \label{experiment3_training}
 \end{figure}
 
-\subsection{Experiment Result 4}
-\label{subsec:experiment_result_4}
 
+\subsection{Experiment 4: Setup}
+\label{subsec:experiement4_setup}
 \begin{figure}[!htb]
 \centerline{
 \includegraphics[width=0.5\textwidth]{./figures/experiment4_before}
 \includegraphics[width=0.5\textwidth]{./figures/experiment4_after}}
 \caption{Game environment for experiment 4: before (left) and after (right) transfer learning}
-\label{experiment5}
+\label{experiment4_setup}
 \end{figure}
 
-Finally the hypothesis is transferred to a new environment where there is a new concept that did not exist in the first environment
-and therefore the agent needs to learn it after the hypothesis is transferred.
+The transferred hypotheses are the same as that in Experiment 3, and the positive examples were collected the environment on the left in Figure \ref{experiment4_setup}.
+The new environment, shown on the right in Figure \ref{experiment4_setup}, is the same except that there is teleport links.
+This is a new concept that did not exist in the trained environment and therefore the agent needs to learn it after the hypothesis is transferred.
+The same as Experiment 3, we use four different agents.
+
+\subsection{Experiment Result 4}
+\label{subsec:experiment_result_4}
+
+Figure \ref{experiment4_training_test} show the results of the performance. The agent is able to succeffully learn the new concept and quickly finds the optimal policy at the early episodes.
+This confirms that the transferred agents learns on top of what is already learnt. This experiment shows that the hypotheses is transferable even in cases where there is something the agent needs to learn in a new environment.
+
+Also the difference of the state where the link is located does not cause any problems even when the positive examples in the previous environment is transferred, since the surrounding information is within the context rather than background knowledge. 
+This shows the power of context dependent examples in RL senarios.
 
 \begin{figure}[!htb]
 \centerline{
@@ -407,30 +419,23 @@ and therefore the agent needs to learn it after the hypothesis is transferred.
 \includegraphics[width=0.55\textwidth]{./figures/experiment4_test}
 }
 \caption{Result of experiment 4 (learning curve)}
-\label{experiment5_training}
+\label{experiment4_training_test}
 \end{figure}
 
-% \begin{figure}[!htb]
-% \centering
-% \includegraphics[width=1.0\textwidth]{./figures/experiment4_test}
-% \caption{Result of experiment 4 (performance)}
-% \label{experiment5_test}
-% \end{figure}
+The new hypotheses the agent learns are the same as that of Experiment 2. The hypothesis containing \textsf{link\_start} and \textsf{link\_dest} is what the agent learnt in the new environment.
 
-\begin{equation}
-\begin{split}
-&\textsf{state\_after(V1) :- link\_start(V0), link\_dest(V1), state\_before(V0).}\\
-&\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V0), action(right), not wall(V1).}\\
-&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
-&\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V0), action(down), not wall(V1).}\\
-&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V0), action(right), wall(V1).}\\
-&\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V1), action(left), wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V0), action(down), wall(V1).}\\
-&\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}
-\end{split}
-\label{experiment4_ilasp}
-\end{equation}
+\lstinputlisting[
+%   language = Prolog,
+  caption  = {Hypotheses for experiment 4},
+]{experiment4_hypothesis.pl}
+
+\section{Discussion}
+\label{sec:discussion}
+
+on a simple maze environment, which is the main target of our framework.
+
+Although this is the first time and inductive logic programming is applied into reinforcement leaning and there are new interesting property for ILP(RL),
+there are two major limitations with the current framework.
 
 % In simple environments, we show that the agent learns rule of the game faster than existing RL algorithms, learnt concepts is easy to understand for human users.
 % We also show that the learnt hypothesis is a general concept and can be applied to other environment to mitigate learning process.
@@ -443,12 +448,6 @@ and therefore the agent needs to learn it after the hypothesis is transferred.
 
 % TODO more details on the strength of the algorithm. 
 % Validity
-
-\section{Discussion}
-\label{sec:discussion}
-
-Although this is the first time and inductive logic programming is applied into reinforcement leaning and there are new interesting property for ILP(RL),
-there are two major limitations with the current framework.
 
 \subsection{Scalability}
 \label{sec:scalability}

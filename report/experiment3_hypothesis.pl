@@ -14,4 +14,3 @@ state_after(V0):-adjacent(up, V0, V1), state_before(V0),
                  action(down), wall(V1).
 state_after(V1):-adjacent(up, V0, V1), state_before(V1),
                  action(up), wall(V0).
- 
