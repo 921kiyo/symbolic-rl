@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  1 SEP 2018 18:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  1 SEP 2018 19:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1559,12 +1559,7 @@ Package pdftex.def Info: ./figures/experiment4_test.png used on input line 420.
  [41 <./figures/experiment3_after_training.png> <./figures/experiment3_after_te
 st.png> <./figures/experiment4_before.png> <./figures/experiment4_after.png> <.
 /figures/experiment4_training.png> <./figures/experiment4_test.png>] (./experim
-ent4_hypothesis.pl) [42]
-Overfull \hbox (12.58002pt too wide) in paragraph at lines 478--483
-[]\OT1/bch/m/n/10.95 The first lim-i-ta-tion is scal-a-bil-ity. As pointed
- []
-
-[43
+ent4_hypothesis.pl) [42] [43
 
 ]) [44]
 Chapter 5.
@@ -1613,17 +1608,16 @@ ine 20.
 
 ]) [46]
 Chapter 6.
-(./chapters/conclusion.tex
-
-LaTeX Warning: Reference `sec:scalability' on page 47 undefined on input line 3
-5.
-
-[47
+(./chapters/conclusion.tex [47
 
 ]
 
+LaTeX Warning: Reference `sec:scalability' on page 48 undefined on input line 6
+0.
+
+
 Package natbib Warning: Citation `Sridharan2017' on page 48 undefined on input 
-line 43.
+line 68.
 
 ) [48]
 No file main.bbl.
@@ -1726,7 +1720,7 @@ lic/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msbm10.pfb>
-Output written on main.pdf (60 pages, 948935 bytes).
+Output written on main.pdf (60 pages, 950782 bytes).
 PDF statistics:
  787 PDF objects out of 1000 (max. 8388607)
  656 compressed objects within 7 object streams

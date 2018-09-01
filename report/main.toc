@@ -67,9 +67,9 @@
 \contentsline {chapter}{\numberline {5}Related Work}{45}{chapter.5}
 \contentsline {chapter}{\numberline {6}Conclusion}{47}{chapter.6}
 \contentsline {section}{\numberline {6.1}Summary of Work}{47}{section.6.1}
-\contentsline {section}{\numberline {6.2}Further Research}{47}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Value Iteration Approach}{47}{subsection.6.2.1}
-\contentsline {subsection}{\numberline {6.2.2}Weak Constraint}{47}{subsection.6.2.2}
+\contentsline {section}{\numberline {6.2}Further Research}{48}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Value Iteration Approach}{48}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}Weak Constraint}{48}{subsection.6.2.2}
 \contentsline {subsection}{\numberline {6.2.3}Generalisation of the Current Approach}{48}{subsection.6.2.3}
 \contentsline {chapter}{\numberline {A}Ethics}{49}{appendix.A}
 \contentsline {chapter}{\numberline {B}Learning tasks}{52}{appendix.B}

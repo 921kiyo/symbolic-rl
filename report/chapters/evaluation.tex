@@ -444,7 +444,7 @@ Although this is the first time and inductive logic programming is applied into 
 there are two major limitations with the current framework.
 
 \begin{description}
-\item[Fater learning convergence]
+\item[Faster learning convergence]
 The agent with ILP(RL) learns the valid move of the environment at the very early stage of learning and, as soon as it finds the terminal state, is able to genrate a plan as a sequence of actions to reach the goal.
 While this is a proof-of-concept approach, this way of RL is a new and the experiments show that this is a promissing direction of the research.
 
@@ -470,35 +470,35 @@ In simple environments, we show that the agent learns rule of the game faster th
 Although the this first version of the ILP(RL) framework using ILASP and ASP show potentials, there are a number of limitations with the current frameworks.
 Some of these limitations are further elaborated in Further Research in the concluding chapter.
 
+It was implement from scratch.
 
 \begin{description}
 \item[Learning time]
-
-\item[Scalability issue for more complex environment]
-The first limitation is scalability. As pointed in XXX or XXX,
-ILP framework is known to be less scalable. The current framework is tested in a relatively simple environments, 
-and proven to be work better than RL algorithsm in terms of the number of episodes that is needed to converge to an optimal policy.
-However, learning in each episode is relatively slower than that of RL. 
-This is shown in XXX, which shows average learnint time for ILASP. 
-
-This limitation is theoretically discussed in XXX, where the complexity of deciding satisfiability is 
-$\sum_{2}^{P}$-complete. Since there is no negative examples used in our current framework, the complexity is NP-complete.
-
-Whereas Q-learning update value function in the same way whether there is a new concept such as teleport links.
-
-Figure XXX shows traning times for Experiment 1 and 2.
-
-ILASP learning time for Experiment 1 and 2. 
+While we show that ILP(RL) improves the learning convergence in terms of the number of episodes required, the computational time is significantly longer than that of benchmarks due to the computation required for inductive learning with ILASP.
+This limitation indicates that ILP(RL) may not be suitable in an environment where there is a moving object based on time rather than time steps.
 
 Unlike existing reinforcement learning,
 out algorithm refines hypothesis at every time steps within the same episode.
 Thus even though the efficiency in terms of the number of iteration is higher,
 training time within each iteration tends to be lower.
 
+\item[Scalability issue for more complex environment]
+ILP framework is known to be less scalable. The current framework is tested in a relatively simple environments, 
+and proven to be work better than RL algorithsm in terms of the number of episodes that is needed to converge to an optimal policy.
+However, learning in each episode is relatively slower than that of RL. 
+This is shown in XXX, which shows average learnint time for ILASP. 
+
+This limitation is theoretically discussed in XXX, where the complexity of deciding satisfiability is 
+As shown in Experiment 1 and Experiment 2, adding two language bias significantly increased the runtime of the algorithm, since the search space grows significantly with respect to the language bias.
+
+$\sum_{2}^{P}$-complete. Since there is no negative examples used in our current framework, the complexity is NP-complete.
+
+Whereas Q-learning update value function in the same way whether there is a new concept such as teleport links.
+
 Another question remains to how to extend the framework to more realistic senarios. RL works in more complex environments such as 3D or real physical environment, 
 whereas the experiences of the agent in the current framework need to be expressed as ASP syntax, thus expressing continuous states rather than discrete states is challenging.
 
-\item[Assumptions]
+\item[Requirements of assumptions]
 
 Language bias
 While most of existing reinforcement learning works in different kinds of environment without pre-configuration, our algorithm
@@ -514,6 +514,7 @@ In some senarios, there may not be a termination state (goal) and instead there 
 Since the current implementation is dependent on finding the goal for planning rather than maximing total rewards, which is the common objective for most of RL algorithms,
 the application of the current framework may be limited to particular types of problems.
 
+There are some promissing solutions for some of these limitations, which we discuss in the next chapter.
 
 \end{description}  
 

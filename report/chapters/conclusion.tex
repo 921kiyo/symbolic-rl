@@ -2,14 +2,39 @@
 \label{sec:summary_of_work}
 
 In this paper, we developed a new RL algorithm by applying ILP to develop a new learning process.
+We summarise some of the works we have done throughout the project.
+
+\begin{itemize}
+\item We started off by looking at existing symbolic reinforcement learning approaches to understand the research fields and see the potentials of improving further researchs.
+Due to advances of ASP-based ILP frameworks and there is no existing works of applying ASP-based ILP into RL senarios, this motivates us to pursuing the potentials of ILP to solve RL problems.
+Because of the flexibility and experise of ILASP, we decided to apply ILASP as our core learning framework.
+
+\item We considerered the target hypotheses and how to construct learning tasks. Our target learning is a valid move of the agent, and whic can be expressed with state transition for each action.
+Also all the components of learning tasks have to be in ASP-syntax, we developed a Python engine for translating all output of the environment into ASP-syntax.
+
+surrounding information
+
+\item As a way to use our learnt hypotheses to execute a sequence of actions, we used the Clingo ASP solver for our plan execution. 
+The use of ASP optimisation is based on the assumption that the goal of the game is to find a shortest path to a terminal state.
+
+\item We considered which kind of RL problems we would like to test with our new framework. Since this is a new proof-of-concept and testing core concepts were required, we chose a custom-maze game provided by VDGL and created original environments.
+
+\item We tested our new framework in a various maze environments to highlight each aspect of the algorithm. We show that ILP(RL) learns faster than benchmarks for finding a shortest path, and show a capability of transfer learning.
+While the experiments were conducted in a simple limited conditions, we show some promissing potentials of the ILP-based approach for RL problems.
+
+\end{itemize}
+
 We used a latest ILP algorithm called ILASP, Learning from Answer Set Program to iteratively improve hypotheses.
 
 \section{Further Research}
 \label{sec:further_research}
 
-Having stated the limitations of the current framework, we discuss some of the possible improments and further research in this section.
+\begin{description}
+    \item[Learning time]
+\end{description}    
 
-This is a proof of concept, a new type of model-based reinforcement learning using inductive logic programming. 
+Having stated the limitations of the current framework, we discuss some of the possible improments and further research in this section.
+Since this new approach is a proof of concept, there are a number of possible directions.
 
 More complicated environment
 
