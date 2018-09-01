@@ -32,31 +32,32 @@
 \BOOKMARK [2][]{subsection.3.5.1}{3.5.1 Inductive Learning with ILASP}{section.3.5}% 32
 \BOOKMARK [2][]{subsection.3.5.2}{3.5.2 Planning with ASP}{section.3.5}% 33
 \BOOKMARK [2][]{subsection.3.5.3}{3.5.3 Environment Platform}{section.3.5}% 34
-\BOOKMARK [0][]{chapter.4}{4 Evaluation}{}% 35
-\BOOKMARK [1][]{section.4.1}{4.1 Experimental Setup}{chapter.4}% 36
-\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 Evaluation Metrics}{section.4.1}% 37
-\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Benchmarks}{section.4.1}% 38
-\BOOKMARK [2][]{subsection.4.1.3}{4.1.3 Parameters}{section.4.1}% 39
-\BOOKMARK [1][]{section.4.2}{4.2 Learning Evaluation}{chapter.4}% 40
-\BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Experiment 1: Setup}{section.4.2}% 41
-\BOOKMARK [2][]{subsection.4.2.2}{4.2.2 Experiment 1: Result}{section.4.2}% 42
-\BOOKMARK [2][]{subsection.4.2.3}{4.2.3 Experiment 2: Setup}{section.4.2}% 43
-\BOOKMARK [2][]{subsection.4.2.4}{4.2.4 Experiment 2: Result}{section.4.2}% 44
-\BOOKMARK [1][]{section.4.3}{4.3 Transfer Learning Evaluation}{chapter.4}% 45
-\BOOKMARK [2][]{subsection.4.3.1}{4.3.1 Experiment 3: Setup}{section.4.3}% 46
-\BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Experiment Result 3}{section.4.3}% 47
-\BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Experiment 4: Setup}{section.4.3}% 48
-\BOOKMARK [2][]{subsection.4.3.4}{4.3.4 Experiment Result 4}{section.4.3}% 49
-\BOOKMARK [1][]{section.4.4}{4.4 Discussion}{chapter.4}% 50
-\BOOKMARK [2][]{subsection.4.4.1}{4.4.1 Scalability}{section.4.4}% 51
-\BOOKMARK [2][]{subsection.4.4.2}{4.4.2 Flexibility}{section.4.4}% 52
-\BOOKMARK [0][]{chapter.5}{5 Related Work}{}% 53
-\BOOKMARK [0][]{chapter.6}{6 Conclusion}{}% 54
-\BOOKMARK [1][]{section.6.1}{6.1 Summary of Work}{chapter.6}% 55
-\BOOKMARK [1][]{section.6.2}{6.2 Further Research}{chapter.6}% 56
-\BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Value Iteration Approach}{section.6.2}% 57
-\BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Weak Constraint}{section.6.2}% 58
-\BOOKMARK [2][]{subsection.6.2.3}{6.2.3 Generalisation of the Current Approach}{section.6.2}% 59
-\BOOKMARK [0][]{appendix.A}{A Ethics}{}% 60
-\BOOKMARK [0][]{appendix.B}{B Learning tasks}{}% 61
-\BOOKMARK [0][]{appendix.C}{C Answer Set Program}{}% 62
+\BOOKMARK [2][]{subsection.3.5.4}{3.5.4 The Main Driver}{section.3.5}% 35
+\BOOKMARK [0][]{chapter.4}{4 Evaluation}{}% 36
+\BOOKMARK [1][]{section.4.1}{4.1 Experimental Setup}{chapter.4}% 37
+\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 Evaluation Metrics}{section.4.1}% 38
+\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Benchmarks}{section.4.1}% 39
+\BOOKMARK [2][]{subsection.4.1.3}{4.1.3 Parameters}{section.4.1}% 40
+\BOOKMARK [1][]{section.4.2}{4.2 Learning Evaluation}{chapter.4}% 41
+\BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Experiment 1: Setup}{section.4.2}% 42
+\BOOKMARK [2][]{subsection.4.2.2}{4.2.2 Experiment 1: Result}{section.4.2}% 43
+\BOOKMARK [2][]{subsection.4.2.3}{4.2.3 Experiment 2: Setup}{section.4.2}% 44
+\BOOKMARK [2][]{subsection.4.2.4}{4.2.4 Experiment 2: Result}{section.4.2}% 45
+\BOOKMARK [1][]{section.4.3}{4.3 Transfer Learning Evaluation}{chapter.4}% 46
+\BOOKMARK [2][]{subsection.4.3.1}{4.3.1 Experiment 3: Setup}{section.4.3}% 47
+\BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Experiment Result 3}{section.4.3}% 48
+\BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Experiment 4: Setup}{section.4.3}% 49
+\BOOKMARK [2][]{subsection.4.3.4}{4.3.4 Experiment Result 4}{section.4.3}% 50
+\BOOKMARK [1][]{section.4.4}{4.4 Discussion}{chapter.4}% 51
+\BOOKMARK [2][]{subsection.4.4.1}{4.4.1 Scalability}{section.4.4}% 52
+\BOOKMARK [2][]{subsection.4.4.2}{4.4.2 Flexibility}{section.4.4}% 53
+\BOOKMARK [0][]{chapter.5}{5 Related Work}{}% 54
+\BOOKMARK [0][]{chapter.6}{6 Conclusion}{}% 55
+\BOOKMARK [1][]{section.6.1}{6.1 Summary of Work}{chapter.6}% 56
+\BOOKMARK [1][]{section.6.2}{6.2 Further Research}{chapter.6}% 57
+\BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Value Iteration Approach}{section.6.2}% 58
+\BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Weak Constraint}{section.6.2}% 59
+\BOOKMARK [2][]{subsection.6.2.3}{6.2.3 Generalisation of the Current Approach}{section.6.2}% 60
+\BOOKMARK [0][]{appendix.A}{A Ethics}{}% 61
+\BOOKMARK [0][]{appendix.B}{B Learning tasks}{}% 62
+\BOOKMARK [0][]{appendix.C}{C Answer Set Program}{}% 63

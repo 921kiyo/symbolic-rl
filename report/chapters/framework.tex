@@ -586,6 +586,7 @@ Planning is computed using Clingo 5.
 \end{itemize}
 
 \subsection{Environment Platform}
+\subsubsection{The Video Game Definition Language (VGDL)}
 
 \begin{figure}[!ht!b]
 \centering
@@ -596,9 +597,55 @@ Planning is computed using Clingo 5.
 
 We use the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
 The VGDL allows users to easily craft their own environments, which makes us possible to do various experiments without relying on a default environment. The VGDL platform provides an interface with OpenAI Gym (\cite{Brockman2016}), which is a commonly used benchmark platform.
+
 The base game is a simple maze as shown in Figure \ref{VGDL_sample}.
 There are 3 different types of cells: a goal cell, walls and paths. The agent can take 4 different actions: up, down, right and left.
 The environment is not known to the agent in advance, and it attempts to find the goal by exploring the environment.
 In all experiments, the agent receives -1 in any states except the goal state, where it gains a reward of 10.
 Once the agent reaches the goal, or termination state, that episode is finished and the agent start the next episode from the starting point.
 
+TODO write more details of how you make your own environment
+We use PyVGDL\footnote{https://github.com/schaul/py-vgdl/}, which is a high-level VGDL on top of pygame\footnote{https://www.pygame.org}, 
+a Python modules designed for writing video games.
+
+
+We develop our framework ILP(RL) using an environment of VDGL game.
+
+\subsubsection{OpenAI Gym}
+The communication between VGDL environment and an agent, ILP(RL), is through OpenAI Gym, which is 
+% The VDGL game is communicated with RL algorithms through OpenAI Gym. 
+
+\lstinputlisting[
+  language = Python,
+  caption  = {OpenAI gym interface},
+]{openai.py}
+
+\begin{itemize}
+\item \textsf{env.reset()} resets the game and the agent starts from the starting position. We call it when the agent starts a new episode.
+\item \textsf{env.step(action)} returns an observation of taking an action, which include the state location of the agent in terms of x and y coodinates, reward of the state, an boolean value indicating whether the agent reaches an terminal state.
+The action is chosen by an RL algorithm of your choice. In the case of ILP(RL), action is chosen by the ASP planning or random exploration strategy between 0 and 3.
+\item \textsf{env.render()} renders one frame of the environment to see the movement of the agent in pygame.
+\end{itemize}
+
+\subsection{The Main Driver}
+All of the above are connected in Python script.
+
+The main roles of the driver is handling the communications between an environment and an agent as well as the communications within the agent.
+
+
+
+\begin{description}
+\item[Communication between an environment and an agent]
+
+When an agent takes an action in a VDGL game environment, 
+the output of the environment is returned by OpenAI gym environment, which is of the form:
+
+This works the same for any RL algorithms when using OpenAI gym environment. 
+
+
+subprocess
+
+\item[Communication within the agent]
+
+\end{description}
+    

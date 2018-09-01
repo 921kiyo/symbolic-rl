@@ -110,6 +110,8 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/filecontents/filecontents.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/filecontents/filecontents.sty
+INPUT openai.py
+OUTPUT openai.py
 INPUT experiment1_hypothesis.pl
 OUTPUT experiment1_hypothesis.pl
 INPUT experiment1_asp.pl
@@ -344,6 +346,12 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT ./figures/env_sample.png
 INPUT ./figures/env_sample.png
 INPUT ./figures/env_sample.png
+INPUT openai.py
+INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT openai.py
+INPUT openai.py
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmitt10.tfm
 INPUT chapters/evaluation.tex
 INPUT chapters/evaluation.tex
 INPUT ./figures/experiment1.png
@@ -434,6 +442,7 @@ INPUT /usr/share/texlive/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb
