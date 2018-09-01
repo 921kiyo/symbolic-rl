@@ -429,19 +429,35 @@ The new hypotheses the agent learns are the same as that of Experiment 2. The hy
   caption  = {Hypotheses for experiment 4},
 ]{experiment4_hypothesis.pl}
 
+\clearpage
+
 \section{Discussion}
 \label{sec:discussion}
 
+We investigaged the properties of ILP(RL) using a simple maze environment. While the development of ILP(RL) is still in early stage and only a proof-of-concept, 
+we observe both strengths as well as weakness of the current approach. We summarise both of these in the following sections.
+
+\subsection{Strengths of ILP(RL)}
 on a simple maze environment, which is the main target of our framework.
 
 Although this is the first time and inductive logic programming is applied into reinforcement leaning and there are new interesting property for ILP(RL),
 there are two major limitations with the current framework.
 
 \begin{description}
-\item[paralist]
+\item[Fater learning convergence]
+The agent with ILP(RL) learns the valid move of the environment at the very early stage of learning and, as soon as it finds the terminal state, is able to genrate a plan as a sequence of actions to reach the goal.
+While this is a proof-of-concept approach, this way of RL is a new and the experiments show that this is a promissing direction of the research.
+
+\item[Transfer Learning]
+Unlike existing RL algorithms, where it learns value functions ro Q values, ILP(RL) learns a valid move as a hypotheses, which can be applied to similar but different environments.
+We confimed with the experiments and, especially when the goal is known to the agent
+We also show that the agent can learn a new hypothesis on top of the transferred ones, which is very flexible in terms of applicability of the learnt hypotheses.
+
+\item[Symbolic learning]
+Since both planning and learning can be expressed in ASP syntax, the learning process is easy to understand for human users, and the learnt hypotheses are a very general rule of the game.
+
 In simple environments, we show that the agent learns rule of the game faster than existing RL algorithms, learnt concepts is easy to understand for human users.
-\end{description}
-% We also show that the learnt hypothesis is a general concept and can be applied to other environment to mitigate learning process.
+\end{description} 
 
 % The full hypotheses were learnt in the very early phase of learning and exploration phase. Thus with sufficient exploration, the model of the environment is correct
 % and therefore it is able to find the optimal policy/path. 
@@ -449,12 +465,16 @@ In simple environments, we show that the agent learns rule of the game faster th
 % We show that ILP(RL) is able to solve a reduced MDP where the rewards are assumed to be associated with a sequence of actions planned as answer sets.
 % Although this is a limitated solution, there is a potential to expand it to solve full MDP as discussed in Further Research. 
 
-% TODO more details on the strength of the algorithm. 
-% Validity
+\subsection{Limitations of the current framework}
+\label{subsec:limitations}
+Although the this first version of the ILP(RL) framework using ILASP and ASP show potentials, there are a number of limitations with the current frameworks.
+Some of these limitations are further elaborated in Further Research in the concluding chapter.
 
-\subsection{Scalability}
-\label{sec:scalability}
 
+\begin{description}
+\item[Learning time]
+
+\item[Scalability issue for more complex environment]
 The first limitation is scalability. As pointed in XXX or XXX,
 ILP framework is known to be less scalable. The current framework is tested in a relatively simple environments, 
 and proven to be work better than RL algorithsm in terms of the number of episodes that is needed to converge to an optimal policy.
@@ -475,19 +495,25 @@ out algorithm refines hypothesis at every time steps within the same episode.
 Thus even though the efficiency in terms of the number of iteration is higher,
 training time within each iteration tends to be lower.
 
-\subsection{Flexibility}
-\label{sec:flexibility}
+Another question remains to how to extend the framework to more realistic senarios. RL works in more complex environments such as 3D or real physical environment, 
+whereas the experiences of the agent in the current framework need to be expressed as ASP syntax, thus expressing continuous states rather than discrete states is challenging.
 
+\item[Assumptions]
+
+Language bias
 While most of existing reinforcement learning works in different kinds of environment without pre-configuration, our algorithm
 needs to define search space for learning hypothesis. As explained in the experiment 3, it was necessary to add two extra modeb before training.
-Thus the algorithm may not be feasible in cases where these learning concepts were unknown or difficult to define. 
+Thus the algorithm may not be feasible in cases where these learning concepts were unknown or difficult to define with language bias. 
+
 In addition, not only it needs search space, surrounding information is assumed to be known to the agent. 
 While this assumption may be reasonable in many cases, this is not common in traditional reinforcement learning setting.
 
+\item[limited MDP]
 The current framework does not make use of rewards the agent collects and mainly uses the location of the goal for planning.
 In some senarios, there may not be a termination state (goal) and instead there may be a different purpose to gain these rewards. 
 Since the current implementation is dependent on finding the goal for planning rather than maximing total rewards, which is the common objective for most of RL algorithms,
 the application of the current framework may be limited to particular types of problems.
 
-Another question remains to how to extend the framework to more realistic senarios. RL works in more complex environments such as 3D or real physical environment, 
-whereas the experiences of the agent in the current framework need to be expressed as ASP syntax, thus expressing continuous states rather than discrete states is challenging.
+
+\end{description}  
+

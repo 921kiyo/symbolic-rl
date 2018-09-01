@@ -61,16 +61,16 @@
 \contentsline {subsection}{\numberline {4.3.2}Experiment Result 3}{40}{subsection.4.3.2}
 \contentsline {subsection}{\numberline {4.3.3}Experiment 4: Setup}{40}{subsection.4.3.3}
 \contentsline {subsection}{\numberline {4.3.4}Experiment Result 4}{41}{subsection.4.3.4}
-\contentsline {section}{\numberline {4.4}Discussion}{42}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Scalability}{42}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Flexibility}{43}{subsection.4.4.2}
-\contentsline {chapter}{\numberline {5}Related Work}{44}{chapter.5}
-\contentsline {chapter}{\numberline {6}Conclusion}{46}{chapter.6}
-\contentsline {section}{\numberline {6.1}Summary of Work}{46}{section.6.1}
-\contentsline {section}{\numberline {6.2}Further Research}{46}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Value Iteration Approach}{46}{subsection.6.2.1}
-\contentsline {subsection}{\numberline {6.2.2}Weak Constraint}{46}{subsection.6.2.2}
-\contentsline {subsection}{\numberline {6.2.3}Generalisation of the Current Approach}{47}{subsection.6.2.3}
-\contentsline {chapter}{\numberline {A}Ethics}{48}{appendix.A}
-\contentsline {chapter}{\numberline {B}Learning tasks}{51}{appendix.B}
-\contentsline {chapter}{\numberline {C}Answer Set Program}{52}{appendix.C}
+\contentsline {section}{\numberline {4.4}Discussion}{43}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Strengths of ILP(RL)}{43}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Limitations of the current framework}{43}{subsection.4.4.2}
+\contentsline {chapter}{\numberline {5}Related Work}{45}{chapter.5}
+\contentsline {chapter}{\numberline {6}Conclusion}{47}{chapter.6}
+\contentsline {section}{\numberline {6.1}Summary of Work}{47}{section.6.1}
+\contentsline {section}{\numberline {6.2}Further Research}{47}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Value Iteration Approach}{47}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}Weak Constraint}{47}{subsection.6.2.2}
+\contentsline {subsection}{\numberline {6.2.3}Generalisation of the Current Approach}{48}{subsection.6.2.3}
+\contentsline {chapter}{\numberline {A}Ethics}{49}{appendix.A}
+\contentsline {chapter}{\numberline {B}Learning tasks}{52}{appendix.B}
+\contentsline {chapter}{\numberline {C}Answer Set Program}{53}{appendix.C}

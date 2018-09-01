@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  1 SEP 2018 16:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  1 SEP 2018 18:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1559,66 +1559,73 @@ Package pdftex.def Info: ./figures/experiment4_test.png used on input line 420.
  [41 <./figures/experiment3_after_training.png> <./figures/experiment3_after_te
 st.png> <./figures/experiment4_before.png> <./figures/experiment4_after.png> <.
 /figures/experiment4_training.png> <./figures/experiment4_test.png>] (./experim
-ent4_hypothesis.pl) [42]) [43]
+ent4_hypothesis.pl) [42]
+Overfull \hbox (12.58002pt too wide) in paragraph at lines 478--483
+[]\OT1/bch/m/n/10.95 The first lim-i-ta-tion is scal-a-bil-ity. As pointed
+ []
+
+[43
+
+]) [44]
 Chapter 5.
 (./chapters/related_work.tex
 
-Package natbib Warning: Citation `Garnelo2016' on page 44 undefined on input li
+Package natbib Warning: Citation `Garnelo2016' on page 45 undefined on input li
 ne 3.
 
 
-Package natbib Warning: Citation `LeCunL1998' on page 44 undefined on input lin
+Package natbib Warning: Citation `LeCunL1998' on page 45 undefined on input lin
 e 3.
 
 
-Package natbib Warning: Citation `Su2017' on page 44 undefined on input line 4.
+Package natbib Warning: Citation `Su2017' on page 45 undefined on input line 4.
 
 
 
-Package natbib Warning: Citation `Garcez2018' on page 44 undefined on input lin
+Package natbib Warning: Citation `Garcez2018' on page 45 undefined on input lin
 e 6.
 
 
-Package natbib Warning: Citation `Zambaldi2018' on page 44 undefined on input l
+Package natbib Warning: Citation `Zambaldi2018' on page 45 undefined on input l
 ine 8.
 
 
-Package natbib Warning: Citation `Garnelo2016' on page 44 undefined on input li
+Package natbib Warning: Citation `Garnelo2016' on page 45 undefined on input li
 ne 8.
 
 
-Package natbib Warning: Citation `Apeldoorn2017' on page 44 undefined on input 
+Package natbib Warning: Citation `Apeldoorn2017' on page 45 undefined on input 
 line 18.
 
 
-Package natbib Warning: Citation `Apeldoorn2016' on page 44 undefined on input 
+Package natbib Warning: Citation `Apeldoorn2016' on page 45 undefined on input 
 line 18.
 
 
-Package natbib Warning: Citation `Apeldoorn' on page 44 undefined on input line
+Package natbib Warning: Citation `Apeldoorn' on page 45 undefined on input line
  18.
 
 
-Package natbib Warning: Citation `Ferreira2017' on page 44 undefined on input l
+Package natbib Warning: Citation `Ferreira2017' on page 45 undefined on input l
 ine 20.
 
-[44
+[45
 
-]) [45]
+]) [46]
 Chapter 6.
 (./chapters/conclusion.tex
 
-LaTeX Warning: Reference `sec:scalability' on page 46 undefined on input line 3
+LaTeX Warning: Reference `sec:scalability' on page 47 undefined on input line 3
 5.
 
-[46
+[47
 
 ]
 
-Package natbib Warning: Citation `Sridharan2017' on page 47 undefined on input 
+Package natbib Warning: Citation `Sridharan2017' on page 48 undefined on input 
 line 43.
 
-) [47]
+) [48]
 No file main.bbl.
 Appendix A.
 (./chapters/appendix_ethics.tex
@@ -1645,16 +1652,16 @@ Overfull \hbox (9.14763pt too wide) in alignment at lines 75--136
  [] [] [] 
  []
 
-[48
+[49
 
 ]
 Overfull \hbox (9.14763pt too wide) in alignment at lines 136--143
  [] [] [] 
  []
 
-[49]) [50]
+[50]) [51]
 Appendix B.
-(./chapters/appendix_learning_task.tex) [51
+(./chapters/appendix_learning_task.tex) [52
 
 ]
 Appendix C.
@@ -1663,7 +1670,7 @@ Appendix C.
 Package natbib Warning: There were undefined citations.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1001.
-[52
+[53
 
 ]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 1001.
@@ -1679,7 +1686,7 @@ Package rerunfilecheck Warning: File `main.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `main.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  F6BB6063C6EAF8BED0D448F19FA8D131;4574.
+(rerunfilecheck)             After:  402C8CDB4D79242846C4912119CA12EA;4610.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1692,8 +1699,8 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1001.
  ) 
 Here is how much of TeX's memory you used:
- 14093 strings out of 493029
- 206741 string characters out of 6136234
+ 14094 strings out of 493029
+ 206751 string characters out of 6136234
  439080 words of memory out of 5000000
  16912 multiletter control sequences out of 15000+600000
  56440 words of font info for 108 fonts, out of 8000000 for 9000
@@ -1719,10 +1726,10 @@ lic/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msbm10.pfb>
-Output written on main.pdf (59 pages, 947130 bytes).
+Output written on main.pdf (60 pages, 948935 bytes).
 PDF statistics:
- 783 PDF objects out of 1000 (max. 8388607)
- 653 compressed objects within 7 object streams
- 373 named destinations out of 1000 (max. 500000)
+ 787 PDF objects out of 1000 (max. 8388607)
+ 656 compressed objects within 7 object streams
+ 374 named destinations out of 1000 (max. 500000)
  121 words of extra memory for PDF output out of 10000 (max. 10000000)
 
