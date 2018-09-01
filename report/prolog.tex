@@ -174,21 +174,21 @@
 }
 
 \begin{filecontents*}{experiment1_hypothesis.pl}
-state_after(V1) :- adjacent(right, V0, V1), state_before(V1), 
+state_after(V1):-adjacent(right, V0, V1), state_before(V1), 
                    action(right), wall(V0).
-state_after(V0) :- adjacent(right, V0, V1), state_before(V0), 
+state_after(V0):-adjacent(right, V0, V1), state_before(V0), 
                    action(left), wall(V1).
-state_after(V1) :- adjacent(down, V0, V1), state_before(V1), 
+state_after(V1):-adjacent(down, V0, V1), state_before(V1), 
                    action(down), wall(V0).
-state_after(V1) :- adjacent(up, V0, V1), state_before(V1), 
+state_after(V1):-adjacent(up, V0, V1), state_before(V1), 
                    action(up), wall(V0).
-state_after(V0) :- adjacent(right, V0, V1), state_before(V1), 
+state_after(V0):-adjacent(right, V0, V1), state_before(V1), 
                    action(right), not wall(V0).
-state_after(V0) :- adjacent(left, V0, V1), state_before(V1), 
+state_after(V0):-adjacent(left, V0, V1), state_before(V1), 
                    action(left), not wall(V0).
-state_after(V0) :- adjacent(down, V0, V1), state_before(V1), 
+state_after(V0):-adjacent(down, V0, V1), state_before(V1), 
                    action(down), not wall(V0).
-state_after(V0) :- adjacent(up, V0, V1), state_before(V1), 
+state_after(V0):-adjacent(up, V0, V1), state_before(V1), 
                    action(up), not wall(V0).
 \end{filecontents*}
 
@@ -214,16 +214,48 @@ state_at((16,2),17), action(up,17)
 state_at((16,1),18)
 \end{filecontents*}
 
+\begin{filecontents*}{experiment2_hypothesis_intermediate.pl}
+state_after(V1):-link_dest(V1).
+state_after(V0):-link_dest(V0), state_before(V0),action(right).
+state_after(V1):-adjacent(left, V0, V1), state_before(V0), 
+                 action(right), not wall(V1).
+state_after(V0):-adjacent(left, V0, V1), state_before(V1), 
+                 action(left), not wall(V0).
+state_after(V1):-adjacent(up, V0, V1), state_before(V0), 
+                 action(down), not wall(V1).
+state_after(V0):-adjacent(up, V0, V1), state_before(V1), 
+                 action(up), not wall(V0).
+state_after(V1):-adjacent(left, V0, V1), state_before(V1), 
+                 action(left), wall(V0).
+state_after(V1):-adjacent(down, V0, V1), state_before(V1), 
+                 action(down), wall(V0).
+state_after(V1):-adjacent(up, V0, V1), state_before(V1), 
+                 action(up), wall(V0).
+\end{filecontents*}
+
+\begin{filecontents*}{experiment2_incorrect_asp.pl}
+
+\end{filecontents*}
+
 \begin{filecontents*}{experiment2_hypothesis.pl}
-state_after(V1) :- link_start(V0), link_dest(V1), state_before(V0).
-state_after(V1) :- adjacent(left, V0, V1), state_before(V0), action(right), not wall(V1).
-state_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).
-state_after(V1) :- adjacent(up, V0, V1), state_before(V0), action(down), not wall(V1).
-state_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0).
-state_after(V0) :- adjacent(left, V0, V1), state_before(V0), action(right), wall(V1).
-state_after(V1) :- adjacent(left, V0, V1), state_before(V1), action(left), wall(V0).
-state_after(V0) :- adjacent(up, V0, V1), state_before(V0), action(down), wall(V1).
-state_after(V1) :- adjacent(up, V0, V1), state_before(V1), action(up), wall(V0).
+state_after(V1):-link_start(V0), link_dest(V1), 
+                 state_before(V0).
+state_after(V1):-adjacent(left, V0, V1), state_before(V0),
+                 action(right), not wall(V1).
+state_after(V0):-adjacent(left, V0, V1), state_before(V1),
+                 action(left), not wall(V0).
+state_after(V1):-adjacent(up, V0, V1), state_before(V0),
+                 action(down), not wall(V1).
+state_after(V0):-adjacent(up, V0, V1), state_before(V1),
+                 action(up), not wall(V0).
+state_after(V0):-adjacent(left, V0, V1), state_before(V0),
+                 action(right), wall(V1).
+state_after(V1):-adjacent(left, V0, V1), state_before(V1),
+                 action(left), wall(V0).
+state_after(V0):-adjacent(up, V0, V1), state_before(V0),
+                 action(down), wall(V1).
+state_after(V1):-adjacent(up, V0, V1), state_before(V1),
+                 action(up), wall(V0).
 \end{filecontents*}
 
 \begin{filecontents*}{experiment2_asp.pl}
@@ -244,4 +276,22 @@ state_at((10,7),13)
 state_at((16,1),13)
 \end{filecontents*}
 
+\begin{filecontents*}{experiment3_hypothesis.pl}
+state_after(V0):-adjacent(right, V0, V1), state_before(V1), 
+                 action(right), not wall(V0).
+state_after(V0):-adjacent(left, V0, V1), state_before(V1), 
+                 action(left), not wall(V0).
+state_after(V1):-adjacent(down, V0, V1), state_before(V0), 
+                 action(up), not wall(V1).
+state_after(V0):-adjacent(down, V0, V1), state_before(V1), 
+                 action(down), not wall(V0).
+state_after(V1):-adjacent(right, V0, V1), state_before(V1), 
+                 action(right), wall(V0).
+state_after(V1):-adjacent(left, V0, V1), state_before(V1), 
+                 action(left), wall(V0).
+state_after(V0):-adjacent(up, V0, V1), state_before(V0), 
+                 action(down), wall(V1).
+state_after(V1):-adjacent(up, V0, V1), state_before(V1), 
+                 action(up), wall(V0).
+ \end{filecontents*}
   

@@ -108,7 +108,7 @@ The shortest path between the agent's starting point and the terminal state is 1
 \includegraphics[width=0.55\textwidth]{./figures/experiment1_training}
 \includegraphics[width=0.55\textwidth]{./figures/experiment1_test}
 }
-\caption{Result of experiment 1 (learning curve)}
+\caption{Results of experiment 1: learning curve (left) and testing (right)}
 \label{experiment1_result}
 \end{figure}
 
@@ -135,7 +135,6 @@ In addition to the data-efficient learning, what the agent has learnt with ILP(R
 Learnt hypotheses are shown in \ref{experiment1_hypothesis}, which is the rule of the game and easy to understand for human users.
 Since the learnt hypothesis is a general concept, which can be used in a different environmet.
 This transfer learning capability is also described in Experiement 3 and 4.
-
 
 Next, we see how the agent learns the hypotheses during over time. We plot the learning convergence for ILASP at episode 0 in Figure \ref{experiment1_ilasp}, measured in terms of the number of hypothesis refinement to reach the final hypothesis as shown in \ref{experiment1_hypothesis}.
 This shows that the agent learns most of the hypotheses at the episode 0.
@@ -170,20 +169,21 @@ As discussed in XX, ASP also has its scalability issues. XXX
 \label{experiment1}
 \end{figure}
 
-\newpage
+% \newpage
 
 \subsection{Experiment 2: Setup}
 \label{subsec:experiement2_setup}
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=0.5\textwidth]{./figures/experiment2}
+\includegraphics[width=0.5\textwidth]{./figures/experiment2_setup}
 \caption{Game environment for experiment 2}
-\label{experiment3}
+\label{experiment2}
 \end{figure}
-Experiment 2 was conducted to see if the agent find a optimal path of using a teleport. In the environment shown in Figure \ref{experiment3},
+Experiment 2 was conducted to see if the agent find a optimal path of using a teleport. The environment is the same as experiment 1 except the presence of teleport link.
+In the environment shown in Figure \ref{experiment3},
 there are two ways to reach the goal: using a normal path to get the goal located on the top right corner, or using a telport.
 The environment is designed such that using a teleport is a shorter path and therefore gives higher total reward.
-Compared to Experiment 1, two extra search spaces and concepts are added as follow:
+Compared to Experiment 1, two extra search spaces and concepts are added as follows:
 \begin{equation*}
 \begin{split}
 &\textsf{\#modeb(1, link\_start(var(cell)), (positive)).}\\
@@ -191,16 +191,19 @@ Compared to Experiment 1, two extra search spaces and concepts are added as foll
 \end{split}
 \end{equation*}
 
-Where teleport links are added to the environment. The teleport link is one-way: link\_start takes the agent to link\_dest, but link\_dest does not take the agent back to link\_start.
-The allows ILASP to learn additional hypothesis.
+Where teleport links are added to the environment. The teleport link is one-way: \textsf{link\_start} takes the agent to \textsf{link\_dest}, but \textsf{link\_dest} does not take the agent back to \textsf{link\_start}.
+This extra types allows ILASP to learn additional hypothesis.
 The full learning task for this experiment is in Appendix XX.
 
-Once the agent steps onto a state where link\_start is located, it gets two positive experiences.
-In this game environment, the agent moves two cells in one time step instead of one cell per time step.
+In VDGL game environmet, when the agent steps onto \textsf{link\_start}, it immediately takes the agent to \textsf{link\_dest}. This means that the agent moves two states in one time step.
+Since our ASP translation part takes the state transition as \textsf{state\_before} and \textsf{state\_after}, 
+we deal with this situation such that the agent receives two positive experiences in this time step rather than two time steps.
 
 Also link\_start and link\_dest need to be stored in background knowledge rather than as contex examples,
-because ILASP needs to learn different hypothesis for link and non-link case.
-link locations need to be available for all positive examples so that ILASP correctly learn non-link, which is shown in Figure XX below.
+because the framework need to generate exclusions regarding the link behaviour (TODO EXPLAIN MORE).
+link locations need to be available for all positive examples so that ILASP correctly learn non-link for normal valid move rather than teleport, which is shown in Figure XX below.
+
+Because of the teleport link, the shortest path is 13 steps to reach the terminal state. Thus the maximum total reward that the agent could gain is -3.
 
 \subsection{Experiment 2: Result}
 \label{subsec:experiment2_result}
@@ -211,68 +214,95 @@ link locations need to be available for all positive examples so that ILASP corr
 \includegraphics[width=0.55\textwidth]{./figures/experiment2_training}
 \includegraphics[width=0.55\textwidth]{./figures/experiment2_test}
 }
-\caption{Result of experiment 2 (learning curve)}
+\caption{Results of experiment 3: learning curve (left) and testing (right)}
 \label{experiment2_training}
 \end{figure}
 
 The training performance shown in XX, which converges faster than XX.
 
-\begin{equation}
-\begin{split}
-&\textsf{state\_after(V1) :- link\_dest(V1).}\\
-&\textsf{state\_after(V0) :- link\_dest(V0), state\_before(V0), action(right).}\\
-&\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V0), action(right), not wall(V1).}\\
-&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
-&\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V0), action(down), not wall(V1).}\\
-&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}\\
-&\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V1), action(left), wall(V0).}\\
-&\textsf{state\_after(V1) :- adjacent(down, V0, V1), state\_before(V1), action(down), wall(V0).}\\
-&\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}
-\end{split}
-\label{experiment2_ilasp_imcomplete}
-\end{equation}
+\lstinputlisting[
+  caption  = {Incomplete hypotheses for experiment 2},
+]{experiment2_hypothesis_intermediate.pl}
 
-To highlight the learning the new concept of teleport link, Figure \ref{experiment2_ilasp_imcomplete} is an intermediate incomplete hypothesis learnt by ILASP.
-These hypotheses are generated just after the agent steps onto the link. However, the first hypothesis says
+% \begin{equation}
+% \begin{split}
+% &\textsf{state\_after(V1) :- link\_dest(V1).}\\
+% &\textsf{state\_after(V0) :- link\_dest(V0), state\_before(V0), action(right).}\\
+% &\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V0), action(right), not wall(V1).}\\
+% &\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
+% &\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V0), action(down), not wall(V1).}\\
+% &\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}\\
+% &\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V1), action(left), wall(V0).}\\
+% &\textsf{state\_after(V1) :- adjacent(down, V0, V1), state\_before(V1), action(down), wall(V0).}\\
+% &\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}
+% \end{split}
+% \label{experiment2_ilasp_imcomplete}
+% \end{equation}
+
+To highlight the learning process of the new concept of teleport link, Figure \ref{experiment2_ilasp_imcomplete} is an intermediate incomplete hypothesis learnt by ILASP.
+These hypotheses are generated just after the agent steps onto the \textsf{link\_start}. However, the first hypothesis says
 when link\_dest is available state\_after is true. Since link\_dest is available in background knowledge rather than context,
 when solving for answer sets to generate a plan, it generates incorrect state\_after at every time step.
+
 However, as shown in Algorithms XX, these generated state\_after are all incorrect and therefore will be added to exclusions of the next positive examples.
 These exclusions will later refines hypotheses and results in Figure \ref{experiment2_ilasp_complete}, the final complete hypotheses.
 
-Learnt hypotheses are as follow:
-\begin{equation}
-\begin{split}
-&\textsf{state\_after(V1) :- link\_start(V0), link\_dest(V1), state\_before(V0).}\\
-&\textsf{state\_after(V0) :- link\_dest(V0), state\_before(V0), action(right).}\\
-&\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V0), action(right), not wall(V1).}\\
-&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
-&\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V0), action(down), not wall(V1).}\\
-&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}\\
-&\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V1), action(left), wall(V0).}\\
-&\textsf{state\_after(V1) :- adjacent(down, V0, V1), state\_before(V1), action(down), wall(V0).}\\
-&\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}
-\end{split}
-\label{experiment2_ilasp_complete}
-\end{equation}
+Learnt hypotheses are shown in Figure \ref{hello}:
 
-Compared the Experiment 1, there are two new hypotheses due to the presence of the teleport links.
+\lstinputlisting[
+  caption  = {Complete hypotheses for experiment 2},
+]{experiment2_hypothesis.pl}
+
+% \begin{equation}
+% \begin{split}
+% &\textsf{state\_after(V1) :- link\_start(V0), link\_dest(V1), state\_before(V0).}\\
+% &\textsf{state\_after(V0) :- link\_dest(V0), state\_before(V0), action(right).}\\
+% &\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V0), action(right), not wall(V1).}\\
+% &\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
+% &\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V0), action(down), not wall(V1).}\\
+% &\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}\\
+% &\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V1), action(left), wall(V0).}\\
+% &\textsf{state\_after(V1) :- adjacent(down, V0, V1), state\_before(V1), action(down), wall(V0).}\\
+% &\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}
+% \end{split}
+% \label{experiment2_ilasp_complete}
+% \end{equation}
+
+Compared to the Experiment 1, there are two new hypotheses due to the presence of the teleport links.
 These learnt hypotheses are also applicables to an environment where there is no link, such as a game in experiment 1.
 In this case, the first two hypotheses in Figure XX are never be used since the body predicates relating to link\_start(V0), link\_dest(V1) are never be satisfied.
 % RUNTIME AVERAGE: 95.47274640401204
 % RUNTIME COUNTS: 16.233333333333334
 
-The average runtime of inductive learning is 95.47 seconds, and there are on average 16.23 times inductive learning per episode.
+Figure \ref{experiment2_ilasp} shows the learning convergence of inductive learning at episode 0.
+Similar to Experiment 1, most of inductive learning occur at the beginning of the episode, as shown in Figure \ref{experiment2_runtime}. 
+This result confirms that the agent learns inductive learnig at the beginning of episode.
 
-Figure \ref{experiment2_ilasp} shows the learning convergence of inductive learning.
-Similar to Experiment 1, most of inductive learning occur at the beginning, as shown in Figure \ref{experiment2_runtime}. Despite the fact that the size of the environment is the same as Experiment 1, 
-there is a significant increase of runtime at the beginning of episode. This is because of the increase of search space as we added extra language bias. 
+Despite the fact that the size of the environment is the same as Experiment 1, 
+there is a significant increase of runtime at the beginning of episode. This is because of the increase of search space as we added extra language bias.
 
 There are increase of runtime after episode 0.
 This is due to the fact that the agent later discovers a teleport link, which is a new hypothesis to be learnt. 
+\textcolor{red}{TODO is this really true??}
+The average runtime of inductive learning is 95.47 seconds, and there are on average 16.23 times inductive learning per episode.
 
+\begin{table}[!ht!b]
+\centering
+\begin{tabular}{lll}
+\hline
+Parameter            & ILP(RL)    & Benchmarks      \\ \hline
+Runtime per episode (seconds) & 95.47        & 1        \\
+Average ILASP time (seconds)& XXX        & N/A        \\
+The number of ILASP calls &  16.23      & N/A       \\
+Hypothesis space &  XXX      & N/A       \\
+\end{tabular}
+\caption{Comparision of runtime}
+\label{param}
+\end{table}
 
 While ILP(RL) still learns faster than Q-learning in terms of the number of iterations, 
-the result of Experiment 2 shows that, the learning time per episode increases with respect to the complexity of the environment.
+the result of Experiment 2 shows that, the learning time per episode increases with respect to the size of search space, 
+which corresponds to the number of symbolic representations that the agent needs to learn in the environment.
 
 \begin{figure}[!htb]
 \centering
@@ -287,12 +317,14 @@ the result of Experiment 2 shows that, the learning time per episode increases w
 \caption{Runtime comparision}
 \label{experiment2_runtime}
 \end{figure}
-    
 
+\clearpage
 \newpage
 \section{Transfer Learning Evaluation}
 \label{sec:transfer_learning_evaluation}
-\subsection{Experiment Result 3}
+
+\subsection{Experiment 3: Setup}
+\label{subsec:experiement3_setup}
 
 \begin{figure}[!htb]
 \centerline{
@@ -300,48 +332,59 @@ the result of Experiment 2 shows that, the learning time per episode increases w
 \includegraphics[width=0.5\textwidth]{./figures/experiment3_after}
 }
 \caption{Game environment for experiment 3: before (left) and after (right) transfer learning}
-\label{experiment3}
+\label{experiment3_setup}
 \end{figure}
 
-In Experiment 3, we investigated the potentials of transfer learning betweeen similar environments.
-We trained the agent using the environment on the left in Figure \ref{experiment4}, and transfer the learnt hypothesis as well as positive examples to a new environment.
-The learnt hypothesis is valid move of the game and a general concept that is applicable to any similar games. Positive examples are also transferred since
-if there is a new concept that the agent needs to learn in a new environment, the agent needs to refine the hypothesis by running ILASP, thus the all the positice examples
-are also transferred as well as hypotheses. Background knowledge are not transferred since these information are different in a new environment.
-The agent starts with an empty background knowledge in the new environment and gradually collects them
-as it explore the environment. The goal position is the same as in the first game and we assume that the transferred agent already knows the goal location, but the routes to the goal may be different.
-While this is a limited transfer learning since the goal position is known in advance, this is still a useful transfer in cases where the rest of the environment changes.
-In this experiment, we compare the two learning performance: one with transfer learning and one without it.
+In Experiment 3, we investigated the possibilites of transfer learning betweeen similar environments.
+We trained the agent using the environment on the left in Figure \ref{experiment4}, and transfer the learnt hypothesis as well as positive examples to a new environment on the right in Figure \ref{experiment4}
+The learnt hypothesis is valid move of the game and a general concept that is applicable to any similar environments. Positive examples are also transferred since
+if there is a new hypothesis that the agent needs to learn in a new environment, the agent needs to refine the hypothesis by running ILASP in the new environment.
+Thus the all the positice examples are also transferred as well as learnt hypotheses. 
+Background knowledge are not transferred since the wall locations are different in a new environment.
+The agent therefore starts the exploration of the new environment with an empty background knowledge and gradually collects them over time.
+The goal position is the same as in the first game, but the shortest path to the goal is different between the two environments as new shorter path is introduced in the right environment in Figure \ref{experiment3_setup}.
+
+We use four different agents as follows. 
+
+\begin{itemize}
+    \item Agent(TL): The agent with transferred hypotheses, examples and also remembers the location of the terminal state.
+    \item Agent(noTL)\textsubscript{Goal}: The agent with transferred hypotheses, examples, but does not know the location of the terminal state.
+    \item Agent(noTL)\textsubscript{noGoal}: The agent with no transferred information, neighther the hypotheses nor the location of the terminal state is known to the agent.
+    \item Q-learning
+\end{itemize}
+
+While this is a limited transfer learning since the goal position is known in advance, this is still a useful transfer in cases where the terminal state is the same but the rest of the environment changes.
+
+Figure XX is the hypotheses that is transferred to a new environment, which is acquired by training the agent in the environment once on the left of Figure \ref{experiment3_setup}.
+The positive examples to be transferred are those the agent accumulated in the left environment, XXX examples in total.
+
+\lstinputlisting[
+%   language = Prolog,
+  caption  = {Hypotheses for experiment 3},
+]{experiment3_hypothesis.pl}
+
+\subsection{Experiment Result 3}
 The result is shown in Figure \ref{experiment3_training} and \ref{experiment3_test}.
+For Agent(TL) since the complete hypotheses are already known to the agent as well as the planning, the agent can do planning from episode 0.
+The only information it needs is background knowledge for planning, namely the locations of the walls, which is quickly acquired and reached the maximum total reward at the very beginning of episodes.
 
-These are the hypotheses we are transferring to a new environment.
-Since the complete hypothesis is already known to the agent, it can do planning from the beginning.
+The next best agent in terms of the convergence to the maximum total reward is Agent(noTL)\textsubscript{Goal}. Since the terminal state is konwn to the agent, 
+the agent can do the planning from episode 0. However, the agent needs to learn the hypotheses. The reason that the convergence rate is almost the same as that os Agent(TL) is that
+the ILP(RL) learns the complete hypothese in episode 0, as observed in Experiment 1 and 2, there is no difference between Agent(TL) and Agent(noTL)\textsubscript{Goal}. 
 
-\begin{equation}
-\begin{split}
- &\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V1), action(right), not wall(V0).}\\
- &\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
- &\textsf{state\_after(V1) :- adjacent(down, V0, V1), state\_before(V0), action(up), not wall(V1).}\\
- &\textsf{state\_after(V0) :- adjacent(down, V0, V1), state\_before(V1), action(down), not wall(V0).}\\
- &\textsf{state\_after(V1) :- adjacent(right, V0, V1), state\_before(V1), action(right), wall(V0).}\\
- &\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V1), action(left), wall(V0).}\\
- &\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V0), action(down), wall(V1).}\\
- &\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}
-\end{split}
-\end{equation}
+What makes a difference for the convergence is whether the agent knows the terminal state, which can be seen by compering between Agent(noTL)\textsubscript{Goal} and Agent(noTL)\textsubscript{noGoal}.
+The difference in terms of the iterations is that Agent(noTL)\textsubscript{noGoal} needs to find the terminal state first before starting the planning, which is a random exploration.
+
+This observation shows that there is a promissing potential for improving the exploration strategy to find the terminal state as soon as possible.
+We discuss this in XX.
 
 \begin{figure}[!htb]
-\centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment3_after_training}
-\caption{Result of experiment 3 (learning curve)}
+\centerline{
+\includegraphics[width=0.55\textwidth]{./figures/experiment3_after_training}
+\includegraphics[width=0.55\textwidth]{./figures/experiment3_after_test}
+}
+\caption{Results of experiment 3: learning curve (left) and testing (right)}
 \label{experiment3_training}
-\end{figure}
-
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment3_after_test}
-\caption{Result of experiment 3 (performance)}
-\label{experiment3_test}
 \end{figure}
 
 \subsection{Experiment Result 4}
@@ -359,18 +402,20 @@ Finally the hypothesis is transferred to a new environment where there is a new 
 and therefore the agent needs to learn it after the hypothesis is transferred.
 
 \begin{figure}[!htb]
-\centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment4_training}
+\centerline{
+\includegraphics[width=0.55\textwidth]{./figures/experiment4_training}
+\includegraphics[width=0.55\textwidth]{./figures/experiment4_test}
+}
 \caption{Result of experiment 4 (learning curve)}
 \label{experiment5_training}
 \end{figure}
 
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment4_test}
-\caption{Result of experiment 4 (performance)}
-\label{experiment5_test}
-\end{figure}
+% \begin{figure}[!htb]
+% \centering
+% \includegraphics[width=1.0\textwidth]{./figures/experiment4_test}
+% \caption{Result of experiment 4 (performance)}
+% \label{experiment5_test}
+% \end{figure}
 
 \begin{equation}
 \begin{split}
