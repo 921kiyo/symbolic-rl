@@ -1,0 +1,247 @@
+
+% \usepackage[top=1in]{geometry}
+\usepackage{textcomp}
+\usepackage{listings}
+%\usepackage{minted}      % (requires -shell-escape)
+\usepackage{xcolor}
+\usepackage{filecontents}
+
+
+% --- ugly internals for language definition ---
+%
+\makeatletter
+
+% initialisation of user macros
+\newcommand\PrologPredicateStyle{}
+\newcommand\PrologVarStyle{}
+\newcommand\PrologAnonymVarStyle{}
+\newcommand\PrologAtomStyle{}
+\newcommand\PrologOtherStyle{}
+\newcommand\PrologCommentStyle{}
+
+% useful switches (to keep track of context)
+\newif\ifpredicate@prolog@
+\newif\ifwithinparens@prolog@
+
+% save definition of underscore for test
+\lst@SaveOutputDef{`_}\underscore@prolog
+
+% local variables
+\newcount\currentchar@prolog
+
+
+\newcommand\@testChar@prolog%
+{%
+  % if we're in processing mode...
+  \ifnum\lst@mode=\lst@Pmode%
+    \detectTypeAndHighlight@prolog%
+  \else
+    % ... or within parentheses
+    \ifwithinparens@prolog@%
+      \detectTypeAndHighlight@prolog%
+    \fi
+  \fi
+  % Some housekeeping...
+  \global\predicate@prolog@false%
+}
+
+
+
+% helper macros
+\newcommand\detectTypeAndHighlight@prolog
+{%
+  % First, assume that we have an atom.
+  \def\lst@thestyle{\PrologAtomStyle}%
+  % Test whether we have a predicate and modify the style accordingly.
+  \ifpredicate@prolog@%
+    \def\lst@thestyle{\PrologPredicateStyle}%
+  \else
+    % Test whether we have a predicate and modify the style accordingly.
+    \expandafter\splitfirstchar@prolog\expandafter{\the\lst@token}%
+    % Check whether the identifier starts by an underscore.
+    \expandafter\ifx\@testChar@prolog\underscore@prolog%
+      % Check whether the identifier is '_' (anonymous variable)
+      \ifnum\lst@length=1%
+        \let\lst@thestyle\PrologAnonymVarStyle%
+      \else
+        \let\lst@thestyle\PrologVarStyle%
+      \fi
+    \else
+      % Check whether the identifier starts by a capital letter.
+      \currentchar@prolog=65
+      \loop
+        \expandafter\ifnum\expandafter`\@testChar@prolog=\currentchar@prolog%
+          \let\lst@thestyle\PrologVarStyle%
+          \let\iterate\relax
+        \fi
+        \advance \currentchar@prolog by 1
+        \unless\ifnum\currentchar@prolog>90
+      \repeat
+    \fi
+  \fi
+}
+
+\newcommand\splitfirstchar@prolog{}
+\def\splitfirstchar@prolog#1{\@splitfirstchar@prolog#1\relax}
+\newcommand\@splitfirstchar@prolog{}
+\def\@splitfirstchar@prolog#1#2\relax{\def\@testChar@prolog{#1}}
+
+
+% helper macro for () delimiters
+\def\beginlstdelim#1#2%
+{%
+  \def\endlstdelim{\PrologOtherStyle #2\egroup}%
+  {\PrologOtherStyle #1}%
+  \global\predicate@prolog@false%
+  \withinparens@prolog@true%
+  \bgroup\aftergroup\endlstdelim%
+}
+
+% language name
+\newcommand\lang@prolog{Prolog-pretty}
+% ``normalised'' language name
+\expandafter\lst@NormedDef\expandafter\normlang@prolog%
+\expandafter{\lang@prolog}
+
+% language definition
+\expandafter\expandafter\expandafter\lstdefinelanguage\expandafter%
+{\lang@prolog}
+{%
+  language            = Prolog,
+  keywords            = {},      % reset all preset keywords
+  showstringspaces    = false,
+  alsoletter          = (,
+  alsoother           = @$,
+  moredelim           = **[is][\beginlstdelim{(}{)}]{(}{)},
+  MoreSelectCharTable =
+    \lst@DefSaveDef{`(}\opparen@prolog{\global\predicate@prolog@true\opparen@prolog},
+}
+
+% Hooking into listings to test each ``identifier''
+\newcommand\@ddedToOutput@prolog\relax
+\lst@AddToHook{Output}{\@ddedToOutput@prolog}
+
+\lst@AddToHook{PreInit}
+{%
+  \ifx\lst@language\normlang@prolog%
+    \let\@ddedToOutput@prolog\@testChar@prolog%
+  \fi
+}
+
+\lst@AddToHook{DeInit}{\renewcommand\@ddedToOutput@prolog{}}
+
+\makeatother
+%
+% --- end of ugly internals ---
+% --- definition of a custom style similar to that of Pygments ---
+% custom colors
+\definecolor{PrologPredicate}{RGB}{000,031,255}
+\definecolor{PrologVar}      {RGB}{024,021,125}
+\definecolor{PrologAnonymVar}{RGB}{000,127,000}
+\definecolor{PrologAtom}     {RGB}{186,032,032}
+\definecolor{PrologComment}  {RGB}{063,128,127}
+\definecolor{PrologOther}    {RGB}{000,000,000}
+
+% redefinition of user macros for Prolog style
+\renewcommand\PrologPredicateStyle{\color{PrologPredicate}}
+\renewcommand\PrologVarStyle{\color{PrologVar}}
+\renewcommand\PrologAnonymVarStyle{\color{PrologAnonymVar}}
+\renewcommand\PrologAtomStyle{\color{PrologAtom}}
+\renewcommand\PrologCommentStyle{\itshape\color{PrologComment}}
+\renewcommand\PrologOtherStyle{\color{PrologOther}}
+
+
+% custom style definition 
+\lstdefinestyle{Prolog-pygsty}
+{
+  language     = Prolog-pretty,
+  upquote      = true,
+  stringstyle  = \PrologAtomStyle,
+  commentstyle = \PrologCommentStyle,
+  literate     =
+    {:-}{{\PrologOtherStyle :-}}2
+    {,}{{\PrologOtherStyle ,}}1
+    {.}{{\PrologOtherStyle .}}1
+}
+
+% global settings
+\lstset
+{
+  captionpos = below,
+  frame      = single,
+  columns    = fullflexible,
+  basicstyle = \ttfamily,
+}
+
+\begin{filecontents*}{experiment1_hypothesis.pl}
+state_after(V1) :- adjacent(right, V0, V1), state_before(V1), 
+                   action(right), wall(V0).
+state_after(V0) :- adjacent(right, V0, V1), state_before(V0), 
+                   action(left), wall(V1).
+state_after(V1) :- adjacent(down, V0, V1), state_before(V1), 
+                   action(down), wall(V0).
+state_after(V1) :- adjacent(up, V0, V1), state_before(V1), 
+                   action(up), wall(V0).
+state_after(V0) :- adjacent(right, V0, V1), state_before(V1), 
+                   action(right), not wall(V0).
+state_after(V0) :- adjacent(left, V0, V1), state_before(V1), 
+                   action(left), not wall(V0).
+state_after(V0) :- adjacent(down, V0, V1), state_before(V1), 
+                   action(down), not wall(V0).
+state_after(V0) :- adjacent(up, V0, V1), state_before(V1), 
+                   action(up), not wall(V0).
+\end{filecontents*}
+
+\begin{filecontents*}{experiment1_asp.pl}
+state_at((2,5),0), action(right,0)
+state_at((3,5),1), action(right,1)
+state_at((4,5),2), action(right,2)
+state_at((5,5),3), action(right,3)
+state_at((6,5),4), action(right,4)
+state_at((7,5),5), action(right,5)
+state_at((8,5),6), action(right,6)
+state_at((9,5),7), action(right,7)
+state_at((10,5),8), action(right,8)
+state_at((11,5),9), action(right,9)
+state_at((12,5),10), action(right,10)
+state_at((13,5),11), action(up,11)
+state_at((13,4),12), action(up,12)
+state_at((13,3),13), action(right,13)
+state_at((14,3),14), action(right,14)
+state_at((15,3),15), action(right,15)
+state_at((16,3),16), action(up,16)
+state_at((16,2),17), action(up,17)
+state_at((16,1),18)
+\end{filecontents*}
+
+\begin{filecontents*}{experiment2_hypothesis.pl}
+state_after(V1) :- link_start(V0), link_dest(V1), state_before(V0).
+state_after(V1) :- adjacent(left, V0, V1), state_before(V0), action(right), not wall(V1).
+state_after(V0) :- adjacent(left, V0, V1), state_before(V1), action(left), not wall(V0).
+state_after(V1) :- adjacent(up, V0, V1), state_before(V0), action(down), not wall(V1).
+state_after(V0) :- adjacent(up, V0, V1), state_before(V1), action(up), not wall(V0).
+state_after(V0) :- adjacent(left, V0, V1), state_before(V0), action(right), wall(V1).
+state_after(V1) :- adjacent(left, V0, V1), state_before(V1), action(left), wall(V0).
+state_after(V0) :- adjacent(up, V0, V1), state_before(V0), action(down), wall(V1).
+state_after(V1) :- adjacent(up, V0, V1), state_before(V1), action(up), wall(V0).
+\end{filecontents*}
+
+\begin{filecontents*}{experiment2_asp.pl}
+state_at((2,5),0), action(right,0)
+state_at((3,5),1), action(right,1)
+state_at((4,5),2), action(right,2)
+state_at((5,5),3), action(right,3)
+state_at((6,5),4), action(right,4)
+state_at((7,5),5), action(right,5)
+state_at((8,5),6), action(right,6)
+state_at((9,5),7), action(right,7)
+state_at((10,5),8), action(down,8)
+state_at((10,6),9), action(down,9)
+state_at((10,7),10), state_at((13,1),10), action(right,10)
+state_at((10,7),11), state_at((14,1),11), action(right,11)
+state_at((10,7),12), state_at((15,1),12), action(right,12)
+state_at((10,7),13)
+state_at((16,1),13)
+\end{filecontents*}
+
+  

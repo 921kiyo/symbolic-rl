@@ -1,5 +1,5 @@
-\section{Setting}
-\label{sec:setting}
+\section{Experimental Setup}
+\label{sec:experimental_setup}
 
 \subsection{Evaluation Metrics}
 \label{subsec:evaluation_metrics}
@@ -63,6 +63,8 @@ Epsilon              & 0.1        & 0.1        \\
 \label{param}
 \end{table}
 
+Agents are trained in 250 time steps with 100 episodes, and conducted the same experiment 30 times in each environment. 
+The resulting average score is plotted for each experiment.
 All the matrices used in the experiments are summarised in Table \ref{param}.
 The number of episode is set such that both the benchmarks as well as ILP(RL) eventually eaches the optimal policy. 
 The number of time steps should be sufficient for the both algorithms to reach the terminal state by the random exploration, 
@@ -82,90 +84,102 @@ and ILP(RL) is highly dependent on how quickly the agent finds the goal.
 \section{Learning Evaluation}
 \label{sec:learning_evaluation}
 
-\subsection{Experiment Result 1}
-\label{subsec:experiment_result_1}
+\subsection{Experiment 1: Setup}
+\label{subsec:experiement1_setup}
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.5\textwidth]{./figures/experiment1}
 \caption{Game environment for experiment 1}
-\label{experiment1}
+\label{fig:experiment1}
 \end{figure}
-
+    
 The purpose of the first experiment is to highlight how ILP(RL) agent learns hypotheses in ILASP.
-The environment are designed as a simple maze where the goal is located the right uppper corner as shown in Figure \ref{experiment1}.
+The environment are designed as a simple maze where the terminal state is located the right uppper corner as shown in Figure \ref{fig:experiment1}.
 
-The shortest path is 18 steps, thus the maximum total reward the agent could gain is -8.
+The agent's starting location is the same at every episodes. The agent's goal is to learn hypotheses for valid move of the game, and to use the hypotheses to correctly plan a sequence of actions to reach the goal.
+The shortest path between the agent's starting point and the terminal state is 18 steps, thus the maximum total reward the agent could gain is -8.
+    
+\subsection{Experiment 1: Result}
+\label{subsec:experiment1_result}
 
 \begin{figure}[!htb]
-\centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment1_training}
+\centerline{
+\includegraphics[width=0.55\textwidth]{./figures/experiment1_training}
+\includegraphics[width=0.55\textwidth]{./figures/experiment1_test}
+}
 \caption{Result of experiment 1 (learning curve)}
-\label{experiment1_training}
-\end{figure}
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment1_test}
-\caption{Result of experiment 1 (performance)}
-\label{experiment1_test}
+\label{experiment1_result}
 \end{figure}
 
-Figure \ref{experiment1_training} shows the traning performance between ILP(RL) and Q-learning.
+Figure \ref{experiment1_result} shows the traning performance between ILP(RL) and Q-learning.
 The convergence rate of ILP(RL) is faster than Q-learning: ILP(RL) reaches the maximum reward between 40 and 50 episodes, whereas Q-learning reaches the same level at between 60 and 70 episodes.
-This is because unlike Q-learning where the value function is updated with the rate of alpha, whereas ILP(RL) gradually builds the model of the environment and use the background knowledge to accurately plan.
-This result is also consistent with the general notion that model-based learning (ILP(RL)) is more data-efficient than model-free learning (Q-learning).
+This is because unlike Q-learning where the value function is updated with the rate of alpha, ILP(RL) gradually builds the model of the environment and use the background knowledge to accurately plan.
+This result is also consistent with the general notion that model-based RL is more data-efficient than model-free RL.
 The same trend is also shown in Figure \ref{experiment1_test}, where we measure only the performance of the policy without random exploration.
-
+The reason Q-learning converges slower in the testing than that of training is that Q values are initialised to 0, which means that XXX.
 Overall this results shows that ILP(RL) converges to the optimal policy faster than benchmarks in a simple scenarios, achieving more data-efficient learning.
+
+\lstinputlisting[
+%   language = Prolog,
+  caption  = {Hypotheses for experiment 1},
+]{experiment1_hypothesis.pl}
+
+% \lstinputlisting[
+% %   language = Prolog,
+%   caption  = {Anser sets for experiment 1},
+% ]{experiment1_asp.pl}
+
 
 In addition to the data-efficient learning, what the agent has learnt with ILP(RL) is expressive.
 Learnt hypotheses are shown in \ref{experiment1_hypothesis}, which is the rule of the game and easy to understand for human users.
 Since the learnt hypothesis is a general concept, which can be used in a different environmet.
 This transfer learning capability is also described in Experiement 3 and 4.
 
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment1_runtime}
-\caption{Runtime comparision}
-\label{experiment1}
-\end{figure}
 
-\begin{equation}\label{experiment1_hypothesis}
-\begin{split}
-&\textsf{state\_after(V1) :- adjacent(right, V0, V1), state\_before(V1), action(right), wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V0), action(left), wall(V1).}\\
-&\textsf{state\_after(V1) :- adjacent(down, V0, V1), state\_before(V1), action(down), wall(V0).}\\
-&\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V1), action(right), not wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(down, V0, V1), state\_before(V1), action(down), not wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}
-\end{split}
-\end{equation}
-
-In addition, we plot the learning convergence for ILASP at episode 0 in Figure \ref{experiment1_ilasp}, measured in terms of the number of hypothesis refinement to reach the final hypothesis as shown in \ref{experiment1_hypothesis}.
-This shows that the agent quickly learns the hypothesis at the episode 0. The reason that the agent reaches the maximum reward at between 40 and 50 episodes, is mostly dependent on how quickly the agent finds the goal location,
-which enables it to plan. Since our exploration strategy is expilon random choice, there is a promissing that a better exploration strategy further accelerates the learning process.
+Next, we see how the agent learns the hypotheses during over time. We plot the learning convergence for ILASP at episode 0 in Figure \ref{experiment1_ilasp}, measured in terms of the number of hypothesis refinement to reach the final hypothesis as shown in \ref{experiment1_hypothesis}.
+This shows that the agent learns most of the hypotheses at the episode 0.
+Since the two variables that the agent require to construct optimal answer set planning are the hypothese and background knowledge, in this case the location of the walls, 
+the reason that the agent reaches the maximum reward at between 40 and 50 episodes, is mostly dependent on how quickly the agent finds the goal location.
+Even though the agent acquires the full hypotheses at episode 0, without the terminal state, the agent continues to randomly explore the environment.
+Since our exploration strategy is expilon random choice, there is a promissing that a better exploration strategy further accelerates the learning process.
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment1_ilasp}
+\includegraphics[width=0.55\textwidth]{./figures/experiment1_ilasp}
 \caption{Normalised learning convergence by ILASP for experiment 1}
 \label{experiment1_ilasp}
 \end{figure}
 
-\newpage
-\subsection{Experiment Result 2}
-\label{subsec:experiment_result_2}
-% The game is designed such that
+Finally, we compare the runtime of two algorithms. 
 
+This result confirms that inductive learning part is likely the bottleneck in terms of 
+
+This issue may not be cretical in cases where the time between the time steps is not an issue. If the performace is measured in terms of computation time rather than the number of iterations, 
+ILP(RL) is not likely to perform exisitng RL algorithms. 
+The average runtime of inductive learning is 5.579 seconds, and there are on average 12.83 times inductive learning per episode. 
+% RUNTIME FOR ILASP: 5.579039041812603
+% ILASP RUNS TOTAL: 12.83 times
+The plannning part is not a bottleneck of ILP(RL) compared to Q-leaning, but still takes longer time than Q-learning. While the planning with this environment is relatively simple planning. 
+As discussed in XX, ASP also has its scalability issues. XXX
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.55\textwidth]{./figures/experiment1_runtime}
+\caption{Runtime comparision}
+\label{experiment1}
+\end{figure}
+
+\newpage
+
+\subsection{Experiment 2: Setup}
+\label{subsec:experiement2_setup}
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.5\textwidth]{./figures/experiment2}
 \caption{Game environment for experiment 2}
 \label{experiment3}
 \end{figure}
-
 Experiment 2 was conducted to see if the agent find a optimal path of using a teleport. In the environment shown in Figure \ref{experiment3},
 there are two ways to reach the goal: using a normal path to get the goal located on the top right corner, or using a telport.
 The environment is designed such that using a teleport is a shorter path and therefore gives higher total reward.
@@ -188,29 +202,20 @@ Also link\_start and link\_dest need to be stored in background knowledge rather
 because ILASP needs to learn different hypothesis for link and non-link case.
 link locations need to be available for all positive examples so that ILASP correctly learn non-link, which is shown in Figure XX below.
 
+\subsection{Experiment 2: Result}
+\label{subsec:experiment2_result}
+% The game is designed such that
+    
 \begin{figure}[!htb]
-\centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment2_training}
+\centerline{
+\includegraphics[width=0.55\textwidth]{./figures/experiment2_training}
+\includegraphics[width=0.55\textwidth]{./figures/experiment2_test}
+}
 \caption{Result of experiment 2 (learning curve)}
 \label{experiment2_training}
 \end{figure}
 
 The training performance shown in XX, which converges faster than XX.
-
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment2_test}
-\caption{Result of experiment 2 (performance)}
-\label{experiment2_test}
-\end{figure}
-
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment2_runtime}
-\caption{Runtime comparision}
-\label{experiment1}
-\end{figure}
-    
 
 \begin{equation}
 \begin{split}
@@ -253,13 +258,36 @@ Learnt hypotheses are as follow:
 Compared the Experiment 1, there are two new hypotheses due to the presence of the teleport links.
 These learnt hypotheses are also applicables to an environment where there is no link, such as a game in experiment 1.
 In this case, the first two hypotheses in Figure XX are never be used since the body predicates relating to link\_start(V0), link\_dest(V1) are never be satisfied.
+% RUNTIME AVERAGE: 95.47274640401204
+% RUNTIME COUNTS: 16.233333333333334
+
+The average runtime of inductive learning is 95.47 seconds, and there are on average 16.23 times inductive learning per episode.
+
+Figure \ref{experiment2_ilasp} shows the learning convergence of inductive learning.
+Similar to Experiment 1, most of inductive learning occur at the beginning, as shown in Figure \ref{experiment2_runtime}. Despite the fact that the size of the environment is the same as Experiment 1, 
+there is a significant increase of runtime at the beginning of episode. This is because of the increase of search space as we added extra language bias. 
+
+There are increase of runtime after episode 0.
+This is due to the fact that the agent later discovers a teleport link, which is a new hypothesis to be learnt. 
+
+
+While ILP(RL) still learns faster than Q-learning in terms of the number of iterations, 
+the result of Experiment 2 shows that, the learning time per episode increases with respect to the complexity of the environment.
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=1.0\textwidth]{./figures/experiment2_ilasp}
+\includegraphics[width=0.55\textwidth]{./figures/experiment2_ilasp}
 \caption{Normalised learning convergence by ILASP for experiment 2}
-\label{experiment1_test}
+\label{experiment2_ilasp}
 \end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.55\textwidth]{./figures/experiment2_runtime}
+\caption{Runtime comparision}
+\label{experiment2_runtime}
+\end{figure}
+    
 
 \newpage
 \section{Transfer Learning Evaluation}
@@ -372,11 +400,14 @@ and therefore the agent needs to learn it after the hypothesis is transferred.
 % Validity
 
 \section{Discussion}
+\label{sec:discussion}
 
 Although this is the first time and inductive logic programming is applied into reinforcement leaning and there are new interesting property for ILP(RL),
 there are two major limitations with the current framework.
 
 \subsection{Scalability}
+\label{sec:scalability}
+
 The first limitation is scalability. As pointed in XXX or XXX,
 ILP framework is known to be less scalable. The current framework is tested in a relatively simple environments, 
 and proven to be work better than RL algorithsm in terms of the number of episodes that is needed to converge to an optimal policy.
@@ -398,6 +429,8 @@ Thus even though the efficiency in terms of the number of iteration is higher,
 training time within each iteration tends to be lower.
 
 \subsection{Flexibility}
+\label{sec:flexibility}
+
 While most of existing reinforcement learning works in different kinds of environment without pre-configuration, our algorithm
 needs to define search space for learning hypothesis. As explained in the experiment 3, it was necessary to add two extra modeb before training.
 Thus the algorithm may not be feasible in cases where these learning concepts were unknown or difficult to define. 
