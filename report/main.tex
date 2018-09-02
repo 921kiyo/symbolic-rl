@@ -188,7 +188,7 @@ I would also like to thank Mark Law for his expertise on inductive logic program
 \chapter{Background}
 \label{background}
 
-This chapter introduces the necessary background of Answer Set Programming (ASP), Inductive Logic Programming (ILP) and Reinforcement Learning (RL), which provide the foundations of our research.
+This chapter introduces the necessary background on Answer Set Programming (ASP), Inductive Logic Programming (ILP) and Reinforcement Learning (RL), which provide the foundations of our research.
 
 \section{Answer Set Programming (ASP)}
 \label{sec:asp}
@@ -198,25 +198,51 @@ We first introduce a stable model which is the foundation of ASP, and describe A
 % Non-monotonic reasoning
 \subsection{Stable Model Semantics}
 
-The semantics of the logic are based on the notion of interpretation, which is defined under a \textit{domain}. A domain contains all the objects that exist. 
+The semantics of the logic are based on the notion of interpretation, which is defined under a \textit{domain}. A domain contains all the objects that exist in a given problem. 
 In logic, it is convention to use a special interpretation called a \textit{Herbrand interpretation}.
 
 \begin{defn}
-The \textit{Herbrand Domain}, or \textit{Herbrand Universe}, of a normal logic program \textit{P}, denoted \textit{HD(P)}, is the set of all ground terms that are constants and function symbols appeared in \textit{P}.
+\textit{Definite Logic Program} is a set of definite rules, and  
+A \textit{definite rule} is of the form: 
+\begin{equation}
+\begin{split}
+\underbrace{h}_\text{head} \leftarrow\underbrace{ a\textsubscript{1}, a\textsubscript{2}, ..., a\textsubscript{n}}_\text{body}
+\end{split}
+\label{definite_rule}
+\end{equation}
+\textit{h} and  \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n} are all atoms. \textit{h} is the \textit{head} of the rule and \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n} are the \textit{body} of the rule.
 \end{defn}
 
 \begin{defn}
-The \textit{Herbrand Base} of a normal logic program \textit{P}, denoted \textit{HB(P)}, is the set of all ground predicates that are formed by predicate symbols in \textit{P} and terms in \textit{HD(P)}.
+\textit{Normal Logic Program} is a set of normal rules,
+A \textit{normal rule} is: 
+\begin{equation}
+\begin{split}
+\underbrace{h}_\text{head} \leftarrow\underbrace{ a\textsubscript{1}, a\textsubscript{2}, ..., a\textsubscript{n}, not \ b\textsubscript{n+1}, ....not \ b\textsubscript{n+k}}_\text{body}
+\end{split}
+\label{normal_rule}
+\end{equation}
+where h, a\textsubscript{1}, ... a\textsubscript{n}, and b\textsubscript{n+1}, ..., b\textsubscript{n+k} are all atoms.
+\end{defn}
+
+
+
+\begin{defn}
+The \textit{Herbrand Domain}, or \textit{Herbrand Universe}, of a normal logic program \textit{P}, denoted \textit{HD(P)}, is the set of all ground terms constructed fromconstants and function symbols that appear in \textit{P}.
 \end{defn}
 
 \begin{defn}
-The \textit{Herbrand Interpretation} of a set of a program \textit{P}, denoted \textit{HI(P)}, is a subset of the HB\textsubscript{P}, and is a set of ground atoms that are true in terms of interpretation.
+The \textit{Herbrand Base} of a normal logic program \textit{P}, denoted \textit{HB(P)}, is the set of all ground atoms that are formed by predicate symbols in \textit{P} and terms in \textit{HD(P)}.
+\end{defn}
+
+\begin{defn}
+The \textit{Herbrand Interpretation} of a program \textit{P}, denoted \textit{HI(P)}, is a subset of the HB(P), and ground atoms in an HI(R) are assumed to be true.
 \end{defn}
 
 In order to define a stable model, we need to define a minimal Herbrand model of a normal logic program \textit{P}.
 
 \begin{defn}
-The \textit{Herbrand Model} of a normal logic program \textit{P} is a \textit{HI(P)} if and only if a set \textit{P} of clauses is satisfiable. In other words, the set of clauses \textit{P} is unsatisfiable if no Herbrand model was found.
+The \textit{Herbrand Model} of a definite logic program \textit{P} is a \textit{HI(P)} that satisfies all the clauses in \textit{P}. In other words, the set of clauses \textit{P} is unsatisfiable if no Herbrand model is found.
 \end{defn}
 
 \begin{defn}
@@ -224,9 +250,9 @@ The \textit{Minimal Herbrand Model} of a normal logic program \textit{P} is a He
 \end{defn}
 
 % \begin{defn}
-% \textit{Least Herbrand Model} (denoted as \textit{M(P)}) is an unique minimal Herbrand model for definite logic programs.  The Herbrand Model is a minimum Herbrand model if and only if none of its subsets is an Herbrand model.
+% \textit{Least Herbrand Model} (denoted as \textit{M(P)}) is an unique minimal Herbrand model for definite logic programs.  An Herbrand Model is a minimum Herbrand model if and only if none of its subsets is an Herbrand model.
 % \end{defn}
-% For normal logic programs, there may not be any least Herbrand Model.
+% For normal logic programs, there may not be a least Herbrand Model.
 
 %Interpretation evaluate it to true
 %Interpretation evaluate it to false
@@ -243,22 +269,19 @@ Given the above, there are four Herbrand Interpretations HI(P) = $\langle$ \{q(a
 
 \end{examp}
 
-\textit{Definite Logic Program} is a set of definite rules, and  a \textit{definite rule} is of the form \textit{h} $\leftarrow$ \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n}.  \textit{h} and  \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n} are all atoms. \textit{h} is the \textit{head} of the rule and \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n} are the \textit{body} of the rule.
-\textit{Normal Logic Program} is a set of normal rules, and a normal rule is of the form \textit{h} $\leftarrow$ a\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{not b}\textsubscript{1}, ..., \textit{not  b}\textsubscript{n} where \textit{h} is the head of the rule,
- and \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{b}\textsubscript{1}, ..., \textit{b}\textsubscript{n} are the body of the rule (both the head and body are all atoms).
-
-To solve a normal logic program \textit{P}, the program \textit{P} needs to be grounded. The \textit{grounding} of \textit{P} is the set of all clauses that are c $\in$ \textit{P} and variables are replaced by terms in the Herbrand Domain.
+To solve a normal logic program \textit{P}, the program \textit{P} needs to be grounded. The \textit{grounding} of \textit{P} is the set of all clauses  c $\in$ \textit{P} and with variables replaced by all possible terms in the Herbrand Domain.
 \begin{defn}
-The algorithm of grounding starts with an empty program \textit{Q} = \{  \} and the relevant grounding is constructed by adding to each rule \textit{R} to \textit{Q} such that:
+The algorithm of grounding starts with an empty program \textit{Q} = \{  \} and the relevant grounding is constructed by adding each rule \textit{R} to \textit{Q} such that:
 \begin{itemize}
 \item \textit{R} is a ground instance of a rule in \textit{P}.
-\item Their positive body literals already occurs in the in the of rules in \textit{Q}.
+\item Their positive body literals already occurs in the in the rules in \textit{Q}.
 \end{itemize}
 The algorithm terminates when no more rules can be added to \textit{Q}.
 
 \end{defn}
 
 \begin{examp} \normalfont (Grounding) \\
+\label{grounding}
 
 P = $\begin{cases}
 %	p(X)  \leftarrow not \ q(X). \\
@@ -267,9 +290,7 @@ P = $\begin{cases}
       \end{cases}$ \\
 
 ground(P) in this example is \{p(a), q(a)\}, as p(a) is already grounded and added to Q, and it is also a positive body literal for the first rule, resulting in q(a).
-
 \end{examp}
-\label{grounding}
 
 %TODO Explain grounding in ASP context.
 %The grounding of a normal logic program P can be obtained by replacing each rule in P with a ground instance of the rule, such that for each atom A in body\textsuperscript{+} (R) (TODO EXPLAIN WHAT THIS IS), already occurs in the head of another ground rule.
@@ -279,11 +300,16 @@ Since there is no unique least Herbrand Model for a normal logic program, Stable
 In order to obtain the Stable Model of a program P, P needs to be converted using \textit{Reduct} with respect to an interpretation X.
 
 \begin{defn}
-The \textit{reduct} of P with respect to X can be constructed such that:
+The \textit{reduct} of P with respect to any set X of ground atoms of a normal logic program can be constructed such that:
 \begin{itemize}
 \item If the body of any rule in P contains an atom which is not in X, those rules need to be removed.
 \item All default negation atoms in the remaining rules in P need to be removed.
 \end{itemize}
+\end{defn}
+
+%Any stable model is a minimal Herbrand model, and stable sets is stable models. The stable models can be found by constructing the result of the program with respect to sets of atoms X (P\textsuperscript{x} in the following 2 steps
+\begin{defn}
+X is a \textit{stable model} of P if it is the least Herbrand Model of P\textsuperscript{X}.
 \end{defn}
 
 \begin{examp} \normalfont (Reduct) \\
@@ -310,48 +336,29 @@ Thus reduct P\textsuperscript{x} is (ground(P))\textsuperscript{x} =  \{p(a), q(
 \end{examp}
 \label{reduct}
 
-%Any stable model is a minimal Herbrand model, and stable sets is stable models. The stable models can be found by constructing the result of the program with respect to sets of atoms X (P\textsuperscript{x} in the following 2 steps
-\begin{defn}
-A \textit{Stable Model} of P, denoted SM(P), is an interpretaiton X if and only if X is the unique least Herbrand Model of ground(P)\textsuperscript{x} in the logic program.
-\end{defn}
-
 \subsection{Answer Set Programming (ASP) Syntax}
 
-\begin{defn}
-\textcolor{red}{The answer set} of normal logic program P is a Stable Model defined by a set of rules, where each rule consists of literals, which are made up with an atom \textit{p} or its default negation \textit{not p} (\textit{negation as failure}). Answer Set Programming (ASP) is a normal logic program with extensions: constraints, choice rules and optimisation statements.
-\end{defn}
+An answer set of normal logic program P is a Stable Model defined by a set of rules, where each rule consists of literals, which are made up with an atom \textit{p} or its default negation \textit{not p} (\textit{negation as failure}). Answer Set Programming (ASP) is a normal logic program with extensions: constraints, choice rules and optimisation statements.
 
-A \textit{definite rule} is: 
-\begin{equation}
-\begin{split}
-\underbrace{h}_\text{head} \leftarrow\underbrace{ a\textsubscript{1}, a\textsubscript{2}, ..., a\textsubscript{n}}_\text{body}
-\end{split}
-\label{asp_definite_rule}
-\end{equation}
-
-A \textit{normal rule} is: 
-\begin{equation}
-\begin{split}
-\underbrace{h}_\text{head} \leftarrow\underbrace{ a\textsubscript{1}, a\textsubscript{2}, ..., a\textsubscript{n}, not \ b\textsubscript{n+1}, ....not \ b\textsubscript{n+k}}_\text{body}
-\end{split}
-\label{asp_normal_rule}
-\end{equation}
-where h, a\textsubscript{1}, ... b\textsubscript{n+k} are all atoms.
-A rule with empty body is a \textit{fact}, and a rule with empty head is a  \textit{constraint}.
+A normal rule defined with empty head is a  \textit{constraint},
+and a normal rule  with empty body is a \textit{fact}.
 %TODO positive rule and definite clause
 %A \textit{constraint} of the program P is of the form $\leftarrow$ \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{not b}\textsubscript{1}, ..., \textit{not b}\textsubscript{n}, where the rule has an empty head. 
-The constraint filters any irrelevant answer sets. When computing ground(P)\textsubscript{x}, the empty head becomes $\perp$, which cannot be in the answer sets.
+The constraint filters any irrelevant answer sets. When computing ground(P)\textsubscript{x}, the empty head becomes $\perp$, which cannot be in the answer sets. So any answer set that includes ground body of a constraint is eliminated.
+
 %There are two types of constraints: \textit{hard constraints} and \textit{soft constraints}. Hard constraints are strictly satisfied, whereas soft constraints may not be satisfied but the sum of the violations should be minimised when solving ASP.
 
 A \textit{choice rule} can express possible outcomes given an action choice, which is of the form:
 \begin{equation}
 \begin{split}
-\underbrace{l\{h\textsubscript{1},...,h\textsubscript{m}\}u}_\text{head} \leftarrow \underbrace{a\textsubscript{1}, ..., a\textsubscript{n}, not\ b\textsubscript{1}, ..., not\ b\textsubscript{n}}_\text{body}
+\underbrace{l\{h\textsubscript{1},...,h\textsubscript{m}\}u}_\text{head} \leftarrow \underbrace{a\textsubscript{1}, ..., a\textsubscript{n}, not\ b\textsubscript{n+1}, ..., not\ b\textsubscript{n+k}}_\text{body}
 \end{split}
 \label{asp_choice_rule}
 \end{equation}
 
 where \textit{l} and \textit{u} are integers and h\textsubscript{i} for 1 $\leq$ i $\leq$ m are atoms. The head in the choice rule is called \textit{aggregates}.
+Informally, if the body of a ground choice rule is satisfied by an interpretation X, given a ground choice rule, the choice rule generates all answer sets in which  $l \leq | X \cap \{h\textsubscript{1},...,h\textsubscript{m}\} | \leq u$
+\ref{Law2014}.
 
 \textit{Optimisation statement} is useful to sort the answer sets in terms of preference, which is of the form:
 \begin{equation}
