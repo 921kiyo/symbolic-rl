@@ -202,36 +202,38 @@ The semantics of the logic are based on the notion of interpretation, which is d
 In logic, it is convention to use a special interpretation called a \textit{Herbrand interpretation}.
 
 \begin{defn}
+\label{def:definite_logic_program}
 \textit{Definite Logic Program} is a set of definite rules, and  
 A \textit{definite rule} is of the form: 
 \begin{equation}
+\label{definite_rule}
 \begin{split}
 \underbrace{h}_\text{head} \leftarrow\underbrace{ a\textsubscript{1}, a\textsubscript{2}, ..., a\textsubscript{n}}_\text{body}
 \end{split}
-\label{definite_rule}
 \end{equation}
 \textit{h} and  \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n} are all atoms. \textit{h} is the \textit{head} of the rule and \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n} are the \textit{body} of the rule.
 \end{defn}
 
 \begin{defn}
+\label{def:normal_logic_program}
 \textit{Normal Logic Program} is a set of normal rules,
 A \textit{normal rule} is: 
 \begin{equation}
+\label{normal_rule}
 \begin{split}
 \underbrace{h}_\text{head} \leftarrow\underbrace{ a\textsubscript{1}, a\textsubscript{2}, ..., a\textsubscript{n}, not \ b\textsubscript{n+1}, ....not \ b\textsubscript{n+k}}_\text{body}
 \end{split}
-\label{normal_rule}
 \end{equation}
 where h, a\textsubscript{1}, ... a\textsubscript{n}, and b\textsubscript{n+1}, ..., b\textsubscript{n+k} are all atoms.
 \end{defn}
 
-
-
 \begin{defn}
+\label{def:herbrand_domain}
 The \textit{Herbrand Domain}, or \textit{Herbrand Universe}, of a normal logic program \textit{P}, denoted \textit{HD(P)}, is the set of all ground terms constructed fromconstants and function symbols that appear in \textit{P}.
 \end{defn}
 
 \begin{defn}
+\label{def:herbrand_base}
 The \textit{Herbrand Base} of a normal logic program \textit{P}, denoted \textit{HB(P)}, is the set of all ground atoms that are formed by predicate symbols in \textit{P} and terms in \textit{HD(P)}.
 \end{defn}
 
@@ -242,10 +244,12 @@ The \textit{Herbrand Interpretation} of a program \textit{P}, denoted \textit{HI
 In order to define a stable model, we need to define a minimal Herbrand model of a normal logic program \textit{P}.
 
 \begin{defn}
+\label{def:herbrand_model}
 The \textit{Herbrand Model} of a definite logic program \textit{P} is a \textit{HI(P)} that satisfies all the clauses in \textit{P}. In other words, the set of clauses \textit{P} is unsatisfiable if no Herbrand model is found.
 \end{defn}
 
 \begin{defn}
+\label{def:minimal_herbrand_model}
 The \textit{Minimal Herbrand Model} of a normal logic program \textit{P} is a Herbrand model \textit{M} if none of the subset of \textit{M} is a Herbrand model of \textit{P}.
 \end{defn}
 
@@ -277,7 +281,6 @@ The algorithm of grounding starts with an empty program \textit{Q} = \{  \} and 
 \item Their positive body literals already occurs in the in the rules in \textit{Q}.
 \end{itemize}
 The algorithm terminates when no more rules can be added to \textit{Q}.
-
 \end{defn}
 
 \begin{examp} \normalfont (Grounding) \\
@@ -333,20 +336,37 @@ q(b) $\leftarrow$ not\ p(b). \\
 
 The second step removes negation atoms from the body. \\
 Thus reduct P\textsuperscript{x} is (ground(P))\textsuperscript{x} =  \{p(a), q(b).\}
-\end{examp}
 \label{reduct}
+\end{examp}
+
+\begin{defn}
+X is a \textit{stable model} of P if it is the least Herbrand Model of P\textsuperscript{X}.
+\end{defn}
+
+For normal logic program, there may be more than one or no stable models. In stable model semantics,  there are two different notion of entailments.
+\begin{defn}
+An atom $a$ is \textit{bravely} entailed by a normal logic program P, denoted $ P \models\textsubscript{b} \ a$, if it is true in at least one stable model of P. An atom $a$ is \textit{cautiously} entailed by a normal logic program P, denoted $ P \models\textsubscript{c} \ a$ if it is true in every stable model of P \ref{Law2014}.
+\end{defn}
+
+\begin{examp} \normalfont (Brave and Cautious Entailment) \\
+
+XX
+\end{examp}
 
 \subsection{Answer Set Programming (ASP) Syntax}
 
-An answer set of normal logic program P is a Stable Model defined by a set of rules, where each rule consists of literals, which are made up with an atom \textit{p} or its default negation \textit{not p} (\textit{negation as failure}). Answer Set Programming (ASP) is a normal logic program with extensions: constraints, choice rules and optimisation statements.
+An answer set of normal logic program P is a stable model defined by a set of rules, where each rule consists of literals, which are made up with an atom \textit{p} or its default negation \textit{not p} (\textit{negation as failure}). Answer Set Programming (ASP) is a normal logic program with extensions: constraints, choice rules and optimisation statements.
 
-A normal rule defined with empty head is a  \textit{constraint},
-and a normal rule  with empty body is a \textit{fact}.
 %TODO positive rule and definite clause
-%A \textit{constraint} of the program P is of the form $\leftarrow$ \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{not b}\textsubscript{1}, ..., \textit{not b}\textsubscript{n}, where the rule has an empty head. 
-The constraint filters any irrelevant answer sets. When computing ground(P)\textsubscript{x}, the empty head becomes $\perp$, which cannot be in the answer sets. So any answer set that includes ground body of a constraint is eliminated.
-
-%There are two types of constraints: \textit{hard constraints} and \textit{soft constraints}. Hard constraints are strictly satisfied, whereas soft constraints may not be satisfied but the sum of the violations should be minimised when solving ASP.
+A \textit{constraint} of the program P is of the form:
+\begin{equation}
+\begin{split}
+\leftarrow \textit{a}\textsubscript{1}, ..., \textit{a}\textsubscript{n}, \textit{not b}\textsubscript{n}, ..., \textit{not b}\textsubscript{n+k}
+\end{split}
+\label{asp_choice_rule}
+\end{equation}
+where the normal rule has an empty head, and a normal rule  with empty body is a \textit{fact}.
+ The constraint filters any irrelevant answer sets. When computing ground(P)\textsubscript{x}, the empty head becomes $\perp$, which cannot be in the answer sets. So any answer set that includes ground body of a constraint is eliminated.
 
 A \textit{choice rule} can express possible outcomes given an action choice, which is of the form:
 \begin{equation}
@@ -380,7 +400,7 @@ where \textit{w\textsubscript{1},..., w\textsubscript{n}} are integer weights an
 \section{Inductive Logic Programming (ILP)}
 \label{sec:ilp}
 
-\textit{Inductive Logic Programming (ILP)} is a subfield of machine learning research area aimed at supervised inductive concept learning, and is the intersection between machine learning and logic programming \cite{Muggleton1991}. 
+\textit{Inductive Logic Programming (ILP)} is a subfield of machine learning aimed at supervised inductive concept learning, and is the intersection between machine learning and logic programming \cite{Muggleton1991}. 
 The purpose of ILP is to inductively derive a hypothesis \textit{H} that is a solution of a learning task, which covers all of the positive examples and none of the negative examples, given a hypothesis language for search space and cover relation \cite{DeRaedt1997}. 
 ILP is based on learning from entailment, as shown in Equation \ref{ilp_equation}.
 
@@ -391,7 +411,7 @@ B \wedge H \models E
 where \textit{E} contains all of the positive examples, denoted \textit{E\textsuperscript{+}}, and none of the negative examples, denoted \textit{E\textsuperscript{-}}.
 
 An advantage of ILP over statistical machine learning is that the hypothesis that an agent learns can be easily understood by a human, as it is expressed in first-order logic, making the learning process explainable.
-By contrast, a limitation of ILP is learning scalability. There are usually thousands or more examples in many real-world examples. Scaling ILP tasks to cope with large examples is a challenging task \cite{Muggleton1993}.
+By contrast, a limitation of ILP is scalability. There are usually thousands or more examples in many real-world examples. Scaling ILP tasks to cope with large examples is a challenging task \cite{Muggleton1993}.
 
 \subsection{ILP under Answer Set Semantics}
 There are several ILP non-monotonic learning frameworks under the answer set semantics . We first introduce two of them: \textit{Cautious Induction} and \textit{Brave Induction} (\cite{Sakama2009}), which are the foundations of \textit{Learning from Answer Sets} discussed in Section \ref{section_lasp}, a state-of-the-art ILP framework that we will use for our new framework (for other non-monotonic ILP frameworks, see \cite{Otero2001}, \cite{Inoue2014}, \cite{Corapi2012} and \cite{DeRaedt1997}).
