@@ -262,17 +262,18 @@ The \textit{Minimal Herbrand Model} of a normal logic program \textit{P} is a He
 %Interpretation evaluate it to false
 
 \begin{examp} \normalfont (Herbrand Interpretation, Herbrand Model and M(P)) \\
+We use an simple example to highlight the definitions of Herbrand Interpretation and Herbrand Model.\\
 
 P = $\begin{cases}
-	\textit{p(X)}  \leftarrow \textit{q(X).} \\
-	\textit{q (a).}
-      \end{cases}$
-HD(P) = \{ a \} , HB(P) = \{ q(a), p(a) \}  \\
+	\textit{drive(X)}  \leftarrow \textit{hasCar(X).} \\
+	\textit{hasCar(john).}
+      \end{cases}$ HD(P) = \{ john \} , HB(P) = \{ hasCar(john), drive(john) \}  \\
 
-Given the above, there are four Herbrand Interpretations HI(P) = $\langle$ \{q(a)\}, \{p(a)\}, \{q(a), p(a)\}, \{\} $\rangle$, and one Herbrand Model (as well as M(P)) = \{q(a), p(a)\}
+Given the above program, there are four Herbrand Interpretations:\\
+HI(P) = $\langle$ \{hasCar(john)\}, \{drive(john)\}, \{hasCar(john), drive(john)\}, \{\} $\rangle$, \\
+and one Herbrand Model (as well as M(P)) = \{q(a), p(a)\}.
 
 \end{examp}
-
 To solve a normal logic program \textit{P}, the program \textit{P} needs to be grounded. The \textit{grounding} of \textit{P} is the set of all clauses  c $\in$ \textit{P} and with variables replaced by all possible terms in the Herbrand Domain.
 \begin{defn}
 The algorithm of grounding starts with an empty program \textit{Q} = \{  \} and the relevant grounding is constructed by adding each rule \textit{R} to \textit{Q} such that:
@@ -287,12 +288,11 @@ The algorithm terminates when no more rules can be added to \textit{Q}.
 \label{grounding}
 
 P = $\begin{cases}
-%	p(X)  \leftarrow not \ q(X). \\
-	\textit{q(X)}  \leftarrow \textit{p(X).} \\
-	\textit{p(a).}
+	\textit{drive(X)}  \leftarrow \textit{hasCar(X).} \\
+	\textit{hasCar(john).}
       \end{cases}$ \\
 
-ground(P) in this example is \{p(a), q(a)\}, as p(a) is already grounded and added to Q, and it is also a positive body literal for the first rule, resulting in q(a).
+ground(P) in this example is \{hasCar(john), drive(john)\}, as hasCar(john) is already grounded and added to Q, and it is also a positive body literal for the first rule, resulting in q(a).
 \end{examp}
 
 %TODO Explain grounding in ASP context.
@@ -318,24 +318,24 @@ X is a \textit{stable model} of P if it is the least Herbrand Model of P\textsup
 \begin{examp} \normalfont (Reduct) \\
 
 P = $\begin{cases}
-	\textit{p(X)}  \leftarrow \textit{not q(X).} \\
-  	\textit{q(X)} \leftarrow \textit{not p(X).} \\
-      \end{cases}$  X = \{p(a), q(b)\}
+	\textit{male(X)}  \leftarrow \textit{not female(X).} \\
+  	\textit{female(X)} \leftarrow \textit{not male(X).} \\
+      \end{cases}$  X = \{male(john), female(anna)\}
 
 Where X is a set of atoms. ground(P) is
 
-p(a)  $\leftarrow$ not\ q(a). \\
-p(b)  $\leftarrow$ not\ q(b). \\
-q(a) $\leftarrow$ not\ p(a). \\
-q(b) $\leftarrow$ not\ p(b). \\
+male(john)  $\leftarrow$ not\ female(john). \\
+male(anna)  $\leftarrow$ not\ female(anna). \\
+female(john) $\leftarrow$ not\ male(john). \\
+female(anna) $\leftarrow$ not\ male(anna). \\
 
- The first step removes p(b)  $\leftarrow$ not\ q(b). and q(a) $\leftarrow$ not\ p(a).
+The first step removes male(anna)  $\leftarrow$ not\ female(anna). and female(john) $\leftarrow$ not\ male(john).\\
 
-p(a)  $\leftarrow$ not\ q(a). \\
-q(b) $\leftarrow$ not\ p(b). \\
+male(john)  $\leftarrow$ not\ female(john). \\
+female(anna) $\leftarrow$ not\ male(anna). \\
 
 The second step removes negation atoms from the body. \\
-Thus reduct P\textsuperscript{x} is (ground(P))\textsuperscript{x} =  \{p(a), q(b).\}
+Thus reduct P\textsuperscript{x} is (ground(P))\textsuperscript{x} =  \{male(john), female(anna).\}
 \label{reduct}
 \end{examp}
 
@@ -351,11 +351,12 @@ An atom $a$ is \textit{bravely} entailed by a normal logic program P, denoted $ 
 \begin{examp} \normalfont (Brave and Cautious Entailment) \\
 
 P = $\begin{cases}
-	\textit{p}  \leftarrow \textit{not q, r.} \\
-  	\textit{q} \leftarrow \textit{not p, r.} \\
-	\textit{r.}
-      \end{cases}$ 
-In this case, $P\models$\textsubscript{b} \{p, q, r\} and $P\models$\textsubscript{c} \{ r\}
+	\textit{male}  \leftarrow \textit{not female, tall.} \\
+  	\textit{female} \leftarrow \textit{not male, tall.} \\
+	\textit{tall.}
+      \end{cases}$ \\
+
+In this case, $P\models$\textsubscript{b} \{male, female, tall\} and $P\models$\textsubscript{c} \{tall\}
 \end{examp}
 
 \subsection{Answer Set Programming (ASP) Syntax}
@@ -425,8 +426,9 @@ which are the foundations of \textit{Learning from Answer Sets} discussed in Sec
 \subsubsection{Cautious Induction}
 
 \begin{defn}
-\textit{Cautious Induction} task\footnote{This is more general definition of Cautious Induction than the one defined in \cite{Sakama2009}, as the concept of negative examples was not included in the original definition.} is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples.
-H $\in$ ILP\textsubscript{cautious} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if  there is at least one answer set A of B $\cup$ H (B $\cup$ H is satisfiable) such that for every answer set A of B $\cup$ H: \\
+\textit{Cautious Induction} task\footnote{This is more general definition of Cautious Induction than the one defined in \cite{Sakama2009}, as the concept of negative examples was not included in the original definition.} 
+is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples.
+H $\in$ ILP\textsubscript{cautious} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if  there is at least one answer set A of B $\cup$ H (B $\cup$ H is satisfiable) such that for every answer set A of B $\cup$ H:
 \begin{itemize}
 \item $\forall$ e $\in$ E\textsuperscript{+} : e $\in$ A
 \item $\forall$ e $\in$ E\textsuperscript{-} : e $\notin$ A
@@ -434,6 +436,7 @@ H $\in$ ILP\textsubscript{cautious} $\langle$ B, E\textsuperscript{+}, E\textsup
 \end{defn}
 
 \begin{examp} \normalfont (Cautious Induction) \\
+\label{cautious_induction_example}
 
 B = $\begin{cases}
 	\textit{exercises}  \leftarrow \textit{not \ eat\_out.} \\
@@ -443,11 +446,11 @@ E\textsuperscript{+} = \{tennis\},      E\textsuperscript{-} = \{eat\_out \} \\
 
 One possible  H $\in$ ILP\textsubscript{cautious} is \{tennis$ \leftarrow$ exercises, $\leftarrow$ not tennis \}.
 \end{examp}
-\label{cautious_induction_example}
 
 The limitation of Cautious Induction is that positive examples must be true for all answer sets and negative examples must not be included in any of the answer sets. These conditions may be too strict in some cases, and Cautious Induction is not able to accept a case where positive examples are true in some of the answer sets but not all answer sets of the program.
 
 \begin{examp} \normalfont (Limitation of Cautious Induction) \\
+\label{limitation_cautious}
 
 B = $\begin{cases}
 	\textit{1\{situation(P, awake), situation(P, sleep)\}1} \leftarrow \textit{person(P).} \\
@@ -458,15 +461,13 @@ Neither of \textit{situation(john, awake)} nor \textit{situation(john, sleep)} i
 In this example, the hypothesis only contains person(john). Thus no examples could be given to learn the choice rule.
 \end{examp}
 
-\label{limitation_cautious}
-
 \subsubsection{Brave Induction}
 \begin{defn} \label{def:brave_induction}
 \textit{Brave Induction} task is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ where, B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples.
- H $\in$ ILP\textsubscript{brave} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if there is at least one answer set A of B $\cup$ H such that: \\
+ H $\in$ ILP\textsubscript{brave} $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$ if and only if there is at least one answer set A of B $\cup$ H such that:
 \begin{itemize}
-\item $\forall$ e $\in$ E\textsuperscript{+} : e $\in$ A \\
-\item $\forall$ e $\in$ E\textsuperscript{-} : e $\notin$ A \\
+\item $\forall$ e $\in$ E\textsuperscript{+} : e $\in$ A
+\item $\forall$ e $\in$ E\textsuperscript{-} : e $\notin$ A
 \end{itemize}
 \end{defn}
 
@@ -514,7 +515,6 @@ E = \langle e\textsuperscript{inc}, e\textsuperscript{exc} \rangle.
 where e\textsuperscript{inc} and e\textsuperscript{exc} are called \textit{inclusions} and \textit{exclusions} of \textit{E} respectively.
 An answer set \textit{A extends E} if and only if $(e\textsuperscript{inc} \subseteq A) \wedge (e\textsuperscript{exc} \cap A = \emptyset)$.
 \end{defn}
-% A Herbrand Interpretation extends a partial interpretation if it includes all of E\textsuperscript{inc} and none of E\textsuperscript{exc}.
 
 A \textit{Learning from Answer Sets} task is of the form:
 \begin{equation}
@@ -537,38 +537,23 @@ Given a learning task T, the set of all possible inductive solutions of T, denot
 \item $\forall$ e\textsuperscript{+} $\in$ E\textsuperscript{+} : $\exists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e\textsuperscript{+}
 \item $\forall$ e\textsuperscript{-} $\in$ E\textsuperscript{-} : $\nexists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e\textsuperscript{-}
 \end{enumerate}
-
 \end{defn}
 
-%S\textsubscript{M} consists of all rules given the language bias.
-
-%\begin{examp} \normalfont LAS
-%
-%TODO
-%%B = $\begin{cases}
-%%	exercises  \leftarrow not \ eat\_out. \\
-%%	tennis \leftarrow holiday \\
-%%      \end{cases}$ \\
-%%E\textsubscript{+} = tennis \\
-%%E\textsubscript{-} = eat\_out \\
-%
-%\end{examp}
-%\label{las_example}
-
-% Limitation of LAS??
 \begin{examp} \normalfont (LAS).
 Suppose a learning task T is as follows:
 \begin{flalign*}
 \label{appendix:example}
-&\textsf{cell((0..7, 0..6)).}&\\
-&\textsf{\#modeh(state\_after(var(cell))).}&\\
-&\textsf{\#modeb(1, adjacent(const(action), var(cell), var(cell))).}&\\
-&\textsf{\#pos(e1, \{e\textsuperscript{inc}\}, \{e\textsuperscript{exc}\}})&\\
-&\textsf{\#pos(e2, \{e\textsuperscript{inc}\}, \{e\textsuperscript{exc}\}})
+&\textsf{\#modeh(1, drive(var(person))).}&\\
+&\textsf{\#modeb(1, hasCar(var(person))).}&\\
+&\textsf{\#pos(e1, \{hasCar(john), drive(john)\}, \{\}})&\\
+&\textsf{\#pos(e2, \{hasCar(anna), drive(anna)\}, \{\}})&\\
+&\textsf{person(john).}&\\
+&\textsf{person(anna).}
 \end{flalign*}
+where, both \textsf{person(john)} and \textsf{person(anna)} are background knowledge B, \textsf{\#modeh} and \textsf{\#modeb} are language bias SM and two positive examples \textsf{\#pos} are given.
+
 \end{examp}
-where, both XX and XX are background knowledge B, \textsf{\#modeh} and \textsf{\#modeb} are language bias and two positive examples \textsf{\#pos} are given.
-      
+
 \subsubsection{Inductive Learning of Answer Set Programs (ILASP)}
 
 \textit{Inductive Learning of Answer Set Programs (ILASP)} is an algorithm that is capable of solving a LAS task ILP\textsubscript{LAS}(T) $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, 
@@ -577,7 +562,7 @@ and is based on two fundamental concepts: \textit{positive solutions} and \texti
 A hypothesis H is a positive solution if and only if
 \begin{enumerate}
 \item H $\subseteq$ S\textsubscript{M}
-\item $\forall$ e\textsuperscript{+} $\in$ $\exists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e\textsuperscript{+}
+\item $\forall$ e\textsuperscript{+} $\in$ E\textsuperscript{+} $\exists$ A $\in$ Answer Sets(B $\cup$ H) such that A extends e\textsuperscript{+}
 \end{enumerate}
 A hypothesis H is a violating solution if and only if
 \begin{enumerate}
@@ -587,7 +572,6 @@ A hypothesis H is a violating solution if and only if
 \end{enumerate}
 
 Given both definitions of positive and violating solutions, ILP\textsubscript{LAS} $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$is positive solutions that are not violating solutions.
-
 
 \subsubsection{Context-dependent Learning from Answer Sets }
 \textit{Context-dependent learning from answer sets ($ILP_{LAS}^{context}$)} is a further generalisation of ILP\textsubscript{LAS} with \textit{context dependent examples}\cite{Law2016}\footnote{The original paper developed the framework called \textit{learning from ordered answer sets ($ILP_{LOAS}^{context}$)}. 
@@ -636,7 +620,17 @@ $ILP_{LAS}^{context}$ is used in ILASP2i, which we use for our new framework.
 
 \begin{examp} \normalfont ($ILP_{LAS}^{context}$).
 
-XXX
+Suppose a learning task T is as follows:
+\begin{flalign*}
+\label{appendix:example}
+&\textsf{\#modeh(1, drive(var(person))).}&\\
+&\textsf{\#modeb(1, hasCar(var(person))).}&\\
+&\textsf{\#pos(e1, \{hasCar(john), drive(john)\}, \{\}})&\\
+&\textsf{\#pos(e2, \{hasCar(anna), drive(anna)\}, \{\}})&\\
+&\textsf{person(john).}&\\
+&\textsf{person(anna).}
+\end{flalign*}
+where, both \textsf{person(john)} and \textsf{person(anna)} are background knowledge B, \textsf{\#modeh} and \textsf{\#modeb} are language bias SM and two positive examples \textsf{\#pos} are given.
 \end{examp}
 
 \section{Reinforcement Learning (RL)}

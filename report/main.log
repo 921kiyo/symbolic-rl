@@ -1,10 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  2 SEP 2018 20:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  2 SEP 2018 21:26
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/kiyo/Desktop/Individual_project/report/main.tex
-(/home/kiyo/Desktop/Individual_project/report/main.tex
+**main.tex
+(./main.tex
 LaTeX2e <2016/02/01>
 Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
@@ -720,7 +719,7 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
-(./main.aux)
+No file main.aux.
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 125.
@@ -740,7 +739,7 @@ LaTeX Font Info:    ... okay on input line 125.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 125.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 125.
 
- (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 125.
@@ -928,7 +927,7 @@ LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <12> not available
 [5
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 264--265
+Underfull \hbox (badness 10000) in paragraph at lines 264--266
 
  []
 
@@ -940,30 +939,49 @@ File: omsbch.fd
 LaTeX Font Info:    Font shape `OMS/bch/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 270.
 
-Underfull \hbox (badness 10000) in paragraph at lines 266--271
+Underfull \hbox (badness 10000) in paragraph at lines 267--271
 
  []
 
-LaTeX Font Info:    Try loading font information for TS1+bch on input line 280.
+LaTeX Font Info:    Try loading font information for TS1+bch on input line 281.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1bch.fd
 File: ts1bch.fd 2004/10/18 font definitions for TS1/bch.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 289--294
+Underfull \hbox (badness 10000) in paragraph at lines 290--294
 
+ []
+
+
+Overfull \hbox (7.95976pt too wide) in paragraph at lines 295--296
+[]\OT1/bch/m/n/10.95 ground(P) in this ex-am-ple is \OMS/cmsy/m/n/10.95 f\OT1/b
+ch/m/n/10.95 hasCar(john), drive(john)\OMS/cmsy/m/n/10.95 g\OT1/bch/m/n/10.95 ,
+ as has-Car(john) is al-ready grounded
  []
 
 
 Package natbib Warning: Citation `Gelfond1988' on page 6 undefined on input lin
 e 302.
 
-
+[6]
 Underfull \hbox (badness 10000) in paragraph at lines 318--319
 
  []
 
-[6]
+
 Underfull \hbox (badness 10000) in paragraph at lines 327--331
+
+ []
+
+
+Overfull \hbox (0.98401pt too wide) in paragraph at lines 332--333
+[]\OT1/bch/m/n/10.95 The first step re-moves male(anna) $\OMS/cmsy/m/n/10.95  $
+ \OT1/bch/m/n/10.95 not fe-male(anna). and fe-male(john) $\OMS/cmsy/m/n/10.95  
+$ \OT1/bch/m/n/10.95 not male(john). 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 332--333
 
  []
 
@@ -981,125 +999,100 @@ Underfull \hbox (badness 10000) in paragraph at lines 351--352
  []
 
 
-LaTeX Warning: Reference `Law2014' on page 7 undefined on input line 386.
+Underfull \hbox (badness 10000) in paragraph at lines 353--358
+
+ []
 
 [7]
 
+LaTeX Warning: Reference `Law2014' on page 8 undefined on input line 387.
+
+
 Package natbib Warning: Citation `Gebser2011' on page 8 undefined on input line
- 399.
+ 400.
 
 
 Package natbib Warning: Citation `Muggleton1991' on page 8 undefined on input l
-ine 408.
+ine 409.
 
 
 Package natbib Warning: Citation `DeRaedt1997' on page 8 undefined on input lin
-e 409.
+e 410.
 
 
-LaTeX Warning: Reference `ilp_equation' on page 8 undefined on input line 410.
+LaTeX Warning: Reference `ilp_equation' on page 8 undefined on input line 411.
 
 
 Package natbib Warning: Citation `Muggleton1993' on page 8 undefined on input l
-ine 419.
+ine 420.
 
 
 Package natbib Warning: Citation `Sakama2009' on page 8 undefined on input line
- 423.
-
-
-LaTeX Warning: Reference `section_lasp' on page 8 undefined on input line 424.
-
-
-Package natbib Warning: Citation `Otero2001' on page 8 undefined on input line 
-424.
-
-
-Package natbib Warning: Citation `Inoue2014' on page 8 undefined on input line 
-424.
-
-
-Package natbib Warning: Citation `Corapi2012' on page 8 undefined on input line
  424.
 
 
+LaTeX Warning: Reference `section_lasp' on page 8 undefined on input line 425.
+
+
+Package natbib Warning: Citation `Otero2001' on page 8 undefined on input line 
+425.
+
+
+Package natbib Warning: Citation `Inoue2014' on page 8 undefined on input line 
+425.
+
+
+Package natbib Warning: Citation `Corapi2012' on page 8 undefined on input line
+ 425.
+
+
 Package natbib Warning: Citation `DeRaedt1997' on page 8 undefined on input lin
-e 424.
+e 425.
 
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <9> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 428.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 429.
 
 Package natbib Warning: Citation `Sakama2009' on page 8 undefined on input line
- 428.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 428--431
-
- []
+ 429.
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 436--437
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 438--443
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 450--451
+Underfull \hbox (badness 10000) in paragraph at lines 441--446
 
  []
 
 LaTeX Font Info:    Font shape `OMS/bch/m/it' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 453.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 456.
 
-Underfull \hbox (badness 10000) in paragraph at lines 452--456
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 465--468
+Underfull \hbox (badness 10000) in paragraph at lines 455--459
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 468--469
+Underfull \hbox (badness 10000) in paragraph at lines 474--475
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 469--470
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 473--474
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 475--480
+Underfull \hbox (badness 10000) in paragraph at lines 476--481
 
  []
 
 
 LaTeX Warning: Reference `def:brave_induction' on page 9 undefined on input lin
-e 485.
+e 486.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 489--490
+
+ []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 488--489
+Underfull \hbox (badness 10000) in paragraph at lines 491--496
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 490--495
-
- []
-
-
-Overfull \hbox (5.5026pt too wide) in paragraph at lines 496--497
+Overfull \hbox (5.5026pt too wide) in paragraph at lines 497--498
 []\OT1/bch/m/n/10.95 In or-der to learn the con-straint hy-poth-e-sis H = \OMS/
 cmsy/m/n/10.95 f $ $ \OT1/bch/m/n/10.95 not sit-u-a-tion(P, awake), su-per[]per
 son(P)\OMS/cmsy/m/n/10.95 g\OT1/bch/m/n/10.95 ,
@@ -1107,89 +1100,104 @@ son(P)\OMS/cmsy/m/n/10.95 g\OT1/bch/m/n/10.95 ,
 
 
 Package natbib Warning: Citation `Law2014' on page 10 undefined on input line 5
-04.
+05.
 
-LaTeX Font Info:    Try loading font information for OMS+cmss on input line 568
+LaTeX Font Info:    Try loading font information for OMS+cmss on input line 552
 .
-LaTeX Font Info:    No file OMScmss.fd. on input line 568.
+LaTeX Font Info:    No file OMScmss.fd. on input line 552.
 
 LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbraceleft' on input line 568.
+(Font)              for symbol `textbraceleft' on input line 552.
+
+
+Overfull \hbox (8.6882pt too wide) in paragraph at lines 552--554
+\OT1/bch/m/n/10.95 where, both \OT1/cmss/m/n/10.95 per-son(john) \OT1/bch/m/n/1
+0.95 and \OT1/cmss/m/n/10.95 per-son(anna) \OT1/bch/m/n/10.95 are back-ground k
+nowl-edge B, \OT1/cmss/m/n/10.95 #modeh \OT1/bch/m/n/10.95 and \OT1/cmss/m/n/10
+.95 #modeb
+ []
 
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 586--587
+Underfull \hbox (badness 10000) in paragraph at lines 571--572
 
  []
 
 
 Package natbib Warning: Citation `Law2016' on page 11 undefined on input line 5
-93.
+77.
 
 
-Overfull \hbox (2.16353pt too wide) in paragraph at lines 598--599
+Overfull \hbox (2.16353pt too wide) in paragraph at lines 582--583
 []\OT1/bch/m/n/10.95 Formally, par-tial in-ter-pre-ta-tion is called \OT1/bch/m
 /it/10.95 context-dependent par-tial in-ter-pre-ta-tion (CDPI)\OT1/bch/m/n/10.9
 5 , which
  []
 
 [11]
+Overfull \hbox (8.6882pt too wide) in paragraph at lines 632--634
+\OT1/bch/m/n/10.95 where, both \OT1/cmss/m/n/10.95 per-son(john) \OT1/bch/m/n/1
+0.95 and \OT1/cmss/m/n/10.95 per-son(anna) \OT1/bch/m/n/10.95 are back-ground k
+nowl-edge B, \OT1/cmss/m/n/10.95 #modeh \OT1/bch/m/n/10.95 and \OT1/cmss/m/n/10
+.95 #modeb
+ []
 
-LaTeX Warning: Reference `agent_env' on page 12 undefined on input line 645.
+
+LaTeX Warning: Reference `agent_env' on page 12 undefined on input line 639.
 
 
-LaTeX Warning: Reference `evaluation' on page 12 undefined on input line 646.
+LaTeX Warning: Reference `evaluation' on page 12 undefined on input line 640.
 
-<./figures/agent_env.png, id=174, 216.81pt x 220.825pt>
+<./figures/agent_env.png, id=176, 216.81pt x 220.825pt>
 File: ./figures/agent_env.png Graphic file (type png)
 
 <use ./figures/agent_env.png>
-Package pdftex.def Info: ./figures/agent_env.png used on input line 650.
+Package pdftex.def Info: ./figures/agent_env.png used on input line 644.
 (pdftex.def)             Requested size: 170.72554pt x 170.72314pt.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 651.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 645.
  [12 <./figures/agent_env.png>]
 
 Package natbib Warning: Citation `Puterman1994' on page 13 undefined on input l
-ine 669.
+ine 663.
 
 [13]
 
 Package natbib Warning: Citation `Ray2010' on page 14 undefined on input line 7
-68.
+62.
 
 
 Package natbib Warning: Citation `Sutton1990' on page 14 undefined on input lin
-e 775.
+e 769.
 
 [14]
 
-Package natbib Warning: Citation `Watkins' on page 15 undefined on input line 8
-03.
+Package natbib Warning: Citation `Watkins' on page 15 undefined on input line 7
+97.
 
 [15]
 
-LaTeX Warning: Reference `eq:sgd' on page 16 undefined on input line 919.
+LaTeX Warning: Reference `eq:sgd' on page 16 undefined on input line 913.
 
 [16]
 
-LaTeX Warning: Reference `evaluation' on page 17 undefined on input line 934.
+LaTeX Warning: Reference `evaluation' on page 17 undefined on input line 928.
 
-<./figures/tile_coding.png, id=233, 571.13374pt x 347.2975pt>
+<./figures/tile_coding.png, id=232, 571.13374pt x 347.2975pt>
 File: ./figures/tile_coding.png Graphic file (type png)
 
 <use ./figures/tile_coding.png>
-Package pdftex.def Info: ./figures/tile_coding.png used on input line 940.
+Package pdftex.def Info: ./figures/tile_coding.png used on input line 934.
 (pdftex.def)             Requested size: 438.17227pt x 266.44482pt.
 
 
 LaTeX Warning: Reference `fig:tile_coding' on page 17 undefined on input line 9
-45.
+39.
 
 [17 <./figures/tile_coding.png>] [18]
 Chapter 3.
 (./chapters/framework.tex
-<./figures/architecture.png, id=249, 1040.88875pt x 521.95pt>
+<./figures/architecture.png, id=248, 1040.88875pt x 521.95pt>
 File: ./figures/architecture.png Graphic file (type png)
 
 <use ./figures/architecture.png>
@@ -1206,7 +1214,7 @@ e 11.
 
 LaTeX Warning: Reference `eq:cdpi' on page 20 undefined on input line 34.
 
-<./figures/pipeline_example1.png, id=260, 465.74pt x 233.87375pt>
+<./figures/pipeline_example1.png, id=259, 465.74pt x 233.87375pt>
 File: ./figures/pipeline_example1.png Graphic file (type png)
 
 <use ./figures/pipeline_example1.png>
@@ -1632,8 +1640,20 @@ ne 63.
 Chapter 6.
 (./chapters/conclusion.tex [47
 
-]) [48]
-No file main.bbl.
+]) [48] (./main.bbl
+No file main.brf.
+\tf@brf=\write6
+\openout6 = `main.brf'.
+
+[49
+
+]
+Underfull \hbox (badness 1292) in paragraph at lines 86--86
+\OT1/bch/m/n/10.95 on Ap-prox-i-mat-ing Dy-namic Pro-gram-ming,'' \OT1/bch/m/it
+/10.95 Ma-chine Learn-ing Pro-ceed-ings 1990\OT1/bch/m/n/10.95 ,
+ []
+
+[50]) [51]
 Appendix A.
 (./chapters/appendix_ethics.tex
 Missing character: There is no â in font bchr7t!
@@ -1659,16 +1679,16 @@ Overfull \hbox (9.14763pt too wide) in alignment at lines 75--136
  [] [] [] 
  []
 
-[49
+[52
 
 ]
 Overfull \hbox (9.14763pt too wide) in alignment at lines 136--143
  [] [] [] 
  []
 
-[50]) [51]
+[53]) [54]
 Appendix B.
-(./chapters/appendix_learning_task.tex) [52
+(./chapters/appendix_learning_task.tex) [55
 
 ]
 Appendix C.
@@ -1676,14 +1696,19 @@ Appendix C.
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1051.
-[53
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1045.
+[56
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1051.
- (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1051.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1051.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1045.
+ (./main.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1045.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1045.
 
 
 
@@ -1695,6 +1720,13 @@ Package rerunfilecheck Info: Checksums for `main.out':
 (rerunfilecheck)             Before: <no file>
 (rerunfilecheck)             After:  533BD136667A3320E524063EAC7AD285;4356.
 
+Package rerunfilecheck Warning: File `main.brf' has changed.
+(rerunfilecheck)                Rerun to get bibliographical references right.
+
+Package rerunfilecheck Info: Checksums for `main.brf':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
+
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 
@@ -1703,16 +1735,16 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1051.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1045.
  ) 
 Here is how much of TeX's memory you used:
- 14104 strings out of 493029
- 206899 string characters out of 6136234
- 439929 words of memory out of 5000000
- 16919 multiletter control sequences out of 15000+600000
+ 14289 strings out of 493029
+ 209792 string characters out of 6136234
+ 439953 words of memory out of 5000000
+ 17070 multiletter control sequences out of 15000+600000
  56440 words of font info for 108 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,25n,49p,973b,1752s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,25n,49p,928b,1752s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fon
@@ -1733,10 +1765,10 @@ lic/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msbm10.pfb>
-Output written on main.pdf (60 pages, 955960 bytes).
+Output written on main.pdf (63 pages, 963525 bytes).
 PDF statistics:
- 790 PDF objects out of 1000 (max. 8388607)
- 659 compressed objects within 7 object streams
- 377 named destinations out of 1000 (max. 500000)
+ 842 PDF objects out of 1000 (max. 8388607)
+ 707 compressed objects within 8 object streams
+ 411 named destinations out of 1000 (max. 500000)
  121 words of extra memory for PDF output out of 10000 (max. 10000000)
 
