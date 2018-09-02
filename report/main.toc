@@ -10,11 +10,11 @@
 \contentsline {subsection}{\numberline {2.1.2}Answer Set Programming (ASP) Syntax}{7}{subsection.2.1.2}
 \contentsline {section}{\numberline {2.2}Inductive Logic Programming (ILP)}{8}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}ILP under Answer Set Semantics}{8}{subsection.2.2.1}
-\contentsline {subsubsection}{Cautious Induction }{8}{section*.4}
+\contentsline {subsubsection}{Cautious Induction}{9}{section*.4}
 \contentsline {subsubsection}{Brave Induction}{9}{section*.5}
 \contentsline {subsection}{\numberline {2.2.2}Inductive Learning of Answer Set Programs (ILASP)}{10}{subsection.2.2.2}
 \contentsline {subsubsection}{Learning from Answer Sets (LAS)}{10}{section*.6}
-\contentsline {subsubsection}{Inductive Learning of Answer Set Programs (ILASP)}{10}{section*.7}
+\contentsline {subsubsection}{Inductive Learning of Answer Set Programs (ILASP)}{11}{section*.7}
 \contentsline {subsubsection}{Context-dependent Learning from Answer Sets }{11}{section*.8}
 \contentsline {section}{\numberline {2.3}Reinforcement Learning (RL)}{12}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}Markov Decision Process (MDP)}{12}{subsection.2.3.1}
@@ -23,9 +23,9 @@
 \contentsline {subsection}{\numberline {2.3.4}Temporal-Difference (TD) Learning}{14}{subsection.2.3.4}
 \contentsline {subsection}{\numberline {2.3.5}Function Approximation}{15}{subsection.2.3.5}
 \contentsline {subsubsection}{The Prediction Objective ($\overline {VE}$)}{15}{section*.10}
-\contentsline {subsubsection}{Stochastic gradient descent (SGD)}{15}{section*.11}
+\contentsline {subsubsection}{Stochastic gradient descent (SGD)}{16}{section*.11}
 \contentsline {subsubsection}{Linear Value Function Approximation}{16}{section*.12}
-\contentsline {subsubsection}{Tile Coding \leavevmode {\color {red}(TBD)}}{16}{section*.13}
+\contentsline {subsubsection}{Tile Coding \leavevmode {\color {red}(TBD)}}{17}{section*.13}
 \contentsline {subsection}{\numberline {2.3.6}Transfer Learning \leavevmode {\color {red}(TBD)}}{18}{subsection.2.3.6}
 \contentsline {chapter}{\numberline {3}Framework}{19}{chapter.3}
 \contentsline {section}{\numberline {3.1}Overview}{19}{section.3.1}
@@ -68,6 +68,6 @@
 \contentsline {chapter}{\numberline {6}Conclusion}{47}{chapter.6}
 \contentsline {section}{\numberline {6.1}Summary of Work}{47}{section.6.1}
 \contentsline {section}{\numberline {6.2}Further Research}{48}{section.6.2}
-\contentsline {chapter}{\numberline {A}Ethics}{52}{appendix.A}
-\contentsline {chapter}{\numberline {B}Learning tasks}{55}{appendix.B}
-\contentsline {chapter}{\numberline {C}Answer Set Program}{56}{appendix.C}
+\contentsline {chapter}{\numberline {A}Ethics}{49}{appendix.A}
+\contentsline {chapter}{\numberline {B}Learning tasks}{52}{appendix.B}
+\contentsline {chapter}{\numberline {C}Answer Set Program}{53}{appendix.C}

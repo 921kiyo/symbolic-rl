@@ -350,7 +350,12 @@ An atom $a$ is \textit{bravely} entailed by a normal logic program P, denoted $ 
 
 \begin{examp} \normalfont (Brave and Cautious Entailment) \\
 
-XX
+P = $\begin{cases}
+	\textit{p}  \leftarrow \textit{not q, r.} \\
+  	\textit{q} \leftarrow \textit{not p, r.} \\
+	\textit{r.}
+      \end{cases}$ 
+In this case, $P\models$\textsubscript{b} \{p, q, r\} and $P\models$\textsubscript{c} \{ r\}
 \end{examp}
 
 \subsection{Answer Set Programming (ASP) Syntax}
@@ -414,8 +419,10 @@ An advantage of ILP over statistical machine learning is that the hypothesis tha
 By contrast, a limitation of ILP is scalability. There are usually thousands or more examples in many real-world examples. Scaling ILP tasks to cope with large examples is a challenging task \cite{Muggleton1993}.
 
 \subsection{ILP under Answer Set Semantics}
-There are several ILP non-monotonic learning frameworks under the answer set semantics . We first introduce two of them: \textit{Cautious Induction} and \textit{Brave Induction} (\cite{Sakama2009}), which are the foundations of \textit{Learning from Answer Sets} discussed in Section \ref{section_lasp}, a state-of-the-art ILP framework that we will use for our new framework (for other non-monotonic ILP frameworks, see \cite{Otero2001}, \cite{Inoue2014}, \cite{Corapi2012} and \cite{DeRaedt1997}).
-\subsubsection{Cautious Induction }
+There are several ILP non-monotonic learning frameworks under the answer set semantics. 
+We first introduce two of them: \textit{Cautious Induction} and \textit{Brave Induction} (\cite{Sakama2009}), 
+which are the foundations of \textit{Learning from Answer Sets} discussed in Section \ref{section_lasp}, a state-of-the-art ILP framework that we will use for our new framework (for other non-monotonic ILP frameworks, see \cite{Otero2001}, \cite{Inoue2014}, \cite{Corapi2012} and \cite{DeRaedt1997}).
+\subsubsection{Cautious Induction}
 
 \begin{defn}
 \textit{Cautious Induction} task\footnote{This is more general definition of Cautious Induction than the one defined in \cite{Sakama2009}, as the concept of negative examples was not included in the original definition.} is of the form $\langle$ B, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, where B is the background knowledge, E\textsuperscript{+} is a set of positive examples and E\textsuperscript{-} is a set of negative examples.
@@ -495,16 +502,19 @@ In order to learn the  constraint hypothesis H = \{ $\leftarrow$ not situation(P
 
 \subsubsection{Learning from Answer Sets (LAS)}
 \textit{Learning from Answer Sets (LAS)} was developed in \cite{Law2014} to facilitate more complex learning tasks that neither Cautious Induction nor Brave Induction could learn.
-Examples used in LAS are a tuple of pairs of atoms called \textit{Partial Interpretations}, which is of the form:
+We define examples used in LAS are a set of atoms called a \textit{Partial Interpretation}.
+\begin{defn}
+A \textit{Partial Interpretation E} is of the form:
 \begin{equation}
 \begin{split}
-%\underbrace{h}_\text{head} \leftarrow\underbrace{ a\textsubscript{1}, a\textsubscript{2}, ..., a\textsubscript{n}}_\text{body}
 E = \langle e\textsuperscript{inc}, e\textsuperscript{exc} \rangle. 
 \end{split}
 \label{partial_interpretations}
 \end{equation}
-
-(called \textit{inclusions} and \textit{exclusions} of \textit{E} respectively).  A Herbrand Interpretation extends a partial interpretation if it includes all of E\textsuperscript{inc} and none of E\textsuperscript{exc}.
+where e\textsuperscript{inc} and e\textsuperscript{exc} are called \textit{inclusions} and \textit{exclusions} of \textit{E} respectively.
+An answer set \textit{A extends E} if and only if $(e\textsuperscript{inc} \subseteq A) \wedge (e\textsuperscript{exc} \cap A = \emptyset)$.
+\end{defn}
+% A Herbrand Interpretation extends a partial interpretation if it includes all of E\textsuperscript{inc} and none of E\textsuperscript{exc}.
 
 A \textit{Learning from Answer Sets} task is of the form:
 \begin{equation}
@@ -513,8 +523,11 @@ T = \langle B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} \r
 \end{split}
 \label{las}
 \end{equation}
-where B is background knowledge, S\textsubscript{M} is hypothesis space, and E\textsuperscript{+} and E\textsuperscript{-} are examples of positive and negative partial interpretations. S\textsubscript{M} consists of a set of normal rules, choice rules and constraints. 
-S\textsubscript{M} is specified by \textit{language bias} of the learning task using \textit{mode declaration}. Mode declaration specifies what can occur in a hypothesis by specifying the predicates, and consists of two parts: \textit{modeh} and \textit{modeb}.  \textit{modeh} and \textit{modeb} are the predicates that can occur in the head of the rule and body of the rule respectively. Language bias is the specification of the language in the hypothesis in order to reduce the search space for the hypothesis.
+where B is background knowledge, S\textsubscript{M} is hypothesis space, and E\textsuperscript{+} and E\textsuperscript{-} are examples of positive and negative partial interpretations. 
+S\textsubscript{M} consists of a set of normal rules, choice rules and constraints. 
+S\textsubscript{M} is specified by \textit{language bias} of the learning task using \textit{mode declaration}. 
+Mode declaration specifies what can occur in a hypothesis by specifying the predicates, and consists of two parts: \textit{modeh} and \textit{modeb}. 
+\textit{modeh} and \textit{modeb} are the predicates that can occur in the head of the rule and body of the rule respectively. 
 
 \begin{defn}{Learning from Answer Sets (LAS)}
 
@@ -543,10 +556,23 @@ Given a learning task T, the set of all possible inductive solutions of T, denot
 %\label{las_example}
 
 % Limitation of LAS??
-
+\begin{examp} \normalfont (LAS).
+Suppose a learning task T is as follows:
+\begin{flalign*}
+\label{appendix:example}
+&\textsf{cell((0..7, 0..6)).}&\\
+&\textsf{\#modeh(state\_after(var(cell))).}&\\
+&\textsf{\#modeb(1, adjacent(const(action), var(cell), var(cell))).}&\\
+&\textsf{\#pos(e1, \{e\textsuperscript{inc}\}, \{e\textsuperscript{exc}\}})&\\
+&\textsf{\#pos(e2, \{e\textsuperscript{inc}\}, \{e\textsuperscript{exc}\}})
+\end{flalign*}
+\end{examp}
+where, both XX and XX are background knowledge B, \textsf{\#modeh} and \textsf{\#modeb} are language bias and two positive examples \textsf{\#pos} are given.
+      
 \subsubsection{Inductive Learning of Answer Set Programs (ILASP)}
 
-\textit{Inductive Learning of Answer Set Programs (ILASP)} is an algorithm that is capable of solving LAS tasks, and is based on two fundamental concepts: \textit{positive solutions} and \textit{violating solutions}.
+\textit{Inductive Learning of Answer Set Programs (ILASP)} is an algorithm that is capable of solving a LAS task ILP\textsubscript{LAS}(T) $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, 
+and is based on two fundamental concepts: \textit{positive solutions} and \textit{violating solutions}.
 
 A hypothesis H is a positive solution if and only if
 \begin{enumerate}
@@ -562,10 +588,6 @@ A hypothesis H is a violating solution if and only if
 
 Given both definitions of positive and violating solutions, ILP\textsubscript{LAS} $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$is positive solutions that are not violating solutions.
 
-\begin{examp} \normalfont (ILASP).
-
-XXX
-\end{examp}
 
 \subsubsection{Context-dependent Learning from Answer Sets }
 \textit{Context-dependent learning from answer sets ($ILP_{LAS}^{context}$)} is a further generalisation of ILP\textsubscript{LAS} with \textit{context dependent examples}\cite{Law2016}\footnote{The original paper developed the framework called \textit{learning from ordered answer sets ($ILP_{LOAS}^{context}$)}. 
