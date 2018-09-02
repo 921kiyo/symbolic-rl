@@ -1,14 +1,3 @@
-@article{Lifschitz2008,
-abstract = {Answer set programming (ASP) is a form of declarative pro-gramming oriented towards difficult search problems. As an outgrowth of research on the use of nonmonotonic reason-ing in knowledge representation, it is particularly useful in knowledge-intensive applications. ASP programs consist of rules that look like Prolog rules, but the computational mech-anisms used in ASP are different: they are based on the ideas that have led to the creation of fast satisfiability solvers for propositional logic.},
-author = {Lifschitz, Vladimir},
-file = {:home/kiyo/Dropbox/Individual Project/ILP/What is ASP.pdf:pdf},
-journal = {Aaai},
-keywords = {Senior Member Papers},
-pages = {1594--1597},
-title = {{What Is Answer Set Programming?.}},
-volume = {8},
-year = {2008}
-}
 @article{Dzeroski2001,
 abstract = {Relational reinforcement learning is presented, a learning technique that combines reinforcement learning with relational learning or inductive logic programming.Dueto the use of a more expressive representation language to represent states, actions and Q-functions, relational reinforcement learning can be potentially applied to a new range of learning tasks. One such task that we investigate is planning in the blocks world, where it is assumed that the effects of the actions are unknown to the agent and the agent has to learn a policy. Within this simple domain we show that relational reinforcement learning solves some existing problems with reinforcement learning. In particular, relational reinforcement learning allows us to employ structural representations, to abstract from specific goals pursued and to exploit the results of previous learning phases when addressing new (more complex) situations.},
 author = {Dzeroski, Saso and {De Raedt}, Luc and Driessens, Kurt},
@@ -23,15 +12,12 @@ title = {{Thesis: Relational Reinforcement Learning}},
 volume = {43},
 year = {2001}
 }
-
-
 @article{Meadows2018,
 author = {Meadows, Benjamin},
 file = {:home/kiyo/Downloads/intex18{\_}actionAxiomLearn.pdf:pdf},
 title = {{Knowledge Representation and Interactive Learning of Domain Knowledge for Human-Robot Interaction}},
 year = {2018}
 }
-
 @inproceedings{gringo,
 abstract = {We describe the major new features emerging from a significant redesign of the grounder gringo, building upon a grounding algorithm based on semi-naive database evaluation. Unlike previous versions, rules only need to be safe rather than domain-restricted.},
 address = {Berlin, Heidelberg},
@@ -44,8 +30,6 @@ publisher = {Springer Berlin Heidelberg},
 title = {{Advances in gringo Series 3}},
 year = {2011}
 }
-
-
 @article{Ray2010,
 abstract = {Model-based Reinforcement Learning refers to learning optimal behavior indirectly by learning a model of the environment by taking actions and observing the outcomes that include the next state and the immediate reward. The models predict the outcomes of actions and are used in lieu of or in addition to interaction with the environment to learn optimal policies. 3 Motivation and Background Reinforcement Learning (RL) refers to learning to behave optimally in a stochastic environment by taking actions and receiving rewards [1]. The environment is assumed Markovian in that there is a fixed probability of the next state given the current state and the agent's action. The agent also receives an immediate reward based on the current state and the action. Models of the next-state distribution and the immediate rewards are referred to as " action models " and, in general, are not known to the learner. The agent's goal is to take actions, observe the outcomes including rewards and next states, and learn a policy or a mapping from states to actions that optimizes some performance measure. Typically the performance measure is the expected total reward in episodic domains, and the expected average reward per time step or expected discounted total reward in infinite-horizon domains. The theory of Markov Decision Processes (MDPs) implies that under fairly general conditions, there is a stationary policy, i.e., a time-invariant mapping from states to actions, that maximizes each of the above reward measures. Moreover, there are MDP solution algorithms, e.g., value iteration and policy iteration [2], which can be used to solve the MDP exactly given the action models. Assuming that the number of states is not exceedingly high, this suggests a straight-forward approach for model-based reinforcement learning. The models can be learned by interacting with the environment by taking actions, observing the resulting states and rewards, and estimating the parameters of the action models through maximum likelihood methods. Once the models are estimated to a desired accuracy, the MDP solution algorithms can be run to learn the optimal policy. One weakness of the above approach is that it seems to suggest that a fairly accurate model needs to be learned over the entire domain to learn a good policy. Intuitively it seems that we should be able to get by without learning highly accurate models for suboptimal actions. A related problem is that the method does not suggest how best to explore the domain, i.e., which states to visit and which actions to execute to quickly learn an optimal policy. A third issue is one of scaling these methods, including model learning, to very large state spaces with billions of states. The remaining sections outline some of the approaches explored in the literature to solve these problems.},
 archivePrefix = {arXiv},
@@ -63,7 +47,34 @@ title = {{Model-Based Reinforcement Learning}},
 url = {http://dx.doi.org/10.1007/978-0-387-30164-8{\_}556},
 year = {2010}
 }
-
+@article{Lifschitz2008,
+abstract = {Answer set programming (ASP) is a form of declarative pro-gramming oriented towards difficult search problems. As an outgrowth of research on the use of nonmonotonic reason-ing in knowledge representation, it is particularly useful in knowledge-intensive applications. ASP programs consist of rules that look like Prolog rules, but the computational mech-anisms used in ASP are different: they are based on the ideas that have led to the creation of fast satisfiability solvers for propositional logic.},
+author = {Lifschitz, Vladimir},
+file = {:home/kiyo/Dropbox/Individual Project/ILP/What is ASP.pdf:pdf},
+journal = {Aaai},
+keywords = {Senior Member Papers},
+pages = {1594--1597},
+title = {{What Is Answer Set Programming?.}},
+volume = {8},
+year = {2008}
+}
+@article{Kazmi2017,
+abstract = {Inductive Logic Programming (ILP) combines rule-based and statistical artificial intelligence methods, by learning a hypothesis comprising a set of rules given background knowledge and constraints for the search space. We focus on extending the XHAIL algorithm for ILP which is based on Answer Set Programming and we evaluate our extensions using the Natural Language Processing application of sentence chunking. With respect to processing natural language, ILP can cater for the constant change in how we use language on a daily basis. At the same time, ILP does not require huge amounts of training examples such as other statistical methods and produces interpretable results, that means a set of rules, which can be analysed and tweaked if necessary. As contributions we extend XHAIL with (i) a pruning mechanism within the hypothesis generalisation algorithm which enables learning from larger datasets, (ii) a better usage of modern solver technology using recently developed optimisation methods, and (iii) a time budget that permits the usage of suboptimal results. We evaluate these improvements on the task of sentence chunking using three datasets from a recent SemEval competition. Results show that our improvements allow for learning on bigger datasets with results that are of similar quality to state-of-the-art systems on the same task. Moreover, we compare the hypotheses obtained on datasets to gain insights on the structure of each dataset.},
+archivePrefix = {arXiv},
+arxivId = {1706.05171},
+author = {Kazmi, Mishal and Sch{\"{u}}ller, Peter and Saygın, Y{\"{u}}cel},
+doi = {10.1016/j.eswa.2017.06.013},
+eprint = {1706.05171},
+file = {:home/kiyo/Dropbox/Individual Project/ILP/Improving Scalability of Inductive Logic Programming
+via Pruning and Best-Effort Optimisation.pdf:pdf},
+issn = {09574174},
+journal = {Expert Systems with Applications},
+keywords = {Answer Set Programming,Chunking,Inductive logic programming,Natural Language Processing},
+pages = {291--303},
+title = {{Improving scalability of inductive logic programming via pruning and best-effort optimisation}},
+volume = {87},
+year = {2017}
+}
 @article{Brockman2016,
 archivePrefix = {arXiv},
 arxivId = {1606.01540},
@@ -524,7 +535,7 @@ archivePrefix = {arXiv},
 arxivId = {1608.01946},
 author = {Law, Mark and Russo, Alessandra and Broda, Krysia},
 eprint = {1608.01946},
-file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Law, Russo, Broda - 2016 - Iterative Learning of Answer Set Programs from Context Dependent Examples(2).pdf:pdf},
+file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Law, Russo, Broda - 2016 - Iterative Learning of Answer Set Programs from Context Dependent Examples(3).pdf:pdf},
 month = {aug},
 title = {{Iterative Learning of Answer Set Programs from Context Dependent Examples}},
 url = {http://arxiv.org/abs/1608.01946},
@@ -835,7 +846,7 @@ archivePrefix = {arXiv},
 arxivId = {1608.01946},
 author = {Law, Mark and Russo, Alessandra and Broda, Krysia},
 eprint = {1608.01946},
-file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Law, Russo, Broda - 2016 - Iterative Learning of Answer Set Programs from Context Dependent Examples(2).pdf:pdf},
+file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Law, Russo, Broda - 2016 - Iterative Learning of Answer Set Programs from Context Dependent Examples(3).pdf:pdf},
 month = {aug},
 title = {{Iterative Learning of Answer Set Programs from Context Dependent Examples}},
 url = {http://arxiv.org/abs/1608.01946},
@@ -963,20 +974,6 @@ url = {http://dx.doi.org/10.1038/nature16961},
 volume = {529},
 year = {2016}
 }
-@article{Mnih2015,
-abstract = {The theory of reinforcement learning provides a normative account 1 , deeply rooted in psychological 2 and neuroscientific 3 perspectives on animal behaviour, of how agents may optimize their control of an environment. To use reinforcement learning successfully in situations approaching real-world complexity, however, agents are confronted with a difficult task: they must derive efficient representations of the environment from high-dimensional sensory inputs, and use these to generalize past experience to new situations. Remarkably, humans and other animals seem to solve this problem through a harmonious combination of reinforcement learning and hierarchical sensory pro-cessing systems 4,5 , the former evidenced by a wealth of neural data revealing notable parallels between the phasic signals emitted by dopa-minergic neurons and temporal difference reinforcement learning algorithms 3 . While reinforcement learning agents have achieved some successes in a variety of domains 6–8 , their applicability has previously been limited to domains in which useful features can be handcrafted, or to domains with fully observed, low-dimensional state spaces. Here we use recent advances in training deep neural networks 9–11 to develop a novel artificial agent, termed a deep Q-network, that can learn successful policies directly from high-dimensional sensory inputs using end-to-end reinforcement learning. We tested this agent on the challenging domain of classic Atari 2600 games 12},
-archivePrefix = {arXiv},
-arxivId = {1312.5602},
-author = {Mnih, Volodymyr and Kavukcuoglu, Koray and Silver, David and Rusu, Andrei A. and Veness, Joel and Bellemare, Marc G. and Graves, Alex and Riedmiller, Martin and Fidjeland, Andreas K. and Ostrovski, Georg and Petersen, Stig and Beattie, Charles and Sadik, Amir and Antonoglou, Ioannis and King, Helen and Kumaran, Dharshan and Wierstra, Daan and Legg, Shane and Hassabis, Demis},
-doi = {10.1038/nature14236},
-eprint = {1312.5602},
-isbn = {1476-4687 (Electronic) 0028-0836 (Linking)},
-issn = {14764687},
-journal = {Nature},
-pmid = {25719670},
-title = {{Human-level control through deep reinforcement learning}},
-year = {2015}
-}
 @article{Krizhevsky2012,
 abstract = {We trained a large, deep convolutional neural network to classify the 1.2 million high-resolution images in the ImageNet LSRVRC-2010 contest into the 1000 different classes. On the test data, we achieved top-1 and top-5 error rates of 37.5{\%} and 17.0{\%} which is considerably better than the previous state of the art. The neural network, which has 60 million paramters and 650,000 neurons, consists of five convolutional layers, some of which are followed by max-pooling layers, and three fully connected layers with a final 1000-way softmax. To make training faster, we used non-saturating neurons and a very efficient GPU implementation of the convolutional operation. To reduce overfitting in the fully-connected layers, we employed a recently-developed method called 'dropout' that proved to be effective. We also entered a variant of the model in the ILSVRC-2012 competition and achievd a top-5 test error rate of 15.3{\%}, compared to 26.2{\%} achieved by the second-best entry.},
 archivePrefix = {arXiv},
@@ -992,6 +989,20 @@ pages = {1--9},
 pmid = {7491034},
 title = {{ImageNet Classification with Deep Convolutional Neural Networks}},
 year = {2012}
+}
+@article{Mnih2015,
+abstract = {The theory of reinforcement learning provides a normative account 1 , deeply rooted in psychological 2 and neuroscientific 3 perspectives on animal behaviour, of how agents may optimize their control of an environment. To use reinforcement learning successfully in situations approaching real-world complexity, however, agents are confronted with a difficult task: they must derive efficient representations of the environment from high-dimensional sensory inputs, and use these to generalize past experience to new situations. Remarkably, humans and other animals seem to solve this problem through a harmonious combination of reinforcement learning and hierarchical sensory pro-cessing systems 4,5 , the former evidenced by a wealth of neural data revealing notable parallels between the phasic signals emitted by dopa-minergic neurons and temporal difference reinforcement learning algorithms 3 . While reinforcement learning agents have achieved some successes in a variety of domains 6–8 , their applicability has previously been limited to domains in which useful features can be handcrafted, or to domains with fully observed, low-dimensional state spaces. Here we use recent advances in training deep neural networks 9–11 to develop a novel artificial agent, termed a deep Q-network, that can learn successful policies directly from high-dimensional sensory inputs using end-to-end reinforcement learning. We tested this agent on the challenging domain of classic Atari 2600 games 12},
+archivePrefix = {arXiv},
+arxivId = {1312.5602},
+author = {Mnih, Volodymyr and Kavukcuoglu, Koray and Silver, David and Rusu, Andrei A. and Veness, Joel and Bellemare, Marc G. and Graves, Alex and Riedmiller, Martin and Fidjeland, Andreas K. and Ostrovski, Georg and Petersen, Stig and Beattie, Charles and Sadik, Amir and Antonoglou, Ioannis and King, Helen and Kumaran, Dharshan and Wierstra, Daan and Legg, Shane and Hassabis, Demis},
+doi = {10.1038/nature14236},
+eprint = {1312.5602},
+isbn = {1476-4687 (Electronic) 0028-0836 (Linking)},
+issn = {14764687},
+journal = {Nature},
+pmid = {25719670},
+title = {{Human-level control through deep reinforcement learning}},
+year = {2015}
 }
 @article{Mnih2015a,
 abstract = {Policy advice is a transfer learning method where a student agent is able to learn faster via advice from a teacher. However, both this and other reinforcement learning transfer methods have little theoretical analysis. This paper formally defines a setting where multiple teacher agents can provide advice to a student and introduces an algorithm to leverage both autonomous exploration and teacher's advice. Our regret bounds justify the intuition that good teachers help while bad teachers hurt. Using our formalization, we are also able to quantify, for the first time, when negative transfer can occur within such a reinforcement learning setting.},

@@ -191,6 +191,12 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+INPUT main.out
+INPUT main.out
+INPUT main.out
+INPUT main.out
+INPUT ./main.out
+INPUT ./main.out
 OUTPUT main.out
 OUTPUT main.pdf
 INPUT /usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
@@ -261,9 +267,11 @@ INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchb7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchb8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchr7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchb7t.tfm
+INPUT main.toc
 OUTPUT main.toc
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchb7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchb8r.tfm
+INPUT main.lot
 OUTPUT main.lot
 INPUT chapters/introduction.tex
 INPUT chapters/introduction.tex

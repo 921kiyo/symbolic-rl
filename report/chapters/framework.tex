@@ -1,3 +1,6 @@
+This chapter introduces a new proof-of-concept framework called \textit{ILP(RL)}, a new learning framwork for RL problems by using inductive learning with ILASP and planning with ASP.
+The development of this framework is one of the main components of this project and we explain the mechanisms in details in this Chapter.
+
 \section{Overview}
 \label{sec:overview}
 
@@ -8,7 +11,8 @@
 \label{fig:ILPRL_overview}
 \end{figure}
 
-The overall architecture of the learning framework, called \textit{ILP(RL)}, is shown in Figure \ref{fig:ILPRL_overview}. 
+
+The overall architecture of ILP(RL), is shown in Figure \ref{fig:ILPRL_overview}. 
 By interacting with the environment, an agent receives state transition experiences as positive examples, which is uP, together with pre-defined background knowledge and language bias, to learn and improve hypotheses.
 The agent also remembers surrounding information it has seen as background knowledge, which is used to make an action plan together using the learnt hypotheses by solving an answer set program.
 Mechanisms of each step is explained in details in the following sections.

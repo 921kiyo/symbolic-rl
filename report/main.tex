@@ -292,7 +292,8 @@ P = $\begin{cases}
 	\textit{hasCar(john).}
       \end{cases}$ \\
 
-ground(P) in this example is \{hasCar(john), drive(john)\}, as hasCar(john) is already grounded and added to Q, and it is also a positive body literal for the first rule, resulting in q(a).
+ground(P) in this example is \{drive(john) $\leftarrow$ hasCar(john), hasCar(john) \}, as hasCar(john) is already grounded and added to Q, 
+and it is also a positive body literal for the first rule, resulting in drive(john) $\leftarrow$ hasCar(john).
 \end{examp}
 
 %TODO Explain grounding in ASP context.
