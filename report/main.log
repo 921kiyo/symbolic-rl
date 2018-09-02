@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  1 SEP 2018 21:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  2 SEP 2018 12:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1290,19 +1290,19 @@ Package pdftex.def Info: ./figures/env_sample.png used on input line 592.
 Package natbib Warning: Citation `Schaul2013' on page 28 undefined on input lin
 e 597.
 
-
-Package natbib Warning: Citation `Brockman2016' on page 28 undefined on input l
-ine 598.
-
 [28 <./figures/env_sample.png>]
 
-LaTeX Warning: Reference `VGDL_sample' on page 29 undefined on input line 600.
+Package natbib Warning: Citation `Brockman2016' on page 29 undefined on input l
+ine 607.
+
+
+LaTeX Warning: Reference `VGDL_sample' on page 29 undefined on input line 609.
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 620.
+nput line 629.
  (./openai.py
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1.
@@ -1566,48 +1566,63 @@ ent4_hypothesis.pl) [42] [43
 Chapter 5.
 (./chapters/related_work.tex
 
+Package natbib Warning: Citation `Dzeroski2001' on page 45 undefined on input l
+ine 6.
+
+
+Overfull \hbox (1.65915pt too wide) in paragraph at lines 10--11
+[]\OT1/bch/m/n/10.95 RRL is based on first-order logic, and does not cope with 
+nega-tion as fail-ure or non-monotonic
+ []
+
+
 Package natbib Warning: Citation `Garnelo2016' on page 45 undefined on input li
-ne 3.
+ne 22.
 
 
 Package natbib Warning: Citation `LeCunL1998' on page 45 undefined on input lin
-e 3.
+e 23.
 
 
-Package natbib Warning: Citation `Su2017' on page 45 undefined on input line 4.
-
+Package natbib Warning: Citation `Su2017' on page 45 undefined on input line 29
+.
 
 
 Package natbib Warning: Citation `Garcez2018' on page 45 undefined on input lin
-e 6.
-
-
-Package natbib Warning: Citation `Zambaldi2018' on page 45 undefined on input l
-ine 8.
-
-
-Package natbib Warning: Citation `Garnelo2016' on page 45 undefined on input li
-ne 8.
-
-
-Package natbib Warning: Citation `Apeldoorn2017' on page 45 undefined on input 
-line 18.
-
-
-Package natbib Warning: Citation `Apeldoorn2016' on page 45 undefined on input 
-line 18.
-
-
-Package natbib Warning: Citation `Apeldoorn' on page 45 undefined on input line
- 18.
-
-
-Package natbib Warning: Citation `Ferreira2017' on page 45 undefined on input l
-ine 20.
+e 32.
 
 [45
 
-]) [46]
+]
+
+Package natbib Warning: Citation `Zambaldi2018' on page 46 undefined on input l
+ine 35.
+
+
+Package natbib Warning: Citation `Garnelo2016' on page 46 undefined on input li
+ne 36.
+
+
+Package natbib Warning: Citation `Apeldoorn2017' on page 46 undefined on input 
+line 46.
+
+
+Package natbib Warning: Citation `Apeldoorn2016' on page 46 undefined on input 
+line 47.
+
+
+Package natbib Warning: Citation `Apeldoorn' on page 46 undefined on input line
+ 47.
+
+
+Package natbib Warning: Citation `Ferreira2017' on page 46 undefined on input l
+ine 52.
+
+
+Package natbib Warning: Citation `Meadows2018' on page 46 undefined on input li
+ne 65.
+
+) [46]
 Chapter 6.
 (./chapters/conclusion.tex [47
 
@@ -1685,10 +1700,10 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1001.
  ) 
 Here is how much of TeX's memory you used:
- 14089 strings out of 493029
- 206671 string characters out of 6136234
- 439336 words of memory out of 5000000
- 16910 multiletter control sequences out of 15000+600000
+ 14091 strings out of 493029
+ 206698 string characters out of 6136234
+ 439739 words of memory out of 5000000
+ 16912 multiletter control sequences out of 15000+600000
  56440 words of font info for 108 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,25n,49p,973b,1752s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1712,7 +1727,7 @@ lic/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msbm10.pfb>
-Output written on main.pdf (60 pages, 951504 bytes).
+Output written on main.pdf (60 pages, 953258 bytes).
 PDF statistics:
  783 PDF objects out of 1000 (max. 8388607)
  652 compressed objects within 7 object streams

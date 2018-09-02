@@ -97,6 +97,10 @@ M.~Gebser, R.~Kaminski, A.~K{\"{o}}nig, and T.~Schaub, ``{Advances in gringo
 G.~Brockman, V.~Cheung, L.~Pettersson, J.~Schneider, J.~Schulman, J.~Tang, and
   W.~Zaremba, ``{OpenAI Gym},'' jun 2016.
 
+\bibitem{Dzeroski2001}
+S.~Dzeroski, L.~{De Raedt}, and K.~Driessens, ``{Thesis: Relational
+  Reinforcement Learning},'' {\em Machine Learning}, vol.~43, pp.~7--52, 2001.
+
 \bibitem{Su2017}
 J.~Su, D.~V. Vargas, and S.~Kouichi, ``{One pixel attack for fooling deep
   neural networks},'' oct 2017.
@@ -130,5 +134,9 @@ D.~Apeldoorn and G.~Kern-isberner, ``{Towards an Understanding of What Is
 L.~A. Ferreira, R.~A.~C. Bianchi, P.~E. Santos, and R.~L. de~Mantaras,
   ``{Answer Set Programming for Non-Stationary Markov Decision Processes},''
   may 2017.
+
+\bibitem{Meadows2018}
+B.~Meadows, ``{Knowledge Representation and Interactive Learning of Domain
+  Knowledge for Human-Robot Interaction},'' 2018.
 
 \end{thebibliography}

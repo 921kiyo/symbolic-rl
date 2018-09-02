@@ -595,7 +595,16 @@ Planning is computed using Clingo 5.
 \end{figure}
 
 We use the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
-The VGDL allows users to easily craft their own environments, which makes us possible to do various experiments without relying on a default environment. The VGDL platform provides an interface with OpenAI Gym (\cite{Brockman2016}), which is a commonly used benchmark platform.
+The VGDL allows users to easily craft their own environments, which makes us possible to do various experiments without relying on a default environment. 
+All objects in the games can be described as a sprite in the \textit{SpriteSet}, and users can define the objects' properties such as orientation or movements.
+The representation of each object can be specified in \textit{LevelMapping} and allows users to customize an original map.
+\textit{InteractionSet} specify the effects of objects when two objects interact in the game.
+\textit{TerminationSet} specify the conditions for ending the game.
+
+
+XX VDGL mapping example.
+
+The VGDL platform provides an interface with OpenAI Gym (\cite{Brockman2016}), which is a commonly used benchmark platform.
 
 The base game is a simple maze as shown in Figure \ref{VGDL_sample}.
 There are 3 different types of cells: a goal cell, walls and paths. The agent can take 4 different actions: up, down, right and left.
