@@ -30,9 +30,9 @@
 \contentsline {chapter}{\numberline {3}Framework}{19}{chapter.3}
 \contentsline {section}{\numberline {3.1}Overview}{19}{section.3.1}
 \contentsline {section}{\numberline {3.2}Inductive Learning Task}{20}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Context Dependent Examples}{20}{subsection.3.2.1}
-\contentsline {subsubsection}{Positive examples in ASP syntax}{20}{section*.16}
-\contentsline {subsection}{\numberline {3.2.2}Background Knowledge}{21}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.1}Background Knowledge}{20}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Context Dependent Examples}{20}{subsection.3.2.2}
+\contentsline {subsubsection}{Positive examples in ASP syntax}{21}{section*.16}
 \contentsline {subsection}{\numberline {3.2.3}Language Bias}{22}{subsection.3.2.3}
 \contentsline {subsection}{\numberline {3.2.4}Hypothesis}{23}{subsection.3.2.4}
 \contentsline {section}{\numberline {3.3}Planning with Answer Set Programming}{23}{section.3.3}

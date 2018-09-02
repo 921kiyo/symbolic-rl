@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  2 SEP 2018 23:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  3 SEP 2018 00:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -764,8 +764,6 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 125.
 LaTeX Info: Redefining \pageref on input line 125.
 LaTeX Info: Redefining \nameref on input line 125.
-
-(./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
@@ -870,22 +868,15 @@ LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <14.4> not available
 ]
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <24.88> not available
 (Font)              Font shape `OT1/bch/b/n' tried instead on input line 154.
-
-
-Package hyperref Warning: old toc file detected, not used; run LaTeX again.
-
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
-[5
+ [5
 
 ] [6
 
 
 ]
-
-Package hyperref Warning: old lot file detected, not used; run LaTeX again.
-
 \tf@lot=\write5
 \openout5 = `main.lot'.
 
@@ -1052,7 +1043,18 @@ Package natbib Warning: Citation `Corapi2012' on page 8 undefined on input line
 Package natbib Warning: Citation `DeRaedt1997' on page 8 undefined on input lin
 e 426.
 
-LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <9> not availailable
+LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <9> not available
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 430.
+
+Package natbib Warning: Citation `Sakama2009' on page 8 undefined on input line
+ 430.
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 442--447
+
+ []
+
+LaTeX Font Info:    Font shape `OMS/bch/m/it' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 457.
 
 Underfull \hbox (badness 10000) in paragraph at lines 456--460
@@ -1193,133 +1195,122 @@ Chapter 3.
 File: ./figures/architecture.png Graphic file (type png)
 
 <use ./figures/architecture.png>
-Package pdftex.def Info: ./figures/architecture.png used on input line 9.ine 9
-40.
-
-[17 <./figures/tile_coding.png>] [18]
-Chapter 3.
-(./chapters/framework.tex
-<./figures/architecture.png, id=248, 1040.88875pt x 521.95pt>
-File: ./figures/architecture.png Graphic file (type png)
-
-<use ./figures/architecture.png>
 Package pdftex.def Info: ./figures/architecture.png used on input line 9.
 (pdftex.def)             Requested size: 438.17227pt x 219.71925pt.
 
 
 LaTeX Warning: Reference `fig:ILPRL_overview' on page 19 undefined on input lin
-e 15.
+e 14.
 
 [19
 
  <./figures/architecture.png>]
 
-LaTeX Warning: Reference `eq:cdpi' on page 20 undefined on input line 38.
+LaTeX Warning: Reference `eq:cdpi' on page 20 undefined on input line 93.
 
-<./figures/pipeline_example1.png, id=257, 465.74pt x 233.87375pt>
+[20] <./figures/pipeline_example1.png, id=269, 465.74pt x 233.87375pt>
 File: ./figures/pipeline_example1.png Graphic file (type png)
 
 <use ./figures/pipeline_example1.png>
-Package pdftex.def Info: ./figures/pipeline_example1.png used on input line 83.
-
+Package pdftex.def Info: ./figures/pipeline_example1.png used on input line 138
+.
 (pdftex.def)             Requested size: 306.71924pt x 154.02525pt.
 
 
-LaTeX Warning: Reference `example_pos_example' on page 20 undefined on input li
-ne 88.
-
-[20]
-
 LaTeX Warning: Reference `example_pos_example' on page 21 undefined on input li
-ne 103.
+ne 143.
 
 [21 <./figures/pipeline_example1.png>]
 
+LaTeX Warning: Reference `example_pos_example' on page 22 undefined on input li
+ne 158.
+
+
 LaTeX Warning: Reference `def:las_context' on page 22 undefined on input line 1
-66.
+73.
 
 
-LaTeX Warning: Reference `eq:sm' on page 22 undefined on input line 182.
+LaTeX Warning: Reference `eq:sm' on page 22 undefined on input line 189.
 
 
-LaTeX Warning: Reference `eq:cell' on page 22 undefined on input line 182.
+LaTeX Warning: Reference `eq:cell' on page 22 undefined on input line 189.
 
 Missing character: There is no ã in font bchr7t!
 Missing character: There is no € in font bchr7t!
 Missing character: There is no € in font bchr7t!
 
-LaTeX Warning: Reference `def:context' on page 22 undefined on input line 195.
+LaTeX Warning: Reference `def:context' on page 22 undefined on input line 202.
 
 [22] [23]
 
-LaTeX Warning: Reference `eq:choice_rule' on page 24 undefined on input line 29
-9.
+LaTeX Warning: Reference `eq:choice_rule' on page 24 undefined on input line 30
+6.
 
 
 LaTeX Warning: Reference `def:ILPRL_context' on page 24 undefined on input line
- 308.
+ 315.
 
 
-LaTeX Warning: Reference `eq:adjacent' on page 24 undefined on input line 318.
+LaTeX Warning: Reference `eq:adjacent' on page 24 undefined on input line 325.
 
 
-LaTeX Warning: Reference `eq:cell' on page 24 undefined on input line 318.
+LaTeX Warning: Reference `eq:cell' on page 24 undefined on input line 325.
 
 [24]
 
-LaTeX Warning: Reference `eq:asp_goal' on page 25 undefined on input line 360.
+LaTeX Warning: Reference `eq:asp_goal' on page 25 undefined on input line 367.
 
 
 LaTeX Warning: Reference `subsec:answer_set_program' on page 25 undefined on in
-put line 363.
+put line 370.
 
 [25]
 
-LaTeX Warning: Reference `def:ILPRL_exc' on page 26 undefined on input line 405
+LaTeX Warning: Reference `def:ILPRL_exc' on page 26 undefined on input line 412
 .
 
 [26]
 
 LaTeX Warning: Reference `fig:ILPRL_overview' on page 27 undefined on input lin
-e 524.
+e 531.
 
 
-LaTeX Warning: Reference `def:ILASP_run' on page 27 undefined on input line 541
+LaTeX Warning: Reference `def:ILASP_run' on page 27 undefined on input line 548
 .
 
 [27]
 
-Package natbib Warning: Citation `gringo' on page 28 undefined on input line 56
-4.
+Package natbib Warning: Citation `gringo' on page 28 undefined on input line 57
+1.
 
 
-Package natbib Warning: Citation `gringo' on page 28 undefined on input line 58
-5.
+Package natbib Warning: Citation `gringo' on page 28 undefined on input line 59
+2.
 
 <./figures/env_sample.png, id=342, 567.11874pt x 174.6525pt>
 File: ./figures/env_sample.png Graphic file (type png)
 
 <use ./figures/env_sample.png>
-Package pdftex.def Info: ./figures/env_sample.png used on input line 596.
+Package pdftex.def Info: ./figures/env_sample.png used on input line 603.
 (pdftex.def)             Requested size: 438.17227pt x 134.94653pt.
 
 
 Package natbib Warning: Citation `Schaul2013' on page 28 undefined on input lin
-e 601.
+e 608.
 
 [28]
 
 Package natbib Warning: Citation `Brockman2016' on page 29 undefined on input l
-ine 609.
+ine 616.
 
 
-LaTeX Warning: Reference `VGDL_sample' on page 29 undefined on input line 611.
+LaTeX Warning: Reference `VGDL_sample' on page 29 undefined on input line 618.
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 631.
+nput line 638.
  (./openai.py
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1.
@@ -1345,7 +1336,16 @@ Package pdftex.def Info: ./figures/experiment1.png used on input line 92.
 (pdftex.def)             Requested size: 219.08614pt x 97.65382pt.
 
 
-LaTeX Warning: Reference `fig:experiment1' on page 32 undefined ested size: 240.99608pt x 172.13927pt.
+LaTeX Warning: Reference `fig:experiment1' on page 32 undefined on input line 9
+8.
+
+[32] <./figures/experiment1_training.png, id=404, 505.89pt x 361.35pt>
+File: ./figures/experiment1_training.png Graphic file (type png)
+
+<use ./figures/experiment1_training.png>
+Package pdftex.def Info: ./figures/experiment1_training.png used on input line 
+110.
+(pdftex.def)             Requested size: 240.99608pt x 172.13927pt.
 
 <./figures/experiment1_test.png, id=405, 505.89pt x 361.35pt>
 File: ./figures/experiment1_test.png Graphic file (type png)
@@ -1578,18 +1578,6 @@ Package natbib Warning: Citation `Dzeroski2001' on page 45 undefined on input l
 ine 6.
 
 
-Overfull \hbox (1.65915pt too wide) in paragraph atfter.png> <.
-/figures/experiment4_training.png> <./figures/experiment4_test.png>] (./experim
-ent4_hypothesis.pl) [42] [43
-
-]) [44]
-Chapter 5.
-(./chapters/related_work.tex
-
-Package natbib Warning: Citation `Dzeroski2001' on page 45 undefined on input l
-ine 6.
-
-
 Overfull \hbox (1.65915pt too wide) in paragraph at lines 10--11
 []\OT1/bch/m/n/10.95 RRL is based on first-order logic, and does not cope with 
 nega-tion as fail-ure or non-monotonic
@@ -1706,8 +1694,8 @@ Package rerunfilecheck Warning: File `main.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
-(rerunfilecheck)             After:  533BD136667A3320E524063EAC7AD285;4356.
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  4B58478EB1D19B409BC22CC13FF22696;4356.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1720,9 +1708,9 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1046.
  ) 
 Here is how much of TeX's memory you used:
- 14108 strings out of 493029
- 206935 string characters out of 6136234
- 440179 words of memory out of 5000000
+ 14104 strings out of 493029
+ 206899 string characters out of 6136234
+ 440143 words of memory out of 5000000
  16919 multiletter control sequences out of 15000+600000
  56440 words of font info for 108 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1747,7 +1735,7 @@ lic/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msbm10.pfb>
-Output written on main.pdf (60 pages, 955920 bytes).
+Output written on main.pdf (60 pages, 956345 bytes).
 PDF statistics:
  790 PDF objects out of 1000 (max. 8388607)
  659 compressed objects within 7 object streams
