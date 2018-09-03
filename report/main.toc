@@ -68,6 +68,6 @@
 \contentsline {chapter}{\numberline {6}Conclusion}{49}{chapter.6}
 \contentsline {section}{\numberline {6.1}Summary of Work}{49}{section.6.1}
 \contentsline {section}{\numberline {6.2}Further Research}{50}{section.6.2}
-\contentsline {chapter}{\numberline {A}Ethics}{51}{appendix.A}
-\contentsline {chapter}{\numberline {B}Learning tasks}{54}{appendix.B}
-\contentsline {chapter}{\numberline {C}Answer Set Program}{55}{appendix.C}
+\contentsline {chapter}{\numberline {A}Ethics}{54}{appendix.A}
+\contentsline {chapter}{\numberline {B}Learning tasks}{57}{appendix.B}
+\contentsline {chapter}{\numberline {C}Answer Set Program}{58}{appendix.C}

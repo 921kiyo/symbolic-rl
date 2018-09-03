@@ -129,31 +129,41 @@ Context dependent examples contain the results of the agent's interaction with a
 they are used as positive examples. A positive example is expressed as a following ASP form:
 \begin{equation}
 \begin{split}
-    \textsf{\#pos}(\{e\textsuperscript{inc}\}, \{e\textsuperscript{exc}\}, \textsf{\{C\}})
+    \textsf{\#pos}(\{E\textsuperscript{inc}\}, \{E\textsuperscript{exc}\}, \textsf{\{C\}})
 \end{split}
 \end{equation}
 
 It is equivalent to context-dependent partial interpretation (CDPI) in  $ILP_{LAS}^{context}$. 
-As defined in the Equation \ref{eq:cdpi}, CDPI is of the form $\langle$ e, C $\rangle$ where e = $\langle$ e\textsuperscript{inc}, e\textsuperscript{exc} $\rangle$. 
+As defined in the Equation \ref{eq:cdpi}, CDPI is of the form $\langle$ e, C $\rangle$ where e = $\langle$ E\textsuperscript{inc}, E\textsuperscript{exc} $\rangle$. 
 Each of the components in CDPI is defined as follows:
-\begin{defn} \label{def:ILPRL_inc}
-e\textsuperscript{inc} of CDPI for ILP(RL) is the next state of an agent $\forall$ s\textsubscript{t+1} $\in$ S such that answer sets of B $\cup$ H does not cover.
-\end{defn}
-
-\begin{defn} \label{def:ILPRL_exc}
-e\textsuperscript{exc} of CDPI for ILP(RL) is the next state of an agent $\forall$ s\textsubscript{t+1} $\not\in$ S such that answer sets of B $\cup$ H covers,
-as well as $\forall$ s$^\prime$\textsubscript{t+1} $\in$ S\textsubscript{neighbor} such that s\textsubscript{t+1} $\neq$ s$^\prime$\textsubscript{t+1}.
-\end{defn}
-where B is the current background knowledge, H is the current hypotheses learnt by previous inductive learning using ILASP, 
-S is all the states in the environment, and S\textsubscript{neighbor} is vertial and horizontal adjacent states of s\textsubscript{t} as well as s\textsubscript{t} itself.
 
 \begin{defn}\label{def:ILPRL_context}
-Context C of CDPI for ILP(RL) contains an action a\textsubscript{t}, a state s\textsubscript{t}, and adjacent walls of s\textsubscript{t}.
+$C\textsubscript{ILP(RL)}$ contains an action a\textsubscript{t}, the current statestate s\textsuperscript{*}\textsubscript{t}, and adjacent walls of s\textsubscript{t}.
 \label{def:context}
 \end{defn}
 
-Both e\textsuperscript{inc} and e\textsuperscript{exc} contain only the next state s\textsubscript{t+1}, expressed as \textit{state\_after((x,y))}, or empty.
-For context C, a\textsubscript{t} is translated int \textit{action((a))}, s\textsubscript{t} is translated into \textit{state\_before((x,y))}, and adjacent walls of s\textsubscript{t} are translated into \textit{wall((x$^\prime$,y$^\prime$))}.
+\begin{defn} \label{def:ILPRL_inc}
+$E\textsuperscript{inc}\textsubscript{ILP(RL)}$ includes s\textsubscript{t+1} $\in$ S such that:
+\begin{itemize}
+\item s\textsubscript{t+1} = s\textsuperscript{*}\textsubscript{t+1}
+\item $ \forall A \in AS(B \cup H\textsubscript{t} \cup C\textsubscript{ILP(RL)})|$ s\textsubscript{t+1} $\not\in A$
+\end{itemize}
+\end{defn}
+
+\begin{defn} \label{def:ILPRL_exc}
+E\textsuperscript{exc}\textsubscript{ILP(RL)} includes S\textsubscript{t+1} $\in$ S such that:
+\begin{itemize}
+\item s\textsubscript{t+1} $\neq$ s\textsuperscript{*}\textsubscript{t+1}
+\item $ \forall A \in AS(B \cup H\textsubscript{t} \cup C\textsubscript{ILP(RL)})|$ s\textsubscript{t+1} $\in A$
+\end{itemize}
+\end{defn}
+
+where S\textsuperscript{*}\textsubscript{t+1} is the next state where the agent is at t+1, 
+B is the background knowledge, H\textsubscript{t} is the hypotheses at t, 
+S is all the states in the environment.
+
+% Both e\textsuperscript{inc} and e\textsuperscript{exc} contain only the next state s\textsubscript{t+1}, expressed as \textit{state\_after((x,y))}, or empty.
+% For context C, a\textsubscript{t} is translated int \textit{action((a))}, s\textsubscript{t} is translated into \textit{state\_before((x,y))}, and adjacent walls of s\textsubscript{t} are translated into \textit{wall((x$^\prime$,y$^\prime$))}.
 
 In this report, we assume that part of context contains only whether a wall exists or not, with the presence of a wall, the agent cannot move to the state where a wall exist.
 
