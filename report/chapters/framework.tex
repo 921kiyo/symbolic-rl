@@ -125,7 +125,8 @@ For example, a grid maze shown in Figure\ref{environment_example} has a height a
 % These environment experiences are part of context examples in the positive examples.
 
 \subsection{Context Dependent Examples}
-Context dependent examples contain the results of the agent's interaction with an environment. Since all the interactions with the environment are examples of valid moves
+Context dependent examples contain the results of the agent's interaction with an environment. 
+Since all the interactions with the environment are examples of valid moves
 they are used as positive examples. A positive example is expressed as a following ASP form:
 \begin{equation}
 \begin{split}
@@ -334,19 +335,26 @@ No & ILASP syntax & ASP planning syntax\\ \hline
 The conversion from (empty body) to \textsf{time(T)} means that the body of all the hypotheses include \textsf{time(T)} in ASP planning syntax.
 \begin{examp} \normalfont (Mapping of ASP syntax between $ILP_{LAS}^{context}$ and ASP).
 
-\begin{equation}
+Suppose that an agent leant the following hypothesis in inductive learning phase. 
+\begin{equation*}
 \begin{split}
 &\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V1), action(right), not wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(down, V0, V1), state\_before(V1), action(down), not wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}
 \end{split}
-\end{equation}
-The syntax of ASP is different from ILASP phase, because we need to include time sequence when solving ASP.
-In ILASP, it is only state\_before and state\_after, but in plan generation, there will be more than one state transition.
-These syntax conversion needs to be done for learnt hypothesis
+\end{equation*}
 
+This hypothesis is converted into the following for ASP planning.
+\begin{equation*}
+\begin{split}
+&\textsf{state\_at(V0, T+1) :- time(T), adjacent(right, V0, V1), state\_at(V1, T), action(right, T), not wall(V0).}\\
+\end{split}
+\end{equation*}
+The converted hypothesis can generate a sequence of actions and states to the right direction at more then two time steps.
 \end{examp}
+
+The answer set program for ILP(RL) is summarised as follows:/
+\lstinputlisting[
+  caption  = {Answer set program for ILP(RL)},
+]{asp_planning.pl}
 
 Second, we define a choice rule of actions, which is of the form:
 \begin{equation}\label{eq:choice_rule}
@@ -356,13 +364,13 @@ Second, we define a choice rule of actions, which is of the form:
 \end{split}
 \end{equation}
 
-Action is given as a choice rule, and this choice rule states that action must be one of four actions: \textsf{down}, \textsf{up}, \textsf{right}, or \textsf{left}
+An action is given as a choice rule, and the choice rule states that an action must be one of four actions: \textsf{down}, \textsf{up}, \textsf{right}, or \textsf{left}
 at each time step T, as defined in the maximum and minimum integers 1.
-The choice rules specify that one of four actions must be true unless \textsf{not finished(T)} or \textsf{time(T)} are satisfied, as defined in the body of the rule.
+The choice rule specifies that one of four actions must be true unless \textsf{not finished(T)} or \textsf{time(T)} are satisfied, as defined in the body of the rule.
 In RL scenarios, this means there is always action to be taken until the agent reaches a terminal state, 
 When the agent reaches a terminal state, \textsf{finished(T)} is satisfied, otherwise time step T exceeds a maximum time steps allocated to the agent.
 
-The maximum time steps are specified external and it is of the form:
+The maximum time steps are specified externally and it is of the form:
 
 \begin{equation}
 \begin{split}
@@ -370,7 +378,7 @@ The maximum time steps are specified external and it is of the form:
 \end{split}
 \end{equation}
 where T\textsubscript{t} is the current time step and T\textsubscript{max} is the maximum time steps.
-For example, if an agent is at time step 0, and can take actions 100 times to find a goal time is defined as \textsf{time(0..100)}.
+For example, if an agent is at time step 0, and can take actions up to 100 times within a episode until it finds a goal,ntime is defined as \textsf{time(0..100)}.
 
 \textsf{finished(T)} determines whether the agent reaches the goal, which is defined in the following ASP form:
 
@@ -385,21 +393,20 @@ For example, if an agent is at time step 0, and can take actions 100 times to fi
 
 \textsf{state\_at((X\textsubscript{goal}, Y\textsubscript{goal}))} is the location of the goal, which is unknown to the agent in the beginning of the training.
 The agent explores the environment until it finds the goal location.
-In the other word, the agent cannot generate a plan to the goal untile the goal is found. 
+In the other words, the agent cannot generate a plan to the goal until the goal is found. 
 Once the agent reaches the goal and \textsf{finished(T)} is satisfied, 
 there will not be any actions at time T+1 since the body of the action choice rule defined in \ref{eq:choice_rule} is not satisfied.
 
-Next, facts of walls information is provided as follows:
+Next, facts of walls information are what the agent collects as context of context dependent examples, which is provided as follows:
 \begin{equation}
 \begin{split}
 &\textsf{wall((X,Y))}\\
 \end{split}
 \end{equation}
+ 
+For ASP planning part, these wall information is accumulated as background knowledge different from background knowledge for ILASP, and used it for solving ASP. 
 
-As defined in Definition \ref{def:ILPRL_context}, the agent is assumed to be able to see ajacent walls and used it as a context in positive examples in $ILP_{LAS}^{context}$. 
-For ASP planning part, these wall information is accumulated as background knowledge as a separate repository, and used it for solving ASP. 
-
-Next, the starting state for the planning provided as part of ASP. It is simply the current location of the agent where the actions plan is a starting point.
+Next, the starting state for the planning provided as part of ASP. It is the current location of the agent when the plan is generated.
 \begin{equation}
 \begin{split}
 \textsf{state\_at((X\textsubscript{start}, Y\textsubscript{start}), T)}
@@ -728,22 +735,22 @@ The action is chosen by an RL algorithm of your choice. In the case of ILP(RL), 
 \item \textsf{env.render()} renders one frame of the environment to see the movement of the agent in pygame.
 \end{itemize}
 
-\subsection{The Main Driver}
-All of the above are connected in Python script.
+% \subsection{The Main Driver}
+% All of the above are connected in Python script.
 
-The main roles of the driver is handling the communications between an environment and an agent as well as the communications within the agent.
+% The main roles of the driver is handling the communications between an environment and an agent as well as the communications within the agent.
 
-\begin{description}
-\item[Communication between an environment and an agent]
+% \begin{description}
+% \item[Communication between an environment and an agent]
 
-When an agent takes an action in a VDGL game environment, 
-the output of the environment is returned by OpenAI gym environment, which is of the form:
+% When an agent takes an action in a VDGL game environment, 
+% the output of the environment is returned by OpenAI gym environment, which is of the form:
 
-This works the same for any RL algorithms when using OpenAI gym environment. 
+% This works the same for any RL algorithms when using OpenAI gym environment. 
 
 
-subprocess
+% subprocess
 
-\item[Communication within the agent]
+% \item[Communication within the agent]
 
-\end{description}
+% \end{description}

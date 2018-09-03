@@ -10,23 +10,23 @@
 \contentsline {table}{\numberline {3.4}{\ignorespaces ASP syntax mapping between \relax }}{25}{table.caption.18}
 \contentsline {figure}{\numberline {3.5}{\ignorespaces The VGDL (Video Game Definition Language) environment example\relax }}{31}{figure.caption.20}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces List of parameters used in the experiments\relax }}{34}{table.caption.22}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Game environment for experiment 1\relax }}{35}{figure.caption.23}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Results of experiment 1: learning curve (left) and testing (right)\relax }}{35}{figure.caption.24}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Normalised learning convergence by ILASP for experiment 1\relax }}{36}{figure.caption.25}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Runtime comparision\relax }}{37}{figure.caption.26}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Game environment for experiment 2\relax }}{37}{figure.caption.27}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Results of experiment 3: learning curve (left) and testing (right)\relax }}{38}{figure.caption.28}
-\contentsline {table}{\numberline {4.8}{\ignorespaces Comparision of runtime\relax }}{40}{table.caption.29}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Normalised learning convergence by ILASP for experiment 2\relax }}{40}{figure.caption.30}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Runtime comparision\relax }}{40}{figure.caption.31}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Game environment for experiment 3: before (left) and after (right) transfer learning\relax }}{41}{figure.caption.32}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Results of experiment 3: learning curve (left) and testing (right)\relax }}{43}{figure.caption.33}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Game environment for experiment 4: before (left) and after (right) transfer learning\relax }}{43}{figure.caption.34}
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Result of experiment 4 (learning curve)\relax }}{43}{figure.caption.35}
+\contentsline {table}{\numberline {4.1}{\ignorespaces List of parameters used in the experiments\relax }}{35}{table.caption.22}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Game environment for experiment 1\relax }}{36}{figure.caption.23}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Results of experiment 1: learning curve (left) and testing (right)\relax }}{36}{figure.caption.24}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Normalised learning convergence by ILASP for experiment 1\relax }}{37}{figure.caption.25}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Runtime comparision\relax }}{38}{figure.caption.26}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Game environment for experiment 2\relax }}{38}{figure.caption.27}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Results of experiment 3: learning curve (left) and testing (right)\relax }}{39}{figure.caption.28}
+\contentsline {table}{\numberline {4.8}{\ignorespaces Comparision of runtime\relax }}{41}{table.caption.29}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Normalised learning convergence by ILASP for experiment 2\relax }}{41}{figure.caption.30}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Runtime comparision\relax }}{41}{figure.caption.31}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Game environment for experiment 3: before (left) and after (right) transfer learning\relax }}{42}{figure.caption.32}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Results of experiment 3: learning curve (left) and testing (right)\relax }}{44}{figure.caption.33}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Game environment for experiment 4: before (left) and after (right) transfer learning\relax }}{44}{figure.caption.34}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Result of experiment 4 (learning curve)\relax }}{44}{figure.caption.35}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {A.1}{\ignorespaces Ethics Checklist\relax }}{53}{table.A.1}
+\contentsline {table}{\numberline {A.1}{\ignorespaces Ethics Checklist\relax }}{57}{table.A.1}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

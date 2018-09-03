@@ -114,6 +114,8 @@ INPUT learning_task_example1.pl
 OUTPUT learning_task_example1.pl
 INPUT learning_task_example2.pl
 OUTPUT learning_task_example2.pl
+INPUT asp_planning.py
+OUTPUT asp_planning.py
 INPUT openai.py
 OUTPUT openai.py
 INPUT experiment1_hypothesis.pl
@@ -355,6 +357,9 @@ INPUT learning_task_example1.pl
 INPUT learning_task_example2.pl
 INPUT learning_task_example2.pl
 INPUT learning_task_example2.pl
+INPUT asp_planning.pl
+INPUT asp_planning.pl
+INPUT asp_planning.pl
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT ./figures/env_sample.png
 INPUT ./figures/env_sample.png
