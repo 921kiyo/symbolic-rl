@@ -87,6 +87,10 @@ R.~S. Sutton, ``{Integrated Architectures for Learning, Planning, and Reacting
 \bibitem{Watkins}
 Watkins, ``{Learning from Delayed Reward}.''
 
+\bibitem{Law2017}
+M.~Law, A.~Russo, and K.~Broda, ``{Inductive Learning of Answer Set Programs
+  v3.1.0 User Manual},'' 2017.
+
 \bibitem{gringo}
 M.~Gebser, R.~Kaminski, A.~K{\"{o}}nig, and T.~Schaub, ``{Advances in gringo
   Series 3},'' in {\em Logic Programming and Nonmonotonic Reasoning} (J.~P.

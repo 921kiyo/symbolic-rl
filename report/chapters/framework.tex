@@ -42,7 +42,7 @@ When the agent reaches the terminal state, the agent receives a positive reward 
 Since the agent's goal is to maximise the total estimate rewards over time, this goal is equivalent to finding the shortest path from a starting state to a terminal state.
 
 We also assume that, unlike an agent with other RL algorithms, the agent can see states of vertical and horizontal, but not diagonal, states around the agent. 
-This assumption allows a agent to learn a valid move in the environment. For example, the agent at \{X=2, Y=4\} can see that there are walls at \{X=1, Y=4\} and \{X=2, Y=5\}.
+This assumption allows a agent to learn valid moves in the environment. For example, the agent at \{X=2, Y=4\} can see that there are walls at \{X=1, Y=4\} and \{X=2, Y=5\}.
 More details of how to use these surrounding information is described in \ref{sec:inductive_learning_task}.
 
 The applicability in more complex environment is not considered in this project and it is discussed in Further Research in Section \ref{sec:further_research}.
@@ -57,8 +57,8 @@ The applicability in more complex environment is not considered in this project 
 
 \section{Inductive Learning Task}
 \label{sec:inductive_learning_task}
-The first step is constructing learning task using ILASP. The objective of the inductive learning is to learn a valid move in a given environment, which is used for generating action plan at the later step.
-The definition of a valid move is as follows:
+The first step is constructing learning task using ILASP. The objective of the inductive learning is to learn valid moves in a given environment, which is used for generating action plan at the later step.
+The definition of valid moves is as follows:
 
 \begin{equation}
 \begin{split}
@@ -154,7 +154,7 @@ $E\textsuperscript{inc}\textsubscript{ILP(RL)}$ includes s\textsubscript{t+1} $\
 E\textsuperscript{exc}\textsubscript{ILP(RL)} includes S\textsubscript{t+1} $\in$ S such that:
 \begin{itemize}
 \item s\textsubscript{t+1} $\neq$ s\textsuperscript{*}\textsubscript{t+1}
-\item $ \forall A \in AS(B \cup H\textsubscript{t} \cup C\textsubscript{ILP(RL)})|$ s\textsubscript{t+1} $\in A$
+\item $ \exists A \in AS(B \cup H\textsubscript{t} \cup C\textsubscript{ILP(RL)})|$ s\textsubscript{t+1} $\in A$
 \end{itemize}
 \end{defn}
 
@@ -188,7 +188,7 @@ In this report, we assume that part of context contains only whether a wall exis
 \label{example_pos_example}
 \end{figure}
 
-We use a simple 5x5 gridworld environment to hilight how an agent gains a positive example.
+We use a simple 5x5 grid maze environment to highlight how an agent gains a positive example.
 Suppose the agent does not know a hypothesis and takes an action "right" to move from (2,4) to (3,4) cell, as shown on the left in Figure \ref{example_pos_example}.
 a\textsubscript{t} is "right" s\textsubscript{t} is (2,4) and s\textsubscript{t+1} is (3,4).
 According to the Definition \ref{def:ILPRL_inc}, the answer sets of B $\cup$ H, does not cover s\textsubscript{t+1} since H = $\emptyset$, thus \textsf{state\_after((3,4))} is in e\textsuperscript{inc}.
@@ -227,7 +227,7 @@ From this example, the following positive example is generated:
 \subsection{Language Bias}
 \label{subsec:language_bias}
 We now define a search space using a language bias specified by \textit{mode declaration}.
-As defined in \ref{def:las_context}, H $\subseteq$ S\textsubscript{M} for $ILP_{LAS}^{context}$, thus in order to learn a valid move, S\textsubscript{M} is specified as follows:
+As defined in \ref{def:las_context}, H $\subseteq$ S\textsubscript{M} for $ILP_{LAS}^{context}$, thus in order to learn the valid moves, S\textsubscript{M} is specified as follows:
 \begin{equation} \label{eq:sm}
 \begin{split}
 &\textsf{\#modeh(state\_after(var(cell))).}\\
@@ -239,9 +239,8 @@ As defined in \ref{def:las_context}, H $\subseteq$ S\textsubscript{M} for $ILP_{
 \end{equation}
 
 where \textsf{\#modeh} and \textsf{\#modeb} are the \textit{normal head declarations} and the \textit{body declarations}. 
-The first argument of each \textsf{\#modeb} specifies the maximum number of times that \textsf{\#modeb} can be used in each rule (also called \textit{recall}), which is 1 for all rules in ILP(RL).  
-
-\textsf{var(t)} is a placeholder for variable of \textit{type} \textsf{t}. In \ref{eq:sm}, we use \textsf{cell} for the variable type, which is grounded using on \textsf{cell} defined in \ref{eq:cell} in the background knowledge.
+The first argument of each \textsf{\#modeb} specifies the maximum number of times that \textsf{\#modeb} can be used in each rule (also called \textit{recall}) \cite{Law2017}, 
+which we specify 1 for all mode declarations in ILP(RL). \textsf{var(t)} is a placeholder for variable of \textit{type} \textsf{t}. In \ref{eq:sm}, we use \textsf{cell} for the variable type, which is grounded using on \textsf{cell} defined in \ref{eq:cell} in the background knowledge.
 \textsf{const(t)} is a placeholder for constant term of type \textsf{t}, and type \textsf{t} must be specified as \textsf{\#constant(t, c)},　where \textsf{c} is a constant term., 
 const(t) is specified as follows:
 
@@ -257,20 +256,21 @@ const(t) is specified as follows:
 \textsf{action} type is specified as constant since ILASP needs to learn different hypothesis for each action, 
 and can be found in each context dependent examples as specified in Definition \ref{def:context}.
 
-\textsf{(positive)} in \textsf{\#modeb} specifies that the predicates only appears as positive and not negation as failure, which reduces the seach space. 
-In ILP(RL), \textsf{wall(var(cell))} could appears as \textsf{not wall} in a hypothesis, and all other body declarations should only be positive due to the specification of \textsf{(positive)}. 
+\textsf{(positive)} in \textsf{\#modeb} specifies that the predicates only appear as positive and not negation as failure, which reduces the seach space. 
+In ILP(RL), \textsf{wall(var(cell))} could appear as \textsf{not wall} in a hypothesis, and all other body declarations should only be positive due to the specification of \textsf{(positive)}. 
 
-Finally, we define \textsf{\#max\_penalty} to specify the maximum size of the hypothesis. By default it is 15, and we increased to 50 as the maximum.
-Increasing \#max\_penalty allows ILASP to learn a longer hypothesis at the expense of longer computation.
-% As we describe in XXX, the search space increases in propotion to the complexity of learning tasks, which slows down the learning process.
+Finally, we define \textsf{\#max\_penalty} to specify the maximum size of the hypothesis. By default it is 15, however our target hypotheses defined in \ref{target_hypothesis} is larger than 15, and it is increased to 50.
+Increasing \#max\_penalty allows ILASP to learn longer hypotheses at the expense of longer computation.
 % For example, the search space in this particular setting is in XX.
 
 \subsection{Hypothesis}
 \label{sebsec:hypothesis}
-Having defined the $ILP_{LAS}^{context}$ task T = $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, ILP(RL) is able to learn an hypothesis H. 
+Having defined the $ILP_{LAS}^{context}$ task T = $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, ILP(RL) is able to learn hypotheses H. 
 Since B and S\textsubscript{M} are fixed, the hypotheses varies based on context dependent examples that the agent receives by interacting with an environment.
-In the early phase of ILP(RL) learning, the agent does not have many positive examples, and learns an hypothesis that is part of the full hypothesis that the agent can run in the environment.
-Therefore it is important to iteratively improve hypotheses. Inductive learning algorithm is executed by the following rule.
+For example, in the early phase of ILP(RL) learning, the agent does not have many positive examples, and learns an hypothesis that is subset of the full target hypothesis that the agent can run in the environment.
+ILP(RL) iteratively improves hypotheses as illustrated in Figure \ref{fig:ILPRL_overview}.
+
+Formally,$ILP_{LAS}^{context}$ is executed by the following rule.
 \begin{defn}\label{def:ILASP_run}
 ILP(RL) runs $ILP_{LAS}^{context}$ to relearn H\textsubscript{new} if and only if $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{+}, $\exists$A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
 \end{defn}
@@ -309,31 +309,43 @@ The learnt hypotheses using $ILP_{LAS}^{context}$ can be used to generate a sequ
 In the following subsections, we explain how to create an answer set program and use the answer sets to make a plan in a maze environment.
 \subsection{Answer Set Program}
 \label{subsec:answer_set_program}
-The ASP program should be constructed such that answer sets of ASP are a sequence of actions and states at each time step in the form of ASP syntax. 
-We explain the details of how the ASP program is constructed in the planning phase.
+The ASP program should be constructed such that answer sets of ASP are a sequence of actions and states at each time step in ASP syntax. 
 
 First, we use the learnt hypotheses by $ILP_{LAS}^{context}$ as part of the ASP program.
 In the inductive learning phase in ILP(RL), we only need to differentiate between s\textsubscript{t} and s\textsubscript{t+1} as \textsf{state\_before} and \textsf{state\_after} respectively.
-However, for the planning with ASP, the answer sets contains a sequence of actions and states at each time steps. 
+However, for the planning with ASP, the answer sets contains a sequence of actions and states for more than two time steps. 
 In order to capture the notion of time sequences, we modify the ASP syntax by 
-introducing T. Specifically, the following mapping is required 
+adding time \textit{T}. Specifically, the following mapping is required between ILASP and ASP planning syntax.
 
-XX
-% \begin{equation}
-% \begin{split}
-% &\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V1), action(right), not wall(V0).}\\
-% &\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
-% &\textsf{state\_after(V0) :- adjacent(down, V0, V1), state\_before(V1), action(down), not wall(V0).}\\
-% &\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}
-% \end{split}
-% \end{equation}
-% The syntax of ASP is different from ILASP phase, because we need to include time sequence when solving ASP.
-% In ILASP, it is only state\_before and state\_after, but in plan generation, there will be more than one state transition.
-% These syntax conversion needs to be done for learnt hypothesis    
-
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|p{5cm}|p{5cm}|}
+% \begin{tabular}{|l|l|p{1.5cm}|p{7cm}|l|l|l|l|}
+\hline
+No & ILASP syntax & ASP planning syntax\\ \hline
+1 & \textsf{state\_before(V)} & \textsf{state\_at(V1, T)}  \\ \hline
+2 & \textsf{state\_after(V)} & \textsf{state\_at(V1, T+1)}  \\ \hline
+3 & \textsf{(empty body)} & \textsf{time(T)}  \\ \hline
+4 & \textsf{action(A)} & \textsf{action(A, T)}  \\ \hline
+\end{tabular}
+\caption{ASP syntax mapping between }
+\label{table:extension_specification}
+\end{table}
+The conversion from (empty body) to \textsf{time(T)} means that the body of all the hypotheses include \textsf{time(T)} in ASP planning syntax.
 \begin{examp} \normalfont (Mapping of ASP syntax between $ILP_{LAS}^{context}$ and ASP).
 
-XXX
+\begin{equation}
+\begin{split}
+&\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V1), action(right), not wall(V0).}\\
+&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
+&\textsf{state\_after(V0) :- adjacent(down, V0, V1), state\_before(V1), action(down), not wall(V0).}\\
+&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}
+\end{split}
+\end{equation}
+The syntax of ASP is different from ILASP phase, because we need to include time sequence when solving ASP.
+In ILASP, it is only state\_before and state\_after, but in plan generation, there will be more than one state transition.
+These syntax conversion needs to be done for learnt hypothesis
+
 \end{examp}
 
 Second, we define a choice rule of actions, which is of the form:
@@ -475,11 +487,11 @@ The answer set using the hypothesis XXX is
 
 XXX. 
 The answer set using the improved hypothesis is XXX, 
-Which correctly returns a sequence of actions and predicted states. 
+Which correctly returns a sequence of actions and predicted states.
 
 \end{examp}
 
-This uncorrect plan is also a source for learning a better hypothesis. 
+This incorrect plan is also a source for learning a better hypothesis. 
 As shown in Example XX, if the hypothesis is not a full hypotheses, outputs of ASP contain lots of \textsf{state\_at((X,Y), T)} at the same states. 
 Given the agent is at one state at each time step, these duplicates are all included in exclusions, as defined in Definition \ref{def:ILPRL_exc}.
 
@@ -735,4 +747,3 @@ subprocess
 \item[Communication within the agent]
 
 \end{description}
-    
