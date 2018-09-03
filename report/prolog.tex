@@ -211,22 +211,72 @@ wall((5,4)). wall((4,5)).}).
 
 \end{filecontents*}
 
-\begin{filecontents*}{asp_planning.py}
-1{action(down,T); action(up,T); action(right,T); action(left,T)}1} 
- :- time(T), not finished(T).
-time(Ttextsubscript{t}..Ttextsubscript{max})}
-finished(T):- goal(T2), time(T), T} geq textsf{T2.
-goal(T):- state_at((Xtextsubscript{goal}, Ytextsubscript{goal}), T), not finished(T-1).
+\begin{filecontents*}{asp_planning.pl}
+% Hypotheses are given from ILASP.
+
+1{action(down,T);
+  action(up,T);
+  action(right,T);
+  action(left,T)}1
+  :-time(T), not finished(T).
+
+time(T..T_max).
+
+finished(T):- goal(T2), time(T), T >= T2.
+goal(T):- state_at((X_goal, Y_goal), T), not finished(T-1).
 goalMet:- goal(T).
 :- not goalMet.
-wall((X,Y))}
-textsf{state_at((Xtextsubscript{start}, Ytextsubscript{start}), T)}
-#minimize{1, X, T: action(X,T)}}.
-#show state_at/2. 
+
+% walls are given from context dependent examples
+wall((X_1, Y_1)).
+wall((X_2, Y_2)).
+... 
+
+% Current state of the agent at time T
+state_at((X, Y), T).
+
+#show state_at/2.
 #show action/2.
+
+#minimize{1, X, T: action(X,T)}.
+
+cell((0..X_width, 0..Y_height)).
+adjacent(right,(X+1,Y),(X,Y)):-cell((X,Y)),cell((X+1,Y)).
+adjacent(left,(X,Y),(X+1,Y)):-cell((X,Y)),cell((X+1,Y)).
+adjacent(down,(X,Y+1),(X,Y)):-cell((X,Y)),cell((X,Y+1)).
+adjacent(up,(X,Y),(X,Y+1)):-cell((X,Y)),cell((X,Y+1)).
+      
 \end{filecontents*}
   
+\begin{filecontents*}{asp_planning_example.pl}
+% Hypotheses are given from ILASP.
+1{action(down,T);action(up,T);action(right,T);
+  action(left,T)}1:-time(T), not finished(T).
+time(0..10).
 
+finished(T):- goal(T2), time(T), T >= T2.
+goal(T):- state_at((3, 1), T), not finished(T-1).
+goalMet:- goal(T).
+:- not goalMet.
+wall((X_1, Y_1)).
+wall((X_2, Y_2)).
+
+% Current state of the agent at time T
+state_at((1, 3), T).
+
+#show state_at/2.
+#show action/2.
+
+#minimize{1, X, T: action(X,T)}.
+
+cell((0..4, 0..4)).
+adjacent(right,(X+1,Y),(X,Y)):-cell((X,Y)),cell((X+1,Y)).
+adjacent(left,(X,Y),(X+1,Y)):-cell((X,Y)),cell((X+1,Y)).
+adjacent(down,(X,Y+1),(X,Y)):-cell((X,Y)),cell((X,Y+1)).
+adjacent(up,(X,Y),(X,Y+1)):-cell((X,Y)),cell((X,Y+1)).
+      
+\end{filecontents*}
+  
 \begin{filecontents*}{openai.py}
   import gym # import OpenAI gym package
   import gym_vgdl # used to connect VGDL and OpenAI gym

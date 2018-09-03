@@ -38,13 +38,13 @@
 \contentsline {section}{\numberline {3.4}Planning with Answer Set Programming}{25}{section.3.4}
 \contentsline {subsection}{\numberline {3.4.1}Answer Set Program}{25}{subsection.3.4.1}
 \contentsline {subsection}{\numberline {3.4.2}Plan Execution}{28}{subsection.3.4.2}
-\contentsline {section}{\numberline {3.5}Exploration}{29}{section.3.5}
-\contentsline {section}{\numberline {3.6}Implementation}{30}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Inductive Learning with ILASP}{30}{subsection.3.6.1}
-\contentsline {subsection}{\numberline {3.6.2}Planning with ASP}{31}{subsection.3.6.2}
-\contentsline {subsection}{\numberline {3.6.3}Environment Platform}{31}{subsection.3.6.3}
-\contentsline {subsubsection}{The Video Game Definition Language (VGDL)}{31}{section*.19}
-\contentsline {subsubsection}{OpenAI Gym}{32}{section*.21}
+\contentsline {section}{\numberline {3.5}Exploration}{30}{section.3.5}
+\contentsline {section}{\numberline {3.6}Implementation}{31}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Inductive Learning with ILASP}{31}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Planning with ASP}{32}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.6.3}Environment Platform}{32}{subsection.3.6.3}
+\contentsline {subsubsection}{The Video Game Definition Language (VGDL)}{32}{section*.20}
+\contentsline {subsubsection}{OpenAI Gym}{33}{section*.22}
 \contentsline {chapter}{\numberline {4}Evaluation}{34}{chapter.4}
 \contentsline {section}{\numberline {4.1}Experimental Setup}{34}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Evaluation Metrics}{34}{subsection.4.1.1}
@@ -67,6 +67,6 @@
 \contentsline {chapter}{\numberline {6}Conclusion}{50}{chapter.6}
 \contentsline {section}{\numberline {6.1}Summary of Work}{50}{section.6.1}
 \contentsline {section}{\numberline {6.2}Further Research}{51}{section.6.2}
-\contentsline {chapter}{\numberline {A}Ethics}{55}{appendix.A}
-\contentsline {chapter}{\numberline {B}Learning tasks}{58}{appendix.B}
-\contentsline {chapter}{\numberline {C}Answer Set Program}{59}{appendix.C}
+\contentsline {chapter}{\numberline {A}Ethics}{52}{appendix.A}
+\contentsline {chapter}{\numberline {B}Learning tasks}{55}{appendix.B}
+\contentsline {chapter}{\numberline {C}Answer Set Program}{56}{appendix.C}
