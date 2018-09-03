@@ -24,7 +24,7 @@ together with the learnt hypotheses, uses it to make an action plan by solving a
 The plan is a sequence of actions and it navigates the agent in the environment.
 
 The agent iteratively execute this cycle in order to learn and improve the hypotheses as well as an action planning. 
-Mechanisms of each step is explained in details in the following sections.
+Mechanisms of each step are explained in details in the following sections.
 
 \section{Environment}
 \label{sec:environment}
@@ -216,8 +216,8 @@ From this example, the following positive example is generated:
 
 \subsection{Language Bias}
 \label{subsec:language_bias}
-Recall in \ref{def:las_context} that H $\subseteq$ S\textsubscript{M} for $ILP_{LAS}^{context}$, thus we define a search space using a language bias specified by \textit{mode declaration}.
-We define S\textsubscript{M} as follows:
+We now define a search space using a language bias specified by \textit{mode declaration}.
+As defined in \ref{def:las_context}, H $\subseteq$ S\textsubscript{M} for $ILP_{LAS}^{context}$, thus in order to learn a valid move, S\textsubscript{M} is specified as follows:
 \begin{equation} \label{eq:sm}
 \begin{split}
 &\textsf{\#modeh(state\_after(var(cell))).}\\
@@ -227,12 +227,11 @@ We define S\textsubscript{M} as follows:
 &\textsf{\#modeb(1, wall(var(cell))).} \\
 \end{split}
 \end{equation}
-% Without these in the form of mode bias, the search space for ILASP will be empty.
 
-\textsf{\#modeh} and \textsf{\#modeb} are the \textit{normal head} declarations and the body declarations. 
-The first argument of each \textsf{\#modeb} specifies the maximum number of times that \textsf{\#modeb} can be used in each rule (also called \textit{recall}), which is 1 in our case.  
+where \textsf{\#modeh} and \textsf{\#modeb} are the \textit{normal head declarations} and the \textit{body declarations}. 
+The first argument of each \textsf{\#modeb} specifies the maximum number of times that \textsf{\#modeb} can be used in each rule (also called \textit{recall}), which is 1 for all rules in ILP(RL).  
 
-\textsf{var(t)} is a placeholder for variable of \textit{type} \textsf{t}. In \ref{eq:sm}, we use \textsf{cell} for a variable type, which is based on any cell defined in \ref{eq:cell}.
+\textsf{var(t)} is a placeholder for variable of \textit{type} \textsf{t}. In \ref{eq:sm}, we use \textsf{cell} for the variable type, which is grounded using on \textsf{cell} defined in \ref{eq:cell} in the background knowledge.
 \textsf{const(t)} is a placeholder for constant term of type \textsf{t}, and type \textsf{t} must be specified as \textsf{\#constant(t, c)},　where \textsf{c} is a constant term., 
 const(t) is specified as follows:
 
@@ -245,66 +244,79 @@ const(t) is specified as follows:
 \end{split}
 \end{equation}
 
-\textsf{action} type is specified as constant since ILASP should learn different hypothesis for each action, and can be found in each context as specified in Definition \ref{def:context}.
+\textsf{action} type is specified as constant since ILASP needs to learn different hypothesis for each action, 
+and can be found in each context dependent examples as specified in Definition \ref{def:context}.
 
 \textsf{(positive)} in \textsf{\#modeb} specifies that the predicates only appears as positive and not negation as failure, which reduces the seach space. 
-In this case, \textsf{\#modeb(1, wall(var(cell)))} could appears as \textsf{not wall}, and all other body declaration should be positive. 
-% Positive excludes the possibility of negation as a failure in order to reduce the search space.
+In ILP(RL), \textsf{wall(var(cell))} could appears as \textsf{not wall} in a hypothesis, and all other body declarations should only be positive due to the specification of \textsf{(positive)}. 
 
 Finally, we define \textsf{\#max\_penalty} to specify the maximum size of the hypothesis. By default it is 15, and we increased to 50 as the maximum.
-Increasing \#max\_penalty allows ILASP to learn longer hypothesis in expense of longer computation.
+Increasing \#max\_penalty allows ILASP to learn a longer hypothesis at the expense of longer computation.
 % As we describe in XXX, the search space increases in propotion to the complexity of learning tasks, which slows down the learning process.
 % For example, the search space in this particular setting is in XX.
-\begin{examp} \normalfont (Language Bias).
 
-XXX
-\end{examp}
-    
 \subsection{Hypothesis}
 \label{sebsec:hypothesis}
-Having defined the $ILP_{LAS}^{context}$ task T, ILP(RL) is able to learn an hypothesis H. 
-Since B and S\textsubscript{M} are fixed, the learnt H varies depending on positive examples that the agent receives.
-In the early phase of learning, the agent does not have many positive examples, and learns an hypothesis that is part of the full hypothesis that the agent can run in the environment.
+Having defined the $ILP_{LAS}^{context}$ task T = $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, ILP(RL) is able to learn an hypothesis H. 
+Since B and S\textsubscript{M} are fixed, the hypotheses varies based on context dependent examples that the agent receives by interacting with an environment.
+In the early phase of ILP(RL) learning, the agent does not have many positive examples, and learns an hypothesis that is part of the full hypothesis that the agent can run in the environment.
 Therefore it is important to iteratively improve hypotheses. Inductive learning algorithm is executed by the following rule.
 \begin{defn}\label{def:ILASP_run}
 ILP(RL) runs $ILP_{LAS}^{context}$ to relearn H\textsubscript{new} if and only if $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{+}, $\exists$A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
 \end{defn}
 where H is the current hypothesis that the agent has learnt so far. 
 Learnt hypotheses are improved when a new positive example is added and the current hypothesis does not cover the new positive example.
-It it does cover it, there is no need to rerun ILASP again.
+If the current hypothese cover the new positive example, there is no need to re-execute ILASP.
 
 The learnt hypothesis will be used to generate a plan, which we describe in the next section.
 
 \begin{examp} \normalfont (Hypothesis).
+Using the context dependent examples illustrated in Exaple \ref{example_pos_example}, we explain how the agent learns hypotheses.
+Suppose that the agent takes an action "right" and gains one positive example, as shown on the right in Example \ref{example_pos_example}. 
+The full learning task for this simple case is shown as follows:
 
-For example, if the agent has only one positive example,
+\lstinputlisting[
+  caption  = {Learning task example},
+]{learning_task_example1.pl}
+From the above learning task, ILASP learns the following hypothesis.
+\begin{equation}
+\begin{split}
+\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V0).}
+\end{split}
+\end{equation}
 
-XXX
+\lstinputlisting[
+  caption  = {Additional context dependent example},
+]{learning_task_example2.pl}
+
 This hypothesis, for example, does not explain how to move "down". In order to learn how to move "down", it needs an positive example of moving up.
 \end{examp}
 
 \section{Planning with Answer Set Programming}
 \label{sec:planning}
 
-Having learnt hypothesis using $ILP_{LAS}^{context}$, we can use the learnt hypotheses to generate a sequence of actions in the form of answer sets that the agent should follow.
-In the following subsections, we explain how to create a answer set program and use the answer sets to make a plan in a maze.
+The learnt hypotheses using $ILP_{LAS}^{context}$ can be used to generate a sequence of action plan that the agent should follow.
+In the following subsections, we explain how to create an answer set program and use the answer sets to make a plan in a maze environment.
 \subsection{Answer Set Program}
 \label{subsec:answer_set_program}
-The ASP should be constructed such that answer sets of ASP are a sequence of actions and the next state by taking each action. 
-We explain the details of how the ASP is constructed in the planning phase.
+The ASP program should be constructed such that answer sets of ASP are a sequence of actions and states at each time step in the form of ASP syntax. 
+We explain the details of how the ASP program is constructed in the planning phase.
 
-First, we use the learnt hypotheses by $ILP_{LAS}^{context}$ as rules for solving ASP.
-In the  $ILP_{LAS}^{context}$, we only need to differenciate between s\textsubscript{t} and s\textsubscript{t+1} as \textsf{state\_before(T)} and \textsf{state\_after(T+1)} respectively.
-However, for ASP planning, the answer sets contains a sequence of actions and states at each time steps. In order to capture the notion of time sequences, we modify the ASP syntax slightly by 
+First, we use the learnt hypotheses by $ILP_{LAS}^{context}$ as part of the ASP program.
+In the inductive learning phase in ILP(RL), we only need to differentiate between s\textsubscript{t} and s\textsubscript{t+1} as \textsf{state\_before} and \textsf{state\_after} respectively.
+However, for the planning with ASP, the answer sets contains a sequence of actions and states at each time steps. 
+In order to capture the notion of time sequences, we modify the ASP syntax by 
 introducing T. Specifically, the following mapping is required 
-\begin{equation}
-\begin{split}
-&\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V1), action(right), not wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(down, V0, V1), state\_before(V1), action(down), not wall(V0).}\\
-&\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}
-\end{split}
-\end{equation}
+
+XX
+% \begin{equation}
+% \begin{split}
+% &\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V1), action(right), not wall(V0).}\\
+% &\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
+% &\textsf{state\_after(V0) :- adjacent(down, V0, V1), state\_before(V1), action(down), not wall(V0).}\\
+% &\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}
+% \end{split}
+% \end{equation}
 % The syntax of ASP is different from ILASP phase, because we need to include time sequence when solving ASP.
 % In ILASP, it is only state\_before and state\_after, but in plan generation, there will be more than one state transition.
 % These syntax conversion needs to be done for learnt hypothesis    
@@ -314,7 +326,7 @@ introducing T. Specifically, the following mapping is required
 XXX
 \end{examp}
 
-Second, we define a rule for action, which is of the form:
+Second, we define a choice rule of actions, which is of the form:
 \begin{equation}\label{eq:choice_rule}
 \begin{split}
 &\textsf{1\{action(down,T); action(up,T); action(right,T); action(left,T)\}1} \\
@@ -322,10 +334,14 @@ Second, we define a rule for action, which is of the form:
 \end{split}
 \end{equation}
 
-Action is given as a choice rule, and this choice rule states that action must be one of four actions: \textsf{down},\textsf{up},\textsf{right}, or \textsf{left}.
-at each time step T, as defined maximum and minimum numbers in 1.
-One of four actions must be selected unless \textsf{not finished(T)} or \textsf{time(T)} are satisfied, as defined in the body of the rule.
-In RL scenarios, this means there is always action to be taken until the agent reaches a goal, thus \textsf{finished(T)} is satisfied, or time step T exceeds a maximum time step.
+Action is given as a choice rule, and this choice rule states that action must be one of four actions: \textsf{down}, \textsf{up}, \textsf{right}, or \textsf{left}
+at each time step T, as defined in the maximum and minimum integers 1.
+The choice rules specify that one of four actions must be true unless \textsf{not finished(T)} or \textsf{time(T)} are satisfied, as defined in the body of the rule.
+In RL scenarios, this means there is always action to be taken until the agent reaches a terminal state, 
+When the agent reaches a terminal state, \textsf{finished(T)} is satisfied, otherwise time step T exceeds a maximum time steps allocated to the agent.
+
+The maximum time steps are specified external and it is of the form:
+
 \begin{equation}
 \begin{split}
 &\textsf{time(T\textsubscript{t}..T\textsubscript{max})}
@@ -610,7 +626,7 @@ ILASP2i has a number of options, and we explain each option using the actual com
 where,
 \begin{itemize}
 \item \textsf{--version=2i} specifies that we use ILASP2i.
-\item \textsf{--ml=8} specified the maximum numbers of body that each rule can have. The default length is XX.
+\item \textsf{--ml=8} specified the maximum numbers of body that each rule can have. The default length is 3.
 \item \textsf{--nc} means no constrains, and omits constrains from the search space. Since our target hypothesis is not a constraint, this option recudes the search space.
 \item \textsf{--clingo5} generates clingo 5 programs, which is fater, instead of clingo 4.3.
 \item \textsf{--clingo "clingo5 --opt-strat=usc,stratify"} specifies clingo executable with the specified options. 

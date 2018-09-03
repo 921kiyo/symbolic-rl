@@ -1,26 +1,27 @@
+In this Chapter, we conducted 4 different experiments in simple maze environments to investigate how the ILP(RL) agent learns and reaches the optimal policy.
+
 \section{Experimental Setup}
 \label{sec:experimental_setup}
 
 \subsection{Evaluation Metrics}
 \label{subsec:evaluation_metrics}
 
-We investigate how the agent using ILP(RL) learns and reaches the optimal policy.
 As introduced in \ref{sec:motivation}, our motivation is to improve the RL learning efficiency and capability of transfer learning.
 Therefore, these are the two main measurements for the performance of ILP(RL).
 
 The learning efficiencies are measured in two different ways. First, the performance of ILP(RL) is compared with benchmarks in terms of
 convergence rate, which is measured in terms of the number of episodes that the agent requires to get to an optimal policy.
-The optimal policy can be measured in terms of the total reward that the agent gains at each episodes. 
-Throughout the experiments, we designed the environment such that the agent receives reward of -1 for any state except the terminal state, and receives reward of + 10 for the terminal state, or the goal.
+The optimal policy can be measured in terms of the total reward that the agent gains at each episode. 
+Throughout the experiments, we designed the environment such that the agent receives reward of -1 for any state except the terminal state, and receives reward of +10 for the terminal state, or the goal.
 For example, if the agent needs the shortest 10 actions to get to the terminal state, the maximum reward the agent could get per episode is 0 (-1 reward at each action + 10 for reaching the goal).
-We log the reward at each time step and calculate the total reward at each episode. 
-
-At each episode, we also measure the performance without exploration to see the pure optimal policy.
+We log the rewards at each time step and calculate the total reward at each episode. 
+Since the agent follows an random exploration throughout the learning, the total reward never converges to the maximum in learining. 
+Therefore at each episode, we also measure the performance without exploration to see the pure optimal policy.
 
 Second, the convergence of learning by ILASP is measured to see the learning curve of ILP(RL), which is defined as follows:
 \begin{equation}
 \begin{split}
-\frac{\textsf{The cumulative number of inductive learning per time step at episode 0}}{\textsf{The total number of inductive learning at all episodes}}
+\frac{\textsf{The cumulative number of ILASP calls per time step at episode 0}}{\textsf{The total number of ILASP calls in all episodes}}
 \end{split}
 \end{equation}
 The reason we are measuring it only at episode 0 is that empirically the agent learns most of the target hypotheses within episode 0 and there is no hypothesis refinement after episode 0.
@@ -43,8 +44,7 @@ since ILP(RL) has one extra assumption: the agent knows surrounding information 
 which is not a common assumption for Q-learning. Thus we incorporate the same surrounding information as features, and update the weights of each feature as a learning.
 We compare the performance of ILP(RL) with these two methods.
 
-\textcolor{red}{TODO Details of tile-coding configuration}
-
+% \textcolor{red}{TODO Details of tile-coding configuration}
 For transfer learnig evaluation, 
 
 \subsection{Parameters}
@@ -144,7 +144,7 @@ Since our exploration strategy is expilon random choice, there is a promissing t
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=0.55\textwidth]{./figures/experiment1_ilasp}
+\includegraphics[width=0.9\textwidth]{./figures/experiment1_ilasp}
 \caption{Normalised learning convergence by ILASP for experiment 1}
 \label{experiment1_ilasp}
 \end{figure}
@@ -163,7 +163,7 @@ As discussed in XX, ASP also has its scalability issues. XXX
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=0.55\textwidth]{./figures/experiment1_runtime}
+\includegraphics[width=0.9\textwidth]{./figures/experiment1_runtime}
 \caption{Runtime comparision}
 \label{experiment1}
 \end{figure}
@@ -217,7 +217,7 @@ Because of the teleport link, the shortest path is 13 steps to reach the termina
 \label{experiment2_training}
 \end{figure}
 
-The training performance shown in XX, which converges faster than XX.
+The same as the Experiment 1, both training and test performance converges faster than that of Q-learning.
 
 \lstinputlisting[
   caption  = {Incomplete hypotheses for experiment 2},

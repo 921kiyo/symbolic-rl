@@ -110,6 +110,10 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/filecontents/filecontents.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/filecontents/filecontents.sty
+INPUT learning_task_example1.pl
+OUTPUT learning_task_example1.pl
+INPUT learning_task_example2.pl
+OUTPUT learning_task_example2.pl
 INPUT openai.py
 OUTPUT openai.py
 INPUT experiment1_hypothesis.pl
@@ -344,8 +348,14 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/latex-fonts/lasy7.tfm
 INPUT ./figures/pipeline_example1.png
 INPUT ./figures/pipeline_example1.png
 INPUT ./figures/pipeline_example1.png
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
+INPUT learning_task_example1.pl
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
+INPUT learning_task_example1.pl
+INPUT learning_task_example1.pl
+INPUT learning_task_example2.pl
+INPUT learning_task_example2.pl
+INPUT learning_task_example2.pl
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT ./figures/env_sample.png
 INPUT ./figures/env_sample.png
 INPUT ./figures/env_sample.png
