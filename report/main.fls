@@ -331,9 +331,9 @@ INPUT chapters/framework.tex
 INPUT ./figures/architecture.png
 INPUT ./figures/architecture.png
 INPUT ./figures/architecture.png
-INPUT ./figures/pipeline_example1.png
-INPUT ./figures/pipeline_example1.png
-INPUT ./figures/pipeline_example1.png
+INPUT ./figures/environment_example.png
+INPUT ./figures/environment_example.png
+INPUT ./figures/environment_example.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
@@ -341,6 +341,9 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/latex-fonts/lasy10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/latex-fonts/lasy7.tfm
+INPUT ./figures/pipeline_example1.png
+INPUT ./figures/pipeline_example1.png
+INPUT ./figures/pipeline_example1.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT ./figures/env_sample.png

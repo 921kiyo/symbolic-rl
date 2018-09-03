@@ -29,45 +29,45 @@
 \contentsline {subsection}{\numberline {2.3.6}Transfer Learning \leavevmode {\color {red}(TBD)}}{18}{subsection.2.3.6}
 \contentsline {chapter}{\numberline {3}Framework}{19}{chapter.3}
 \contentsline {section}{\numberline {3.1}Overview}{19}{section.3.1}
-\contentsline {section}{\numberline {3.2}Inductive Learning Task}{20}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Background Knowledge}{20}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Context Dependent Examples}{20}{subsection.3.2.2}
-\contentsline {subsubsection}{Positive examples in ASP syntax}{21}{section*.16}
-\contentsline {subsection}{\numberline {3.2.3}Language Bias}{22}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Hypothesis}{23}{subsection.3.2.4}
-\contentsline {section}{\numberline {3.3}Planning with Answer Set Programming}{23}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Answer Set Program}{23}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Plan Execution}{25}{subsection.3.3.2}
-\contentsline {section}{\numberline {3.4}Exploration}{26}{section.3.4}
-\contentsline {section}{\numberline {3.5}Implementation}{27}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Inductive Learning with ILASP}{27}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Planning with ASP}{28}{subsection.3.5.2}
-\contentsline {subsection}{\numberline {3.5.3}Environment Platform}{28}{subsection.3.5.3}
-\contentsline {subsubsection}{The Video Game Definition Language (VGDL)}{28}{section*.18}
-\contentsline {subsubsection}{OpenAI Gym}{29}{section*.20}
-\contentsline {subsection}{\numberline {3.5.4}The Main Driver}{30}{subsection.3.5.4}
-\contentsline {chapter}{\numberline {4}Evaluation}{31}{chapter.4}
-\contentsline {section}{\numberline {4.1}Experimental Setup}{31}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Evaluation Metrics}{31}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Benchmarks}{31}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Parameters}{32}{subsection.4.1.3}
-\contentsline {section}{\numberline {4.2}Learning Evaluation}{32}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Experiment 1: Setup}{32}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Experiment 1: Result}{33}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Experiment 2: Setup}{35}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}Experiment 2: Result}{36}{subsection.4.2.4}
-\contentsline {section}{\numberline {4.3}Transfer Learning Evaluation}{39}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Experiment 3: Setup}{39}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Experiment Result 3}{40}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}Experiment 4: Setup}{40}{subsection.4.3.3}
-\contentsline {subsection}{\numberline {4.3.4}Experiment Result 4}{41}{subsection.4.3.4}
-\contentsline {section}{\numberline {4.4}Discussion}{43}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Strengths of ILP(RL)}{43}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Limitations of the current framework}{43}{subsection.4.4.2}
-\contentsline {chapter}{\numberline {5}Related Work}{45}{chapter.5}
-\contentsline {chapter}{\numberline {6}Conclusion}{47}{chapter.6}
-\contentsline {section}{\numberline {6.1}Summary of Work}{47}{section.6.1}
-\contentsline {section}{\numberline {6.2}Further Research}{48}{section.6.2}
-\contentsline {chapter}{\numberline {A}Ethics}{49}{appendix.A}
-\contentsline {chapter}{\numberline {B}Learning tasks}{52}{appendix.B}
-\contentsline {chapter}{\numberline {C}Answer Set Program}{53}{appendix.C}
+\contentsline {section}{\numberline {3.2}Environment}{20}{section.3.2}
+\contentsline {section}{\numberline {3.3}Inductive Learning Task}{21}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Background Knowledge}{21}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Context Dependent Examples}{22}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Language Bias}{23}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Hypothesis}{24}{subsection.3.3.4}
+\contentsline {section}{\numberline {3.4}Planning with Answer Set Programming}{24}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Answer Set Program}{24}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Plan Execution}{26}{subsection.3.4.2}
+\contentsline {section}{\numberline {3.5}Exploration}{27}{section.3.5}
+\contentsline {section}{\numberline {3.6}Implementation}{28}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Inductive Learning with ILASP}{28}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Planning with ASP}{29}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.6.3}Environment Platform}{30}{subsection.3.6.3}
+\contentsline {subsubsection}{The Video Game Definition Language (VGDL)}{30}{section*.18}
+\contentsline {subsubsection}{OpenAI Gym}{31}{section*.20}
+\contentsline {subsection}{\numberline {3.6.4}The Main Driver}{31}{subsection.3.6.4}
+\contentsline {chapter}{\numberline {4}Evaluation}{32}{chapter.4}
+\contentsline {section}{\numberline {4.1}Experimental Setup}{32}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Evaluation Metrics}{32}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Benchmarks}{32}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Parameters}{33}{subsection.4.1.3}
+\contentsline {section}{\numberline {4.2}Learning Evaluation}{33}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Experiment 1: Setup}{33}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Experiment 1: Result}{34}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Experiment 2: Setup}{36}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Experiment 2: Result}{37}{subsection.4.2.4}
+\contentsline {section}{\numberline {4.3}Transfer Learning Evaluation}{40}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Experiment 3: Setup}{40}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Experiment Result 3}{41}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Experiment 4: Setup}{41}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}Experiment Result 4}{42}{subsection.4.3.4}
+\contentsline {section}{\numberline {4.4}Discussion}{44}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Strengths of ILP(RL)}{44}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Limitations of the current framework}{44}{subsection.4.4.2}
+\contentsline {chapter}{\numberline {5}Related Work}{46}{chapter.5}
+\contentsline {chapter}{\numberline {6}Conclusion}{48}{chapter.6}
+\contentsline {section}{\numberline {6.1}Summary of Work}{48}{section.6.1}
+\contentsline {section}{\numberline {6.2}Further Research}{49}{section.6.2}
+\contentsline {chapter}{\numberline {A}Ethics}{53}{appendix.A}
+\contentsline {chapter}{\numberline {B}Learning tasks}{56}{appendix.B}
+\contentsline {chapter}{\numberline {C}Answer Set Program}{57}{appendix.C}
