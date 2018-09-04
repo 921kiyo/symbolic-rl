@@ -14,9 +14,9 @@ Third, the transfer learning (TL), where the experience that an agent gained to 
 
 In order to overcome these limitations of existing RL methods, we introduce a new RL approach which is based on using Inductive Logic Programming (ILP). 
 ILP is another subfield of machine learning based on logic programming and focuses on the computation of the hypothesis expressed in the form of logic programs that, together with background knowledge, entail all positive examples and none of the negative examples. 
-% TODO An ILP symtem is a rule-based supervised concept learning over examples, and maps xXXXX
+% TODO An ILP system is a rule-based supervised concept learning over examples, and maps xXXXX
 ILP has several advantages compared to RL. 
-First, unlike most of statistical machine learning methods, ILP requires a small number of training data due to the presense of language bias which defines what the logic program can learn.
+First, unlike most of statistical machine learning methods, ILP requires a small number of training data due to the presence of language bias which defines what the logic program can learn.
 Second, the learnt hypothesis is expressed using a symbolic representation and therefore is easy to interpret for human users.
 Third, since the learnt hypothesis is a abstract and general concept, it can be easily applied to a different learning task, making transfer learning possible.
 The disadvantages of ILP system are that examples, or training data, have to be clearly defined.
@@ -29,16 +29,16 @@ and uses the learnt hypothesis and background knowledge to generate a sequence o
 In recent RL research, there is a number of research on introducing symbolic representation into RL in order to achieve more data-efficient learning as well as transparent learning. 
 One of the methods is to incorporate symbolic representations into the system \cite{Garnelo2016}. This approach is promising and shows potentials.
 In addition, there has been works on using ASP into RL to achieve data-efficient learning.
-However, none of the papers attempt to apply inductive learnig in RL senarios. 
+However, none of the papers attempt to apply inductive learning in RL scenarios. 
 % but the combining of ILP and RL has not been explored.
 % In addition, most of the ILP frameworks are also tested in senarios where the environment is known to the agent in advance.
 
-Since the recent ILP framworks enable us to learn a complex hypothesis in a more realistic environments, 
+Since the recent ILP frameworks enable us to learn a complex hypothesis in a more realistic environments, 
 
 Finally, the recent advance of Inductive Logic Programming (ILP) research has enabled us to apply ILP in more complex situations and there are a number of new algorithms based on Answer Set Programmings (ASPs) that work well in non-monotonic scenarios.
 
 Because of the recent advancement of ILP and RL, it is natural to consider that a combination of both approaches would be the next field to explore.
-Therefore my motivation is to combine these two different subfields of machine learnig and devise a new way of RL algorithm in order to overcome some of the RL problems.
+Therefore my motivation is to combine these two different subfields of machine learning and devise a new way of RL algorithm in order to overcome some of the RL problems.
 % This new approach is tested in a various
 % My motivation is to also test the algorithm where the agent does not know the environment in advance, which is the typical case for RL research.
 % Second, it resembles how humans reason. Similar to reinforcement learning, there are some aspects of trial-and-error in human learning, but humans exploit reasonings to efficiently learn about their surrounding or situations. 
@@ -51,10 +51,10 @@ Particularly since \cite{Garnelo2016}, there have been several researches that f
 The main objective of this project is to provide a proof-of-concept of a new RL framework using ILP called ILP(RL) and to investigate the potentials of ILP(RL) for improving the learning efficiency and transfer learning capability that current RL methods suffer.
 % a ASP-based framework called Inductive Learning of Answer Set Programs (ILASP)
 % ILASP is a state-of-art ILP method that can be applied to incomplete and more complex environments.
-% This initial proof of concept showed promissing preliminary results and as well as limitation of the current framework. 
+% This initial proof of concept showed promising preliminary results and as well as limitation of the current framework. 
 % Nevertheless, there is avenues for potential improvement, which could be explored in further research.
 
-The objective of this project is devided into the following high-level objectives: 
+The objective of this project is divided into the following high-level objectives: 
 
 \newcommand\litem[1]{\item{\bfseries #1.\\}}
 \begin{enumerate}
@@ -67,20 +67,20 @@ Various hyper-parameters for the learning task are also considered.
 Having learnt a hypothesis using an ILP algorithm, the agent needs to choose an action based on the learnt hypothesis.
 We investigate how the agent can effectively plan a sequence of actions using the hypothesis.
 \litem{Evaluation of the new framework in various environments}
-In order to investigate the applicabilities of ILP-based approach, evaluation of the new framework in various scenarios is conducted in order to gain
+In order to investigate the applicability of ILP-based approach, evaluation of the new framework in various scenarios is conducted in order to gain
 insight into its potential, especially how it improves the learning process and capability of transfer learning.
 \end{enumerate}
 
 % Discrete and deterministic environment. 
-This project is a proof of concept for a new way of RL using ILP and therefore more complex environments such as continuous states or schocastic environments are not considered in this project. 
+This project is a proof of concept for a new way of RL using ILP and therefore more complex environments such as continuous states or stochastic environments are not considered in this project. 
 The possibilities of applying these more complex environments are discussed in Section\ref{sec:further_research}.
 
 \section{Contributions}
 \label{contributions}
 The main contribution of this project is the development of a novel ILP based approach to reinforcement learning .
-This project contributes to the incorporation of ASP-based ILP ilearning frameworks into Reinforcement Learning by applying the latest ILP framework called Learning from Answer Sets. 
+This project contributes to the incorporation of ASP-based ILP learning frameworks into Reinforcement Learning by applying the latest ILP framework called Learning from Answer Sets. 
 To my knowledge, this is the first attempt of incorporating an ASP-based ILP learning framework is incorporated into an RL scenario.
-% and the algorithm learns hypotheses, which is the valid move of the game, which is a general concept and therefore can be easily applied to a different senarios.
+% and the algorithm learns hypotheses, which is the valid move of the game, which is a general concept and therefore can be easily applied to a different scenarios.
 
 In simple environments, we show that an agent learns the rules of the game and reaches an optimal policy faster than existing RL algorithms.
 We also show that the learnt hypothesis is easy to understand for human users, and can be applied to other environments to optimise the agent's learning process.

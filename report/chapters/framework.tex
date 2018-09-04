@@ -1,4 +1,4 @@
-This chapter introduces a new proof-of-concept framework called \textit{ILP(RL)}, a new learning framwork for RL problems using inductive learning with ILASP and planning with ASP.
+This chapter introduces a new proof-of-concept framework called \textit{ILP(RL)}, a new learning framework for solving MDP problems using inductive learning with ILASP and planning with ASP.
 The development of this framework is one of the main objectives of this project and we explain the framework in details in this Chapter.
 
 \section{Overview}
@@ -38,62 +38,45 @@ The development of this framework is one of the main objectives of this project 
 \EndIf
 \State $Update(B\textsubscript{ASP})$
 \EndWhile
-% \If {Terminal state is found}
-% \State
-% \LineComment{rand(0,1) generates a random number between 0 and 1}
-% \If {$rand(0,1) < \epsilon $} 
-% \space
-% \State
-% \LineComment{randInt(0,A) generates a uniformly random integer between 0 and $|A|$}
-% \State $i = randInt(0, |A|)$ 
-% \Return $a\textsubscript{i}$
-% \Else \State $a\textsubscript{i}$ = ASP Plan of ILP(RL)
-% \Return $a\textsubscript{i}$
-% \EndIf
-% \Else \State $i = randInt(1, |A|)$
-% \Return $a\textsubscript{i}$
-% \EndIf
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
-    
 
 The overall architecture of ILP(RL), is shown in Figure \ref{fig:ILPRL_overview}. 
 ILP(RL) mainly consists of two components: inductive learning with ILASP and planning with ASP. 
 
-First step is inductive learning. An agent interacts with an unknown environment, 
+The first step is inductive learning. An agent interacts with an unknown environment, 
 and receives state transition experiences as context dependent examples. 
-Together with pre-defined background knowledge and language bias, these examples are used to inductively learn and improve hypotheses, which are valid moves in the environment.
+Together with pre-defined background knowledge and language bias, these examples are used to inductively learn and improve hypotheses, which are state transition function in the environment.
 
-Second step is ASP planning. The interaction with the environment also gives the agent information about the environment, such as locations of walls or a goal. 
+The second step is ASP planning. The interaction with the environment also gives the agent information about the environment, such as locations of walls or a terminal state. 
 The agent remembers these information as background knowledge, and, 
-together with the learnt hypotheses, uses it to make an action plan by solving an answer set program.
+together with the learnt hypotheses, uses them to make an action plan by solving an ASP program.
 The plan is a sequence of actions and it navigates the agent in the environment.
 
-The agent iteratively execute this cycle in order to learn and improve the hypotheses as well as an action planning. 
+The agent iteratively executes this cycle in order to learn and improve the hypotheses as well as an action planning. 
 Mechanisms of each step are explained in details in the following sections.
-
 
 \section{Environment}
 \label{sec:environment}
-Since there is no exisitng base framworks for ILP(RL), our focus on this project is to develop the preliminary version of the framework. 
-Therefore, we use a very simple environmnet that allows us to see the potentials of our proposed architecture.
+Since there is no existing base frameworks for ILP(RL), our focus on this project is to develop a preliminary version of the framework. 
+Therefore, we use a very simple environment that allows us to see the potentials of our proposed architecture.
 The base environment is a simple grid maze, and we assume that the environment is a discrete deterministic environment. 
 
-We use an simple example to explain the environment as shown in Figure \ref{environment_example}.
+We use a simple example to explain the environment as shown in Figure \ref{environment_example}.
 States are expressed as X and Y coordinates. In Figure \ref{environment_example}, for example, the agent is located at \{X=2, Y=4\}.
 The agent can take one of four possible actions at each time: up, down right and left.
-Every time the agent takes an action, the agent receives the following experience: a reward R\textsubscript{t}, the next state S\textsubscript{t+1}, surrounding information of the current state.
+Every time the agent takes an action, the agent receives the following experiences: a reward R\textsubscript{t}, the next state S\textsubscript{t+1} and surrounding information of the current state.
 The base environment mainly consists of three different elements: a goal, walls and paths.
-The goal cell is the terminal state and the agent receives a positive reward when and the agent receives an negative rewards in any states except the terminal state.
+The goal cell is the terminal state and the agent receives a positive reward when the agent receives a negative reward in any states except the terminal state.
 When the agent reaches the terminal state, the agent receives a positive reward and the current episode is complete. 
 Since the agent's goal is to maximise the total estimate rewards over time, this goal is equivalent to finding the shortest path from a starting state to a terminal state.
 
 We also assume that, unlike an agent with other RL algorithms, the agent can see states of vertical and horizontal, but not diagonal, states around the agent. 
-This assumption allows a agent to learn valid moves in the environment. For example, the agent at \{X=2, Y=4\} can see that there are walls at \{X=1, Y=4\} and \{X=2, Y=5\}.
+This assumption allows a agent to learn a state transition in the environment using inductive learning. For example, the agent at \{X=2, Y=4\} can see that there are walls at \{X=1, Y=4\} and \{X=2, Y=5\}.
 More details of how to use these surrounding information is described in \ref{sec:inductive_learning_task}.
 
-The applicability in more complex environment is not considered in this project and it is discussed in Further Research in Section \ref{sec:further_research}.
+The applicability for a more complex environment is not considered in this project and it is discussed in Further Research in Section \ref{sec:further_research}.
 
 % The environment is provided outside of our algorithm,
 \begin{figure}[!htb]
@@ -105,7 +88,7 @@ The applicability in more complex environment is not considered in this project 
 
 \section{Inductive Learning Task}
 \label{sec:inductive_learning_task}
-The first step is constructing learning task using ILASP. The objective of the inductive learning is to learn valid moves in a given environment, which is used for generating action plan at the later step.
+The first step is to construct a learning task using ILASP. The objective of the inductive learning is to learn state transitions in a given environment, which is used for generating an action plan at later steps.
 The definition of valid moves is as follows:
 
 \begin{equation}
@@ -123,9 +106,9 @@ The definition of valid moves is as follows:
 \end{equation}
 
 where \textsf{state\_after} is the next state S\textsubscript{t+1}, \textsf{state\_before} is the current state S\textsubscript{t}. \textsf{action} is an action A\textsubscript{t} taken by the agent.
-\textsf{adjacent(D, V0, V1)} specifies that V0 is next to V1 in the direction of D (e.g \textsf{adjacent(right, V0, V1)} means V0 is right next to V1). 
-\textsf{wall(V)} and \textsf{not wall(V)} specify whether there is a wall or not wall in a state V respectively.
-We describe the details of how to gain background knowledge, context dependent examples and language bias, necessary components for the agent to learn the above hypotheses.
+\textsf{adjacent(D, V0, V1)} specifies that V0 is next to V1 in the direction of D. For example, \textsf{adjacent(right, V0, V1)} means V0 is right next to V1. 
+\textsf{wall(V)} and \textsf{not wall(V)} specify whether a state is a wall or not wall in a state V respectively.
+We describe the details of how to construct the background knowledge, context dependent examples and the language bias, and these are the necessary components for the agent to learn the target hypotheses.
 The summary of a full ILASP learning task can be found in Appendix \ref{chap:learning_tasks}.
 % Similar to other RL algorithms, an agent explores an environment by taking actions, which generates experiences. 
 % These experiences need to be translated into ASP syntax and 
@@ -135,8 +118,8 @@ The summary of a full ILASP learning task can be found in Appendix \ref{chap:lea
 
 \subsection{Background Knowledge}
 \label{subsec:background_knowledge}
-First we define necessary background knowledge for inductive learning.
-In order to learn a valid move for each direction in the form of state transition as shown in \ref{target_hypothesis}, we need to define the meaning of "being next to" a state.
+First we define necessary background knowledge for the inductive learning.
+In order to learn the state transition for each direction in the form of state transition as shown in \ref{target_hypothesis}, we need to define the meaning of "being next to" a state.
 This is defined as \textit{adjacent}, which is of the form:
 
 \begin{equation} \label{eq:adjacent}
@@ -157,19 +140,19 @@ The rules \ref{eq:adjacent} are given as background knowledge and allow the agen
 \end{split}
 \end{equation}
 
-where, 0..X defines the range of X coodinates and X and Y are the size of width and height of the environment respectively. 
+where, 0..X defines the range of X coordinates and X and Y are the size of width and height of the environment respectively. 
 For example, a grid maze shown in Figure\ref{environment_example} has a height and width of 5, thus the type cell is defined in the background knowledge as \textsf{cell((0..5, 0..5))}.
 
 % While the agent explores the environment, it also keeps all the surrounding information as background knowledge,
 % which will be stored in different repository, and are later used to generate a sequence of actions plan using H.
 
-% This does not include state transition experience, as these state\_before and action takens are different at every timestep.
+% This does not include state transition experience, as these state\_before and action taken are different at every time step.
 % In static environment (e.g no moving enermy), environment information remain the same across time, and thus it will be beneficial to remember.
 % This principle is different from most RL methods, as they are model-free learning.
 % In our simple maze environment, the agent is able to see the surrounding states and 
 % these could be all wall position that the agent has seen so far, which can be
 % wall((1, 5)). which represents the location of the wall.
-% Another example could be a location of a teleportation if the agent sees it.
+% Another example could be a location of a teleport if the agent sees it.
 % These environment experiences are part of context examples in the positive examples.
 
 \subsection{Context Dependent Examples}
@@ -214,7 +197,7 @@ S is all the states in the environment.
 % Both e\textsuperscript{inc} and e\textsuperscript{exc} contain only the next state s\textsubscript{t+1}, expressed as \textit{state\_after((x,y))}, or empty.
 % For context C, a\textsubscript{t} is translated int \textit{action((a))}, s\textsubscript{t} is translated into \textit{state\_before((x,y))}, and adjacent walls of s\textsubscript{t} are translated into \textit{wall((x$^\prime$,y$^\prime$))}.
 
-In this report, we assume that part of context contains only whether a wall exists or not, with the presence of a wall, the agent cannot move to the state where a wall exist.
+In this report, we assume that part of context contains only whether a wall exists or not, with the presence of a wall, the agent cannot move to the state where a wall exists.
 
 % \subsubsection{Positive examples in ASP syntax}
 % \label{subsubsec:positive_examples_asp_syntax}
@@ -243,7 +226,7 @@ a\textsubscript{t} is "right" s\textsubscript{t} is (2,4) and s\textsubscript{t+
 According to the Definition \ref{def:ILPRL_inc}, the answer sets of B $\cup$ H, does not cover s\textsubscript{t+1} since H = $\emptyset$, thus \textsf{state\_after((3,4))} is in e\textsuperscript{inc}.
 All other alternative next states S\textsubscript{t+1} that the agent could have ended up by taking different actions
 (down, up, and left) are in the exclusions.
-Context includes a\textsubscript{t}, s\textsubscript{t} and S\textsubscript{neighbor} of walls.
+Context includes a\textsubscript{t}, s\textsubscript{t} and S\textsubscript{neighbour} of walls.
 The following positive example is generated.
 
 \begin{equation}
@@ -254,12 +237,12 @@ The following positive example is generated.
 \end{split}
 \end{equation}
 
-The next example illustrates a senario when the agent tries to move to a state where a wall is. 
+The next example illustrates a scenarios when the agent tries to move to a state where a wall is. 
 The agent is at (4,4) and tries to move to a cell (5,4) by taking an action "right", as shown on the left in Figure \ref{example_pos_example}. 
 In this case, however, there is a wall at (5,4) and therefore the agent cannot go to that cell.
 Because of the blocking wall, s\textsubscript{t} and s\textsubscript{t+1} are (4,4).
 The same the previous case, H = $\emptyset$ and therefore the answer sets of B $\cup$ H, does not cover s\textsubscript{t+1}.
-All other alternative next adjacent states S\textsubscript{t+1} (4,3), (3,4), (5,4) and (4,5) are exclusions, and the context is collected.
+All other alternative next adjacent states S\textsubscript{t+1} (4,3), (3,4), (5,4) and (4,5) are exclusions, and the contexts are collected.
 From this example, the following positive example is generated:
 
 \begin{equation}
@@ -276,7 +259,7 @@ From this example, the following positive example is generated:
 \subsection{Language Bias}
 \label{subsec:language_bias}
 We now define a search space using a language bias specified by \textit{mode declaration}.
-As defined in \ref{def:las_context}, H $\subseteq$ S\textsubscript{M} for $ILP_{LAS}^{context}$, thus in order to learn the valid moves, S\textsubscript{M} is specified as follows:
+As defined in \ref{def:las_context}, H $\subseteq$ S\textsubscript{M} for $ILP_{LAS}^{context}$, thus in order to learn the target hypotheses, S\textsubscript{M} is specified as follows:
 \begin{equation} \label{eq:sm}
 \begin{split}
 &\textsf{\#modeh(state\_after(var(cell))).}\\
@@ -289,8 +272,8 @@ As defined in \ref{def:las_context}, H $\subseteq$ S\textsubscript{M} for $ILP_{
 
 where \textsf{\#modeh} and \textsf{\#modeb} are the \textit{normal head declarations} and the \textit{body declarations}. 
 The first argument of each \textsf{\#modeb} specifies the maximum number of times that \textsf{\#modeb} can be used in each rule (also called \textit{recall}) \cite{Law2017}, 
-which we specify 1 for all mode declarations in ILP(RL). \textsf{var(t)} is a placeholder for variable of \textit{type} \textsf{t}. In \ref{eq:sm}, we use \textsf{cell} for the variable type, which is grounded using on \textsf{cell} defined in \ref{eq:cell} in the background knowledge.
-\textsf{const(t)} is a placeholder for constant term of type \textsf{t}, and type \textsf{t} must be specified as \textsf{\#constant(t, c)},　where \textsf{c} is a constant term., 
+which we specify 1 for all mode declarations in ILP(RL). \textsf{var(t)} is a placeholder for a variable of \textit{type} \textsf{t}. In \ref{eq:sm}, we use \textsf{cell} for the variable type, which is grounded using on \textsf{cell} specified in \ref{eq:cell} in the background knowledge.
+\textsf{const(t)} is a placeholder for a constant term of type \textsf{t}, and type \textsf{t} must be specified as \textsf{\#constant(t, c)},　where \textsf{c} is a constant term., 
 const(t) is specified as follows:
 
 \begin{equation}
@@ -302,13 +285,13 @@ const(t) is specified as follows:
 \end{split}
 \end{equation}
 
-\textsf{action} type is specified as constant since ILASP needs to learn different hypothesis for each action, 
-and can be found in each context dependent examples as specified in Definition \ref{def:context}.
+\textsf{action} type is specified as constant since ILASP needs to learn a different hypothesis for each action, 
+and can be found in each context dependent example as specified in Definition \ref{def:context}.
 
-\textsf{(positive)} in \textsf{\#modeb} specifies that the predicates only appear as positive and not negation as failure, which reduces the seach space. 
+\textsf{(positive)} in \textsf{\#modeb} specifies that the predicates only appear as positive and not negation as failure, which reduces the search space. 
 In ILP(RL), \textsf{wall(var(cell))} could appear as \textsf{not wall} in a hypothesis, and all other body declarations should only be positive due to the specification of \textsf{(positive)}. 
 
-Finally, we define \textsf{\#max\_penalty} to specify the maximum size of the hypothesis. By default it is 15, however our target hypotheses defined in \ref{target_hypothesis} is larger than 15, and it is increased to 50.
+Finally, we define \textsf{\#max\_penalty} to specify the maximum size of the hypothesis. By default it is 15, however our target hypotheses defined in \ref{target_hypothesis} is larger than 15, and thus it is increased to 50.
 Increasing \#max\_penalty allows ILASP to learn longer hypotheses at the expense of longer computation.
 % For example, the search space in this particular setting is in XX.
 
@@ -319,18 +302,18 @@ Since B and S\textsubscript{M} are fixed, the hypotheses varies based on context
 For example, in the early phase of ILP(RL) learning, the agent does not have many positive examples, and learns an hypothesis that is subset of the full target hypothesis that the agent can run in the environment.
 ILP(RL) iteratively improves hypotheses as illustrated in Figure \ref{fig:ILPRL_overview}.
 
-Formally,$ILP_{LAS}^{context}$ is executed by the following rule.
+Formally,$ILP_{LAS}^{context}$ is executed by the following rule:
 \begin{defn}\label{def:ILASP_run}
 ILP(RL) runs $ILP_{LAS}^{context}$ to relearn H\textsubscript{new} if and only if $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{+}, $\exists$A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
 \end{defn}
-where H is the current hypothesis that the agent has learnt so far. 
-Learnt hypotheses are improved when a new positive example is added and the current hypothesis does not cover the new positive example.
-If the current hypothese cover the new positive example, there is no need to re-execute ILASP.
+where H is the current hypotheses that the agent has learnt so far. 
+Learnt hypotheses are improved when a new positive example is added and the current hypotheses do not cover the new positive example.
+If the current hypotheses cover the new positive example, there is no need to re-execute ILASP.
 
-The learnt hypothesis will be used to generate a plan, which we describe in the next section.
+The learnt hypotheses will be used to generate a plan, which we describe in the next section.
 
 \begin{examp} \normalfont (Hypothesis).
-Using the context dependent examples illustrated in Exaple \ref{example_pos_example}, we explain how the agent learns hypotheses.
+Using the context dependent examples illustrated in Example \ref{example_pos_example}, we explain how the agent learns hypotheses.
 Suppose that the agent takes an action "right" and gains one positive example, as shown on the right in Example \ref{example_pos_example}. 
 The full learning task for this simple case is shown as follows:
 
@@ -388,7 +371,7 @@ No & ILASP syntax & ASP planning syntax\\ \hline
 The conversion from (empty body) to \textsf{time(T)} means that the body of all the hypotheses include \textsf{time(T)} in ASP planning syntax.
 \begin{examp} \normalfont (Mapping of ASP syntax between $ILP_{LAS}^{context}$ and ASP).
 
-Suppose that an agent leant the following hypothesis in inductive learning phase. 
+Suppose that an agent learnt the following hypothesis in inductive learning phase. 
 \begin{equation*}
 \begin{split}
 &\textsf{state\_after(V0) :- adjacent(right, V0, V1), state\_before(V1), action(right), not wall(V0).}\\
@@ -426,7 +409,7 @@ The maximum time steps are specified externally and it is of the form:
 \end{split}
 \end{equation}
 where T\textsubscript{t} is the current time step and T\textsubscript{max} is the maximum time steps.
-For example, if an agent is at time step 0, and can take actions up to 100 times within a episode until it finds a goal,ntime is defined as \textsf{time(0..100)}.
+For example, if an agent is at time step 0, and can take actions up to 100 times within a episode until it finds a goal, \textsf{time} is defined as \textsf{time(0..100)}.
 
 \textsf{finished(T)} determines whether the agent reaches the goal, which is defined in the following ASP form:
 
@@ -461,10 +444,10 @@ Next, the starting state for the planning provided as part of ASP. It is the cur
 \end{split}
 \end{equation}
 
-In addition, the definition of ajacent and cell type are also provided, which are the same as what was defined as background knoweldge of $ILP_{LAS}^{context}$ (Equation \ref{eq:adjacent} and \ref{eq:cell})
-ajacents.
+In addition, the definition of adjacent and cell type are also provided, which are the same as what was defined as background knowledge of $ILP_{LAS}^{context}$ (Equation \ref{eq:adjacent} and \ref{eq:cell})
+adjacent.
 
-Next, we need to incorporate a nortion of rewards in each state. Instead of maximising the total rewards, which is the objectives of most RL methods, 
+Next, we need to incorporate a notion of rewards in each state. Instead of maximising the total rewards, which is the objectives of most RL methods, 
 we use optimisation statements as follow. 
 \begin{equation}
 \begin{split}
@@ -472,10 +455,10 @@ we use optimisation statements as follow.
 \end{split}
 \end{equation}
 
-The use of optimisation staetment is based on the assumption that the total rewards can be maximised by searching for optimal answer sets. 
+The use of optimisation statement is based on the assumption that the total rewards can be maximised by searching for optimal answer sets. 
 While this works only subset of MDP, our preliminary research focuses on solving this particular MDP problem. 
     
-Finally, we are only interested in a sequecne of actions and corresponding states as the output of the ASP program. 
+Finally, we are only interested in a sequence of actions and corresponding states as the output of the ASP program. 
 Clingo can selectively include the atoms of certain predicates in the output and hide unselected ones. 
 This is specified as follows:
 \begin{equation}
@@ -500,14 +483,13 @@ The output of an ASP program is of the form:
 &\textsf{state\_at((x\textsubscript{goal},y\textsubscript{goal}),t+n+1).} 
 \end{split}
 \end{equation}
-% In RL algorithm, the agent also needs the positive reward by reaching a termination state. 
 
 where \textit{n} is the number of time steps taken to reach the goal. 
 \textit{action(A,T)} tells which action the agent should take at each time.
 Given the answer set planning is correct, the agent follows the plan and reach the goal. 
 The correctness of the planning is based on the correctness of the hypotheses as well as the wall surrounding information in the agent's background knowledge. 
 For the correctness of the hypotheses, since the agent does not know all the information about the environment in the beginning of the learning,   
-clingo might not generate correct sequence of actions leading to the goals.
+Clingo might not generate correct sequence of actions leading to the goals.
 Also if the agent has not seen enough surrounding walls, the plan of actions might be blocked by a wall that the agent has not seen. 
 
 \begin{examp} \normalfont (Answer Set Program).
@@ -562,42 +544,6 @@ This completes the whole cycle of ILP(RL) shown in Figure \ref{fig:ILPRL_overvie
 % At the start of the learning, H is usually not correct or too general, using this H will generate lots of answer sets that are not useful for the planning.
 % These examples will be collected and included as exclusions of a new positive example.
 
-% This is formally defined in Algorithm.
-% \begin{algorithm}
-% \caption{ILP(RL)}\label{euclid}
-% \begin{algorithmic}[1]
-% \Procedure{ILP(RL) (B and E)}{}
-
-% \While {True}
-%     \State $\textit{H (inductive solutions)} \gets \text{run ILASP(T)}$
-%     \State $\textit{plan(actions, states) answer sets} \gets \text{AS(B, H)}$
-%     \While {actions in P}
-%         \State $\textit{observed state} \gets \text{run clingo(T)}$
-%         \If {$ \textit{observed state} \neq \textit{predicted state} $}
-%             \State $\textit{H} \gets \text{run ILASP(T)}$
-%             \EndIf
-%         % \If {$ \textit{observed state not equal \textit{predicted state $}
-%         % \EndIf
-%     \EndWhile
-%     % \If {$ new \ background \ encountered $}
-%     %     % \State $\textit{H} \gets \text{run ILASP(T)}$
-%     % \EndIf
-%     % \For{i from 0 to N}
-%     %     \If {$ A[i]\ is \ in \ T$}
-%     %         \State \Return $FALSE$
-%     %     \Else
-%     %         \State Add A[i] to T
-%     %     \EndIf
-%     % \EndFor
-% % \State \Return $TRUE$
-% \EndWhile
-
-% \EndProcedure
-% \caption{ILP(RL) }
-% \end{algorithmic}
-% \end{algorithm}
-
-% Exploration is one of the active research areas in RL, and is often discussed as a tradeoff between exploration and exploitation. 
 \section{Exploration}
 \label{exploration}
 In this section, we explain exploration of ILP(RL). While the agent can learn the hypotheses and execute a planning by interacting with the environment as shown in Figure \ref{fig:ILPRL_overview},
@@ -611,7 +557,7 @@ the agent also needs to explore by taking a new action to discover a new state, 
 
 One of the simple exploration strategies in RL is called \textit{$\epsilon$-greedy strategy}.
 $\epsilon$-greedy strategy states that an agent follows the optimal policy with probability of (1- $\epsilon$) where $\epsilon \in [0,1]$, 
-and the agent takes an random action with a probability of $\epsilon$. $\epsilon$ is hiper-parameter and chosen externally.
+and the agent takes an random action with a probability of $\epsilon$. $\epsilon$ is hyper-parameter and chosen externally.
 Based on $\epsilon$-greedy strategy, we define the exploration strategy for ILP(RL) as follows:
 \begin{algorithm}
 \caption{ILP(RL) Exploration Strategy}\label{euclid}
@@ -636,7 +582,7 @@ Based on $\epsilon$-greedy strategy, we define the exploration strategy for ILP(
 \end{algorithmic}
 \end{algorithm}
 When the agent deviates from the planning by taking an random action and moves to a new state, the agent generates a new planning from the new state. 
-Since the ILP(RL) agent does not know when the optimal plan is found, it is necessary for ILP(RL) to contiues $\epsilon$-greedy strategy.
+Since the ILP(RL) agent does not know when the optimal plan is found, it is necessary for ILP(RL) to continues $\epsilon$-greedy strategy.
 
 \section{Implementation}
 \label{Implementation}
@@ -647,15 +593,15 @@ In the following section, we explain each component of ILP(RL) in details.
 
 \subsection{Inductive Learning with ILASP}
 We use ILASP2i, a inductive learning system developed in XX. 
-ILASP2i is an interative version of ILASP2, and is designed to scale with the numbers of examples. 
+ILASP2i is an interactive version of ILASP2, and is designed to scale with the numbers of examples. 
 ILASP2i also introduces the use of context dependent examples.
 The latest ILASP officially available at the time of writing is ILASP3, which is designed to work on a noisy examples. 
-Our positive examples do not contain noise, state transition positive examples, and ILASP2i was sufficient for our implemnetation.
+Our positive examples do not contain noise, state transition positive examples, and ILASP2i was sufficient for our implementation.
 which is discussed in Section XX. 
-Alghough ILASP2i is designed to work with a large number of examples, inductive learning part is the bottleneck of our framework in terms of computational time. 
+Although ILASP2i is designed to work with a large number of examples, inductive learning part is the bottleneck of our framework in terms of computational time. 
 We did a number of optimisation in order to mitigate this. 
 
-The first optimastion is the frequency of running ILASP. 
+The first optimisation is the frequency of running ILASP. 
 As already described in Definition \ref{def:ILASP_run}, ILASP is ran only if the current hypothesis does not cover all the examples accumulated so far.
 Because of this, inductive learning takes place at the very early stage of learning, which is highlighted in the experiments in Chapter XX. 
 
@@ -676,9 +622,9 @@ where,
 \begin{itemize}
 \item \textsf{--version=2i} specifies that we use ILASP2i.
 \item \textsf{--ml=8} specified the maximum numbers of body that each rule can have. The default length is 3.
-\item \textsf{--nc} means no constrains, and omits constrains from the search space. Since our target hypothesis is not a constraint, this option recudes the search space.
-\item \textsf{--clingo5} generates clingo 5 programs, which is fater, instead of clingo 4.3.
-\item \textsf{--clingo "clingo5 --opt-strat=usc,stratify"} specifies clingo executable with the specified options. 
+\item \textsf{--nc} means no constrains, and omits constrains from the search space. Since our target hypothesis is not a constraint, this option reduces the search space.
+\item \textsf{--clingo5} generates Clingo 5 programs, which is faster, instead of Clingo 4.3.
+\item \textsf{--clingo "clingo5 --opt-strat=usc,stratify"} specifies Clingo executable with the specified options. 
 \textsf{usc, stratify} is unsatisfiable-core base optimisation with stratification using Gringo \cite{gringo}, a core XXX introduced in gringo version 3. REFERENCE.
 \item \textsf{--cached-ref=PATH} enables the iterative mode, and keeps the output of the relevant example to a specified path, and start the learning from where it left before rather than going though all the examples.
 \item \textsf{--max-rule-length=8} The default maximum number is 5.
@@ -732,7 +678,7 @@ The behaviours of the game can be specified using VGDL as shown in \ref{list:vgd
 All objects in the games can be described as a sprite in the \textit{SpriteSet}, where users can define the objects' properties.
 \textit{InteractionSet} specify the effects of objects when two objects interact in the game.
 \textit{TerminationSet} specify the conditions for ending the game.
-The representation of each object can be specified in \textit{LevelMapping} and allows users to customize an original map.
+The representation of each object can be specified in \textit{LevelMapping} and allows users to customise an original map.
 
 We use PyVGDL\footnote{https://github.com/schaul/py-vgdl/}, which is a high-level VGDL on top of pygame\footnote{https://www.pygame.org}, 
 a Python modules designed for writing video games.
@@ -755,7 +701,7 @@ In this report, an agent receives a reward of -1 for any state except the termin
 
 \begin{itemize}
 \item \textsf{env.reset()} resets the game and the agent starts from the starting position. We call it when the agent starts a new episode.
-\item \textsf{env.step(action)} returns an observation of taking an action, which include the state location of the agent in terms of x and y coodinates, reward of the state, an boolean value indicating whether the agent reaches an terminal state.
+\item \textsf{env.step(action)} returns an observation of taking an action, which include the state location of the agent in terms of x and y coordinates, reward of the state, an boolean value indicating whether the agent reaches an terminal state.
 The action is chosen by an RL algorithm of your choice. In the case of ILP(RL), action is chosen by the ASP planning or random exploration strategy between 0 and 3.
 \item \textsf{env.render()} renders one frame of the environment to visualise the movement of the agent in pygame.
 \end{itemize}
@@ -772,7 +718,6 @@ The action is chosen by an RL algorithm of your choice. In the case of ILP(RL), 
 % the output of the environment is returned by OpenAI gym environment, which is of the form:
 
 % This works the same for any RL algorithms when using OpenAI gym environment. 
-
 
 % subprocess
 

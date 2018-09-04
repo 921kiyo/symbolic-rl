@@ -152,7 +152,7 @@
  \end{abstract}
 \cleardoublepage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Acknowledgments}
+\section*{Acknowledgements}
 
 I would like to thank Prof. Alessandra Russo for supervising my project, and for her enthusiasm for my work and invaluable guidance throughout.
 
@@ -241,7 +241,7 @@ where h, a\textsubscript{1}, ... a\textsubscript{n}, and b\textsubscript{n+1}, .
 
 \begin{defn}
 \label{def:herbrand_domain}
-The \textit{Herbrand Domain}, or \textit{Herbrand Universe}, of a normal logic program \textit{P}, denoted \textit{HD(P)}, is the set of all ground terms constructed fromconstants and function symbols that appear in \textit{P}.
+The \textit{Herbrand Domain}, or \textit{Herbrand Universe}, of a normal logic program \textit{P}, denoted \textit{HD(P)}, is the set of all ground terms constructed from constants and function symbols that appear in \textit{P}.
 \end{defn}
 
 \begin{defn}
@@ -316,7 +316,7 @@ Since there is no unique least Herbrand Model for a normal logic program, Stable
 In order to obtain the Stable Model of a program P, P needs to be converted using \textit{Reduct} with respect to an interpretation X.
 
 \begin{defn}
-The \textit{reduct} of P with respect to any set X of ground atoms of a normal logic program can be constructed such that:
+The \textit{Reduct} of P with respect to any set X of ground atoms of a normal logic program can be constructed such that:
 \begin{itemize}
 \item If the body of any rule in P contains an atom which is not in X, those rules need to be removed.
 \item All default negation atoms in the remaining rules in P need to be removed.
@@ -625,7 +625,7 @@ Relevant examples are counterexamples for the previously computed hypothesis in 
 
 $ILP_{LAS}^{context}$ is used in ILASP2i, which we use for our new framework.
 
-%These features will be useful when a game agent is in two different environmets as discussed in Section \ref{model_generation_and_update}.
+%These features will be useful when a game agent is in two different environments as discussed in Section \ref{model_generation_and_update}.
 
 \begin{examp} \normalfont ($ILP_{LAS}^{context}$).
 
@@ -666,7 +666,7 @@ H\textsubscript{t} = S\textsubscript{1}, R\textsubscript{1}, A\textsubscript{1},
 where S is \textit{states}, R is \textit{rewards} and A is \textit{actions}. A state S\textsubscript{t} determines the next environment and has a \textit{Markov property} if and only if 
 \begin{equation}
 \begin{split}
-P[S\textsubscript{t+1} \vert S\textsubscript{t}] = P[S\textsubscript{t+1} \vert S\textsubscript{1}, ..., S\textsubscript{t}].
+\mathbb{P}[S\textsubscript{t+1} \vert S\textsubscript{t}] = \mathbb{P}[S\textsubscript{t+1} \vert S\textsubscript{1}, ..., S\textsubscript{t}].
 \end{split}
 \end{equation}
 In other words, the probability of reaching S\textsubscript{t+1} depends only on S\textsubscript{t}, which captures all the relevant information from the earlier history (\cite{Puterman1994}).
@@ -679,8 +679,8 @@ RL.
 \item S is the set of finite states that is observable in the environment.
 \item A is the set of finite actions taken by the agent.
 \item T is \textit{a state transition function}: S $\times$ A $\times$ S $\rightarrow$ [0,1], which is a probability of reaching a future state s$^\prime$ $\in$ S by taking an action a $\in$ A in the current state  s $\in$ S.
-%\item T\textsubscript{a}(s, s$^\prime$) is a state transition in the form of probability matrix Pr(S\textsubscript{t+1} = s$^\prime$ $\vert$ s\textsubscript{t} = s, a\textsubscript{t} = a), which is the probablity that action \textit{a} in state \textit{s} at time \textit{t} will result in state \textit{s$^\prime$} at time \textit{t+1}.
-\item R is a reward function R\textsubscript{a}(s, s$^\prime$) = $\displaystyle \E[R\textsubscript{t+1} $ $\vert$ S\textsubscript{t+1} = s$^\prime$, A\textsubscript{t} = a], the expected immediate reward that action \textit{a} in state \textit{s} at time \textit{t} will return.
+%\item T\textsubscript{a}(s, s$^\prime$) is a state transition in the form of probability matrix Pr(S\textsubscript{t+1} = s$^\prime$ $\vert$ s\textsubscript{t} = s, a\textsubscript{t} = a), which is the probability that action \textit{a} in state \textit{s} at time \textit{t} will result in state \textit{s$^\prime$} at time \textit{t+1}.
+\item R is a reward function R\textsubscript{a}(s, s$^\prime$) = $\mathbb{P}[R\textsubscript{t+1} $ $\vert$ S\textsubscript{t+1} = s$^\prime$, A\textsubscript{t} = a, S\textsubscript{t} = s], the expected immediate reward that action \textit{a} in state \textit{s} at time \textit{t} will return.
 \end{itemize}
 \end{defn}
 
@@ -699,15 +699,6 @@ where $\gamma$ is a discount rate $\gamma$ $\in$ [0,1], a parameter which repres
 \label{policy_value_functions_subsection}
 Most RL algorithms are concerned with estimating \textit{Value functions}.
 Value functions estimate the expected return, or discounted cumulative future reward,  for a given action in a given state. The expected reward for an agent is dependent on the agent's action.  
-Value functions are defined by \textit{policies}, which map from states to probabilities of choosing each action. 
-A policy $\pi$ is defined as follows:
-\begin{equation}
-\label{eq:policy}
-\begin{split}
-\pi(a|s) =  \displaystyle \mathbb{P}[A\textsubscript{t} = a | S\textsubscript{t} = s]
-\end{split}
-\end{equation}
-      
 The state value function v\textsubscript{$\pi$}(s) of an MDP under a policy $\pi$ is the expected return starting from state \textit{s}, which is of the form:
 
 \begin{equation}
@@ -724,21 +715,28 @@ v\textsuperscript{*}(s) = \underset{\pi}{\max} \ v\textsubscript{$\pi$}(s)
 
 XXX
 \end{examp}
+Value functions are defined by \textit{policies}, which map from states to probabilities of choosing each action. 
+A policy $\pi$ is defined as follows:
+\begin{equation}
+\label{eq:policy}
+\begin{split}
+\pi(a|s) =  \displaystyle \mathbb{P}[A\textsubscript{t} = a | S\textsubscript{t} = s]
+\end{split}
+\end{equation}
 
-Similar to the state value function v\textsubscript{$\pi$},  we define an \textit{action-value function} under a policy $\pi$, which represents the value of taking action a in state s following a policy $\pi$. 
+While the value functions estimate the value of  a particular state, the value of taking an action a given a particular s state is similarly estimated by an \textit{state-action value function}, or \textit{Q function} under a policy $\pi$. State-action value function is defined as follows: 
 \begin{equation}
 q\textsubscript{$\pi$}(s, a) = \displaystyle \E [G\textsubscript{t} \vert S\textsubscript{t} = s, A\textsubscript{t} = a] \ \textsf{for all}\ s \in \mathcal{S}
 \end{equation}
 
-The optimal state-action-value function q\textsuperscript{*}(s,a) maximises the action-value function over all policies in the MDP, which is of the form:
+An optimal policy achieves the optimal state-action value functions, and it can be computed by maximising over the optimal state-action value functions.
+The optimal state-action-value function q\textsuperscript{*}(s,a) maximises the state-action value functions over all policies in the MDP, which is of the form:
 
 \begin{equation}
 q\textsuperscript{*}(s, a) = \underset{\pi}{\max} \ q\textsubscript{$\pi$}(s, a)
 \end{equation}
 
-A solution to MDP is called a \textit{policy $\pi$}, a sequence of actions that leads to a solution. An optimal policy achieves the optimal value function (or action-value function), and it can be computed by maximising over the optimal value function (or action-value function).
-
-\begin{examp} \normalfont (Action-value Functions).
+\begin{examp} \normalfont (State-action value Functions).
 
 XXX
 \end{examp}
@@ -768,30 +766,12 @@ XXX
 %
 %q\textsubscript{$\pi$} = $\displaystyle \E[R\textsubscript{t+1} $[R\textsubscript{t+1} + $\gamma$ R\textsubscript{t+2} + $\gamma^2$ R\textsubscript{t+3} + ... $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a, A\textsubscript{t+1 } = a,]
 
-\subsection{Model-based and Model-free RL}
-\label{model_base_model_free_subsection}
-A \textit{model} is a representation of an environment that an agent can use to understand how the environment should look like. 
-There are two different types of RL methods: \textit{model-based} and \textit{model-free} RL method. 
-Model-based RL is where, when a model of the environment is known, the agent uses the model to plan for a series of actions to achieve the agent's goal. 
-The model itself can be learnt by interacting with the environment by taking actions, which return states and rewards, and the parameters of the action models can be estimated with maximum likelihood methods \cite{Ray2010}.
-Using a model, an agent can do planning to generate or improve a policy for the modeled environment. 
-Most of the RL methods are model-free RL, where the model is unknown and the agent learns to achieve the goal solely by interacting with the environment. 
-Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
-When the model of the environment is correct, unlike with model-free RL, the agent does not require trial-and-error interactions with the environment and therefore model-based RL is faster to reach an optimal policy. 
-However, when the model is not a true representation of the environment, or the true MDP, the planning algorithms will not lead to the optimal policy, but a suboptimal policy.
-
-One algorithm which combines both aspects of model-based and model-free learning to solve the issue of sub-optimality is called Dyna \cite{Sutton1990}.
-Dyna learns a model from real experience and uses the model to generate simulated experience to update the evaluation functions.
-This approach is more efficient because the simulated experiences are relatively easy to generate compared to real experiences, thus less iterations are required.
-
-This idea of learning a model of the environment and using it to execute planning is a core idea of our new framework. 
-
 \subsection{Temporal-Difference (TD) Learning}
 \label{td_learning_section}
 
 One of the RL approaches for solving a MDP is called \textit{Temporal-Difference (TD) Learning}.
 TD learning is an online model-free RL which learns directly from episodes of incomplete experiences without a model of the environment.
-TD updates the estimates of value function as follows:
+TD learning updates the estimates of value function as follows:
 
 \begin{equation}
 \centering
@@ -799,61 +779,91 @@ V(S\textsubscript{t}) \leftarrow V(S\textsubscript{t}) + \alpha[R\textsubscript{
 \end{equation}
 
 where R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) is the target for TD update, which is a biased estimate of v\textsubscript{$\pi$} (S\textsubscript{t}), and $\delta$ = R\textsubscript{t+1} + $\gamma$ V(S\textsubscript{t+1}) - V(S\textsubscript{t}) is called \textit{TD error}, which is the error in V(S\textsubscript{t}) available at time t+1.
-Since the TD method only needs to know the estimate of one step ahead and does not need the final outcome of the episodes (also called TD(0)), it can learn online after every time step. TD also works without the terminal state, which is the goal for an agent.
-TD(0) is proved to converge to v\textsubscript{$\pi$} in the table-based case (non-function approximation).
-%However, because bootstraping updates an estimate for an estimate, some bias are inevitable.
-%In addition, TD method is sensitive to initial value, (but low variance).
+Since the TD learning only needs to know the estimate of one step ahead and does not need the final outcome of the episodes (also called TD(0)), it can learn online after every time step. TD learning also works without the terminal state, which is the goal for an agent.
+TD(0) is proved to converge to v\textsubscript{$\pi$} in the table-based case.
 
 %\begin{equation}
 %\textbf{	V(S\textsubscript{t} \leftarrow V(S\textsubscript{t} + \alpha (R\textsubscript{t+1} + \gamma V(S\textsubscript{t+1}) - V(S\textsubscript{t}))
 %}\end{equation}
 
-\textit{Q-learning} is off-policy TD learning defined in \cite{Watkins}, where the agent only knows about the possible states and actions. 
+\textit{Q-learning} is off-policy TD learning introduced in \cite{Watkins}, where the agent only knows about the possible states and actions.  
 The transition states and reward probability functions are unknown to the agent.
 The update rule for the state-action value function, called \textit{Q function}, is of the form:
 
 \begin{equation}\label{eq:q_learning}
-Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\textsubscript{t}) +  \alpha(R\textsubscript{t+1} + \gamma  max (a+t) Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))
+Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\textsubscript{t}) +  \alpha(R\textsubscript{t+1} + \gamma \ max (a+t) \ Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))
 \end{equation}
 
 where $\alpha$ is a constant step-size parameter, or learning rate, $\alpha$ between 0 and 1,  and $\gamma$ is a discount rate. 
-The function Q(S,A) predicts the best action A in state S to maximise the total cumulative rewards.
+The function Q(S,A) predicts the best action A in state S to maximise the total cumulative rewards. Q-learning is off-policy because a policy being evaluated and improved is different from the policy being used to take an action.
 
-%\begin{algorithm}
-%\caption{Q-learning (off-policy TD control)}\label{euclid}
-%\begin{algorithmic}[1]
-%\Procedure{}{}
-%\State $\text{Initialise Q(s,a) arbitrarily, and Q(terminal-state,.)  = 0}$
-%%\For
-%%$\text{Repeat (for each episode):}$
-%\State $\text{Choose a from s using policy derived from Q (e.g, epsilon-greedy)}$
-%\State $\text{Take action a, observe r,  s$\prime$}$
-
-%\begin{equation}
-%Q(s,a) \leftarrow Q(s,a) +  \alpha(R\textsubscript{t+1} + \gamma  max (a+t) Q(s$\prime$, a$\prime$) - Q(s\textsubscript{t}, a\textsubscript{t}))
-%s \gets s$\prime$
-%\end{equation}
-
-%\EndProcedure
-%\caption{Q-learning for estimating $\pi$ $\approx$ $\pi$\textsubscript{*} }
-%\end{algorithmic}
-%\end{algorithm}
+\begin{algorithm}
+\caption{Q-learning (off-policy TD control)}
+\label{algorithm:q_learning}
+\begin{algorithmic}[1]
+\Procedure{}{}
+\State $\text{Initialise Q(s,a) arbitrarily}$
+\Repeat$\text{\ for each episode}$
+\State $\text{Choose a from s using policy derived from Q}$
+\State $\text{Take action a, observe r,  s^$\prime$}$
+\State $Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\textsubscript{t}) +  \alpha(R\textsubscript{t+1} + \gamma \ max (a+t) \ Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))$
+\State $ s \leftarrow s^\prime $
+\Until $\text{ s is terminal}$ 
+\Return $Q$ 
+\EndProcedure
+\caption{Q-learning for leaning $Q: X \times A \rightarrow \mathbb{R} $}
+\end{algorithmic}
+\end{algorithm}
 
 \begin{equation}
-Q(s\textsubscript{t},a\textsubscript{t}) = E [R\textsubscript{t+1} + \gamma R\textsubscript{t+2} + \gamma^2 R\textsubscript{t+3} + ... \vert s\textsubscript{t},a\textsubscript{t} ]
+Q(s\textsubscript{t},a\textsubscript{t}) = \displaystyle \E [R\textsubscript{t+1} + \gamma R\textsubscript{t+2} + \gamma^2 R\textsubscript{t+3} + ... \vert s\textsubscript{t},a\textsubscript{t} ]
 \end{equation}
 
-Q-learning is guaranteed to converge to an optimal policy in a finite tabular representation.
+Q-learning algorithm is defines in \ref{algorithm:q_learning}. Since the state-action value function Q learnt by Q-learning directly approximates q*, Q-learning is  guaranteed to converge to an optimal policy in a finite tabular representation. \textcolor{red}{TODO REF}
 Since Q-learning is one of the most widely used RL methods and our experiments are conducted in a tabular representation, we use it as one of the benchmarks for our new framework.
 %\textcolor{red}{Paper Jaakkola et al. 1993}
 
 %The optimal Q-function Q\textsuperscript{*}(s,a) is directly approximated by the learned action-value function Q.
 
 % Model free can be done using Monte Carlo Policy evaluation
-% One way to solve the Bellman Optimality equation is Q-leraning
+% One way to solve the Bellman Optimality equation is Q-learning
 % U(s) = max a Q(s,a)
-% The function is estimated by Q-learning, which repeately updates Q(s,a) using the Bellman Equation.
-%Q-learning learns the value of its deterministic greedy policy from the experience and gradually converge to the optimal Q-function. It also explored following \textit{$\epsilon$-greedy policy}, which is a stochastic greedy policy, but with the probability of $\epsilon$, the agent chooses an action randomly instea of the greedy action.
+% The function is estimated by Q-learning, which repeatedly updates Q(s,a) using the Bellman Equation.
+%Q-learning learns the value of its deterministic greedy policy from the experience and gradually converge to the optimal Q-function. It also explored following \textit{$\epsilon$-greedy policy}, which is a stochastic greedy policy, but with the probability of $\epsilon$, the agent chooses an action randomly instead of the greedy action.
+
+
+\subsection{Model-based and Model-free RL}
+\label{model_base_model_free_subsection}
+A \textit{model} is a representation of an environment that an agent can use to understand how the environment should look like. 
+There are two different types of RL methods: \textit{model-based} and \textit{model-free} RL method. 
+Model-based RL is where, when a model of the environment is known, the agent uses the model to plan for a series of actions to achieve the agent's goal. 
+The model itself can be learnt by interacting with the environment by taking actions, which return states and rewards, and the parameters of the action models can be estimated with maximum likelihood methods \cite{Ray2010}.
+Using a model, an agent can do planning to generate or improve a policy for the modelled environment. 
+Most of the RL methods are model-free RL, where the model is unknown and the agent learns to achieve the goal solely by interacting with the environment. 
+Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
+When the model of the environment is correct, unlike with model-free RL, the agent does not require trial-and-error interactions with the environment and therefore model-based RL is faster to reach an optimal policy. 
+However, when the model is not a true representation of the environment, or the true MDP, the planning algorithms will not lead to the optimal policy, but a sub-optimal policy.
+
+One algorithm which combines both aspects of model-based and model-free learning to solve the issue of sub-optimality is called Dyna \cite{Sutton1990}.
+Dyna learns a model from real experience and uses the model to generate simulated experience to update the evaluation functions.
+This approach is more efficient because the simulated experiences are relatively easy to generate compared to real experiences, thus less iterations are required.
+
+This idea of learning a model of the environment and using it to execute planning is a core idea of our new framework. 
+
+\subsection{Transfer Learning}
+\label{transfer_learning}
+
+Transfer learning is a method that knowledge learnt in one or more tasks can be used to learn a new task better than if without the knowledge in the first task. Transfer learning is an active research areas in machine learning, but not many have been done in RL. Since training tend to be time consuming and computational expensive, transfer learning allows the trained model to be applied in a different setting. Transfer learning in RL is particularly important since most of the RL research have been done in a simulation or game scenarios, and training RL models in a real physical environment is more expensive to conduct. Even in a virtual environments like games, the transfer learning between different tasks will greatly will have a big impact on potential applications.
+One of the purposes of transfer learning is so that the agent requires less time to learn a new task with the help of what was learn in previous tasks. Another goal would be to measure how effectively the agent reuses its knowledge in a new task.
+% There are many different matrices used to measure the performance of the transfer learning.
+% Five common metrics are defined in XX as follow.
+% TODO source task selection
+
+%Compare with human play, which is used in DeepMind Atari paper.
+
+% Since each metric measures different aspect of transfer learning, using multiple metrics would provide more comprehensive views of the performance of an RL algorithm.
+
+
 
 % \subsection{Function Approximation}
 % \label{function_approximation}
@@ -868,7 +878,7 @@ Since Q-learning is one of the most widely used RL methods and our experiments a
 
 % \subsubsection{The Prediction Objective ($\overline{VE}$)}
 % With function approximation, an update at one state changes many other states, and therefore the values of all states will not be exactly accurate.
-% There is a tradeoff among states as to which state we make it more accurate, while others might be less accurate.
+% There is a trade off among states as to which state we make it more accurate, while others might be less accurate.
 % The error in a state s is the square of the difference between the approximate value $\hat{v}$(s,w) and the true value v\textsubscript{$\pi$}(s). The objective function can be defined by weighting it over the state space by $\mu$, the \textit{Mean Squared Value Error}, denoted $\overline{VE}$.
 
 % \begin{equation}
@@ -950,7 +960,7 @@ Since Q-learning is one of the most widely used RL methods and our experiments a
 % \label{fig:tile_coding}
 % \end{figure}
 
-% Illustration of tile coding is shown in Figure \ref{fig:tile_coding}. In Tile Coding, state set is represented as a continuous two-dimentionala space. If a state is within the space, then the value of the  corrensponding feature is set to be 1 to indicate that the feature is present, while 0 indicates that the feature is absent. This way of representing the feature is called \textit{binary feature}.  \textit{Coarse coding} represents a state with which binary features are present within the space.
+% Illustration of tile coding is shown in Figure \ref{fig:tile_coding}. In Tile Coding, state set is represented as a continuous two-dimentionala space. If a state is within the space, then the value of the  corresponding feature is set to be 1 to indicate that the feature is present, while 0 indicates that the feature is absent. This way of representing the feature is called \textit{binary feature}.  \textit{Coarse coding} represents a state with which binary features are present within the space.
 % One area is associated with one weight w, and training at a state will affect the weight of all the areas overlapping that state. the approximate value function will be updated within at all states within the union of the areas, and a point that has more overlap will be more affected.
 % The size and shape of the areas will determine the degree of the generalisation. Large areas will have more generalisation. In addition, tiles can be overlap, and the change of the weight in that state will affect all other states within the intersection of the spaces. 
 % The degree of overlap within a space will determined the degree of the generalisation.
@@ -958,64 +968,17 @@ Since Q-learning is one of the most widely used RL methods and our experiments a
 
 % \textit{Tile coding} is a type of coarse coding. \textit{Tiling} is a partition of state space, and each element of the partition is called a \textit{tile}.
 
-% The state stpace is partitioned into multiple tiles with multiple tilings. Each tile in each tiling is associated with
+% The state space is partitioned into multiple tiles with multiple tilings. Each tile in each tiling is associated with
 
 % In order to do coarse coding with tile coding, multiple tilings are required, each tiling is offset from one another by a fraction of a tile width.
 
 % As illustrated in Figure XXX, when a state occurs, several features with corresponding tiles become active,
 
-% Tile coding has computational advantage, since each component of tiling is binary value,  XXXX.
+% Tile coding has computational advantage, since each component of tiling is binary value, .
 
 % a trained state will be generalised to other states if they are within any of the same tiles.
 
 % Similar to coarse coding, the size and shape of tiles will determine the degree of approximation.
-
-\subsection{Transfer Learning \textcolor{red}{(TBD)}}
-\label{transfer_learning}
-
-Transfer learning is a method that knowledge learnt in one or more tasks can be used to learn a new task better than if without the knowlege in the first task.
-
-Transfer learning is an active research areas in machine learning, but not many have been done in RL.
-Since training tend to be time consuming and computational expensive, transfer learning allow the trained model to be applied in a different setting.
-
-Transfer learning in RL is particularly important since most of the RL research have been done in a simulation or game scenarios, and training RL models in a real physical environment is more expensive to conduct.
-
-Even in a virtual environments like games,  the transfer learning between different tasks will greatly will have a big impact on potential applications.
-
-This will also speed up learning
-
-Transfer learning in ILP domain have been proved to be successful in many fields,
-
-Since this project is combining ILP into RL senarios, this has a potential for extending this particular research.
-
-We conducted experiements on transfer learning capabilities, which we describe in XXX.
-
-One of the  purposes of transfer learning is so that the agent requires less time to learn a new task with the help of what was learn in previous tasks.
-
-
-Another goal would be to measure how effectively the agent reuses its knoledge in a new task.
-In this case the performan of learningon the first task is usally not measured.
-
-There are many different matrices used to measure the performance of the transfer learning.
-Five common matrics are defined in XX as follow.
-
-TODO source task selection
-
-%Compare with human play, which is used in DeepMind Atari paper.
-%
-%\begin{itemize}
-%\item Jumpstart
-%\item Asymptotic Performance
-%\end{itemize}
-
-Since each matric measures different aspect of transfer learning, using multiple metrics would provide more comprehensive views of the performance of an RL algorithm.
-%
-%\begin{equation}
-%\begin{split}
-%r = \frac{Area under curve with transfer - area under curve without transfer}{area under curve without transfer}
-%\end{split}
-%\end{equation}
-%REFERENCE
 
 \chapter{Framework}
 \label{framework}

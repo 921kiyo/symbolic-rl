@@ -7,26 +7,26 @@ The combining logic-based learning with reinforcement learning has its roots in 
 
 RRL equipped with generalisation of inductive logic programming. 
 
-RRL is based on first-order logic, and does not cope with negation as failure or non-monotonic reasonings.
+RRL is based on first-order logic, and does not cope with negation as failure or non-monotonic reasoning.
 
 However, most RRL algorithms focus on planning. 
-RRL incorporates relational representations of states and actions to generalize Q-function and 
+RRL incorporates relational representations of states and actions to generalise Q-function and 
 More recent work on using relational representation in RL is the paper in XX, which combines RRL and DRL in order to overcome the interpretability and an ability to generalise of DRL.
-The proposed architecture uses self-attention mechanism to reason about the relations bewtween entities in rhw environment to help imroving policy. 
-While RLL was applied to XX, this approach also shows an promissing direction of using ILP in RL.
+The proposed architecture uses self-attention mechanism to reason about the relations between entities in the environment to help improving policy. 
+While RLL was applied to XX, this approach also shows an promising direction of using ILP in RL.
 
 % reuse of experiences.
 
  \cite{Garnelo2016} introduced Deep Symbolic Reinforcement Learning (DSRL), a proof of concept for incorporating symbolic front end as a means of converting low-dimensional symbolic representation into spatio-temporal representations, which will be the state transitions input of reinforcement learning. 
- DSRL extracts features using convolutional neural newtworks (CNNs) \cite{LeCunL1998} and an autoencoder, which are transformed into symbolic representations for relevant object types and positions of the objects. 
+ DSRL extracts features using convolutional neural networks (CNNs) \cite{LeCunL1998} and an auto-encoder, which are transformed into symbolic representations for relevant object types and positions of the objects. 
  These symbolic representations represent abstract state-space, which are the inputs for the Q-learning algorithm to learn a policy on this particular state-space. 
  DSRL was shown to outperform DRL in stochastic variant environments.
 However, there are a number of drawbacks to this approach. 
-First, the extraction of the individual objects was done by manually defined threhold of feature activation values, given that the games were geometrically simple. 
+First, the extraction of the individual objects was done by manually defined threshold of feature activation values, given that the games were geometrically simple. 
 Thus this approach would not scale in geometrically complex games. 
 Second, using deep neural network front-end might also cause a problem. As demonstrated in \cite{Su2017}, a single irrelevant pixel could dramatically influence the state through the change in CNNs.
 In addition, while proposed method successfully used symbolic representations to achieve more data-efficient learning, 
-there is still the potential to apply symbolic learning to those symbolic representations to further improve the learning efficiency, which is what we attemp to do in this paper.
+there is still the potential to apply symbolic learning to those symbolic representations to further improve the learning efficiency, which is what we attempt to do in this paper.
 \cite{Garcez2018} further explored this symbolic abstraction approach by incorporating the relative position of each object with respect to every other object rather than absolute object position. 
 They also assign priority to each Q-value function based on the relative distance of objects from an agent.
 
@@ -42,32 +42,29 @@ We explore how to effectively learn the model of the environment and effectively
 %The history of data-efficient learning
 
 Another approach for using symbolic reinforcement learning is storing heuristics expressed by knowledge bases [\cite{Apeldoorn2017}).  
-An agent lerans the concept of \textit{Hierarchical Knowledge Bases (HKBs)} (which is defined in more details in \cite{Apeldoorn2016} and \cite{Apeldoorn}] at every iteration of training, which contain multiple rules (state-action pairs). 
+An agent learns the concept of \textit{Hierarchical Knowledge Bases (HKBs)} (which is defined in more details in \cite{Apeldoorn2016} and \cite{Apeldoorn}] at every iteration of training, which contain multiple rules (state-action pairs). 
 The agent then is able to decide itself when it should exploit the heuristic rather than the state-action pairs of the RL using  \textit{Strategic Depth}. 
 This approach effectively uses the heuristic knowledge bases, which acts as a sym-symbolic model of the game.
 
 Another field related to our research is the combining of ASP and RL. 
 The original concept of combining ASP and RL was in \cite{Ferreira2017}, where they developed an algorithm that efficiently finds the optimal solution of an MDP of non-stationary domains by using ASP to find the possible trajectories of an MDP. 
-ASP is used to find a set of states of an MDP as choice rules describing the consequnces of each possible action.
+ASP is used to find a set of states of an MDP as choice rules describing the consequences of each possible action.
 % In order to find stationary sets, an extension of ASP called BC\textsuperscript{+}, an action language, was used. BC\textsuperscript{+} can directly translate the agent's actions into ASP form, and provide sequences of actions in answer sets.
-The more details of theoretial explanation of this approach is described in XX.
+The more details of theoretical explanation of this approach is described in XX.
 This approach focused more on efficient update of the Q function using ASP, and does not make use of inductive learning.
 
 Similar works were conducted for learning XX in PAPER, for XX in XXX and for XX in XX. 
 All of them are based on experiment in using robot.
 
 
-Our framwork focues on ASP-based ILP with RL, which has not been explored.
+Our framework focus on ASP-based ILP with RL, which has not been explored.
 
 
-\cite{Meadows2018} proposed an architecture for interactively discovering previously unkonwn axioms using reinforcement learnig.
+\cite{Meadows2018} proposed an architecture for interactively discovering previously unknown axioms using reinforcement learning.
 Axioms represent domain dynamics of preconditions and expected outcomes, as well as the relationship among actions of the agents and objects in the domain.
 These discovered axioms are used to generate more general axioms that can be use for subsequence reasoning.
 uses ASP program to encode a decision tree induction as well as relational representation in order to . 
 The extension of [] is
-%ASP BC\textsuperscript{+} translation was done manually.
-
-
 
 %Incorporation of logic into reinforcement learning dates back to the study of relational reinforcement learning,
 

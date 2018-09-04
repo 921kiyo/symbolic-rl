@@ -5,11 +5,11 @@ In this paper, we developed a new RL algorithm by applying ILP to develop a new 
 We summarise some of the works we have done throughout the project.
 
 \begin{itemize}
-\item We started off by looking at existing symbolic reinforcement learning approaches to understand the research fields and see the potentials of improving further researchs.
-Due to advances of ASP-based ILP frameworks and there is no existing works of applying ASP-based ILP into RL senarios, this motivates us to pursuing the potentials of ILP to solve RL problems.
-Because of the flexibility and experise of ILASP, we decided to apply ILASP as our core learning framework.
+\item We started off by looking at existing symbolic reinforcement learning approaches to understand the research fields and see the potentials of improving further researches.
+Due to advances of ASP-based ILP frameworks and there is no existing works of applying ASP-based ILP into RL scenarios, this motivates us to pursuing the potentials of ILP to solve RL problems.
+Because of the flexibility and expertise of ILASP, we decided to apply ILASP as our core learning framework.
 
-\item We considerered the target hypotheses and how to construct learning tasks. Our target learning is a valid move of the agent, and whic can be expressed with state transition for each action.
+\item We considered the target hypotheses and how to construct learning tasks. Our target learning is a valid move of the agent, and which can be expressed with state transition for each action.
 Also all the components of learning tasks have to be in ASP-syntax, we developed a Python engine for translating all output of the environment into ASP-syntax.
 
 surrounding information
@@ -20,7 +20,7 @@ The use of ASP optimisation is based on the assumption that the goal of the game
 \item We considered which kind of RL problems we would like to test with our new framework. Since this is a new proof-of-concept and testing core concepts were required, we chose a custom-maze game provided by VDGL and created original environments.
 
 \item We tested our new framework in a various maze environments to highlight each aspect of the algorithm. We show that ILP(RL) learns faster than benchmarks for finding a shortest path, and show a capability of transfer learning.
-While the experiments were conducted in a simple limited conditions, we show some promissing potentials of the ILP-based approach for RL problems.
+While the experiments were conducted in a simple limited conditions, we show some promising potentials of the ILP-based approach for RL problems.
 
 \end{itemize}
 
@@ -29,18 +29,18 @@ We used a latest ILP algorithm called ILASP, Learning from Answer Set Program to
 \section{Further Research}
 \label{sec:further_research}
 
-Since the development of ILP(RL) is a new attemp and we only develop the initial version and tested only on simple maze games, 
-there are a number of directions for further research. We discuss some of the possible improments and further research in this section.
+Since the development of ILP(RL) is a new attempt and we only develop the initial version and tested only on simple maze games, 
+there are a number of directions for further research. We discuss some of the possible improvements and further research in this section.
 
 % More general transfer learning.
-% Only empirically correct, no theoreticaly guarantee
+% Only empirically correct, no theoretically guarantee
 % Our approach is similar to experience replay ??
-% More promissing approach is to combine RL algorithm and using ILP approach to complement each other, rather than replacing the bellman equation altogether. 
+% More promising approach is to combine RL algorithm and using ILP approach to complement each other, rather than replacing the bellman equation altogether. 
 \begin{description}
     \item[Better exploration strategy]
     We used a random exploration strategy for both algorithms in order to compare the performance of ILP(RL) with existing RL algorithms. 
     As shown in the experiments, however, the convergence of ILP(RL) is heavily dependent on finding a terminal state in order to start planning part.
-    In RL research, exploration stategy is another active research field and a more sophisticated exploration strategy would facilitate the learning of ILP(RL)
+    In RL research, exploration strategy is another active research field and a more sophisticated exploration strategy would facilitate the learning of ILP(RL)
     such as Boltzman approach, Count-based and Optimistic Initial value TODO REFERENCE).
     % The current framework simply uses a simple random exploration, therefore even if the agent takes an random action and goes to a different state other than the planed one, 
     % the agent does the replan from the new state and quickly correct to the original plan path. 
@@ -48,30 +48,30 @@ there are a number of directions for further research. We discuss some of the po
     % In other words, if the shorter path is far from the current state, the agent is unlikely be able to find the new state unless epsilon value is very high. 
     \item[Experiments on different environments]
     Since the purpose of this paper is develop the initial framework of ILP(RL) and experiments on the core part of the algorithms,
-    furhter experiments on different game environments are required for more robustness of the framework, such as the presence of dynamic enermies in the environment or non-stational environment.
-    This might releave other aspects of using ILP in RL context and further bridge the gaps between the fielf of RL and ILP.
+    further experiments on different game environments are required for more robustness of the framework, such as the presence of dynamic enemies in the environment or non-stational environment.
+    This might leave other aspects of using ILP in RL context and further bridge the gaps between the field of RL and ILP.
 
     % Another benchmark is tile coding, which is a type of linear function approximation techniques described in Chapter XX.
-    % The reason for using an extra benchmark is that the performance comparision of ILP(RL) with q-learning might not be a fair comparision,
+    % The reason for using an extra benchmark is that the performance comparison of ILP(RL) with q-learning might not be a fair comparison,
     % since ILP(RL) has one extra assumption: the agent knows surrounding information (whether there are walls in adjacent cells),
     % which is not a common assumption for Q-learning. Thus we incorporate the same surrounding information as features, and update the weights of each feature as a learning.
     % We compare the performance of ILP(RL) with these two methods.
 
     \item[Inclusion of reward as part of learning]
-    The current implementation of ILP(RL) can only solve a reduced MDP, where there is only one rewards and they can be solved by minising the answer sets.
+    The current implementation of ILP(RL) can only solve a reduced MDP, where there is only one rewards and they can be solved by minimising the answer sets.
     In many RL environments, however, there can be more than one type of rewards. In order to improve our current framework to solve other types of MDP, 
-    the rewards themselve can be included as part of inductive learning using \textit{Learning from ordered answer sets}, denoted $ILP_{LOAS}$. 
+    the rewards themselves can be included as part of inductive learning using \textit{Learning from ordered answer sets}, denoted $ILP_{LOAS}$. 
     This framework is an extension of ILASP by allowing the learning of ASP programs with weak constraints.
     Examples under $ILP_{LOAS}$ are called \textit{ordered pairs of partial answer sets} which can represents which answer sets of a learnt hypothesis are preferred to the others.
     This element of preference learning can be used for different types of rewards. 
     Weak constraints (Calimeri et al 2013) allows 
-    With using $ILP_{LOAS}$, we could further generalise the current framework by removing ASP planning part and inductive learnig would return a sequene of actions. 
+    With using $ILP_{LOAS}$, we could further generalise the current framework by removing ASP planning part and inductive learning would return a sequence of actions. 
     Since our implementation in this paper is a proof-of-concept and generality of hypotheses are useful to highlight the strengths of our approach in terms of transfer learning.
-    This flexibility of inductive learning is a promissing direction.
+    This flexibility of inductive learning is a promising direction.
     \item[Value Iteration Approach]
     \item[Reducing the initial assumption]
-    The current assumption requires the assumption of adjacent definition as a background knolwedge. This could be, however learnt using ILASP.
-    Also the concept of adjacent is another general concpet and can be useful in many different environments.
+    The current assumption requires the assumption of adjacent definition as a background knowledge. This could be, however learnt using ILASP.
+    Also the concept of adjacent is another general concept and can be useful in many different environments.
 \end{description}
 % This approach, however, might also suffer from the computing time, as discussed in \ref{sec:scalability}
 % \item Possibility of using other representational concepts such as \textit{Predictive Representations of State} or \textit{Affordance} \cite{Sridharan2017} for the agent's learning task. These concept have not been considered at the moment, but could help better transfer learning.
