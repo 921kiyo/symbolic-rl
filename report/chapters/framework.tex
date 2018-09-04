@@ -589,6 +589,7 @@ Based on $\epsilon$-greedy strategy, we define the exploration strategy for ILP(
 \end{algorithm}
 When the agent deviates from the planning by taking an random action and moves to a new state, the agent generates a new planning from the new state. 
 Since the ILP(RL) agent does not know when the optimal plan is found, it is necessary for ILP(RL) to contiues $\epsilon$-greedy strategy.
+
 \section{Implementation}
 \label{Implementation}
 In this section, we describe how we developed ILP(RL) framework.
@@ -663,47 +664,50 @@ Planning is computed using Clingo 5.
 \begin{figure}[!ht!b]
 \centering
 \includegraphics[width=1\textwidth]{./figures/env_sample}
-\caption{The VGDL (Video Game Definition Language) environment example} 
+\caption{Map sketch of a VGDL game (left) and it's high-level representation (right)} 
 \label{VGDL_sample}
 \end{figure}
 
 We use the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
-The VGDL allows users to easily craft their own environments, which makes us possible to do various experiments without relying on a default environment. 
-All objects in the games can be described as a sprite in the \textit{SpriteSet}, and users can define the objects' properties such as orientation or movements.
-The representation of each object can be specified in \textit{LevelMapping} and allows users to customize an original map.
+The VGDL allows users to easily craft their own environments, 
+which makes us possible to do various experiments without relying on a default environment.
+
+The base game we used to implement ILP(RL) is shown in Figure\ref{VGDL_sample}.
+The map sketch is a plain text file and is easy to modify the configuration of the game.
+
+\lstinputlisting[
+    caption  = {VGDL description of a maze game},
+    label = {list:vgdl}
+]{vgdl.pl}
+
+The behaviours of the game can be specified using VGDL as shown in \ref{list:vgdl}. 
+All objects in the games can be described as a sprite in the \textit{SpriteSet}, where users can define the objects' properties.
 \textit{InteractionSet} specify the effects of objects when two objects interact in the game.
 \textit{TerminationSet} specify the conditions for ending the game.
-XX VDGL mapping example.
+The representation of each object can be specified in \textit{LevelMapping} and allows users to customize an original map.
 
-The VGDL platform provides an interface with OpenAI Gym (\cite{Brockman2016}), which is a commonly used benchmark platform.
-
-The base game is a simple maze as shown in Figure \ref{VGDL_sample}.
-There are 3 different types of cells: a goal cell, walls and paths. The agent can take 4 different actions: up, down, right and left.
-The environment is not known to the agent in advance, and it attempts to find the goal by exploring the environment.
-In all experiments, the agent receives -1 in any states except the goal state, where it gains a reward of 10.
-Once the agent reaches the goal, or termination state, that episode is finished and the agent start the next episode from the starting point.
-
-TODO write more details of how you make your own environment
 We use PyVGDL\footnote{https://github.com/schaul/py-vgdl/}, which is a high-level VGDL on top of pygame\footnote{https://www.pygame.org}, 
 a Python modules designed for writing video games.
 
-
-We develop our framework ILP(RL) using an environment of VDGL game.
-
 \subsubsection{OpenAI Gym}
-The communication between VGDL environment and an agent, ILP(RL), is through OpenAI Gym, which is 
-% The VDGL game is communicated with RL algorithms through OpenAI Gym. 
+The VGDL platform provides an interface with OpenAI Gym (\cite{Brockman2016}), a commonly used benchmark platform for RL research.
+The communication between VGDL environment and an agent, is through OpenAI Gym interface. 
+\ref{list:openai} shows the functions provided by OpenAI Gym as well as the simple implementation for RL. 
+
+% In all experiments, the agent receives -1 in any states except the goal state, where it gains a reward of 10.
+% Once the agent reaches the goal, or termination state, that episode is finished and the agent start the next episode from the starting point.
 
 \lstinputlisting[
   language = Python,
   caption  = {OpenAI gym interface},
+  label = {list:openai}
 ]{openai.py}
 
 \begin{itemize}
 \item \textsf{env.reset()} resets the game and the agent starts from the starting position. We call it when the agent starts a new episode.
 \item \textsf{env.step(action)} returns an observation of taking an action, which include the state location of the agent in terms of x and y coodinates, reward of the state, an boolean value indicating whether the agent reaches an terminal state.
 The action is chosen by an RL algorithm of your choice. In the case of ILP(RL), action is chosen by the ASP planning or random exploration strategy between 0 and 3.
-\item \textsf{env.render()} renders one frame of the environment to see the movement of the agent in pygame.
+\item \textsf{env.render()} renders one frame of the environment to visualise the movement of the agent in pygame.
 \end{itemize}
 
 % \subsection{The Main Driver}

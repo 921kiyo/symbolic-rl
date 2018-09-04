@@ -118,6 +118,8 @@ INPUT asp_planning.pl
 OUTPUT asp_planning.pl
 INPUT asp_planning_example.pl
 OUTPUT asp_planning_example.pl
+INPUT vgdl.pl
+OUTPUT vgdl.pl
 INPUT openai.py
 OUTPUT openai.py
 INPUT experiment1_hypothesis.pl
@@ -371,6 +373,9 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchr8r.tfm
 INPUT ./figures/env_sample.png
 INPUT ./figures/env_sample.png
 INPUT ./figures/env_sample.png
+INPUT vgdl.pl
+INPUT vgdl.pl
+INPUT vgdl.pl
 INPUT openai.py
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty

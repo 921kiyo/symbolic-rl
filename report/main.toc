@@ -40,28 +40,28 @@
 \contentsline {subsection}{\numberline {3.6.3}Environment Platform}{30}{subsection.3.6.3}
 \contentsline {subsubsection}{The Video Game Definition Language (VGDL)}{30}{section*.15}
 \contentsline {subsubsection}{OpenAI Gym}{31}{section*.17}
-\contentsline {chapter}{\numberline {4}Evaluation}{32}{chapter.4}
-\contentsline {section}{\numberline {4.1}Experimental Setup}{32}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Evaluation Metrics}{32}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Benchmarks}{33}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Parameters}{33}{subsection.4.1.3}
-\contentsline {section}{\numberline {4.2}Learning Evaluation}{33}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Experiment 1: Setup}{33}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Experiment 1: Result}{34}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Experiment 2: Setup}{36}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}Experiment 2: Result}{37}{subsection.4.2.4}
-\contentsline {section}{\numberline {4.3}Transfer Learning Evaluation}{40}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Experiment 3: Setup}{40}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Experiment Result 3}{41}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}Experiment 4: Setup}{41}{subsection.4.3.3}
-\contentsline {subsection}{\numberline {4.3.4}Experiment Result 4}{42}{subsection.4.3.4}
-\contentsline {section}{\numberline {4.4}Discussion}{44}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Strengths of ILP(RL)}{44}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Limitations of the current framework}{44}{subsection.4.4.2}
-\contentsline {chapter}{\numberline {5}Related Work}{46}{chapter.5}
-\contentsline {chapter}{\numberline {6}Conclusion}{48}{chapter.6}
-\contentsline {section}{\numberline {6.1}Summary of Work}{48}{section.6.1}
-\contentsline {section}{\numberline {6.2}Further Research}{49}{section.6.2}
-\contentsline {chapter}{\numberline {A}Ethics}{50}{appendix.A}
-\contentsline {chapter}{\numberline {B}Learning tasks}{53}{appendix.B}
-\contentsline {chapter}{\numberline {C}Answer Set Program}{54}{appendix.C}
+\contentsline {chapter}{\numberline {4}Evaluation}{33}{chapter.4}
+\contentsline {section}{\numberline {4.1}Experimental Setup}{33}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Evaluation Metrics}{33}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Benchmarks}{34}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Parameters}{34}{subsection.4.1.3}
+\contentsline {section}{\numberline {4.2}Learning Evaluation}{34}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Experiment 1: Setup}{34}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Experiment 1: Result}{35}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Experiment 2: Setup}{37}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Experiment 2: Result}{38}{subsection.4.2.4}
+\contentsline {section}{\numberline {4.3}Transfer Learning Evaluation}{41}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Experiment 3: Setup}{41}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Experiment Result 3}{42}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Experiment 4: Setup}{42}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}Experiment Result 4}{43}{subsection.4.3.4}
+\contentsline {section}{\numberline {4.4}Discussion}{45}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Strengths of ILP(RL)}{45}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Limitations of the current framework}{45}{subsection.4.4.2}
+\contentsline {chapter}{\numberline {5}Related Work}{47}{chapter.5}
+\contentsline {chapter}{\numberline {6}Conclusion}{49}{chapter.6}
+\contentsline {section}{\numberline {6.1}Summary of Work}{49}{section.6.1}
+\contentsline {section}{\numberline {6.2}Further Research}{50}{section.6.2}
+\contentsline {chapter}{\numberline {A}Ethics}{51}{appendix.A}
+\contentsline {chapter}{\numberline {B}Learning tasks}{54}{appendix.B}
+\contentsline {chapter}{\numberline {C}Answer Set Program}{55}{appendix.C}
