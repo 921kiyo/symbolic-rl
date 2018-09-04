@@ -599,9 +599,7 @@ Formally, partial interpretation is called \textit{context-dependent partial int
 \end{split}
 \end{equation}
 
-where \textit{e} is a partial interpretation and C is a context, or an ASP program without weak constraints.
-
-%TODO weak delete.
+where \textit{e} is a partial interpretation and C is a context.
 
 %A \textit{context-dependent ordering example (CDOE)} is of the form $\langle$ $\langle$e\textsubscript{1}, C\textsubscript{1} $\rangle$, $\langle$ e\textsubscript{2}, C\textsubscript{2} $\rangle$$\rangle$, which is a pair of CDPI. 
 %An APS program P \textit{bravely respects o} if and only if
@@ -620,8 +618,6 @@ A hypothesis H is an inductive solution of T if and only if:
 \item H $\subseteq$ S\textsubscript{M}
 \item $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{+}, $\exists$A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
 \item $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{-}, $\nexists$A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
-%\item $\forall$o $\in$ O\textsuperscript{b} B $\cup$ H bravely respects o
-%\item $\forall$o $\in$ O\textsuperscript{c} B $\cup$ H cautiously respects o
 \end{enumerate}
 \end{defn}
 One of the main advantages of using context dependent examples is that when a hypothesis is computed, only the relevant set of examples are used for search rather than using all examples at once. 
@@ -684,14 +680,13 @@ RL.
 \item A is the set of finite actions taken by the agent.
 \item T is \textit{a state transition function}: S $\times$ A $\times$ S $\rightarrow$ [0,1], which is a probability of reaching a future state s$^\prime$ $\in$ S by taking an action a $\in$ A in the current state  s $\in$ S.
 %\item T\textsubscript{a}(s, s$^\prime$) is a state transition in the form of probability matrix Pr(S\textsubscript{t+1} = s$^\prime$ $\vert$ s\textsubscript{t} = s, a\textsubscript{t} = a), which is the probablity that action \textit{a} in state \textit{s} at time \textit{t} will result in state \textit{s$^\prime$} at time \textit{t+1}.
-\item R is a reward function R\textsubscript{a}(s, s$^\prime$) = $\displaystyle \E[R\textsubscript{t+1} $ $\vert$ S\textsubscript{t} = s, A\textsubscript{t} = a], the expected immediate reward that action \textit{a} in state \textit{s} at time \textit{t} will return.
+\item R is a reward function R\textsubscript{a}(s, s$^\prime$) = $\displaystyle \E[R\textsubscript{t+1} $ $\vert$ S\textsubscript{t+1} = s$^\prime$, A\textsubscript{t} = a], the expected immediate reward that action \textit{a} in state \textit{s} at time \textit{t} will return.
 \end{itemize}
 \end{defn}
-%$\displaystyle \E[R\textsubscript{t+1} \vert$ S\textsubscript{t} = s]
 
 The objective of an agent is to solve an MDP by taking a sequence of actions to maximise the total cumulative reward it receives. 
 A method of finding the optimal solution of an MDP is Reinforcement Learning (RL). 
-Formally, the objective of a RL agent is to maximise \textit{expected discounted return},which is defined as:
+Formally, the objective of a RL agent is to maximise \textit{expected discounted return} over time steps \textit{k},which is defined as:
 \begin{equation}
 \begin{split}
 G\textsubscript{t} = R\textsubscript{t+1} + \gamma R \textsubscript{t+2} + ...  = \sum_{k=0}^{\infty} \gamma\textsuperscript{k} R\textsubscript{t+k+1} 
@@ -700,14 +695,20 @@ G\textsubscript{t} = R\textsubscript{t+1} + \gamma R \textsubscript{t+2} + ...  
 
 where $\gamma$ is a discount rate $\gamma$ $\in$ [0,1], a parameter which represents the preference of the agent for the present reward over future rewards. If $\gamma$ is low, the agent is more interested in maximising immediate rewards. 
 
-% TODO explain what k is 
-For RL programs, it is not necessary for the agent to know T and R in advance, but they are present in the environment and can be realised each time the agent takes an action. 
-
 \subsection{Policies and Value Functions}
 \label{policy_value_functions_subsection}
 Most RL algorithms are concerned with estimating \textit{Value functions}.
-Value functions estimate the expected return, or expected future reward,  for a given action in a given state. The expected reward for an agent is dependent on the agent's action.  
-Value functions are defined by \textit{policies}, which maps from states to probabilities of choosing each action. The state value function v\textsubscript{$\pi$}(s) of an MDP under a policy $\pi$ is the expected return starting from state \textit{s}, which is of the form:
+Value functions estimate the expected return, or discounted cumulative future reward,  for a given action in a given state. The expected reward for an agent is dependent on the agent's action.  
+Value functions are defined by \textit{policies}, which map from states to probabilities of choosing each action. 
+A policy $\pi$ is defined as follows:
+\begin{equation}
+\label{eq:policy}
+\begin{split}
+\pi(a|s) =  \displaystyle \mathbb{P}[A\textsubscript{t} = a | S\textsubscript{t} = s]
+\end{split}
+\end{equation}
+      
+The state value function v\textsubscript{$\pi$}(s) of an MDP under a policy $\pi$ is the expected return starting from state \textit{s}, which is of the form:
 
 \begin{equation}
 v\textsubscript{$\pi$}(s) = \displaystyle \E [G\textsubscript{t} \vert S\textsubscript{t} = s] \ \textsf{for all}\ s \in \mathcal{S}
