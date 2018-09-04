@@ -331,9 +331,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchb7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchb8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchr7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchr8r.tfm
-INPUT ./figures/tile_coding.png
-INPUT ./figures/tile_coding.png
-INPUT ./figures/tile_coding.png
 INPUT chapters/framework.tex
 INPUT chapters/framework.tex
 INPUT ./figures/architecture.png
@@ -369,6 +366,8 @@ INPUT ./figures/asp_example.png
 INPUT asp_planning_example.pl
 INPUT asp_planning_example.pl
 INPUT asp_planning_example.pl
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchrc7t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchr8r.tfm
 INPUT ./figures/env_sample.png
 INPUT ./figures/env_sample.png
 INPUT ./figures/env_sample.png

@@ -15,46 +15,45 @@
 \BOOKMARK [2][]{subsection.2.3.2}{2.3.2 Policies and Value Functions}{section.2.3}% 15
 \BOOKMARK [2][]{subsection.2.3.3}{2.3.3 Model-based and Model-free RL}{section.2.3}% 16
 \BOOKMARK [2][]{subsection.2.3.4}{2.3.4 Temporal-Difference \(TD\) Learning}{section.2.3}% 17
-\BOOKMARK [2][]{subsection.2.3.5}{2.3.5 Function Approximation}{section.2.3}% 18
-\BOOKMARK [2][]{subsection.2.3.6}{2.3.6 Transfer Learning \(TBD\)}{section.2.3}% 19
-\BOOKMARK [0][]{chapter.3}{3 Framework}{}% 20
-\BOOKMARK [1][]{section.3.1}{3.1 Overview}{chapter.3}% 21
-\BOOKMARK [1][]{section.3.2}{3.2 Environment}{chapter.3}% 22
-\BOOKMARK [1][]{section.3.3}{3.3 Inductive Learning Task}{chapter.3}% 23
-\BOOKMARK [2][]{subsection.3.3.1}{3.3.1 Background Knowledge}{section.3.3}% 24
-\BOOKMARK [2][]{subsection.3.3.2}{3.3.2 Context Dependent Examples}{section.3.3}% 25
-\BOOKMARK [2][]{subsection.3.3.3}{3.3.3 Language Bias}{section.3.3}% 26
-\BOOKMARK [2][]{subsection.3.3.4}{3.3.4 Hypothesis}{section.3.3}% 27
-\BOOKMARK [1][]{section.3.4}{3.4 Planning with Answer Set Programming}{chapter.3}% 28
-\BOOKMARK [2][]{subsection.3.4.1}{3.4.1 Answer Set Program}{section.3.4}% 29
-\BOOKMARK [2][]{subsection.3.4.2}{3.4.2 Plan Execution}{section.3.4}% 30
-\BOOKMARK [1][]{section.3.5}{3.5 Exploration}{chapter.3}% 31
-\BOOKMARK [1][]{section.3.6}{3.6 Implementation}{chapter.3}% 32
-\BOOKMARK [2][]{subsection.3.6.1}{3.6.1 Inductive Learning with ILASP}{section.3.6}% 33
-\BOOKMARK [2][]{subsection.3.6.2}{3.6.2 Planning with ASP}{section.3.6}% 34
-\BOOKMARK [2][]{subsection.3.6.3}{3.6.3 Environment Platform}{section.3.6}% 35
-\BOOKMARK [0][]{chapter.4}{4 Evaluation}{}% 36
-\BOOKMARK [1][]{section.4.1}{4.1 Experimental Setup}{chapter.4}% 37
-\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 Evaluation Metrics}{section.4.1}% 38
-\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Benchmarks}{section.4.1}% 39
-\BOOKMARK [2][]{subsection.4.1.3}{4.1.3 Parameters}{section.4.1}% 40
-\BOOKMARK [1][]{section.4.2}{4.2 Learning Evaluation}{chapter.4}% 41
-\BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Experiment 1: Setup}{section.4.2}% 42
-\BOOKMARK [2][]{subsection.4.2.2}{4.2.2 Experiment 1: Result}{section.4.2}% 43
-\BOOKMARK [2][]{subsection.4.2.3}{4.2.3 Experiment 2: Setup}{section.4.2}% 44
-\BOOKMARK [2][]{subsection.4.2.4}{4.2.4 Experiment 2: Result}{section.4.2}% 45
-\BOOKMARK [1][]{section.4.3}{4.3 Transfer Learning Evaluation}{chapter.4}% 46
-\BOOKMARK [2][]{subsection.4.3.1}{4.3.1 Experiment 3: Setup}{section.4.3}% 47
-\BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Experiment Result 3}{section.4.3}% 48
-\BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Experiment 4: Setup}{section.4.3}% 49
-\BOOKMARK [2][]{subsection.4.3.4}{4.3.4 Experiment Result 4}{section.4.3}% 50
-\BOOKMARK [1][]{section.4.4}{4.4 Discussion}{chapter.4}% 51
-\BOOKMARK [2][]{subsection.4.4.1}{4.4.1 Strengths of ILP\(RL\)}{section.4.4}% 52
-\BOOKMARK [2][]{subsection.4.4.2}{4.4.2 Limitations of the current framework}{section.4.4}% 53
-\BOOKMARK [0][]{chapter.5}{5 Related Work}{}% 54
-\BOOKMARK [0][]{chapter.6}{6 Conclusion}{}% 55
-\BOOKMARK [1][]{section.6.1}{6.1 Summary of Work}{chapter.6}% 56
-\BOOKMARK [1][]{section.6.2}{6.2 Further Research}{chapter.6}% 57
-\BOOKMARK [0][]{appendix.A}{A Ethics}{}% 58
-\BOOKMARK [0][]{appendix.B}{B Learning tasks}{}% 59
-\BOOKMARK [0][]{appendix.C}{C Answer Set Program}{}% 60
+\BOOKMARK [2][]{subsection.2.3.5}{2.3.5 Transfer Learning \(TBD\)}{section.2.3}% 18
+\BOOKMARK [0][]{chapter.3}{3 Framework}{}% 19
+\BOOKMARK [1][]{section.3.1}{3.1 Overview}{chapter.3}% 20
+\BOOKMARK [1][]{section.3.2}{3.2 Environment}{chapter.3}% 21
+\BOOKMARK [1][]{section.3.3}{3.3 Inductive Learning Task}{chapter.3}% 22
+\BOOKMARK [2][]{subsection.3.3.1}{3.3.1 Background Knowledge}{section.3.3}% 23
+\BOOKMARK [2][]{subsection.3.3.2}{3.3.2 Context Dependent Examples}{section.3.3}% 24
+\BOOKMARK [2][]{subsection.3.3.3}{3.3.3 Language Bias}{section.3.3}% 25
+\BOOKMARK [2][]{subsection.3.3.4}{3.3.4 Hypothesis}{section.3.3}% 26
+\BOOKMARK [1][]{section.3.4}{3.4 Planning with Answer Set Programming}{chapter.3}% 27
+\BOOKMARK [2][]{subsection.3.4.1}{3.4.1 Answer Set Program}{section.3.4}% 28
+\BOOKMARK [2][]{subsection.3.4.2}{3.4.2 Plan Execution}{section.3.4}% 29
+\BOOKMARK [1][]{section.3.5}{3.5 Exploration}{chapter.3}% 30
+\BOOKMARK [1][]{section.3.6}{3.6 Implementation}{chapter.3}% 31
+\BOOKMARK [2][]{subsection.3.6.1}{3.6.1 Inductive Learning with ILASP}{section.3.6}% 32
+\BOOKMARK [2][]{subsection.3.6.2}{3.6.2 Planning with ASP}{section.3.6}% 33
+\BOOKMARK [2][]{subsection.3.6.3}{3.6.3 Environment Platform}{section.3.6}% 34
+\BOOKMARK [0][]{chapter.4}{4 Evaluation}{}% 35
+\BOOKMARK [1][]{section.4.1}{4.1 Experimental Setup}{chapter.4}% 36
+\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 Evaluation Metrics}{section.4.1}% 37
+\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Benchmarks}{section.4.1}% 38
+\BOOKMARK [2][]{subsection.4.1.3}{4.1.3 Parameters}{section.4.1}% 39
+\BOOKMARK [1][]{section.4.2}{4.2 Learning Evaluation}{chapter.4}% 40
+\BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Experiment 1: Setup}{section.4.2}% 41
+\BOOKMARK [2][]{subsection.4.2.2}{4.2.2 Experiment 1: Result}{section.4.2}% 42
+\BOOKMARK [2][]{subsection.4.2.3}{4.2.3 Experiment 2: Setup}{section.4.2}% 43
+\BOOKMARK [2][]{subsection.4.2.4}{4.2.4 Experiment 2: Result}{section.4.2}% 44
+\BOOKMARK [1][]{section.4.3}{4.3 Transfer Learning Evaluation}{chapter.4}% 45
+\BOOKMARK [2][]{subsection.4.3.1}{4.3.1 Experiment 3: Setup}{section.4.3}% 46
+\BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Experiment Result 3}{section.4.3}% 47
+\BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Experiment 4: Setup}{section.4.3}% 48
+\BOOKMARK [2][]{subsection.4.3.4}{4.3.4 Experiment Result 4}{section.4.3}% 49
+\BOOKMARK [1][]{section.4.4}{4.4 Discussion}{chapter.4}% 50
+\BOOKMARK [2][]{subsection.4.4.1}{4.4.1 Strengths of ILP\(RL\)}{section.4.4}% 51
+\BOOKMARK [2][]{subsection.4.4.2}{4.4.2 Limitations of the current framework}{section.4.4}% 52
+\BOOKMARK [0][]{chapter.5}{5 Related Work}{}% 53
+\BOOKMARK [0][]{chapter.6}{6 Conclusion}{}% 54
+\BOOKMARK [1][]{section.6.1}{6.1 Summary of Work}{chapter.6}% 55
+\BOOKMARK [1][]{section.6.2}{6.2 Further Research}{chapter.6}% 56
+\BOOKMARK [0][]{appendix.A}{A Ethics}{}% 57
+\BOOKMARK [0][]{appendix.B}{B Learning tasks}{}% 58
+\BOOKMARK [0][]{appendix.C}{C Answer Set Program}{}% 59

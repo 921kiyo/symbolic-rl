@@ -42,7 +42,10 @@ there are a number of directions for further research. We discuss some of the po
     As shown in the experiments, however, the convergence of ILP(RL) is heavily dependent on finding a terminal state in order to start planning part.
     In RL research, exploration stategy is another active research field and a more sophisticated exploration strategy would facilitate the learning of ILP(RL)
     such as Boltzman approach, Count-based and Optimistic Initial value TODO REFERENCE).
-
+    % The current framework simply uses a simple random exploration, therefore even if the agent takes an random action and goes to a different state other than the planed one, 
+    % the agent does the replan from the new state and quickly correct to the original plan path. 
+    % This means it is likely that the agent of ILP(RL) only explores the adjacent cells and if there is a shorter path or new state
+    % In other words, if the shorter path is far from the current state, the agent is unlikely be able to find the new state unless epsilon value is very high. 
     \item[Experiments on different environments]
     Since the purpose of this paper is develop the initial framework of ILP(RL) and experiments on the core part of the algorithms,
     furhter experiments on different game environments are required for more robustness of the framework, such as the presence of dynamic enermies in the environment or non-stational environment.

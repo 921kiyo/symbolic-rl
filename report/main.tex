@@ -17,6 +17,16 @@
 \usepackage{xcolor}
 % \usepackage{minted}
 
+\usepackage[noend]{algpseudocode}
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+\makeatletter
+\algnewcommand{\LineComment}[1]{\Statex \hskip\ALG@thistlm \(\triangleright\) #1}
+\makeatother
+
 \definecolor{codegray}{rgb}{0.8,0.8,0.8}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
@@ -841,125 +851,120 @@ Since Q-learning is one of the most widely used RL methods and our experiments a
 % The function is estimated by Q-learning, which repeately updates Q(s,a) using the Bellman Equation.
 %Q-learning learns the value of its deterministic greedy policy from the experience and gradually converge to the optimal Q-function. It also explored following \textit{$\epsilon$-greedy policy}, which is a stochastic greedy policy, but with the probability of $\epsilon$, the agent chooses an action randomly instea of the greedy action.
 
-\subsection{Function Approximation}
-\label{function_approximation}
-Q-learning with a tabular representation works when every state-action value can be represented. 
-In case of very large MDPs, however, it may not be possible to represent all state-action values with a tabular representation.
-For example, robot arms have a continuous states in 3D dimensional space.
-This problem motivates the use of \textit{function approximation}, which estimates value function with function approximation.  Not only is it represented in tabular form, but also in the form of a parameterised function with \textit{weight vector w}.
-%$\in \R\textsuperscript{d}$ where $\R\textsuperscript{d}$ is XXX
-Unlike Q-table, changing one weight updates the estimated value of not only one state, but many states, and this generalisation makes it more flexible to apply to different scenarios where the tabular approach could not be applied.
+% \subsection{Function Approximation}
+% \label{function_approximation}
+% Q-learning with a tabular representation works when every state-action value can be represented. 
+% In case of very large MDPs, however, it may not be possible to represent all state-action values with a tabular representation.
+% For example, robot arms have a continuous states in 3D dimensional space.
+% This problem motivates the use of \textit{function approximation}, which estimates value function with function approximation.  Not only is it represented in tabular form, but also in the form of a parameterised function with \textit{weight vector w}.
+% %$\in \R\textsuperscript{d}$ where $\R\textsuperscript{d}$ is XXX
+% Unlike Q-table, changing one weight updates the estimated value of not only one state, but many states, and this generalisation makes it more flexible to apply to different scenarios where the tabular approach could not be applied.
 
-The reason we are introducing the function approximation is that it is used as another benchmark for our new framework.
+% The reason we are introducing the function approximation is that it is used as another benchmark for our new framework.
 
-\subsubsection{The Prediction Objective ($\overline{VE}$)}
-With function approximation, an update at one state changes many other states, and therefore the values of all states will not be exactly accurate.
-There is a tradeoff among states as to which state we make it more accurate, while others might be less accurate.
-The error in a state s is the square of the difference between the approximate value $\hat{v}$(s,w) and the true value v\textsubscript{$\pi$}(s). The objective function can be defined by weighting it over the state space by $\mu$, the \textit{Mean Squared Value Error}, denoted $\overline{VE}$.
+% \subsubsection{The Prediction Objective ($\overline{VE}$)}
+% With function approximation, an update at one state changes many other states, and therefore the values of all states will not be exactly accurate.
+% There is a tradeoff among states as to which state we make it more accurate, while others might be less accurate.
+% The error in a state s is the square of the difference between the approximate value $\hat{v}$(s,w) and the true value v\textsubscript{$\pi$}(s). The objective function can be defined by weighting it over the state space by $\mu$, the \textit{Mean Squared Value Error}, denoted $\overline{VE}$.
 
-\begin{equation}
-\overline{VE}(w) \doteq \sum_{s \in S} \mu (s) \big[ v\textsubscript{$\pi$}(s) - \hat{v}(s,w) \big]\textsuperscript{2}.
-\end{equation}
-\label{ve}
+% \begin{equation}
+% \overline{VE}(w) \doteq \sum_{s \in S} \mu (s) \big[ v\textsubscript{$\pi$}(s) - \hat{v}(s,w) \big]\textsuperscript{2}.
+% \end{equation}
+% \label{ve}
 
-\subsubsection{Stochastic gradient descent (SGD)}
-\textit{Stochastic gradient descent (SGD)} methods are commonly used to learn function approximation in value prediction, which works well for online reinforcement learning.
-%TODO EXPLAIN ONLINE VS OFFLINE LEARNING
-The weight vector w in SGD is defined as:
-\begin{equation}
- w \doteq  \begin{pmatrix}  w\textsubscript{1}  \\ w\textsubscript{2} \\ \vdots \\ w\textsubscript{n}   \end{pmatrix}
-\end{equation}
+% \subsubsection{Stochastic gradient descent (SGD)}
+% \textit{Stochastic gradient descent (SGD)} methods are commonly used to learn function approximation in value prediction, which works well for online reinforcement learning.
+% %TODO EXPLAIN ONLINE VS OFFLINE LEARNING
+% The weight vector w in SGD is defined as:
+% \begin{equation}
+%  w \doteq  \begin{pmatrix}  w\textsubscript{1}  \\ w\textsubscript{2} \\ \vdots \\ w\textsubscript{n}   \end{pmatrix}
+% \end{equation}
 
-and $\hat{v}$(s,w) is a differentiable function of w for all s $\in$ S.
-%minimize the $\overline{VE}$ on the observed examples. 
-SGD adjusts the weights vector by a fraction of $\alpha$, a step-size parameter,  in the direction that reduces the error on that example the most. Formally, it is defined as:
+% and $\hat{v}$(s,w) is a differentiable function of w for all s $\in$ S.
+% %minimize the $\overline{VE}$ on the observed examples. 
+% SGD adjusts the weights vector by a fraction of $\alpha$, a step-size parameter,  in the direction that reduces the error on that example the most. Formally, it is defined as:
 
-\begin{equation}\label{eq:sgd}
-\begin{split}
-w\textsubscript{t+1} & \doteq w\textsubscript{t} -  \frac{1}{2} \alpha  \bigtriangledown \big[ v\textsubscript{$\pi$}(S\textsubscript{t}) - \hat{v}(S\textsubscript{t}, w\textsubscript{t}) \big]\textsuperscript{2}. \\
-& = w\textsubscript{t} +  \alpha  \big[ v\textsubscript{$\pi$}(S\textsubscript{t}) - \hat{v}(S\textsubscript{t}, w\textsubscript{t}) \big] \bigtriangledown \hat{v}(S\textsubscript{t}, w\textsubscript{t}).
-\end{split}
-\end{equation}
+% \begin{equation}\label{eq:sgd}
+% \begin{split}
+% w\textsubscript{t+1} & \doteq w\textsubscript{t} -  \frac{1}{2} \alpha  \bigtriangledown \big[ v\textsubscript{$\pi$}(S\textsubscript{t}) - \hat{v}(S\textsubscript{t}, w\textsubscript{t}) \big]\textsuperscript{2}. \\
+% & = w\textsubscript{t} +  \alpha  \big[ v\textsubscript{$\pi$}(S\textsubscript{t}) - \hat{v}(S\textsubscript{t}, w\textsubscript{t}) \big] \bigtriangledown \hat{v}(S\textsubscript{t}, w\textsubscript{t}).
+% \end{split}
+% \end{equation}
 
-The gradient of J(w), which is the vector of partial derivatives with respect to each weight vector,  is defined as:
+% The gradient of J(w), which is the vector of partial derivatives with respect to each weight vector,  is defined as:
 
-\begin{equation}
-\bigtriangledown\textsubscript{w} J(w) =  \begin{pmatrix} \frac{\partial J(w)}{\partial w\textsubscript{1}}  \\ \vdots \\ \frac{\partial J(w)}{\partial w\textsubscript{n}}   \end{pmatrix}
-\end{equation}
+% \begin{equation}
+% \bigtriangledown\textsubscript{w} J(w) =  \begin{pmatrix} \frac{\partial J(w)}{\partial w\textsubscript{1}}  \\ \vdots \\ \frac{\partial J(w)}{\partial w\textsubscript{n}}   \end{pmatrix}
+% \end{equation}
 
-%\begin{equation}
-%w\textsubscript{t+1} \doteq w\textsubscript{t} + \alpha \big[ U\textsubscript{t} - \hat{v}(S\textsubscript{t}, w\textsubscript{t})\big] x(S\textsubscript{t})
-%\end{equation}
+% %\begin{equation}
+% %w\textsubscript{t+1} \doteq w\textsubscript{t} + \alpha \big[ U\textsubscript{t} - \hat{v}(S\textsubscript{t}, w\textsubscript{t})\big] x(S\textsubscript{t})
+% %\end{equation}
 
-\subsubsection{Linear Value Function Approximation}
-A \textit{linear function} of a weight vector is a type of simple function approximation to approximate the action-value function. 
-\begin{equation}
-\hat{q}(s,a) \approx q\textsubscript{$\pi$} (s,a)
-\end{equation}
+% \subsubsection{Linear Value Function Approximation}
+% A \textit{linear function} of a weight vector is a type of simple function approximation to approximate the action-value function. 
+% \begin{equation}
+% \hat{q}(s,a) \approx q\textsubscript{$\pi$} (s,a)
+% \end{equation}
 
-The vector x(s,a) represents a \textit{feature vector}, which is of the form:
+% The vector x(s,a) represents a \textit{feature vector}, which is of the form:
 
-\begin{equation}
-x(S, A) = \begin{pmatrix} x\textsubscript{1}(S, A) \\ \vdots \\ x\textsubscript{n}(S, A)  \end{pmatrix}
-\end{equation}
-where each x(s,a) is a feature of the corresponding action-state pair.
+% \begin{equation}
+% x(S, A) = \begin{pmatrix} x\textsubscript{1}(S, A) \\ \vdots \\ x\textsubscript{n}(S, A)  \end{pmatrix}
+% \end{equation}
+% where each x(s,a) is a feature of the corresponding action-state pair.
 
-Using the SGD update with linear function approximation, the gradient of the approximate value function with respect to w is:
-%\textcolor{red}{Add proof here}
-\begin{equation}
-\bigtriangledown \hat{q}(s, a,w) = x(s, a)
-\end{equation}
+% Using the SGD update with linear function approximation, the gradient of the approximate value function with respect to w is:
+% %\textcolor{red}{Add proof here}
+% \begin{equation}
+% \bigtriangledown \hat{q}(s, a,w) = x(s, a)
+% \end{equation}
 
-Thus the general SGD update defined in (\ref{eq:sgd}) can be simplified to the following:
+% Thus the general SGD update defined in (\ref{eq:sgd}) can be simplified to the following:
 
-\begin{equation}\label{eq:sgd_linear}
-\begin{split}
-w\textsubscript{t+1} & = w\textsubscript{t} +  \alpha  \big[ q\textsubscript{$\pi$}(S\textsubscript{t}, A\textsubscript{t}) - \hat{q}(S\textsubscript{t}, A\textsubscript{t}, w\textsubscript{t}) \big] x(S\textsubscript{t}, A\textsubscript{t})
-\end{split}
-\end{equation}
+% \begin{equation}\label{eq:sgd_linear}
+% \begin{split}
+% w\textsubscript{t+1} & = w\textsubscript{t} +  \alpha  \big[ q\textsubscript{$\pi$}(S\textsubscript{t}, A\textsubscript{t}) - \hat{q}(S\textsubscript{t}, A\textsubscript{t}, w\textsubscript{t}) \big] x(S\textsubscript{t}, A\textsubscript{t})
+% \end{split}
+% \end{equation}
 
-%The error in a state s is the square of the difference between the approximate value
-%$\hat{v}$(S,w) and the true value v(S,w).
-%\begin{equation}
-%J(w) = \displaystyle \E \textsubscript{$\pi$} \big[ (v\textsubscript{$\pi$}(S) -  \hat{v}(S,w))\textsuperscript{2} \big]
-%\end{equation}
-Unlike non-linear value function approximation, the linear method is guaranteed to converge to a global optimum.
-One disadvantage of the linear method is that it cannot express any relationship between features. For example, it cannot represent that feature \textit{i} is useful only if feature \textit{j} is not present.
-Nevertheless,  this approach is sufficient for our experiments, which are described in Chapter \ref{evaluation}.
+% %The error in a state s is the square of the difference between the approximate value
+% %$\hat{v}$(S,w) and the true value v(S,w).
+% %\begin{equation}
+% %J(w) = \displaystyle \E \textsubscript{$\pi$} \big[ (v\textsubscript{$\pi$}(S) -  \hat{v}(S,w))\textsuperscript{2} \big]
+% %\end{equation}
+% Unlike non-linear value function approximation, the linear method is guaranteed to converge to a global optimum.
+% One disadvantage of the linear method is that it cannot express any relationship between features. For example, it cannot represent that feature \textit{i} is useful only if feature \textit{j} is not present.
+% Nevertheless,  this approach is sufficient for our experiments, which are described in Chapter \ref{evaluation}.
 
-\subsubsection{Tile Coding \textcolor{red}{(TBD)}}
-There are different linear function approximation methods to represents states as features. Feature construction depends on a problem you are solving.  We introduce \textit{Tile Coding} which will be used for our benchmark.
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=1.0\textwidth]{./figures/tile_coding}
-\caption{Tiling coding illustration}
-\label{fig:tile_coding}
-\end{figure}
+% \subsubsection{Tile Coding \textcolor{red}{(TBD)}}
+% There are different linear function approximation methods to represents states as features. Feature construction depends on a problem you are solving.  We introduce \textit{Tile Coding} which will be used for our benchmark.
+% \begin{figure}[!htb]
+% \centering
+% \includegraphics[width=1.0\textwidth]{./figures/tile_coding}
+% \caption{Tiling coding illustration}
+% \label{fig:tile_coding}
+% \end{figure}
 
-Illustration of tile coding is shown in Figure \ref{fig:tile_coding}. In Tile Coding, state set is represented as a continuous two-dimentionala space. If a state is within the space, then the value of the  corrensponding feature is set to be 1 to indicate that the feature is present, while 0 indicates that the feature is absent. This way of representing the feature is called \textit{binary feature}.  \textit{Coarse coding} represents a state with which binary features are present within the space.
-One area is associated with one weight w, and training at a state will affect the weight of all the areas overlapping that state. the approximate value function will be updated within at all states within the union of the areas, and a point that has more overlap will be more affected.
-The size and shape of the areas will determine the degree of the generalisation. Large areas will have more generalisation. In addition, tiles can be overlap, and the change of the weight in that state will affect all other states within the intersection of the spaces. 
-The degree of overlap within a space will determined the degree of the generalisation.
-The shape of the space also affect how it is generalised.
+% Illustration of tile coding is shown in Figure \ref{fig:tile_coding}. In Tile Coding, state set is represented as a continuous two-dimentionala space. If a state is within the space, then the value of the  corrensponding feature is set to be 1 to indicate that the feature is present, while 0 indicates that the feature is absent. This way of representing the feature is called \textit{binary feature}.  \textit{Coarse coding} represents a state with which binary features are present within the space.
+% One area is associated with one weight w, and training at a state will affect the weight of all the areas overlapping that state. the approximate value function will be updated within at all states within the union of the areas, and a point that has more overlap will be more affected.
+% The size and shape of the areas will determine the degree of the generalisation. Large areas will have more generalisation. In addition, tiles can be overlap, and the change of the weight in that state will affect all other states within the intersection of the spaces. 
+% The degree of overlap within a space will determined the degree of the generalisation.
+% The shape of the space also affect how it is generalised.
 
-\textit{Tile coding} is a type of coarse coding. \textit{Tiling} is a partition of state space, and each element of the partition is called a \textit{tile}.
+% \textit{Tile coding} is a type of coarse coding. \textit{Tiling} is a partition of state space, and each element of the partition is called a \textit{tile}.
 
-The state stpace is partitioned into multiple tiles with multiple tilings. Each tile in each tiling is associated with
+% The state stpace is partitioned into multiple tiles with multiple tilings. Each tile in each tiling is associated with
 
-In order to do coarse coding with tile coding, multiple tilings are required, each tiling is offset from one another by a fraction of a tile width.
+% In order to do coarse coding with tile coding, multiple tilings are required, each tiling is offset from one another by a fraction of a tile width.
 
-As illustrated in Figure XXX, when a state occurs, several features with corresponding tiles become active,
+% As illustrated in Figure XXX, when a state occurs, several features with corresponding tiles become active,
 
-Tile coding has computational advantage, since each component of tiling is binary value,  XXXX.
+% Tile coding has computational advantage, since each component of tiling is binary value,  XXXX.
 
-a trained state will be generalised to other states if they are within any of the same tiles.
+% a trained state will be generalised to other states if they are within any of the same tiles.
 
-Similar to coarse coding, the size and shape of tiles will determine the degree of approximation.
-
-\begin{examp} \normalfont (Tile Coding).
-
-XXX
-\end{examp}
+% Similar to coarse coding, the size and shape of tiles will determine the degree of approximation.
 
 \subsection{Transfer Learning \textcolor{red}{(TBD)}}
 \label{transfer_learning}

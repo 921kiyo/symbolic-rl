@@ -488,7 +488,7 @@ Thus the agent can make an action plan to reach the goal. The ASP program for th
 % In this example, the following is the answer set program
 % The answer set using the hypothesis XXX is 
 
-XXX. 
+XXX.
 % The answer set using the improved hypothesis is XXX, 
 % Which correctly returns a sequence of actions and predicted states.
 
@@ -496,6 +496,7 @@ This incorrect plan is also a source for learning a better hypothesis.
 As shown in Example XX, if the hypothesis is not a full hypotheses, outputs of ASP contain lots of \textsf{state\_at((X,Y), T)} at the same states. 
 Given the agent is at one state at each time step, these duplicates are all included in exclusions, as defined in Definition \ref{def:ILPRL_exc}.
 
+This completes the whole cycle of ILP(RL) shown in Figure \ref{fig:ILPRL_overview}.
 % When the agent encounters a new environment (e.g a new wall), this new information will be added to its background, which will be used to improved the hypothesis. 
 % Similarly, after executing an action by following the generated plan, the agent receives a new positive example. If the new positive example is not covered by the current hypotheses, 
 % ILASP reruns using the new example to improve the hypotheses. 
@@ -548,76 +549,52 @@ Given the agent is at one state at each time step, these duplicates are all incl
 % \end{algorithmic}
 % \end{algorithm}
 
-% Everytime the agent executes an action by following the plan, it checks whether the observed state is that is expected.
-
-% If there is a difference between the two, either
-
-% B is incorrect
-
-% H is not sophisticated enough,
-
-% If that is the case, the agent runs ILASP again using more positive examples it collected during the plan execution.
-
+% Exploration is one of the active research areas in RL, and is often discussed as a tradeoff between exploration and exploitation. 
 \section{Exploration}
 \label{exploration}
-Exploration is one of the active research areas in RL, and is often discussed as a tradeoff between exploration and exploitation. 
-While the agent exploit what is already learnt and follow the best policy and action selection so far.
-It also needs to explore by taking a new action to discover a new state, which might make the agent discover an even shorter path and therefore higher total rewards in the future or in the long term. 
-One of the most commonly used strategies is $\epsilon$-greedy strategy. 
-As described in Chapter XXX, the agent takes an random action with a probability of $\epsilon$, which is a hiper-parameter.
+In this section, we explain exploration of ILP(RL). While the agent can learn the hypotheses and execute a planning by interacting with the environment as shown in Figure \ref{fig:ILPRL_overview},
+there are mainly two reasons why ILP(RL) requires exploration. 
+First, the ILP(RL) agent can only do ASP planning only if it finds a terminal state. 
+Therefore the agent needs to continues exploring the environment until the terminal state is found. 
+Second, even if the terminal state is known and the agent generates a planning based on the background knowledge and the hypotheses, 
+this does not guarantee that the agent always finds an optimal plan.
+While the agent exploit what is already learnt and follow the best plan so far,
+the agent also needs to explore by taking a new action to discover a new state, which might make the agent discover an even shorter path and therefore higher total rewards in the long term.
 
-ILP(RL) planning starts once the agent reaches a goal once. However it is likely that the agent has not seen all the environment
-and therefore is likely to generates a sub-optimal plan. Therefore, similar to RL algorithms, the agent also has to explore a new state.
-
-In our case, given the goal is found and the model is correct, it is likely that following the plan will maximize the total rewards, 
-To avoid the agent from being stuck in a sub-optimal plan, the agent deliberately discards the plan and takes an random action with a probability of
-epsilon (which is less than 1) TODO define this mathematically.
-
-When the agent deviates from the planning, it discovers new information, which will be added to B.
-Exploration is therefore necessary to make sure that the agent might discovers a shorter path than the current plan, which will be demonstrated in the experiment.
-
-\begin{examp} \normalfont (Plan Generation).
-Suppose the plan of the agent is the following. 
-
-Suppose the agent decides to take an random action and moves "up", which may help it discover a new state. 
-From the new state, the agent again plan to the goal from the current state. In this case, the new plan is 
-Sub-optimal plan -> random exploration -> optimal policy.
-
-\end{examp}
-    
-% Another common way is to decay the $\epsilon$ by the number of episodes, since at the beginning it is more likely that the agent has not fully explored the environment and therefore higher epsilon.
-
-While statistical RL algorithms, such as Q-learning or Tile-coding explained in XX, update Q-value by a facter of alpha, 
-ILP(RL) tends to strictly follow the plan the generated. Also it is known that model-based RL tends to get stuck in a sub-optimal if the model is incorrect, ILP(RL) also needs a exploration
-And since the agent does not know when the perfect hypothesis in a particular environment is fully realised, it needs to keep exploring the environment even though
-
-This strategy may not be appropriate in cases there safety is a priority (since it is random action.)
-
-When the agent takes an random action and move into a new state, the agents creates a new plan from the new state and continue to move forward.
-
-% Epsilon needs to be larger than Q-learnig because
-It is simple to implement.
-
-The reason for using random exploration is that it can be used for both benchmark and ILP(RL) and thus enables us to do a fair comparision between them.
-
-After taking an random action, the agent again has a probably of epsilon for taking an random action. 
-Throughout following the new plan, there is a small probalbility of chance that the agent takes an random action.
-
-The current framework simply uses a simple random exploration, therefore even if the agent takes an random action and goes to a different state other than the planed one, 
-the agent does the replan from the new state and quickly correct to the original plan path. 
-This means it is likely that the agent of ILP(RL) only explores the adjacent cells and if there is a shorter path or new state
-In other words, if the shorter path is far from the current state, the agent is unlikely be able to find the new state unless epsilon value is very high. 
-
+One of the simple exploration strategies in RL is called \textit{$\epsilon$-greedy strategy}.
+$\epsilon$-greedy strategy states that an agent follows the optimal policy with probability of (1- $\epsilon$) where $\epsilon \in [0,1]$, 
+and the agent takes an random action with a probability of $\epsilon$. $\epsilon$ is hiper-parameter and chosen externally.
+Based on $\epsilon$-greedy strategy, we define the exploration strategy for ILP(RL) as follows:
+\begin{algorithm}
+\caption{ILP(RL) Exploration Strategy}\label{euclid}
+\begin{algorithmic}[1]
+\Procedure{NextAction}{}
+\If {Terminal state is found}
+\State
+\LineComment{rand(0,1) generates a random number between 0 and 1}
+\If {$rand(0,1) < \epsilon $} 
+\space
+\State
+\LineComment{randInt(0,A) generates a uniformly random integer between 0 and $|A|$}
+\State $i = randInt(0, |A|)$ 
+\Return $a\textsubscript{i}$
+\Else \State $a\textsubscript{i}$ = ASP Plan of ILP(RL)
+\Return $a\textsubscript{i}$
+\EndIf
+\Else \State $i = randInt(1, |A|)$
+\Return $a\textsubscript{i}$
+\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+When the agent deviates from the planning by taking an random action and moves to a new state, the agent generates a new planning from the new state. 
+Since the ILP(RL) agent does not know when the optimal plan is found, it is necessary for ILP(RL) to contiues $\epsilon$-greedy strategy.
 \section{Implementation}
 \label{Implementation}
-
-% We use GVG-AI Framework for our experiments, which was created for the General Video Gamea AI Competition\footnote{http://www.gvgai.net/},
-% a game environment for an agent that should be able to play a wide variety of games without knowing which games are to be played.
-As shown in Figure \ref{fig:ILPRL_overview}, there are mainly three different components that need to be communicated: inductive learning with ILASP, planning with ASP and the external environment platform provided by VGDL with OpenAI interface.
+In this section, we describe how we developed ILP(RL) framework.
+There are mainly three different components that need to be communicated: inductive learning with ILASP, planning with ASP and the external environment platform provided by VGDL with OpenAI interface.
 All of them are communicated through the main driver written in Python. 
-In the following section, part of low-level implementation of each part of the framework.
-
-% \subsection{External Dependencies}
+In the following section, we explain each component of ILP(RL) in details.
 
 \subsection{Inductive Learning with ILASP}
 We use ILASP2i, a inductive learning system developed in XX. 

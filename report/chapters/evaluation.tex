@@ -72,7 +72,8 @@ The number of time steps should be sufficient for the both algorithms to reach t
 which we set 250 time steps for all experiments. If the agent does not find the terminal state by 250 time steps, the agent receives the reward of -250 and 
 start the next episode from the starting point. If the agent reaches the terminal state within 250 time steps, it receives the reward of 10 and start the next episode with the same starting point. 
 
-Starting point is fixed every episode. 
+Starting point is fixed every episode.
+% The reason for using random exploration is that it can be used for both benchmark and ILP(RL) and thus enables us to do a fair comparision between them. 
 % Epsilon for ILP(RL) should be higher, since the agent follows the generated plan,
 % whereas benchmark algorithms update value function with the degree of alpha.
 We conducted several experiments using different environments to highlight each aspect of the algorithm.
