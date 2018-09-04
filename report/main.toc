@@ -48,7 +48,7 @@
 \contentsline {section}{\numberline {4.2}Learning Evaluation}{34}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Experiment 1: Setup}{34}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Experiment 1: Result}{35}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Experiment 2: Setup}{37}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.3}Experiment 2: Setup}{36}{subsection.4.2.3}
 \contentsline {subsection}{\numberline {4.2.4}Experiment 2: Result}{38}{subsection.4.2.4}
 \contentsline {section}{\numberline {4.3}Transfer Learning Evaluation}{41}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}Experiment 3: Setup}{41}{subsection.4.3.1}

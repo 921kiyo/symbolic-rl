@@ -694,6 +694,8 @@ The VGDL platform provides an interface with OpenAI Gym (\cite{Brockman2016}), a
 The communication between VGDL environment and an agent, is through OpenAI Gym interface. 
 \ref{list:openai} shows the functions provided by OpenAI Gym as well as the simple implementation for RL. 
 
+In this report, an agent receives a reward of -1 for any state except the terminal state, and receives reward of +10 for the terminal state, or the goal.
+
 % In all experiments, the agent receives -1 in any states except the goal state, where it gains a reward of 10.
 % Once the agent reaches the goal, or termination state, that episode is finished and the agent start the next episode from the starting point.
 

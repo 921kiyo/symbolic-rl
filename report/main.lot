@@ -11,13 +11,13 @@
 \contentsline {figure}{\numberline {3.6}{\ignorespaces Map sketch of a VGDL game (left) and it's high-level representation (right)\relax }}{30}{figure.caption.16}
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {4.1}{\ignorespaces List of parameters used in the experiments\relax }}{34}{table.caption.18}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Game environment for experiment 1\relax }}{35}{figure.caption.19}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Game environment for experiment 1\relax }}{34}{figure.caption.19}
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Results of experiment 1: learning curve (left) and testing (right)\relax }}{35}{figure.caption.20}
 \contentsline {figure}{\numberline {4.4}{\ignorespaces Normalised learning convergence by ILASP for experiment 1\relax }}{36}{figure.caption.21}
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Runtime comparision\relax }}{37}{figure.caption.22}
 \contentsline {figure}{\numberline {4.6}{\ignorespaces Game environment for experiment 2\relax }}{37}{figure.caption.23}
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Results of experiment 3: learning curve (left) and testing (right)\relax }}{38}{figure.caption.24}
-\contentsline {table}{\numberline {4.8}{\ignorespaces Comparision of runtime\relax }}{40}{table.caption.25}
+\contentsline {table}{\numberline {4.8}{\ignorespaces Comparision of runtime\relax }}{39}{table.caption.25}
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Normalised learning convergence by ILASP for experiment 2\relax }}{40}{figure.caption.26}
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Runtime comparision\relax }}{40}{figure.caption.27}
 \contentsline {figure}{\numberline {4.11}{\ignorespaces Game environment for experiment 3: before (left) and after (right) transfer learning\relax }}{41}{figure.caption.28}

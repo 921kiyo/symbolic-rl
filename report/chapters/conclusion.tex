@@ -51,6 +51,12 @@ there are a number of directions for further research. We discuss some of the po
     furhter experiments on different game environments are required for more robustness of the framework, such as the presence of dynamic enermies in the environment or non-stational environment.
     This might releave other aspects of using ILP in RL context and further bridge the gaps between the fielf of RL and ILP.
 
+    % Another benchmark is tile coding, which is a type of linear function approximation techniques described in Chapter XX.
+    % The reason for using an extra benchmark is that the performance comparision of ILP(RL) with q-learning might not be a fair comparision,
+    % since ILP(RL) has one extra assumption: the agent knows surrounding information (whether there are walls in adjacent cells),
+    % which is not a common assumption for Q-learning. Thus we incorporate the same surrounding information as features, and update the weights of each feature as a learning.
+    % We compare the performance of ILP(RL) with these two methods.
+
     \item[Inclusion of reward as part of learning]
     The current implementation of ILP(RL) can only solve a reduced MDP, where there is only one rewards and they can be solved by minising the answer sets.
     In many RL environments, however, there can be more than one type of rewards. In order to improve our current framework to solve other types of MDP, 
