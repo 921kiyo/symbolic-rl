@@ -1,10 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  4 SEP 2018 06:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.27)  4 SEP 2018 13:53
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/kiyo/Desktop/Individual_project/report/main.tex
-(/home/kiyo/Desktop/Individual_project/report/main.tex
+**main.tex
+(./main.tex
 LaTeX2e <2016/02/01>
 Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
@@ -750,38 +749,54 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
-(./main.aux)
+(./main.aux
+
+LaTeX Warning: Label `asp_choice_rule' multiply defined.
+
+
+LaTeX Warning: Label `environment_example' multiply defined.
+
+
+LaTeX Warning: Label `list:asp_planning' multiply defined.
+
+
+LaTeX Warning: Label `euclid' multiply defined.
+
+
+LaTeX Warning: Label `param' multiply defined.
+
+)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 134.
-LaTeX Font Info:    ... okay on input line 134.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 134.
-LaTeX Font Info:    ... okay on input line 134.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 134.
-LaTeX Font Info:    ... okay on input line 134.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 134.
-LaTeX Font Info:    ... okay on input line 134.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 134.
-LaTeX Font Info:    ... okay on input line 134.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 134.
-LaTeX Font Info:    ... okay on input line 134.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 134.
-LaTeX Font Info:    ... okay on input line 134.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 134.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 134.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 137.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 137.
 
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 134.
-LaTeX Font Info:    Try loading font information for OT1+bch on input line 134.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Try loading font information for OT1+bch on input line 137.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1bch.fd
 File: ot1bch.fd 2004/10/18 font definitions for OT1/bch.
 )
 \AtBeginShipoutBox=\box39
-Package hyperref Info: Link coloring ON on input line 134.
+Package hyperref Info: Link coloring ON on input line 137.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -791,9 +806,11 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count161
 )
-LaTeX Info: Redefining \ref on input line 134.
-LaTeX Info: Redefining \pageref on input line 134.
-LaTeX Info: Redefining \nameref on input line 134.
+LaTeX Info: Redefining \ref on input line 137.
+LaTeX Info: Redefining \pageref on input line 137.
+LaTeX Info: Redefining \nameref on input line 137.
+
+(./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
@@ -851,8 +868,8 @@ LaTeX Info: Redefining \nameref on input line 134.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hypcap package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package backref Info: ** backref set up for natbib ** on input line 134.
-(./titlepage.tex <./figures/imperial.pdf, id=4, 362.35374pt x 95.35625pt>
+Package backref Info: ** backref set up for natbib ** on input line 137.
+(./titlepage.tex <./figures/imperial.pdf, id=241, 362.35374pt x 95.35625pt>
 File: ./figures/imperial.pdf Graphic file (type pdf)
 
 <use ./figures/imperial.pdf>
@@ -882,7 +899,7 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./figures/imperial.pdf>])
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 147.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 150.
 
 (./chapters/abstract.tex) [1
 
@@ -891,22 +908,20 @@ LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10.95> not available
 
 ]
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 152.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 155.
  [3] [4
 
 
 ]
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <24.88> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 163.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 166.
+ (./main.toc [5
+
+])
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
- [5
-
-] [6
-
-
-]
+ [6] (./main.lot)
 \tf@lot=\write5
 \openout5 = `main.lot'.
 
@@ -914,8 +929,10 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.193 \chapter
+l.196 \chapter
               {Introduction} [1
+
+
 
 ]
 Chapter 1.
@@ -943,180 +960,166 @@ e 30.
 Package natbib Warning: Citation `Garnelo2016' on page 3 undefined on input lin
 e 46.
 
-
-LaTeX Warning: Reference `sec:further_research' on page 3 undefined on input li
-ne 76.
-
 [3]) [4]
 Chapter 2.
 
 Package natbib Warning: Citation `Lifschitz2008' on page 5 undefined on input l
-ine 204.
+ine 207.
 
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <12> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 208.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 211.
 [5
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 273--275
+Underfull \hbox (badness 10000) in paragraph at lines 276--278
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+bch on input line 279.
+LaTeX Font Info:    Try loading font information for OMS+bch on input line 282.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsbch.fd
 File: omsbch.fd 
 )
 LaTeX Font Info:    Font shape `OMS/bch/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 279.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 282.
 
-Underfull \hbox (badness 10000) in paragraph at lines 276--280
+Underfull \hbox (badness 10000) in paragraph at lines 279--283
 
  []
 
-LaTeX Font Info:    Try loading font information for TS1+bch on input line 290.
+LaTeX Font Info:    Try loading font information for TS1+bch on input line 293.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1bch.fd
 File: ts1bch.fd 2004/10/18 font definitions for TS1/bch.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 299--303
+Underfull \hbox (badness 10000) in paragraph at lines 302--306
 
  []
 
 
 Package natbib Warning: Citation `Gelfond1988' on page 6 undefined on input lin
-e 312.
+e 315.
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 328--329
+Underfull \hbox (badness 10000) in paragraph at lines 331--332
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 337--341
+Underfull \hbox (badness 10000) in paragraph at lines 340--344
 
  []
 
 
-Overfull \hbox (0.98401pt too wide) in paragraph at lines 342--343
+Overfull \hbox (0.98401pt too wide) in paragraph at lines 345--346
 []\OT1/bch/m/n/10.95 The first step re-moves male(anna) $\OMS/cmsy/m/n/10.95  $
  \OT1/bch/m/n/10.95 not fe-male(anna). and fe-male(john) $\OMS/cmsy/m/n/10.95  
 $ \OT1/bch/m/n/10.95 not male(john). 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 342--343
+Underfull \hbox (badness 10000) in paragraph at lines 345--346
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 344--346
+Underfull \hbox (badness 10000) in paragraph at lines 347--349
 
  []
 
 
-LaTeX Warning: Reference `Law2014' on page 7 undefined on input line 358.
+LaTeX Warning: Reference `Law2014' on page 7 undefined on input line 361.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 361--362
+Underfull \hbox (badness 10000) in paragraph at lines 364--365
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 363--368
+Underfull \hbox (badness 10000) in paragraph at lines 366--371
 
  []
 
 [7]
 
-LaTeX Warning: Reference `Law2014' on page 8 undefined on input line 397.
+LaTeX Warning: Reference `Law2014' on page 8 undefined on input line 400.
 
 
 Package natbib Warning: Citation `Gebser2011' on page 8 undefined on input line
- 410.
+ 413.
 
 
 Package natbib Warning: Citation `Muggleton1991' on page 8 undefined on input l
-ine 419.
+ine 422.
 
 
 Package natbib Warning: Citation `DeRaedt1997' on page 8 undefined on input lin
-e 420.
-
-
-LaTeX Warning: Reference `ilp_equation' on page 8 undefined on input line 421.
+e 423.
 
 
 Package natbib Warning: Citation `Muggleton1993' on page 8 undefined on input l
-ine 430.
+ine 433.
 
 
 Package natbib Warning: Citation `Sakama2009' on page 8 undefined on input line
- 434.
-
-
-LaTeX Warning: Reference `section_lasp' on page 8 undefined on input line 435.
+ 437.
 
 
 Package natbib Warning: Citation `Otero2001' on page 8 undefined on input line 
-435.
+438.
 
 
 Package natbib Warning: Citation `Inoue2014' on page 8 undefined on input line 
-435.
+438.
 
 
 Package natbib Warning: Citation `Corapi2012' on page 8 undefined on input line
- 435.
+ 438.
 
 
 Package natbib Warning: Citation `DeRaedt1997' on page 8 undefined on input lin
-e 435.
+e 438.
 
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <9> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 439.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 442.
 
 Package natbib Warning: Citation `Sakama2009' on page 8 undefined on input line
- 439.
+ 442.
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 451--456
+Underfull \hbox (badness 10000) in paragraph at lines 454--459
 
  []
 
 LaTeX Font Info:    Font shape `OMS/bch/m/it' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 466.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 469.
 
-Underfull \hbox (badness 10000) in paragraph at lines 465--469
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 484--485
+Underfull \hbox (badness 10000) in paragraph at lines 468--472
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 486--491
+Underfull \hbox (badness 10000) in paragraph at lines 487--488
 
  []
 
 
-LaTeX Warning: Reference `def:brave_induction' on page 9 undefined on input lin
-e 496.
+Underfull \hbox (badness 10000) in paragraph at lines 489--494
+
+ []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 499--500
+Underfull \hbox (badness 10000) in paragraph at lines 502--503
 
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 501--506
+Underfull \hbox (badness 10000) in paragraph at lines 504--509
 
  []
 
 
-Overfull \hbox (5.5026pt too wide) in paragraph at lines 507--508
+Overfull \hbox (5.5026pt too wide) in paragraph at lines 510--511
 []\OT1/bch/m/n/10.95 In or-der to learn the con-straint hy-poth-e-sis H = \OMS/
 cmsy/m/n/10.95 f $ $ \OT1/bch/m/n/10.95 not sit-u-a-tion(P, awake), su-per[]per
 son(P)\OMS/cmsy/m/n/10.95 g\OT1/bch/m/n/10.95 ,
@@ -1124,18 +1127,18 @@ son(P)\OMS/cmsy/m/n/10.95 g\OT1/bch/m/n/10.95 ,
 
 
 Package natbib Warning: Citation `Law2014' on page 10 undefined on input line 5
-15.
+18.
 
-LaTeX Font Info:    Try loading font information for OMS+cmss on input line 562
+LaTeX Font Info:    Try loading font information for OMS+cmss on input line 565
 .
-LaTeX Font Info:    No file OMScmss.fd. on input line 562.
+LaTeX Font Info:    No file OMScmss.fd. on input line 565.
 
 LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbraceleft' on input line 562.
+(Font)              for symbol `textbraceleft' on input line 565.
 
 
-Overfull \hbox (8.6882pt too wide) in paragraph at lines 562--564
+Overfull \hbox (8.6882pt too wide) in paragraph at lines 565--567
 \OT1/bch/m/n/10.95 where, both \OT1/cmss/m/n/10.95 per-son(john) \OT1/bch/m/n/1
 0.95 and \OT1/cmss/m/n/10.95 per-son(anna) \OT1/bch/m/n/10.95 are back-ground k
 nowl-edge B, \OT1/cmss/m/n/10.95 #modeh \OT1/bch/m/n/10.95 and \OT1/cmss/m/n/10
@@ -1143,295 +1146,156 @@ nowl-edge B, \OT1/cmss/m/n/10.95 #modeh \OT1/bch/m/n/10.95 and \OT1/cmss/m/n/10
  []
 
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 581--582
+Underfull \hbox (badness 10000) in paragraph at lines 584--585
 
  []
 
 
 Package natbib Warning: Citation `Law2016' on page 11 undefined on input line 5
-87.
+90.
 
 
-Overfull \hbox (2.16353pt too wide) in paragraph at lines 592--593
+Overfull \hbox (2.16353pt too wide) in paragraph at lines 595--596
 []\OT1/bch/m/n/10.95 Formally, par-tial in-ter-pre-ta-tion is called \OT1/bch/m
 /it/10.95 context-dependent par-tial in-ter-pre-ta-tion (CDPI)\OT1/bch/m/n/10.9
 5 , which
  []
 
 [11]
-Overfull \hbox (8.6882pt too wide) in paragraph at lines 642--644
+Overfull \hbox (8.6882pt too wide) in paragraph at lines 645--647
 \OT1/bch/m/n/10.95 where, both \OT1/cmss/m/n/10.95 per-son(john) \OT1/bch/m/n/1
 0.95 and \OT1/cmss/m/n/10.95 per-son(anna) \OT1/bch/m/n/10.95 are back-ground k
 nowl-edge B, \OT1/cmss/m/n/10.95 #modeh \OT1/bch/m/n/10.95 and \OT1/cmss/m/n/10
 .95 #modeb
  []
 
-
-LaTeX Warning: Reference `agent_env' on page 12 undefined on input line 649.
-
-
-LaTeX Warning: Reference `evaluation' on page 12 undefined on input line 650.
-
-<./figures/agent_env.png, id=176, 216.81pt x 220.825pt>
+<./figures/agent_env.png, id=513, 216.81pt x 220.825pt>
 File: ./figures/agent_env.png Graphic file (type png)
 
 <use ./figures/agent_env.png>
-Package pdftex.def Info: ./figures/agent_env.png used on input line 654.
+Package pdftex.def Info: ./figures/agent_env.png used on input line 657.
 (pdftex.def)             Requested size: 170.72554pt x 170.72314pt.
 LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10> not available
-(Font)              Font shape `OT1/bch/b/n' tried instead on input line 655.
+(Font)              Font shape `OT1/bch/b/n' tried instead on input line 658.
  [12 <./figures/agent_env.png>]
 
 Package natbib Warning: Citation `Puterman1994' on page 13 undefined on input l
-ine 673.
+ine 676.
 
 [13]
 
 Package natbib Warning: Citation `Ray2010' on page 14 undefined on input line 7
-72.
+75.
 
 
 Package natbib Warning: Citation `Sutton1990' on page 14 undefined on input lin
-e 779.
+e 782.
 
 [14]
 
 Package natbib Warning: Citation `Watkins' on page 15 undefined on input line 8
-07.
+10.
 
 [15] [16]
 Chapter 3.
 (./chapters/framework.tex
-<./figures/architecture.png, id=222, 1040.88875pt x 521.95pt>
+<./figures/architecture.png, id=552, 1040.88875pt x 521.95pt>
 File: ./figures/architecture.png Graphic file (type png)
 
 <use ./figures/architecture.png>
 Package pdftex.def Info: ./figures/architecture.png used on input line 9.
 (pdftex.def)             Requested size: 438.17227pt x 219.71925pt.
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 15.
+ [17
 
-
-LaTeX Warning: Reference `fig:ILPRL_overview' on page 17 undefined on input lin
-e 14.
-
-[17
-
- <./figures/architecture.png>]
-
-LaTeX Warning: Reference `environment_example' on page 18 undefined on input li
-ne 35.
-
-
-LaTeX Warning: Reference `environment_example' on page 18 undefined on input li
-ne 36.
-
-
-LaTeX Warning: Reference `sec:inductive_learning_task' on page 18 undefined on 
-input line 46.
-
-
-LaTeX Warning: Reference `sec:further_research' on page 18 undefined on input l
-ine 48.
-
-<./figures/environment_example.png, id=231, 243.91125pt x 264.99pt>
+ <./figures/architecture.png>] [18]
+<./figures/environment_example.png, id=569, 243.91125pt x 264.99pt>
 File: ./figures/environment_example.png Graphic file (type png)
 
 <use ./figures/environment_example.png>
-Package pdftex.def Info: ./figures/environment_example.png used on input line 5
-3.
+Package pdftex.def Info: ./figures/environment_example.png used on input line 1
+01.
 (pdftex.def)             Requested size: 175.26622pt x 190.41257pt.
- [18 <./figures/environment_example.png>]
-
-LaTeX Warning: Reference `chap:learning_tasks' on page 19 undefined on input li
-ne 81.
-
-
-LaTeX Warning: Reference `target_hypothesis' on page 19 undefined on input line
- 91.
-
-
-LaTeX Warning: Reference `eq:adjacent' on page 19 undefined on input line 104.
-
-
-LaTeX Warning: Reference `environment_example' on page 19 undefined on input li
-ne 113.
-
-[19]
-
-LaTeX Warning: Reference `eq:cdpi' on page 20 undefined on input line 138.
-
-<./figures/pipeline_example1.png, id=249, 465.74pt x 233.87375pt>
+ [19 <./figures/environment_example.png>] <./figures/pipeline_example1.png, id=
+582, 465.74pt x 233.87375pt>
 File: ./figures/pipeline_example1.png Graphic file (type png)
 
 <use ./figures/pipeline_example1.png>
-Package pdftex.def Info: ./figures/pipeline_example1.png used on input line 187
+Package pdftex.def Info: ./figures/pipeline_example1.png used on input line 235
 .
 (pdftex.def)             Requested size: 350.53915pt x 176.02937pt.
+ [20] [21 <./figures/pipeline_example1.png>]
 
-
-LaTeX Warning: Reference `example_pos_example' on page 20 undefined on input li
-ne 193.
-
-
-LaTeX Warning: Reference `def:ILPRL_inc' on page 20 undefined on input line 195
-.
-
-[20 <./figures/pipeline_example1.png>]
-
-LaTeX Warning: Reference `example_pos_example' on page 21 undefined on input li
-ne 210.
-
-
-LaTeX Warning: Reference `def:las_context' on page 21 undefined on input line 2
-31.
-
-
-Package natbib Warning: Citation `Law2017' on page 21 undefined on input line 2
-43.
-
-
-LaTeX Warning: Reference `eq:sm' on page 21 undefined on input line 244.
-
-
-LaTeX Warning: Reference `eq:cell' on page 21 undefined on input line 244.
+Package natbib Warning: Citation `Law2017' on page 22 undefined on input line 2
+91.
 
 Missing character: There is no ã in font bchr7t!
 Missing character: There is no € in font bchr7t!
 Missing character: There is no € in font bchr7t!
-
-LaTeX Warning: Reference `def:context' on page 21 undefined on input line 258.
-
-[21]
-
-LaTeX Warning: Reference `target_hypothesis' on page 22 undefined on input line
- 263.
-
-
-LaTeX Warning: Reference `fig:ILPRL_overview' on page 22 undefined on input lin
-e 272.
-
-
-LaTeX Warning: Reference `example_pos_example' on page 22 undefined on input li
-ne 285.
-
-
-LaTeX Warning: Reference `example_pos_example' on page 22 undefined on input li
-ne 286.
-
+[22]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 291.
-(./learning_task_example1.pl [22]) (./learning_task_example2.pl)
-
-LaTeX Warning: Reference `list:asp_planning' on page 23 undefined on input line
- 314.
-
-(./asp_planning.pl [23]
+nput line 339.
+ (./learning_task_example1.pl) (./learning_task_example2.pl) [23]
+(./asp_planning.pl
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 19.
-)
-Overfull \hbox (34.35732pt too wide) in paragraph at lines 355--355
+) [24]
+Overfull \hbox (34.35732pt too wide) in paragraph at lines 403--403
 [] 
  []
 
-[24]
-
-LaTeX Warning: Reference `eq:choice_rule' on page 25 undefined on input line 39
-8.
-
-
-LaTeX Warning: Reference `eq:adjacent' on page 25 undefined on input line 416.
-
-
-LaTeX Warning: Reference `eq:cell' on page 25 undefined on input line 416.
-
-[25] <./figures/asp_example.png, id=373, 243.91125pt x 233.87375pt>
+[25] [26] <./figures/asp_example.png, id=722, 243.91125pt x 233.87375pt>
 File: ./figures/asp_example.png Graphic file (type png)
 
 <use ./figures/asp_example.png>
-Package pdftex.def Info: ./figures/asp_example.png used on input line 469.
+Package pdftex.def Info: ./figures/asp_example.png used on input line 517.
 (pdftex.def)             Requested size: 175.26622pt x 168.0535pt.
- (./asp_planning_example.pl [26])
+ (./asp_planning_example.pl [27 <./figures/asp_example.png>]) [28] [29]
 
-LaTeX Warning: Reference `def:ILPRL_exc' on page 27 undefined on input line 497
-.
-
-
-LaTeX Warning: Reference `fig:ILPRL_overview' on page 27 undefined on input lin
-e 499.
+Package natbib Warning: Citation `gringo' on page 30 undefined on input line 68
+2.
 
 
-LaTeX Warning: Reference `fig:ILPRL_overview' on page 27 undefined on input lin
-e 555.
+Package natbib Warning: Citation `gringo' on page 30 undefined on input line 70
+3.
 
-[27 <./figures/asp_example.png>]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 569.
- [28]
-
-LaTeX Warning: Reference `def:ILASP_run' on page 29 undefined on input line 611
-.
-
-
-Package natbib Warning: Citation `gringo' on page 29 undefined on input line 63
-4.
-
-
-Package natbib Warning: Citation `gringo' on page 29 undefined on input line 65
-5.
-
-[29] <./figures/env_sample.png, id=436, 567.11874pt x 174.6525pt>
+<./figures/env_sample.png, id=773, 567.11874pt x 174.6525pt>
 File: ./figures/env_sample.png Graphic file (type png)
 
 <use ./figures/env_sample.png>
-Package pdftex.def Info: ./figures/env_sample.png used on input line 666.
+Package pdftex.def Info: ./figures/env_sample.png used on input line 714.
 (pdftex.def)             Requested size: 438.17227pt x 134.94653pt.
 
 
 Package natbib Warning: Citation `Schaul2013' on page 30 undefined on input lin
-e 671.
+e 719.
 
-
-LaTeX Warning: Reference `VGDL_sample' on page 30 undefined on input line 675.
-
-(./vgdl.pl [30 <./figures/env_sample.png>])
-
-LaTeX Warning: Reference `list:vgdl' on page 31 undefined on input line 683.
-
+(./vgdl.pl [30])
 
 Package natbib Warning: Citation `Brockman2016' on page 31 undefined on input l
-ine 693.
+ine 741.
 
 
-LaTeX Warning: Reference `list:openai' on page 31 undefined on input line 695.
+Underfull \vbox (badness 1033) has occurred while \output is active []
 
+ [31 <./figures/env_sample.png>]
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
-) (./openai.py
-[31])) [32]
+) (./openai.py))
+[32]
 Chapter 4.
-(./chapters/evaluation.tex
-
-LaTeX Warning: Reference `sec:motivation' on page 33 undefined on input line 9.
-
-
-[33
+(./chapters/evaluation.tex [33
 
 ]
-
-LaTeX Warning: Reference `param' on page 34 undefined on input line 63.
-
-<./figures/experiment1.png, id=519, 434.62375pt x 193.72375pt>
+<./figures/experiment1.png, id=859, 434.62375pt x 193.72375pt>
 File: ./figures/experiment1.png Graphic file (type png)
 
 <use ./figures/experiment1.png>
 Package pdftex.def Info: ./figures/experiment1.png used on input line 86.
 (pdftex.def)             Requested size: 219.08614pt x 97.65382pt.
-
-
-LaTeX Warning: Reference `fig:experiment1' on page 34 undefined on input line 9
-2.
-
-[34 <./figures/experiment1.png>]
-<./figures/experiment1_training.png, id=530, 505.89pt x 361.35pt>
+ [34 <./figures/experiment1.png>]
+<./figures/experiment1_training.png, id=865, 505.89pt x 361.35pt>
 File: ./figures/experiment1_training.png Graphic file (type png)
 
 <use ./figures/experiment1_training.png>
@@ -1439,17 +1303,13 @@ Package pdftex.def Info: ./figures/experiment1_training.png used on input line
 102.
 (pdftex.def)             Requested size: 240.99608pt x 172.13927pt.
 
-<./figures/experiment1_test.png, id=531, 505.89pt x 361.35pt>
+<./figures/experiment1_test.png, id=866, 505.89pt x 361.35pt>
 File: ./figures/experiment1_test.png Graphic file (type png)
 
 <use ./figures/experiment1_test.png>
 Package pdftex.def Info: ./figures/experiment1_test.png used on input line 102.
 
 (pdftex.def)             Requested size: 240.99608pt x 172.13927pt.
-
-
-LaTeX Warning: Reference `experiment1_result' on page 35 undefined on input lin
-e 107.
 
 
 LaTeX Warning: Reference `experiment1_test' on page 35 undefined on input line 
@@ -1461,27 +1321,15 @@ es/experiment1_test.png>]
 LaTeX Warning: Reference `experiment1_hypothesis' on page 36 undefined on input
  line 127.
 
-
-LaTeX Warning: Reference `experiment1_ilasp' on page 36 undefined on input line
- 131.
-
-<./figures/experiment1_ilasp.png, id=556, 722.7pt x 361.35pt>
+<./figures/experiment1_ilasp.png, id=892, 505.89pt x 361.35pt>
 File: ./figures/experiment1_ilasp.png Graphic file (type png)
 
 <use ./figures/experiment1_ilasp.png>
 Package pdftex.def Info: ./figures/experiment1_ilasp.png used on input line 140
 .
-(pdftex.def)             Requested size: 306.71924pt x 153.35944pt.
+(pdftex.def)             Requested size: 306.71924pt x 219.08885pt.
 
-
-LaTeX Warning: Reference `exp1_runtime' on page 36 undefined on input line 146.
-
-
-
-LaTeX Warning: Reference `exp1_runtime' on page 36 undefined on input line 148.
-
-
-<./figures/experiment1_runtime.png, id=557, 505.89pt x 361.35pt>
+<./figures/experiment1_runtime.png, id=895, 505.89pt x 361.35pt>
 File: ./figures/experiment1_runtime.png Graphic file (type png)
 
 <use ./figures/experiment1_runtime.png>
@@ -1489,20 +1337,19 @@ Package pdftex.def Info: ./figures/experiment1_runtime.png used on input line 1
 59.
 (pdftex.def)             Requested size: 306.71924pt x 219.08885pt.
 
-<./figures/experiment2_setup.png, id=558, 436.63126pt x 250.9375pt>
+<./figures/experiment2_setup.png, id=896, 436.63126pt x 250.9375pt>
 File: ./figures/experiment2_setup.png Graphic file (type png)
 
 <use ./figures/experiment2_setup.png>
 Package pdftex.def Info: ./figures/experiment2_setup.png used on input line 170
 .
 (pdftex.def)             Requested size: 219.08614pt x 125.9126pt.
+ [36 <./figures/experiment1_ilasp.png>]
 
+LaTeX Warning: Reference `experiment3' on page 37 undefined on input line 175.
 
-LaTeX Warning: Reference `experiment3' on page 36 undefined on input line 175.
-
-[36 <./figures/experiment1_ilasp.png>] [37 <./figures/experiment1_runtime.png> 
-<./figures/experiment2_setup.png>]
-<./figures/experiment2_training.png, id=576, 505.89pt x 361.35pt>
+[37 <./figures/experiment1_runtime.png> <./figures/experiment2_setup.png>]
+<./figures/experiment2_training.png, id=910, 505.89pt x 361.35pt>
 File: ./figures/experiment2_training.png Graphic file (type png)
 
 <use ./figures/experiment2_training.png>
@@ -1510,7 +1357,7 @@ Package pdftex.def Info: ./figures/experiment2_training.png used on input line
 210.
 (pdftex.def)             Requested size: 240.99608pt x 172.13927pt.
 
-<./figures/experiment2_test.png, id=577, 505.89pt x 361.35pt>
+<./figures/experiment2_test.png, id=911, 505.89pt x 361.35pt>
 File: ./figures/experiment2_test.png Graphic file (type png)
 
 <use ./figures/experiment2_test.png>
@@ -1522,45 +1369,21 @@ Package pdftex.def Info: ./figures/experiment2_test.png used on input line 210.
 LaTeX Warning: Reference `experiment2_ilasp_imcomplete' on page 38 undefined on
  input line 236.
 
+[38 <./figures/experiment2_training.png> <./figures/experiment2_test.png>]
 
-LaTeX Warning: Reference `def:ILPRL_exc' on page 38 undefined on input line 241
-.
-
-
-LaTeX Warning: Reference `experiment2_ilasp_complete' on page 38 undefined on i
+LaTeX Warning: Reference `experiment2_ilasp_complete' on page 39 undefined on i
 nput line 242.
 
-
-LaTeX Warning: Reference `list:exp2_final_hypotheses' on page 38 undefined on i
-nput line 243.
-
-[38 <./figures/experiment2_training.png> <./figures/experiment2_test.png>]
-(./experiment2_hypothesis.pl)
-
-LaTeX Warning: Reference `list:exp2_final_hypotheses' on page 39 undefined on i
-nput line 267.
-
-
-LaTeX Warning: Reference `experiment2_ilasp' on page 39 undefined on input line
- 272.
-
-
-LaTeX Warning: Reference `experiment2_runtime' on page 39 undefined on input li
-ne 273.
-
-
-LaTeX Warning: Reference `experiment2_runtime' on page 39 undefined on input li
-ne 276.
-
-[39] <./figures/experiment2_ilasp.png, id=628, 722.7pt x 361.35pt>
+(./experiment2_hypothesis.pl) [39]
+<./figures/experiment2_ilasp.png, id=964, 505.89pt x 361.35pt>
 File: ./figures/experiment2_ilasp.png Graphic file (type png)
 
 <use ./figures/experiment2_ilasp.png>
 Package pdftex.def Info: ./figures/experiment2_ilasp.png used on input line 306
 .
-(pdftex.def)             Requested size: 306.71924pt x 153.35944pt.
+(pdftex.def)             Requested size: 306.71924pt x 219.08885pt.
 
-<./figures/experiment2_runtime.png, id=629, 505.89pt x 361.35pt>
+<./figures/experiment2_runtime.png, id=965, 505.89pt x 361.35pt>
 File: ./figures/experiment2_runtime.png Graphic file (type png)
 
 <use ./figures/experiment2_runtime.png>
@@ -1568,7 +1391,7 @@ Package pdftex.def Info: ./figures/experiment2_runtime.png used on input line 3
 13.
 (pdftex.def)             Requested size: 306.71924pt x 219.08885pt.
  [40 <./figures/experiment2_ilasp.png> <./figures/experiment2_runtime.png>]
-<./figures/experiment3_before.png, id=638, 457.71pt x 266.9975pt>
+<./figures/experiment3_before.png, id=972, 457.71pt x 266.9975pt>
 File: ./figures/experiment3_before.png Graphic file (type png)
 
 <use ./figures/experiment3_before.png>
@@ -1576,7 +1399,7 @@ Package pdftex.def Info: ./figures/experiment3_before.png used on input line 33
 0.
 (pdftex.def)             Requested size: 219.08614pt x 127.79881pt.
 
-<./figures/experiment3_after.png, id=639, 459.7175pt x 265.99374pt>
+<./figures/experiment3_after.png, id=973, 459.7175pt x 265.99374pt>
 File: ./figures/experiment3_after.png Graphic file (type png)
 
 <use ./figures/experiment3_after.png>
@@ -1590,32 +1413,15 @@ LaTeX Warning: Reference `experiment4' on page 41 undefined on input line 336.
 
 LaTeX Warning: Reference `experiment4' on page 41 undefined on input line 337.
 
-
-LaTeX Warning: Reference `experiment3_setup' on page 41 undefined on input line
- 344.
-
-
-LaTeX Warning: Reference `exp3_hypotheses' on page 41 undefined on input line 3
-57.
-
-
-LaTeX Warning: Reference `experiment3_setup' on page 41 undefined on input line
- 357.
-
 (./experiment3_hypothesis.pl [41
 
  <./figures/experiment3_before.png> <./figures/experiment3_after.png>])
-
-LaTeX Warning: Reference `experiment3_training' on page 42 undefined on input l
-ine 367.
-
-
 Overfull \hbox (18.70392pt too wide) in paragraph at lines 371--375
 []\OT1/bch/m/n/10.95 The next best agent in terms of the con-ver-gence to the m
 ax-i-mum to-tal re-ward is Agent(noTL)$[]$.
  []
 
-<./figures/experiment3_after_training.png, id=647, 722.7pt x 361.35pt>
+<./figures/experiment3_after_training.png, id=983, 722.7pt x 361.35pt>
 File: ./figures/experiment3_after_training.png Graphic file (type png)
 
 <use ./figures/experiment3_after_training.png>
@@ -1623,7 +1429,7 @@ Package pdftex.def Info: ./figures/experiment3_after_training.png used on input
  line 387.
 (pdftex.def)             Requested size: 240.99608pt x 120.49748pt.
 
-<./figures/experiment3_after_test.png, id=648, 722.7pt x 361.35pt>
+<./figures/experiment3_after_test.png, id=984, 722.7pt x 361.35pt>
 File: ./figures/experiment3_after_test.png Graphic file (type png)
 
 <use ./figures/experiment3_after_test.png>
@@ -1631,7 +1437,7 @@ Package pdftex.def Info: ./figures/experiment3_after_test.png used on input lin
 e 387.
 (pdftex.def)             Requested size: 240.99608pt x 120.49748pt.
 
-<./figures/experiment4_before.png, id=649, 436.63126pt x 219.82124pt>
+<./figures/experiment4_before.png, id=985, 436.63126pt x 219.82124pt>
 File: ./figures/experiment4_before.png Graphic file (type png)
 
 <use ./figures/experiment4_before.png>
@@ -1639,27 +1445,15 @@ Package pdftex.def Info: ./figures/experiment4_before.png used on input line 39
 8.
 (pdftex.def)             Requested size: 219.08614pt x 110.29942pt.
 
-<./figures/experiment4_after.png, id=650, 437.635pt x 220.825pt>
+<./figures/experiment4_after.png, id=986, 437.635pt x 220.825pt>
 File: ./figures/experiment4_after.png Graphic file (type png)
 
 <use ./figures/experiment4_after.png>
 Package pdftex.def Info: ./figures/experiment4_after.png used on input line 398
 .
 (pdftex.def)             Requested size: 219.08614pt x 110.547pt.
-
-
-LaTeX Warning: Reference `experiment4_setup' on page 42 undefined on input line
- 403.
-
-
-LaTeX Warning: Reference `experiment4_setup' on page 42 undefined on input line
- 404.
-
-
-LaTeX Warning: Reference `experiment4_training_test' on page 42 undefined on in
-put line 411.
-
-[42] <./figures/experiment4_training.png, id=675, 722.7pt x 361.35pt>
+ [42]
+<./figures/experiment4_training.png, id=1012, 722.7pt x 361.35pt>
 File: ./figures/experiment4_training.png Graphic file (type png)
 
 <use ./figures/experiment4_training.png>
@@ -1667,7 +1461,7 @@ Package pdftex.def Info: ./figures/experiment4_training.png used on input line
 422.
 (pdftex.def)             Requested size: 240.99608pt x 120.49748pt.
 
-<./figures/experiment4_test.png, id=676, 722.7pt x 361.35pt>
+<./figures/experiment4_test.png, id=1013, 722.7pt x 361.35pt>
 File: ./figures/experiment4_test.png Graphic file (type png)
 
 <use ./figures/experiment4_test.png>
@@ -1743,8 +1537,19 @@ ne 63.
 Chapter 6.
 (./chapters/conclusion.tex [49
 
-]) [50]
-No file main.bbl.
+]) [50] (./main.bbl (./main.brf)
+\tf@brf=\write6
+\openout6 = `main.brf'.
+
+ [51
+
+]
+Underfull \hbox (badness 1292) in paragraph at lines 86--86
+\OT1/bch/m/n/10.95 on Ap-prox-i-mat-ing Dy-namic Pro-gram-ming,'' \OT1/bch/m/it
+/10.95 Ma-chine Learn-ing Pro-ceed-ings 1990\OT1/bch/m/n/10.95 ,
+ []
+
+[52]) [53]
 Appendix A.
 (./chapters/appendix_ethics.tex
 Missing character: There is no â in font bchr7t!
@@ -1770,16 +1575,16 @@ Overfull \hbox (9.14763pt too wide) in alignment at lines 75--136
  [] [] [] 
  []
 
-[51
+[54
 
 ]
 Overfull \hbox (9.14763pt too wide) in alignment at lines 136--143
  [] [] [] 
  []
 
-[52]) [53]
+[55]) [56]
 Appendix B.
-(./chapters/appendix_learning_task.tex) [54
+(./chapters/appendix_learning_task.tex) [57
 
 ]
 Appendix C.
@@ -1787,24 +1592,25 @@ Appendix C.
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1051.
-[55
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1054.
+[58
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1051.
- (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1051.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1051.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1054.
+ (./main.aux
 
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
 
+)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1054.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1054.
 
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 5BC0E888305AECC932C55CD2C5430610;4262.
+Package rerunfilecheck Info: File `main.brf' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  5BC0E888305AECC932C55CD2C5430610;4262.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -1812,18 +1618,18 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were undefined references.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1051.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1054.
  ) 
 Here is how much of TeX's memory you used:
- 14366 strings out of 493029
- 210802 string characters out of 6136234
- 448649 words of memory out of 5000000
- 17048 multiletter control sequences out of 15000+600000
+ 14638 strings out of 493029
+ 214931 string characters out of 6136234
+ 445994 words of memory out of 5000000
+ 17272 multiletter control sequences out of 15000+600000
  57577 words of font info for 109 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,25n,49p,973b,1930s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,25n,49p,928b,1838s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fon
@@ -1844,10 +1650,10 @@ lic/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msbm10.pfb>
-Output written on main.pdf (62 pages, 993731 bytes).
+Output written on main.pdf (65 pages, 977726 bytes).
 PDF statistics:
- 941 PDF objects out of 1000 (max. 8388607)
- 804 compressed objects within 9 object streams
- 493 named destinations out of 1000 (max. 500000)
- 126 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1315 PDF objects out of 1440 (max. 8388607)
+ 1172 compressed objects within 12 object streams
+ 529 named destinations out of 1000 (max. 500000)
+ 598 words of extra memory for PDF output out of 10000 (max. 10000000)
 

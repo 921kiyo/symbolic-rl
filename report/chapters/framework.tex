@@ -11,6 +11,53 @@ The development of this framework is one of the main objectives of this project 
 \label{fig:ILPRL_overview}
 \end{figure}
 
+\begin{algorithm}
+\caption{ILP(RL) Algorithm}\label{euclid}
+\begin{algorithmic}[1]
+\State \textbf{Input:} \\
+\State States S = \{ 1, ..., n\textsubscript{x}\}
+\State Actions A = \{ 1, ..., n\textsubscript{a}\} A: X $\rightarrow$ A
+\State States transition T: X x A $\rightarrow$ X
+\State $\epsilon \in [0,1]$
+
+\State Background knowledge for ILASP B\textsubscript{ILP}
+\State Background knowledge for ASP B\textsubscript{ASP}
+\State Language bias S\textsubscript{M} \\
+
+\Procedure{ILP(RL)}{S, A, T, $\epsilon$, B\textsubscript{ILP}, B\textsubscript{ASP}, S\textsubscript{M}}
+\State $H = \emptyset$
+\State $E = \emptyset$
+\State Start s $\in$ S
+\While s is not terminal 
+\State $a \leftarrow NEXTACTION(B\textsubscript{ASP}, H)$
+\State $s^\prime \leftarrow T(s,a)$
+\State $e \leftarrow MakeDCPI(s^\prime, s, a) $ 
+\State $E = E + e$
+\If {$ ILASP(B \cup H, S\textsubscript{M}\emptyset, E) == UNSATISFIABLE$}
+\State $H = ILASP(B, S\textsubscript{M}, E)$
+\EndIf
+\State $Update(B\textsubscript{ASP})$
+\EndWhile
+% \If {Terminal state is found}
+% \State
+% \LineComment{rand(0,1) generates a random number between 0 and 1}
+% \If {$rand(0,1) < \epsilon $} 
+% \space
+% \State
+% \LineComment{randInt(0,A) generates a uniformly random integer between 0 and $|A|$}
+% \State $i = randInt(0, |A|)$ 
+% \Return $a\textsubscript{i}$
+% \Else \State $a\textsubscript{i}$ = ASP Plan of ILP(RL)
+% \Return $a\textsubscript{i}$
+% \EndIf
+% \Else \State $i = randInt(1, |A|)$
+% \Return $a\textsubscript{i}$
+% \EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+    
+
 The overall architecture of ILP(RL), is shown in Figure \ref{fig:ILPRL_overview}. 
 ILP(RL) mainly consists of two components: inductive learning with ILASP and planning with ASP. 
 
@@ -25,6 +72,7 @@ The plan is a sequence of actions and it navigates the agent in the environment.
 
 The agent iteratively execute this cycle in order to learn and improve the hypotheses as well as an action planning. 
 Mechanisms of each step are explained in details in the following sections.
+
 
 \section{Environment}
 \label{sec:environment}

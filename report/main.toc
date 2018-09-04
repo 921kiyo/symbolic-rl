@@ -26,20 +26,20 @@
 \contentsline {section}{\numberline {3.1}Overview}{17}{section.3.1}
 \contentsline {section}{\numberline {3.2}Environment}{18}{section.3.2}
 \contentsline {section}{\numberline {3.3}Inductive Learning Task}{19}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Background Knowledge}{19}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.1}Background Knowledge}{20}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}Context Dependent Examples}{20}{subsection.3.3.2}
 \contentsline {subsection}{\numberline {3.3.3}Language Bias}{21}{subsection.3.3.3}
 \contentsline {subsection}{\numberline {3.3.4}Hypothesis}{22}{subsection.3.3.4}
-\contentsline {section}{\numberline {3.4}Planning with Answer Set Programming}{23}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Answer Set Program}{23}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {3.4.2}Plan Execution}{26}{subsection.3.4.2}
+\contentsline {section}{\numberline {3.4}Planning with Answer Set Programming}{24}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Answer Set Program}{24}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Plan Execution}{27}{subsection.3.4.2}
 \contentsline {section}{\numberline {3.5}Exploration}{28}{section.3.5}
-\contentsline {section}{\numberline {3.6}Implementation}{28}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Inductive Learning with ILASP}{28}{subsection.3.6.1}
-\contentsline {subsection}{\numberline {3.6.2}Planning with ASP}{29}{subsection.3.6.2}
+\contentsline {section}{\numberline {3.6}Implementation}{29}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Inductive Learning with ILASP}{29}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Planning with ASP}{30}{subsection.3.6.2}
 \contentsline {subsection}{\numberline {3.6.3}Environment Platform}{30}{subsection.3.6.3}
 \contentsline {subsubsection}{The Video Game Definition Language (VGDL)}{30}{section*.15}
-\contentsline {subsubsection}{OpenAI Gym}{31}{section*.17}
+\contentsline {subsubsection}{OpenAI Gym}{32}{section*.17}
 \contentsline {chapter}{\numberline {4}Evaluation}{33}{chapter.4}
 \contentsline {section}{\numberline {4.1}Experimental Setup}{33}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Evaluation Metrics}{33}{subsection.4.1.1}
@@ -48,7 +48,7 @@
 \contentsline {section}{\numberline {4.2}Learning Evaluation}{34}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Experiment 1: Setup}{34}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Experiment 1: Result}{35}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Experiment 2: Setup}{36}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.3}Experiment 2: Setup}{37}{subsection.4.2.3}
 \contentsline {subsection}{\numberline {4.2.4}Experiment 2: Result}{38}{subsection.4.2.4}
 \contentsline {section}{\numberline {4.3}Transfer Learning Evaluation}{41}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}Experiment 3: Setup}{41}{subsection.4.3.1}
@@ -62,6 +62,6 @@
 \contentsline {chapter}{\numberline {6}Conclusion}{49}{chapter.6}
 \contentsline {section}{\numberline {6.1}Summary of Work}{49}{section.6.1}
 \contentsline {section}{\numberline {6.2}Further Research}{50}{section.6.2}
-\contentsline {chapter}{\numberline {A}Ethics}{51}{appendix.A}
-\contentsline {chapter}{\numberline {B}Learning tasks}{54}{appendix.B}
-\contentsline {chapter}{\numberline {C}Answer Set Program}{55}{appendix.C}
+\contentsline {chapter}{\numberline {A}Ethics}{54}{appendix.A}
+\contentsline {chapter}{\numberline {B}Learning tasks}{57}{appendix.B}
+\contentsline {chapter}{\numberline {C}Answer Set Program}{58}{appendix.C}
