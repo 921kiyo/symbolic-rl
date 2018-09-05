@@ -12,25 +12,24 @@ The development of this framework is one of the main objectives of this project 
 \end{figure}
 
 \begin{algorithm}
-\caption{ILP(RL) Algorithm}\label{euclid}
+\caption{ILP(RL) Algorithm}
 \begin{algorithmic}[1]
+\label{algo:ILPRL}
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
-\State \textbf{Input:} \\
-\State
- 
-\State States S = \{ 1, ..., n\textsubscript{x}\}
-\State Actions A = \{ 1, ..., n\textsubscript{a}\} A: X $\rightarrow$ A
-\State States transition T: X x A $\rightarrow$ X
-\State $\epsilon \in [0,1]$
-\State Background knowledge for ILASP and ASP B
-\State Language bias S\textsubscript{M} \\
+\State \textbf{Input:}
+\State \ \ \ \ \ \ States $S = \{ 1, ..., n\textsubscript{x}\}$
+\State \ \ \ \ \ \ Actions $A = \{ 1, ..., n\textsubscript{a}\} A: X \rightarrow A$
+\State \ \ \ \ \ \ States transition $T: X \times A \rightarrow X$
+\State \ \ \ \ \ \ $\epsilon \in [0,1]$
+\State \ \ \ \ \ \ Background knowledge for ILASP and ASP $B$
+\State \ \ \ \ \ \ Language bias $S\textsubscript{M}$ \\
 
 \Procedure{ILP(RL)}{S, A, T, $\epsilon$, B, S\textsubscript{M}}
 \State $H = \emptyset$
 \State $E = \emptyset$
 \State Start s $\in$ S
 \While s is not terminal 
-\State $a \leftarrow POLICY(B, H, s, A)$ \\
+\State $a \leftarrow POLICY(B, H, s, A, \epsilon)$ \\
 \space
 \LineComment{observe the next state $s^\prime$ by taking action a}
 \State $s^\prime \leftarrow T(s,a)$
@@ -39,7 +38,7 @@ The development of this framework is one of the main objectives of this project 
 \State $e \leftarrow MakeDCPI(s^\prime, s, a) $ 
 \State $E = E + e$
 \space
-\LineComment{if the current B $\cup$ H without language bias does not cover E, relean H}
+\LineComment{if the current B $\cup$ H without language bias does not cover E, update H}
 \If {$ ILASP(B \cup H, S\textsubscript{M}=\emptyset, E) == UNSATISFIABLE$}
 \State $H = ILASP(B, S\textsubscript{M}, E)$
 \EndIf
@@ -96,7 +95,7 @@ The applicability for a more complex environment is not considered in this proje
 \section{Inductive Learning Task}
 \label{sec:inductive_learning_task}
 The first step is to construct a learning task using ILASP. The objective of the inductive learning is to learn state transitions in a given environment, which is used for generating an action plan at later steps.
-The definition of valid moves is as follows:
+The target hypotheses are specified as follows:
 
 \begin{equation}
 \begin{split}
@@ -115,7 +114,7 @@ The definition of valid moves is as follows:
 where \textsf{state\_after} is the next state S\textsubscript{t+1}, \textsf{state\_before} is the current state S\textsubscript{t}. \textsf{action} is an action A\textsubscript{t} taken by the agent.
 \textsf{adjacent(D, V0, V1)} specifies that V0 is next to V1 in the direction of D. For example, \textsf{adjacent(right, V0, V1)} means V0 is right next to V1. 
 \textsf{wall(V)} and \textsf{not wall(V)} specify whether a state is a wall or not wall in a state V respectively.
-We describe the details of how to construct the background knowledge, context dependent examples and the language bias, and these are the necessary components for the agent to learn the target hypotheses.
+We describe the details of how to construct the background knowledge, context dependent examples and the language bias in the following sections, and these are the necessary components for the agent to learn the target hypotheses.
 The summary of a full ILASP learning task can be found in Appendix \ref{chap:learning_tasks}.
 % Similar to other RL algorithms, an agent explores an environment by taking actions, which generates experiences. 
 % These experiences need to be translated into ASP syntax and 
@@ -126,8 +125,8 @@ The summary of a full ILASP learning task can be found in Appendix \ref{chap:lea
 \subsection{Background Knowledge}
 \label{subsec:background_knowledge}
 First we define necessary background knowledge for the inductive learning.
-In order to learn the state transition for each direction in the form of state transition as shown in \ref{target_hypothesis}, we need to define the meaning of "being next to" a state.
-This is defined as \textit{adjacent}, which is of the form:
+In order to learn the state transition for each direction as shown in \ref{target_hypothesis}, we need to define the meaning of "being next to" a state.
+This is defined as a rule \textit{adjacent}, which is of the form:
 
 \begin{equation} \label{eq:adjacent}
 \begin{split}
@@ -138,7 +137,7 @@ This is defined as \textit{adjacent}, which is of the form:
 \end{split}
 \end{equation}
 
-where \textsf{cell} corresponds to a state, and \textsf{X} and \textsf{Y} represent coordinates respectively.
+where \textsf{cell} corresponds to a state, and \textsf{X} and \textsf{Y} represent x-coordinate and y-coordinate respectively.
 The rules \ref{eq:adjacent} are given as background knowledge and allow the agent to understand the relation of two adjacent states.
 \textit{cell((X,Y))} is defined as follows:
 \begin{equation} \label{eq:cell}
@@ -147,42 +146,29 @@ The rules \ref{eq:adjacent} are given as background knowledge and allow the agen
 \end{split}
 \end{equation}
 
-where, 0..X defines the range of X coordinates and X and Y are the size of width and height of the environment respectively. 
-For example, a grid maze shown in Figure\ref{environment_example} has a height and width of 5, thus the type cell is defined in the background knowledge as \textsf{cell((0..5, 0..5))}.
-
-% While the agent explores the environment, it also keeps all the surrounding information as background knowledge,
-% which will be stored in different repository, and are later used to generate a sequence of actions plan using H.
-
-% This does not include state transition experience, as these state\_before and action taken are different at every time step.
-% In static environment (e.g no moving enermy), environment information remain the same across time, and thus it will be beneficial to remember.
-% This principle is different from most RL methods, as they are model-free learning.
-% In our simple maze environment, the agent is able to see the surrounding states and 
-% these could be all wall position that the agent has seen so far, which can be
-% wall((1, 5)). which represents the location of the wall.
-% Another example could be a location of a teleport if the agent sees it.
-% These environment experiences are part of context examples in the positive examples.
+where, \textsf{X} and \textsf{Y} are the size of width and height of an environment respectively. 
+For example, a grid maze shown in Figure\ref{environment_example} has a height and width of 4, thus the type cell is defined in the background knowledge as \textsf{cell((0..4, 0..4))}.
 
 \subsection{Context Dependent Examples}
-Context dependent examples contain the results of the agent's interaction with an environment. 
-Since all the interactions with the environment are examples of valid moves
+Context dependent examples contain actual state transition that the agent gains by interacting with an environment. Since all the interactions with the environment are examples of valid moves,
 they are used as positive examples. A positive example is expressed as a following ASP form:
 \begin{equation}
 \begin{split}
-    \textsf{\#pos}(\{E\textsuperscript{inc}\}, \{E\textsuperscript{exc}\}, \textsf{\{C\}})
+    \textsf{\#pos}(\{E\SPSB{inc}{ILP(RL)}\}, \{E\SPSB{exc}{ILP(RL)}\}, \{C\textsubscript{ILP(RL)}\})
 \end{split}
 \end{equation}
 
 It is equivalent to context-dependent partial interpretation (CDPI) in  $ILP_{LAS}^{context}$. 
-As defined in the Equation \ref{eq:cdpi}, CDPI is of the form $\langle$ e, C $\rangle$ where e = $\langle$ E\textsuperscript{inc}, E\textsuperscript{exc} $\rangle$. 
-Each of the components in CDPI is defined as follows:
+As defined in the Equation \ref{eq:cdpi}, CDPI is of the form $\langle e, C \rangle$ where $e = \langle E\textsuperscript{inc}, E\textsuperscript{exc} \rangle$. 
+Each of the component in CDPI in ILP(RL) is defined as follows:
 
 \begin{defn}\label{def:ILPRL_context}
-$C\textsubscript{ILP(RL)}$ contains an action a\textsubscript{t}, the current state s\textsuperscript{*}\textsubscript{t}, and adjacent walls of s\textsubscript{t}.
+$C\textsubscript{ILP(RL)}$ contains an action a\textsubscript{t}, the current state $s\textsubscript{t}$, and adjacent walls of $s\textsubscript{t}$.
 \label{def:context}
 \end{defn}
 
 \begin{defn} \label{def:ILPRL_inc}
-$E\textsuperscript{inc}\textsubscript{ILP(RL)}$ includes s\textsubscript{t+1} $\in$ S such that:
+$E\SPSB{inc}{ILP(RL)}$ includes $s\textsubscript{t+1} \in S$ such that:
 \begin{itemize}
 \item s\textsubscript{t+1} = s\textsuperscript{*}\textsubscript{t+1}
 \item $ \forall A \in AS(B \cup H\textsubscript{t} \cup C\textsubscript{ILP(RL)})|$ s\textsubscript{t+1} $\not\in A$
@@ -190,21 +176,19 @@ $E\textsuperscript{inc}\textsubscript{ILP(RL)}$ includes s\textsubscript{t+1} $\
 \end{defn}
 
 \begin{defn} \label{def:ILPRL_exc}
-E\textsuperscript{exc}\textsubscript{ILP(RL)} includes S\textsubscript{t+1} $\in$ S such that:
+$E\SPSB{exc}{ILP(RL)}$ includes $s\textsubscript{t+1} \in S$ such that:
 \begin{itemize}
-\item s\textsubscript{t+1} $\neq$ s\textsuperscript{*}\textsubscript{t+1}
+\item $s\textsubscript{t+1} \neq s\textsuperscript{*}\textsubscript{t+1}$
 \item $ \exists A \in AS(B \cup H\textsubscript{t} \cup C\textsubscript{ILP(RL)})|$ s\textsubscript{t+1} $\in A$
 \end{itemize}
 \end{defn}
 
-where S\textsuperscript{*}\textsubscript{t+1} is the next state where the agent is at t+1, 
-B is the background knowledge, H\textsubscript{t} is the hypotheses at t, 
-S is all the states in the environment.
+where $s\textsuperscript{*}\textsubscript{t+1}$ is the true next state where the agent is at $t+1$, 
+$B$ is the background knowledge, $H\textsubscript{t}$ is the hypotheses at $t$, $S$ is all the states in the environment.
 
-% Both e\textsuperscript{inc} and e\textsuperscript{exc} contain only the next state s\textsubscript{t+1}, expressed as \textit{state\_after((x,y))}, or empty.
 % For context C, a\textsubscript{t} is translated int \textit{action((a))}, s\textsubscript{t} is translated into \textit{state\_before((x,y))}, and adjacent walls of s\textsubscript{t} are translated into \textit{wall((x$^\prime$,y$^\prime$))}.
 
-In this report, we assume that part of context contains only whether a wall exists or not, with the presence of a wall, the agent cannot move to the state where a wall exists.
+% In this report, we assume that part of context contains only whether a wall exists or not, with the presence of a wall, the agent cannot move to the state where a wall exists.
 
 % \subsubsection{Positive examples in ASP syntax}
 % \label{subsubsec:positive_examples_asp_syntax}
@@ -227,31 +211,27 @@ In this report, we assume that part of context contains only whether a wall exis
 \label{example_pos_example}
 \end{figure}
 
-We use a simple 5x5 grid maze environment to highlight how an agent gains a positive example.
-Suppose the agent does not know a hypothesis and takes an action "right" to move from (2,4) to (3,4) cell, as shown on the left in Figure \ref{example_pos_example}.
-a\textsubscript{t} is "right" s\textsubscript{t} is (2,4) and s\textsubscript{t+1} is (3,4).
-According to the Definition \ref{def:ILPRL_inc}, the answer sets of B $\cup$ H, does not cover s\textsubscript{t+1} since H = $\emptyset$, thus \textsf{state\_after((3,4))} is in e\textsuperscript{inc}.
-All other alternative next states S\textsubscript{t+1} that the agent could have ended up by taking different actions
-(down, up, and left) are in the exclusions.
-Context includes a\textsubscript{t}, s\textsubscript{t} and S\textsubscript{neighbour} of walls.
+We use a simple $5 \times 5$ grid maze environment to highlight how an agent gains a positive example.
+Suppose $H\textsubscript{t}=\emptyset$ and an agent takes an action "right" to move from $(1,3)$ to $(2,3)$ cell, as shown on the left in Figure \ref{example_pos_example}.
+$a\textsubscript{t}$ is "right", $s\textsubscript{t}$ is $(1,3)$ and $s^*\textsubscript{t}$ is $(2,3)$.
+According to the Definition \ref{def:ILPRL_inc}, $A=\emptyset$ since $H\textsubscript{t}=\emptyset$, thus \textsf{state\_after((2,3))} is in $E\SPSB{exc}{ILP(RL)}$, $A=\emptyset$ is there is no exclusions in this case.
+$C\textsubscript{ILP(RL)}$ includes $a\textsubscript{t}$, $s\textsubscript{t}$ and adjacent walls of $s\textsubscript{t}$.
 The following positive example is generated.
 
 \begin{equation}
 \begin{split}
-    \textsf{\#pos(} & \textsf{\{state\_after((3,4))\},}\\
-                    & \textsf{\{state\_after((2,4)),state\_after((1,5)),state\_after((0,4)),state\_after((1,4))\},} \\
-    & \textsf{\{state\_before((2,4)). action(right). wall((1, 4)). wall((4, 2)).\})}
+    \textsf{\#pos(} & \textsf{\{state\_after((2,3))\},}\\
+                    & \textsf{\{\},} \\
+    & \textsf{\{state\_before((1,3)). action(right). wall((0, 3)). wall((1, 4)).\})}
 \end{split}
 \end{equation}
 
-The next example illustrates a scenarios when the agent tries to move to a state where a wall is. 
-The agent is at (4,4) and tries to move to a cell (5,4) by taking an action "right", as shown on the left in Figure \ref{example_pos_example}. 
-In this case, however, there is a wall at (5,4) and therefore the agent cannot go to that cell.
-Because of the blocking wall, s\textsubscript{t} and s\textsubscript{t+1} are (4,4).
-The same the previous case, H = $\emptyset$ and therefore the answer sets of B $\cup$ H, does not cover s\textsubscript{t+1}.
-All other alternative next adjacent states S\textsubscript{t+1} (4,3), (3,4), (5,4) and (4,5) are exclusions, and the contexts are collected.
+The next example illustrates a case when the agent tries to move to a state where a wall is. As shown on the right in Figure \ref{example_pos_example}, the agent is at $(3,3)$ and tries to move to a state $(3,4)$ by taking an action "right", as shown on the left in Figure \ref{example_pos_example}. 
+In this case, however, there is a wall at $(4,3)$ and therefore the agent cannot go to that state. Because of the blocking wall, $s\textsubscript{t} = s^*\textsubscript{t+1} = (4,4)$.
+The same the previous case, suppose $H = \emptyset$ and therefore $A = \emptyset$.
+% All other alternative next adjacent states S\textsubscript{t+1} (4,3), (3,4), (5,4) and (4,5) are exclusions, and the contexts are collected.
 From this example, the following positive example is generated:
-
+\textcolor{red}{TODO UPDATE this example}
 \begin{equation}
 \begin{split}
 \textsf{\#pos(} & \textsf{\{state\_after((4,4))\}}, \\
@@ -266,7 +246,7 @@ From this example, the following positive example is generated:
 \subsection{Language Bias}
 \label{subsec:language_bias}
 We now define a search space using a language bias specified by \textit{mode declaration}.
-As defined in \ref{def:las_context}, H $\subseteq$ S\textsubscript{M} for $ILP_{LAS}^{context}$, thus in order to learn the target hypotheses, S\textsubscript{M} is specified as follows:
+As defined in \ref{def:las_context}, $H \subseteq S\textsubscript{M}$ for $ILP_{LAS}^{context}$, thus in order to learn the target hypotheses, $S\textsubscript{M}$ is specified as follows:
 \begin{equation} \label{eq:sm}
 \begin{split}
 &\textsf{\#modeh(state\_after(var(cell))).}\\
@@ -279,9 +259,9 @@ As defined in \ref{def:las_context}, H $\subseteq$ S\textsubscript{M} for $ILP_{
 
 where \textsf{\#modeh} and \textsf{\#modeb} are the \textit{normal head declarations} and the \textit{body declarations}. 
 The first argument of each \textsf{\#modeb} specifies the maximum number of times that \textsf{\#modeb} can be used in each rule (also called \textit{recall}) \cite{Law2017}, 
-which we specify 1 for all mode declarations in ILP(RL). \textsf{var(t)} is a placeholder for a variable of \textit{type} \textsf{t}. In \ref{eq:sm}, we use \textsf{cell} for the variable type, which is grounded using on \textsf{cell} specified in \ref{eq:cell} in the background knowledge.
+which we specify $1$ for \textsf{\#modeb} in ILP(RL). \textsf{var(t)} is a placeholder for a variable of \textit{type} \textsf{t}. In \ref{eq:sm}, we use \textsf{cell} for the variable type, which is grounded using \textsf{cell} specified in \ref{eq:cell} in the background knowledge.
 \textsf{const(t)} is a placeholder for a constant term of type \textsf{t}, and type \textsf{t} must be specified as \textsf{\#constant(t, c)},　where \textsf{c} is a constant term., 
-const(t) is specified as follows:
+\textsf{const(t)} is specified as follows:
 
 \begin{equation}
 \begin{split}
@@ -292,32 +272,25 @@ const(t) is specified as follows:
 \end{split}
 \end{equation}
 
-\textsf{action} type is specified as constant since ILASP needs to learn a different hypothesis for each action, 
-and can be found in each context dependent example as specified in Definition \ref{def:context}.
+\textsf{action} type is specified as a constant since ILP(RL) needs to learn a different hypothesis of state transitions for each direction based on the context dependent examples that the agent collects..
 
-\textsf{(positive)} in \textsf{\#modeb} specifies that the predicates only appear as positive and not negation as failure, which reduces the search space. 
-In ILP(RL), \textsf{wall(var(cell))} could appear as \textsf{not wall} in a hypothesis, and all other body declarations should only be positive due to the specification of \textsf{(positive)}. 
+\textsf{(positive)} in \textsf{\#modeb} specifies that the body predicates only appear as positive and not negation as failure, which reduces the search space. We use \textsf{(positive)} for all \textsf{\#modeb} except \textsf{wall}. Thus \textsf{wall(var(cell))} could appear as \textsf{not wall} in a hypothesis, and all other body predicates should only be positive.
 
 Finally, we define \textsf{\#max\_penalty} to specify the maximum size of the hypothesis. By default it is 15, however our target hypotheses defined in \ref{target_hypothesis} is larger than 15, and thus it is increased to 50.
 Increasing \#max\_penalty allows ILASP to learn longer hypotheses at the expense of longer computation.
-% For example, the search space in this particular setting is in XX.
 
 \subsection{Hypothesis}
 \label{sebsec:hypothesis}
-Having defined the $ILP_{LAS}^{context}$ task T = $\langle$ B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} $\rangle$, ILP(RL) is able to learn hypotheses H. 
-Since B and S\textsubscript{M} are fixed, the hypotheses varies based on context dependent examples that the agent receives by interacting with an environment.
-For example, in the early phase of ILP(RL) learning, the agent does not have many positive examples, and learns an hypothesis that is subset of the full target hypothesis that the agent can run in the environment.
-ILP(RL) iteratively improves hypotheses as illustrated in Figure \ref{fig:ILPRL_overview}.
-
-Formally,$ILP_{LAS}^{context}$ is executed by the following rule:
-\begin{defn}\label{def:ILASP_run}
-ILP(RL) runs $ILP_{LAS}^{context}$ to relearn H\textsubscript{new} if and only if $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{+}, $\exists$A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
-\end{defn}
-where H is the current hypotheses that the agent has learnt so far. 
-Learnt hypotheses are improved when a new positive example is added and the current hypotheses do not cover the new positive example.
+Having defined the $ILP_{LAS}^{context}$ task $T = \langle B, S\textsubscript{M}, E\textsuperscript{+}, E\textsuperscript{-} \rangle$, ILP(RL) is able to learn hypotheses $H$. 
+Since $B$ and $S\textsubscript{M}$ are fixed, the hypotheses vary based on context dependent examples that the agent accumulates by interacting with an environment.
+For example, in the early phase of learning, the agent does not have many positive examples, and learns a hypothesis that is subset of the full target hypotheses that the agent could learn in the environment. Thus ILP(RL) needs to iteratively improves the hypotheses as illustrated in Figure \ref{fig:ILPRL_overview}.
+As specified in line 19 of Algorithm \label{algo:ILPRL}, $ILP_{LAS}^{context}$ is executed when the current hypotheses do not cover the new context example.
 If the current hypotheses cover the new positive example, there is no need to re-execute ILASP.
+% ILP(RL) runs $ILP_{LAS}^{context}$ to relearn H\textsubscript{new} if and only if $\forall$$\langle$ e, C$\rangle$ $\in$ E\textsuperscript{+}, $\exists$A $\in$ Answer Sets (B $\cup$ C $\cup$ H) such that A extends e
+% \end{defn}
+% where H is the current hypotheses that the agent has learnt so far. 
 
-The learnt hypotheses will be used to generate a plan, which we describe in the next section.
+The learnt hypotheses will be used for ASP planning, which we describe in the next section.
 
 \begin{examp} \normalfont (Hypothesis).
 Using the context dependent examples illustrated in Example \ref{example_pos_example}, we explain how the agent learns hypotheses.
@@ -328,27 +301,35 @@ The full learning task for this simple case is shown as follows:
   caption  = {Learning task example},
 ]{learning_task_example1.pl}
 From the above learning task, ILASP learns the following hypothesis.
-\begin{equation}
+\begin{equation*}
 \begin{split}
 \textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V0).}
 \end{split}
-\end{equation}
+\end{equation*}
 
+After having learnt the hypothesis above, suppose the agent takes another action and gains one extra example as shown in Listing \ref{additional_example}.
 \lstinputlisting[
   caption  = {Additional context dependent example},
+  label = {additional_example}
 ]{learning_task_example2.pl}
 
-This hypothesis, for example, does not explain how to move "down". In order to learn how to move "down", it needs an positive example of moving up.
+The current hypothesis, does not cover the new positive example, ILP(RL) runs ILASP with the new positive example. The revised hypotheses are as follows:
+\begin{equation*}
+\begin{split}
+XXX
+\end{split}
+\end{equation*}
+
+ILP(RL) keeps improving the hypotheses this way until the target hypotheses are learnt.
 \end{examp}
 
 \section{Planning with Answer Set Programming}
 \label{sec:planning}
-
-The learnt hypotheses using $ILP_{LAS}^{context}$ can be used to generate a sequence of action plan that the agent should follow.
-In the following subsections, we explain how to create an answer set program and use the answer sets to make a plan in a maze environment.
+The learnt hypotheses in the inductive learning phase are used to generate a sequence of action plan that the agent should follow.
+In the following subsections, we explain how to create an ASP program and use the answer sets by the ASP to make an action plan in a maze environment.
 \subsection{Answer Set Program}
 \label{subsec:answer_set_program}
-The ASP program should be constructed such that answer sets of ASP are a sequence of actions and states at each time step in ASP syntax. 
+The ASP program should be constructed such that answer sets of the ASP program are a sequence of actions and states at each time step in ASP syntax. 
 The answer set program for ILP(RL) is summarised in Listing \ref{list:asp_planning}:
 \lstinputlisting[
   caption  = {Answer set program for ILP(RL)},
