@@ -235,7 +235,6 @@ def copy_las_base(height, width, lasfile, is_link=False):
     '''
     make a lasfile for ILASP
     '''
-
     cell = "cell((0..{}, 0..{})).\n".format(width, height)
     with open(lasfile, "a") as base:
         base.write(cell)
@@ -277,6 +276,10 @@ def run_ILASP(filename, cache_path=None):
     return hypothesis
 
 def check_ILASP_cover(hypothesis, pos, height, width, link):
+    '''
+    Check hypothesis needs to be refined 
+    '''
+
     if pos == None:
         return True
 
@@ -299,6 +302,9 @@ def check_ILASP_cover(hypothesis, pos, height, width, link):
         return False
 
 def remove_mode(output_file):
+    '''
+    Helper function for removing mode declarations
+    '''
     with open(output_file, "r") as out:
         lines = out.readlines()
     with open(output_file, "w") as out:

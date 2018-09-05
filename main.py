@@ -91,6 +91,7 @@ def k_learning(env, num_episodes, epsilon=0.1, record_prefix=None, is_link=False
 
     wall_list = induction.get_all_walls(env)
 
+    # Logging dictionaries
     stats = plotting.EpisodeStats(
         episode_lengths=np.zeros(num_episodes),
         episode_rewards=np.zeros(num_episodes),
@@ -104,7 +105,6 @@ def k_learning(env, num_episodes, epsilon=0.1, record_prefix=None, is_link=False
 
     for i_episode in range(num_episodes):
         print("==============NEW EPISODE======================")
-        print("i_episode ", i_episode)
         start_total_runtime = time.time()
 
         previous_state = env.reset()
@@ -115,10 +115,7 @@ def k_learning(env, num_episodes, epsilon=0.1, record_prefix=None, is_link=False
         t = 0
         # Once the agent reaches the goal, the algorithm kicks in
         if reached_goal:
-            # Decaying epsilon greedy params
             new_epsilon = epsilon
-            # new_epsilon = epsilon*(1/(i_episode+1)**cf.DECAY_PARAM)
-            # print("new_epsilon ", new_epsilon)
 
             while t < cf.TIME_RANGE:
                 if first_abduction == False:
@@ -214,7 +211,8 @@ def k_learning(env, num_episodes, epsilon=0.1, record_prefix=None, is_link=False
         else:
             for t in range(cf.TIME_RANGE):
                 env.render()
-                # time.sleep(0.1)
+                # Uncomment time.sleep() to see the movement of the agent slower
+                # time.sleep(0.1) 
 
                 # Take a step
                 action = randint(0, 3)

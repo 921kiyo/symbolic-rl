@@ -38,17 +38,24 @@ def add_new_walls(previous_state, wall_list, file):
         helper.append_to_file(wall, file)
 
 def add_start_state(start_state):
+    '''
+    Add the current state of the agent to ASP program
+    '''
     start_state = "%AAA\n" + "state_at((" + str(int(start_state[0])) + ", " + str(int(start_state[1])) + "), 1).\n" + "%BBB\n"
     helper.append_to_file(start_state, cf.CLINGOFILE)
 
 def add_hypothesis(hypothesis_asp):
+    '''
+    Add learnt hypothese to ASP program
+    '''
     helper.append_to_file("%START\n", cf.CLINGOFILE)
     helper.append_to_file(hypothesis_asp, cf.CLINGOFILE)
     helper.append_to_file("%END\n", cf.CLINGOFILE)
 
 def add_goal_state(goal_state):
-    # TODO update goal specification
-    # goal specification
+    '''
+    Add goal spec to ASP program
+    '''
     goal_state = "state_at((" + str(int(goal_state[0])) + ", " + str(int(goal_state[1])) + "), T),"
     goal = "finished(T):- goal(T2), time(T), T >= T2.\n goal(T):- " + goal_state + " not finished(T-1).\n" + \
     "goalMet:- goal(T).\n:- not goalMet.\n"
@@ -74,14 +81,11 @@ def run_clingo(clingofile):
     '''
     print("clingo running...")
     try:
-        # clingo5 --opt-strat=usc,stratify -n 0 clingo2.lp --opt-mode=opt --outf=2
-        # planning_actions = subprocess.check_output(["clingo", "-n", "0", clingofile, "--opt-mode=opt", "--outf=2"], universal_newlines=True)
         planning_actions = subprocess.check_output(["clingo5", "--opt-strat=usc,stratify", "-n", "0", clingofile, "--opt-mode=opt", "--outf=2"], universal_newlines=True)
     except subprocess.CalledProcessError as e:
         planning_actions = e.output
         # When Clingo returns UNSATISFIABLE
         print("Clingo error...", planning_actions)
-        # print(e.output)
     json_plan = json.loads(planning_actions)
     # Extract only the optimal answer set (last one)
     is_success = json_plan["Result"]
@@ -94,6 +98,7 @@ def run_clingo(clingofile):
 
 def sort_planning(answer_sets):
     '''
+    Sort the answer sets by time step
     Output: sorted action and state arrays
     '''
     states = []
@@ -158,6 +163,9 @@ def update_X(state, step):
     return state[0:start_index+1] + str(x) + state[end_index:size]
 
 def get_X(state):
+    '''
+    Extract X coodinate
+    '''
     first_blacket_seen = False
     start_index = end_index = 0
     for index, char in enumerate(state):
@@ -171,6 +179,9 @@ def get_X(state):
     return int(state[start_index+1: end_index]), start_index, end_index
 
 def get_Y(state):
+    '''
+    Extract Y coodinate
+    '''
     start_index = end_index = 0
     start_index_found = False
     for index, char in enumerate(state):
@@ -249,7 +260,6 @@ def update_agent_position(agent_position, t):
 
     helper.append_to_file(start_state, cf.CLINGOFILE)
 
-# TODO update arguments
 def update_h(hypothesis):
     '''
     Update planning starting point based on the location of the agent
