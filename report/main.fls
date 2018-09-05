@@ -138,6 +138,10 @@ INPUT experiment3_hypothesis.pl
 OUTPUT experiment3_hypothesis.pl
 INPUT experiment4_hypothesis.pl
 OUTPUT experiment4_hypothesis.pl
+INPUT appendix_learning_tasks.pl
+OUTPUT appendix_learning_tasks.pl
+INPUT appendix_asp.pl
+OUTPUT appendix_asp.pl
 INPUT includes.tex
 INPUT includes.tex
 INPUT /usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
@@ -181,8 +185,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/backref.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/backref.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/latexsym.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/latexsym.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/oberdiek/hypcap.sty
@@ -302,6 +304,8 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/latex-fonts/lasy5.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchri7t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchri7t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchri8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchr7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm
@@ -311,8 +315,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/latex-fonts/lasy9.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchb7t.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchri7t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchri8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchr7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/bitstrea/charter/bchr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/bitstrea/charter/bchr7t.vf
@@ -350,9 +352,9 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/latex-fonts/lasy10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/latex-fonts/lasy7.tfm
-INPUT ./figures/pipeline_example1.png
-INPUT ./figures/pipeline_example1.png
-INPUT ./figures/pipeline_example1.png
+INPUT ./figures/env_context_example.png
+INPUT ./figures/env_context_example.png
+INPUT ./figures/env_context_example.png
 INPUT learning_task_example1.pl
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT learning_task_example1.pl
@@ -461,8 +463,14 @@ INPUT chapters/appendix_ethics.tex
 INPUT chapters/appendix_ethics.tex
 INPUT chapters/appendix_learning_task.tex
 INPUT chapters/appendix_learning_task.tex
+INPUT appendix_learning_tasks.pl
+INPUT appendix_learning_tasks.pl
+INPUT appendix_learning_tasks.pl
 INPUT chapters/appendix_asp.tex
 INPUT chapters/appendix_asp.tex
+INPUT appendix_asp.pl
+INPUT appendix_asp.pl
+INPUT appendix_asp.pl
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out
