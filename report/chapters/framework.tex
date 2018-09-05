@@ -206,7 +206,7 @@ $B$ is the background knowledge, $H\textsubscript{t}$ is the hypotheses at $t$, 
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=0.8\textwidth]{./figures/pipeline_example1}
+\includegraphics[width=0.8\textwidth]{./figures/env_context_example}
 \caption{5$\times$5 grid maze example (context dependent example)}
 \label{example_pos_example}
 \end{figure}
@@ -335,29 +335,27 @@ The answer set program for ILP(RL) is summarised in Listing \ref{list:asp_planni
   caption  = {Answer set program for ILP(RL)},
   label = {list:asp_planning}
 ]{asp_planning.pl}
-
-First, we use the learnt hypotheses by $ILP_{LAS}^{context}$ as part of the ASP program.
-In the inductive learning phase in ILP(RL), we only need to differentiate between s\textsubscript{t} and s\textsubscript{t+1} as \textsf{state\_before} and \textsf{state\_after} respectively.
-However, for the planning with ASP, the answer sets contains a sequence of actions and states for more than two time steps. 
-In order to capture the notion of time sequences, we modify the ASP syntax by 
+First, we use the learnt hypotheses returned from ILASP as part of the ASP program.
+In the inductive learning phase in ILP(RL), we only need to differentiate between $s\textsubscript{t}$ and $s\textsubscript{t+1}$ as \textsf{state\_before} and \textsf{state\_after} respectively.
+For the planning with ASP, however, the answer sets contain a sequence of actions and states for more than two time steps, such as $s\textsubscript{t}, s\textsubscript{t+1}, s\textsubscript{t+2}, \dots$.
+In order to capture the notion of the time sequences, the ASP syntax of the hypotheses needs to be modified from inductive learning phase to ASP planning by 
 adding time \textit{T}. Specifically, the following mapping is required between ILASP and ASP planning syntax.
 
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|p{5cm}|p{5cm}|}
-% \begin{tabular}{|l|l|p{1.5cm}|p{7cm}|l|l|l|l|}
 \hline
-No & ILASP syntax & ASP planning syntax\\ \hline
+No & Inductive learning syntax & ASP planning syntax\\ \hline
 1 & \textsf{state\_before(V)} & \textsf{state\_at(V1, T)}  \\ \hline
 2 & \textsf{state\_after(V)} & \textsf{state\_at(V1, T+1)}  \\ \hline
 3 & \textsf{(empty body)} & \textsf{time(T)}  \\ \hline
 4 & \textsf{action(A)} & \textsf{action(A, T)}  \\ \hline
 \end{tabular}
-\caption{ASP syntax mapping between }
+\caption{ASP syntax mapping between inductive learning and ASP planning}
 \label{table:extension_specification}
 \end{table}
-The conversion from (empty body) to \textsf{time(T)} means that the body of all the hypotheses include \textsf{time(T)} in ASP planning syntax.
-\begin{examp} \normalfont (Mapping of ASP syntax between $ILP_{LAS}^{context}$ and ASP).
+The conversion from (empty body) to \textsf{time(T)} means that the body of all the hypotheses includes \textsf{time(T)} in ASP planning syntax.
+\begin{examp} \normalfont (Mapping of ASP syntax between inductive learning and ASP planning).
 
 Suppose that an agent learnt the following hypothesis in inductive learning phase. 
 \begin{equation*}
@@ -366,88 +364,82 @@ Suppose that an agent learnt the following hypothesis in inductive learning phas
 \end{split}
 \end{equation*}
 
-This hypothesis is converted into the following for ASP planning.
+This hypothesis is converted into the following syntax for ASP planning.
 \begin{equation*}
 \begin{split}
 &\textsf{state\_at(V0, T+1) :- time(T), adjacent(right, V0, V1), state\_at(V1, T), action(right, T), not wall(V0).}\\
 \end{split}
 \end{equation*}
-The converted hypothesis can generate a sequence of actions and states to the right direction at more then two time steps.
+The converted hypothesis is used to generate a sequence of actions and states to the "right" direction for more then two time steps for ASP planning.
 \end{examp}
 
-Second, we define a choice rule of actions, which is of the form:
+An action for the agent is given as a choice rule, which is of the form:
 \begin{equation}\label{eq:choice_rule}
 \begin{split}
 &\textsf{1\{action(down,T); action(up,T); action(right,T); action(left,T)\}1} \\
 &\textsf{ :- time(T), not finished(T).}\\
 \end{split}
 \end{equation}
-
-An action is given as a choice rule, and the choice rule states that an action must be one of four actions: \textsf{down}, \textsf{up}, \textsf{right}, or \textsf{left}
+The choice rule states that an action must be one of four actions: \textsf{down}, \textsf{up}, \textsf{right}, or \textsf{left}
 at each time step T, as defined in the maximum and minimum integers 1.
-The choice rule specifies that one of four actions must be true unless \textsf{not finished(T)} or \textsf{time(T)} are satisfied, as defined in the body of the rule.
-In RL scenarios, this means there is always action to be taken until the agent reaches a terminal state, 
-When the agent reaches a terminal state, \textsf{finished(T)} is satisfied, otherwise time step T exceeds a maximum time steps allocated to the agent.
+The choice rule specifies that one of four actions must be true unless \textsf{not finished(T)} or \textsf{time(T)} are satisfied, as defined in the body of the rule.Therefore there is always an action to be taken until the agent reaches a terminal state, 
+When the agent reaches a terminal state, \textsf{finished(T)} is satisfied, otherwise time step T exceeds a maximum time step allocated to the agent.
 
-The maximum time steps are specified externally and it is of the form:
-
+The maximum time step is  specified externally and it is of the form:
 \begin{equation}
 \begin{split}
 &\textsf{time(T\textsubscript{t}..T\textsubscript{max})}
 \end{split}
 \end{equation}
-where T\textsubscript{t} is the current time step and T\textsubscript{max} is the maximum time steps.
-For example, if an agent is at time step 0, and can take actions up to 100 times within a episode until it finds a goal, \textsf{time} is defined as \textsf{time(0..100)}.
+where T\textsubscript{t} is the current time step and T\textsubscript{max} is the maximum time step.
+For example, if an agent is at time step 0, and can take actions up to 100 time step within an episode until it finds a terminal state, \textsf{time} is defined as \textsf{time(0..100)}.
 
-\textsf{finished(T)} determines whether the agent reaches the goal, which is defined in the following ASP form:
+\textsf{finished(T)} determines whether the agent reaches the goal, which is specified as follows:
 
 \begin{equation}\label{eq:asp_goal}
 \begin{split}
 &\textsf{finished(T):- goal(T2), time(T), T} \geq \textsf{T2.}\\
-&\textsf{goal(T):- state\_at((X\textsubscript{goal}, Y\textsubscript{goal}), T), not finished(T-1).}\\
+&\textsf{goal(T):- state\_at((X\textsubscript{terminal}, Y\textsubscript{terminal}), T), not finished(T-1).}\\
 &\textsf{goalMet:- goal(T).}\\
 &\textsf{:- not goalMet.}
 \end{split}
 \end{equation}
 
-\textsf{state\_at((X\textsubscript{goal}, Y\textsubscript{goal}))} is the location of the goal, which is unknown to the agent in the beginning of the training.
-The agent explores the environment until it finds the goal location.
-In the other words, the agent cannot generate a plan to the goal until the goal is found. 
-Once the agent reaches the goal and \textsf{finished(T)} is satisfied, 
-there will not be any actions at time T+1 since the body of the action choice rule defined in \ref{eq:choice_rule} is not satisfied.
+\textsf{state\_at((X\textsubscript{terminal}, Y\textsubscript{terminal}))} is the location of the terminal state, which is unknown to the agent before the learning starts.
+The agent explores the environment until it finds the terminal state.
 
-Next, facts of walls information are what the agent collects as context of context dependent examples, which is provided as follows:
+Once the agent reaches the goal at time $t$ and \textsf{finished(T)} is satisfied, 
+there will not be any actions at time $t+1$ since the body of the choice rule defined in \ref{eq:choice_rule} is not satisfied.
+
+The locations of walls are what the agent collects from the context of context dependent examples, which are specified as follows:
 \begin{equation}
 \begin{split}
 &\textsf{wall((X,Y))}\\
 \end{split}
 \end{equation}
  
-For ASP planning part, these wall information is accumulated as background knowledge different from background knowledge for ILASP, and used it for solving ASP. 
+These wall information are accumulated as background knowledge, and they are used for ASP planning. 
 
-Next, the starting state for the planning provided as part of ASP. It is the current location of the agent when the plan is generated.
+The starting state for the planning is provided as part of ASP. It is the current location of the agent at time t when the plan is generated. It is specified as follows:
 \begin{equation}
 \begin{split}
 \textsf{state\_at((X\textsubscript{start}, Y\textsubscript{start}), T)}
 \end{split}
 \end{equation}
 
-In addition, the definition of adjacent and cell type are also provided, which are the same as what was defined as background knowledge of $ILP_{LAS}^{context}$ (Equation \ref{eq:adjacent} and \ref{eq:cell})
-adjacent.
+In addition, the definition of adjacent and cell type are also provided, which is the same as the definition of adjacent in inductive learning phase defined in Equation \ref{eq:adjacent} and \ref{eq:cell}.
 
-Next, we need to incorporate a notion of rewards in each state. Instead of maximising the total rewards, which is the objectives of most RL methods, 
-we use optimisation statements as follow. 
+Next, we need to incorporate a notion of rewards. Instead of maximising the total rewards, which is the objectives of most RL methods, we assume that the rewards for any states except the terminal state in an environment are -1, so that we can use
+an optimisation statement in ASP in order to maximise the total rewards. Due to this assumption, the current framework of ILP(RL) works only subset of MDP, and our preliminary research focuses on solving this particular MDP problem. 
+The optimisation statement in ILP(RL) is specified as follows: 
 \begin{equation}
 \begin{split}
 &\textsf{\#minimize\{1, X, T: action(X,T)\}}.
 \end{split}
 \end{equation}
 
-The use of optimisation statement is based on the assumption that the total rewards can be maximised by searching for optimal answer sets. 
-While this works only subset of MDP, our preliminary research focuses on solving this particular MDP problem. 
-    
 Finally, we are only interested in a sequence of actions and corresponding states as the output of the ASP program. 
-Clingo can selectively include the atoms of certain predicates in the output and hide unselected ones. 
+Clingo can selectively include the atoms of certain predicates in the output and hide other predicates. 
 This is specified as follows:
 \begin{equation}
 \begin{split}
@@ -459,8 +451,8 @@ This way the answer sets of the ASP program contains only \textsf{state\_at} and
 
 \subsection{Plan Execution}
 \label{subsec:plan_execution}
-Having defined the ASP program, we describe how to use the answer sets generated by the ASP in order to execute the planning.
-The output of an ASP program is of the form:
+Having defined the ASP program, we describe how to use the answer sets generated by solving the ASP program in order to execute actions.
+The output of an ASP program is the plan that the agent follows, and it is of the form:
 \begin{equation}
 \begin{split}
 &\textsf{state\_at((x\textsubscript{t},y\textsubscript{t}),t), action(a\textsubscript{t},t),}\\
@@ -472,15 +464,14 @@ The output of an ASP program is of the form:
 \end{split}
 \end{equation}
 
-where \textit{n} is the number of time steps taken to reach the goal. 
-\textit{action(A,T)} tells which action the agent should take at each time.
+where \textsf{n} is the number of time steps taken to reach the goal. 
+\textsf{action(A,T)} tells the agent which action to take at each time.
 Given the answer set planning is correct, the agent follows the plan and reach the goal. 
-The correctness of the planning is based on the correctness of the hypotheses as well as the wall surrounding information in the agent's background knowledge. 
-For the correctness of the hypotheses, since the agent does not know all the information about the environment in the beginning of the learning,   
-Clingo might not generate correct sequence of actions leading to the goals.
-Also if the agent has not seen enough surrounding walls, the plan of actions might be blocked by a wall that the agent has not seen. 
-
-\begin{examp} \normalfont (Answer Set Program).
+The correctness of the planning is based on the correctness of the hypotheses as well as the wall information in the agent's background knowledge. 
+For example, if the agent does not have a hypothesis for how to move right, the ASP plan does not generate an answer set containing \textsf{action(right)}. Similarly, if the agent has not seen enough surrounding walls, and one of the \textsf{state(x,y)} in the plan is a wall, the agent fails to follow the plan. If this happens, either the current hypotheses were incomplete, or the agent needs more background knowledge.
+The agent constantly refine the hypotheses by accumulating more context dependent examples, which also contains a new wall information. This way the ASP planning also improves and the agent is able to correctly navigate through the maze using a ASP plan.
+This completes the whole cycle of ILP(RL) framework shown in Figure \ref{fig:ILPRL_overview}.
+\begin{examp} \normalfont (Answer Set Program and Plan Execution).
 
 \begin{figure}[!htb]
 \centering
@@ -488,33 +479,37 @@ Also if the agent has not seen enough surrounding walls, the plan of actions mig
 \caption{5$\times$5 grid maze example (ASP planning)}
 \label{environment_example}
 \end{figure}
-We use the same 5*5 grid maze as an example to highlight how the ASP planning works. 
+We use the same $5 \times 5$ grid maze as an example to highlight how the ASP planning works. 
 Suppose that the agent is at (1,3) and has already found a terminal state (3,1).
 Thus the agent can make an action plan to reach the goal. The ASP program for this example is provided as follows:
 
 \lstinputlisting[
-    caption  = {Answer set program for ILP(RL)},
-    label = {list:asp_planning}
+    caption  = {Example of ASP program},
+    label = {list:asp_program_example}
 ]{asp_planning_example.pl}
+The learnt hypotheses given by ILASP contain state transition for all four directions, and the agent has already seen necessary wall locations. The ASP program defined in Listing \ref{list:asp_program_example} returns the answer sets as a plan. By following the answer sets, the agent is able to reach the terminal state at (3,1).
 
+\begin{equation*}
+\begin{split}
+&\textsf{state\_at((1,3),0),action(up,0),}\\
+&\textsf{state\_at((1,2),1),action(up,1),}\\
+&\textsf{state\_at((1,1),2),action(right,2),}\\ 
+&\textsf{state\_at((2,1),3),action(right,3),}\\
+&\textsf{state\_at((3,1),4).} 
+\end{split}
+\end{equation*}
 \end{examp}
-    
 % Together with hypothesis, the background knowledge will used to solve for answer sets program. 
 % However, since hypothesis is not complete, there is more than one answer set at each time step. 
 % Since one of the answer sets state\_at is correct, the rest will be in the exclusions in the answer set, 
 % which is used to further improve the hypothesis in the next iteration of inductive learning.
 % In this example, the following is the answer set program
 % The answer set using the hypothesis XXX is 
-
-XXX.
 % The answer set using the improved hypothesis is XXX, 
 % Which correctly returns a sequence of actions and predicted states.
-
-This incorrect plan is also a source for learning a better hypothesis. 
-As shown in Example XX, if the hypothesis is not a full hypotheses, outputs of ASP contain lots of \textsf{state\_at((X,Y), T)} at the same states. 
-Given the agent is at one state at each time step, these duplicates are all included in exclusions, as defined in Definition \ref{def:ILPRL_exc}.
-
-This completes the whole cycle of ILP(RL) shown in Figure \ref{fig:ILPRL_overview}.
+% This incorrect plan is also a source for learning a better hypothesis. 
+% As shown in Example XX, if the hypothesis is not a full hypotheses, outputs of ASP contain lots of \textsf{state\_at((X,Y), T)} at the same states. 
+% Given the agent is at one state at each time step, these duplicates are all included in exclusions, as defined in Definition \ref{def:ILPRL_exc}.
 % When the agent encounters a new environment (e.g a new wall), this new information will be added to its background, which will be used to improved the hypothesis. 
 % Similarly, after executing an action by following the generated plan, the agent receives a new positive example. If the new positive example is not covered by the current hypotheses, 
 % ILASP reruns using the new example to improve the hypotheses. 
