@@ -14,29 +14,36 @@ The development of this framework is one of the main objectives of this project 
 \begin{algorithm}
 \caption{ILP(RL) Algorithm}\label{euclid}
 \begin{algorithmic}[1]
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \State \textbf{Input:} \\
+\State
+ 
 \State States S = \{ 1, ..., n\textsubscript{x}\}
 \State Actions A = \{ 1, ..., n\textsubscript{a}\} A: X $\rightarrow$ A
 \State States transition T: X x A $\rightarrow$ X
 \State $\epsilon \in [0,1]$
-
-\State Background knowledge for ILASP B\textsubscript{ILP}
-\State Background knowledge for ASP B\textsubscript{ASP}
+\State Background knowledge for ILASP and ASP B
 \State Language bias S\textsubscript{M} \\
 
-\Procedure{ILP(RL)}{S, A, T, $\epsilon$, B\textsubscript{ILP}, B\textsubscript{ASP}, S\textsubscript{M}}
+\Procedure{ILP(RL)}{S, A, T, $\epsilon$, B, S\textsubscript{M}}
 \State $H = \emptyset$
 \State $E = \emptyset$
 \State Start s $\in$ S
 \While s is not terminal 
-\State $a \leftarrow NEXTACTION(B\textsubscript{ASP}, H)$
+\State $a \leftarrow POLICY(B, H, s, A)$ \\
+\space
+\LineComment{observe the next state $s^\prime$ by taking action a}
 \State $s^\prime \leftarrow T(s,a)$
+\space
+\LineComment{generate a positive example}
 \State $e \leftarrow MakeDCPI(s^\prime, s, a) $ 
 \State $E = E + e$
-\If {$ ILASP(B \cup H, S\textsubscript{M}\emptyset, E) == UNSATISFIABLE$}
+\space
+\LineComment{if the current B $\cup$ H without language bias does not cover E, relean H}
+\If {$ ILASP(B \cup H, S\textsubscript{M}=\emptyset, E) == UNSATISFIABLE$}
 \State $H = ILASP(B, S\textsubscript{M}, E)$
 \EndIf
-\State $Update(B\textsubscript{ASP})$
+\State $Update(B)$
 \EndWhile
 \EndProcedure
 \end{algorithmic}
@@ -170,7 +177,7 @@ As defined in the Equation \ref{eq:cdpi}, CDPI is of the form $\langle$ e, C $\r
 Each of the components in CDPI is defined as follows:
 
 \begin{defn}\label{def:ILPRL_context}
-$C\textsubscript{ILP(RL)}$ contains an action a\textsubscript{t}, the current statestate s\textsuperscript{*}\textsubscript{t}, and adjacent walls of s\textsubscript{t}.
+$C\textsubscript{ILP(RL)}$ contains an action a\textsubscript{t}, the current state s\textsuperscript{*}\textsubscript{t}, and adjacent walls of s\textsubscript{t}.
 \label{def:context}
 \end{defn}
 
@@ -555,14 +562,15 @@ this does not guarantee that the agent always finds an optimal plan.
 While the agent exploit what is already learnt and follow the best plan so far,
 the agent also needs to explore by taking a new action to discover a new state, which might make the agent discover an even shorter path and therefore higher total rewards in the long term.
 
-One of the simple exploration strategies in RL is called \textit{$\epsilon$-greedy strategy}.
-$\epsilon$-greedy strategy states that an agent follows the optimal policy with probability of (1- $\epsilon$) where $\epsilon \in [0,1]$, 
+One of the simple exploration policies in RL is called \textit{$\epsilon$-greedy policy}.
+$\epsilon$-greedy policy states that an agent follows the optimal policy with probability of (1- $\epsilon$) where $\epsilon \in [0,1]$, 
 and the agent takes an random action with a probability of $\epsilon$. $\epsilon$ is hyper-parameter and chosen externally.
-Based on $\epsilon$-greedy strategy, we define the exploration strategy for ILP(RL) as follows:
-\begin{algorithm}
-\caption{ILP(RL) Exploration Strategy}\label{euclid}
+Based on $\epsilon$-greedy policy, we define the exploration policy for ILP(RL) in \ref{alg:exploration}:
+\begin{algorithm}[!htb]
+\caption{ILP(RL) Exploration Policy}
 \begin{algorithmic}[1]
-\Procedure{NextAction}{}
+\label{alg:exploration}
+\Procedure{Policy}{}
 \If {Terminal state is found}
 \State
 \LineComment{rand(0,1) generates a random number between 0 and 1}

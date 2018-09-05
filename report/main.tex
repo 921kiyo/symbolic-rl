@@ -399,6 +399,11 @@ where \textit{l} and \textit{u} are integers and h\textsubscript{i} for 1 $\leq$
 Informally, if the body of a ground choice rule is satisfied by an interpretation X, given a ground choice rule, the choice rule generates all answer sets in which  $l \leq | X \cap \{h\textsubscript{1},...,h\textsubscript{m}\} | \leq u$
 \ref{Law2014}.
 
+
+Reduct in ASP 4 steps. 
+\ref{Law2015}
+
+
 \textit{Optimisation statement} is useful to sort the answer sets in terms of preference, which is of the form:
 \begin{equation}
 \begin{split}
@@ -834,15 +839,16 @@ Since Q-learning is one of the most widely used RL methods and our experiments a
 
 \subsection{Model-based and Model-free RL}
 \label{model_base_model_free_subsection}
-A \textit{model} is a representation of an environment that an agent can use to understand how the environment should look like. 
+A \textit{model} is a representation of an environment that an agent can use to understand how the environment should look like, which is  T and R in MDP. 
 There are two different types of RL methods: \textit{model-based} and \textit{model-free} RL method. 
 Model-based RL is where, when a model of the environment is known, the agent uses the model to plan for a series of actions to achieve the agent's goal. 
 The model itself can be learnt by interacting with the environment by taking actions, which return states and rewards, and the parameters of the action models can be estimated with maximum likelihood methods \cite{Ray2010}.
 Using a model, an agent can do planning to generate or improve a policy for the modelled environment. 
-Most of the RL methods are model-free RL, where the model is unknown and the agent learns to achieve the goal solely by interacting with the environment. 
+
+By contrast, model-free RL is where a model is unknown and the agent learns to achieve the goal solely by interacting with the environment without using the model. 
 Thus the agent knows only possible states and actions, and the transition state and reward probability functions are unknown.
-When the model of the environment is correct, unlike with model-free RL, the agent does not require trial-and-error interactions with the environment and therefore model-based RL is faster to reach an optimal policy. 
-However, when the model is not a true representation of the environment, or the true MDP, the planning algorithms will not lead to the optimal policy, but a sub-optimal policy.
+When the model of the environment is correct, the model-based RL agent can reach an optimal policy without trial-and-error interactions with the environment. 
+When the model is not a true representation of the environment, or the true MDP, however, the planning algorithms will not lead to the optimal policy, but a sub-optimal policy.
 
 One algorithm which combines both aspects of model-based and model-free learning to solve the issue of sub-optimality is called Dyna \cite{Sutton1990}.
 Dyna learns a model from real experience and uses the model to generate simulated experience to update the evaluation functions.
@@ -853,17 +859,14 @@ This idea of learning a model of the environment and using it to execute plannin
 \subsection{Transfer Learning}
 \label{transfer_learning}
 
-Transfer learning is a method that knowledge learnt in one or more tasks can be used to learn a new task better than if without the knowledge in the first task. Transfer learning is an active research areas in machine learning, but not many have been done in RL. Since training tend to be time consuming and computational expensive, transfer learning allows the trained model to be applied in a different setting. Transfer learning in RL is particularly important since most of the RL research have been done in a simulation or game scenarios, and training RL models in a real physical environment is more expensive to conduct. Even in a virtual environments like games, the transfer learning between different tasks will greatly will have a big impact on potential applications.
+Transfer learning is a method that knowledge learnt in one or more tasks can be used to learn a new task better than if without the knowledge in the first task. Since training a RL algorithm tends to be time consuming and computational expensive, transfer learning allows the trained agent to be applied in a different setting.
+While transfer learning is an active research areas in machine learning, not many have been done in RL. Transfer learning in RL is particularly important since most of the RL research have been done in a simulation or game scenarios, and training RL models in a real physical environment is more expensive to conduct. Even in a virtual environments like games, the transfer learning between different tasks will greatly will have a big impact on potential applications.
 One of the purposes of transfer learning is so that the agent requires less time to learn a new task with the help of what was learn in previous tasks. Another goal would be to measure how effectively the agent reuses its knowledge in a new task.
 % There are many different matrices used to measure the performance of the transfer learning.
 % Five common metrics are defined in XX as follow.
 % TODO source task selection
-
 %Compare with human play, which is used in DeepMind Atari paper.
-
 % Since each metric measures different aspect of transfer learning, using multiple metrics would provide more comprehensive views of the performance of an RL algorithm.
-
-
 
 % \subsection{Function Approximation}
 % \label{function_approximation}

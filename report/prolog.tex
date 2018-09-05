@@ -472,3 +472,47 @@ state_after(V0):-adjacent(up, V0, V1), state_before(V0),
 state_after(V1):-adjacent(up, V0, V1), state_before(V1), 
                  action(up), wall(V0).  
 \end{filecontents*}
+
+\begin{filecontents*}{appendix_learning_tasks.pl}
+cell((0..7, 0..6)).
+adjacent(right, (X+1,Y),(X,Y)):-cell((X,Y)), cell((X+1,Y)).
+adjacent(left,(X,Y),  (X+1,Y)):-cell((X,Y)), cell((X+1,Y)).
+adjacent(down, (X,Y+1),(X,Y)):-cell((X,Y)), cell((X,Y+1)).
+adjacent(up,   (X,Y),  (X,Y+1)):-cell((X,Y)), cell((X,Y+1)).
+#modeh(state_after(var(cell))).
+#modeb(1, adjacent(const(action),var(cell),var(cell))).
+#modeb(1, state_before(var(cell)),(positive)).
+#modeb(1, action(const(action)),(positive)).
+#modeb(1, wall(var(cell))).
+#max_penalty(50).
+#constant(action, right).
+#constant(action, left).
+#constant(action, down).
+#constant(action, up).
+% Context dependent examples are added here
+\end{filecontents*}
+
+\begin{filecontents*}{appendix_asp.pl}
+1{action(down,T);
+  action(up,T);
+  action(right,T);
+  action(left,T);}1:-time(T), not finished(T).
+
+state_at((1,4),3).
+finished(T):-goal(T2),time(T), T >= T2.
+goal(T):-state_at((5, 1),T), not finished(T-1).
+goalMet:-goal(T).
+:-not goalMet.
+
+time(0..30).
+cell((0..6, 0..5)).
+
+adjacent(right,(X+1,Y),(X,Y)):-cell((X,Y)),cell((X+1,Y)).
+adjacent(left,(X,Y),(X+1,Y)):-cell((X,Y)), cell((X+1,Y)).
+adjacent(down,(X,Y+1),(X,Y)):-cell((X,Y)), cell((X,Y+1)).
+adjacent(up,(X,Y),(X,Y+1)):-cell((X,Y)), cell((X,Y+1)).
+
+#minimize{1,X,T: action(X,T)}.
+#show state_at/2.
+#show action/2.
+\end{filecontents*}
