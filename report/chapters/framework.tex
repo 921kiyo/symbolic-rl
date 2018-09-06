@@ -14,13 +14,11 @@ The development of this framework is one of the main objectives of this project 
 
 \begin{algorithm}
 \caption{Inductive Learning ILP(RL) Algorithm}
+\label{algorithm:inductive_learning}
 \begin{algorithmic}[1]
 \label{algo:ILPRL}
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \State \textbf{Input:}
-% \State \ \ \ \ \ \ Current State $s$
-% \State \ \ \ \ \ \ Action $a$
-% \State \ \ \ \ \ \ Next State $s^\prime$ = T(s,a)
 \State \ \ \ \ \ \ Current hypothesis $H$
 \State \ \ \ \ \ \ Cumulative context dependent examples $E$
 \State \ \ \ \ \ \ Background knowledge$B$
@@ -478,8 +476,10 @@ This way the answer sets of the ASP program contains only \textsf{state\_at} and
 
 \subsection{Plan Execution}
 \label{subsec:plan_execution}
-\begin{algorithm}
+
+\begin{algorithm}[!htb]
 \caption{ASP Planning ILP(RL) Algorithm}
+\label{algorithm:asp_planning}
 \begin{algorithmic}[1]
 \label{algo:ILPRL}
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
@@ -658,25 +658,10 @@ Since the ILP(RL) agent does not know when the optimal plan is found, it is nece
 \caption{Data flow diagram for ILP(RL) Engine, Environment and Evaluation components}
 \label{fig:dataflow}
 \end{figure}
-We divide our implementation of the design outline into three separate software components: ILP(RL) Engine, Environment Platform and Evaluation Engine. The overview of our software implementation is shown in the data flow diagram in Figure \ref{fig:dataflow}. We describe each components of the implementation in the following sections.
+We divide our implementation of the design outline into three separate software components: ILP(RL) Engine, Environment Platform and Evaluation Engine. The overview of our software implementation is shown in the data flow diagram in Figure \ref{fig:dataflow}. 
 
-\subsection{ILP(RL) Engine}
-ILP(RL) Engine is our main framework explained in Chapter \ref{framework}. The main driver is written in Python and handles the communications between an environment and an agent as well as the communications within the agent. 
-% The communication between the environment is simple: the driver sends an action determined by ILP(RL) algorithm and receives an observation.
-
-\begin{itemize}
-    \item create a learning
-\end{itemize}
-The two main job of the driver is to execute inductive learning with ILASP, planning with ASP and the interaction with the environment platform provided by VGDL with OpenAI interface.
-All of them are communicated through the main driver written in Python. 
-In the following section, we explain each component of ILP(RL) in details.
-
-% The main roles of the driver is handling the communications between an environment and an agent as well as the communications within the agent.
-
-% When an agent takes an action in a VDGL game environment, 
-% the output of the environment is returned by OpenAI gym environment, which is of the form:
-
-% This works the same for any RL algorithms when using OpenAI gym environment. 
+ILP(RL) Engine is our main framework explained in Chapter \ref{framework}. As shown in Figure \ref{fig:dataflow}, the main driver is written in Python and executes the algorithms, construct the necessary files and handles the communications by sending input and output among third-party software and libraries as well as executing their programs: ILASP, Clingo and the environment platform including the Video Game Definition Language (VDGL) and OpenAI Gym. The main driver is also responsible for I/O operation for context dependent examples as well as background knowledge, both are being accumulated in text files. Eval Driver is another Python script that executes the evaluation of ILP(RL) as well as benchmark RL algorithm, or Q-learning. The details of the evaluation is described in Chapter \label{evaluation}. All the results of inductive learning with ILASP, ASP planning and evaluation are recorded in Logging folder.
+In the following sections, we explain how the main driver communicates with third-party softwaredetails.
 
 \subsection{Inductive Learning with ILASP}
 We use ILASP2i, an inductive learning system developed in \ref{Law2016b}.
@@ -760,7 +745,7 @@ All objects in the games can be described as a sprite in the \textit{SpriteSet},
 \textit{TerminationSet} specify the conditions for ending the game.
 The representation of each object can be specified in \textit{LevelMapping} and allows users to customise an original map.
 
-We use PyVGDL\footnote{https://github.com/schaul/py-vgdl/}, which is a high-level VGDL on top of pygame\footnote{https://www.pygame.org}, 
+We use PyVGDL\footnote{https://github.com/rubenvereecken/py-vgdl}, which is a high-level VGDL on top of pygame\footnote{https://www.pygame.org}, 
 a Python modules designed for writing video games.
 
 \subsection{OpenAI Gym}

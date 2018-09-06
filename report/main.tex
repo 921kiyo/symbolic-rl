@@ -702,10 +702,10 @@ The optimal state-value function v\textsuperscript{*}(s) maximises the value fun
 v\textsuperscript{*}(s) = \underset{\pi}{\max} \ v\textsubscript{$\pi$}(s)
 \end{equation}
 
-\begin{examp} \normalfont (Value Functions).
+% \begin{examp} \normalfont (Value Functions).
 
-XXX
-\end{examp}
+% XXX
+% \end{examp}
 Value functions are defined by \textit{policies}, which map from states to probabilities of choosing each action. 
 A policy $\pi$ is defined as follows:
 \begin{equation}
@@ -727,15 +727,11 @@ The optimal state-action-value function q\textsuperscript{*}(s,a) maximises the 
 q\textsuperscript{*}(s, a) = \underset{\pi}{\max} \ q\textsubscript{$\pi$}(s, a)
 \end{equation}
 
-\begin{examp} \normalfont (State-action value Functions).
+% \begin{examp} \normalfont (State-action value Functions).
 
-XXX
-\end{examp}
+% XXX
+% \end{examp}
 
-%TODO BELLMAN OPTIMALITY EQUATION
-
-%A policy $\pi$ is optimal if it maximises the action-value function q()
-%The transition and reward functions are not necessary to be known to compute $\pi$.
 %Among all possible value functions, an \textit{optimal policy $\pi^*$} is the one that maximise the total rewards in the environment.
 %The optimal policy $\pi$\textsuperscript{*} corresponds to v\textsuperscript{*}(s)
 
@@ -789,20 +785,20 @@ where $\alpha$ is a constant step-size parameter, or learning rate, $\alpha$ bet
 The function Q(S,A) predicts the best action A in state S to maximise the total cumulative rewards. Q-learning is off-policy because a policy being evaluated and improved is different from the policy being used to take an action.
 
 \begin{algorithm}
-\caption{Q-learning (off-policy TD control)}
+\caption{Q-learning for leaning $Q$}
 \label{algorithm:q_learning}
 \begin{algorithmic}[1]
 \Procedure{}{}
-\State $\text{Initialise Q(s,a) arbitrarily}$
+\State $\text{Initialise $Q(s,a)$ arbitrarily}$
 \Repeat$\text{\ for each episode}$
-\State $\text{Choose a from s using policy derived from Q}$
-\State $\text{Take action a, observe r,  s^$\prime$}$
+\State $\text{Choose $a$ from $s$ using policy derived from Q}$
+\State $\text{Take action $a$, observe $r$,  $s^\prime$}$
 \State $Q(s\textsubscript{t},a\textsubscript{t}) \leftarrow Q(s\textsubscript{t},a\textsubscript{t}) +  \alpha(R\textsubscript{t+1} + \gamma \ max (a+t) \ Q(s\textsubscript{t+1}, a\textsubscript{t+1}) - Q(s\textsubscript{t}, a\textsubscript{t}))$
 \State $ s \leftarrow s^\prime $
-\Until $\text{ s is terminal}$ 
+\Until $\text{ $s$ is terminal}$ 
 \Return $Q$ 
 \EndProcedure
-\caption{Q-learning for leaning $Q: X \times A \rightarrow \mathbb{R} $}
+
 \end{algorithmic}
 \end{algorithm}
 
@@ -810,7 +806,7 @@ The function Q(S,A) predicts the best action A in state S to maximise the total 
 Q(s\textsubscript{t},a\textsubscript{t}) = \displaystyle \E [R\textsubscript{t+1} + \gamma R\textsubscript{t+2} + \gamma^2 R\textsubscript{t+3} + ... \vert s\textsubscript{t},a\textsubscript{t} ]
 \end{equation}
 
-Q-learning algorithm is defines in \ref{algorithm:q_learning}. Since the state-action value function Q learnt by Q-learning directly approximates q*, Q-learning is  guaranteed to converge to an optimal policy in a finite tabular representation. \textcolor{red}{TODO REF}
+Q-learning algorithm is defined in Algorithm \ref{algorithm:q_learning}. Since the state-action value function Q learnt by Q-learning directly approximates q*, Q-learning is  guaranteed to converge to an optimal policy in a finite tabular representation. \textcolor{red}{TODO REF}
 Since Q-learning is one of the most widely used RL methods and our experiments are conducted in a tabular representation, we use it as one of the benchmarks for our new framework.
 %\textcolor{red}{Paper Jaakkola et al. 1993}
 

@@ -1,4 +1,4 @@
-In this Chapter, we conducted 4 different experiments in simple maze environments to investigate how the ILP(RL) agent learns and finds the optimal path.
+In this Chapter, we conducted 4 different evaluations in simple maze environments to investigate how the ILP(RL) agent learns and finds the optimal policy.
 
 \section{Experimental Setup}
 \label{sec:experimental_setup}
@@ -6,42 +6,37 @@ In this Chapter, we conducted 4 different experiments in simple maze environment
 \subsection{Evaluation Metrics}
 \label{subsec:evaluation_metrics}
 
-As introduced in \ref{sec:motivation}, our motivation is to improve the RL learning efficiency and capability of transfer learning.
+As introduced in Section \ref{sec:motivation}, our motivation is to improve the learning efficiency and capability of transfer learning in RL.
 Therefore, these are the two main measurements for the performance of ILP(RL).
+The learning efficiency is measured in three different ways: performance of optimal policy, convergence of inductive learning and runtime of ILP(RL). Due to the random exploration for both ILP(RL) and a benchmark, the performance of each experiment varies. Especially ASP planning of ILP(RL) starts only when the agent finds a terminal state and it is dependent on an random exploration. In order to smooth the impact of the randomness, we ran 30 experiments per evaluation and computed an average for all the evaluation metrics. Within an experiment, an agent is allocated 250 time steps per episode, 100 episode per experiment.
 
-The learning efficiencies are measured in three different ways. First, the performance of ILP(RL) is compared with benchmarks in terms of
-convergence rate, which is measured in terms of the number of episodes that the agent requires to get to an optimal policy.
-The optimal policy can be measured in terms of the total reward that the agent gains at each episode. 
-For example, if an agent requires the shortest 10 actions to get to the terminal state, the maximum reward the agent could get per episode is 0 (-1 reward at each action + 10 for reaching the goal).
-We log the rewards at each time step and plot the total reward at each episode. 
-Since the agent follows an random exploration throughout the learning, the total reward never converges to the maximum in learning. 
-Therefore at each episode, we also measure the performance without exploration to see the pure optimal policy.
-
-Second, the convergence of learning by ILASP is measured to see the learning curve of ILP(RL), which is specified as follows:
-\begin{equation}
-\begin{split}
-\frac{\textsf{The cumulative number of ILASP calls per time step at episode 0}}{\textsf{The total number of ILASP calls in all episodes}}
-\end{split}
-\end{equation}
-The reason we are measuring it only at episode 0 is that empirically the agent learns most of the target hypotheses within episode 0 and there is few inductive learning after episode 0.
-This gives a normalised convergence rate of ILASP learning with the maximum 1, and we plot it across each time steps. 
-If an inductive learning happens after episode 0, this included in the denominator, and the maximum convergence plot is strictly less than 1.
-
-Third, we log runtime of both ILP(RL) and a benchmark at each episode, and plot the cumulative runtime over episodes.
-For ILP(RL), we also measure the number of ILASP calls and the average runtime of ILASP calls. 
-
-\subsection{Benchmarks}
-\label{subsec:benchmarks}
-% We use different benchmarks for learning evaluation and transfer learning evaluation. 
-We use Q-learning as our base benchmark.
+In order to compare the performance of ILP(RL) with an existing RL method, we use Q-learning as our base benchmark.
 Q-learning is widely used RL technique, and given the environments used for the experiments are a simple environment in that
 it is discrete and deterministic, this method is sufficient as a benchmark.
 
-TODO Q-leaning Implementation
+% TODO Q-leaning Implementation
 % As defined in Algorithm XX (Q-learning) in Section \ref{td_learning_section}, we randomly 
-% randomly initialise the Q-values except the terminal state, and we measure the same evaluation metrics as ILP(RL), 
+% randomly initialise the state-action value functions except the terminal state, and we measure the same evaluation metrics as ILP(RL), 
 % and compare the performance of the two algorithms in order to examine how well ILP(RL) learns faster than Q-learning.
 % (Optimistic and pessimistic initialisation.)
+
+\subsubsection{Performance of optimal policy}
+The performance of ILP(RL) is compared with a benchmark in terms of
+ optimal policy, which is measured in terms of the total reward that an agent gains per episode by following its optimal policy.
+For all the evaluations, the agent receives -1 for any states except a terminal state and receives +10 when it reaches the terminal state.
+For example, if an agent requires the minimum 10 actions to get to a terminal state, the maximum total reward that the agent could gain per episode is 0 (-1 reward at each action +10 for reaching the terminal state).
+
+In RL analysis, the optimal policy is measured without exploration nor learning. For ILP(RL), for example, the agent might still take an random action even when the ASP planning is already optimal. Thus, the exploration policy does not allow us to measure the performance of it's optimal policy. Thus at after every episode, we disable an random exploration and inductive learning, and run the same experiment, so that the agent can only follow its optimal policy. In the case of ILP(RL), if the agent does not know a terminal state or hypothesis, it does not have any policy because ASP planning cannot be executed, and therefore the agent gets -250 total reward.
+\subsubsection{Convergence of Inductive Learning}
+The convergence of inductive learning is measured to see the learning curve of inductive learning phase in ILP(RL), which is specified as follows:
+\begin{equation}
+\begin{split}
+\frac{\textsf{The cumulative number of ILASP calls per time step}}{\textsf{The total number of ILASP calls in all episodes}} \in [0,1]
+\end{split}
+\end{equation}
+This gives a normalised convergence rate of inductive learning with the maximum 1. For example, if the total number of ILASP calls in all episodes is 10 and there is a ILASP call at time step 1 episode 1, it is recorded as 0.1. When there is another ILASP call at time step 2 episode 1 after the first ILASP call, it is recorded as 0.2. The 10th ILASP call in this evaluation is recorded as 1. 
+\subsubsection{Runtime}
+We recorded runtime of both ILP(RL) and a benchmark at each episode, and plot the cumulative runtime over episodes. For ILP(RL), we also recorded the average runtime of ILASP calls per evaluation. All the evaluations were conducted in Linux Operating System with Intel i7-6560U CPU and 8GB RAM.
 
 \subsection{Parameters}
 \begin{table}[!ht!b]
@@ -49,89 +44,80 @@ TODO Q-leaning Implementation
 \begin{tabular}{lll}
 \hline
 Parameter            & ILP(RL)    & Q-learning      \\ \hline
-The number of experiments& 30       & 30       \\
-The number of episode per experiment& 100        & 100        \\
+The number of experiment per evaluation& 30       & 30       \\
+The number of episode per evaluation& 100        & 100        \\
 Time steps per episode& 250        & 250        \\
 % Discount rate        & 0,5       & 1.4e-2       \\
-Alpha                & N/A       & 0.5       \\
-Epsilon              & 0.1        & 0.1        \\
+$\alpha$ (learning rate)        & N/A       & 0.5       \\
+$\epsilon$ (epsilon)         & 0.1        & 0.1        \\
+Reward for any states except a terminal state  & -1        & -1       \\
+Reward for a terminal state     & 10        & 10       \\
 \end{tabular}
-\caption{List of parameters used in the experiments}
-\label{param}
+\caption{List of parameters used in the evaluations}
+\label{table:parameter}
 \end{table}
 
-All the parameters used in the experiments are summarised in Table \ref{param}.
-Agents are trained in 250 time steps with 100 episodes, and conducted the same experiment 30 times in each environment. 
-Each experiment is conducted 30 times and the perform is averaged across the experiments, 
-since the performance of the agent is affected by the randomness of the exploration,
-and ILP(RL) is highly dependent on how quickly the agent finds the goal.
-The number of episode is specified such that both ILP(RL) and Q-learning eventually reaches the optimal policy.
+All the parameters used in the evaluations are summarised in Table \ref{table:parameter}.
+We trained the agents with maximum 250 time step, 100 episodes, and conducted the same experiment 30 times in each environment. 
 The number of time steps should be sufficient for the both algorithms to reach a terminal state by the $\epsilon$-greedy exploration strategy, 
 which we specify 250 time steps for all experiments. 
-If the agent does not find the terminal state by 250 time steps, the agent receives the reward of -250 and 
-start the next episode from a starting point. If the agent reaches the terminal state within 250 time steps, 
-it receives the reward of 10 and start the next episode with the fixed starting point. 
-% The reason for using random exploration is that it can be used for both benchmark and ILP(RL) and thus enables us to do a fair comparison between them.
-We conducted several experiments using different environments to highlight each aspect of the algorithm.
+The number of episode is specified such that both ILP(RL) and Q-learning eventually reaches the optimal policy.
+Every episode starts from a starting state. If the agent reaches the terminal state within 250 time steps, the episode is complete and the next episode starts with the fixed starting state. 
+
+The learning rate  $\alpha$ for Q-learning, as shown in Equation \ref{eq:q_learning}, determines how much Q-value is updated each time. Since our environments are relatively simple, we use 0.5 for $\alpha$. For the same reason, $\epsilon$ for both ILP(RL) and Q-learning is 0.1.
+
+The rewards were arbitrarily assigned -1 for all states except the terminal state, and 10 for the terminal state.
+
+We conducted 4 different evaluations using different environments to highlight each aspect of ILP(RL) algorithm.
 \section{Learning Evaluation}
 \label{sec:learning_evaluation}
 
-\subsection{Experiment 1: Setup}
+\subsection{Evaluation 1: Baseline}
 \label{subsec:experiement1_setup}
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.5\textwidth]{./figures/experiment1}
-\caption{Game environment for experiment 1}
+\caption{Game environment for Evaluation 1}
 \label{fig:experiment1}
 \end{figure}
     
-The purpose of the first experiment is to highlight how ILP(RL) agent learns hypotheses in ILASP.
-The environment are designed as a simple maze where the terminal state is located the right upper corner as shown in Figure \ref{fig:experiment1}.
-The shortest path between the agent's starting point and the terminal state is 18 steps, thus the maximum total reward the agent could gain is -8.
-    
-\subsection{Experiment 1: Result}
+The purpose of the first evaluation is to highlight how ILP(RL) agent learns the hypotheses using inductive learning and executes an ASP planning.
+The environment is a simple maze where the terminal state is located the right upper corner as shown in Figure \ref{fig:experiment1}.
+The shortest time step between the agent's starting state and the terminal state is 18 steps, thus the maximum total reward the agent could gain is -8.
+
+\subsection{Evaluation 1: Result}
 \label{subsec:experiment1_result}
 
 \begin{figure}[!htb]
-\centerline{
-\includegraphics[width=0.55\textwidth]{./figures/experiment1_training}
-\includegraphics[width=0.55\textwidth]{./figures/experiment1_test}
-}
-\caption{Results of experiment 1: learning curve (left) and testing (right)}
+\centering
+\includegraphics[width=0.7\textwidth]{./figures/experiment1_test}
+\caption{Evaluation 1: optimal policy }
 \label{experiment1_result}
 \end{figure}
 
-Figure \ref{experiment1_result} shows the learning and testing performance.
-The convergence rate of ILP(RL) is faster than Q-learning: ILP(RL) reaches the maximum reward at between 40 and 50 episode, 
-whereas Q-learning reaches the same level at between 60 and 70 episodes.
-This is because unlike Q-learning where the value function is updated with the rate of alpha, ILP(RL) gradually builds the model of the environment and use the background knowledge to accurately plan.
-This result is also consistent with the general notion that model-based RL is more data-efficient than model-free RL.
-The same trend is also shown on the right in Figure \ref{experiment1_test}, where we measure only the performance of the policy without random exploration.
-% The reason Q-learning converges slower in the testing than that of training is that Q values are initialised to 0, which means that XXX.
-Overall this results shows that ILP(RL) converges to the optimal policy faster than Q-learning in this simple scenario, achieving more data-efficient learning.
+Figure \ref{experiment1_result} shows the performance of optimal policy.
+ILP(RL) reaches the optimal policy faster than Q-learning: ILP(RL) reaches the optimal policy at between 40 and 50 episode, 
+whereas Q-learning reaches the optimal policy at around 60 episode. ILP(RL) learns the optimal policy in earlier episode because once the terminal state is found, the planning is always correct since there is only one way to reach the terminal state. The variations of the convergence to a optimal policy is dependent on how quickly the agent finds the terminal state. 
+Since the exploration of ILP(RL) is based on $\epsilon$-greedy policy, this result shows that there is a potential that a better exploration policy further improves the ILP(RL) learning.
+
+The convergence of Q-learning for reaching an optimal policy is steeper than that of ILP(RL). This is because the state-action value functions are updated with the rate of $\alpha$, and the optimal policy for Q-learning is achieved when the optimal state-action value functions are achieved. By contrast, 
+ILP(RL) gradually learns state transition of the environment using inductive learning and uses the background knowledge to accurately plan. 
+
+Overall this result shows that ILP(RL) converges to the optimal policy faster than Q-learning in this simple scenario, achieving more data-efficient learning.
 
 \lstinputlisting[
 %   language = Prolog,
   caption  = {Hypotheses for experiment 1},
+  label = {list:experiment1_hypothesis}
 ]{experiment1_hypothesis.pl}
 
-% \lstinputlisting[
-% %   language = Prolog,
-%   caption  = {Answer sets for experiment 1},
-% ]{experiment1_asp.pl}
-
 In addition to the data-efficient learning, what the agent has learnt with ILP(RL) is expressive.
-Learnt hypotheses are shown in \ref{experiment1_hypothesis}, which is the rule of the game and easy to understand for human users.
-Since the learnt hypothesis is a general concept, which can be used in a different environment.
-This transfer learning capability is also described in Experiment 3 and 4.
+Learnt hypotheses are shown in \ref{list:experiment1_hypothesis}, which are state transition for all directions, both when an adjacent state is a wall or not wall. The learnt state transitions are easy to understand for human users, and general in that they can be applied to a different similar environment.
 
-Next, we see how the agent learns the hypotheses over time. We plot the learning convergence for ILASP at episode 0 in Figure \ref{experiment1_ilasp}.
-This graph shows that the agent learns almost all of the hypotheses at the episode 0.
-Since the two variables that the agent require to construct optimal answer set planning are the hypotheses and background knowledge, in this case the location of the walls, 
-the reason that the agent reaches the maximum reward at between 40 and 50 episodes, is mostly dependent on how quickly the agent finds the goal location.
-Even though the agent leans the full hypotheses at episode 0, without the terminal state, the agent continues to randomly explore the environment.
-Since the exploration of ILP(RL) is based on $\epsilon$-greedy strategy, there is a potential that a better exploration strategy further improve the ILP(RL) learning.
+Next, we see how the agent learns the hypotheses over time. We plot part of the learning convergence for ILASP at episode 0 in Figure \ref{experiment1_ilasp}.
+It converges to 1 after 200 episode, and shows that the agent learns the target hypotheses at the episode 0.
+Since the two variables that the agent require to construct optimal answer set planning are the hypotheses and background knowledge, and the target hypotheses are learnt at episode 0, the convergence of finding an optimal policy for ILP(RL) is dependent on how quickly the agent finds a terminal state. 
 
 \begin{figure}[!htb]
 \centering
@@ -142,11 +128,11 @@ Since the exploration of ILP(RL) is based on $\epsilon$-greedy strategy, there i
 
 Finally, we compare the runtime of two algorithms. 
 The Figure \ref{exp1_runtime} shows that the runtime of ILP(RL) in the first few episodes is significantly high. 
-This is due to the fact that ILP(RL) runs ILASP calls at the beginning of episodes.
+This is due to the fact that ILP(RL) runs ILASP calls to learn the hypotheses at the beginning of episodes.
 The Figure \ref{exp1_runtime} therefore highlights an issue that inductive learning is likely the bottleneck in terms of computational time.
-This issue may not be critical in cases where the time between the time steps is not an issue. If the performance is measured in terms of computation time rather than the number of iterations, 
-ILP(RL) is not likely to perform existing RL algorithms. 
-The average runtime of inductive learning is 5.579 seconds, and there are on average 12.83 times inductive learning per episode. 
+This issue may not be critical in cases where the time of the time between the time steps is not an issue. If the performance is measured in terms of computation time rather than the number of iterations, 
+ILP(RL) does not perform better than Q-learning. 
+The average runtime of inductive learning is 5.579 seconds, and there are on average 12.83 times inductive learning per episode in this environment.
 % RUNTIME FOR ILASP: 5.579039041812603
 % ILASP RUNS TOTAL: 12.83 times
 The ASP planning is not a bottleneck of ILP(RL), but still takes longer time than Q-learning, as can be observed by the divergence of cumulative runtime between the two algorithms. 
@@ -159,17 +145,16 @@ This experiment show that while ILP(RL) learns faster than Q-learning in terms o
 \label{exp1_runtime}
 \end{figure}
 
-% \newpage
-
-\subsection{Experiment 2: Setup}
+\subsection{Evaluation 2: Extended Baseline}
 \label{subsec:experiement2_setup}
+
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.5\textwidth]{./figures/experiment2_setup}
-\caption{Game environment for experiment 2}
+\caption{Game environment for Evaluation 2}
 \label{experiment2}
 \end{figure}
-Experiment 2 was conducted to see if the agent finds a optimal path using a teleport. The environment is the same as experiment 1 except the presence of teleport link.
+Experiment 2 was conducted to see if the agent finds a optimal path using a teleport. The environment is the same as experiment 1 except the presence of teleport link and three extra walls to surround the destination teleport.
 In the environment shown in Figure \ref{experiment3},
 there are two ways to reach the goal: using a floor path to get the goal located on the top right corner, or using a teleport.
 The environment is designed such that using a teleport is a shorter path and therefore gives higher total reward.
@@ -197,39 +182,23 @@ The link locations need to be available for all positive examples so that ILASP 
 
 Because of the teleport link, the shortest path is 13 steps to reach the terminal state. Thus the maximum total reward that the agent could gain is -3.
 
-\subsection{Experiment 2: Result}
+\subsection{Evaluation 2: Result}
 \label{subsec:experiment2_result}
 % The game is designed such that
     
 \begin{figure}[!htb]
-\centerline{
-\includegraphics[width=0.55\textwidth]{./figures/experiment2_training}
-\includegraphics[width=0.55\textwidth]{./figures/experiment2_test}
-}
+\centering
+% \includegraphics[width=0.55\textwidth]{./figures/experiment2_training}
+\includegraphics[width=0.7\textwidth]{./figures/experiment2_test}
 \caption{Results of experiment 3: learning curve (left) and testing (right)}
 \label{experiment2_training}
 \end{figure}
 
-The same as the Experiment 1, both training and test performance converges faster than that of Q-learning.
+The same as the Evaluation 1, both training and test performance converges faster than that of Q-learning.
 
 \lstinputlisting[
   caption  = {Incomplete hypotheses for experiment 2},
 ]{experiment2_hypothesis_intermediate.pl}
-
-% \begin{equation}
-% \begin{split}
-% &\textsf{state\_after(V1) :- link\_dest(V1).}\\
-% &\textsf{state\_after(V0) :- link\_dest(V0), state\_before(V0), action(right).}\\
-% &\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V0), action(right), not wall(V1).}\\
-% &\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
-% &\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V0), action(down), not wall(V1).}\\
-% &\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}\\
-% &\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V1), action(left), wall(V0).}\\
-% &\textsf{state\_after(V1) :- adjacent(down, V0, V1), state\_before(V1), action(down), wall(V0).}\\
-% &\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}
-% \end{split}
-% \label{experiment2_ilasp_imcomplete}
-% \end{equation}
 
 To highlight the learning process of the new concept of teleport link, Figure \ref{experiment2_ilasp_imcomplete} is an intermediate incomplete hypothesis learnt by ILASP.
 These hypotheses are generated just after the agent steps onto the \textsf{link\_start}. However, the first hypothesis says
@@ -260,7 +229,7 @@ The final complete hypotheses are show in Listing \ref{list:exp2_final_hypothese
 % \label{experiment2_ilasp_complete}
 % \end{equation}
 
-Compared to the Experiment 1, there are two new hypotheses due to the presence of the teleport links.
+Compared to the Evaluation 1, there are two new hypotheses due to the presence of the teleport links.
 These learnt hypotheses are also applicable to an environment where there is no link, such as a game in experiment 1.
 In this case, the first two hypotheses in Listing \ref{list:exp2_final_hypotheses} are never be used 
 since the body predicates relating to link\_start(V0), link\_dest(V1) are never be satisfied.
@@ -313,12 +282,12 @@ which corresponds to the number of symbolic representations that the agent needs
 \label{experiment2_runtime}
 \end{figure}
 
-\clearpage
-\newpage
+% \clearpage
+% \newpage
 \section{Transfer Learning Evaluation}
 \label{sec:transfer_learning_evaluation}
 
-\subsection{Experiment 3: Setup}
+\subsection{Evaluation 3: Transfer Learning}
 \label{subsec:experiement3_setup}
 
 \begin{figure}[!htb]
@@ -326,7 +295,7 @@ which corresponds to the number of symbolic representations that the agent needs
 \includegraphics[width=0.5\textwidth]{./figures/experiment3_before}
 \includegraphics[width=0.5\textwidth]{./figures/experiment3_after}
 }
-\caption{Game environment for experiment 3: before (left) and after (right) transfer learning}
+\caption{Game environment for Evaluation 3: before (left) and after (right) transfer learning}
 \label{experiment3_setup}
 \end{figure}
 
@@ -361,7 +330,7 @@ The positive examples to be transferred are those the agent accumulated in the l
   label = {exp3_hypotheses}
 ]{experiment3_hypothesis.pl}
 
-\subsection{Experiment Result 3}
+\subsection{Evaluation Result 3}
 The result is shown in Figure \ref{experiment3_training}.
 For Agent(TL), since the complete hypotheses are already known to the agent as well as the terminal state, the agent can do ASP planning from episode 0.
 The only information required is background knowledge for the ASP planning, namely the locations of the walls, which are quickly acquired and reached the maximum total reward at the very beginning of episodes.
@@ -379,22 +348,20 @@ This observation shows that there is a promising potential for improving the exp
 There was no ILASP calls in the new environments since the transferred hypotheses are already optimal and cover all the examples the agent encounters in the new environment.
 
 \begin{figure}[!htb]
-\centerline{
-\includegraphics[width=0.55\textwidth]{./figures/experiment3_after_training}
-\includegraphics[width=0.55\textwidth]{./figures/experiment3_after_test}
-}
+\centering
+% \includegraphics[width=0.55\textwidth]{./figures/experiment3_after_training}
+\includegraphics[width=0.7\textwidth]{./figures/experiment3_after_test}
 \caption{Results of experiment 3: learning curve (left) and testing (right)}
 \label{experiment3_training}
 \end{figure}
 
-
-\subsection{Experiment 4: Setup}
+\subsection{Evaluation 4: Extended Transfer Learning}
 \label{subsec:experiement4_setup}
 \begin{figure}[!htb]
-\centerline{
-\includegraphics[width=0.5\textwidth]{./figures/experiment4_before}
-\includegraphics[width=0.5\textwidth]{./figures/experiment4_after}}
-\caption{Game environment for experiment 4: before (left) and after (right) transfer learning}
+\centering
+% \includegraphics[width=0.5\textwidth]{./figures/experiment4_before}
+\includegraphics[width=0.7\textwidth]{./figures/experiment4_after}
+\caption{Game environment for Evaluation 4: before (left) and after (right) transfer learning}
 \label{experiment4_setup}
 \end{figure}
 
@@ -403,7 +370,7 @@ The new environment, shown on the right in Figure \ref{experiment4_setup}, is th
 This is a new concept that did not exist in the trained environment and therefore the agent needs to learn it after the hypotheses are transferred.
 The same as Experiment 3, we use four different agents.
 
-\subsection{Experiment Result 4}
+\subsection{Evaluation 4: Result}
 \label{subsec:experiment_result_4}
 
 Figure \ref{experiment4_training_test} show the results of the learning and test performance. 
