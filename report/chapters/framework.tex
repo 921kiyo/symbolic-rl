@@ -11,42 +11,68 @@ The development of this framework is one of the main objectives of this project 
 \label{fig:ILPRL_overview}
 \end{figure}
 
+
 \begin{algorithm}
-\caption{ILP(RL) Algorithm}
+\caption{Inductive Learning ILP(RL) Algorithm}
 \begin{algorithmic}[1]
 \label{algo:ILPRL}
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \State \textbf{Input:}
-\State \ \ \ \ \ \ Current state $s$
-\State \ \ \ \ \ \ Actions $A = \{ 1, ..., n\textsubscript{a}\} A: X \rightarrow A$
-\State \ \ \ \ \ \ States transition $T: X \times A \rightarrow X$
-\State \ \ \ \ \ \ $\epsilon \in [0,1]$
-\State \ \ \ \ \ \ Background knowledge for ILASP and ASP $B$
+% \State \ \ \ \ \ \ Current State $s$
+% \State \ \ \ \ \ \ Action $a$
+% \State \ \ \ \ \ \ Next State $s^\prime$ = T(s,a)
+\State \ \ \ \ \ \ Current hypothesis $H$
+\State \ \ \ \ \ \ Cumulative context dependent examples $E$
+\State \ \ \ \ \ \ Background knowledge$B$
 \State \ \ \ \ \ \ Language bias $S\textsubscript{M}$ \\
-
-\Procedure{ILP(RL)}{S, A, T, $\epsilon$, B, S\textsubscript{M}}
-\State $H = \emptyset$
-\State $E = \emptyset$
-\State Start s $\in$ S
-\While s is not terminal 
-\State $a \leftarrow POLICY(B, H, s, A, \epsilon)$ \\
-\space
-\LineComment{observe the next state $s^\prime$ by taking action a}
-\State $s^\prime \leftarrow T(s,a)$
-\space
-\LineComment{generate a positive example}
-\State $e \leftarrow MakeDCPI(s^\prime, s, a) $ 
-\State $E = E + e$
-\space
-\LineComment{if the current B $\cup$ H without language bias does not cover E, update H}
-\If {$ ILASP(B \cup H, S\textsubscript{M}=\emptyset, E) == UNSATISFIABLE$}
+\Procedure{Inductive-Learning}{$H, E, B, S\textsubscript{M}$}
+\If {$ILASP(B \cup H \cup S\textsubscript{M}=\emptyset)$ does not cover $E$}
 \State $H = ILASP(B, S\textsubscript{M}, E)$
 \EndIf
-\State $Update(B)$
-\EndWhile
+\State $Update(B, e)$
+\LineComment{Add surrounding walls to $B$}
+
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
+
+
+% \begin{algorithm}
+% \caption{ILP(RL) Algorithm}
+% \begin{algorithmic}[1]
+% \label{algo:ILPRL}
+% \renewcommand{\algorithmicrequire}{\textbf{Input:}}
+% \State \textbf{Input:}
+% \State \ \ \ \ \ \ States $S = \{ 1, ..., n\textsubscript{x}\}$
+% \State \ \ \ \ \ \ Actions $A = \{ 1, ..., n\textsubscript{a}\} A: X \rightarrow A$
+% \State \ \ \ \ \ \ States transition $T: X \times A \rightarrow X$
+% \State \ \ \ \ \ \ $\epsilon \in [0,1]$
+% \State \ \ \ \ \ \ Background knowledge for ILASP and ASP $B$
+% \State \ \ \ \ \ \ Language bias $S\textsubscript{M}$ \\
+
+% \Procedure{ILP(RL)}{$S, A, T, \epsilon, B, S\textsubscript{M}$}
+% \State {$H = \emptyset$}
+% \State {$E = \emptyset$}
+% \State {Start s $\in$ S}
+% \While {$s$ is not terminal} 
+% \State $a \leftarrow POLICY(s, A, B, H, \epsilon)$ \\
+% \space
+% \LineComment{observe the next state $s^\prime$ by taking action a}
+% \State $s^\prime \leftarrow T(s,a)$
+% \space
+% \LineComment{generate a positive example}
+% \State $e \leftarrow MakeDCPI(s^\prime, s, a) $ 
+% \State $E = E + e$
+% \space
+% \LineComment{if the current B $\cup$ H without language bias does not cover E, update H}
+% \If {$ ILASP(B \cup H, S\textsubscript{M}=\emptyset, E) == UNSATISFIABLE$}
+% \State $H = ILASP(B, S\textsubscript{M}, E)$
+% \EndIf
+% \State $Update(B)$
+% \EndWhile
+% \EndProcedure
+% \end{algorithmic}
+% \end{algorithm}
 
 The overall architecture of ILP(RL), is shown in Figure \ref{fig:ILPRL_overview}. 
 ILP(RL) mainly consists of two components: inductive learning with ILASP and planning with ASP. 
@@ -150,6 +176,7 @@ where, \textsf{X} and \textsf{Y} are the size of width and height of an environm
 For example, a grid maze shown in Figure\ref{environment_example} has a height and width of 4, thus the type cell is defined in the background knowledge as \textsf{cell((0..4, 0..4))}.
 
 \subsection{Context Dependent Examples}
+\label{subsec:context_dependent_examples}
 Context dependent examples contain actual state transition that the agent gains by interacting with an environment. Since all the interactions with the environment are examples of valid moves,
 they are used as positive examples. A positive example is expressed as a following ASP form:
 \begin{equation}
@@ -406,7 +433,7 @@ For example, if an agent is at time step 0, and can take actions up to 100 time 
 \end{equation}
 
 \textsf{state\_at((X\textsubscript{terminal}, Y\textsubscript{terminal}))} is the location of the terminal state, which is unknown to the agent before the learning starts.
-The agent explores the environment until it finds the terminal state.
+The agent explores the environment until it finds the terminal state. The terminal state is stored in the background knowledge.
 
 Once the agent reaches the goal at time $t$ and \textsf{finished(T)} is satisfied, 
 there will not be any actions at time $t+1$ since the body of the choice rule defined in \ref{eq:choice_rule} is not satisfied.
@@ -451,6 +478,52 @@ This way the answer sets of the ASP program contains only \textsf{state\_at} and
 
 \subsection{Plan Execution}
 \label{subsec:plan_execution}
+\begin{algorithm}
+\caption{ASP Planning ILP(RL) Algorithm}
+\begin{algorithmic}[1]
+\label{algo:ILPRL}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\State \textbf{Input:}
+\State \ \ \ \ \ \ Current State $s$
+\State \ \ \ \ \ \ ASP program $ASP$
+\State \ \ \ \ \ \ Current hypothesis $H$
+\State \ \ \ \ \ \ Context dependent examples $E$
+\State \ \ \ \ \ \ Background knowledge$B$
+\State \ \ \ \ \ \ Language bias $S\textsubscript{M}$
+\State \ \ \ \ \ \ $\epsilon \in [0,1]$
+
+\Procedure{ASP-Planning}{$s, ASP, H, E, B, S\textsubscript{M}, \epsilon$}
+    \State $AS\textsubscript{plan} = Clingo(ASP)$
+    \LineComment{Execute a sequence of actions by following the plan}
+    \For{$a\textsubscript{plan, t}$ in $AS\textsubscript{plan}$}
+    \LineComment{Execute a sequence of actions by following the plan}
+        \If {$rand(0,1) < \epsilon $}
+         \LineComment{rand(0,1) generates a random number between 0 and 1}
+            \State $i = randInt(0, |A|)$
+            \LineComment{randInt(0,A) generates a random integer between 0 and $|A|$}
+            \State $s^\prime \leftarrow$ take action $a\textsubscript{i}$ at state $s$
+            \State {$t = t + 1$}
+            \State {$Update(E)$}
+            \LineComment {Update $E$ using the definitions defined in Section  \ref{subsec:context_dependent_examples}}
+            \State {INDUCTIVE-LEARNING($H, E, B, S\textsubscript{M}$)}
+            \Return{}
+            \LineComment{Did not follow the plan, thus break the for loop and make a new plan}
+            \Else \State $a\textsubscript{t}$ = $A\textsubscript{plan}(t)$
+            \State $s^\prime \leftarrow$ take action $a\textsubscript{t}$ at state $s$
+            \State {$t = t + 1$}
+            \State {$Update(E)$}
+            \LineComment {Update $E$ using the definitions defined in Section  \ref{subsec:context_dependent_examples}}
+            \State {INDUCTIVE-LEARNING($H, E, B, S\textsubscript{M}$)
+            \State {$s = s^\prime$}
+        \EndIf
+    \EndFor
+    \Return{}
+\EndProcedure
+
+\end{algorithmic}
+\end{algorithm}
+
+
 Having defined the ASP program, we describe how to use the answer sets generated by solving the ASP program in order to execute actions.
 The output of an ASP program is the plan that the agent follows, and it is of the form:
 \begin{equation}
@@ -529,58 +602,87 @@ The learnt hypotheses given by ILASP contain state transition for all four direc
 
 \section{Exploration}
 \label{exploration}
-In this section, we explain exploration of ILP(RL). While the agent can learn the hypotheses and execute a planning by interacting with the environment as shown in Figure \ref{fig:ILPRL_overview},
+In this section, we explain the exploration policy of ILP(RL). While the agent can learn the hypotheses and execute a planning by interacting with the environment as shown in Figure \ref{fig:ILPRL_overview},
 there are mainly two reasons why ILP(RL) requires exploration. 
 First, the ILP(RL) agent can only do ASP planning only if it finds a terminal state. 
-Therefore the agent needs to continues exploring the environment until the terminal state is found. 
-Second, even if the terminal state is known and the agent generates a planning based on the background knowledge and the hypotheses, 
-this does not guarantee that the agent always finds an optimal plan.
-While the agent exploit what is already learnt and follow the best plan so far,
-the agent also needs to explore by taking a new action to discover a new state, which might make the agent discover an even shorter path and therefore higher total rewards in the long term.
+Therefore the agent needs to continues exploring the environment until it finds the terminal state. 
+Second, even if the terminal state is found and the agent generates a planning based on the hypotheses and background knowledge, 
+the plan does not guarantee that the agent always finds an optimal policy.
+While the agent exploits what is already learnt and follow the best plan based on the current hypotheses and background knowledge,
+the agent also needs to explore by taking a random action different in order to discover a new state, which might make the agent find an even shorter path and therefore higher total rewards in the long term.
 
 One of the simple exploration policies in RL is called \textit{$\epsilon$-greedy policy}.
 $\epsilon$-greedy policy states that an agent follows the optimal policy with probability of (1- $\epsilon$) where $\epsilon \in [0,1]$, 
-and the agent takes an random action with a probability of $\epsilon$. $\epsilon$ is hyper-parameter and chosen externally.
-Based on $\epsilon$-greedy policy, we define the exploration policy for ILP(RL) in \ref{alg:exploration}:
-\begin{algorithm}[!htb]
-\caption{ILP(RL) Exploration Policy}
-\begin{algorithmic}[1]
-\label{alg:exploration}
-\Procedure{Policy}{}
-\If {Terminal state is found}
-\State
-\LineComment{rand(0,1) generates a random number between 0 and 1}
-\If {$rand(0,1) < \epsilon $} 
-\space
-\State
-\LineComment{randInt(0,A) generates a uniformly random integer between 0 and $|A|$}
-\State $i = randInt(0, |A|)$ 
-\Return $a\textsubscript{i}$
-\Else \State $a\textsubscript{i}$ = ASP Plan of ILP(RL)
-\Return $a\textsubscript{i}$
-\EndIf
-\Else \State $i = randInt(1, |A|)$
-\Return $a\textsubscript{i}$
-\EndIf
-\EndProcedure
-\end{algorithmic}
-\end{algorithm}
+and the agent takes a random action with probability of $\epsilon$. $\epsilon$ is a hyper-parameter and chosen externally.
+
 When the agent deviates from the planning by taking an random action and moves to a new state, the agent generates a new planning from the new state. 
-Since the ILP(RL) agent does not know when the optimal plan is found, it is necessary for ILP(RL) to continues $\epsilon$-greedy strategy.
+Since the ILP(RL) agent does not know when the optimal plan is found, it is necessary for ILP(RL) to continues $\epsilon$-greedy policy.
+% Based on $\epsilon$-greedy policy in RL, we define the exploration policy for ILP(RL) in \ref{alg:exploration}:
+% \begin{algorithm}[!htb]
+% \caption{ILP(RL) Exploration Policy}
+% \begin{algorithmic}[1]
+% \label{alg:exploration}
+% \renewcommand{\algorithmicrequire}{\textbf{Input:}}
+% \State \textbf{Input:}
+% \State \ \ \ \ \ \ Current state $s$
+% \State \ \ \ \ \ \ Actions $A = \{ 1, ..., n\textsubscript{a}\} A: X \rightarrow A$
+% \State \ \ \ \ \ \ Background knowledge for ASP $B$
+% \State \ \ \ \ \ \ Current hypotheses $H$
+% \State \ \ \ \ \ \ $\epsilon \in [0,1]$
+
+% \Procedure{Policy}{$s, A, B, H, \epsilon$}
+% \If {Terminal state is found}
+% \State $A\textsubscript{plan} = Planning(s,B,H)$
+% \State
+% \LineComment{rand(0,1) generates a random number between 0 and 1}
+% \If {$rand(0,1) < \epsilon $} 
+% \space
+% \State
+% \LineComment{randInt(0,A) generates a uniformly random integer between 0 and $|A|$}
+% \State $i = randInt(0, |A|)$ 
+% \Return $a\textsubscript{i}$
+% \Else \State $a\textsubscript{i}$ = $A\textsubscript{plan}(t)$
+% \Return $a\textsubscript{i}$
+% \EndIf
+% \Else \State $i = randInt(1, |A|)$
+% \Return $a\textsubscript{i}$
+% \EndIf
+% \EndProcedure
+% \end{algorithmic}
+% \end{algorithm}
 
 \section{Implementation}
-\label{Implementation}
-In this section, we describe how we developed ILP(RL) framework.
-There are mainly three different components that need to be communicated: inductive learning with ILASP, planning with ASP and the external environment platform provided by VGDL with OpenAI interface.
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=1.0\textwidth]{./figures/ILPRL_dataflow}
+\caption{Data flow diagram for ILP(RL) Engine, Environment and Evaluation components}
+\label{fig:dataflow}
+\end{figure}
+We divide our implementation of the design outline into three separate software components: ILP(RL) Engine, Environment Platform and Evaluation Engine. The overview of our software implementation is shown in the data flow diagram in Figure \ref{fig:dataflow}. We describe each components of the implementation in the following sections.
+
+\subsection{ILP(RL) Engine}
+ILP(RL) Engine is our main framework explained in Chapter \ref{framework}. The main driver is written in Python and handles the communications between an environment and an agent as well as the communications within the agent. 
+% The communication between the environment is simple: the driver sends an action determined by ILP(RL) algorithm and receives an observation.
+
+\begin{itemize}
+    \item create a learning
+\end{itemize}
+The two main job of the driver is to execute inductive learning with ILASP, planning with ASP and the interaction with the environment platform provided by VGDL with OpenAI interface.
 All of them are communicated through the main driver written in Python. 
 In the following section, we explain each component of ILP(RL) in details.
 
+% The main roles of the driver is handling the communications between an environment and an agent as well as the communications within the agent.
+
+% When an agent takes an action in a VDGL game environment, 
+% the output of the environment is returned by OpenAI gym environment, which is of the form:
+
+% This works the same for any RL algorithms when using OpenAI gym environment. 
+
 \subsection{Inductive Learning with ILASP}
-We use ILASP2i, a inductive learning system developed in XX. 
-ILASP2i is an interactive version of ILASP2, and is designed to scale with the numbers of examples. 
+We use ILASP2i, an inductive learning system developed in \ref{Law2016b}.
+ILASP2i is an iterative version of ILASP2, and is designed to scale with the numbers of examples. 
 ILASP2i also introduces the use of context dependent examples.
-The latest ILASP officially available at the time of writing is ILASP3, which is designed to work on a noisy examples. 
-Our positive examples do not contain noise, state transition positive examples, and ILASP2i was sufficient for our implementation.
+The latest ILASP available is ILASP3, which is designed to work on a noisy examples. Our context dependent examples do not contain noise since they are all true state transition that the agent has experienced, and therefore ILASP2i was sufficient for our implementation.
 which is discussed in Section XX. 
 Although ILASP2i is designed to work with a large number of examples, inductive learning part is the bottleneck of our framework in terms of computational time. 
 We did a number of optimisation in order to mitigate this. 
@@ -614,12 +716,6 @@ where,
 \item \textsf{--max-rule-length=8} The default maximum number is 5.
 \end{itemize}
 
-Last optimisation is specifying search space.
-
-Complexity. 
-
-TODO the number of search space XX. 
-
 \subsection{Planning with ASP}
 Planning is computed using Clingo 5.
 
@@ -637,7 +733,7 @@ Planning is computed using Clingo 5.
 \end{itemize}
 
 \subsection{Environment Platform}
-\subsubsection{The Video Game Definition Language (VGDL)}
+\subsection{The Video Game Definition Language (VGDL)}
 
 \begin{figure}[!ht!b]
 \centering
@@ -667,7 +763,8 @@ The representation of each object can be specified in \textit{LevelMapping} and 
 We use PyVGDL\footnote{https://github.com/schaul/py-vgdl/}, which is a high-level VGDL on top of pygame\footnote{https://www.pygame.org}, 
 a Python modules designed for writing video games.
 
-\subsubsection{OpenAI Gym}
+\subsection{OpenAI Gym}
+\label{sebseq:openai_gym}
 The VGDL platform provides an interface with OpenAI Gym (\cite{Brockman2016}), a commonly used benchmark platform for RL research.
 The communication between VGDL environment and an agent, is through OpenAI Gym interface. 
 \ref{list:openai} shows the functions provided by OpenAI Gym as well as the simple implementation for RL. 
@@ -689,22 +786,3 @@ In this report, an agent receives a reward of -1 for any state except the termin
 The action is chosen by an RL algorithm of your choice. In the case of ILP(RL), action is chosen by the ASP planning or random exploration strategy between 0 and 3.
 \item \textsf{env.render()} renders one frame of the environment to visualise the movement of the agent in pygame.
 \end{itemize}
-
-% \subsection{The Main Driver}
-% All of the above are connected in Python script.
-
-% The main roles of the driver is handling the communications between an environment and an agent as well as the communications within the agent.
-
-% \begin{description}
-% \item[Communication between an environment and an agent]
-
-% When an agent takes an action in a VDGL game environment, 
-% the output of the environment is returned by OpenAI gym environment, which is of the form:
-
-% This works the same for any RL algorithms when using OpenAI gym environment. 
-
-% subprocess
-
-% \item[Communication within the agent]
-
-% \end{description}
