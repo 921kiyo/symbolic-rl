@@ -97,9 +97,9 @@ The shortest time step between the agent's starting state and the terminal state
 \end{figure}
 
 Figure \ref{experiment1_result} shows the performance of optimal policy.
-ILP(RL) reaches the optimal policy faster than Q-learning: ILP(RL) reaches the optimal policy at between 40 and 50 episode, 
-whereas Q-learning reaches the optimal policy at around 60 episode. ILP(RL) learns the optimal policy in earlier episode because once the terminal state is found, the planning is always correct since there is only one way to reach the terminal state. The variations of the convergence to a optimal policy is dependent on how quickly the agent finds the terminal state. 
-Since the exploration of ILP(RL) is based on $\epsilon$-greedy policy, this result shows that there is a potential that a better exploration policy further improves the ILP(RL) learning.
+ILP(RL) reaches the optimal policy faster than Q-learning: ILP(RL) reaches the optimal policy at before 40 episode, 
+whereas Q-learning reaches the optimal policy at around 60 episode. ILP(RL) learns the optimal policy at an earlier episode because once the terminal state is found, the planning is always correct since there is only one way to reach the terminal state. The variations of the convergence to a optimal policy for ILP(RL) is dependent on how quickly the agent finds the terminal state. 
+Since the exploration of ILP(RL) is based on $\epsilon$-greedy policy with the current ILP(RL), this result shows that there is a potential that a better exploration policy further improves the ILP(RL) learning.
 
 The convergence of Q-learning for reaching an optimal policy is steeper than that of ILP(RL). This is because the state-action value functions are updated with the rate of $\alpha$, and the optimal policy for Q-learning is achieved when the optimal state-action value functions are achieved. By contrast, 
 ILP(RL) gradually learns state transition of the environment using inductive learning and uses the background knowledge to accurately plan. 
@@ -108,12 +108,13 @@ Overall this result shows that ILP(RL) converges to the optimal policy faster th
 
 \lstinputlisting[
 %   language = Prolog,
-  caption  = {Hypotheses for experiment 1},
+  caption  = {Hypotheses learnt in Evaluation 1},
   label = {list:experiment1_hypothesis}
 ]{experiment1_hypothesis.pl}
 
 In addition to the data-efficient learning, what the agent has learnt with ILP(RL) is expressive.
 Learnt hypotheses are shown in \ref{list:experiment1_hypothesis}, which are state transition for all directions, both when an adjacent state is a wall or not wall. The learnt state transitions are easy to understand for human users, and general in that they can be applied to a different similar environment.
+The full learning task for this evaluation is in Appendix \ref{chap:learning_tasks_eval1}.
 
 Next, we see how the agent learns the hypotheses over time. We plot part of the learning convergence for ILASP at episode 0 in Figure \ref{experiment1_ilasp}.
 It converges to 1 after 200 episode, and shows that the agent learns the target hypotheses at the episode 0.
@@ -132,7 +133,7 @@ This is due to the fact that ILP(RL) runs ILASP calls to learn the hypotheses at
 The Figure \ref{exp1_runtime} therefore highlights an issue that inductive learning is likely the bottleneck in terms of computational time.
 This issue may not be critical in cases where the time of the time between the time steps is not an issue. If the performance is measured in terms of computation time rather than the number of iterations, 
 ILP(RL) does not perform better than Q-learning. 
-The average runtime of inductive learning is 5.579 seconds, and there are on average 12.83 times inductive learning per episode in this environment.
+The average runtime of inductive learning is 5.58 seconds, and there are on average 12.83 times inductive learning per episode in this environment.
 % RUNTIME FOR ILASP: 5.579039041812603
 % ILASP RUNS TOTAL: 12.83 times
 The ASP planning is not a bottleneck of ILP(RL), but still takes longer time than Q-learning, as can be observed by the divergence of cumulative runtime between the two algorithms. 
@@ -141,7 +142,7 @@ This experiment show that while ILP(RL) learns faster than Q-learning in terms o
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.7\textwidth]{./figures/experiment1_runtime}
-\caption{Runtime comparison}
+\caption{Evaluation 1: runtime comparison}
 \label{exp1_runtime}
 \end{figure}
 
@@ -154,11 +155,11 @@ This experiment show that while ILP(RL) learns faster than Q-learning in terms o
 \caption{Game environment for Evaluation 2}
 \label{experiment2}
 \end{figure}
-Experiment 2 was conducted to see if the agent finds a optimal path using a teleport. The environment is the same as experiment 1 except the presence of teleport link and three extra walls to surround the destination teleport.
+Evaluation 2 was conducted to see if the agent learns a teleport and finds an optimal path using the teleport. The environment is the same as Evaluation 1 except the presence of teleport link and three extra walls to surround the destination teleport.
 In the environment shown in Figure \ref{experiment3},
-there are two ways to reach the goal: using a floor path to get the goal located on the top right corner, or using a teleport.
-The environment is designed such that using a teleport is a shorter path and therefore gives higher total reward.
-Compared to Experiment 1, two extra language biases are added as follows:
+there are two ways to reach the goal: using a floor path to reach the goal located on the top right corner, or using the teleport.
+The environment is designed such that using the teleport is a shorter path and therefore gives a higher total reward.
+Compared to Evaluation 1, two extra language biases are added as follows:
 \begin{equation*}
 \begin{split}
 &\textsf{\#modeb(1, link\_start(var(cell)), (positive)).}\\
@@ -168,122 +169,97 @@ Compared to Experiment 1, two extra language biases are added as follows:
 
 \textsf{link\_start(var(cell))} is a state for departure of the teleport and \textsf{link\_dest(var(cell))} is the destination of the teleport. 
 The teleport link is one-way: \textsf{link\_start} takes the agent to \textsf{link\_dest}, but \textsf{link\_dest} does not take the agent back to \textsf{link\_start}.
-This extra types allows ILASP to learn additional hypothesis.
-The full learning task for this experiment is in Appendix XX.
+This extra types allows ILASP to learn additional hypotheses.
+The full learning task for this evaluation is in Appendix \ref{chap:learning_tasks_eval2}.
 
-In VDGL game environment, when the agent steps onto \textsf{link\_start}, it immediately takes the agent to \textsf{link\_dest}. This means that the agent moves two states in one time step.
-Since our ASP translation part takes the state transition as \textsf{state\_before} and \textsf{state\_after}, 
-we deal with this situation such that the agent receives two positive experiences in this time step rather than two time steps.
-
-Also link\_start and link\_dest need to be stored in background knowledge rather than as context examples,
-because ILP(RL) needs to generate exclusions regarding the link behaviour.
-% (TODO EXPLAIN MORE).
-The link locations need to be available for all positive examples so that ILASP correctly learns different a valid move for floor and teleport, which is shown in Figure XX below.
+Also \textsf{link\_start} and \textsf{link\_dest} need to be stored in background knowledge rather than as context dependent examples when the agent finds them, 
+because ILP(RL) needs to generate exclusions regarding the teleport link behaviour.
+The link locations need to be available for all positive examples so that ILASP correctly learns different a valid move for floor and teleport.
 
 Because of the teleport link, the shortest path is 13 steps to reach the terminal state. Thus the maximum total reward that the agent could gain is -3.
 
 \subsection{Evaluation 2: Result}
 \label{subsec:experiment2_result}
-% The game is designed such that
     
 \begin{figure}[!htb]
 \centering
 % \includegraphics[width=0.55\textwidth]{./figures/experiment2_training}
 \includegraphics[width=0.7\textwidth]{./figures/experiment2_test}
-\caption{Results of experiment 3: learning curve (left) and testing (right)}
+\caption{Evaluation 2: optimal policy}
 \label{experiment2_training}
 \end{figure}
 
-The same as the Evaluation 1, both training and test performance converges faster than that of Q-learning.
-
+Similar to Evaluation 1, as shown in Figure \ref{experiment2_training}, ILP(RL) finds an optimal policy faster than Q-learning. Compared to the environment in Evaluation 1, ILP(RL) finds an optimal policy at earlier episode, because finding a terminal state is easier for ILP(RL) in this environment, since finding \textsf{link\_start} immediately leads the agent to the terminal state rather than having to go through a floor path to the upper right corner of the environment.
+\newpage
 \lstinputlisting[
-  caption  = {Incomplete hypotheses for experiment 2},
+  caption  = {Incomplete hypotheses for Evaluation 2},
+  label = {experiment2_hypothesis_intermediate}
 ]{experiment2_hypothesis_intermediate.pl}
 
-To highlight the learning process of the new concept of teleport link, Figure \ref{experiment2_ilasp_imcomplete} is an intermediate incomplete hypothesis learnt by ILASP.
-These hypotheses are generated just after the agent steps onto the \textsf{link\_start}. However, the first hypothesis says
-when link\_dest is available state\_after is true. Since link\_dest is available in background knowledge rather than context,
-when solving for answer sets to generate a plan, it generates incorrect state\_after at every time step.
+To highlight the inductive learning process of the new concept of teleport link, Listing \ref{experiment2_hypothesis_intermediate} is an intermediate incomplete hypotheses learnt by ILASP.
+These hypotheses are generated just after the agent steps onto the \textsf{link\_start}. However, the first hypothesis in Listing \ref{experiment2_hypothesis_intermediate} states that
+when \textsf{link\_dest} is available \textsf{state\_after} is true. Since \textsf{link\_dest} is available in background knowledge rather than context in the context dependent examples,
+when solving for answer sets to generate a plan, it generates incorrect \textsf{state\_after} at every time step.
 
-However, as shown in Definition \ref{def:ILPRL_exc}, these generated state\_after are all incorrect and therefore will be added to exclusions of the next positive examples.
-These exclusions will later refines hypotheses and results in Figure \ref{experiment2_ilasp_complete}.
-The final complete hypotheses are show in Listing \ref{list:exp2_final_hypotheses}.
+However, as shown in Definition \ref{def:ILPRL_exc}, these generated \textsf{state\_after} are all incorrect and therefore will be added to exclusions of the next positive example.
+These exclusions will later refine hypotheses and the final complete hypotheses are shown in Listing \ref{list:exp2_final_hypotheses}.
 
 \lstinputlisting[
-  caption  = {Complete hypotheses for experiment 2},
+  caption  = {Complete hypotheses for Evaluation 2},
   label = {list:exp2_final_hypotheses}
 ]{experiment2_hypothesis.pl}
 
-% \begin{equation}
-% \begin{split}
-% &\textsf{state\_after(V1) :- link\_start(V0), link\_dest(V1), state\_before(V0).}\\
-% &\textsf{state\_after(V0) :- link\_dest(V0), state\_before(V0), action(right).}\\
-% &\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V0), action(right), not wall(V1).}\\
-% &\textsf{state\_after(V0) :- adjacent(left, V0, V1), state\_before(V1), action(left), not wall(V0).}\\
-% &\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V0), action(down), not wall(V1).}\\
-% &\textsf{state\_after(V0) :- adjacent(up, V0, V1), state\_before(V1), action(up), not wall(V0).}\\
-% &\textsf{state\_after(V1) :- adjacent(left, V0, V1), state\_before(V1), action(left), wall(V0).}\\
-% &\textsf{state\_after(V1) :- adjacent(down, V0, V1), state\_before(V1), action(down), wall(V0).}\\
-% &\textsf{state\_after(V1) :- adjacent(up, V0, V1), state\_before(V1), action(up), wall(V0).}
-% \end{split}
-% \label{experiment2_ilasp_complete}
-% \end{equation}
-
 Compared to the Evaluation 1, there are two new hypotheses due to the presence of the teleport links.
-These learnt hypotheses are also applicable to an environment where there is no link, such as a game in experiment 1.
+These learnt hypotheses are also applicable to an environment where there is no teleport links, such as the environment in Evaluation 1.
 In this case, the first two hypotheses in Listing \ref{list:exp2_final_hypotheses} are never be used 
 since the body predicates relating to link\_start(V0), link\_dest(V1) are never be satisfied.
-% RUNTIME AVERAGE: 95.47274640401204
-% RUNTIME COUNTS: 16.233333333333334
-
-Figure \ref{experiment2_ilasp} shows the learning convergence of inductive learning at episode 0.
-Similar to Experiment 1, most of inductive learning occur at the beginning of the episode, as shown in Figure \ref{experiment2_runtime}. 
-This result confirms that the agent learns inductive learning at the beginning of episode.
-
-Figure \ref{experiment2_runtime} show the runtime of ILP(RL) and Q-learning. 
-Despite the fact that the size of the environment is the same as Experiment 1, 
-there is a significant increase of runtime for ILP(RL) at the beginning of episode. 
-This is because of the increase of search space as we added extra language bias.
-
-% There are increase of runtime after episode 0.
-% This is due to the fact that the agent later discovers a teleport link, which is a new hypothesis to be learnt. 
-The average runtime of inductive learning is 95.47 seconds, and there are on average 16.23 times inductive learning per episode.
-
-\begin{table}[!ht!b]
-\centering
-\begin{tabular}{lll}
-\hline
-Parameter            & ILP(RL)    & Benchmarks      \\ \hline
-Runtime per episode (seconds) & 95.47        & 1        \\
-Average ILASP time (seconds)& XXX        & N/A        \\
-The number of ILASP calls &  16.23      & N/A       \\
-Hypothesis space &  XXX      & N/A       \\
-\end{tabular}
-\caption{Comparison of runtime}
-\label{param}
-\end{table}
-TODO is the table a good idea?
-
-While ILP(RL) still learns faster than Q-learning in terms of the number of iterations, 
-the result of Experiment 2 shows that, the learning time per episode increases with respect to the size of search space, 
-which corresponds to the number of symbolic representations that the agent needs to learn in the environment.
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.7\textwidth]{./figures/experiment2_ilasp}
-\caption{Normalised learning convergence by ILASP for experiment 2}
+\caption{Normalised learning convergence by ILASP for Evaluation 2}
 \label{experiment2_ilasp}
 \end{figure}
+
+Figure \ref{experiment2_ilasp} shows the learning convergence of inductive learning at episode 0.
+Similar to Evaluation 1, most of ILASP calls occur at the beginning of the episode, as shown in Figure \ref{experiment2_runtime}.
+The results of Evaluation 1 and 2 confirm that ILP(RL) learns state transition at the beginning of learning.
+If the agent finds the teleport link state at a later episode, ILP(RL) refines the hypotheses by learning a new state transition regarding the teleport link.
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.7\textwidth]{./figures/experiment2_runtime}
-\caption{Runtime comparison}
+\caption{Evaluation 2: runtime comparison}
 \label{experiment2_runtime}
 \end{figure}
 
-% \clearpage
-% \newpage
+Figure \ref{experiment2_runtime} shows the runtime of ILP(RL) and Q-learning in Evaluation 2. 
+Despite the fact that the size of the environment is the same as Experiment 1,
+there is a significant increase of runtime for ILP(RL) at the beginning of episode. 
+This is because of the increase of search space in order for ILP(RL) to learn a new state transition.
+The average runtime of inductive learning is 95.47 seconds, and there are on average 16.23 times inductive learning per episode.
+% RUNTIME AVERAGE: 95.47274640401204
+% RUNTIME COUNTS: 16.233333333333334
+\begin{table}[!ht!b]
+\centering
+\begin{tabular}{lll}
+\hline
+Metrics            & Evaluation1    & Evaluation2      \\ \hline
+Average ILASP runtime time (seconds)& 5.58        & 95.47       \\
+The number of ILASP calls &  12.83      & 16.23      \\
+Search space &  1690      & 32755       \\
+\end{tabular}
+\caption{Comparison of runtime, ILASP calls and search space between Evaluation 1 and 2}
+\label{table:runtime_comparison}
+\end{table}
+
+To highlight the increase of runtime, Table \ref{table:runtime_comparison} summarises the comparison of runtime, ILASP calls and search space between Evaluation 1 and 2. 
+Because of the two extra language biases for learning the teleport link, the search space in Evaluation 2 is significantly larger than that of Evaluation 1. This increase affects each ILASP call, resulting in much longer ILASP runtime in Evaluation 2. ILP(RL) calls ILASP an average of 3.4 more times in order to learn new hypotheses regarding the teleport link state.
+
+While ILP(RL) still learns faster than Q-learning in terms of the number of iterations, 
+the result of Experiment 2 shows that, the learning time per episode increases with respect to the size of search space, 
+which corresponds to the number of state transition that the agent needs to learn in the environment.
+
 \section{Transfer Learning Evaluation}
 \label{sec:transfer_learning_evaluation}
 
@@ -299,14 +275,14 @@ which corresponds to the number of symbolic representations that the agent needs
 \label{experiment3_setup}
 \end{figure}
 
-In Experiment 3, we investigated the possibilities of transfer learning between similar environments.
-We trained the ILP(RL) agent using the environment on the left in Figure \ref{experiment4}, 
-and transfer the learnt hypothesis as well as positive examples to a new environment on the right in Figure \ref{experiment4}.
-The learnt hypotheses are valid moves in the environment and a general concept that is applicable to any similar environments. 
-Positive examples are also transferred because, if there is a new hypothesis that the agent needs to learn in a new environment, 
-ILP(RL) needs to refine the hypothesis by running ILASP in the new environment.
-Thus the all the positive examples are also transferred as well as the learnt hypotheses. 
-Background knowledge are not transferred since the wall locations are different in a new environment.
+In Evaluation 3, we investigate the possibilities of transfer learning between similar environments.
+We trained the ILP(RL) agent using the environment on the left in Figure \ref{experiment3_setup}, 
+and transfer the learnt hypotheses as well as context dependent examples to a new environment on the right in Figure \ref{experiment3_setup}. The terminal state is located at the same location, and there is an extra path in the environment on the right of Figure \ref{experiment3_setup}.
+
+Context dependent examples are transferred to the new environment. This is because if there is a new hypothesis that the agent needs to learn in the new environment, 
+ILP(RL) needs to refine the hypothesis using these transferred context dependent examples. Thus all the context dependent examples are also transferred as well as the learnt hypotheses. 
+
+Background knowledge is not transferred since the wall locations are different in a new environment.
 The agent therefore starts the exploration of the new environment with an empty background knowledge and gradually collects them over time.
 The terminal state is the same as that in the first environment, but the shortest path to the goal is different between the two environments as new shorter path is introduced in the right environment in Figure \ref{experiment3_setup}.
 
@@ -314,111 +290,97 @@ In addition to Q-learning, we use three extra agents for comparison as follows.
 
 \begin{itemize}
     \item Agent(TL): The agent with transferred hypotheses, examples and also remembers the location of the terminal state.
-    \item Agent(noTL)\textsubscript{Goal}: The agent with transferred hypotheses, examples, but does not know the location of the terminal state.
-    \item Agent(noTL)\textsubscript{noGoal}: The agent with no transferred information, neither the hypotheses nor the location of the terminal state is known to the agent.
-    \item Q-learning
+    \item Agent(noTL)\textsubscript{Goal}: The agent with no transferred information, but knows the location of the terminal state.
+    \item Agent(noTL)\textsubscript{noGoal}: The agent with no transferred information, including the location of the terminal state.
 \end{itemize}
-
-While this is a limited transfer learning since the terminal state is known in advance, this is still a useful transfer in cases where the terminal state is the same but the rest of the environment changes.
-
-Listing \ref{exp3_hypotheses} is the hypotheses that is transferred to a new environment, which is acquired by training the agent in the environment once on the left of Figure \ref{experiment3_setup}.
-The positive examples to be transferred are those the agent accumulated in the left environment, XXX examples in total.
 
 \lstinputlisting[
 %   language = Prolog,
-  caption  = {Hypotheses for experiment 3},
+  caption  = {Hypotheses for Evaluation 3},
   label = {exp3_hypotheses}
 ]{experiment3_hypothesis.pl}
 
-\subsection{Evaluation Result 3}
-The result is shown in Figure \ref{experiment3_training}.
-For Agent(TL), since the complete hypotheses are already known to the agent as well as the terminal state, the agent can do ASP planning from episode 0.
-The only information required is background knowledge for the ASP planning, namely the locations of the walls, which are quickly acquired and reached the maximum total reward at the very beginning of episodes.
+Listing \ref{exp3_hypotheses} is the hypotheses that is transferred to a new environment, which is acquired by training the agent in the environment once on the left of Figure \ref{experiment3_setup}.
+The learnt hypotheses are the same hypotheses are that in Evaluation 1 shown in Listing \ref{list:experiment1_hypothesis} in the environment, they are a general concept that is applicable to any similar environments.
 
-The next best agent in terms of the convergence to the maximum total reward is Agent(noTL)\textsubscript{Goal}. Since the terminal state is known to the agent, 
-the agent can do the planning from episode 0. However, the agent needs to learn the hypotheses. The reason that the convergence rate is almost the same as that of Agent(TL) is that
-, the ILP(RL) learns the almost complete hypotheses in episode 0, as observed in Experiment 1 and 2. 
-Thus there is no difference between Agent(TL) and Agent(noTL)\textsubscript{Goal} in terms of learning speed. 
-
-What makes a difference for the convergence is whether the agent knows the terminal state, which can be seen by compering between Agent(noTL)\textsubscript{Goal} and Agent(noTL)\textsubscript{noGoal}.
-The difference in terms of the iterations is that Agent(noTL)\textsubscript{noGoal} needs to find the terminal state first before starting the planning, which is a random exploration.
-
-This observation shows that there is a promising potential for improving the exploration strategy to find the terminal state as soon as possible.
-
-There was no ILASP calls in the new environments since the transferred hypotheses are already optimal and cover all the examples the agent encounters in the new environment.
-
+\subsection{Evaluation 3: Result}
 \begin{figure}[!htb]
 \centering
 % \includegraphics[width=0.55\textwidth]{./figures/experiment3_after_training}
 \includegraphics[width=0.7\textwidth]{./figures/experiment3_after_test}
-\caption{Results of experiment 3: learning curve (left) and testing (right)}
+\caption{Evaluation 3: optimal policy}
 \label{experiment3_training}
 \end{figure}
+
+The result is shown in Figure \ref{experiment3_training}.
+For Agent(TL), since the complete hypotheses are already known to the agent as well as the terminal state, the agent can do ASP planning from episode 0. There is no ILASP calls in the new environment since the transferred hypotheses are already the target hypotheses and cover all the examples the agent encounters in the new environment.
+The only information required is background knowledge for the ASP planning, namely the locations of the walls, which are quickly acquired and reached the maximum total reward at the very beginning of episodes.
+
+The next best agent in terms of convergence rate is Agent(noTL)\textsubscript{Goal}. Since the terminal state is known to the agent, 
+the agent can do the planning from episode 0. However, the agent needs to learn the hypotheses. The reason that the convergence rate is almost the same as that of Agent(TL) is that, the ILP(RL) learns the complete hypotheses at very early episode, as observed in Evaluation 1 and 2. 
+Thus there is no difference between Agent(TL) and Agent(noTL)\textsubscript{Goal} in terms of learning speed. 
+
+What makes a difference for finding an optimal policy is whether the agent knows the terminal state, which can be seen by compering between Agent(noTL)\textsubscript{Goal} and Agent(noTL)\textsubscript{noGoal}.
+The difference in terms of the iterations is that Agent(noTL)\textsubscript{noGoal} needs to find the terminal state first before starting the planning, which is a random exploration.
+
+The capabilities of the transfer learning works especially when the terminal state is transferred, because the ASP planning of ILP(RL) depends on the terminal state. 
+In addition, this evaluation further confirms that there is a promising potential for improving the exploration strategy to find the terminal state as soon as possible.
 
 \subsection{Evaluation 4: Extended Transfer Learning}
 \label{subsec:experiement4_setup}
 \begin{figure}[!htb]
-\centering
-% \includegraphics[width=0.5\textwidth]{./figures/experiment4_before}
-\includegraphics[width=0.7\textwidth]{./figures/experiment4_after}
+\centerline{
+\includegraphics[width=0.5\textwidth]{./figures/experiment4_before}
+\includegraphics[width=0.5\textwidth]{./figures/experiment4_after}
+}
+
 \caption{Game environment for Evaluation 4: before (left) and after (right) transfer learning}
 \label{experiment4_setup}
 \end{figure}
-
-The transferred hypotheses are the same as that in Experiment 3, and the positive examples were collected the environment on the left in Figure \ref{experiment4_setup}.
-The new environment, shown on the right in Figure \ref{experiment4_setup}, is the same except that there is teleport links.
+In Evaluation 4, we trained ILP(RL) on the left in Figure \ref{experiment4_setup}, and transferred context dependent examples as well as the learnt hypotheses. The objective of this experiment is to see how the transferred agent learns a new state transition on top of the transferred hypotheses. In the new environment on the right of Figure \ref{experiment4_setup}, there is a teleport link and using the teleport is the shortest path to the terminal state. 
 This is a new concept that did not exist in the trained environment and therefore the agent needs to learn it after the hypotheses are transferred.
-The same as Experiment 3, we use four different agents.
+The same as Evaluation 3, we use four different agents.
 
 \subsection{Evaluation 4: Result}
 \label{subsec:experiment_result_4}
 
-Figure \ref{experiment4_training_test} show the results of the learning and test performance. 
-The agent is able to successfully learn the new concept and quickly finds the optimal policy at the early episodes.
-This confirms that the transferred agents learns on top of what is already learnt. This experiment shows that the hypotheses is transferable even in cases where there is something the agent needs to learn in a new environment.
-
-Also the difference of the state where the link is located does not cause any problems even when the positive examples in the previous environment is transferred, since the surrounding information is within the context rather than background knowledge. 
-This shows the power of context dependent examples in RL scenarios.
-
 \begin{figure}[!htb]
-\centerline{
-\includegraphics[width=0.55\textwidth]{./figures/experiment4_training}
-\includegraphics[width=0.55\textwidth]{./figures/experiment4_test}
-}
-\caption{Result of experiment 4 (learning curve)}
+\centering
+% \includegraphics[width=0.55\textwidth]{./figures/experiment4_training}
+\includegraphics[width=0.7\textwidth]{./figures/experiment4_test}
+\caption{Evaluation 4: optimal policy}
 \label{experiment4_training_test}
 \end{figure}
 
-The new hypotheses the agent learns are the same as that of Experiment 2. The hypothesis containing \textsf{link\_start} and \textsf{link\_dest} is what the agent learnt in the new environment.
+Figure \ref{experiment4_training_test} shows the results of optimal policy. 
+Agent(TL) is able to successfully learn the new concept and quickly finds the optimal policy at the early episodes. Similar to Evaluation 3, Agent(notTL)\textsubscript{Goal} also quickly reaches the optimal policy,  
+This experiment shows that the hypotheses is transferable even in cases where there is a new hypothesis the agent needs to learn in a new environment.
 
-\lstinputlisting[
-%   language = Prolog,
-  caption  = {Hypotheses for experiment 4},
-]{experiment4_hypothesis.pl}
+Also the difference of the state where the link is located does not cause any problems with ILP(RL) algorithm even when the positive examples in the previous environment are transferred. This is because information of ajacent walls are within the context of each example rather than background knowledge. This experiment shows the flexibility of context dependent examples in RL senarios.
 
-\clearpage
+The new hypotheses the agent learns are the same as that of Evaluation 2. The hypotheses regarding \textsf{link\_start} and \textsf{link\_dest} is what the Agent(TL) learnt in the new environment.
 
 \section{Discussion}
 \label{sec:discussion}
 
-We investigated the properties of ILP(RL) using a simple maze environment. While the development of ILP(RL) is still in early stage and only a proof-of-concept, 
-we observe both strengths as well as weakness of the current approach. We summarise both of these in the following sections.
+We evaluated the properties of ILP(RL) using simple maze environments. While the development of ILP(RL) is still in early stage and only a proof-of-concept, we observe both strengths as well as weakness of the current framework of ILP(RL). We summarise both of these in the following sections.
 
 \subsection{Strengths of ILP(RL)}
-As observed in the 4 experiments, there are several advantages of ILP(RL) over Q-learning.
+As observed in the 4 evaluations, there are several advantages of ILP(RL) over Q-learning.
 
 \begin{description}
-\item[Faster learning convergence]
-The ILP(RL) agent learns the valid move of the environment at the very early stage of learning and, as soon as it finds the terminal state, is able to generate a plan as a sequence of actions to reach the goal.
+\item[Faster learning of an optimal policy]
+The ILP(RL) agent learns the general state transitions of the environment at the very early stage of learning, mostly at episode 0, and as soon as it finds the terminal state, is able to generate an ASP plan as a sequence of actions to find an optimal policy.
 While this is a proof-of-concept approach, this way of RL is a new and the experiments show that this is a promising direction of the research.
 
 \item[Transfer Learning]
 Unlike existing RL algorithms, where it learns value functions or Q values, ILP(RL) learns a valid move as a hypotheses, which can be applied to similar but different environments.
-We confirmed this with the experiments and, especially when the goal is known to the agent in experiment 3 and 4.
-We also show that the agent can learn a new hypothesis on top of the transferred ones, which is very flexible in terms of applicability of the learnt hypotheses.
+We confirmed the possibility of transfer learning with the evaluations. Especially when the goal is known to the agent in Evaluation 3 and 4.
+While this is a limited transfer learning since the terminal state is known in advance, this is still a useful transfer in cases where the terminal state is the same but the rest of the environment changes.
+We also observed that the agent can learn a new hypothesis on top of the transferred hypotheses, which is very flexible in terms of applicability of the learnt hypotheses.
 
 \item[Symbolic learning]
-Since both planning and learning can be expressed in ASP syntax, the learning process is easy to understand for human users, and the learnt hypotheses are a very general rule of the game.
+Since both the outcomes of ASP planning and inductive learning can be expressed in ASP syntax, the learning process as well as outcomes of ILP(RL) are easy to understand for human users, and the learnt hypotheses are very general state transitions of an environment.
 \end{description} 
 
 % The full hypotheses were learnt in the very early phase of learning and exploration phase. Thus with sufficient exploration, the model of the environment is correct
@@ -429,48 +391,35 @@ Since both planning and learning can be expressed in ASP syntax, the learning pr
 
 \subsection{Limitations of the current framework}
 \label{subsec:limitations}
-Although the this first version of the ILP(RL) framework using ILASP and ASP show potentials, there are a number of limitations with the current framework.
-Some of these limitations are further elaborated in Further Research in the concluding chapter.
-% It was implement from scratch.
+Although the this first version of the ILP(RL) using inductive learning and ASP planning show potentials for a new way of solving RL problems, it is a proof-of-concept and there are a number of limitations with the current framework.
+Some of these limitations are further elaborated in Further Research in Chapter \ref{sec:further_research}.
 
 \begin{description}
-\item[Learning time]
-While we show that ILP(RL) improves the learning convergence in terms of the number of episodes required, the computational time is significantly longer than that of Q-learning due to the computation required for inductive learning with ILASP as well as ASP planning.
-This limitation indicates that ILP(RL) may not be suitable in an environment where there is a moving object based on time rather than time steps.
+\item[Runtime]
+While we show that ILP(RL) converges to a optimal policy in terms of the number of episodes, the computational time is significantly longer than that of Q-learning due to the computation required for inductive learning with ILASP as well as ASP planning.
+This limitation indicates that ILP(RL) may not be suitable in an environment where the runtime of learning is also a concern. ILP(RL) may also be unsuitable in an environment where there are moving objects based on time rather than time steps.
 
 \item[Scalability issue for more complex environment]
 ILP framework is known to be less scalable. The current framework is tested in a relatively simple environments, 
-and proven to be work better than RL algorithms in terms of the number of episodes that is needed to converge to an optimal policy.
-However, learning in each episode is relatively slower than that of RL. 
+and proven to be work better than Q-learning in terms of learning an optimal policy by time. However, learning runtime of ILP(RL) in each time step is slower than that of Q-learning, which is worsen when there are more hypotheses that ILP(RL) needs to learn.
+For example, as shown in Evaluation 1 and 2, adding two language bias significantly increased the runtime of the algorithm, since the search space grows significantly with respect to the language bias.
+Whereas Q-learning updates value function regardless of whether there is a new concept such as teleport links, ILP(RL) needs to expands search space of hypotheses by adding more language bias. This is an important issue since many of RL research are focused on the development of RL algorithms in more complex environments.
 
-This limitation is theoretically discussed in XXX, where the complexity of deciding satisfiability is XX. (TODO Need to understand NP complete)
-As shown in Experiment 1 and Experiment 2, adding two language bias significantly increased the runtime of the algorithm, since the search space grows significantly with respect to the language bias.
-
-$\sum_{2}^{P}$-complete. Since there is no negative examples used in our current framework, the complexity is NP-complete.
-
-Whereas Q-learning update value function regardless of whether there is a new concept such as teleport links.
-
-Another question remains to how to extend the current framework to more realistic scenarios. RL works in more complex environments such as 3D or real physical environment, 
-whereas the experiences of the agent in the current framework need to be expressed as ASP syntax, thus expressing continuous states rather than discrete states is challenging.
-
+Another question is the possibility of extending ILP(RL) to more realistic scenarios. RL works in more complex environments such as 3D or real physical environment, 
+whereas the observations of an environment need to be expressed as ASP syntax for ILP(RL) to work.
 \item[Requirements of assumptions]
+ILP(RL) requires initial assumptions such as background knowledge or specification of language bias for search space. While most of existing reinforcement learning works in different kinds of environment without any pre-configuration, As shown in the Evaluation 2, it was necessary to add two extra modeb before learning starts.
+Thus the current framework of ILP(RL) is unfeasible in cases where these learning concepts were unknown or difficult to define with language bias.
 
-Language bias
-While most of existing reinforcement learning works in different kinds of environment without pre-configuration, our algorithm
-needs to define search space for learning hypothesis. As explained in the experiment 3, it was necessary to add two extra modeb before training.
-Thus the algorithm may not be feasible in cases where these learning concepts were unknown or difficult to define with language bias. 
+In addition, not only it needs search space, but also it is assumed that an agent knows the definition of adjacent state and is able to see the adjacent states. 
+While this assumption may be reasonable in many cases, this is not common in traditional RL setting.
 
-In addition, not only it needs search space, surrounding information is assumed to be known to the agent. 
-While this assumption may be reasonable in many cases, this is not common in traditional reinforcement learning setting.
-
-\item[limited MDP]
-The current framework does not make use of rewards the agent collects and mainly uses the location of the goal for planning.
-In other environments, however, there may not be a termination state (goal) and instead there may be a different purpose to gain these rewards. 
-Since the current implementation is dependent on finding the goal for planning rather than maximising total rewards, 
-which is the common objective for most of RL algorithms,
-the application of the current framework is limited to particular types of problems.
-
-There are some promising solutions for some of these limitations, which we discuss in the next chapter.
+\item[solving limited MDP]
+The current ILP(RL) framework does not make use of rewards for inductive learning and only uses the terminal state for ASP planning. While our evaluations were conducted in a simple environment and we assumed that there is only one reward for any states except a terminal state. As described in Section\ref{model_base_model_free_subsection}, other model-based RL methods learn a model of an environment, which tells the agent the reward and state transition functiosn. However, the current ILP(RL) only learns state transition and does not learn reward functions. In addition, some MDP problems contain no terminal state and instead there may be a different means to gain rewards. 
+Since the current ILP(RL) is dependent on finding a terminal state for planning rather than maximising total rewards, 
+the application of the current framework is limited to a particular type of MDP problem.
 
 \end{description}  
+
+Some of these issues are further discussed in Chapter \ref{conclusion}.
 

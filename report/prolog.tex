@@ -502,14 +502,15 @@ state_after(V1):-adjacent(up, V0, V1), state_before(V1),
                  action(up), wall(V0).  
 \end{filecontents*}
 
-\begin{filecontents*}{appendix_learning_tasks.pl}
-cell((0..7, 0..6)).
+\begin{filecontents*}{appendix_learning_task_eval1.pl}
+cell((0..18, 0..8)).
 adjacent(right, (X+1,Y),(X,Y)):-cell((X,Y)), cell((X+1,Y)).
 adjacent(left,(X,Y),  (X+1,Y)):-cell((X,Y)), cell((X+1,Y)).
 adjacent(down, (X,Y+1),(X,Y)):-cell((X,Y)), cell((X,Y+1)).
 adjacent(up,   (X,Y),  (X,Y+1)):-cell((X,Y)), cell((X,Y+1)).
 #modeh(state_after(var(cell))).
-#modeb(1, adjacent(const(action),var(cell),var(cell))).
+#modeb(1,adjacent(const(action),var(cell),var(cell)),
+      (positive)).
 #modeb(1, state_before(var(cell)),(positive)).
 #modeb(1, action(const(action)),(positive)).
 #modeb(1, wall(var(cell))).
@@ -518,6 +519,31 @@ adjacent(up,   (X,Y),  (X,Y+1)):-cell((X,Y)), cell((X,Y+1)).
 #constant(action, left).
 #constant(action, down).
 #constant(action, up).
+% Context dependent examples are added here
+\end{filecontents*}
+
+\begin{filecontents*}{appendix_learning_task_eval2.pl}
+cell((0..18, 0..8)).
+adjacent(right, (X+1,Y),(X,Y)):-cell((X,Y)), cell((X+1,Y)).
+adjacent(left,(X,Y),  (X+1,Y)):-cell((X,Y)), cell((X+1,Y)).
+adjacent(down, (X,Y+1),(X,Y)):-cell((X,Y)), cell((X,Y+1)).
+adjacent(up,   (X,Y),  (X,Y+1)):-cell((X,Y)), cell((X,Y+1)).
+
+#modeh(state_after(var(cell))).
+#modeb(1,adjacent(const(action),var(cell),var(cell)),
+      (positive)).
+#modeb(1,state_before(var(cell)),(positive)).
+#modeb(1,action(const(action)),(positive)).
+#modeb(1,wall(var(cell))).
+% Two additional language biases
+#modeb(1, link_start(var(cell)), (positive)).
+#modeb(1, link_dest(var(cell)), (positive)).
+#max_penalty(50).
+#constant(action, right).
+#constant(action, left).
+#constant(action, down).
+#constant(action, up).
+#pos({state_after((2,6))}, 
 % Context dependent examples are added here
 \end{filecontents*}
 
