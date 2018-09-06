@@ -139,7 +139,7 @@ where \textsf{state\_after} is the next state S\textsubscript{t+1}, \textsf{stat
 \textsf{adjacent(D, V0, V1)} specifies that V0 is next to V1 in the direction of D. For example, \textsf{adjacent(right, V0, V1)} means V0 is right next to V1. 
 \textsf{wall(V)} and \textsf{not wall(V)} specify whether a state is a wall or not wall in a state V respectively.
 We describe the details of how to construct the background knowledge, context dependent examples and the language bias in the following sections, and these are the necessary components for the agent to learn the target hypotheses.
-The summary of a full ILASP learning task can be found in Appendix \ref{chap:learning_tasks}.
+% The summary of a full ILASP learning task can be found in Appendix \ref{chap:learning_tasks}.
 % Similar to other RL algorithms, an agent explores an environment by taking actions, which generates experiences. 
 % These experiences need to be translated into ASP syntax and 
 % and are recorded in as context dependent examples. 
@@ -513,7 +513,7 @@ This way the answer sets of the ASP program contains only \textsf{state\_at} and
             \State {$t = t + 1$}
             \State {$Update(E)$}
             \LineComment {Update $E$ using the definitions defined in Section  \ref{subsec:context_dependent_examples}}
-            \State {INDUCTIVE-LEARNING($H, E, B, S\textsubscript{M}$)
+            \State {INDUCTIVE-LEARNING($H, E, B, S\textsubscript{M}$)}
             \State {$s = s^\prime$}
         \EndIf
     \EndFor
@@ -664,7 +664,7 @@ ILP(RL) Engine is our main framework explained in Chapter \ref{framework}. As sh
 In the following sections, we explain how the main driver communicates with third-party softwaredetails.
 
 \subsection{Inductive Learning with ILASP}
-We use ILASP2i, an inductive learning system developed in \ref{Law2016b}.
+We use ILASP2i, an inductive learning system developed in \cite{Law2016b}.
 ILASP2i is an iterative version of ILASP2, and is designed to scale with the numbers of examples. 
 ILASP2i also introduces the use of context dependent examples.
 The latest ILASP available is ILASP3, which is designed to work on a noisy examples. Our context dependent examples do not contain noise since they are all true state transition that the agent has experienced, and therefore ILASP2i was sufficient for our implementation.
@@ -673,15 +673,10 @@ Although ILASP2i is designed to work with a large number of examples, inductive 
 We did a number of optimisation in order to mitigate this. 
 
 The first optimisation is the frequency of running ILASP. 
-As already described in Definition \ref{def:ILASP_run}, ILASP is ran only if the current hypothesis does not cover all the examples accumulated so far.
-Because of this, inductive learning takes place at the very early stage of learning, which is highlighted in the experiments in Chapter XX. 
+As already described in Algorithm \ref{algorithm:inductive_learning}, ILASP is ran only if the current hypothesis does not cover all the examples accumulated so far.
 
 The next optimisation is through the command line. 
 ILASP2i has a number of options, and we explain each option using the actual command we use to run ILASP
-
-% \begin{minted}[]
-% ILASP --version=2i FILENAME.las -ml=8 -nc --clingo5 
-% \end{minted}
 
 \begin{lstlisting}[]
     ILASP --version=2i FILENAME.las -ml=8 -nc --clingo5 
@@ -727,7 +722,7 @@ Planning is computed using Clingo 5.
 \label{VGDL_sample}
 \end{figure}
 
-We use the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{Schaul2013}).
+We use the Video Game Definition Language (VGDL), which is a high-level description language for 2D video games providing a platform for computational intelligence research (\cite{schaul2013video}).
 The VGDL allows users to easily craft their own environments, 
 which makes us possible to do various experiments without relying on a default environment.
 

@@ -1,3 +1,5 @@
+
+
 @article{Dzeroski2001,
 abstract = {Relational reinforcement learning is presented, a learning technique that combines reinforcement learning with relational learning or inductive logic programming.Dueto the use of a more expressive representation language to represent states, actions and Q-functions, relational reinforcement learning can be potentially applied to a new range of learning tasks. One such task that we investigate is planning in the blocks world, where it is assumed that the effects of the actions are unknown to the agent and the agent has to learn a policy. Within this simple domain we show that relational reinforcement learning solves some existing problems with reinforcement learning. In particular, relational reinforcement learning allows us to employ structural representations, to abstract from specific goals pursued and to exploit the results of previous learning phases when addressing new (more complex) situations.},
 author = {Dzeroski, Saso and {De Raedt}, Luc and Driessens, Kurt},
@@ -13,7 +15,7 @@ volume = {43},
 year = {2001}
 }
 
-@article{Law2017,
+@misc{Law2017,
 archivePrefix = {arXiv},
 arxivId = {1608.01946},
 author = {Law, Mark and Russo, Alessandra and Broda, Krysia},
@@ -24,12 +26,12 @@ title = {{Inductive Learning of Answer Set Programs v3.1.0 User Manual}},
 year = {2017}
 }
 
-@article{Meadows2018,
-author = {Meadows, Benjamin},
-file = {:home/kiyo/Downloads/intex18{\_}actionAxiomLearn.pdf:pdf},
-title = {{Knowledge Representation and Interactive Learning of Domain Knowledge for Human-Robot Interaction}},
-year = {2018}
+@proceedings{Meadows2018,
+  title={Knowledge Representation and Interactive Learning of Domain Knowledge for Human-Robot Interaction},
+  author={Sridharan, Mohan and Meadows, Benjamin},
+  year = {2018} 
 }
+
 @inproceedings{gringo,
 abstract = {We describe the major new features emerging from a significant redesign of the grounder gringo, building upon a grounding algorithm based on semi-naive database evaluation. Unlike previous versions, rules only need to be safe rather than domain-restricted.},
 address = {Berlin, Heidelberg},
@@ -87,29 +89,27 @@ title = {{Improving scalability of inductive logic programming via pruning and b
 volume = {87},
 year = {2017}
 }
+
 @article{Brockman2016,
-archivePrefix = {arXiv},
-arxivId = {1606.01540},
-author = {Brockman, Greg and Cheung, Vicki and Pettersson, Ludwig and Schneider, Jonas and Schulman, John and Tang, Jie and Zaremba, Wojciech},
-eprint = {1606.01540},
-file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Brockman et al. - 2016 - OpenAI Gym.pdf:pdf},
-month = {jun},
-title = {{OpenAI Gym}},
-url = {http://arxiv.org/abs/1606.01540},
-year = {2016}
+  title={Openai gym},
+  author={Brockman, Greg and Cheung, Vicki and Pettersson, Ludwig and Schneider, Jonas and Schulman, John and Tang, Jie and Zaremba, Wojciech},
+  journal={arXiv preprint arXiv:1606.01540},
+  year={2016}
 }
+
+
 @article{Law2016b,
-abstract = {In recent years, several frameworks and systems have been proposed that extend Inductive Logic Programming (ILP) to the Answer Set Programming (ASP) paradigm. In ILP, examples must all be explained by a hypothesis together with a given background knowledge. In existing systems, the background knowledge is the same for all examples; however, examples may be context-dependent. This means that some examples should be explained in the context of some information, whereas others should be explained in different contexts. In this paper, we capture this notion and present a context-dependent extension of the Learning from Ordered Answer Sets framework. In this extension, contexts can be used to further structure the background knowledge. We then propose a new iterative algorithm, ILASP2i, which exploits this feature to scale up the existing ILASP2 system to learning tasks with large numbers of examples. We demonstrate the gain in scalability by applying both algorithms to various learning tasks. Our results show that, compared to ILASP2, the newly proposed ILASP2i system can be two orders of magnitude faster and use two orders of magnitude less memory, whilst preserving the same average accuracy. This paper is under consideration for acceptance in TPLP.},
-archivePrefix = {arXiv},
-arxivId = {1608.01946},
-author = {Law, Mark and Russo, Alessandra and Broda, Krysia},
-eprint = {1608.01946},
-file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Law, Russo, Broda - 2016 - Iterative Learning of Answer Set Programs from Context Dependent Examples(3).pdf:pdf},
-month = {aug},
-title = {{Iterative Learning of Answer Set Programs from Context Dependent Examples}},
-url = {http://arxiv.org/abs/1608.01946},
-year = {2016}
+  title={Iterative learning of answer set programs from context dependent examples},
+  author={Law, Mark and Russo, Alessandra and Broda, Krysia},
+  journal={Theory and Practice of Logic Programming},
+  volume={16},
+  number={5-6},
+  pages={834--848},
+  year={2016},
+  publisher={Cambridge University Press}
 }
+
+
 @article{Muggleton1993,
 abstract = {Inductive Logic Programming (ILP) is a research area which investigates the construction of quantified definite clause theories from examples and background knowledge. ILP systems have been applied successfully in a number of real-world domains. These include the learning of structure-activity rules for drug design, finite-element mesh design rules, rules for primary-secondary prediction of protein structure and fault diagnosis rules for satellites. There is a well established tradition of learning-in-the-limit results in ILP. Recently some results within Valiant's PAC-learning frame-work have also been demonstrated for ILP systems. In this paper it is argued that algorithms can be directly derived from the formal specifications of ILP. This provides a common basis for Inverse Resolution, Explanation-Based Learning, Abduction and Relative Least General Generalisation. A new general-purpose, efficient approach to predicate invention is demonstrated. ILP is underconstrained by its logical specification. Therefore a brief overview of extra-logical constraints used in ILP systems is given. Some present limitations and research directions for the field are identified.},
 author = {Muggleton, Stephen},
@@ -136,22 +136,23 @@ title = {{What can I not do? Towards an Architecture for Reasoning about and Lea
 url = {http://homepages.engineering.auckland.ac.nz/{~}smohan/Papers/icaps17{\_}affordanceLearn.pdf},
 year = {2017}
 }
-@article{Apeldoorn2016,
-author = {Apeldoorn, Daan and Kern-isberner, Gabriele},
-file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Apeldoorn, Kern-isberner - 2016 - When Should Learning Agents Switch to Explicit Knowledge.pdf:pdf},
-pages = {174--186},
-title = {{When Should Learning Agents Switch to Explicit Knowledge ?}},
-volume = {41},
-year = {2016}
+
+@inproceedings{Apeldoorn2016,
+  title={When Should Learning Agents Switch to Explicit Knowledge?},
+  author={Apeldoorn, Daan and Kern-Isberner, Gabriele},
+  booktitle={GCAI},
+  pages={174--186},
+  year={2016}
 }
-@article{Apeldoorn,
-author = {Apeldoorn, Daan and Kern-isberner, Gabriele},
-file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Apeldoorn, Kern-isberner - Unknown - Towards an Understanding of What Is Learned Extracting Multi-Abstraction-Level Knowledge from Lear.pdf:pdf},
-isbn = {9781577357872},
-keywords = {Special Track on Uncertain Reasoning},
-pages = {764--767},
-title = {{Towards an Understanding of What Is Learned : Extracting Multi-Abstraction-Level Knowledge from Learning Agents}}
+
+@inproceedings{Apeldoorn,
+  title={Towards an understanding of what is learned: Extracting multi-abstraction-level knowledge from learning agents},
+  author={Apeldoorn, D and Kern-Isberner, G},
+  booktitle={Proceedings of the Thirtieth International Florida Artificial Intelligence Research Society Conference, V. Rus and Z. Markov, Eds. Palo Alto, California: AAAI Press},
+  pages={764--767},
+  year={2017}
 }
+
 @article{Rafols2005,
 author = {Rafols, Eddie J and Ring, Mark B and Sutton, Richard S and Tanner, Brian and Tg, Canada},
 file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Rafols et al. - 2005 - Using Predictive Representations to Improve Generalization in Reinforcement Learning.pdf:pdf},
@@ -164,16 +165,23 @@ file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/L
 title = {{Predictive Representations of State}},
 year = {1992}
 }
+
 @article{Zambaldi2018,
-abstract = {We introduce an approach for deep reinforcement learning (RL) that improves upon the efficiency, generalization capacity, and interpretability of conventional approaches through structured perception and relational reasoning. It uses self-attention to iteratively reason about the relations between entities in a scene and to guide a model-free policy. Our results show that in a novel navigation and planning task called Box-World, our agent finds interpretable solutions that improve upon baselines in terms of sample complexity, ability to generalize to more complex scenes than experienced during training, and overall performance. In the StarCraft II Learning Environment, our agent achieves state-of-the-art performance on six mini-games -- surpassing human grandmaster performance on four. By considering architectural inductive biases, our work opens new directions for overcoming important, but stubborn, challenges in deep RL.},
-archivePrefix = {arXiv},
-arxivId = {1806.01830},
-author = {Zambaldi, Vinicius and Raposo, David and Santoro, Adam and Bapst, Victor and Li, Yujia and Babuschkin, Igor and Tuyls, Karl and Reichert, David and Lillicrap, Timothy and Lockhart, Edward and Shanahan, Murray and Langston, Victoria and Pascanu, Razvan and Botvinick, Matthew and Vinyals, Oriol and Battaglia, Peter},
-eprint = {1806.01830},
-month = {jun},
-title = {{Relational Deep Reinforcement Learning}},
-url = {http://arxiv.org/abs/1806.01830},
-year = {2018}
+  title={Relational Deep Reinforcement Learning},
+  author={Zambaldi, Vinicius and Raposo, David and Santoro, Adam and Bapst, Victor and Li, Yujia and Babuschkin, Igor and Tuyls, Karl and Reichert, David and Lillicrap, Timothy and Lockhart, Edward and others},
+  journal={arXiv preprint arXiv:1806.01830},
+  year={2018}
+}
+
+@article{LeCunL1998,
+  title={Gradient-based learning applied to document recognition},
+  author={LeCun, Yann and Bottou, L{\'e}on and Bengio, Yoshua and Haffner, Patrick},
+  journal={Proceedings of the IEEE},
+  volume={86},
+  number={11},
+  pages={2278--2324},
+  year={1998},
+  publisher={IEEE}
 }
 @article{Y.LeCunL.BottouY.Bengio1998,
 archivePrefix = {arXiv},
@@ -204,18 +212,7 @@ file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/W
 title = {{Learning from Delayed Reward}},
 url = {http://www.cs.rhul.ac.uk/{~}chrisw/new{\_}thesis.pdf}
 }
-@article{Zambaldi2018,
-abstract = {We introduce an approach for deep reinforcement learning (RL) that improves upon the efficiency, generalization capacity, and interpretability of conventional approaches through structured perception and relational reasoning. It uses self-attention to iteratively reason about the relations between entities in a scene and to guide a model-free policy. Our results show that in a novel navigation and planning task called Box-World, our agent finds interpretable solutions that improve upon baselines in terms of sample complexity, ability to generalize to more complex scenes than experienced during training, and overall performance. In the StarCraft II Learning Environment, our agent achieves state-of-the-art performance on six mini-games -- surpassing human grandmaster performance on four. By considering architectural inductive biases, our work opens new directions for overcoming important, but stubborn, challenges in deep RL.},
-archivePrefix = {arXiv},
-arxivId = {1806.01830},
-author = {Zambaldi, Vinicius and Raposo, David and Santoro, Adam and Bapst, Victor and Li, Yujia and Babuschkin, Igor and Tuyls, Karl and Reichert, David and Lillicrap, Timothy and Lockhart, Edward and Shanahan, Murray and Langston, Victoria and Pascanu, Razvan and Botvinick, Matthew and Vinyals, Oriol and Battaglia, Peter},
-eprint = {1806.01830},
-file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Zambaldi et al. - 2018 - Relational Deep Reinforcement Learning.pdf:pdf},
-month = {jun},
-title = {{Relational Deep Reinforcement Learning}},
-url = {http://arxiv.org/abs/1806.01830},
-year = {2018}
-}
+
 @article{Santoro2018,
 abstract = {Memory-based neural networks model temporal data by leveraging an ability to remember information for long periods. It is unclear, however, whether they also have an ability to perform complex relational reasoning with the information they remember. Here, we first confirm our intuitions that standard memory architectures may struggle at tasks that heavily involve an understanding of the ways in which entities are connected -- i.e., tasks involving relational reasoning. We then improve upon these deficits by using a new memory module -- a $\backslash$textit{\{}Relational Memory Core{\}} (RMC) -- which employs multi-head dot product attention to allow memories to interact. Finally, we test the RMC on a suite of tasks that may profit from more capable relational reasoning across sequential information, and show large gains in RL domains (e.g. Mini PacMan), program evaluation, and language modeling, achieving state-of-the-art results on the WikiText-103, Project Gutenberg, and GigaWord datasets.},
 archivePrefix = {arXiv},
@@ -228,28 +225,14 @@ title = {{Relational recurrent neural networks}},
 url = {http://arxiv.org/abs/1806.01822},
 year = {2018}
 }
-@article{Law2017,
-archivePrefix = {arXiv},
-arxivId = {1608.01946},
-author = {Law, Mark and Russo, Alessandra and Broda, Krysia},
-eprint = {1608.01946},
-file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Law, Russo, Broda - 2017 - Inductive Learning of Answer Set Programs v3.1.0 User Manual.pdf:pdf},
-issn = {16113349},
-title = {{Inductive Learning of Answer Set Programs v3.1.0 User Manual}},
-year = {2017}
-}
+
 @article{Su2017,
-abstract = {Recent research has revealed that the output of Deep Neural Networks (DNN) can be easily altered by adding relatively small perturbations to the input vector. In this paper, we analyze an attack in an extremely limited scenario where only one pixel can be modified. For that we propose a novel method for generating one-pixel adversarial perturbations based on differential evolution. It requires less adversarial information and can fool more types of networks. The results show that 70.97{\%} of the natural images can be perturbed to at least one target class by modifying just one pixel with 97.47{\%} confidence on average. Thus, the proposed attack explores a different take on adversarial machine learning in an extreme limited scenario, showing that current DNNs are also vulnerable to such low dimension attacks.},
-archivePrefix = {arXiv},
-arxivId = {1710.08864},
-author = {Su, Jiawei and Vargas, Danilo Vasconcellos and Kouichi, Sakurai},
-eprint = {1710.08864},
-file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Su, Vargas, Kouichi - 2017 - One pixel attack for fooling deep neural networks.pdf:pdf},
-month = {oct},
-title = {{One pixel attack for fooling deep neural networks}},
-url = {http://arxiv.org/abs/1710.08864},
-year = {2017}
+  title={One pixel attack for fooling deep neural networks},
+  author={Su, Jiawei and Vargas, Danilo Vasconcellos and Kouichi, Sakurai},
+  journal={arXiv preprint arXiv:1710.08864},
+  year={2017}
 }
+
 @article{Paradigm2018,
 author = {Paradigm, The Answer-set Programming},
 file = {:home/kiyo/Dropbox/Individual Project/book/ASP{\_}ch/10.0{\_}pp{\_}114{\_}130{\_}The{\_}Answer-Set{\_}Programming{\_}Paradigm.pdf:pdf},
@@ -467,21 +450,16 @@ url = {http://linkinghub.elsevier.com/retrieve/pii/S1364661399013315},
 volume = {3},
 year = {1999}
 }
+
 @article{Levine2015,
-abstract = {Policy search methods can allow robots to learn control policies for a wide range of tasks, but practical applications of policy search often require hand-engineered components for perception, state estimation, and low-level control. In this paper, we aim to answer the following question: does training the perception and control systems jointly end-to-end provide better performance than training each component separately? To this end, we develop a method that can be used to learn policies that map raw image observations directly to torques at the robot's motors. The policies are represented by deep convolutional neural networks (CNNs) with 92,000 parameters, and are trained using a partially observed guided policy search method, which transforms policy search into supervised learning, with supervision provided by a simple trajectory-centric reinforcement learning method. We evaluate our method on a range of real-world manipulation tasks that require close coordination between vision and control, such as screwing a cap onto a bottle, and present simulated comparisons to a range of prior policy search methods.},
-archivePrefix = {arXiv},
-arxivId = {1504.00702},
-author = {Levine, Sergey and Finn, Chelsea and Darrell, Trevor and Abbeel, Pieter},
-doi = {10.1007/s13398-014-0173-7.2},
-eprint = {1504.00702},
-file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Levine et al. - 2015 - End-to-End Training of Deep Visuomotor Policies.pdf:pdf},
-isbn = {9781479969227},
-issn = {15337928},
-month = {apr},
-pmid = {15003161},
-title = {{End-to-End Training of Deep Visuomotor Policies}},
-url = {http://arxiv.org/abs/1504.00702},
-year = {2015}
+  title={End-to-end training of deep visuomotor policies},
+  author={Levine, Sergey and Finn, Chelsea and Darrell, Trevor and Abbeel, Pieter},
+  journal={The Journal of Machine Learning Research},
+  volume={17},
+  number={1},
+  pages={1334--1373},
+  year={2016},
+  publisher={JMLR. org}
 }
 @article{Gelfond1988,
 abstract = {We propose a new declarative semantics for logic programs with negation. Its formulation is quite simple; at the same time, it is more general than the iterated fixed point semantics for stratied programs, and is applicable to some useful programs that are not stratified.},
@@ -525,23 +503,8 @@ pages = {185--192},
 title = {{Towards generating arcade game rules with VGDL}},
 year = {2015}
 }
-@article{Law2014,
-abstract = {{\textcopyright} Springer International Publishing Switzerland 2014.Existing work on Inductive Logic Programming (ILP) has focused mainly on the learning of definite programs or normal logic programs. In this paper, we aim to push the computational boundary to a wider class of programs: Answer Set Programs. We propose a new paradigm for ILP that integrates existing notions of brave and cautious semantics within a unifying learning framework whose inductive solutions are Answer Set Programs and examples are partial interpretations We present an algorithm that is sound and complete with respect to our new notion of inductive solutions. We demonstrate its applicability by discussing a prototype implementation, called ILASP (Inductive Learning of Answer Set Programs), and evaluate its use in the context of planning. In particular, we show how ILASP can be used to learn agent's knowledge about the environment. Solutions of the learned ASP program provide plans for the agent to travel through the given environment.},
-archivePrefix = {arXiv},
-arxivId = {1608.01946},
-author = {Law, Mark and Russo, Alessandra and Broda, Krysia},
-eprint = {1608.01946},
-file = {:home/kiyo/Dropbox/Individual Project/ILP/ILASP{\_}Paper.pdf:pdf},
-issn = {16113349},
-journal = {European Conference on Logics in Artificial Intelligence (JELIA)},
-keywords = {inductive reasoning,learning answer set programs,monotonic inductive logic programming,non-},
-number = {Ray 2009},
-pages = {311--325},
-title = {{Inductive Learning of Answer Set Programs}},
-volume = {2},
-year = {2014}
-}
-@article{Law2016,
+
+@misc{Law2016,
 abstract = {In recent years, several frameworks and systems have been proposed that extend Inductive Logic Programming (ILP) to the Answer Set Programming (ASP) paradigm. In ILP, examples must all be explained by a hypothesis together with a given background knowledge. In existing systems, the background knowledge is the same for all examples; however, examples may be context-dependent. This means that some examples should be explained in the context of some information, whereas others should be explained in different contexts. In this paper, we capture this notion and present a context-dependent extension of the Learning from Ordered Answer Sets framework. In this extension, contexts can be used to further structure the background knowledge. We then propose a new iterative algorithm, ILASP2i, which exploits this feature to scale up the existing ILASP2 system to learning tasks with large numbers of examples. We demonstrate the gain in scalability by applying both algorithms to various learning tasks. Our results show that, compared to ILASP2, the newly proposed ILASP2i system can be two orders of magnitude faster and use two orders of magnitude less memory, whilst preserving the same average accuracy. This paper is under consideration for acceptance in TPLP.},
 archivePrefix = {arXiv},
 arxivId = {1608.01946},
@@ -567,27 +530,17 @@ url = {http://arxiv.org/abs/1507.06566 http://dx.doi.org/10.1017/S14710684150001
 year = {2015}
 }
 @article{Garcez2018,
-archivePrefix = {arXiv},
-arxivId = {1804.08597},
-author = {d'Avila Garcez, Artur and Dutra, Aimore Resende Riquetti and Alonso, Eduardo},
-eprint = {1804.08597},
-file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Garcez, Dutra, Alonso - 2018 - Towards Symbolic Reinforcement Learning with Common Sense.pdf:pdf},
-month = {apr},
-title = {{Towards Symbolic Reinforcement Learning with Common Sense}},
-url = {http://arxiv.org/abs/1804.08597},
-year = {2018}
+  title={Towards Symbolic Reinforcement Learning with Common Sense},
+  author={Garcez, Artur d'Avila and Dutra, Aimore Resende Riquetti and Alonso, Eduardo},
+  journal={arXiv preprint arXiv:1804.08597},
+  year={2018}
 }
+
 @article{Garnelo2016,
-abstract = {Deep reinforcement learning (DRL) brings the power of deep neural networks to bear on the generic task of trial-and-error learning, and its effectiveness has been convincingly demonstrated on tasks such as Atari video games and the game of Go. However, contemporary DRL systems inherit a number of shortcomings from the current generation of deep learning techniques. For example, they require very large datasets to work effectively, entailing that they are slow to learn even when such datasets are available. Moreover, they lack the ability to reason on an abstract level, which makes it difficult to implement high-level cognitive functions such as transfer learning, analogical reasoning, and hypothesis-based reasoning. Finally, their operation is largely opaque to humans, rendering them unsuitable for domains in which verifiability is important. In this paper, we propose an end-to-end reinforcement learning architecture comprising a neural back end and a symbolic front end with the potential to overcome each of these shortcomings. As proof-of-concept, we present a preliminary implementation of the architecture and apply it to several variants of a simple video game. We show that the resulting system -- though just a prototype -- learns effectively, and, by acquiring a set of symbolic rules that are easily comprehensible to humans, dramatically outperforms a conventional, fully neural DRL system on a stochastic variant of the game.},
-archivePrefix = {arXiv},
-arxivId = {1609.05518},
-author = {Garnelo, Marta and Arulkumaran, Kai and Shanahan, Murray},
-eprint = {1609.05518},
-file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Garnelo, Arulkumaran, Shanahan - 2016 - Towards Deep Symbolic Reinforcement Learning.pdf:pdf},
-month = {sep},
-title = {{Towards Deep Symbolic Reinforcement Learning}},
-url = {http://arxiv.org/abs/1609.05518},
-year = {2016}
+  title={Towards deep symbolic reinforcement learning},
+  author={Garnelo, Marta and Arulkumaran, Kai and Shanahan, Murray},
+  journal={arXiv preprint arXiv:1609.05518},
+  year={2016}
 }
 @article{Ebner2013,
 abstract = {This chapter is a direct follow-up to the chapter on General Video Game Playing (GVGP). As that group recognised the need to create a Video Game Description Language (VGDL), we formed a group to address that challenge and the results of that group is the current chapter. Unlike the VGDL envisioned in the previous chapter, the language envisioned here is not meant to be supplied to the game-playing agent for automatic reasoning; instead we argue that the agent should learn this from interaction with the system. The main purpose of the language proposed here is to be able to specify complete video games, so that they could be compiled with a special VGDL compiler. Implementing such a compiler could provide numerous opportunities; users could modify existing games very quickly, or have a library of existing implementations defined within the language (e.g. an Asteroids ship or a Mario avatar) that have pre-existing, parameterised behaviours that can be customised for the users specific purposes. Provided the language is fit for purpose, automatic game creation could be explored further through experimentation with machine learning algorithms, furthering research in game creation and design. In order for both of these perceived functions to be realised and to ensure it is suitable for a large user base we recognise that the language carries several key requirements. Not only must it be human-readable, but retain the capability to be both expressive and extensible whilst equally simple as it is general. In our preliminary discussions, we sought to define the key requirements and challenges in constructing a new VGDL that will become part of the GVGP process. From this we have proposed an initial design to the semantics of the language and the components required to define a given game. Furthermore, we applied this approach to represent classic games such as Space Invaders, Lunar Lander and Frogger in an attempt to identify potential problems that may come to light. Work is ongoing to realise the potential of the VGDL for the purposes of Procedural Content Generation, Automatic Game Design and Transfer Learning.},
@@ -698,6 +651,49 @@ file = {:home/kiyo/Dropbox/Individual Project/ILP/IL of Human Behaviours.pdf:pdf
 pages = {1--3},
 title = {{Inductive Learning of Human Behaviours}}
 }
+
+@inproceedings{schaul2013video,
+  title={A video game description language for model-based or interactive learning},
+  author={Schaul, Tom},
+  booktitle={Computational Intelligence in Games (CIG), 2013 IEEE Conference on},
+  pages={1--8},
+  year={2013},
+  organization={IEEE}
+}
+
+@inproceedings{law2014inductive,
+  title={Inductive learning of answer set programs},
+  author={Law, Mark and Russo, Alessandra and Broda, Krysia},
+  booktitle={European Workshop on Logics in Artificial Intelligence},
+  pages={311--325},
+  year={2014},
+  organization={Springer}
+}
+
+@book{puterman2014markov,
+  title={Markov decision processes: discrete stochastic dynamic programming},
+  author={Puterman, Martin L},
+  year={2014},
+  publisher={John Wiley \& Sons}
+}
+
+@article{Law2014,
+abstract = {{\textcopyright} Springer International Publishing Switzerland 2014.Existing work on Inductive Logic Programming (ILP) has focused mainly on the learning of definite programs or normal logic programs. In this paper, we aim to push the computational boundary to a wider class of programs: Answer Set Programs. We propose a new paradigm for ILP that integrates existing notions of brave and cautious semantics within a unifying learning framework whose inductive solutions are Answer Set Programs and examples are partial interpretations We present an algorithm that is sound and complete with respect to our new notion of inductive solutions. We demonstrate its applicability by discussing a prototype implementation, called ILASP (Inductive Learning of Answer Set Programs), and evaluate its use in the context of planning. In particular, we show how ILASP can be used to learn agent's knowledge about the environment. Solutions of the learned ASP program provide plans for the agent to travel through the given environment.},
+archivePrefix = {arXiv},
+arxivId = {1608.01946},
+author = {Law, Mark and Russo, Alessandra and Broda, Krysia},
+eprint = {1608.01946},
+file = {:home/kiyo/Dropbox/Individual Project/ILP/ILASP{\_}Paper.pdf:pdf},
+issn = {16113349},
+journal = {European Conference on Logics in Artificial Intelligence (JELIA)},
+keywords = {inductive reasoning,learning answer set programs,monotonic inductive logic programming,non-},
+number = {Ray 2009},
+pages = {311--325},
+title = {Inductive Learning of Answer Set Programs},
+volume = {2},
+year = {2014}
+}
+
 @article{Dragiev2017,
 abstract = {The integration of abduction and induction has lead to a variety of non-monotonic ILP systems. XHAIL is one of these systems, in which abduction is used to compute hypotheses that subsume Kernel Sets. On the other hand, Peircebayes is a recently proposed logic-based probabilistic programming approach that combines abduction with parameter learning to learn distributions of most likely explanations. In this paper, we propose an approach for integrating probabilistic inference with ILP. The basic idea is to redefine the inductive task of XHAIL as a statistical abduction, and to use Peircebayes to learn probability distribution of hypotheses. An initial evaluation of the proposed algorithm is given using synthetic data.},
 author = {Dragiev, Stanislav and Russo, Alessandra and Broda, Krysia and Law, Mark and Turliuc, Rares},
@@ -792,18 +788,18 @@ title = {{Explaining Transition Systems through Program Induction}},
 url = {http://arxiv.org/abs/1705.08320},
 year = {2017}
 }
+
 @article{Ferreira2017,
-abstract = {Non-stationary domains, where unforeseen changes happen, present a challenge for agents to find an optimal policy for a sequential decision making problem. This work investigates a solution to this problem that combines Markov Decision Processes (MDP) and Reinforcement Learning (RL) with Answer Set Programming (ASP) in a method we call ASP(RL). In this method, Answer Set Programming is used to find the possible trajectories of an MDP, from where Reinforcement Learning is applied to learn the optimal policy of the problem. Results show that ASP(RL) is capable of efficiently finding the optimal solution of an MDP representing non-stationary domains.},
-archivePrefix = {arXiv},
-arxivId = {1705.01399},
-author = {Ferreira, Leonardo A. and Bianchi, Reinaldo A. C. and Santos, Paulo E. and de Mantaras, Ramon Lopez},
-eprint = {1705.01399},
-file = {:home/kiyo/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Ferreira et al. - 2017 - Answer Set Programming for Non-Stationary Markov Decision Processes.pdf:pdf},
-month = {may},
-title = {{Answer Set Programming for Non-Stationary Markov Decision Processes}},
-url = {http://arxiv.org/abs/1705.01399},
-year = {2017}
+  title={Answer set programming for non-stationary Markov decision processes},
+  author={Ferreira, Leonardo A and Bianchi, Reinaldo AC and Santos, Paulo E and de Mantaras, Ramon Lopez},
+  journal={Applied Intelligence},
+  volume={47},
+  number={4},
+  pages={993--1007},
+  year={2017},
+  publisher={Springer}
 }
+
 @article{Ferreira2017a,
 abstract = {Non-stationary domains, that change in unpredicted ways, are a challenge for agents searching for optimal policies in sequential decision-making problems. This paper presents a combination of Markov Decision Processes (MDP) with Answer Set Programming (ASP), named {\{}$\backslash$em Online ASP for MDP{\}} (oASP(MDP)), which is a method capable of constructing the set of domain states while the agent interacts with a changing environment. oASP(MDP) updates previously obtained policies, learnt by means of Reinforcement Learning (RL), using rules that represent the domain changes observed by the agent. These rules represent a set of domain constraints that are processed as ASP programs reducing the search space. Results show that oASP(MDP) is capable of finding solutions for problems in non-stationary domains without interfering with the action-value function approximation process.},
 archivePrefix = {arXiv},

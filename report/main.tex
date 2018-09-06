@@ -344,7 +344,7 @@ X is a \textit{stable model} of P if it is the least Herbrand Model of P\textsup
 
 For normal logic program, there may be more than one or no stable models. In stable model semantics,  there are two different notion of entailments.
 \begin{defn}
-An atom $a$ is \textit{bravely} entailed by a normal logic program P, denoted $ P \models\textsubscript{b} \ a$, if it is true in at least one stable model of P. An atom $a$ is \textit{cautiously} entailed by a normal logic program P, denoted $ P \models\textsubscript{c} \ a$ if it is true in every stable model of P \ref{Law2014}.
+An atom $a$ is \textit{bravely} entailed by a normal logic program P, denoted $ P \models\textsubscript{b} \ a$, if it is true in at least one stable model of P. An atom $a$ is \textit{cautiously} entailed by a normal logic program P, denoted $ P \models\textsubscript{c} \ a$ if it is true in every stable model of P \cite{Law2014}.
 \end{defn}
 
 \begin{examp} \normalfont (Brave and Cautious Entailment) \\
@@ -383,12 +383,7 @@ A \textit{choice rule} can express possible outcomes given an action choice, whi
 
 where \textit{l} and \textit{u} are integers and h\textsubscript{i} for 1 $\leq$ i $\leq$ m are atoms. The head in the choice rule is called \textit{aggregates}.
 Informally, if the body of a ground choice rule is satisfied by an interpretation X, given a ground choice rule, the choice rule generates all answer sets in which  $l \leq | X \cap \{h\textsubscript{1},...,h\textsubscript{m}\} | \leq u$
-\ref{Law2014}.
-
-
-Reduct in ASP 4 steps. 
-\ref{Law2015}
-
+\cite{Law2014}.
 
 \textit{Optimisation statement} is useful to sort the answer sets in terms of preference, which is of the form:
 \begin{equation}
@@ -660,7 +655,7 @@ where S is \textit{states}, R is \textit{rewards} and A is \textit{actions}. A s
 \mathbb{P}[S\textsubscript{t+1} \vert S\textsubscript{t}] = \mathbb{P}[S\textsubscript{t+1} \vert S\textsubscript{1}, ..., S\textsubscript{t}].
 \end{split}
 \end{equation}
-In other words, the probability of reaching S\textsubscript{t+1} depends only on S\textsubscript{t}, which captures all the relevant information from the earlier history (\cite{Puterman1994}).
+In other words, the probability of reaching S\textsubscript{t+1} depends only on S\textsubscript{t}, which captures all the relevant information from the earlier history (\cite{puterman2014markov}).
 When an agent must make a sequence of decision, the sequential decision problem can be formalised using the \textit{Markov decision process (MDP)}. MDP formally represents a fully observable environment of an agent for 
 RL.
 \begin{defn}{Markov Decision Process (MDP)}
