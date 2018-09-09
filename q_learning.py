@@ -142,15 +142,16 @@ def q_learning(env, num_episodes, discount_factor=1, alpha=0.5, epsilon=0.1):
         run_experiment(env, Q, stats_test, i_episode, width, cf.TIME_RANGE)
     return Q, stats, stats_test
 
-env = gym.make('vgdl_experiment4_after-v0')
-temp_dir = os.path.join(base_dir, "result_pkl/experiment4_q")
+env = gym.make('vgdl_experiment3_after-v0')
+# env = gym.make('vgdl_experiment1-v0')
+temp_dir = os.path.join(base_dir, "result_pkl/experiment3_q_q")
 # import ipdb; ipdb.set_trace()
 # Q, stats, stats_test = q_learning(env, 100)
 
 for i in range(30):
     Q, stats, stats_test = q_learning(env, 100)
-    plotting.store_stats(stats, temp_dir, "exp4_v{}".format(i))
-    plotting.store_stats(stats_test, temp_dir, "exp4_test_v{}".format(i))
+    plotting.store_stats(stats, temp_dir, "exp3_v{}".format(i))
+    plotting.store_stats(stats_test, temp_dir, "exp3_test_v{}".format(i))
 
 # import ipdb; ipdb.set_trace()
 # plotting.plot_episode_stats_test(stats, stats_test)

@@ -6,7 +6,7 @@ import os.path
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
 def experiment_learning(exp_no):
-    pkl_dir = os.path.join(base_dir, "result_pkl/experiment{}".format(str(exp_no)))
+    pkl_dir = os.path.join(base_dir, "result_pkl/experiment{}_x".format(str(exp_no)))
     pkl_dir_q = os.path.join(base_dir, "result_pkl/experiment{}_q".format(str(exp_no)))
 
     # pkl_dir = os.path.join(base_dir, "result_pkl/experiment1_delete")
@@ -14,11 +14,11 @@ def experiment_learning(exp_no):
 
     # make average score for training
     plotting.average_score(base_dir, pkl_dir, "exp{}_v".format(str(exp_no)), 100, 30)
-    plotting.average_score(base_dir, pkl_dir_q, "exp{}_v".format(str(exp_no)), 100, 30)
+    # plotting.average_score(base_dir, pkl_dir_q, "exp{}_v".format(str(exp_no)), 100, 30)
 
     # make average score for test
     plotting.average_score(base_dir, pkl_dir, "exp{}_test_v".format(str(exp_no)), 100, 30)
-    plotting.average_score(base_dir, pkl_dir_q, "exp{}_test_v".format(str(exp_no)), 100, 30)
+    # plotting.average_score(base_dir, pkl_dir_q, "exp{}_test_v".format(str(exp_no)), 100, 30)
 
     runtime, total  = plotting.average_ILASP(base_dir, pkl_dir, "exp{}_ilasp_v".format(str(exp_no)), 100, 250, 30)
     # Load the pkl files
@@ -30,11 +30,11 @@ def experiment_learning(exp_no):
 
     stats_ilasp = plotting.load_stats(pkl_dir, "exp{}_ilasp_v_average".format(str(exp_no)))
     
-    plotting.plot_episode_stats_learning(stats, stats_q)
+    # plotting.plot_episode_stats_learning(stats, stats_q)
     plotting.plot_episode_stats_learning(stats_test, stats_q_test)
-    # plotting.plot_episode_stats_runtime(stats, stats_q)
-    plotting.plot_ILASP_progress(stats_ilasp)
     plotting.plot_episode_stats_runtime(stats, stats_q)
+    plotting.plot_ILASP_progress(stats_ilasp)
+    # plotting.plot_episode_stats_runtime(stats, stats_q)
 
 # def ilasp_runtime(exp_no):
 #     pkl_dir = os.path.join(base_dir, "result_pkl/experiment{}".format(str(exp_no)))
@@ -69,19 +69,87 @@ def experiment3_test():
     pkl_dir = os.path.join(base_dir, "result_pkl/experiment3_after_noTL_noGoal")
     pkl_dir2 = os.path.join(base_dir, "result_pkl/experiment3_after_noTL_goal")
     pkl_dir3 = os.path.join(base_dir, "result_pkl/experiment3_after_TL")
+    # pkl_dir3 = os.path.join(base_dir, "result_pkl/experiment3_q")
+    
     # make average score
-    plotting.average_score(base_dir, pkl_dir, "exp3_test_v", 100, 30)
-    plotting.average_score(base_dir, pkl_dir2, "exp4_test_v", 100, 30)
-    # plotting.average_score(base_dir, pkl_dir3, "exp3_v", 100, 30)
+    # plotting.average_score(base_dir, pkl_dir, "exp3_test_v", 100, 30)
+    # plotting.average_score(base_dir, pkl_dir2, "exp4_test_v", 100, 30)
+    # plotting.average_score(base_dir, pkl_dir3, "exp3_test_TL_v", 100, 30)
+    # plotting.average_score(base_dir, pkl_dir_q, "exp3_v", 100, 30)
     # Load the pkl files
     stats = plotting.load_stats(pkl_dir, "exp3_test_v_average")
     stats2 = plotting.load_stats(pkl_dir2, "exp4_test_v_average")
-    stats3 = plotting.load_stats(pkl_dir3, "exp4_test_after_TL_v_average")
-    # import ipdb; ipdb.set_trace()
+    # stats3 = plotting.load_stats(pkl_dir3, "exp4_test_after_TL_v_average")
+    stats3 = plotting.load_stats(pkl_dir3, "exp3_test_TL_v_average")
+    
     plotting.plot_episode_stats_transfer(stats, stats2, stats3)
 
-# experiment_learning(2)
-experiment_transfer()
+# experiment3_test()
+def experiment4_test():
+    pkl_dir = os.path.join(base_dir, "result_pkl/experiment4_after_noTL_noGoal")
+    
+    pkl_dir2 = os.path.join(base_dir, "result_pkl/experiment4_after_noTL_goal")
+    pkl_dir_afterTL = os.path.join(base_dir, "result_pkl/experiment4_after_TL")
+    
+
+    # make average score
+    # plotting.average_score(base_dir, pkl_dir, "exp4_test_v", 100, 30)
+    
+    # plotting.average_score(base_dir, pkl_dir2, "exp4_test_v", 100, 9)
+    
+    plotting.average_score(base_dir, pkl_dir_afterTL, "exp4_test_TL_v", 100, 1)
+    # plotting.average_score(base_dir, pkl_dir_q, "exp4_test_v", 100, 30)
+
+    # Load the pkl files
+    stats = plotting.load_stats(pkl_dir, "exp4_test_v_average")
+    stats2 = plotting.load_stats(pkl_dir2, "exp4_test_v_average")
+    stats3 = plotting.load_stats(pkl_dir_afterTL, "exp4_test_TL_v_average")
+    
+    # XXX = os.path.join(base_dir, "result_pkl/experiment_keep_first/experiment4_after_noTL")
+    # stats2 = plotting.load_stats(XXX, "exp4_test_after_noTL_v_average")
+
+    # stats3 = plotting.load_stats(pkl_dir_afterTL, "exp4_test_TL_v0")
+    # stats_q = plotting.load_stats(pkl_dir_q, "exp4_test_v_average")
+    # import ipdb; ipdb.set_trace()
+    plotting.plot_episode_stats_transfer(stats, stats2, stats3)
+    # plotting.plot_episode_stats_simple(stats2)
+# experiment4_test()
+def experiment5_test():
+    pkl_noTL = os.path.join(base_dir, "result_pkl/experiment_keep_first/experiment4_after_noTL")
+    pkl_noTL_goal = os.path.join(base_dir, "result_pkl/experiment4_after_noTL_goal")
+    pkl_TL = os.path.join(base_dir, "result_pkl/experiment_keep_first/experiment4_after_TL")
+    
+    # pkl_dir2 = os.path.join(base_dir, "result_pkl/experiment4_after_noTL_goal")
+    # pkl_dir_afterTL = os.path.join(base_dir, "result_pkl/experiment4_after_TL")
+    # pkl_dir2 = os.path.join(base_dir, "result_pkl/experiment4_after_noTL_goal")
+
+    # make average score
+    # plotting.average_score(base_dir, pkl_noTL, "exp4_test_after_noTL_v", 100, 30)
+    
+    # plotting.average_score(base_dir, pkl_TL, "exp4_test_after_TL_v", 100, 30)
+    
+    # plotting.average_score(base_dir, pkl_noTL_noGoal, "exp4_test_v", 100, 9)
+    # plotting.average_score(base_dir, pkl_dir_q, "exp4_test_v", 100, 30)
+
+    # Load the pkl files
+    stats = plotting.load_stats(pkl_noTL, "exp4_test_after_noTL_v_average")
+    stats2 = plotting.load_stats(pkl_noTL_goal, "exp4_test_v_average")
+    stats3 = plotting.load_stats(pkl_TL, "exp4_test_after_TL_v_average")
+    
+
+    # stats3 = plotting.load_stats(pkl_dir_afterTL, "exp4_test_TL_v0")
+    # stats_q = plotting.load_stats(pkl_dir_q, "exp4_test_v_average")
+    # import ipdb; ipdb.set_trace()
+    plotting.plot_episode_stats_transfer(stats, stats2, stats3)
+experiment5_test()
+# pkl_dir = os.path.join(base_dir, "result_pkl/experiment4_after_TL")
+# stats = plotting.load_stats(pkl_dir, "exp4_test_TL_v0")
+# stats = plotting.load_stats(pkl_dir, "exp4_TL_v0")
+# import ipdb; ipdb.set_trace()
+# plotting.plot_episode_stats_simple(stats)
+# experiment3_test()
+# experiment_learning(1)
+# experiment_transfer()
 
 # plotting.average_score(base_dir, pkl_dir, "exp4_after_TL_v", 100, 30)
 # plotting.average_score(base_dir, pkl_dir, "exp1_v", 100, 30)

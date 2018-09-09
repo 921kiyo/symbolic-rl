@@ -175,8 +175,8 @@ def k_learning(env, num_episodes, h, goal, epsilon=0.1, record_prefix=None, is_l
                 abduction.add_new_walls(previous_state, wall_list, cf.CLINGOFILE)
 
                 # Make ASP syntax of state transition
-                extra_exclusion = induction.generate_extra_exclusions(previous_state_at, next_state_at, states_plan)
-                pos1, pos2,link = induction.generate_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range, extra_exclusion)
+
+                pos1, pos2,link = induction.generate_pos(hypothesis, previous_state, next_state, action_string, wall_list, cell_range)
                 
                 if link is not None:
                         keep_link = link
@@ -221,7 +221,7 @@ def k_learning(env, num_episodes, h, goal, epsilon=0.1, record_prefix=None, is_l
 # env = gym.make('vgdl_experiment3.5-v0')
 # env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_aaa_small-v0')
-env = gym.make('vgdl_experiment5-v0')
+env = gym.make('vgdl_experiment3_after-v0')
 # env = gym.make('vgdl_aaa_field-v0')
 # env = gym.make('vgdl_aaa_teleport-v0')
 
@@ -239,9 +239,9 @@ goal = (16,1)
 temp_dir = os.path.join(cf.BASE_DIR, "result_pkl/experiment3_after_TL")
 
 for i in range(30):
-    stats, stats_test,stats_ilasp = k_learning(env, 100, h, goal, epsilon=0.1, record_prefix="experiment5_TL", is_link=True)
-    plotting.store_stats(stats, temp_dir, "exp5_TL_v{}".format(str(i)))
-    plotting.store_stats(stats_test, temp_dir, "exp5_test_TL_v{}".format(str(i)))
+    stats, stats_test,stats_ilasp = k_learning(env, 100, h, goal, epsilon=0.1, record_prefix="ee", is_link=False)
+    # plotting.store_stats(stats, temp_dir, "exp3_TL_v{}".format(str(i)))
+    # plotting.store_stats(stats_test, temp_dir, "exp3_test_TL_v{}".format(str(i)))
 
     # stats, stats_test = k_learning(env, 100, epsilon=0.4, record_prefix="experiment3.5_ver3", is_link=True)
     # plotting.store_stats(stats, cf.BASE_DIR, "vgdl_experiment4_after")

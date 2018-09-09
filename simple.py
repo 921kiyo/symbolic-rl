@@ -11,11 +11,11 @@ from lib.helper import gen_log_dir
 from lib import plotting, helper, induction
 
 TIME_RANGE = 400
-env = gym.make('vgdl_aaa_field-v0')
-# env = gym.make('vgdl_experiment2-v0')
+# env = gym.make('vgdl_aaa_field-v0')
+# env = gym.make('vgdl_experiment1-v0')
 # env = gym.make('vgdl_experiment3_before-v0')
 # env = gym.make('vgdl_experiment3_after-v0')
-# env = gym.make('vgdl_experiment4_before-v0')
+env = gym.make('vgdl_experiment4_before-v0')
 # env = gym.make('vgdl_experiment4_after-v0')
 
 for i_episode in range(TIME_RANGE):
@@ -28,8 +28,8 @@ for i_episode in range(TIME_RANGE):
         time.sleep(0.01)
         # Take a step
         action = env.action_space.sample()
-        # next_state, reward, done, _ = env.step(4)
-        next_state, reward, done, _ = env.step(action)
+        next_state, reward, done, _ = env.step(4)
+        # next_state, reward, done, _ = env.step(action)
         if done:
             break
 exit(1)
