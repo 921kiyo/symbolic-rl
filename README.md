@@ -40,13 +40,11 @@ The agent iteratively executes this cycle in order to learn and improve the hypo
 
 ## ILP(RL) Implementation
 ![ILP(RL) dataflow](https://github.com/921kiyo/Symbolic_RL/blob/master/report/figures/ILPRL_dataflow.png)
-We divide our implementation of the design outline into three separate software components: ILP(RL) Engine, Environment Platform and Evaluation Engine. The overview of our software implementation is shown in the data flow diagram in Figure \ref{fig:dataflow}. 
+We divide our implementation of the design outline into three separate software components: ILP(RL) Engine, Environment Platform and Evaluation Engine. The overview of our software implementation is shown in the data flow diagram in the figure above. 
 
-ILP(RL) Engine is our main framework shown in Figure \ref{fig:ILPRL_overview}. As shown in Figure \ref{fig:dataflow}, the main driver is written in Python and executes the learning cycle shown in Figure \ref{fig:ILPRL_overview}. The main driver constructs the necessary files, such as a learning task and an ASP program, and handles the communications by sending input and output among third-party software and libraries as well as executing their programs: ILASP, Clingo and the environment platform including the Video Game Definition Language (VDGL) and OpenAI Gym. The main driver is also responsible for I/O operation for context dependent examples as well as background knowledge, both are being accumulated in text files. 
-
-Eval Driver is another Python script that executes the evaluation of ILP(RL) as well as a benchmark RL algorithm for evaluations. The details of the evaluation is described in the next chapter. 
-
-All the results of inductive learning with ILASP, ASP planning and evaluation are recorded in Logging folder as shown in Figure \ref{fig:dataflow}.
+ILP(RL) Engine is our main framework shown in Framework. The main driver constructs the necessary files, such as a learning task and an ASP program, and handles the communications by sending input and output among third-party software and libraries as well as executing their programs: ILASP, Clingo and the environment platform including the [Video Game Definition Language (VDGL)](http://www.gvgai.net/vgdl.php) and OpenAI Gym. The main driver is also responsible for I/O operation for context dependent examples as well as background knowledge, both are being accumulated in text files. 
+Eval Driver is another Python script that executes the evaluation of ILP(RL) as well as a benchmark RL algorithm for evaluations. 
+Finally, all the results of inductive learning with ILASP, ASP planning and evaluation are recorded in Logging folder.
 
 ## Installation & Dependencies
 In order to run the ILP(RL), you need the following dependencies.
