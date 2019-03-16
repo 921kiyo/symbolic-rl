@@ -13,7 +13,7 @@ Reinforcement Learning (RL) has been applied and proven to be successful in many
 However, most of current RL methods face limitations, namely, low learning efficiency, 
 inability to use abstract reasoning, and inability of transfer learning to similar environments.
 In order to tackle these shortcomings, we introduce a new learning approach called ILP(RL).
-ILP(RL) is based on [Inductive Logic Programming (ILP)](https://www.doc.ic.ac.uk/~shm/ilp.html) and Answer Set Programming (ASP) and learns a state transition with ILP and navigate through an environment using ASP.
+ILP(RL) is based on [Inductive Logic Programming (ILP)](https://www.doc.ic.ac.uk/~shm/ilp.html) and [Answer Set Programming (ASP)](https://en.wikipedia.org/wiki/Answer_set_programming) and learns a state transition with ILP and navigate through an environment using ASP.
 ILP(RL) learns a general concept of a state transition, called a hypothesis in an environment, and generates a plan for a sequence of actions to a destination.
 The learnt hypotheses is highly expressive and transferable to a similar environment. 
 While there are a number of past papers that attempt to incorporate symbolic representation to RL problems in order to achieve efficient learning, 
