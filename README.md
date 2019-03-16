@@ -3,7 +3,9 @@
 ## About the project
 
 We developed ILP(RL), a new way of reinforcement learning (RL) method by applying ASP-based [Inductive Logic Programming (ILP)](https://www.doc.ic.ac.uk/~shm/ilp.html) into RL. 
-This project is conducted for  [MSc Individual Projects](https://www.doc.ic.ac.uk/lab/msc-projects/ProjectsGuide.html) in Computing Science at [Imperial College London](http://www.imperial.ac.uk/computing/). **The full report can be found [here](https://github.com/921kiyo/Symbolic_RL/blob/master/report.pdf).**
+This project is conducted for  [MSc Individual Projects](https://www.doc.ic.ac.uk/lab/msc-projects/ProjectsGuide.html) in Computing Science at [Imperial College London](http://www.imperial.ac.uk/computing/). 
+
+**The full report can be found [here](https://github.com/921kiyo/Symbolic_RL/blob/master/report.pdf).**
 
 
 ## Abstract
