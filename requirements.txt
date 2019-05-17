@@ -45,7 +45,7 @@ simplegeneric==0.8.1
 six==1.11.0
 tqdm==4.25.0
 traitlets==4.3.2
-urllib3==1.23
+urllib3>=1.24.2
 -e git+git@github.com:921kiyo/Individual_project.git@7a7d7e12e4207dccf435e2329effe4147b565928#egg=vgdl&subdirectory=py-vgdl
 wcwidth==0.1.7
 wrapt==1.10.11
